@@ -1,0 +1,50 @@
+\
+{% extends "base.html" %}
+{% block page_title %}Scholarship Interview Coach{% endblock %}
+{% block content %}
+
+<section class="grid-2">
+    <div class="card">
+        <h2>🎤 Generate Interview Questions</h2>
+        <form method="POST" class="form">
+            <label>Scholarship name</label>
+            <input name="scholarship" placeholder="Example: Turkish Scholarship, UII, Romanian Scholarship">
+
+            <label>Major</label>
+            <input name="major" placeholder="Example: Computer Science">
+
+            <label>Your profile summary optional</label>
+            <textarea name="profile" rows="7" placeholder="GPA, projects, certificates, volunteering, goals..."></textarea>
+
+            <button type="submit">✨ Generate Questions</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>📌 Saved Questions</h2>
+        {% for q in saved_questions %}
+            <div class="item">
+                <strong>{{ q.question }}</strong>
+                <span>{{ q.scholarship }} · {{ q.major }} · Score: {{ q.score if q.score is not none else "Not evaluated" }}</span>
+                <a class="small-button" href="{{ url_for('answer_question', answer_id=q.id) }}">Answer / Evaluate</a>
+            </div>
+        {% else %}
+            <p class="muted">No questions yet.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% if generated %}
+<section class="card">
+    <h2>✨ Generated Questions</h2>
+    {% for item in generated %}
+        <div class="item">
+            <strong>{{ item.question }}</strong>
+            <span><b>Why:</b> {{ item.why_they_ask }}</span>
+            <span><b>Strategy:</b> {{ item.answer_strategy }}</span>
+        </div>
+    {% endfor %}
+</section>
+{% endif %}
+
+{% endblock %}

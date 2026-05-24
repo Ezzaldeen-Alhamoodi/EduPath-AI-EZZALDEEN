@@ -1,0 +1,70 @@
+\
+{% extends "base.html" %}
+{% block page_title %}Programming Coach{% endblock %}
+{% block content %}
+
+<section class="grid-2">
+    <div class="card">
+        <h2>💻 Debugging Coach</h2>
+        <form method="POST" class="form">
+            <label>Problem description</label>
+            <textarea name="problem" rows="4"></textarea>
+
+            <label>Your code</label>
+            <textarea name="code" rows="8"></textarea>
+
+            <label>Error message</label>
+            <textarea name="error" rows="3"></textarea>
+
+            <button type="submit">🧠 Get Hints</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>🧾 Save Repeated Mistake</h2>
+        <form method="POST" action="{{ url_for('add_mistake') }}" class="form">
+            <label>Area</label>
+            <input name="area" placeholder="Python, SQL, Algorithms...">
+
+            <label>Mistake</label>
+            <textarea name="mistake" rows="4"></textarea>
+
+            <label>Correction</label>
+            <textarea name="correction" rows="4"></textarea>
+
+            <button type="submit">💾 Save Mistake</button>
+        </form>
+    </div>
+</section>
+
+{% if result %}
+<section class="card">
+    <h2>Debugging Feedback</h2>
+    <h3>Likely Problem</h3>
+    <p class="improved">{{ result.likely_problem }}</p>
+
+    <h3>Hints</h3>
+    <ul>{% for item in result.hints %}<li>{{ item }}</li>{% endfor %}</ul>
+
+    <h3>Debugging Steps</h3>
+    <ul>{% for item in result.debugging_steps %}<li>{{ item }}</li>{% endfor %}</ul>
+
+    <h3>What to Learn</h3>
+    <ul>{% for item in result.what_to_learn %}<li>{{ item }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+
+<section class="card">
+    <h2>Saved Mistakes</h2>
+    {% for m in mistakes %}
+        <div class="item">
+            <strong>{{ m.area }}</strong>
+            <span>{{ m.mistake }}</span>
+            <span><b>Correction:</b> {{ m.correction or "not added" }}</span>
+        </div>
+    {% else %}
+        <p class="muted">No mistakes saved yet.</p>
+    {% endfor %}
+</section>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+\
+{% extends "base.html" %}
+{% block page_title %}Answer Practice{% endblock %}
+{% block content %}
+
+<section class="card">
+    <h2>Question</h2>
+    <p class="question">{{ item.question }}</p>
+
+    <form method="POST" class="form">
+        <label>Your answer</label>
+        <textarea name="answer" rows="8">{{ item.answer or "" }}</textarea>
+
+        <div class="form-row">
+            <button name="action" value="save" type="submit">💾 Save Only</button>
+            <button name="action" value="evaluate" type="submit">🧠 Evaluate with AI</button>
+        </div>
+    </form>
+</section>
+
+{% if feedback %}
+<section class="card">
+    <h2>Feedback</h2>
+
+    {% if feedback.score is defined %}
+        <div class="score">Score: {{ feedback.score }}/10</div>
+    {% endif %}
+
+    {% if feedback.strengths %}
+        <h3>Strengths</h3>
+        <ul>{% for s in feedback.strengths %}<li>{{ s }}</li>{% endfor %}</ul>
+    {% endif %}
+
+    {% if feedback.weaknesses %}
+        <h3>Weaknesses</h3>
+        <ul>{% for w in feedback.weaknesses %}<li>{{ w }}</li>{% endfor %}</ul>
+    {% endif %}
+
+    {% if feedback.suggestions %}
+        <h3>Suggestions</h3>
+        <ul>{% for s in feedback.suggestions %}<li>{{ s }}</li>{% endfor %}</ul>
+    {% endif %}
+
+    {% if feedback.improved_answer %}
+        <h3>Improved Answer</h3>
+        <p class="improved">{{ feedback.improved_answer }}</p>
+    {% endif %}
+
+    {% if feedback.raw %}
+        <pre>{{ feedback.raw }}</pre>
+    {% endif %}
+</section>
+{% endif %}
+
+{% endblock %}

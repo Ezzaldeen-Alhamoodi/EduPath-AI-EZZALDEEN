@@ -1,0 +1,74 @@
+\
+{% extends "base.html" %}
+{% block page_title %}Goals{% endblock %}
+{% block content %}
+
+<section class="grid-2">
+    <div class="card">
+        <h2>🎯 Create New Goal</h2>
+        <form method="POST" class="form">
+            <label>Goal name</label>
+            <input name="title" placeholder="Example: TOEFL, Python, Mathematics, Scholarship Interview">
+
+            <label>Category</label>
+            <select name="category">
+                <option>English</option>
+                <option>Language</option>
+                <option>Programming</option>
+                <option>Mathematics</option>
+                <option>Scholarship</option>
+                <option>AI</option>
+                <option>General</option>
+            </select>
+
+            <label>Current level</label>
+            <select name="current_level">
+                <option>Beginner</option>
+                <option>Intermediate</option>
+                <option>Advanced</option>
+            </select>
+
+            <label>Daily study time in minutes</label>
+            <input name="daily_minutes" type="number" value="60" min="15">
+
+            <div class="form-row">
+                <div>
+                    <label>Start date</label>
+                    <input name="start_date" type="date">
+                </div>
+                <div>
+                    <label>End date / deadline</label>
+                    <input name="deadline" type="date">
+                </div>
+            </div>
+
+            <label>Daily reminder time</label>
+            <input name="reminder_time" type="time">
+
+            <label>Notes</label>
+            <textarea name="notes" rows="3" placeholder="Write your goal details..."></textarea>
+
+            <button type="submit">💾 Save Goal & Generate Plan</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>📌 Saved Goals</h2>
+        {% for goal in goals %}
+            <div class="item">
+                <strong>{{ goal.title }}</strong>
+                <span>{{ goal.category }} · {{ goal.current_level }} · {{ goal.daily_minutes }} min/day</span>
+                <span>Start: {{ goal.start_date or "not set" }} · End: {{ goal.deadline or "not set" }}</span>
+                <span>Reminder: {{ goal.reminder_time or "not set" }}</span>
+                <div class="actions">
+                    <a class="small-button warning" href="{{ url_for('edit_goal', goal_id=goal.id) }}">✏️ Edit</a>
+                    <a class="small-button danger" href="{{ url_for('delete_goal', goal_id=goal.id) }}">🗑 Delete</a>
+                </div>
+            </div>
+        {% else %}
+            <p class="muted">No goals saved yet.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

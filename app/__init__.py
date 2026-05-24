@@ -1,0 +1,750 @@
+\
+import os
+import json
+import logging
+from datetime import datetime, date, timedelta
+
+from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
+from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+from openai import OpenAI
+
+load_dotenv(override=True)
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+db = SQLAlchemy()
+
+
+class Goal(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(180), nullable=False)
+    category = db.Column(db.String(80), nullable=False, default="General")
+    current_level = db.Column(db.String(80), nullable=False, default="Beginner")
+    daily_minutes = db.Column(db.Integer, nullable=False, default=60)
+    start_date = db.Column(db.String(40), nullable=True)
+    deadline = db.Column(db.String(40), nullable=True)
+    reminder_time = db.Column(db.String(20), nullable=True)
+    notes = db.Column(db.Text, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+class StudyTask(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    goal_id = db.Column(db.Integer, db.ForeignKey("goal.id"), nullable=True)
+    title = db.Column(db.String(220), nullable=False)
+    category = db.Column(db.String(80), nullable=False, default="Study")
+    skill = db.Column(db.String(100), nullable=False, default="General")
+    language = db.Column(db.String(80), nullable=True)
+    practice_type = db.Column(db.String(80), nullable=True)
+    source = db.Column(db.String(180), nullable=True)
+    difficulty = db.Column(db.Integer, nullable=False, default=1)
+    priority = db.Column(db.Integer, nullable=False, default=3)
+    estimated_minutes = db.Column(db.Integer, nullable=False, default=30)
+    start_date = db.Column(db.String(40), nullable=True)
+    due_date = db.Column(db.String(40), nullable=True)
+    reminder_time = db.Column(db.String(20), nullable=True)
+    repeat_type = db.Column(db.String(40), nullable=False, default="daily")
+    status = db.Column(db.String(30), nullable=False, default="pending")
+    review_count = db.Column(db.Integer, nullable=False, default=0)
+    last_reviewed = db.Column(db.String(40), nullable=True)
+    notes = db.Column(db.Text, nullable=True)
+
+    goal = db.relationship("Goal", backref="tasks")
+
+
+class InterviewAnswer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    scholarship = db.Column(db.String(160), nullable=False)
+    major = db.Column(db.String(120), nullable=False)
+    question = db.Column(db.Text, nullable=False)
+    answer = db.Column(db.Text, nullable=True)
+    score = db.Column(db.Integer, nullable=True)
+    feedback = db.Column(db.Text, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+class MistakeLog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    area = db.Column(db.String(80), nullable=False, default="General")
+    mistake = db.Column(db.Text, nullable=False)
+    correction = db.Column(db.Text, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+def create_app():
+    app = Flask(__name__)
+    app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
+        "DATABASE_URL",
+        "sqlite:///edupath_ai_ezzaldeen.db",
+    )
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    db.init_app(app)
+
+    with app.app_context():
+        db.create_all()
+
+    ai_client = build_ai_client()
+
+    @app.route("/")
+    def index():
+        goals = Goal.query.order_by(Goal.id.desc()).limit(6).all()
+        tasks = StudyTask.query.order_by(StudyTask.id.desc()).limit(10).all()
+        mistakes = MistakeLog.query.order_by(MistakeLog.id.desc()).limit(6).all()
+
+        total_tasks = StudyTask.query.count()
+        completed_tasks = StudyTask.query.filter_by(status="done").count()
+        pending_tasks = StudyTask.query.filter_by(status="pending").count()
+        total_goals = Goal.query.count()
+        progress = int((completed_tasks / total_tasks) * 100) if total_tasks else 0
+
+        weak_skills = detect_weaknesses()
+
+        return render_template(
+            "index.html",
+            goals=goals,
+            tasks=tasks,
+            mistakes=mistakes,
+            total_tasks=total_tasks,
+            completed_tasks=completed_tasks,
+            pending_tasks=pending_tasks,
+            total_goals=total_goals,
+            progress=progress,
+            weak_skills=weak_skills,
+        )
+
+    @app.route("/goals", methods=["GET", "POST"])
+    def goals():
+        if request.method == "POST":
+            goal = Goal(
+                title=request.form.get("title", "").strip(),
+                category=request.form.get("category", "General").strip(),
+                current_level=request.form.get("current_level", "Beginner").strip(),
+                daily_minutes=int(request.form.get("daily_minutes", 60) or 60),
+                start_date=request.form.get("start_date", "").strip(),
+                deadline=request.form.get("deadline", "").strip(),
+                reminder_time=request.form.get("reminder_time", "").strip(),
+                notes=request.form.get("notes", "").strip(),
+            )
+
+            if not goal.title:
+                flash("Goal title is required.", "error")
+                return redirect(url_for("goals"))
+
+            db.session.add(goal)
+            db.session.commit()
+            create_initial_tasks(goal)
+            flash("Goal saved and smart tasks were generated.", "success")
+            return redirect(url_for("goals"))
+
+        all_goals = Goal.query.order_by(Goal.id.desc()).all()
+        return render_template("goals.html", goals=all_goals)
+
+    @app.route("/goal/<int:goal_id>/edit", methods=["GET", "POST"])
+    def edit_goal(goal_id):
+        goal = Goal.query.get_or_404(goal_id)
+
+        if request.method == "POST":
+            goal.title = request.form.get("title", "").strip()
+            goal.category = request.form.get("category", "General").strip()
+            goal.current_level = request.form.get("current_level", "Beginner").strip()
+            goal.daily_minutes = int(request.form.get("daily_minutes", 60) or 60)
+            goal.start_date = request.form.get("start_date", "").strip()
+            goal.deadline = request.form.get("deadline", "").strip()
+            goal.reminder_time = request.form.get("reminder_time", "").strip()
+            goal.notes = request.form.get("notes", "").strip()
+            db.session.commit()
+            flash("Goal changes saved.", "success")
+            return redirect(url_for("goals"))
+
+        return render_template("edit_goal.html", goal=goal)
+
+    @app.route("/goal/<int:goal_id>/delete")
+    def delete_goal(goal_id):
+        goal = Goal.query.get_or_404(goal_id)
+        for task in list(goal.tasks):
+            db.session.delete(task)
+        db.session.delete(goal)
+        db.session.commit()
+        flash("Goal and its tasks were deleted.", "success")
+        return redirect(url_for("goals"))
+
+    @app.route("/tasks", methods=["GET", "POST"])
+    def tasks():
+        if request.method == "POST":
+            task = StudyTask(
+                title=request.form.get("title", "").strip(),
+                category=request.form.get("category", "Study").strip(),
+                skill=request.form.get("skill", "General").strip(),
+                language=request.form.get("language", "").strip(),
+                practice_type=request.form.get("practice_type", "").strip(),
+                source=request.form.get("source", "").strip(),
+                difficulty=int(request.form.get("difficulty", 1) or 1),
+                priority=int(request.form.get("priority", 3) or 3),
+                estimated_minutes=int(request.form.get("estimated_minutes", 30) or 30),
+                start_date=request.form.get("start_date", "").strip(),
+                due_date=request.form.get("due_date", "").strip(),
+                reminder_time=request.form.get("reminder_time", "").strip(),
+                repeat_type=request.form.get("repeat_type", "daily").strip(),
+                notes=request.form.get("notes", "").strip(),
+            )
+
+            if not task.title:
+                flash("Task title is required.", "error")
+                return redirect(url_for("tasks"))
+
+            db.session.add(task)
+            db.session.commit()
+            flash("Task saved.", "success")
+            return redirect(url_for("tasks"))
+
+        all_tasks = StudyTask.query.order_by(
+            StudyTask.status.asc(),
+            StudyTask.priority.desc(),
+            StudyTask.difficulty.asc(),
+            StudyTask.id.desc(),
+        ).all()
+        return render_template("tasks.html", tasks=all_tasks)
+
+    @app.route("/task/<int:task_id>/edit", methods=["GET", "POST"])
+    def edit_task(task_id):
+        task = StudyTask.query.get_or_404(task_id)
+
+        if request.method == "POST":
+            task.title = request.form.get("title", "").strip()
+            task.category = request.form.get("category", "Study").strip()
+            task.skill = request.form.get("skill", "General").strip()
+            task.language = request.form.get("language", "").strip()
+            task.practice_type = request.form.get("practice_type", "").strip()
+            task.source = request.form.get("source", "").strip()
+            task.difficulty = int(request.form.get("difficulty", 1) or 1)
+            task.priority = int(request.form.get("priority", 3) or 3)
+            task.estimated_minutes = int(request.form.get("estimated_minutes", 30) or 30)
+            task.start_date = request.form.get("start_date", "").strip()
+            task.due_date = request.form.get("due_date", "").strip()
+            task.reminder_time = request.form.get("reminder_time", "").strip()
+            task.repeat_type = request.form.get("repeat_type", "daily").strip()
+            task.notes = request.form.get("notes", "").strip()
+            db.session.commit()
+            flash("Task changes saved.", "success")
+            return redirect(url_for("tasks"))
+
+        return render_template("edit_task.html", task=task)
+
+    @app.route("/task/<int:task_id>/done")
+    def mark_task_done(task_id):
+        task = StudyTask.query.get_or_404(task_id)
+        task.status = "done"
+        task.review_count += 1
+        task.last_reviewed = str(date.today())
+        db.session.commit()
+        flash("Task marked as done.", "success")
+        return redirect(url_for("tasks"))
+
+    @app.route("/task/<int:task_id>/pending")
+    def mark_task_pending(task_id):
+        task = StudyTask.query.get_or_404(task_id)
+        task.status = "pending"
+        db.session.commit()
+        flash("Task returned to pending.", "success")
+        return redirect(url_for("tasks"))
+
+    @app.route("/task/<int:task_id>/delete")
+    def delete_task(task_id):
+        task = StudyTask.query.get_or_404(task_id)
+        db.session.delete(task)
+        db.session.commit()
+        flash("Task deleted.", "success")
+        return redirect(url_for("tasks"))
+
+    @app.route("/languages")
+    def languages():
+        tasks = StudyTask.query.filter_by(category="Language").order_by(StudyTask.id.desc()).all()
+        return render_template("languages.html", tasks=tasks)
+
+    @app.route("/interview", methods=["GET", "POST"])
+    def interview():
+        generated = None
+
+        if request.method == "POST":
+            scholarship = request.form.get("scholarship", "").strip()
+            major = request.form.get("major", "").strip()
+            profile = request.form.get("profile", "").strip()
+
+            if not scholarship or not major:
+                flash("Scholarship and major are required.", "error")
+                return redirect(url_for("interview"))
+
+            prompt = f"""
+You are a scholarship interview coach.
+
+Student profile:
+{profile}
+
+Scholarship: {scholarship}
+Major: {major}
+
+Generate 5 realistic interview questions. For each question, provide:
+- question
+- why_they_ask
+- answer_strategy
+
+Return valid JSON array only.
+"""
+            ai_text = call_ai(ai_client, prompt, max_tokens=900, temperature=0.5)
+            generated = parse_json_array(ai_text)
+
+            if generated:
+                for item in generated:
+                    q = InterviewAnswer(
+                        scholarship=scholarship,
+                        major=major,
+                        question=item.get("question", str(item)),
+                    )
+                    db.session.add(q)
+                db.session.commit()
+
+        saved_questions = InterviewAnswer.query.order_by(InterviewAnswer.id.desc()).limit(20).all()
+        return render_template("interview.html", generated=generated, saved_questions=saved_questions)
+
+    @app.route("/answer/<int:answer_id>", methods=["GET", "POST"])
+    def answer_question(answer_id):
+        item = InterviewAnswer.query.get_or_404(answer_id)
+
+        if request.method == "POST":
+            answer = request.form.get("answer", "").strip()
+            action = request.form.get("action", "save")
+
+            if not answer:
+                flash("Answer is required.", "error")
+                return redirect(url_for("answer_question", answer_id=answer_id))
+
+            item.answer = answer
+
+            if action == "evaluate":
+                prompt = f"""
+You are a strict but helpful scholarship interview evaluator.
+
+Question:
+{item.question}
+
+Student answer:
+{answer}
+
+Evaluate the answer. Return valid JSON only:
+{{
+  "score": integer from 0 to 10,
+  "strengths": ["..."],
+  "weaknesses": ["..."],
+  "suggestions": ["..."],
+  "improved_answer": "..."
+}}
+"""
+                ai_text = call_ai(ai_client, prompt, max_tokens=800, temperature=0.3)
+                result = parse_json_object(ai_text)
+                item.score = result.get("score", 0)
+                item.feedback = json.dumps(result, ensure_ascii=False, indent=2)
+
+            db.session.commit()
+            flash("Answer saved.", "success")
+            return redirect(url_for("answer_question", answer_id=answer_id))
+
+        feedback = None
+        if item.feedback:
+            try:
+                feedback = json.loads(item.feedback)
+            except Exception:
+                feedback = {"raw": item.feedback}
+
+        return render_template("answer.html", item=item, feedback=feedback)
+
+    @app.route("/english", methods=["GET", "POST"])
+    def english():
+        result = None
+
+        if request.method == "POST":
+            text = request.form.get("text", "").strip()
+            mode = request.form.get("mode", "natural").strip()
+
+            if not text:
+                flash("Please write text first.", "error")
+                return redirect(url_for("english"))
+
+            prompt = f"""
+You are an English coach for a scholarship student.
+
+Mode: {mode}
+
+Student text:
+{text}
+
+Return valid JSON only:
+{{
+  "corrected_text": "...",
+  "natural_version": "...",
+  "simple_explanation": ["..."],
+  "useful_vocabulary": ["..."]
+}}
+"""
+            ai_text = call_ai(ai_client, prompt, max_tokens=700, temperature=0.4)
+            result = parse_json_object(ai_text)
+
+        return render_template("english.html", result=result)
+
+    @app.route("/programming", methods=["GET", "POST"])
+    def programming():
+        result = None
+
+        if request.method == "POST":
+            problem = request.form.get("problem", "").strip()
+            code = request.form.get("code", "").strip()
+            error = request.form.get("error", "").strip()
+
+            prompt = f"""
+You are a programming tutor. Do not give the final solution directly unless necessary.
+Explain the likely error, give hints, debugging steps, and one small corrected example if useful.
+
+Problem:
+{problem}
+
+Code:
+{code}
+
+Error:
+{error}
+
+Return valid JSON:
+{{
+ "likely_problem": "...",
+ "hints": ["..."],
+ "debugging_steps": ["..."],
+ "what_to_learn": ["..."]
+}}
+"""
+            ai_text = call_ai(ai_client, prompt, max_tokens=800, temperature=0.3)
+            result = parse_json_object(ai_text)
+
+        mistakes = MistakeLog.query.order_by(MistakeLog.id.desc()).limit(12).all()
+        return render_template("programming.html", result=result, mistakes=mistakes)
+
+    @app.route("/mistake", methods=["POST"])
+    def add_mistake():
+        area = request.form.get("area", "General").strip()
+        mistake = request.form.get("mistake", "").strip()
+        correction = request.form.get("correction", "").strip()
+
+        if mistake:
+            db.session.add(MistakeLog(area=area, mistake=mistake, correction=correction))
+            db.session.commit()
+            flash("Mistake saved to your learning log.", "success")
+
+        return redirect(url_for("programming"))
+
+    @app.route("/api/tasks")
+    def api_tasks():
+        tasks = StudyTask.query.filter_by(status="pending").all()
+        return jsonify([
+            {
+                "id": t.id,
+                "title": t.title,
+                "category": t.category,
+                "language": t.language,
+                "practice_type": t.practice_type,
+                "source": t.source,
+                "due_date": t.due_date,
+                "reminder_time": t.reminder_time,
+                "repeat_type": t.repeat_type,
+                "minutes": t.estimated_minutes,
+            }
+            for t in tasks
+        ])
+
+    @app.route("/api/smart_plan", methods=["POST"])
+    def api_smart_plan():
+        data = request.get_json(force=True)
+        title = data.get("title", "General goal")
+        level = data.get("level", "Beginner")
+        daily_minutes = int(data.get("daily_minutes", 60))
+        days = int(data.get("days", 14))
+        plan = generate_algorithmic_plan(title, level, daily_minutes, days)
+        return jsonify({"plan": plan})
+
+    return app
+
+
+def build_ai_client():
+    key = os.environ.get("OPENROUTER_API_KEY")
+    if not key:
+        logger.warning("OPENROUTER_API_KEY is missing. App will use fallback responses.")
+        return None
+
+    return OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=key,
+        default_headers={
+            "HTTP-Referer": "http://localhost:5000",
+            "X-Title": "EduPath AI EZZALDEEN",
+        },
+    )
+
+
+def call_ai(client, prompt, max_tokens=500, temperature=0.4):
+    if client is None:
+        return fallback_ai_response(prompt)
+
+    model = os.environ.get("OPENROUTER_MODEL", "deepseek/deepseek-chat-v3-0324:free")
+
+    try:
+        response = client.chat.completions.create(
+            model=model,
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are EduPath AI EZZALDEEN, a natural, practical, honest learning coach. "
+                        "Use simple clear language. Do not invent facts."
+                    ),
+                },
+                {"role": "user", "content": prompt},
+            ],
+            max_tokens=max_tokens,
+            temperature=temperature,
+        )
+        return response.choices[0].message.content.strip()
+    except Exception as e:
+        logger.exception("AI call failed")
+        return fallback_ai_response(prompt, error=str(e))
+
+
+def fallback_ai_response(prompt, error=None):
+    if "Generate 5 realistic interview questions" in prompt:
+        return json.dumps([
+            {
+                "question": "Tell us about yourself and your academic background.",
+                "why_they_ask": "They want to understand your profile and motivation.",
+                "answer_strategy": "Mention your academic strength, computer science interest, projects, volunteering, and future goals.",
+            },
+            {
+                "question": "Why did you choose Computer Science?",
+                "why_they_ask": "They want to know if your choice is serious and connected to your future.",
+                "answer_strategy": "Connect mathematics, problem-solving, programming, AI, and practical impact.",
+            },
+            {
+                "question": "Why do you deserve this scholarship?",
+                "why_they_ask": "They want evidence of excellence, discipline, and potential.",
+                "answer_strategy": "Mention your GPA, self-learning, projects, volunteering, and clear goals.",
+            },
+            {
+                "question": "What are your future plans after graduation?",
+                "why_they_ask": "They want to see if you have a realistic long-term vision.",
+                "answer_strategy": "Explain your plan to gain strong CS skills and use technology to help education and healthcare.",
+            },
+            {
+                "question": "What challenge have you overcome?",
+                "why_they_ask": "They want to assess resilience.",
+                "answer_strategy": "Use a real challenge such as limited resources and explain how you continued learning.",
+            },
+        ], ensure_ascii=False)
+
+    if "Evaluate the answer" in prompt:
+        return json.dumps({
+            "score": 7,
+            "strengths": [
+                "The answer is understandable.",
+                "It has a clear personal direction.",
+            ],
+            "weaknesses": [
+                "It needs a more specific example.",
+                "The ending can be stronger.",
+            ],
+            "suggestions": [
+                "Add one real achievement or project.",
+                "Connect your answer more clearly to the scholarship.",
+            ],
+            "improved_answer": "This is a good start. Make it more specific by adding one personal example and linking it to your future goals.",
+        }, ensure_ascii=False)
+
+    if "English coach" in prompt:
+        return json.dumps({
+            "corrected_text": "Your text was received. Add your OpenRouter API key to get full AI correction.",
+            "natural_version": "Add your OpenRouter API key to generate a natural English version.",
+            "simple_explanation": [
+                "Fallback mode is working.",
+                "AI correction needs OPENROUTER_API_KEY.",
+            ],
+            "useful_vocabulary": ["clear", "natural", "confident"],
+        }, ensure_ascii=False)
+
+    if "programming tutor" in prompt:
+        return json.dumps({
+            "likely_problem": "AI mode is not enabled yet, but the debugging coach page is working.",
+            "hints": ["Add your OpenRouter API key in .env.", "Then paste your code and error message."],
+            "debugging_steps": ["Read the error line.", "Print variables.", "Test one small part at a time."],
+            "what_to_learn": ["Debugging habits", "Reading error messages"],
+        }, ensure_ascii=False)
+
+    return json.dumps({
+        "message": "Fallback mode is active. Add OPENROUTER_API_KEY to enable full AI features.",
+        "error": error or "",
+    }, ensure_ascii=False)
+
+
+def create_initial_tasks(goal):
+    plan = generate_algorithmic_plan(goal.title, goal.current_level, goal.daily_minutes, days=14)
+
+    for day in plan:
+        for item in day["tasks"]:
+            task = StudyTask(
+                goal_id=goal.id,
+                title=item["title"],
+                category=goal.category if goal.category != "English" else "Language",
+                skill=item["skill"],
+                language="English" if goal.category == "English" else "",
+                practice_type=item.get("practice_type", ""),
+                source="",
+                difficulty=item["difficulty"],
+                priority=item["priority"],
+                estimated_minutes=item["minutes"],
+                start_date=goal.start_date or str(date.today()),
+                due_date=day["date"],
+                reminder_time=goal.reminder_time,
+                repeat_type="daily",
+            )
+            db.session.add(task)
+
+    db.session.commit()
+
+
+def generate_algorithmic_plan(title, level, daily_minutes, days=14):
+    today = date.today()
+    skill_templates = infer_skills(title)
+    level_factor = {"Beginner": 1, "Intermediate": 2, "Advanced": 3}.get(level, 1)
+
+    plan = []
+
+    for i in range(days):
+        current_date = today + timedelta(days=i)
+        available = daily_minutes
+        daily_tasks = []
+
+        main_skill = skill_templates[i % len(skill_templates)]
+        difficulty = min(5, level_factor + (i // 4))
+        main_minutes = max(25, int(available * 0.5))
+
+        daily_tasks.append({
+            "title": f"Study {main_skill}: {title}",
+            "skill": main_skill,
+            "practice_type": main_skill if main_skill in ["Reading", "Writing", "Listening", "Speaking"] else "",
+            "difficulty": difficulty,
+            "priority": 5,
+            "minutes": main_minutes,
+        })
+
+        available -= main_minutes
+
+        practice_minutes = max(20, int(daily_minutes * 0.3))
+        daily_tasks.append({
+            "title": f"Practice exercises for {main_skill}",
+            "skill": main_skill,
+            "practice_type": main_skill if main_skill in ["Reading", "Writing", "Listening", "Speaking"] else "",
+            "difficulty": difficulty,
+            "priority": 4,
+            "minutes": min(practice_minutes, available),
+        })
+
+        available -= min(practice_minutes, available)
+
+        if i >= 2 and i % 3 == 0:
+            review_skill = skill_templates[(i - 2) % len(skill_templates)]
+            daily_tasks.append({
+                "title": f"Spaced review: {review_skill}",
+                "skill": review_skill,
+                "practice_type": review_skill if review_skill in ["Reading", "Writing", "Listening", "Speaking"] else "",
+                "difficulty": max(1, difficulty - 1),
+                "priority": 5,
+                "minutes": max(15, min(available, 25)),
+            })
+
+        plan.append({"day": i + 1, "date": str(current_date), "tasks": daily_tasks})
+
+    return plan
+
+
+def infer_skills(title):
+    text = title.lower()
+
+    if any(word in text for word in ["english", "toefl", "ielts", "turkish", "russian", "indonesian", "romanian", "language"]):
+        return ["Reading", "Writing", "Listening", "Speaking", "Vocabulary", "Grammar"]
+
+    if any(word in text for word in ["python", "programming", "coding", "codeforces"]):
+        return ["Syntax", "Problem Solving", "Functions", "Data Structures", "Debugging"]
+
+    if any(word in text for word in ["math", "calculus", "algebra"]):
+        return ["Concept Understanding", "Examples", "Problem Solving", "Review", "Timed Practice"]
+
+    if any(word in text for word in ["scholarship", "interview", "motivation letter"]):
+        return ["Self Introduction", "Motivation", "Achievements", "Future Plans", "Mock Interview"]
+
+    if any(word in text for word in ["ai", "machine learning", "data"]):
+        return ["Python Basics", "Data", "Models", "Evaluation", "Projects"]
+
+    return ["Learning", "Practice", "Review", "Application"]
+
+
+def detect_weaknesses():
+    pending = StudyTask.query.filter_by(status="pending").all()
+    counts = {}
+
+    for task in pending:
+        key = task.skill or task.category or "General"
+        counts[key] = counts.get(key, 0) + (task.priority or 1)
+
+    sorted_items = sorted(counts.items(), key=lambda x: x[1], reverse=True)
+    return sorted_items[:5]
+
+
+def parse_json_array(text):
+    try:
+        data = json.loads(text)
+        if isinstance(data, list):
+            return data
+    except Exception:
+        pass
+
+    start = text.find("[")
+    end = text.rfind("]")
+
+    if start != -1 and end != -1 and end > start:
+        try:
+            data = json.loads(text[start:end + 1])
+            if isinstance(data, list):
+                return data
+        except Exception:
+            pass
+
+    return []
+
+
+def parse_json_object(text):
+    try:
+        data = json.loads(text)
+        if isinstance(data, dict):
+            return data
+    except Exception:
+        pass
+
+    start = text.find("{")
+    end = text.rfind("}")
+
+    if start != -1 and end != -1 and end > start:
+        try:
+            data = json.loads(text[start:end + 1])
+            if isinstance(data, dict):
+                return data
+        except Exception:
+            pass
+
+    return {"raw": text}

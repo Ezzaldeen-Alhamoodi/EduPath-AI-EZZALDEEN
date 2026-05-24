@@ -1,0 +1,40 @@
+\
+{% extends "base.html" %}
+{% block page_title %}English Coach{% endblock %}
+{% block content %}
+
+<section class="card">
+    <h2>✍️ Improve Your English</h2>
+    <form method="POST" class="form">
+        <label>Your text</label>
+        <textarea name="text" rows="8" placeholder="Write your English answer here..."></textarea>
+
+        <label>Mode</label>
+        <select name="mode">
+            <option value="natural">Natural interview English</option>
+            <option value="simple">Simple and clear English</option>
+            <option value="formal">Formal scholarship style</option>
+        </select>
+
+        <button type="submit">✨ Improve Text</button>
+    </form>
+</section>
+
+{% if result %}
+<section class="card">
+    <h2>Result</h2>
+    <h3>Corrected Text</h3>
+    <p class="improved">{{ result.corrected_text }}</p>
+
+    <h3>Natural Version</h3>
+    <p class="improved">{{ result.natural_version }}</p>
+
+    <h3>Explanation</h3>
+    <ul>{% for item in result.simple_explanation %}<li>{{ item }}</li>{% endfor %}</ul>
+
+    <h3>Useful Vocabulary</h3>
+    <ul>{% for item in result.useful_vocabulary %}<li>{{ item }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+
+{% endblock %}

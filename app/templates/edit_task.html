@@ -1,0 +1,17 @@
+\
+{% extends "base.html" %}
+{% block page_title %}Edit Task{% endblock %}
+{% block content %}
+
+<section class="card">
+    <h2>✏️ Edit Task</h2>
+    <form method="POST" class="form">
+        {% include "_task_form.html" %}
+        <div class="actions">
+            <button type="submit">💾 Save Changes</button>
+            <a class="small-button cancel" href="{{ url_for('tasks') }}">↩ Cancel</a>
+        </div>
+    </form>
+</section>
+
+{% endblock %}

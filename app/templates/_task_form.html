@@ -1,0 +1,64 @@
+\
+<label>Task name</label>
+<input name="title" value="{{ task.title if task else '' }}" placeholder="Example: Practice English speaking">
+
+<label>Category</label>
+<select name="category">
+    {% for c in ["Study", "Language", "Programming", "Scholarship", "Mathematics", "AI", "General"] %}
+        <option {% if task and task.category == c %}selected{% endif %}>{{ c }}</option>
+    {% endfor %}
+</select>
+
+<label>Skill / section</label>
+<input name="skill" value="{{ task.skill if task else '' }}" placeholder="Example: Reading, Writing, Debugging">
+
+<label>Language optional</label>
+<input name="language" value="{{ task.language if task else '' }}" placeholder="English, Turkish, Russian, Indonesian, Romanian...">
+
+<label>Practice type optional</label>
+<select name="practice_type">
+    {% for p in ["", "Reading", "Writing", "Listening", "Speaking", "Vocabulary", "Grammar"] %}
+        <option value="{{ p }}" {% if task and task.practice_type == p %}selected{% endif %}>{{ p or "Not language practice" }}</option>
+    {% endfor %}
+</select>
+
+<label>Website / app / source</label>
+<input name="source" value="{{ task.source if task else '' }}" placeholder="Example: YouTube, Duolingo, TOEFL book, Codeforces">
+
+<div class="form-row">
+    <div>
+        <label>Difficulty 1-5</label>
+        <input name="difficulty" type="number" min="1" max="5" value="{{ task.difficulty if task else 1 }}">
+    </div>
+    <div>
+        <label>Priority 1-5</label>
+        <input name="priority" type="number" min="1" max="5" value="{{ task.priority if task else 3 }}">
+    </div>
+</div>
+
+<label>Estimated minutes</label>
+<input name="estimated_minutes" type="number" min="5" value="{{ task.estimated_minutes if task else 30 }}">
+
+<div class="form-row">
+    <div>
+        <label>Start date</label>
+        <input name="start_date" type="date" value="{{ task.start_date if task else '' }}">
+    </div>
+    <div>
+        <label>End / due date</label>
+        <input name="due_date" type="date" value="{{ task.due_date if task else '' }}">
+    </div>
+</div>
+
+<label>Reminder time</label>
+<input name="reminder_time" type="time" value="{{ task.reminder_time if task else '' }}">
+
+<label>Repeat</label>
+<select name="repeat_type">
+    {% for r in ["daily", "weekly", "once"] %}
+        <option {% if task and task.repeat_type == r %}selected{% endif %}>{{ r }}</option>
+    {% endfor %}
+</select>
+
+<label>Notes</label>
+<textarea name="notes" rows="3">{{ task.notes if task else "" }}</textarea>

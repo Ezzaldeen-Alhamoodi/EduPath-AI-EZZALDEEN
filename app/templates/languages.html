@@ -1,0 +1,38 @@
+\
+{% extends "base.html" %}
+{% block page_title %}Language Practice{% endblock %}
+{% block content %}
+
+<section class="hero compact">
+    <div>
+        <span class="tag">🌍 Multi-language learning</span>
+        <h2>Plan Reading, Writing, Listening, and Speaking practice.</h2>
+        <p>Add language tasks from the Tasks page and choose language, practice type, source, dates, and reminder time.</p>
+    </div>
+    <a class="button light" href="{{ url_for('tasks') }}">➕ Add Language Task</a>
+</section>
+
+<section class="grid-4">
+    <div class="skill-card">📖 Reading</div>
+    <div class="skill-card">✍️ Writing</div>
+    <div class="skill-card">🎧 Listening</div>
+    <div class="skill-card">🗣 Speaking</div>
+</section>
+
+<section class="card">
+    <h2>🌍 Language Tasks</h2>
+    {% for task in tasks %}
+        <div class="task-mini">
+            <div>
+                <strong>{{ task.language or "Language" }} — {{ task.practice_type or task.skill }}</strong>
+                <span>{{ task.title }} · {{ task.estimated_minutes }} min</span>
+                <span>Source: {{ task.source or "not set" }} · Reminder: {{ task.reminder_time or "not set" }}</span>
+            </div>
+            <span class="badge">{{ task.status }}</span>
+        </div>
+    {% else %}
+        <p class="muted">No language tasks yet.</p>
+    {% endfor %}
+</section>
+
+{% endblock %}
