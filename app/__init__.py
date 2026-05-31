@@ -10,6 +10,8 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
 from openai import OpenAI
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
+from flask_mail import Mail, Message
 
 load_dotenv(override=True)
 
@@ -18,6 +20,7 @@ logger = logging.getLogger(__name__)
 
 db = SQLAlchemy()
 login_manager = LoginManager()
+mail = Mail()
 
 
 
@@ -30,6 +33,8 @@ class User(UserMixin, db.Model):
     major = db.Column(db.String(140), nullable=True)
     target_degree = db.Column(db.String(120), nullable=True)
     languages = db.Column(db.String(255), nullable=True)
+    email_verified = db.Column(db.Boolean, nullable=False, default=False)
+    verification_sent_at = db.Column(db.DateTime, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     goals = db.relationship("Goal", backref="owner", lazy=True)
@@ -103,6 +108,64 @@ class MistakeLog(db.Model):
 
 
 
+
+def generate_token(email, purpose):
+    serializer = URLSafeTimedSerializer(os.environ.get("SECRET_KEY", "dev-secret-key"))
+    return serializer.dumps(email, salt=f"edupath-{purpose}")
+
+def verify_token(token, purpose, max_age=3600):
+    serializer = URLSafeTimedSerializer(os.environ.get("SECRET_KEY", "dev-secret-key"))
+    return serializer.loads(token, salt=f"edupath-{purpose}", max_age=max_age)
+
+def send_email_message(subject, recipients, body):
+    """Send email if SMTP is configured. Otherwise log the email body for development."""
+    try:
+        if not current_app_mail_is_configured():
+            logger.info("Email not configured. Subject: %s | Recipients: %s | Body: %s", subject, recipients, body)
+            return False
+        message = Message(subject=subject, recipients=recipients, body=body)
+        mail.send(message)
+        return True
+    except Exception:
+        logger.exception("Email sending failed")
+        return False
+
+def current_app_mail_is_configured():
+    return bool(os.environ.get("MAIL_SERVER") and os.environ.get("MAIL_USERNAME") and os.environ.get("MAIL_PASSWORD"))
+
+def send_verification_email(user):
+    token = generate_token(user.email, "verify-email")
+    link = url_for("verify_email", token=token, _external=True)
+    body = f"""Hello {user.name},
+
+Welcome to EduPath AI EZZALDEEN.
+
+Please verify your email by opening this link:
+{link}
+
+This link is valid for 24 hours.
+
+If you did not create this account, ignore this email.
+"""
+    return send_email_message("Verify your EduPath AI email", [user.email], body)
+
+def send_password_reset_email(user):
+    token = generate_token(user.email, "reset-password")
+    link = url_for("reset_password", token=token, _external=True)
+    body = f"""Hello {user.name},
+
+You requested a password reset for EduPath AI EZZALDEEN.
+
+Reset your password using this link:
+{link}
+
+This link is valid for 1 hour.
+
+If you did not request this, ignore this email.
+"""
+    return send_email_message("Reset your EduPath AI password", [user.email], body)
+
+
 @login_manager.user_loader
 def load_user(user_id):
     try:
@@ -119,8 +182,18 @@ def create_app():
     )
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+    app.config["MAIL_SERVER"] = os.environ.get("MAIL_SERVER", "")
+    app.config["MAIL_PORT"] = int(os.environ.get("MAIL_PORT", "587"))
+    app.config["MAIL_USE_TLS"] = os.environ.get("MAIL_USE_TLS", "true").lower() == "true"
+    app.config["MAIL_USE_SSL"] = os.environ.get("MAIL_USE_SSL", "false").lower() == "true"
+    app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME", "")
+    app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD", "")
+    app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("MAIL_DEFAULT_SENDER", app.config["MAIL_USERNAME"] or "noreply@edupath.ai")
+
+
     db.init_app(app)
     login_manager.init_app(app)
+    mail.init_app(app)
     login_manager.login_view = "login"
     login_manager.login_message = "Please log in to access EduPath AI."
 
@@ -198,6 +271,92 @@ def create_app():
             return redirect(url_for("index"))
 
         return render_template("login.html")
+
+
+    @app.route("/verify-email/<token>")
+    def verify_email(token):
+        try:
+            email = verify_token(token, "verify-email", max_age=86400)
+        except SignatureExpired:
+            flash("Verification link expired. Please request a new one.", "error")
+            return redirect(url_for("resend_verification"))
+        except BadSignature:
+            flash("Invalid verification link.", "error")
+            return redirect(url_for("login"))
+
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            flash("Account not found.", "error")
+            return redirect(url_for("register"))
+
+        user.email_verified = True
+        db.session.commit()
+        flash("Email verified successfully.", "success")
+        return redirect(url_for("index" if current_user.is_authenticated else "login"))
+
+    @app.route("/resend-verification", methods=["GET", "POST"])
+    @login_required
+    def resend_verification():
+        if current_user.email_verified:
+            flash("Your email is already verified.", "success")
+            return redirect(url_for("profile"))
+
+        if request.method == "POST":
+            send_verification_email(current_user)
+            current_user.verification_sent_at = datetime.utcnow()
+            db.session.commit()
+            flash("Verification email sent. Check your inbox or app logs if SMTP is not configured.", "success")
+            return redirect(url_for("profile"))
+
+        return render_template("resend_verification.html")
+
+    @app.route("/forgot-password", methods=["GET", "POST"])
+    def forgot_password():
+        if current_user.is_authenticated:
+            return redirect(url_for("profile"))
+
+        if request.method == "POST":
+            email = request.form.get("email", "").strip().lower()
+            user = User.query.filter_by(email=email).first()
+            if user:
+                send_password_reset_email(user)
+            flash("If this email exists, a password reset link has been sent.", "success")
+            return redirect(url_for("login"))
+
+        return render_template("forgot_password.html")
+
+    @app.route("/reset-password/<token>", methods=["GET", "POST"])
+    def reset_password(token):
+        try:
+            email = verify_token(token, "reset-password", max_age=3600)
+        except SignatureExpired:
+            flash("Password reset link expired.", "error")
+            return redirect(url_for("forgot_password"))
+        except BadSignature:
+            flash("Invalid password reset link.", "error")
+            return redirect(url_for("forgot_password"))
+
+        user = User.query.filter_by(email=email).first_or_404()
+
+        if request.method == "POST":
+            password = request.form.get("password", "")
+            confirm_password = request.form.get("confirm_password", "")
+
+            if len(password) < 6:
+                flash("Password must be at least 6 characters.", "error")
+                return redirect(url_for("reset_password", token=token))
+
+            if password != confirm_password:
+                flash("Passwords do not match.", "error")
+                return redirect(url_for("reset_password", token=token))
+
+            user.password_hash = generate_password_hash(password)
+            db.session.commit()
+            flash("Password updated successfully. Please log in.", "success")
+            return redirect(url_for("login"))
+
+        return render_template("reset_password.html", token=token)
+
 
     @app.route("/logout")
     @login_required
@@ -698,6 +857,10 @@ def ensure_database_columns():
                     table_columns[table] = []
 
             additions = {
+                "user": {
+                    "email_verified": "ALTER TABLE user ADD COLUMN email_verified BOOLEAN DEFAULT 0",
+                    "verification_sent_at": "ALTER TABLE user ADD COLUMN verification_sent_at DATETIME"
+                },
                 "goal": {
                     "user_id": "ALTER TABLE goal ADD COLUMN user_id INTEGER"
                 },

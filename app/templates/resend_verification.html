@@ -1,0 +1,20 @@
+\
+{% extends "base.html" %}
+{% block page_title %}Verify Email{% endblock %}
+{% block content %}
+
+<section class="auth-shell">
+    <div class="auth-card">
+        <div class="auth-brand">🧠 EduPath AI EZZALDEEN</div>
+        <h2>Verify your email</h2>
+        <p class="muted">Your account is active, but email verification helps secure public deployment.</p>
+
+        <form method="POST" class="form">
+            <button type="submit">📩 Resend verification email</button>
+        </form>
+
+        <p class="auth-link"><a href="{{ url_for('profile') }}">Back to profile</a></p>
+    </div>
+</section>
+
+{% endblock %}

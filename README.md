@@ -159,3 +159,33 @@ This release adds the first multi-user foundation.
 - Goals now appear correctly in Dashboard and Goals for the logged-in user.
 - Goal progress is available on the Goals page.
 - Coach System remains unchanged.
+
+
+## EduPath AI v3.2 Public Ready
+
+### Added
+- Email verification.
+- Resend verification email.
+- Password reset by email token.
+- PostgreSQL compatibility for Render.
+- Procfile for deployment.
+- Runtime file.
+- `.env.example` for production setup.
+- SMTP-ready email sending with safe log fallback if email is not configured.
+
+### Render Environment Variables
+Set these in Render:
+- SECRET_KEY
+- OPENROUTER_API_KEY
+- OPENROUTER_MODEL=openrouter/auto
+- DATABASE_URL from Render PostgreSQL
+- MAIL_SERVER
+- MAIL_PORT
+- MAIL_USE_TLS
+- MAIL_USERNAME
+- MAIL_PASSWORD
+- MAIL_DEFAULT_SENDER
+
+### Notes
+- If SMTP is not configured, verification/reset links are written to logs for development.
+- For public use, configure SMTP before sharing widely.

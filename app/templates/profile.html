@@ -8,6 +8,7 @@
         <span class="tag">Private Profile</span>
         <h2>👤 {{ current_user.name }}</h2>
         <p>{{ current_user.email }}</p>
+        {% if current_user.email_verified %}<span class="tag verified">✅ Email verified</span>{% else %}<a class="button ghost" href="{{ url_for('resend_verification') }}">📩 Verify Email</a>{% endif %}
     </div>
     <a class="button light" href="{{ url_for('logout') }}">🚪 Logout</a>
 </section>

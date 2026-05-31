@@ -4,3 +4,5 @@ python-dotenv==1.0.1
 openai==1.59.8
 gunicorn==22.0.0
 Flask-Login==0.6.3
+Flask-Mail==0.9.1
+psycopg2-binary==2.9.9
