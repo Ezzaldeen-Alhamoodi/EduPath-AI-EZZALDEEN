@@ -151,3 +151,11 @@ This release adds the first multi-user foundation.
   - Scholarship Coach
 - Desktop navigation still keeps detailed sections.
 - Better mobile organization for limited screen space.
+
+
+## v3.1.1 Goals Fix
+
+- Fixed a user-data ownership bug where newly created goals could be saved without `user_id`.
+- Goals now appear correctly in Dashboard and Goals for the logged-in user.
+- Goal progress is available on the Goals page.
+- Coach System remains unchanged.

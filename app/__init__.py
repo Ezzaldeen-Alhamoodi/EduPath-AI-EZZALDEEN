@@ -244,6 +244,7 @@ def create_app():
         goals = Goal.query.filter_by(user_id=current_user.id).order_by(Goal.id.desc()).limit(6).all()
         for goal in goals:
             goal.time_left = calculate_goal_time_left(goal.deadline)
+            goal.goal_progress = calculate_goal_progress(goal)
         tasks = StudyTask.query.filter_by(user_id=current_user.id).order_by(StudyTask.id.desc()).limit(10).all()
         mistakes = MistakeLog.query.filter_by(user_id=current_user.id).order_by(MistakeLog.id.desc()).limit(6).all()
 
@@ -273,6 +274,7 @@ def create_app():
     def goals():
         if request.method == "POST":
             goal = Goal(
+                user_id=current_user.id,
                 title=request.form.get("title", "").strip(),
                 category=request.form.get("category", "General").strip(),
                 current_level=request.form.get("current_level", "Beginner").strip(),
@@ -295,6 +297,7 @@ def create_app():
         all_goals = Goal.query.filter_by(user_id=current_user.id).order_by(Goal.id.desc()).all()
         for goal in all_goals:
             goal.time_left = calculate_goal_time_left(goal.deadline)
+            goal.goal_progress = calculate_goal_progress(goal)
         return render_template("goals.html", goals=all_goals)
 
     @app.route("/goal/<int:goal_id>/edit", methods=["GET", "POST"])
@@ -669,6 +672,18 @@ def calculate_goal_time_left(deadline):
         return {"days": days, "weeks": round(days / 7, 1), "months": round(days / 30.44, 1), "status": "remaining" if days >= 0 else "overdue"}
     except Exception:
         return None
+
+
+
+def calculate_goal_progress(goal):
+    try:
+        tasks = list(goal.tasks)
+        if not tasks:
+            return 0
+        done = sum(1 for task in tasks if task.status == "done")
+        return int((done / len(tasks)) * 100)
+    except Exception:
+        return 0
 
 
 def ensure_database_columns():
