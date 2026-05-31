@@ -112,3 +112,26 @@ Browser notifications need permission from the browser.
 - Improved dashboard.
 - Goal countdown and progress bars.
 - Better mobile UI.
+
+
+## EduPath AI v2.2 FINAL
+
+This release turns the app into a stronger learning platform.
+
+### New Centers
+- Language Center with language paths, skills, resources, and language tasks.
+- Scholarship Center with application tracker, statuses, deadlines, next steps, and interview links.
+- Code Center with programming tracks, task overview, and saved mistake review.
+- Profile page for student information, target countries, languages, and main goal.
+
+### Dashboard
+- Today's Focus tasks.
+- Profile snapshot.
+- Active goals.
+- Scholarship tracker preview.
+- Weakness detection.
+
+### Preserved
+- OpenRouter AI integration.
+- Existing English Coach, Interview Coach, Programming Coach.
+- Goals, Tasks, recurrence, PWA, Render deployment.

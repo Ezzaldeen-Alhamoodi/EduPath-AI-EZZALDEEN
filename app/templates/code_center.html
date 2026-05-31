@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block page_title %}Code Center{% endblock %}
+{% block content %}
+
+<section class="hero compact">
+    <div>
+        <span class="tag">💻 Code Center</span>
+        <h2>Improve programming through tracks, tasks, projects, and debugging.</h2>
+        <p>Use this center for Python, web development, algorithms, data structures, machine learning, and projects.</p>
+    </div>
+    <a class="button light" href="{{ url_for('programming') }}">🛠 Debugging Coach</a>
+</section>
+
+<section class="card">
+    <h2>🚀 Coding Tracks</h2>
+    <div class="center-grid">
+        {% for name, icon, progress in tracks %}
+            <div class="center-card">
+                <div class="center-icon">{{ icon }}</div>
+                <strong>{{ name }}</strong>
+                <span>{{ progress }}% learning progress</span>
+                <div class="goal-progress-line"><div class="goal-progress-fill" style="width: {{ progress }}%"></div></div>
+                <a class="small-button" href="{{ url_for('tasks') }}">Add Task</a>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="grid-2">
+    <div class="card">
+        <h2>✅ Programming Tasks</h2>
+        {% for task in tasks %}
+            <div class="task-mini">
+                <div>
+                    <strong>{{ task.title }}</strong>
+                    <span>{{ task.topic or task.skill }} · {{ task.estimated_minutes }} min · {{ task.status }}</span>
+                </div>
+                <span class="badge">{{ task.priority }}</span>
+            </div>
+        {% else %}
+            <p class="muted">No programming tasks yet.</p>
+        {% endfor %}
+    </div>
+
+    <div class="card">
+        <h2>🧾 Saved Mistakes</h2>
+        {% for m in mistakes %}
+            <div class="item">
+                <strong>{{ m.area }}</strong>
+                <span>{{ m.mistake }}</span>
+                <span><b>Correction:</b> {{ m.correction or "not added" }}</span>
+            </div>
+        {% else %}
+            <p class="muted">No mistakes saved yet.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

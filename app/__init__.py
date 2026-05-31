@@ -78,6 +78,49 @@ class MistakeLog(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
+
+class UserProfile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    full_name = db.Column(db.String(160), nullable=True)
+    major = db.Column(db.String(160), nullable=True)
+    target_countries = db.Column(db.String(240), nullable=True)
+    languages = db.Column(db.String(240), nullable=True)
+    main_goal = db.Column(db.String(240), nullable=True)
+    bio = db.Column(db.Text, nullable=True)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+class ScholarshipApplication(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    scholarship_name = db.Column(db.String(180), nullable=False)
+    university = db.Column(db.String(180), nullable=True)
+    country = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(80), nullable=False, default="Preparing")
+    deadline = db.Column(db.String(40), nullable=True)
+    next_step = db.Column(db.String(240), nullable=True)
+    notes = db.Column(db.Text, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+
+def status_badge_class(status):
+    status = (status or "").lower()
+    if "accepted" in status:
+        return "status-accepted"
+    if "submitted" in status:
+        return "status-submitted"
+    if "progress" in status or "preparing" in status:
+        return "status-progress"
+    if "rejected" in status:
+        return "status-rejected"
+    if "interview" in status:
+        return "status-interview"
+    return "status-neutral"
+
+
+def deadline_time_left(deadline):
+    return calculate_goal_time_left(deadline)
+
 def create_app():
     app = Flask(__name__)
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
@@ -100,8 +143,13 @@ def create_app():
         goals = Goal.query.order_by(Goal.id.desc()).limit(6).all()
         for goal in goals:
             goal.time_left = calculate_goal_time_left(goal.deadline)
+            goal.goal_progress = calculate_goal_progress(goal)
         tasks = StudyTask.query.order_by(StudyTask.id.desc()).limit(10).all()
         mistakes = MistakeLog.query.order_by(MistakeLog.id.desc()).limit(6).all()
+        applications = ScholarshipApplication.query.order_by(ScholarshipApplication.id.desc()).limit(4).all()
+        profile = UserProfile.query.order_by(UserProfile.id.desc()).first()
+        today_string = str(date.today())
+        today_focus = StudyTask.query.filter(StudyTask.status == "pending").filter((StudyTask.due_date == today_string) | (StudyTask.due_date == None) | (StudyTask.due_date == "")).order_by(StudyTask.priority.desc(), StudyTask.id.desc()).limit(4).all()
 
         total_tasks = StudyTask.query.count()
         completed_tasks = StudyTask.query.filter_by(status="done").count()
@@ -122,6 +170,11 @@ def create_app():
             total_goals=total_goals,
             progress=progress,
             weak_skills=weak_skills,
+            applications=applications,
+            profile=profile,
+            today_focus=today_focus,
+            status_badge_class=status_badge_class,
+            deadline_time_left=deadline_time_left,
         )
 
     @app.route("/goals", methods=["GET", "POST"])
@@ -150,6 +203,7 @@ def create_app():
         all_goals = Goal.query.order_by(Goal.id.desc()).all()
         for goal in all_goals:
             goal.time_left = calculate_goal_time_left(goal.deadline)
+            goal.goal_progress = calculate_goal_progress(goal)
         return render_template("goals.html", goals=all_goals)
 
     @app.route("/goal/<int:goal_id>/edit", methods=["GET", "POST"])
@@ -282,7 +336,16 @@ def create_app():
     @app.route("/languages")
     def languages():
         tasks = StudyTask.query.filter_by(category="Language").order_by(StudyTask.id.desc()).all()
-        return render_template("languages.html", tasks=tasks)
+        languages_data = [
+            {"name": "English", "icon": "🇬🇧", "resources": ["ELSA", "IELTS", "TOEFL", "BBC Learning English"]},
+            {"name": "Chinese", "icon": "🇨🇳", "resources": ["HSK", "HelloChinese", "DuChinese"]},
+            {"name": "Russian", "icon": "🇷🇺", "resources": ["RussianPod101", "RT Learn Russian", "Duolingo"]},
+            {"name": "Turkish", "icon": "🇹🇷", "resources": ["Yunus Emre", "TurkishClass101", "Duolingo"]},
+            {"name": "Indonesian", "icon": "🇮🇩", "resources": ["BIPA", "IndonesianPod101", "Duolingo"]},
+            {"name": "Romanian", "icon": "🇷🇴", "resources": ["RomanianPod101", "Duolingo", "Grammar practice"]},
+        ]
+        skills = ["Reading", "Listening", "Speaking", "Writing", "Grammar", "Vocabulary"]
+        return render_template("languages.html", tasks=tasks, languages_data=languages_data, skills=skills)
 
     @app.route("/interview", methods=["GET", "POST"])
     def interview():
@@ -462,6 +525,84 @@ Return valid JSON:
 
         return redirect(url_for("programming"))
 
+
+    @app.route("/profile", methods=["GET", "POST"])
+    def profile():
+        profile_item = UserProfile.query.order_by(UserProfile.id.desc()).first()
+        if request.method == "POST":
+            if profile_item is None:
+                profile_item = UserProfile()
+                db.session.add(profile_item)
+
+            profile_item.full_name = request.form.get("full_name", "").strip()
+            profile_item.major = request.form.get("major", "").strip()
+            profile_item.target_countries = request.form.get("target_countries", "").strip()
+            profile_item.languages = request.form.get("languages", "").strip()
+            profile_item.main_goal = request.form.get("main_goal", "").strip()
+            profile_item.bio = request.form.get("bio", "").strip()
+            profile_item.updated_at = datetime.utcnow()
+            db.session.commit()
+            flash("Profile saved.", "success")
+            return redirect(url_for("profile"))
+
+        return render_template("profile.html", profile=profile_item)
+
+    @app.route("/scholarship", methods=["GET", "POST"])
+    def scholarship():
+        if request.method == "POST":
+            app_item = ScholarshipApplication(
+                scholarship_name=request.form.get("scholarship_name", "").strip(),
+                university=request.form.get("university", "").strip(),
+                country=request.form.get("country", "").strip(),
+                status=request.form.get("status", "Preparing").strip(),
+                deadline=request.form.get("deadline", "").strip(),
+                next_step=request.form.get("next_step", "").strip(),
+                notes=request.form.get("notes", "").strip(),
+            )
+
+            if not app_item.scholarship_name:
+                flash("Scholarship name is required.", "error")
+                return redirect(url_for("scholarship"))
+
+            db.session.add(app_item)
+            db.session.commit()
+            flash("Scholarship application saved.", "success")
+            return redirect(url_for("scholarship"))
+
+        applications = ScholarshipApplication.query.order_by(ScholarshipApplication.id.desc()).all()
+        questions = InterviewAnswer.query.order_by(InterviewAnswer.id.desc()).limit(8).all()
+        return render_template(
+            "scholarship.html",
+            applications=applications,
+            questions=questions,
+            status_badge_class=status_badge_class,
+            deadline_time_left=deadline_time_left,
+        )
+
+    @app.route("/scholarship/<int:application_id>/delete")
+    def delete_scholarship_application(application_id):
+        item = ScholarshipApplication.query.get_or_404(application_id)
+        db.session.delete(item)
+        db.session.commit()
+        flash("Scholarship application deleted.", "success")
+        return redirect(url_for("scholarship"))
+
+    @app.route("/code")
+    def code_center():
+        tasks = StudyTask.query.filter_by(category="Programming").order_by(StudyTask.id.desc()).limit(20).all()
+        mistakes = MistakeLog.query.order_by(MistakeLog.id.desc()).limit(10).all()
+        tracks = [
+            ("Python", "🐍", 75),
+            ("Web Development", "🌐", 65),
+            ("Algorithms", "🧩", 40),
+            ("Data Structures", "🏗️", 35),
+            ("Machine Learning", "🤖", 25),
+            ("Projects", "🚀", 55),
+            ("Debugging", "🛠️", 60),
+        ]
+        return render_template("code_center.html", tasks=tasks, mistakes=mistakes, tracks=tracks)
+
+
     @app.route("/api/tasks")
     def api_tasks():
         tasks = StudyTask.query.filter_by(status="pending").all()
@@ -508,6 +649,17 @@ def calculate_goal_time_left(deadline):
     except Exception:
         return None
 
+
+
+def calculate_goal_progress(goal):
+    try:
+        tasks = list(goal.tasks)
+        if not tasks:
+            return 0
+        done = sum(1 for task in tasks if task.status == "done")
+        return int((done / len(tasks)) * 100)
+    except Exception:
+        return 0
 
 def ensure_database_columns():
     try:

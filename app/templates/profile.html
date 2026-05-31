@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block page_title %}Profile{% endblock %}
+{% block content %}
+
+<section class="hero compact">
+    <div>
+        <span class="tag">👤 Student Profile</span>
+        <h2>Personalize EduPath AI around your academic journey.</h2>
+        <p>Your profile helps you organize goals, target countries, languages, and scholarship preparation.</p>
+    </div>
+</section>
+
+<section class="grid-2">
+    <div class="card">
+        <h2>✏️ Edit Profile</h2>
+        <form method="POST" class="form">
+            <label>Full name</label>
+            <input name="full_name" value="{{ profile.full_name if profile else '' }}" placeholder="Ezzaldeen Nashwan Ali Mohammed Al-Hamoodi">
+
+            <label>Major</label>
+            <input name="major" value="{{ profile.major if profile else '' }}" placeholder="Computer Science">
+
+            <label>Target countries</label>
+            <input name="target_countries" value="{{ profile.target_countries if profile else '' }}" placeholder="China, Turkey, Romania">
+
+            <label>Languages</label>
+            <input name="languages" value="{{ profile.languages if profile else '' }}" placeholder="English, Chinese, Russian">
+
+            <label>Main goal</label>
+            <input name="main_goal" value="{{ profile.main_goal if profile else '' }}" placeholder="Bachelor scholarship in Computer Science">
+
+            <label>Short bio / profile</label>
+            <textarea name="bio" rows="6" placeholder="Write your academic background, projects, and goals...">{{ profile.bio if profile else '' }}</textarea>
+
+            <button type="submit">💾 Save Profile</button>
+        </form>
+    </div>
+
+    <div class="card profile-card-large">
+        <h2>🌟 Profile Preview</h2>
+        {% if profile %}
+            <div class="profile-preview">
+                <div class="profile-avatar">🎓</div>
+                <strong>{{ profile.full_name or "Student" }}</strong>
+                <span>{{ profile.major or "Major not set" }}</span>
+                <span>Targets: {{ profile.target_countries or "not set" }}</span>
+                <span>Languages: {{ profile.languages or "not set" }}</span>
+                <span>Main goal: {{ profile.main_goal or "not set" }}</span>
+                {% if profile.bio %}<p>{{ profile.bio }}</p>{% endif %}
+            </div>
+        {% else %}
+            <p class="muted">No profile saved yet.</p>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

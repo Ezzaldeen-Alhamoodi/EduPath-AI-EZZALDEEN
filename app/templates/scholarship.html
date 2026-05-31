@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block page_title %}Scholarship Center{% endblock %}
+{% block content %}
+
+<section class="hero compact">
+    <div>
+        <span class="tag">🎤 Scholarship Center</span>
+        <h2>Track applications, prepare interviews, and manage scholarship documents.</h2>
+        <p>This center turns scholarship preparation into clear steps instead of scattered notes.</p>
+    </div>
+    <a class="button light" href="{{ url_for('interview') }}">🎤 Interview Coach</a>
+</section>
+
+<section class="grid-4">
+    <div class="skill-card">📄 Documents</div>
+    <div class="skill-card">✍️ Motivation Letter</div>
+    <div class="skill-card">🎤 Interview</div>
+    <div class="skill-card">⏰ Deadlines</div>
+</section>
+
+<section class="grid-2">
+    <div class="card">
+        <h2>➕ Add Scholarship Application</h2>
+        <form method="POST" class="form">
+            <label>Scholarship / Program name</label>
+            <input name="scholarship_name" placeholder="Example: China Jiliang University Scholarship">
+
+            <label>University</label>
+            <input name="university" placeholder="Example: China Jiliang University">
+
+            <label>Country</label>
+            <input name="country" placeholder="China, Turkey, Romania...">
+
+            <label>Status</label>
+            <select name="status">
+                <option>Preparing</option>
+                <option>In Progress</option>
+                <option>Submitted</option>
+                <option>Interview</option>
+                <option>Accepted</option>
+                <option>Rejected</option>
+            </select>
+
+            <label>Deadline</label>
+            <input name="deadline" type="date">
+
+            <label>Next step</label>
+            <input name="next_step" placeholder="Example: Upload bank statement">
+
+            <label>Notes</label>
+            <textarea name="notes" rows="3"></textarea>
+
+            <button type="submit">💾 Save Application</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>📌 Applications</h2>
+        {% for app in applications %}
+            <div class="item">
+                <strong>{{ app.scholarship_name }}</strong>
+                <span>{{ app.university or "University not set" }} · {{ app.country or "Country not set" }}</span>
+                <span class="status-pill {{ status_badge_class(app.status) }}">{{ app.status }}</span>
+                <span>Deadline: {{ app.deadline or "not set" }}</span>
+                {% if app.next_step %}<span><b>Next:</b> {{ app.next_step }}</span>{% endif %}
+                {% if app.notes %}<span>{{ app.notes }}</span>{% endif %}
+                <div class="actions">
+                    <a class="small-button" href="{{ url_for('interview') }}">🎤 Practice</a>
+                    <a class="small-button danger" href="{{ url_for('delete_scholarship_application', application_id=app.id) }}">🗑 Delete</a>
+                </div>
+            </div>
+        {% else %}
+            <p class="muted">No applications yet.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="card">
+    <h2>🎤 Recent Interview Questions</h2>
+    {% for q in questions %}
+        <div class="item">
+            <strong>{{ q.question }}</strong>
+            <span>{{ q.scholarship }} · {{ q.major }} · Score: {{ q.score if q.score is not none else "Not evaluated" }}</span>
+            <a class="small-button" href="{{ url_for('answer_question', answer_id=q.id) }}">Answer / Evaluate</a>
+        </div>
+    {% else %}
+        <p class="muted">Generate interview questions from the Interview Coach.</p>
+    {% endfor %}
+</section>
+
+{% endblock %}
