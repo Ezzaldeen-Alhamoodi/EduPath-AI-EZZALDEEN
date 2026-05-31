@@ -89,3 +89,12 @@ Open the app link in Chrome, then choose:
 Add to Home screen
 
 Browser notifications need permission from the browser.
+
+## Latest Update
+
+- Goals now generate tasks based on the selected category.
+- Mathematics goals generate mathematics-related tasks.
+- Programming goals generate programming-related tasks.
+- Language skills are generated only for English/Language goals.
+- Tasks now support selected weekdays recurrence.
+- Example: repeat a task only on Friday and Saturday.

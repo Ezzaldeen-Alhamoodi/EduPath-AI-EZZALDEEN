@@ -35,7 +35,11 @@ class StudyTask(db.Model):
     goal_id = db.Column(db.Integer, db.ForeignKey("goal.id"), nullable=True)
     title = db.Column(db.String(220), nullable=False)
     category = db.Column(db.String(80), nullable=False, default="Study")
+    custom_category = db.Column(db.String(120), nullable=True)
     skill = db.Column(db.String(100), nullable=False, default="General")
+    topic = db.Column(db.String(120), nullable=True)
+    custom_topic = db.Column(db.String(120), nullable=True)
+    custom_skill = db.Column(db.String(120), nullable=True)
     language = db.Column(db.String(80), nullable=True)
     practice_type = db.Column(db.String(80), nullable=True)
     source = db.Column(db.String(180), nullable=True)
@@ -46,6 +50,7 @@ class StudyTask(db.Model):
     due_date = db.Column(db.String(40), nullable=True)
     reminder_time = db.Column(db.String(20), nullable=True)
     repeat_type = db.Column(db.String(40), nullable=False, default="daily")
+    repeat_days = db.Column(db.String(120), nullable=True)
     status = db.Column(db.String(30), nullable=False, default="pending")
     review_count = db.Column(db.Integer, nullable=False, default=0)
     last_reviewed = db.Column(db.String(40), nullable=True)
@@ -86,12 +91,15 @@ def create_app():
 
     with app.app_context():
         db.create_all()
+        ensure_database_columns()
 
     ai_client = build_ai_client()
 
     @app.route("/")
     def index():
         goals = Goal.query.order_by(Goal.id.desc()).limit(6).all()
+        for goal in goals:
+            goal.time_left = calculate_goal_time_left(goal.deadline)
         tasks = StudyTask.query.order_by(StudyTask.id.desc()).limit(10).all()
         mistakes = MistakeLog.query.order_by(MistakeLog.id.desc()).limit(6).all()
 
@@ -136,11 +144,12 @@ def create_app():
 
             db.session.add(goal)
             db.session.commit()
-            create_initial_tasks(goal)
-            flash("Goal saved and smart tasks were generated.", "success")
+            flash("Goal saved. Add related tasks manually from the Tasks page.", "success")
             return redirect(url_for("goals"))
 
         all_goals = Goal.query.order_by(Goal.id.desc()).all()
+        for goal in all_goals:
+            goal.time_left = calculate_goal_time_left(goal.deadline)
         return render_template("goals.html", goals=all_goals)
 
     @app.route("/goal/<int:goal_id>/edit", methods=["GET", "POST"])
@@ -178,7 +187,11 @@ def create_app():
             task = StudyTask(
                 title=request.form.get("title", "").strip(),
                 category=request.form.get("category", "Study").strip(),
+                custom_category=request.form.get("custom_category", "").strip(),
+                topic=request.form.get("topic", "").strip(),
+                custom_topic=request.form.get("custom_topic", "").strip(),
                 skill=request.form.get("skill", "General").strip(),
+                custom_skill=request.form.get("custom_skill", "").strip(),
                 language=request.form.get("language", "").strip(),
                 practice_type=request.form.get("practice_type", "").strip(),
                 source=request.form.get("source", "").strip(),
@@ -189,6 +202,7 @@ def create_app():
                 due_date=request.form.get("due_date", "").strip(),
                 reminder_time=request.form.get("reminder_time", "").strip(),
                 repeat_type=request.form.get("repeat_type", "daily").strip(),
+                repeat_days=",".join(request.form.getlist("repeat_days")),
                 notes=request.form.get("notes", "").strip(),
             )
 
@@ -216,7 +230,11 @@ def create_app():
         if request.method == "POST":
             task.title = request.form.get("title", "").strip()
             task.category = request.form.get("category", "Study").strip()
+            task.custom_category = request.form.get("custom_category", "").strip()
+            task.topic = request.form.get("topic", "").strip()
+            task.custom_topic = request.form.get("custom_topic", "").strip()
             task.skill = request.form.get("skill", "General").strip()
+            task.custom_skill = request.form.get("custom_skill", "").strip()
             task.language = request.form.get("language", "").strip()
             task.practice_type = request.form.get("practice_type", "").strip()
             task.source = request.form.get("source", "").strip()
@@ -227,6 +245,7 @@ def create_app():
             task.due_date = request.form.get("due_date", "").strip()
             task.reminder_time = request.form.get("reminder_time", "").strip()
             task.repeat_type = request.form.get("repeat_type", "daily").strip()
+            task.repeat_days = ",".join(request.form.getlist("repeat_days"))
             task.notes = request.form.get("notes", "").strip()
             db.session.commit()
             flash("Task changes saved.", "success")
@@ -457,6 +476,7 @@ Return valid JSON:
                 "due_date": t.due_date,
                 "reminder_time": t.reminder_time,
                 "repeat_type": t.repeat_type,
+                "repeat_days": t.repeat_days,
                 "minutes": t.estimated_minutes,
             }
             for t in tasks
@@ -469,10 +489,55 @@ Return valid JSON:
         level = data.get("level", "Beginner")
         daily_minutes = int(data.get("daily_minutes", 60))
         days = int(data.get("days", 14))
-        plan = generate_algorithmic_plan(title, level, daily_minutes, days)
+        category = data.get("category", "General")
+        plan = generate_algorithmic_plan(title, level, daily_minutes, days, category=category)
         return jsonify({"plan": plan})
 
     return app
+
+
+
+
+def calculate_goal_time_left(deadline):
+    if not deadline:
+        return None
+    try:
+        target = datetime.strptime(deadline, "%Y-%m-%d").date()
+        days = (target - date.today()).days
+        return {"days": days, "weeks": round(days / 7, 1), "months": round(days / 30.44, 1), "status": "remaining" if days >= 0 else "overdue"}
+    except Exception:
+        return None
+
+
+def ensure_database_columns():
+    try:
+        with db.engine.connect() as connection:
+            columns = [row[1] for row in connection.exec_driver_sql("PRAGMA table_info(study_task)").fetchall()]
+            additions = {
+                "repeat_days": "ALTER TABLE study_task ADD COLUMN repeat_days VARCHAR(120)",
+                "topic": "ALTER TABLE study_task ADD COLUMN topic VARCHAR(120)",
+                "custom_category": "ALTER TABLE study_task ADD COLUMN custom_category VARCHAR(120)",
+                "custom_topic": "ALTER TABLE study_task ADD COLUMN custom_topic VARCHAR(120)",
+                "custom_skill": "ALTER TABLE study_task ADD COLUMN custom_skill VARCHAR(120)",
+            }
+            for column, sql in additions.items():
+                if column not in columns:
+                    connection.exec_driver_sql(sql)
+            connection.commit()
+    except Exception:
+        logger.exception("Database column migration failed")
+
+# old migration removed
+def ensure_database_columns_old():
+    """Small SQLite-safe migration for columns added after first release."""
+    try:
+        with db.engine.connect() as connection:
+            columns = [row[1] for row in connection.exec_driver_sql("PRAGMA table_info(study_task)").fetchall()]
+            if "repeat_days" not in columns:
+                connection.exec_driver_sql("ALTER TABLE study_task ADD COLUMN repeat_days VARCHAR(120)")
+                connection.commit()
+    except Exception:
+        logger.exception("Database column migration failed")
 
 
 def build_ai_client():
@@ -593,7 +658,7 @@ def fallback_ai_response(prompt, error=None):
 
 
 def create_initial_tasks(goal):
-    plan = generate_algorithmic_plan(goal.title, goal.current_level, goal.daily_minutes, days=14)
+    plan = generate_algorithmic_plan(goal.title, goal.current_level, goal.daily_minutes, days=14, category=goal.category)
 
     for day in plan:
         for item in day["tasks"]:
@@ -612,15 +677,16 @@ def create_initial_tasks(goal):
                 due_date=day["date"],
                 reminder_time=goal.reminder_time,
                 repeat_type="daily",
+                repeat_days="",
             )
             db.session.add(task)
 
     db.session.commit()
 
 
-def generate_algorithmic_plan(title, level, daily_minutes, days=14):
+def generate_algorithmic_plan(title, level, daily_minutes, days=14, category="General"):
     today = date.today()
-    skill_templates = infer_skills(title)
+    skill_templates = infer_skills(title, category)
     level_factor = {"Beginner": 1, "Intermediate": 2, "Advanced": 3}.get(level, 1)
 
     plan = []
@@ -673,26 +739,42 @@ def generate_algorithmic_plan(title, level, daily_minutes, days=14):
     return plan
 
 
-def infer_skills(title):
-    text = title.lower()
+def infer_skills(title, category="General"):
+    """Choose relevant skills based on category first, then title."""
+    text = (title or "").lower()
+    category_text = (category or "General").lower()
+
+    if category_text in ["english", "language"]:
+        return ["Reading", "Writing", "Listening", "Speaking", "Vocabulary", "Grammar"]
+
+    if category_text == "programming":
+        return ["Concepts", "Problem Solving", "Coding Practice", "Debugging", "Project Building"]
+
+    if category_text == "mathematics":
+        return ["Concept Understanding", "Solved Examples", "Problem Solving", "Review", "Timed Practice"]
+
+    if category_text == "scholarship":
+        return ["Research", "Documents", "Motivation", "Interview Practice", "Final Review"]
+
+    if category_text == "ai":
+        return ["Python Basics", "Data", "Models", "Evaluation", "Projects"]
 
     if any(word in text for word in ["english", "toefl", "ielts", "turkish", "russian", "indonesian", "romanian", "language"]):
         return ["Reading", "Writing", "Listening", "Speaking", "Vocabulary", "Grammar"]
 
-    if any(word in text for word in ["python", "programming", "coding", "codeforces"]):
-        return ["Syntax", "Problem Solving", "Functions", "Data Structures", "Debugging"]
+    if any(word in text for word in ["python", "programming", "coding", "codeforces", "javascript", "flask", "react"]):
+        return ["Concepts", "Problem Solving", "Coding Practice", "Debugging", "Project Building"]
 
-    if any(word in text for word in ["math", "calculus", "algebra"]):
-        return ["Concept Understanding", "Examples", "Problem Solving", "Review", "Timed Practice"]
+    if any(word in text for word in ["math", "mathematics", "calculus", "algebra", "geometry"]):
+        return ["Concept Understanding", "Solved Examples", "Problem Solving", "Review", "Timed Practice"]
 
-    if any(word in text for word in ["scholarship", "interview", "motivation letter"]):
-        return ["Self Introduction", "Motivation", "Achievements", "Future Plans", "Mock Interview"]
+    if any(word in text for word in ["scholarship", "interview", "motivation letter", "application"]):
+        return ["Research", "Documents", "Motivation", "Interview Practice", "Final Review"]
 
     if any(word in text for word in ["ai", "machine learning", "data"]):
         return ["Python Basics", "Data", "Models", "Evaluation", "Projects"]
 
-    return ["Learning", "Practice", "Review", "Application"]
-
+    return ["Planning", "Learning", "Practice", "Review", "Application"]
 
 def detect_weaknesses():
     pending = StudyTask.query.filter_by(status="pending").all()

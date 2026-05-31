@@ -2,72 +2,8 @@
 {% extends "base.html" %}
 {% block page_title %}Dashboard{% endblock %}
 {% block content %}
-
-<section class="hero">
-    <div>
-        <span class="tag">Smart Learning & Scholarship Coach</span>
-        <h2>Build your future step by step.</h2>
-        <p>Plan study goals, language practice, programming improvement, and scholarship interviews in one organized app.</p>
-        <div class="hero-actions">
-            <a class="button light" href="{{ url_for('goals') }}">Create Goal</a>
-            <a class="button ghost" href="{{ url_for('tasks') }}">Add Task</a>
-        </div>
-    </div>
-    <div class="hero-card">
-        <div class="progress-circle">{{ progress }}%</div>
-        <p>Overall Progress</p>
-    </div>
-</section>
-
-<section class="stats-grid">
-    <div class="stat-card blue"><span>🎯</span><h3>Goals</h3><p>{{ total_goals }}</p></div>
-    <div class="stat-card green"><span>✅</span><h3>Completed</h3><p>{{ completed_tasks }}</p></div>
-    <div class="stat-card orange"><span>⏳</span><h3>Pending</h3><p>{{ pending_tasks }}</p></div>
-    <div class="stat-card purple"><span>📚</span><h3>Total Tasks</h3><p>{{ total_tasks }}</p></div>
-</section>
-
-<section class="grid-2">
-    <div class="card">
-        <h2>🎯 Recent Goals</h2>
-        {% for goal in goals %}
-            <div class="item">
-                <strong>{{ goal.title }}</strong>
-                <span>{{ goal.category }} · {{ goal.current_level }} · {{ goal.daily_minutes }} min/day</span>
-                <span>From {{ goal.start_date or "not set" }} to {{ goal.deadline or "not set" }} · Reminder {{ goal.reminder_time or "not set" }}</span>
-            </div>
-        {% else %}
-            <p class="muted">No goals yet.</p>
-        {% endfor %}
-    </div>
-
-    <div class="card">
-        <h2>🧠 Weakness Detection</h2>
-        {% if weak_skills %}
-            {% for skill, score in weak_skills %}
-                <div class="weakness">
-                    <span>{{ skill }}</span>
-                    <div class="bar"><div style="width: {{ [score * 10, 100] | min }}%"></div></div>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p class="muted">Complete and add tasks to detect weak areas.</p>
-        {% endif %}
-    </div>
-</section>
-
-<section class="card">
-    <h2>✅ Recent Tasks</h2>
-    {% for task in tasks %}
-        <div class="task-mini">
-            <div>
-                <strong>{{ task.title }}</strong>
-                <span>{{ task.category }} · {{ task.skill }} · {{ task.estimated_minutes }} min · {{ task.status }}</span>
-            </div>
-            <span class="badge">{{ task.reminder_time or "No reminder" }}</span>
-        </div>
-    {% else %}
-        <p class="muted">No tasks yet.</p>
-    {% endfor %}
-</section>
-
+<section class="hero"><div><span class="tag">Smart Learning & Scholarship Coach</span><h2>Your goals are the compass. Your tasks are the daily steps.</h2><p>Keep your long-term goals visible, then add focused tasks manually according to your real schedule.</p><div class="hero-actions"><a class="button light" href="{{ url_for('goals') }}">Create Goal</a><a class="button ghost" href="{{ url_for('tasks') }}">Add Task</a></div></div><div class="hero-card"><div class="progress-circle">{{ progress }}%</div><p>Overall Task Progress</p></div></section>
+<section class="card focus-goals"><h2>🎯 Your Main Goals</h2><p class="muted">Keep these goals in front of you. Add the repeated actions for each goal from the Tasks page.</p><div class="goal-board">{% for goal in goals %}<div class="goal-tile"><div class="goal-icon">{% if goal.category == "Programming" %}💻{% elif goal.category == "Mathematics" %}🧮{% elif goal.category in ["English", "Language"] %}🌍{% elif goal.category == "Scholarship" %}🎓{% elif goal.category == "AI" %}🤖{% else %}⭐{% endif %}</div><div><strong>{{ goal.title }}</strong><span>{{ goal.category }} · {{ goal.current_level }} · {{ goal.daily_minutes }} min/day target</span><span>Deadline: {{ goal.deadline or "not set" }}</span>{% if goal.time_left %}{% if goal.time_left.status == "remaining" %}<span class="countdown good">{{ goal.time_left.days }} days · {{ goal.time_left.weeks }} weeks · {{ goal.time_left.months }} months remaining</span>{% else %}<span class="countdown danger-text">Overdue by {{ -goal.time_left.days }} days</span>{% endif %}{% else %}<span class="countdown muted">No deadline yet</span>{% endif %}</div></div>{% else %}<p class="muted">No goals yet. Create your first big goal.</p>{% endfor %}</div></section>
+<section class="stats-grid"><div class="stat-card blue"><span>🎯</span><h3>Goals</h3><p>{{ total_goals }}</p></div><div class="stat-card green"><span>✅</span><h3>Completed</h3><p>{{ completed_tasks }}</p></div><div class="stat-card orange"><span>⏳</span><h3>Pending</h3><p>{{ pending_tasks }}</p></div><div class="stat-card purple"><span>📚</span><h3>Total Tasks</h3><p>{{ total_tasks }}</p></div></section>
+<section class="grid-2"><div class="card"><h2>🧠 Weakness Detection</h2>{% if weak_skills %}{% for skill, score in weak_skills %}<div class="weakness"><span>{{ skill }}</span><div class="bar"><div style="width: {{ [score * 10, 100] | min }}%"></div></div></div>{% endfor %}{% else %}<p class="muted">Complete and add tasks to detect weak areas.</p>{% endif %}</div><div class="card"><h2>✅ Recent Tasks</h2>{% for task in tasks %}<div class="task-mini"><div><strong>{{ task.title }}</strong><span>{{ task.category }} · {{ task.topic or "No topic" }} · {{ task.skill }} · {{ task.estimated_minutes }} min · {{ task.status }}</span></div><span class="badge">{{ task.reminder_time or "No reminder" }}</span></div>{% else %}<p class="muted">No tasks yet.</p>{% endfor %}</div></section>
 {% endblock %}
