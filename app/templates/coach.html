@@ -1,0 +1,68 @@
+\
+{% extends "base.html" %}
+{% block page_title %}AI Coach{% endblock %}
+{% block content %}
+
+<section class="hero compact coach-hero">
+    <div>
+        <span class="tag">🧠 AI Coach Center</span>
+        <h2>One place for English improvement and scholarship preparation.</h2>
+        <p>Choose the coach you need today: improve your English answers, or prepare for scholarship interviews and applications.</p>
+    </div>
+    <a class="button light" href="{{ url_for('tasks') }}">✅ Add Practice Task</a>
+</section>
+
+<section class="coach-grid">
+    <a class="coach-card english-card" href="{{ url_for('english') }}">
+        <div class="coach-icon">🇬🇧</div>
+        <div>
+            <h2>English Coach</h2>
+            <p>Improve writing, interview answers, grammar, vocabulary, and natural English style.</p>
+            <span>Open English Coach →</span>
+        </div>
+    </a>
+
+    <a class="coach-card scholarship-card" href="{{ url_for('interview') }}">
+        <div class="coach-icon">🎤</div>
+        <div>
+            <h2>Scholarship Coach</h2>
+            <p>Generate interview questions, evaluate answers, and prepare stronger scholarship responses.</p>
+            <span>Open Scholarship Coach →</span>
+        </div>
+    </a>
+</section>
+
+<section class="grid-2">
+    <div class="card">
+        <h2>🇬🇧 English Practice Ideas</h2>
+        <div class="mini-list">
+            <a href="{{ url_for('english') }}">✍️ Rewrite my answer naturally</a>
+            <a href="{{ url_for('english') }}">🧠 Explain my English mistakes</a>
+            <a href="{{ url_for('tasks') }}">📅 Add daily English practice task</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎤 Scholarship Practice Ideas</h2>
+        <div class="mini-list">
+            <a href="{{ url_for('interview') }}">🎓 Generate interview questions</a>
+            <a href="{{ url_for('interview') }}">📊 Evaluate my answer</a>
+            <a href="{{ url_for('tasks') }}">📅 Add scholarship preparation task</a>
+        </div>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Recent Scholarship Practice</h2>
+    {% for item in recent_answers %}
+        <div class="item">
+            <strong>{{ item.question }}</strong>
+            <span>{{ item.scholarship }} · {{ item.major }} · Score: {{ item.score if item.score is not none else "Not evaluated" }}</span>
+            <a class="small-button" href="{{ url_for('answer_question', answer_id=item.id) }}">Continue Practice</a>
+        </div>
+    {% else %}
+        <p class="muted">No scholarship practice yet. Start from Scholarship Coach.</p>
+    {% endfor %}
+</section>
+
+{% endblock %}

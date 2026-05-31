@@ -231,6 +231,13 @@ def create_app():
 
 
 
+
+    @app.route("/coach")
+    @login_required
+    def coach():
+        recent_answers = InterviewAnswer.query.filter_by(user_id=current_user.id).order_by(InterviewAnswer.id.desc()).limit(5).all()
+        return render_template("coach.html", recent_answers=recent_answers)
+
     @app.route("/")
     @login_required
     def index():

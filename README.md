@@ -133,3 +133,21 @@ This release adds the first multi-user foundation.
 - Existing old data without a user_id will not appear under new accounts.
 - Each new user sees only their own data.
 - Keep `.env` private and never push it to GitHub.
+
+
+## EduPath AI v3.1 Coach System
+
+### Added
+- New AI Coach page.
+- Mobile bottom navigation changed to:
+  - Home
+  - Goals
+  - Tasks
+  - Coach
+  - Code
+  - Profile
+- Coach page combines:
+  - English Coach
+  - Scholarship Coach
+- Desktop navigation still keeps detailed sections.
+- Better mobile organization for limited screen space.
