@@ -19,6 +19,8 @@
             </div>
         </div>
 
+        <button class="theme-toggle" id="themeToggle" type="button">🌙 Dark Mode</button>
+
         <nav>
             <a href="{{ url_for('index') }}">🏠 Dashboard</a>
             <a href="{{ url_for('goals') }}">🎯 Goals</a>
@@ -58,7 +60,8 @@
         <a href="{{ url_for('index') }}"><span>🏠</span><small>Home</small></a>
         <a href="{{ url_for('goals') }}"><span>🎯</span><small>Goals</small></a>
         <a href="{{ url_for('tasks') }}"><span>✅</span><small>Tasks</small></a>
-        <a href="{{ url_for('interview') }}"><span>🎤</span><small>Coach</small></a>
+        <a href="{{ url_for('languages') }}"><span>🇬🇧</span><small>Language</small></a>
+        <a href="{{ url_for('interview') }}"><span>🎤</span><small>Scholarship</small></a>
         <a href="{{ url_for('programming') }}"><span>💻</span><small>Code</small></a>
     </nav>
 

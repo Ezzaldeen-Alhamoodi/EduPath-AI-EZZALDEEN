@@ -1,10 +1,10 @@
 {
   "name": "EduPath AI EZZALDEEN",
   "short_name": "EduPath AI",
-  "description": "Smart Learning and Scholarship Coach",
+  "description": "AI-powered learning, scholarship, language and coding coach.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#eef3ff",
+  "background_color": "#f3f6ff",
   "theme_color": "#2563eb",
   "icons": [
     {

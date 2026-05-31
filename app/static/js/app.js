@@ -96,3 +96,29 @@ const TASK_OPTIONS={"Language":{topics:["English","Turkish","Russian","Indonesia
 function fillSelect(select,values,selectedValue){if(!select)return;select.innerHTML="";values.forEach(value=>{const option=document.createElement("option");option.value=value;option.textContent=value;if(value===selectedValue)option.selected=true;select.appendChild(option);});}
 function updateDynamicTaskFields(){const categorySelect=document.getElementById("categorySelect"),topicSelect=document.getElementById("topicSelect"),skillSelect=document.getElementById("skillSelect"),customCategoryBox=document.getElementById("customCategoryBox"),customTopicBox=document.getElementById("customTopicBox"),customSkillBox=document.getElementById("customSkillBox");if(!categorySelect||!topicSelect||!skillSelect)return;const category=categorySelect.value||"General",config=TASK_OPTIONS[category]||TASK_OPTIONS.General,currentTopic=topicSelect.dataset.current||"",currentSkill=skillSelect.dataset.current||"";fillSelect(topicSelect,config.topics,currentTopic&&config.topics.includes(currentTopic)?currentTopic:config.topics[0]);function refreshSkills(){const selectedTopic=topicSelect.value,skills=config.skills[selectedTopic]||config.skills.Other||["Other"];fillSelect(skillSelect,skills,currentSkill&&skills.includes(currentSkill)?currentSkill:skills[0]);customTopicBox.style.display=selectedTopic==="Other"?"block":"none";customSkillBox.style.display=skillSelect.value==="Other"?"block":"none";}customCategoryBox.style.display=category==="Other"?"block":"none";refreshSkills();topicSelect.onchange=()=>{topicSelect.dataset.current="";skillSelect.dataset.current="";refreshSkills();};skillSelect.onchange=()=>{customSkillBox.style.display=skillSelect.value==="Other"?"block":"none";};}
 document.addEventListener("DOMContentLoaded",()=>{const categorySelect=document.getElementById("categorySelect");if(categorySelect){updateDynamicTaskFields();categorySelect.addEventListener("change",()=>{const topicSelect=document.getElementById("topicSelect"),skillSelect=document.getElementById("skillSelect");if(topicSelect)topicSelect.dataset.current="";if(skillSelect)skillSelect.dataset.current="";updateDynamicTaskFields();});}});
+
+/* Dark mode v2.1 */
+function applyStoredTheme() {
+    const storedTheme = localStorage.getItem("edupath-theme");
+    if (storedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+    } else {
+        document.body.classList.remove("dark-mode");
+    }
+    const btn = document.getElementById("themeToggle");
+    if (btn) {
+        btn.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    applyStoredTheme();
+    const themeToggle = document.getElementById("themeToggle");
+    if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("edupath-theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+            applyStoredTheme();
+        });
+    }
+});

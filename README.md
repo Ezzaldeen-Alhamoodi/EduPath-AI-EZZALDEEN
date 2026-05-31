@@ -104,3 +104,11 @@ Browser notifications need permission from the browser.
 - Improved mobile layout.
 - Added fixed bottom navigation for phones.
 - Improved cards, buttons, forms, spacing, and readability.
+
+## EduPath AI v2.1
+
+- Six-item mobile navigation.
+- Dark Mode.
+- Improved dashboard.
+- Goal countdown and progress bars.
+- Better mobile UI.
