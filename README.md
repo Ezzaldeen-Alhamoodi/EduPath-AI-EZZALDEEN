@@ -189,3 +189,10 @@ Set these in Render:
 ### Notes
 - If SMTP is not configured, verification/reset links are written to logs for development.
 - For public use, configure SMTP before sharing widely.
+
+
+## v3.2.1 Email Input Fix
+
+- Fixed registration/login issues caused by invisible RTL/LTR characters when copying emails from Arabic text or messaging apps.
+- Emails are now normalized and sanitized before validation.
+- Improved email input fields with `inputmode=email` and autocomplete.

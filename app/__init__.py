@@ -2,6 +2,7 @@
 import os
 import json
 import logging
+import unicodedata
 from datetime import datetime, date, timedelta
 
 from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
@@ -109,6 +110,38 @@ class MistakeLog(db.Model):
 
 
 
+
+def sanitize_email(value):
+    """Normalize user-entered emails and remove invisible RTL/LTR/control characters."""
+    if not value:
+        return ""
+
+    cleaned = unicodedata.normalize("NFKC", value)
+
+    invisible_chars = [
+        "\u200e",  # left-to-right mark
+        "\u200f",  # right-to-left mark
+        "\u202a",  # left-to-right embedding
+        "\u202b",  # right-to-left embedding
+        "\u202c",  # pop directional formatting
+        "\u202d",  # left-to-right override
+        "\u202e",  # right-to-left override
+        "\u2066",  # left-to-right isolate
+        "\u2067",  # right-to-left isolate
+        "\u2068",  # first strong isolate
+        "\u2069",  # pop directional isolate
+        "\ufeff",  # zero-width no-break space
+    ]
+
+    for char in invisible_chars:
+        cleaned = cleaned.replace(char, "")
+
+    # Remove all unicode control characters and normal spaces around/inside pasted text.
+    cleaned = "".join(ch for ch in cleaned if unicodedata.category(ch)[0] != "C")
+    cleaned = cleaned.strip().replace(" ", "")
+    return cleaned.lower()
+
+
 def generate_token(email, purpose):
     serializer = URLSafeTimedSerializer(os.environ.get("SECRET_KEY", "dev-secret-key"))
     return serializer.dumps(email, salt=f"edupath-{purpose}")
@@ -210,7 +243,7 @@ def create_app():
 
         if request.method == "POST":
             name = request.form.get("name", "").strip()
-            email = request.form.get("email", "").strip().lower()
+            email = sanitize_email(request.form.get("email", ""))
             password = request.form.get("password", "")
             confirm_password = request.form.get("confirm_password", "")
             country = request.form.get("country", "").strip()
@@ -220,6 +253,10 @@ def create_app():
 
             if not name or not email or not password:
                 flash("Name, email, and password are required.", "error")
+                return redirect(url_for("register"))
+
+            if "@" not in email or "." not in email.split("@")[-1]:
+                flash("Please enter a valid email address.", "error")
                 return redirect(url_for("register"))
 
             if password != confirm_password:
@@ -258,7 +295,7 @@ def create_app():
             return redirect(url_for("index"))
 
         if request.method == "POST":
-            email = request.form.get("email", "").strip().lower()
+            email = sanitize_email(request.form.get("email", ""))
             password = request.form.get("password", "")
 
             user = User.query.filter_by(email=email).first()
@@ -316,7 +353,7 @@ def create_app():
             return redirect(url_for("profile"))
 
         if request.method == "POST":
-            email = request.form.get("email", "").strip().lower()
+            email = sanitize_email(request.form.get("email", ""))
             user = User.query.filter_by(email=email).first()
             if user:
                 send_password_reset_email(user)
