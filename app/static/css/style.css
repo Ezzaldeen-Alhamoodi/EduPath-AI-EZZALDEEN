@@ -1256,3 +1256,11 @@ body.dark-mode .mini-list a {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* Email browser validation fix */
+input[name="email"] {
+    direction: ltr;
+    text-align: left;
+    unicode-bidi: plaintext;
+}

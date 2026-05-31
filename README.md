@@ -196,3 +196,11 @@ Set these in Render:
 - Fixed registration/login issues caused by invisible RTL/LTR characters when copying emails from Arabic text or messaging apps.
 - Emails are now normalized and sanitized before validation.
 - Improved email input fields with `inputmode=email` and autocomplete.
+
+
+## v3.2.2 Email Browser Validation Fix
+
+- Fixed strict browser email validation errors on some phones/browsers.
+- Email fields now use `type=text` with `inputmode=email`, so mobile keyboards still show email layout.
+- Email validation and cleanup are handled safely on the Flask server.
+- Email inputs are forced left-to-right to avoid Arabic/English direction problems.

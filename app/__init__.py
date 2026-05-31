@@ -206,6 +206,21 @@ def load_user(user_id):
     except Exception:
         return None
 
+
+def is_valid_email(value):
+    value = sanitize_email(value)
+    if not value or value.count("@") != 1:
+        return False
+    local, domain = value.split("@", 1)
+    if not local or not domain or "." not in domain:
+        return False
+    if local.startswith(".") or local.endswith(".") or ".." in local:
+        return False
+    if domain.startswith(".") or domain.endswith(".") or ".." in domain:
+        return False
+    return True
+
+
 def create_app():
     app = Flask(__name__)
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
@@ -255,7 +270,7 @@ def create_app():
                 flash("Name, email, and password are required.", "error")
                 return redirect(url_for("register"))
 
-            if "@" not in email or "." not in email.split("@")[-1]:
+            if not is_valid_email(email):
                 flash("Please enter a valid email address.", "error")
                 return redirect(url_for("register"))
 
