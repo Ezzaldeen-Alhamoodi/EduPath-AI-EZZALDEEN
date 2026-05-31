@@ -204,3 +204,12 @@ Set these in Render:
 - Email fields now use `type=text` with `inputmode=email`, so mobile keyboards still show email layout.
 - Email validation and cleanup are handled safely on the Flask server.
 - Email inputs are forced left-to-right to avoid Arabic/English direction problems.
+
+
+## v3.2.3 Email Security
+
+- Removed the owner's private email from placeholders/examples.
+- New accounts no longer log in automatically before email verification.
+- Users must verify their email before logging in when `REQUIRE_EMAIL_VERIFICATION=true`.
+- Added public resend verification page.
+- If someone tries to register with someone else's email, they cannot access the account unless they own that email inbox.

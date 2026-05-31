@@ -11,7 +11,7 @@
 
         <form method="POST" class="form">
             <label>Email</label>
-            <input type="text" name="email" inputmode="email" autocomplete="email" placeholder="geni49607@gmail.com" required>
+            <input type="text" name="email" inputmode="email" autocomplete="email" placeholder="yourname@example.com" required>
 
             <label>Password</label>
             <input type="password" name="password" placeholder="Your password" required>
@@ -20,6 +20,7 @@
         </form>
 
         <p class="auth-link"><a href="{{ url_for('forgot_password') }}">Forgot password?</a></p>
+        <p class="auth-link"><a href="{{ url_for('resend_verification_public') }}">Resend verification email</a></p>
 
         <p class="auth-link">
             New to EduPath AI?

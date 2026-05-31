@@ -237,6 +237,7 @@ def create_app():
     app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME", "")
     app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD", "")
     app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("MAIL_DEFAULT_SENDER", app.config["MAIL_USERNAME"] or "noreply@edupath.ai")
+    app.config["REQUIRE_EMAIL_VERIFICATION"] = os.environ.get("REQUIRE_EMAIL_VERIFICATION", "true").lower() == "true"
 
 
     db.init_app(app)
@@ -318,6 +319,10 @@ def create_app():
                 flash("Invalid email or password.", "error")
                 return redirect(url_for("login"))
 
+            if app.config.get("REQUIRE_EMAIL_VERIFICATION", True) and not user.email_verified:
+                flash("Your email is not verified yet. Please verify it before logging in.", "error")
+                return redirect(url_for("resend_verification_public"))
+
             login_user(user)
             flash("Welcome back.", "success")
             return redirect(url_for("index"))
@@ -361,6 +366,25 @@ def create_app():
             return redirect(url_for("profile"))
 
         return render_template("resend_verification.html")
+
+
+    @app.route("/resend-verification-public", methods=["GET", "POST"])
+    def resend_verification_public():
+        if current_user.is_authenticated:
+            return redirect(url_for("resend_verification"))
+
+        if request.method == "POST":
+            email = sanitize_email(request.form.get("email", ""))
+            user = User.query.filter_by(email=email).first()
+
+            if user and not user.email_verified:
+                send_verification_email(user)
+
+            flash("If this email has an unverified account, a verification link has been sent.", "success")
+            return redirect(url_for("login"))
+
+        return render_template("resend_verification_public.html")
+
 
     @app.route("/forgot-password", methods=["GET", "POST"])
     def forgot_password():
