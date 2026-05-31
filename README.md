@@ -98,3 +98,9 @@ Browser notifications need permission from the browser.
 - Language skills are generated only for English/Language goals.
 - Tasks now support selected weekdays recurrence.
 - Example: repeat a task only on Friday and Saturday.
+
+## Mobile UI v2.0
+
+- Improved mobile layout.
+- Added fixed bottom navigation for phones.
+- Improved cards, buttons, forms, spacing, and readability.
