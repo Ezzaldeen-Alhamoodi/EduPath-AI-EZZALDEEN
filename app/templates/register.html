@@ -1,0 +1,57 @@
+\
+{% extends "base.html" %}
+{% block page_title %}Create Account{% endblock %}
+{% block content %}
+
+<section class="auth-shell">
+    <div class="auth-card wide">
+        <div class="auth-brand">🧠 EduPath AI EZZALDEEN</div>
+        <h2>Create your private account</h2>
+        <p class="muted">Each student gets private goals, tasks, profile, and progress. No one can see another user's data.</p>
+
+        <form method="POST" class="form">
+            <label>Full name</label>
+            <input name="name" placeholder="Your name" required>
+
+            <label>Email</label>
+            <input type="email" name="email" placeholder="you@example.com" required>
+
+            <div class="form-row">
+                <div>
+                    <label>Password</label>
+                    <input type="password" name="password" minlength="6" required>
+                </div>
+                <div>
+                    <label>Confirm password</label>
+                    <input type="password" name="confirm_password" minlength="6" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label>Country optional</label>
+                    <input name="country" placeholder="Example: Yemen">
+                </div>
+                <div>
+                    <label>Major optional</label>
+                    <input name="major" placeholder="Example: Computer Science">
+                </div>
+            </div>
+
+            <label>Target degree optional</label>
+            <input name="target_degree" placeholder="Example: Bachelor">
+
+            <label>Languages optional</label>
+            <input name="languages" placeholder="Example: English, Chinese, Russian">
+
+            <button type="submit">✨ Create Account</button>
+        </form>
+
+        <p class="auth-link">
+            Already have an account?
+            <a href="{{ url_for('login') }}">Login</a>
+        </p>
+    </div>
+</section>
+
+{% endblock %}

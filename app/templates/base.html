@@ -21,15 +21,30 @@
 
         <button class="theme-toggle" id="themeToggle" type="button">🌙 Dark Mode</button>
 
+        <div class="user-mini-panel">
+            {% if current_user.is_authenticated %}
+                <div class="user-avatar">👤</div>
+                <div>
+                    <strong>{{ current_user.name }}</strong>
+                    <span>{{ current_user.email }}</span>
+                </div>
+                <a class="mini-link" href="{{ url_for('profile') }}">Profile</a>
+                <a class="mini-link logout" href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a class="mini-link" href="{{ url_for('login') }}">Login</a>
+                <a class="mini-link" href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </div>
+
         <nav>
             <a href="{{ url_for('index') }}">🏠 Dashboard</a>
             <a href="{{ url_for('goals') }}">🎯 Goals</a>
             <a href="{{ url_for('tasks') }}">✅ Tasks</a>
             <a href="{{ url_for('languages') }}">🌍 Languages</a>
-            <a href="{{ url_for('scholarship') }}">🎤 Scholarship Center</a>
+            <a href="{{ url_for('interview') }}">🎤 Scholarship Coach</a>
             <a href="{{ url_for('english') }}">✍️ English Coach</a>
-            <a href="{{ url_for('profile') }}">👤 Profile</a>
-            <a href="{{ url_for('code_center') }}">💻 Code Center</a>
+            <a href="{{ url_for('programming') }}">💻 Programming Coach</a>
+            {% if current_user.is_authenticated %}<a href="{{ url_for('profile') }}">👤 Profile</a>{% endif %}
         </nav>
 
         <button class="notify-btn" id="enableNotifications">🔔 Enable Reminders</button>
@@ -62,8 +77,8 @@
         <a href="{{ url_for('goals') }}"><span>🎯</span><small>Goals</small></a>
         <a href="{{ url_for('tasks') }}"><span>✅</span><small>Tasks</small></a>
         <a href="{{ url_for('languages') }}"><span>🇬🇧</span><small>Language</small></a>
-        <a href="{{ url_for('scholarship') }}"><span>🎤</span><small>Scholarship</small></a>
-        <a href="{{ url_for('code_center') }}"><span>💻</span><small>Code</small></a>
+        <a href="{{ url_for('interview') }}"><span>🎤</span><small>Scholarship</small></a>
+        <a href="{{ url_for('programming') }}"><span>💻</span><small>Code</small></a>
     </nav>
 
 </body>

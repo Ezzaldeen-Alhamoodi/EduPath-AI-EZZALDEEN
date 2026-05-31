@@ -114,24 +114,22 @@ Browser notifications need permission from the browser.
 - Better mobile UI.
 
 
-## EduPath AI v2.2 FINAL
+## EduPath AI v3.0 Phase 1
 
-This release turns the app into a stronger learning platform.
+This release adds the first multi-user foundation.
 
-### New Centers
-- Language Center with language paths, skills, resources, and language tasks.
-- Scholarship Center with application tracker, statuses, deadlines, next steps, and interview links.
-- Code Center with programming tracks, task overview, and saved mistake review.
-- Profile page for student information, target countries, languages, and main goal.
+### Added
+- Register page.
+- Login page.
+- Logout.
+- User profile page.
+- Secure password hashing using Werkzeug.
+- Flask-Login session management.
+- User-specific goals, tasks, interview answers, and mistakes.
+- Protected pages: users must log in to access private data.
+- The platform name remains EduPath AI EZZALDEEN.
 
-### Dashboard
-- Today's Focus tasks.
-- Profile snapshot.
-- Active goals.
-- Scholarship tracker preview.
-- Weakness detection.
-
-### Preserved
-- OpenRouter AI integration.
-- Existing English Coach, Interview Coach, Programming Coach.
-- Goals, Tasks, recurrence, PWA, Render deployment.
+### Important
+- Existing old data without a user_id will not appear under new accounts.
+- Each new user sees only their own data.
+- Keep `.env` private and never push it to GitHub.

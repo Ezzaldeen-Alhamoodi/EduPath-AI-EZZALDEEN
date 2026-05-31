@@ -1,56 +1,55 @@
+\
 {% extends "base.html" %}
 {% block page_title %}Profile{% endblock %}
 {% block content %}
 
 <section class="hero compact">
     <div>
-        <span class="tag">👤 Student Profile</span>
-        <h2>Personalize EduPath AI around your academic journey.</h2>
-        <p>Your profile helps you organize goals, target countries, languages, and scholarship preparation.</p>
+        <span class="tag">Private Profile</span>
+        <h2>👤 {{ current_user.name }}</h2>
+        <p>{{ current_user.email }}</p>
     </div>
+    <a class="button light" href="{{ url_for('logout') }}">🚪 Logout</a>
+</section>
+
+<section class="stats-grid">
+    <div class="stat-card blue"><span>🎯</span><h3>Your Goals</h3><p>{{ total_goals }}</p></div>
+    <div class="stat-card purple"><span>📚</span><h3>Your Tasks</h3><p>{{ total_tasks }}</p></div>
+    <div class="stat-card green"><span>✅</span><h3>Completed</h3><p>{{ completed_tasks }}</p></div>
 </section>
 
 <section class="grid-2">
     <div class="card">
         <h2>✏️ Edit Profile</h2>
         <form method="POST" class="form">
-            <label>Full name</label>
-            <input name="full_name" value="{{ profile.full_name if profile else '' }}" placeholder="Ezzaldeen Nashwan Ali Mohammed Al-Hamoodi">
+            <label>Name</label>
+            <input name="name" value="{{ current_user.name }}">
+
+            <label>Country</label>
+            <input name="country" value="{{ current_user.country or '' }}" placeholder="Example: Yemen">
 
             <label>Major</label>
-            <input name="major" value="{{ profile.major if profile else '' }}" placeholder="Computer Science">
+            <input name="major" value="{{ current_user.major or '' }}" placeholder="Example: Computer Science">
 
-            <label>Target countries</label>
-            <input name="target_countries" value="{{ profile.target_countries if profile else '' }}" placeholder="China, Turkey, Romania">
+            <label>Target Degree</label>
+            <input name="target_degree" value="{{ current_user.target_degree or '' }}" placeholder="Example: Bachelor">
 
             <label>Languages</label>
-            <input name="languages" value="{{ profile.languages if profile else '' }}" placeholder="English, Chinese, Russian">
-
-            <label>Main goal</label>
-            <input name="main_goal" value="{{ profile.main_goal if profile else '' }}" placeholder="Bachelor scholarship in Computer Science">
-
-            <label>Short bio / profile</label>
-            <textarea name="bio" rows="6" placeholder="Write your academic background, projects, and goals...">{{ profile.bio if profile else '' }}</textarea>
+            <input name="languages" value="{{ current_user.languages or '' }}" placeholder="English, Chinese, Russian">
 
             <button type="submit">💾 Save Profile</button>
         </form>
     </div>
 
-    <div class="card profile-card-large">
-        <h2>🌟 Profile Preview</h2>
-        {% if profile %}
-            <div class="profile-preview">
-                <div class="profile-avatar">🎓</div>
-                <strong>{{ profile.full_name or "Student" }}</strong>
-                <span>{{ profile.major or "Major not set" }}</span>
-                <span>Targets: {{ profile.target_countries or "not set" }}</span>
-                <span>Languages: {{ profile.languages or "not set" }}</span>
-                <span>Main goal: {{ profile.main_goal or "not set" }}</span>
-                {% if profile.bio %}<p>{{ profile.bio }}</p>{% endif %}
-            </div>
-        {% else %}
-            <p class="muted">No profile saved yet.</p>
-        {% endif %}
+    <div class="card">
+        <h2>🔒 Privacy</h2>
+        <p class="improved">
+            Your goals, tasks, scholarship plans, coding notes, and interview answers are linked to your account only.
+            Other users cannot see or edit your data.
+        </p>
+        <p class="muted">
+            Platform name remains EduPath AI EZZALDEEN, while each student has a separate private workspace.
+        </p>
     </div>
 </section>
 

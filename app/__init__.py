@@ -6,6 +6,8 @@ from datetime import datetime, date, timedelta
 
 from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -15,10 +17,29 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 db = SQLAlchemy()
+login_manager = LoginManager()
 
+
+
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(140), nullable=False)
+    email = db.Column(db.String(180), nullable=False, unique=True, index=True)
+    password_hash = db.Column(db.String(255), nullable=False)
+    country = db.Column(db.String(120), nullable=True)
+    major = db.Column(db.String(140), nullable=True)
+    target_degree = db.Column(db.String(120), nullable=True)
+    languages = db.Column(db.String(255), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    goals = db.relationship("Goal", backref="owner", lazy=True)
+    tasks = db.relationship("StudyTask", backref="owner", lazy=True)
+    interview_answers = db.relationship("InterviewAnswer", backref="owner", lazy=True)
+    mistakes = db.relationship("MistakeLog", backref="owner", lazy=True)
 
 class Goal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
     title = db.Column(db.String(180), nullable=False)
     category = db.Column(db.String(80), nullable=False, default="General")
     current_level = db.Column(db.String(80), nullable=False, default="Beginner")
@@ -32,6 +53,7 @@ class Goal(db.Model):
 
 class StudyTask(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
     goal_id = db.Column(db.Integer, db.ForeignKey("goal.id"), nullable=True)
     title = db.Column(db.String(220), nullable=False)
     category = db.Column(db.String(80), nullable=False, default="Study")
@@ -61,6 +83,7 @@ class StudyTask(db.Model):
 
 class InterviewAnswer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
     scholarship = db.Column(db.String(160), nullable=False)
     major = db.Column(db.String(120), nullable=False)
     question = db.Column(db.Text, nullable=False)
@@ -72,6 +95,7 @@ class InterviewAnswer(db.Model):
 
 class MistakeLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
     area = db.Column(db.String(80), nullable=False, default="General")
     mistake = db.Column(db.Text, nullable=False)
     correction = db.Column(db.Text, nullable=True)
@@ -79,47 +103,12 @@ class MistakeLog(db.Model):
 
 
 
-class UserProfile(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String(160), nullable=True)
-    major = db.Column(db.String(160), nullable=True)
-    target_countries = db.Column(db.String(240), nullable=True)
-    languages = db.Column(db.String(240), nullable=True)
-    main_goal = db.Column(db.String(240), nullable=True)
-    bio = db.Column(db.Text, nullable=True)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-
-class ScholarshipApplication(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    scholarship_name = db.Column(db.String(180), nullable=False)
-    university = db.Column(db.String(180), nullable=True)
-    country = db.Column(db.String(100), nullable=True)
-    status = db.Column(db.String(80), nullable=False, default="Preparing")
-    deadline = db.Column(db.String(40), nullable=True)
-    next_step = db.Column(db.String(240), nullable=True)
-    notes = db.Column(db.Text, nullable=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-
-
-def status_badge_class(status):
-    status = (status or "").lower()
-    if "accepted" in status:
-        return "status-accepted"
-    if "submitted" in status:
-        return "status-submitted"
-    if "progress" in status or "preparing" in status:
-        return "status-progress"
-    if "rejected" in status:
-        return "status-rejected"
-    if "interview" in status:
-        return "status-interview"
-    return "status-neutral"
-
-
-def deadline_time_left(deadline):
-    return calculate_goal_time_left(deadline)
+@login_manager.user_loader
+def load_user(user_id):
+    try:
+        return User.query.get(int(user_id))
+    except Exception:
+        return None
 
 def create_app():
     app = Flask(__name__)
@@ -131,6 +120,9 @@ def create_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
+    login_manager.init_app(app)
+    login_manager.login_view = "login"
+    login_manager.login_message = "Please log in to access EduPath AI."
 
     with app.app_context():
         db.create_all()
@@ -138,23 +130,120 @@ def create_app():
 
     ai_client = build_ai_client()
 
+    @app.route("/register", methods=["GET", "POST"])
+    def register():
+        if current_user.is_authenticated:
+            return redirect(url_for("index"))
+
+        if request.method == "POST":
+            name = request.form.get("name", "").strip()
+            email = request.form.get("email", "").strip().lower()
+            password = request.form.get("password", "")
+            confirm_password = request.form.get("confirm_password", "")
+            country = request.form.get("country", "").strip()
+            major = request.form.get("major", "").strip()
+            target_degree = request.form.get("target_degree", "").strip()
+            languages = request.form.get("languages", "").strip()
+
+            if not name or not email or not password:
+                flash("Name, email, and password are required.", "error")
+                return redirect(url_for("register"))
+
+            if password != confirm_password:
+                flash("Passwords do not match.", "error")
+                return redirect(url_for("register"))
+
+            if len(password) < 6:
+                flash("Password must be at least 6 characters.", "error")
+                return redirect(url_for("register"))
+
+            existing_user = User.query.filter_by(email=email).first()
+            if existing_user:
+                flash("This email already has an account. Please log in.", "error")
+                return redirect(url_for("login"))
+
+            user = User(
+                name=name,
+                email=email,
+                password_hash=generate_password_hash(password),
+                country=country,
+                major=major,
+                target_degree=target_degree,
+                languages=languages,
+            )
+            db.session.add(user)
+            db.session.commit()
+            login_user(user)
+            flash("Account created successfully. Welcome to EduPath AI EZZALDEEN.", "success")
+            return redirect(url_for("index"))
+
+        return render_template("register.html")
+
+    @app.route("/login", methods=["GET", "POST"])
+    def login():
+        if current_user.is_authenticated:
+            return redirect(url_for("index"))
+
+        if request.method == "POST":
+            email = request.form.get("email", "").strip().lower()
+            password = request.form.get("password", "")
+
+            user = User.query.filter_by(email=email).first()
+            if not user or not check_password_hash(user.password_hash, password):
+                flash("Invalid email or password.", "error")
+                return redirect(url_for("login"))
+
+            login_user(user)
+            flash("Welcome back.", "success")
+            return redirect(url_for("index"))
+
+        return render_template("login.html")
+
+    @app.route("/logout")
+    @login_required
+    def logout():
+        logout_user()
+        flash("You have been logged out.", "success")
+        return redirect(url_for("login"))
+
+    @app.route("/profile", methods=["GET", "POST"])
+    @login_required
+    def profile():
+        if request.method == "POST":
+            current_user.name = request.form.get("name", current_user.name).strip()
+            current_user.country = request.form.get("country", "").strip()
+            current_user.major = request.form.get("major", "").strip()
+            current_user.target_degree = request.form.get("target_degree", "").strip()
+            current_user.languages = request.form.get("languages", "").strip()
+            db.session.commit()
+            flash("Profile updated.", "success")
+            return redirect(url_for("profile"))
+
+        total_goals = Goal.query.filter_by(user_id=current_user.id).count()
+        total_tasks = StudyTask.query.filter_by(user_id=current_user.id).count()
+        completed_tasks = StudyTask.query.filter_by(user_id=current_user.id, status="done").count()
+        return render_template(
+            "profile.html",
+            total_goals=total_goals,
+            total_tasks=total_tasks,
+            completed_tasks=completed_tasks,
+        )
+
+
+
     @app.route("/")
+    @login_required
     def index():
-        goals = Goal.query.order_by(Goal.id.desc()).limit(6).all()
+        goals = Goal.query.filter_by(user_id=current_user.id).order_by(Goal.id.desc()).limit(6).all()
         for goal in goals:
             goal.time_left = calculate_goal_time_left(goal.deadline)
-            goal.goal_progress = calculate_goal_progress(goal)
-        tasks = StudyTask.query.order_by(StudyTask.id.desc()).limit(10).all()
-        mistakes = MistakeLog.query.order_by(MistakeLog.id.desc()).limit(6).all()
-        applications = ScholarshipApplication.query.order_by(ScholarshipApplication.id.desc()).limit(4).all()
-        profile = UserProfile.query.order_by(UserProfile.id.desc()).first()
-        today_string = str(date.today())
-        today_focus = StudyTask.query.filter(StudyTask.status == "pending").filter((StudyTask.due_date == today_string) | (StudyTask.due_date == None) | (StudyTask.due_date == "")).order_by(StudyTask.priority.desc(), StudyTask.id.desc()).limit(4).all()
+        tasks = StudyTask.query.filter_by(user_id=current_user.id).order_by(StudyTask.id.desc()).limit(10).all()
+        mistakes = MistakeLog.query.filter_by(user_id=current_user.id).order_by(MistakeLog.id.desc()).limit(6).all()
 
-        total_tasks = StudyTask.query.count()
-        completed_tasks = StudyTask.query.filter_by(status="done").count()
-        pending_tasks = StudyTask.query.filter_by(status="pending").count()
-        total_goals = Goal.query.count()
+        total_tasks = StudyTask.query.filter_by(user_id=current_user.id).count()
+        completed_tasks = StudyTask.query.filter_by(user_id=current_user.id, status="done").count()
+        pending_tasks = StudyTask.query.filter_by(user_id=current_user.id, status="pending").count()
+        total_goals = Goal.query.filter_by(user_id=current_user.id).count()
         progress = int((completed_tasks / total_tasks) * 100) if total_tasks else 0
 
         weak_skills = detect_weaknesses()
@@ -170,14 +259,10 @@ def create_app():
             total_goals=total_goals,
             progress=progress,
             weak_skills=weak_skills,
-            applications=applications,
-            profile=profile,
-            today_focus=today_focus,
-            status_badge_class=status_badge_class,
-            deadline_time_left=deadline_time_left,
         )
 
     @app.route("/goals", methods=["GET", "POST"])
+    @login_required
     def goals():
         if request.method == "POST":
             goal = Goal(
@@ -200,15 +285,15 @@ def create_app():
             flash("Goal saved. Add related tasks manually from the Tasks page.", "success")
             return redirect(url_for("goals"))
 
-        all_goals = Goal.query.order_by(Goal.id.desc()).all()
+        all_goals = Goal.query.filter_by(user_id=current_user.id).order_by(Goal.id.desc()).all()
         for goal in all_goals:
             goal.time_left = calculate_goal_time_left(goal.deadline)
-            goal.goal_progress = calculate_goal_progress(goal)
         return render_template("goals.html", goals=all_goals)
 
     @app.route("/goal/<int:goal_id>/edit", methods=["GET", "POST"])
+    @login_required
     def edit_goal(goal_id):
-        goal = Goal.query.get_or_404(goal_id)
+        goal = Goal.query.filter_by(id=goal_id, user_id=current_user.id).first_or_404()
 
         if request.method == "POST":
             goal.title = request.form.get("title", "").strip()
@@ -226,8 +311,9 @@ def create_app():
         return render_template("edit_goal.html", goal=goal)
 
     @app.route("/goal/<int:goal_id>/delete")
+    @login_required
     def delete_goal(goal_id):
-        goal = Goal.query.get_or_404(goal_id)
+        goal = Goal.query.filter_by(id=goal_id, user_id=current_user.id).first_or_404()
         for task in list(goal.tasks):
             db.session.delete(task)
         db.session.delete(goal)
@@ -236,9 +322,11 @@ def create_app():
         return redirect(url_for("goals"))
 
     @app.route("/tasks", methods=["GET", "POST"])
+    @login_required
     def tasks():
         if request.method == "POST":
             task = StudyTask(
+                user_id=current_user.id,
                 title=request.form.get("title", "").strip(),
                 category=request.form.get("category", "Study").strip(),
                 custom_category=request.form.get("custom_category", "").strip(),
@@ -269,7 +357,7 @@ def create_app():
             flash("Task saved.", "success")
             return redirect(url_for("tasks"))
 
-        all_tasks = StudyTask.query.order_by(
+        all_tasks = StudyTask.query.filter_by(user_id=current_user.id).order_by(
             StudyTask.status.asc(),
             StudyTask.priority.desc(),
             StudyTask.difficulty.asc(),
@@ -278,8 +366,9 @@ def create_app():
         return render_template("tasks.html", tasks=all_tasks)
 
     @app.route("/task/<int:task_id>/edit", methods=["GET", "POST"])
+    @login_required
     def edit_task(task_id):
-        task = StudyTask.query.get_or_404(task_id)
+        task = StudyTask.query.filter_by(id=task_id, user_id=current_user.id).first_or_404()
 
         if request.method == "POST":
             task.title = request.form.get("title", "").strip()
@@ -308,8 +397,9 @@ def create_app():
         return render_template("edit_task.html", task=task)
 
     @app.route("/task/<int:task_id>/done")
+    @login_required
     def mark_task_done(task_id):
-        task = StudyTask.query.get_or_404(task_id)
+        task = StudyTask.query.filter_by(id=task_id, user_id=current_user.id).first_or_404()
         task.status = "done"
         task.review_count += 1
         task.last_reviewed = str(date.today())
@@ -318,36 +408,31 @@ def create_app():
         return redirect(url_for("tasks"))
 
     @app.route("/task/<int:task_id>/pending")
+    @login_required
     def mark_task_pending(task_id):
-        task = StudyTask.query.get_or_404(task_id)
+        task = StudyTask.query.filter_by(id=task_id, user_id=current_user.id).first_or_404()
         task.status = "pending"
         db.session.commit()
         flash("Task returned to pending.", "success")
         return redirect(url_for("tasks"))
 
     @app.route("/task/<int:task_id>/delete")
+    @login_required
     def delete_task(task_id):
-        task = StudyTask.query.get_or_404(task_id)
+        task = StudyTask.query.filter_by(id=task_id, user_id=current_user.id).first_or_404()
         db.session.delete(task)
         db.session.commit()
         flash("Task deleted.", "success")
         return redirect(url_for("tasks"))
 
     @app.route("/languages")
+    @login_required
     def languages():
-        tasks = StudyTask.query.filter_by(category="Language").order_by(StudyTask.id.desc()).all()
-        languages_data = [
-            {"name": "English", "icon": "🇬🇧", "resources": ["ELSA", "IELTS", "TOEFL", "BBC Learning English"]},
-            {"name": "Chinese", "icon": "🇨🇳", "resources": ["HSK", "HelloChinese", "DuChinese"]},
-            {"name": "Russian", "icon": "🇷🇺", "resources": ["RussianPod101", "RT Learn Russian", "Duolingo"]},
-            {"name": "Turkish", "icon": "🇹🇷", "resources": ["Yunus Emre", "TurkishClass101", "Duolingo"]},
-            {"name": "Indonesian", "icon": "🇮🇩", "resources": ["BIPA", "IndonesianPod101", "Duolingo"]},
-            {"name": "Romanian", "icon": "🇷🇴", "resources": ["RomanianPod101", "Duolingo", "Grammar practice"]},
-        ]
-        skills = ["Reading", "Listening", "Speaking", "Writing", "Grammar", "Vocabulary"]
-        return render_template("languages.html", tasks=tasks, languages_data=languages_data, skills=skills)
+        tasks = StudyTask.query.filter_by(user_id=current_user.id, category="Language").order_by(StudyTask.id.desc()).all()
+        return render_template("languages.html", tasks=tasks)
 
     @app.route("/interview", methods=["GET", "POST"])
+    @login_required
     def interview():
         generated = None
 
@@ -382,6 +467,7 @@ Return valid JSON array only.
             if generated:
                 for item in generated:
                     q = InterviewAnswer(
+                        user_id=current_user.id,
                         scholarship=scholarship,
                         major=major,
                         question=item.get("question", str(item)),
@@ -389,12 +475,13 @@ Return valid JSON array only.
                     db.session.add(q)
                 db.session.commit()
 
-        saved_questions = InterviewAnswer.query.order_by(InterviewAnswer.id.desc()).limit(20).all()
+        saved_questions = InterviewAnswer.query.filter_by(user_id=current_user.id).order_by(InterviewAnswer.id.desc()).limit(20).all()
         return render_template("interview.html", generated=generated, saved_questions=saved_questions)
 
     @app.route("/answer/<int:answer_id>", methods=["GET", "POST"])
+    @login_required
     def answer_question(answer_id):
-        item = InterviewAnswer.query.get_or_404(answer_id)
+        item = InterviewAnswer.query.filter_by(id=answer_id, user_id=current_user.id).first_or_404()
 
         if request.method == "POST":
             answer = request.form.get("answer", "").strip()
@@ -444,6 +531,7 @@ Evaluate the answer. Return valid JSON only:
         return render_template("answer.html", item=item, feedback=feedback)
 
     @app.route("/english", methods=["GET", "POST"])
+    @login_required
     def english():
         result = None
 
@@ -477,6 +565,7 @@ Return valid JSON only:
         return render_template("english.html", result=result)
 
     @app.route("/programming", methods=["GET", "POST"])
+    @login_required
     def programming():
         result = None
 
@@ -509,103 +598,27 @@ Return valid JSON:
             ai_text = call_ai(ai_client, prompt, max_tokens=800, temperature=0.3)
             result = parse_json_object(ai_text)
 
-        mistakes = MistakeLog.query.order_by(MistakeLog.id.desc()).limit(12).all()
+        mistakes = MistakeLog.query.filter_by(user_id=current_user.id).order_by(MistakeLog.id.desc()).limit(12).all()
         return render_template("programming.html", result=result, mistakes=mistakes)
 
     @app.route("/mistake", methods=["POST"])
+    @login_required
     def add_mistake():
         area = request.form.get("area", "General").strip()
         mistake = request.form.get("mistake", "").strip()
         correction = request.form.get("correction", "").strip()
 
         if mistake:
-            db.session.add(MistakeLog(area=area, mistake=mistake, correction=correction))
+            db.session.add(MistakeLog(user_id=current_user.id, area=area, mistake=mistake, correction=correction))
             db.session.commit()
             flash("Mistake saved to your learning log.", "success")
 
         return redirect(url_for("programming"))
 
-
-    @app.route("/profile", methods=["GET", "POST"])
-    def profile():
-        profile_item = UserProfile.query.order_by(UserProfile.id.desc()).first()
-        if request.method == "POST":
-            if profile_item is None:
-                profile_item = UserProfile()
-                db.session.add(profile_item)
-
-            profile_item.full_name = request.form.get("full_name", "").strip()
-            profile_item.major = request.form.get("major", "").strip()
-            profile_item.target_countries = request.form.get("target_countries", "").strip()
-            profile_item.languages = request.form.get("languages", "").strip()
-            profile_item.main_goal = request.form.get("main_goal", "").strip()
-            profile_item.bio = request.form.get("bio", "").strip()
-            profile_item.updated_at = datetime.utcnow()
-            db.session.commit()
-            flash("Profile saved.", "success")
-            return redirect(url_for("profile"))
-
-        return render_template("profile.html", profile=profile_item)
-
-    @app.route("/scholarship", methods=["GET", "POST"])
-    def scholarship():
-        if request.method == "POST":
-            app_item = ScholarshipApplication(
-                scholarship_name=request.form.get("scholarship_name", "").strip(),
-                university=request.form.get("university", "").strip(),
-                country=request.form.get("country", "").strip(),
-                status=request.form.get("status", "Preparing").strip(),
-                deadline=request.form.get("deadline", "").strip(),
-                next_step=request.form.get("next_step", "").strip(),
-                notes=request.form.get("notes", "").strip(),
-            )
-
-            if not app_item.scholarship_name:
-                flash("Scholarship name is required.", "error")
-                return redirect(url_for("scholarship"))
-
-            db.session.add(app_item)
-            db.session.commit()
-            flash("Scholarship application saved.", "success")
-            return redirect(url_for("scholarship"))
-
-        applications = ScholarshipApplication.query.order_by(ScholarshipApplication.id.desc()).all()
-        questions = InterviewAnswer.query.order_by(InterviewAnswer.id.desc()).limit(8).all()
-        return render_template(
-            "scholarship.html",
-            applications=applications,
-            questions=questions,
-            status_badge_class=status_badge_class,
-            deadline_time_left=deadline_time_left,
-        )
-
-    @app.route("/scholarship/<int:application_id>/delete")
-    def delete_scholarship_application(application_id):
-        item = ScholarshipApplication.query.get_or_404(application_id)
-        db.session.delete(item)
-        db.session.commit()
-        flash("Scholarship application deleted.", "success")
-        return redirect(url_for("scholarship"))
-
-    @app.route("/code")
-    def code_center():
-        tasks = StudyTask.query.filter_by(category="Programming").order_by(StudyTask.id.desc()).limit(20).all()
-        mistakes = MistakeLog.query.order_by(MistakeLog.id.desc()).limit(10).all()
-        tracks = [
-            ("Python", "🐍", 75),
-            ("Web Development", "🌐", 65),
-            ("Algorithms", "🧩", 40),
-            ("Data Structures", "🏗️", 35),
-            ("Machine Learning", "🤖", 25),
-            ("Projects", "🚀", 55),
-            ("Debugging", "🛠️", 60),
-        ]
-        return render_template("code_center.html", tasks=tasks, mistakes=mistakes, tracks=tracks)
-
-
     @app.route("/api/tasks")
+    @login_required
     def api_tasks():
-        tasks = StudyTask.query.filter_by(status="pending").all()
+        tasks = StudyTask.query.filter_by(user_id=current_user.id, status="pending").all()
         return jsonify([
             {
                 "id": t.id,
@@ -624,6 +637,7 @@ Return valid JSON:
         ])
 
     @app.route("/api/smart_plan", methods=["POST"])
+    @login_required
     def api_smart_plan():
         data = request.get_json(force=True)
         title = data.get("title", "General goal")
@@ -650,47 +664,46 @@ def calculate_goal_time_left(deadline):
         return None
 
 
-
-def calculate_goal_progress(goal):
-    try:
-        tasks = list(goal.tasks)
-        if not tasks:
-            return 0
-        done = sum(1 for task in tasks if task.status == "done")
-        return int((done / len(tasks)) * 100)
-    except Exception:
-        return 0
-
 def ensure_database_columns():
+    """SQLite-safe migration for v3.0 Phase 1 authentication and user-owned data."""
     try:
         with db.engine.connect() as connection:
-            columns = [row[1] for row in connection.exec_driver_sql("PRAGMA table_info(study_task)").fetchall()]
+            table_columns = {}
+            for table in ["goal", "study_task", "interview_answer", "mistake_log", "user"]:
+                try:
+                    table_columns[table] = [row[1] for row in connection.exec_driver_sql(f"PRAGMA table_info({table})").fetchall()]
+                except Exception:
+                    table_columns[table] = []
+
             additions = {
-                "repeat_days": "ALTER TABLE study_task ADD COLUMN repeat_days VARCHAR(120)",
-                "topic": "ALTER TABLE study_task ADD COLUMN topic VARCHAR(120)",
-                "custom_category": "ALTER TABLE study_task ADD COLUMN custom_category VARCHAR(120)",
-                "custom_topic": "ALTER TABLE study_task ADD COLUMN custom_topic VARCHAR(120)",
-                "custom_skill": "ALTER TABLE study_task ADD COLUMN custom_skill VARCHAR(120)",
+                "goal": {
+                    "user_id": "ALTER TABLE goal ADD COLUMN user_id INTEGER"
+                },
+                "study_task": {
+                    "user_id": "ALTER TABLE study_task ADD COLUMN user_id INTEGER",
+                    "repeat_days": "ALTER TABLE study_task ADD COLUMN repeat_days VARCHAR(120)",
+                    "topic": "ALTER TABLE study_task ADD COLUMN topic VARCHAR(120)",
+                    "custom_category": "ALTER TABLE study_task ADD COLUMN custom_category VARCHAR(120)",
+                    "custom_topic": "ALTER TABLE study_task ADD COLUMN custom_topic VARCHAR(120)",
+                    "custom_skill": "ALTER TABLE study_task ADD COLUMN custom_skill VARCHAR(120)"
+                },
+                "interview_answer": {
+                    "user_id": "ALTER TABLE interview_answer ADD COLUMN user_id INTEGER"
+                },
+                "mistake_log": {
+                    "user_id": "ALTER TABLE mistake_log ADD COLUMN user_id INTEGER"
+                }
             }
-            for column, sql in additions.items():
-                if column not in columns:
-                    connection.exec_driver_sql(sql)
+
+            for table, cols in additions.items():
+                existing = table_columns.get(table, [])
+                for column, sql in cols.items():
+                    if column not in existing:
+                        connection.exec_driver_sql(sql)
+
             connection.commit()
     except Exception:
         logger.exception("Database column migration failed")
-
-# old migration removed
-def ensure_database_columns_old():
-    """Small SQLite-safe migration for columns added after first release."""
-    try:
-        with db.engine.connect() as connection:
-            columns = [row[1] for row in connection.exec_driver_sql("PRAGMA table_info(study_task)").fetchall()]
-            if "repeat_days" not in columns:
-                connection.exec_driver_sql("ALTER TABLE study_task ADD COLUMN repeat_days VARCHAR(120)")
-                connection.commit()
-    except Exception:
-        logger.exception("Database column migration failed")
-
 
 def build_ai_client():
     key = os.environ.get("OPENROUTER_API_KEY")
@@ -815,6 +828,7 @@ def create_initial_tasks(goal):
     for day in plan:
         for item in day["tasks"]:
             task = StudyTask(
+                user_id=goal.user_id,
                 goal_id=goal.id,
                 title=item["title"],
                 category=goal.category if goal.category != "English" else "Language",

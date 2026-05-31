@@ -1,15 +1,15 @@
 {% extends "base.html" %}
-{% block page_title %}Smart Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
 {% block content %}
 
-<section class="hero v22-hero">
+<section class="hero v21-hero">
     <div>
-        <span class="tag">EduPath AI v2.2</span>
-        <h2>One place for your goals, tasks, languages, scholarships, and code.</h2>
-        <p>Focus on today's most important actions while keeping your long-term learning path visible.</p>
+        <span class="tag">EduPath AI v2.1</span>
+        <h2>Build your future with clear goals and focused daily actions.</h2>
+        <p>Track your goals, manage tasks, practice languages, prepare scholarships, and improve coding with AI support.</p>
         <div class="hero-actions">
-            <a class="button light" href="{{ url_for('tasks') }}">✅ Add Task</a>
-            <a class="button ghost" href="{{ url_for('scholarship') }}">🎤 Track Scholarship</a>
+            <a class="button light" href="{{ url_for('goals') }}">🎯 New Goal</a>
+            <a class="button ghost" href="{{ url_for('tasks') }}">✅ Add Task</a>
         </div>
     </div>
     <div class="hero-card">
@@ -18,59 +18,17 @@
     </div>
 </section>
 
-<section class="quick-actions v22-actions">
+<section class="quick-actions">
     <a href="{{ url_for('languages') }}">🇬🇧<span>Language</span></a>
-    <a href="{{ url_for('scholarship') }}">🎤<span>Scholarship</span></a>
-    <a href="{{ url_for('code_center') }}">💻<span>Code</span></a>
-    <a href="{{ url_for('profile') }}">👤<span>Profile</span></a>
-</section>
-
-<section class="grid-2">
-    <div class="card">
-        <div class="section-title-row">
-            <div>
-                <h2>🔥 Today's Focus</h2>
-                <p class="muted">Your highest-priority tasks for today.</p>
-            </div>
-            <a class="small-button" href="{{ url_for('tasks') }}">All Tasks</a>
-        </div>
-
-        {% for task in today_focus %}
-            <div class="task-mini focus-task">
-                <div>
-                    <strong>{{ task.title }}</strong>
-                    <span>{{ task.category }} · {{ task.topic or task.skill }} · {{ task.estimated_minutes }} min</span>
-                    <span>Priority {{ task.priority }} · Reminder {{ task.reminder_time or "not set" }}</span>
-                </div>
-                <span class="badge">{{ task.status }}</span>
-            </div>
-        {% else %}
-            <p class="muted">No focus tasks yet. Add one from the Tasks page.</p>
-        {% endfor %}
-    </div>
-
-    <div class="card profile-card">
-        <h2>👤 Profile Snapshot</h2>
-        {% if profile %}
-            <div class="profile-mini">
-                <strong>{{ profile.full_name or "Student" }}</strong>
-                <span>{{ profile.major or "Major not set" }}</span>
-                <span>Targets: {{ profile.target_countries or "not set" }}</span>
-                <span>Languages: {{ profile.languages or "not set" }}</span>
-                <span>Main goal: {{ profile.main_goal or "not set" }}</span>
-            </div>
-        {% else %}
-            <p class="muted">Create your profile to personalize your learning path.</p>
-        {% endif %}
-        <a class="button" href="{{ url_for('profile') }}">Edit Profile</a>
-    </div>
+    <a href="{{ url_for('interview') }}">🎤<span>Scholarship</span></a>
+    <a href="{{ url_for('programming') }}">💻<span>Code</span></a>
 </section>
 
 <section class="card focus-goals">
     <div class="section-title-row">
         <div>
             <h2>🎯 Active Goals</h2>
-            <p class="muted">Your goals are the compass. Tasks are the daily steps.</p>
+            <p class="muted">Keep your long-term targets visible. Your tasks are the daily steps.</p>
         </div>
         <a class="small-button" href="{{ url_for('goals') }}">Manage</a>
     </div>
@@ -119,26 +77,6 @@
 
 <section class="grid-2">
     <div class="card">
-        <h2>🎤 Scholarship Tracker</h2>
-        {% for app in applications %}
-            <div class="item">
-                <strong>{{ app.scholarship_name }}</strong>
-                <span>{{ app.university or "University not set" }} · {{ app.country or "Country not set" }}</span>
-                <span class="status-pill {{ status_badge_class(app.status) }}">{{ app.status }}</span>
-                {% if app.deadline %}
-                    {% set left = deadline_time_left(app.deadline) %}
-                    {% if left %}
-                        <span>Deadline: {{ app.deadline }} · {{ left.days }} days left</span>
-                    {% endif %}
-                {% endif %}
-            </div>
-        {% else %}
-            <p class="muted">No scholarship applications tracked yet.</p>
-        {% endfor %}
-        <a class="button" href="{{ url_for('scholarship') }}">Open Scholarship Center</a>
-    </div>
-
-    <div class="card">
         <h2>🧠 Weakness Detection</h2>
         {% if weak_skills %}
             {% for skill, score in weak_skills %}
@@ -150,6 +88,21 @@
         {% else %}
             <p class="muted">Complete and add tasks to detect weak areas.</p>
         {% endif %}
+    </div>
+
+    <div class="card">
+        <h2>✅ Recent Tasks</h2>
+        {% for task in tasks %}
+            <div class="task-mini">
+                <div>
+                    <strong>{{ task.title }}</strong>
+                    <span>{{ task.category }} · {{ task.skill }} · {{ task.estimated_minutes }} min · {{ task.status }}</span>
+                </div>
+                <span class="badge">{{ task.reminder_time or "No reminder" }}</span>
+            </div>
+        {% else %}
+            <p class="muted">No tasks yet.</p>
+        {% endfor %}
     </div>
 </section>
 

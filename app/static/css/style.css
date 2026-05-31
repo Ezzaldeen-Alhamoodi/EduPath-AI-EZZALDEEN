@@ -981,199 +981,121 @@ body.dark-mode .goal-progress-line, body.dark-mode .bar { background:rgba(148,16
 
 
 
-/* ==========================================================
-   EduPath AI v2.2 Centers + Smart Dashboard
-   ========================================================== */
-.v22-hero .tag {
-    font-weight: 900;
-}
-
-.v22-actions {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.center-grid {
+/* EduPath AI v3.0 Phase 1 Authentication UI */
+.auth-shell {
+    min-height: calc(100vh - 170px);
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-    margin-top: 14px;
+    place-items: center;
+    padding: 20px 0;
 }
 
-.center-card {
+.auth-card {
+    width: min(520px, 100%);
+    background: var(--card);
     border: 1px solid var(--border);
-    background: rgba(248, 250, 252, 0.78);
-    border-radius: 24px;
-    padding: 18px;
+    border-radius: 30px;
+    padding: 28px;
     box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    min-height: 190px;
+    backdrop-filter: blur(20px);
 }
 
-.center-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 17px;
+.auth-card.wide {
+    width: min(760px, 100%);
+}
+
+.auth-brand {
+    display: inline-flex;
+    padding: 9px 13px;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary);
+    font-weight: 900;
+    margin-bottom: 14px;
+}
+
+.auth-card h2 {
+    font-size: 30px;
+    margin: 0 0 8px;
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 16px;
+    color: var(--muted);
+}
+
+.auth-link a {
+    color: var(--primary);
+    font-weight: 900;
+    text-decoration: none;
+}
+
+.user-mini-panel {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 10px;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: rgba(248, 250, 252, 0.75);
+}
+
+.user-mini-panel strong {
+    display: block;
+    font-size: 14px;
+}
+
+.user-mini-panel span {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 15px;
     display: grid;
     place-items: center;
     background: linear-gradient(135deg, var(--primary), var(--purple));
     color: white;
-    font-size: 25px;
 }
 
-.center-card strong {
-    font-size: 18px;
-}
-
-.center-card span {
-    color: var(--muted);
-    line-height: 1.5;
-}
-
-.mini-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    margin: 4px 0;
-}
-
-.mini-tags span,
-.status-pill {
-    display: inline-flex !important;
-    width: fit-content;
-    align-items: center;
-    padding: 6px 10px;
-    border-radius: 999px;
-    font-size: 12px !important;
+.mini-link {
+    grid-column: span 2;
+    text-align: center;
+    padding: 8px 10px;
+    border-radius: 12px;
+    text-decoration: none;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary);
     font-weight: 900;
-    line-height: 1;
-    border: 1px solid var(--border);
 }
 
-.mini-tags span {
-    color: var(--primary) !important;
-    background: rgba(37, 99, 235, 0.08);
+.mini-link.logout {
+    background: rgba(220, 38, 38, 0.1);
+    color: var(--danger);
 }
 
-.status-pill {
-    margin: 6px 0;
-}
-
-.status-accepted {
-    background: rgba(22, 163, 74, 0.12);
-    color: #16a34a !important;
-    border-color: rgba(22, 163, 74, 0.25);
-}
-
-.status-submitted {
-    background: rgba(37, 99, 235, 0.12);
-    color: #2563eb !important;
-    border-color: rgba(37, 99, 235, 0.25);
-}
-
-.status-progress,
-.status-interview {
-    background: rgba(249, 115, 22, 0.13);
-    color: #f97316 !important;
-    border-color: rgba(249, 115, 22, 0.28);
-}
-
-.status-rejected {
-    background: rgba(220, 38, 38, 0.12);
-    color: #dc2626 !important;
-    border-color: rgba(220, 38, 38, 0.25);
-}
-
-.status-neutral {
-    background: rgba(100, 116, 139, 0.12);
-    color: #64748b !important;
-}
-
-.focus-task {
-    border-left: 5px solid var(--primary);
-}
-
-.profile-mini,
-.profile-preview {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.profile-mini strong,
-.profile-preview strong {
-    font-size: 20px;
-}
-
-.profile-mini span,
-.profile-preview span {
-    color: var(--muted);
-}
-
-.profile-avatar {
-    width: 76px;
-    height: 76px;
-    display: grid;
-    place-items: center;
-    border-radius: 26px;
-    background: linear-gradient(135deg, var(--primary), var(--purple));
-    font-size: 36px;
-    color: #fff;
-    box-shadow: var(--shadow);
-}
-
-.profile-preview p {
-    line-height: 1.8;
-    background: rgba(248, 250, 252, 0.75);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 14px;
-}
-
-body.dark-mode .center-card,
-body.dark-mode .profile-preview p {
-    background: rgba(30, 41, 59, 0.86);
-}
-
-body.dark-mode .mini-tags span {
-    background: rgba(37, 99, 235, 0.18);
+body.dark-mode .user-mini-panel,
+body.dark-mode .auth-card {
+    background: rgba(15, 23, 42, 0.86);
 }
 
 @media (max-width: 980px) {
-    .center-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
+    .user-mini-panel {
+        display: none;
     }
 
-    .center-card {
-        min-height: 170px;
-        padding: 15px;
-        border-radius: 22px;
+    .auth-card {
+        padding: 20px;
+        border-radius: 24px;
     }
 
-    .center-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 15px;
-        font-size: 22px;
-    }
-
-    .center-card strong {
-        font-size: 16px;
-    }
-
-    .v22-actions {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-@media (max-width: 520px) {
-    .center-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .v22-actions {
-        grid-template-columns: repeat(2, 1fr);
+    .auth-card h2 {
+        font-size: 25px;
     }
 }

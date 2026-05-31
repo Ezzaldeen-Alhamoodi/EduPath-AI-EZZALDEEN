@@ -1,0 +1,29 @@
+\
+{% extends "base.html" %}
+{% block page_title %}Login{% endblock %}
+{% block content %}
+
+<section class="auth-shell">
+    <div class="auth-card">
+        <div class="auth-brand">🧠 EduPath AI EZZALDEEN</div>
+        <h2>Welcome back</h2>
+        <p class="muted">Log in to access your private goals, tasks, scholarship plans, and AI coaching.</p>
+
+        <form method="POST" class="form">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="you@example.com" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Your password" required>
+
+            <button type="submit">🔐 Login</button>
+        </form>
+
+        <p class="auth-link">
+            New to EduPath AI?
+            <a href="{{ url_for('register') }}">Create account</a>
+        </p>
+    </div>
+</section>
+
+{% endblock %}
