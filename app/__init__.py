@@ -36,12 +36,26 @@ class User(UserMixin, db.Model):
     languages = db.Column(db.String(255), nullable=True)
     email_verified = db.Column(db.Boolean, nullable=False, default=False)
     verification_sent_at = db.Column(db.DateTime, nullable=True)
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
+    ai_enabled = db.Column(db.Boolean, nullable=False, default=True)
+    ai_daily_limit = db.Column(db.Integer, nullable=False, default=1)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     goals = db.relationship("Goal", backref="owner", lazy=True)
     tasks = db.relationship("StudyTask", backref="owner", lazy=True)
     interview_answers = db.relationship("InterviewAnswer", backref="owner", lazy=True)
     mistakes = db.relationship("MistakeLog", backref="owner", lazy=True)
+
+class AIUsage(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, index=True)
+    tool_name = db.Column(db.String(80), nullable=False, default="general")
+    usage_date = db.Column(db.String(20), nullable=False, index=True)
+    count = db.Column(db.Integer, nullable=False, default=0)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    user = db.relationship("User", backref="ai_usage_records")
+
 
 class Goal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -221,6 +235,51 @@ def is_valid_email(value):
     return True
 
 
+
+def user_is_admin(user):
+    if not user or not getattr(user, "is_authenticated", False):
+        return False
+    admin_emails = [email.strip().lower() for email in os.environ.get("ADMIN_EMAILS", "geni49607@gmail.com").split(",") if email.strip()]
+    return bool(getattr(user, "is_admin", False) or getattr(user, "email", "").lower() in admin_emails)
+
+def admin_required(view_func):
+    from functools import wraps
+
+    @wraps(view_func)
+    def wrapper(*args, **kwargs):
+        if not current_user.is_authenticated or not user_is_admin(current_user):
+            flash("Admin access only.", "error")
+            return redirect(url_for("index"))
+        return view_func(*args, **kwargs)
+
+    return wrapper
+
+def ai_usage_status(user, tool_name="general"):
+    if user_is_admin(user):
+        return {"allowed": True, "used": 0, "limit": "unlimited"}
+
+    if not getattr(user, "ai_enabled", True):
+        return {"allowed": False, "used": 0, "limit": 0}
+
+    today_value = str(date.today())
+    record = AIUsage.query.filter_by(user_id=user.id, tool_name=tool_name, usage_date=today_value).first()
+    used = record.count if record else 0
+    limit = getattr(user, "ai_daily_limit", 1) or 1
+    return {"allowed": used < limit, "used": used, "limit": limit}
+
+def record_ai_usage(user, tool_name="general"):
+    if user_is_admin(user):
+        return
+
+    today_value = str(date.today())
+    record = AIUsage.query.filter_by(user_id=user.id, tool_name=tool_name, usage_date=today_value).first()
+    if not record:
+        record = AIUsage(user_id=user.id, tool_name=tool_name, usage_date=today_value, count=0)
+        db.session.add(record)
+    record.count += 1
+    db.session.commit()
+
+
 def create_app():
     app = Flask(__name__)
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
@@ -237,11 +296,15 @@ def create_app():
     app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME", "")
     app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD", "")
     app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("MAIL_DEFAULT_SENDER", app.config["MAIL_USERNAME"] or "noreply@edupath.ai")
-    app.config["REQUIRE_EMAIL_VERIFICATION"] = os.environ.get("REQUIRE_EMAIL_VERIFICATION", "true").lower() == "true"
 
 
     db.init_app(app)
     login_manager.init_app(app)
+
+    app.config["REQUIRE_EMAIL_VERIFICATION"] = os.environ.get("REQUIRE_EMAIL_VERIFICATION", "false").lower() == "true"
+    app.config["ADMIN_EMAILS"] = [email.strip().lower() for email in os.environ.get("ADMIN_EMAILS", "geni49607@gmail.com").split(",") if email.strip()]
+    app.config["DEFAULT_AI_DAILY_LIMIT"] = int(os.environ.get("DEFAULT_AI_DAILY_LIMIT", "1"))
+
     mail.init_app(app)
     login_manager.login_view = "login"
     login_manager.login_message = "Please log in to access EduPath AI."
@@ -296,6 +359,10 @@ def create_app():
                 major=major,
                 target_degree=target_degree,
                 languages=languages,
+                is_admin=email in app.config["ADMIN_EMAILS"],
+                ai_enabled=True,
+                ai_daily_limit=app.config["DEFAULT_AI_DAILY_LIMIT"],
+                email_verified=True,
             )
             db.session.add(user)
             db.session.commit()
@@ -319,9 +386,9 @@ def create_app():
                 flash("Invalid email or password.", "error")
                 return redirect(url_for("login"))
 
-            if app.config.get("REQUIRE_EMAIL_VERIFICATION", True) and not user.email_verified:
-                flash("Your email is not verified yet. Please verify it before logging in.", "error")
-                return redirect(url_for("resend_verification_public"))
+            if email in app.config["ADMIN_EMAILS"] and not user.is_admin:
+                user.is_admin = True
+                db.session.commit()
 
             login_user(user)
             flash("Welcome back.", "success")
@@ -467,11 +534,77 @@ def create_app():
 
 
 
+
+    @app.route("/admin")
+    @login_required
+    @admin_required
+    def admin_dashboard():
+        users = User.query.order_by(User.id.desc()).all()
+        total_users = User.query.count()
+        total_goals = Goal.query.count()
+        total_tasks = StudyTask.query.count()
+        completed_tasks = StudyTask.query.filter_by(status="done").count()
+        today_value = str(date.today())
+        ai_today = db.session.query(db.func.sum(AIUsage.count)).filter_by(usage_date=today_value).scalar() or 0
+
+        return render_template(
+            "admin.html",
+            users=users,
+            total_users=total_users,
+            total_goals=total_goals,
+            total_tasks=total_tasks,
+            completed_tasks=completed_tasks,
+            ai_today=ai_today,
+        )
+
+    @app.route("/admin/user/<int:user_id>/update", methods=["POST"])
+    @login_required
+    @admin_required
+    def admin_update_user(user_id):
+        user = User.query.get_or_404(user_id)
+
+        # Do not allow accidentally removing your own admin access by mistake.
+        if user.id != current_user.id:
+            user.is_admin = request.form.get("is_admin") == "on"
+
+        user.ai_enabled = request.form.get("ai_enabled") == "on"
+        user.ai_daily_limit = int(request.form.get("ai_daily_limit", 1) or 1)
+        user.name = request.form.get("name", user.name).strip() or user.name
+        db.session.commit()
+        flash("User updated.", "success")
+        return redirect(url_for("admin_dashboard"))
+
+    @app.route("/admin/user/<int:user_id>/delete", methods=["POST"])
+    @login_required
+    @admin_required
+    def admin_delete_user(user_id):
+        user = User.query.get_or_404(user_id)
+        if user.id == current_user.id:
+            flash("You cannot delete your own admin account.", "error")
+            return redirect(url_for("admin_dashboard"))
+
+        Goal.query.filter_by(user_id=user.id).delete()
+        StudyTask.query.filter_by(user_id=user.id).delete()
+        InterviewAnswer.query.filter_by(user_id=user.id).delete()
+        MistakeLog.query.filter_by(user_id=user.id).delete()
+        AIUsage.query.filter_by(user_id=user.id).delete()
+        db.session.delete(user)
+        db.session.commit()
+        flash("User and related data deleted.", "success")
+        return redirect(url_for("admin_dashboard"))
+
+
     @app.route("/coach")
     @login_required
     def coach():
         recent_answers = InterviewAnswer.query.filter_by(user_id=current_user.id).order_by(InterviewAnswer.id.desc()).limit(5).all()
-        return render_template("coach.html", recent_answers=recent_answers)
+        return render_template(
+            "coach.html",
+            recent_answers=recent_answers,
+            english_ai=ai_usage_status(current_user, "english"),
+            scholarship_ai=ai_usage_status(current_user, "scholarship"),
+            code_ai=ai_usage_status(current_user, "code"),
+        )
 
     @app.route("/")
     @login_required
@@ -757,7 +890,14 @@ Evaluate the answer. Return valid JSON only:
   "improved_answer": "..."
 }}
 """
+                status = ai_usage_status(current_user, "scholarship")
+                if not status["allowed"]:
+                    flash("Your daily AI Coach limit has been reached. You can still save your answer.", "error")
+                    db.session.commit()
+                    return redirect(url_for("answer_question", answer_id=answer_id))
+
                 ai_text = call_ai(ai_client, prompt, max_tokens=800, temperature=0.3)
+                record_ai_usage(current_user, "scholarship")
                 result = parse_json_object(ai_text)
                 item.score = result.get("score", 0)
                 item.feedback = json.dumps(result, ensure_ascii=False, indent=2)
@@ -804,7 +944,13 @@ Return valid JSON only:
   "useful_vocabulary": ["..."]
 }}
 """
+            status = ai_usage_status(current_user, "english")
+            if not status["allowed"]:
+                flash("Your daily English Coach limit has been reached. You can still use goals and tasks.", "error")
+                return redirect(url_for("english"))
+
             ai_text = call_ai(ai_client, prompt, max_tokens=700, temperature=0.4)
+            record_ai_usage(current_user, "english")
             result = parse_json_object(ai_text)
 
         return render_template("english.html", result=result)
@@ -935,7 +1081,10 @@ def ensure_database_columns():
             additions = {
                 "user": {
                     "email_verified": "ALTER TABLE user ADD COLUMN email_verified BOOLEAN DEFAULT 0",
-                    "verification_sent_at": "ALTER TABLE user ADD COLUMN verification_sent_at DATETIME"
+                    "verification_sent_at": "ALTER TABLE user ADD COLUMN verification_sent_at DATETIME",
+                    "is_admin": "ALTER TABLE user ADD COLUMN is_admin BOOLEAN DEFAULT 0",
+                    "ai_enabled": "ALTER TABLE user ADD COLUMN ai_enabled BOOLEAN DEFAULT 1",
+                    "ai_daily_limit": "ALTER TABLE user ADD COLUMN ai_daily_limit INTEGER DEFAULT 1"
                 },
                 "goal": {
                     "user_id": "ALTER TABLE goal ADD COLUMN user_id INTEGER"
@@ -962,6 +1111,16 @@ def ensure_database_columns():
                     if column not in existing:
                         connection.exec_driver_sql(sql)
 
+            connection.exec_driver_sql("""
+                CREATE TABLE IF NOT EXISTS ai_usage (
+                    id INTEGER PRIMARY KEY,
+                    user_id INTEGER NOT NULL,
+                    tool_name VARCHAR(80) NOT NULL DEFAULT 'general',
+                    usage_date VARCHAR(20) NOT NULL,
+                    count INTEGER NOT NULL DEFAULT 0,
+                    created_at DATETIME
+                )
+            """)
             connection.commit()
     except Exception:
         logger.exception("Database column migration failed")

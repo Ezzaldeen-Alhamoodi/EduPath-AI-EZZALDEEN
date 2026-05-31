@@ -213,3 +213,21 @@ Set these in Render:
 - Users must verify their email before logging in when `REQUIRE_EMAIL_VERIFICATION=true`.
 - Added public resend verification page.
 - If someone tries to register with someone else's email, they cannot access the account unless they own that email inbox.
+
+
+## EduPath AI v3.3
+
+### Added
+- Admin Panel.
+- Multiple admin emails through `ADMIN_EMAILS`.
+- AI Coach access control per user.
+- Daily AI limit per user.
+- Admins have unlimited AI use.
+- Goals and tasks remain unlimited for all users.
+- Email verification is disabled by default because SMTP may not be configured.
+- Dashboard version updated to v3.3.
+
+### Environment Variables
+- ADMIN_EMAILS=geni49607@gmail.com,another@example.com
+- DEFAULT_AI_DAILY_LIMIT=1
+- REQUIRE_EMAIL_VERIFICATION=false

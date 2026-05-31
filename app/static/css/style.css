@@ -1264,3 +1264,109 @@ input[name="email"] {
     text-align: left;
     unicode-bidi: plaintext;
 }
+
+
+
+/* EduPath AI v3.3 Admin + AI Controls */
+.admin-hero {
+    background: linear-gradient(135deg, #111827, #2563eb);
+}
+
+.admin-users {
+    display: grid;
+    gap: 16px;
+}
+
+.admin-user-card {
+    display: grid;
+    grid-template-columns: 1.2fr 1.6fr auto;
+    gap: 16px;
+    align-items: start;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 16px;
+    background: rgba(248, 250, 252, 0.72);
+}
+
+.admin-user-card strong,
+.admin-user-card span {
+    display: block;
+}
+
+.admin-user-card span {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.admin-user-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.admin-user-form button {
+    grid-column: span 2;
+}
+
+.checkbox-row {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+.checkbox-row input {
+    width: auto;
+    min-height: auto;
+}
+
+.admin-delete-form {
+    align-self: end;
+}
+
+.ai-status-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.ai-status-grid div {
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 14px;
+    background: rgba(248, 250, 252, 0.75);
+}
+
+.ai-status-grid strong,
+.ai-status-grid span {
+    display: block;
+}
+
+.ai-status-grid span {
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+body.dark-mode .admin-user-card,
+body.dark-mode .ai-status-grid div {
+    background: rgba(30, 41, 59, 0.86);
+}
+
+@media (max-width: 900px) {
+    .admin-user-card {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-user-form {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-user-form button {
+        grid-column: span 1;
+    }
+
+    .ai-status-grid {
+        grid-template-columns: 1fr;
+    }
+}

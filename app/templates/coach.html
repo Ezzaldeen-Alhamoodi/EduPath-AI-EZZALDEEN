@@ -12,6 +12,16 @@
     <a class="button light" href="{{ url_for('tasks') }}">✅ Add Practice Task</a>
 </section>
 
+<section class="card ai-status-card">
+    <h2>🧠 AI Access Status</h2>
+    <div class="ai-status-grid">
+        <div><strong>English Coach</strong><span>{{ english_ai.used }}/{{ english_ai.limit }} today</span></div>
+        <div><strong>Scholarship Coach</strong><span>{{ scholarship_ai.used }}/{{ scholarship_ai.limit }} today</span></div>
+        <div><strong>Code Coach</strong><span>{{ code_ai.used }}/{{ code_ai.limit }} today</span></div>
+    </div>
+    <p class="muted">Goals and tasks remain unlimited. AI usage may be limited by the platform admin.</p>
+</section>
+
 <section class="coach-grid">
     <a class="coach-card english-card" href="{{ url_for('english') }}">
         <div class="coach-icon">🇬🇧</div>

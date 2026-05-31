@@ -1,0 +1,71 @@
+\
+{% extends "base.html" %}
+{% block page_title %}Admin Panel{% endblock %}
+{% block content %}
+
+<section class="hero compact admin-hero">
+    <div>
+        <span class="tag">⚙️ EduPath AI v3.3</span>
+        <h2>Admin Panel</h2>
+        <p>Control users, AI Coach access, daily AI limits, and platform statistics.</p>
+    </div>
+    <a class="button light" href="{{ url_for('profile') }}">👤 My Profile</a>
+</section>
+
+<section class="stats-grid">
+    <div class="stat-card blue"><span>👥</span><h3>Users</h3><p>{{ total_users }}</p></div>
+    <div class="stat-card purple"><span>🎯</span><h3>Goals</h3><p>{{ total_goals }}</p></div>
+    <div class="stat-card orange"><span>✅</span><h3>Tasks</h3><p>{{ total_tasks }}</p></div>
+    <div class="stat-card green"><span>🧠</span><h3>AI Uses Today</h3><p>{{ ai_today }}</p></div>
+</section>
+
+<section class="card">
+    <h2>👥 Users & AI Access</h2>
+    <p class="muted">Goals and tasks are free for everyone. AI Coaches can be limited per user to protect your OpenRouter quota.</p>
+
+    <div class="admin-users">
+        {% for user in users %}
+            <div class="admin-user-card">
+                <div>
+                    <strong>{{ user.name }}</strong>
+                    <span>{{ user.email }}</span>
+                    <span>
+                        Goals: {{ user.goals|length }} ·
+                        Tasks: {{ user.tasks|length }} ·
+                        Admin: {{ "Yes" if user.is_admin else "No" }}
+                    </span>
+                </div>
+
+                <form method="POST" action="{{ url_for('admin_update_user', user_id=user.id) }}" class="admin-user-form">
+                    <label>Name</label>
+                    <input name="name" value="{{ user.name }}">
+
+                    <label class="checkbox-row">
+                        <input type="checkbox" name="ai_enabled" {% if user.ai_enabled %}checked{% endif %}>
+                        <span>Allow AI Coach</span>
+                    </label>
+
+                    <label>Daily AI limit</label>
+                    <input type="number" name="ai_daily_limit" min="0" value="{{ user.ai_daily_limit }}">
+
+                    <label class="checkbox-row">
+                        <input type="checkbox" name="is_admin" {% if user.is_admin %}checked{% endif %} {% if user.id == current_user.id %}disabled{% endif %}>
+                        <span>Admin</span>
+                    </label>
+
+                    <button type="submit">💾 Save</button>
+                </form>
+
+                {% if user.id != current_user.id %}
+                    <form method="POST" action="{{ url_for('admin_delete_user', user_id=user.id) }}" onsubmit="return confirm('Delete this user and all related data?')" class="admin-delete-form">
+                        <button type="submit" class="danger">🗑 Delete User</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% else %}
+            <p class="muted">No users found.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

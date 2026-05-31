@@ -29,6 +29,7 @@
                     <span>{{ current_user.email }}</span>
                 </div>
                 <a class="mini-link" href="{{ url_for('profile') }}">Profile</a>
+                {% if current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS %}<a class="mini-link" href="{{ url_for('admin_dashboard') }}">Admin</a>{% endif %}
                 <a class="mini-link logout" href="{{ url_for('logout') }}">Logout</a>
             {% else %}
                 <a class="mini-link" href="{{ url_for('login') }}">Login</a>
@@ -46,6 +47,7 @@
             <a href="{{ url_for('english') }}">✍️ English Coach</a>
             <a href="{{ url_for('programming') }}">💻 Programming Coach</a>
             {% if current_user.is_authenticated %}<a href="{{ url_for('profile') }}">👤 Profile</a>{% endif %}
+            {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}<a href="{{ url_for('admin_dashboard') }}">⚙️ Admin</a>{% endif %}
         </nav>
 
         <button class="notify-btn" id="enableNotifications">🔔 Enable Reminders</button>
