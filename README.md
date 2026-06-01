@@ -324,3 +324,17 @@ This build actually updates the application files.
   - Detailed corrections with explanation and improvement guidance.
   - Writing tips for faster and stronger writing.
   - Topic vocabulary and phrases with meanings and examples.
+
+
+## v4.2 UI Final Polish
+
+- Unified visual system: blue-focused palette, softer cards, consistent radii, cleaner shadows.
+- AI Coach is now the only dashboard/sidebar coach entry.
+- AI Coach page contains three organized options:
+  - English Coach
+  - Scholarship Coach
+  - Code Coach
+- Removed separate English/Scholarship/Programming coach links from the main sidebar.
+- Improved mobile bottom navigation.
+- Version number appears only at the bottom of Dashboard.
+- Updated icon style to cleaner, more modern symbols.

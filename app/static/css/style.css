@@ -1667,3 +1667,256 @@ body.dark-mode .vocab-card {
         grid-template-columns: 1fr;
     }
 }
+
+
+
+/* EduPath AI v4.2 UI Final Polish */
+:root {
+    --primary: #2563eb;
+    --primary-soft: rgba(37, 99, 235, 0.10);
+    --primary-border: rgba(37, 99, 235, 0.22);
+    --accent: #06b6d4;
+    --ink: #0f172a;
+    --radius-xl: 28px;
+    --radius-lg: 22px;
+    --shadow-soft: 0 16px 38px rgba(15, 23, 42, 0.08);
+}
+
+body {
+    letter-spacing: -0.01em;
+}
+
+.sidebar {
+    border-right: 1px solid rgba(148, 163, 184, 0.18);
+    box-shadow: 8px 0 30px rgba(15, 23, 42, 0.04);
+}
+
+.brand-block .logo,
+.logo {
+    background: linear-gradient(135deg, #2563eb, #06b6d4) !important;
+    color: white !important;
+    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.25);
+}
+
+.brand {
+    letter-spacing: -0.04em;
+}
+
+.main-nav a,
+.sidebar nav a {
+    border-radius: 16px;
+    padding: 12px 14px;
+    font-weight: 850;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.18s ease;
+}
+
+.main-nav a:hover,
+.sidebar nav a:hover {
+    transform: translateX(3px);
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+.topbar {
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(16px);
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 22px;
+}
+
+.topbar h1 {
+    font-size: clamp(25px, 3vw, 38px);
+    letter-spacing: -0.05em;
+}
+
+.pill,
+.tag {
+    border: 1px solid var(--primary-border);
+    background: var(--primary-soft);
+    color: var(--primary);
+    border-radius: 999px;
+    font-weight: 900;
+}
+
+.card,
+.stat-card,
+.hero,
+.task-card,
+.goal-tile,
+.item {
+    border-radius: var(--radius-xl) !important;
+    border: 1px solid rgba(148, 163, 184, 0.18) !important;
+    box-shadow: var(--shadow-soft) !important;
+}
+
+.hero {
+    background: linear-gradient(135deg, #2563eb, #0ea5e9, #06b6d4) !important;
+}
+
+.hero h2 {
+    font-size: clamp(28px, 4vw, 48px);
+    letter-spacing: -0.06em;
+}
+
+.button,
+button,
+.small-button {
+    border-radius: 16px !important;
+    font-weight: 900 !important;
+}
+
+.quick-actions.final-quick-actions {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.quick-actions.final-quick-actions a {
+    min-height: 108px;
+    border-radius: 26px;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.10), rgba(6, 182, 212, 0.08));
+    border: 1px solid var(--primary-border);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 900;
+    transition: 0.18s ease;
+}
+
+.quick-actions.final-quick-actions a:hover {
+    transform: translateY(-3px);
+    border-color: rgba(37, 99, 235, 0.45);
+}
+
+.quick-actions.final-quick-actions span {
+    font-size: 34px;
+    line-height: 1;
+    color: var(--primary);
+}
+
+.quick-actions.final-quick-actions small {
+    display: block;
+    font-size: 14px;
+    color: var(--text);
+}
+
+.final-coach-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.final-coach-card {
+    min-height: 210px;
+    border-radius: 30px !important;
+    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,250,252,0.94)) !important;
+}
+
+.final-coach-card .coach-icon {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.16), rgba(6, 182, 212, 0.16)) !important;
+    color: var(--primary);
+    font-weight: 950;
+    font-size: 24px;
+}
+
+.final-status .ai-status-grid div {
+    border-radius: 20px;
+}
+
+.app-version-footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin: 28px 0 8px;
+    opacity: 0.75;
+}
+
+.mobile-bottom-nav {
+    border-top: 1px solid rgba(148, 163, 184, 0.22);
+    backdrop-filter: blur(18px);
+    background: rgba(255, 255, 255, 0.86) !important;
+}
+
+.mobile-bottom-nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 900;
+}
+
+.mobile-bottom-nav a span {
+    color: var(--primary);
+    font-size: 22px;
+    line-height: 1;
+}
+
+body.dark-mode .topbar,
+body.dark-mode .final-coach-card,
+body.dark-mode .quick-actions.final-quick-actions a,
+body.dark-mode .mobile-bottom-nav {
+    background: rgba(15, 23, 42, 0.88) !important;
+}
+
+body.dark-mode .quick-actions.final-quick-actions small {
+    color: #e5e7eb;
+}
+
+@media (max-width: 1100px) {
+    .final-coach-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .main {
+        padding-bottom: 92px;
+    }
+
+    .topbar {
+        border-radius: 22px;
+        margin: 10px 10px 18px;
+    }
+
+    .hero,
+    .card {
+        border-radius: 24px !important;
+    }
+
+    .quick-actions.final-quick-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .quick-actions.final-quick-actions a {
+        min-height: 92px;
+    }
+
+    .quick-actions.final-quick-actions span {
+        font-size: 28px;
+    }
+
+    .mobile-bottom-nav {
+        left: 10px !important;
+        right: 10px !important;
+        bottom: 10px !important;
+        border-radius: 24px !important;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+        padding: 8px 6px !important;
+    }
+
+    .mobile-bottom-nav a small {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 380px) {
+    .mobile-bottom-nav a small {
+        display: none;
+    }
+
+    .quick-actions.final-quick-actions {
+        grid-template-columns: 1fr;
+    }
+}

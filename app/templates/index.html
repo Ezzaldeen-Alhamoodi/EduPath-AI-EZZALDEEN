@@ -1,15 +1,17 @@
 {% extends "base.html" %}
-{% block page_title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard<div class="app-version-footer">EduPath AI EZZALDEEN · v4.2 UI Final Polish</div>
+
+{% endblock %}
 {% block content %}
 
 <section class="hero v21-hero">
     <div>
-        <span class="tag">EduPath AI v4.1</span>
+        <span class="tag">Smart Learning Workspace</span>
         <h2>Smart goals, exam-aware tasks, and focused progress for your learning path.</h2>
         <p>Track your goals, manage tasks, practice languages, prepare scholarships, and improve coding with AI support.</p>
         <div class="hero-actions">
-            <a class="button light" href="{{ url_for('goals') }}">🎯 New Goal</a>
-            <a class="button ghost" href="{{ url_for('tasks') }}">✅ Add Task</a>
+            <a class="button light" href="{{ url_for('goals') }}">◎ New Goal</a>
+            <a class="button ghost" href="{{ url_for('tasks') }}">▣ Add Task</a>
         </div>
     </div>
     <div class="hero-card">
@@ -20,7 +22,7 @@
 
 
 <section class="card current-focus-v41">
-    <h2>🔥 Current Focus v4.1</h2>
+    <h2>Current Focus</h2>
     <p class="muted">Your most important goals based on progress and recent planning.</p>
     <div class="focus-grid-v41">
         {% for goal in goals[:3] %}
@@ -39,16 +41,17 @@
 </section>
 
 
-<section class="quick-actions">
-    <a href="{{ url_for('languages') }}">🇬🇧<span>Language</span></a>
-    <a href="{{ url_for('coach') }}">🧠<span>Coach</span></a>
-    <a href="{{ url_for('programming') }}">💻<span>Code</span></a>
+<section class="quick-actions final-quick-actions">
+    <a href="{{ url_for('goals') }}"><span>◎</span><small>Goals</small></a>
+    <a href="{{ url_for('tasks') }}"><span>▣</span><small>Tasks</small></a>
+    <a href="{{ url_for('coach') }}"><span>✦</span><small>AI Coach</small></a>
+    <a href="{{ url_for('languages') }}"><span>◌</span><small>Languages</small></a>
 </section>
 
 <section class="card focus-goals">
     <div class="section-title-row">
         <div>
-            <h2>🎯 Active Goals</h2>
+            <h2>Active Goals</h2>
             <p class="muted">Keep your long-term targets visible. Your tasks are the daily steps.</p>
         </div>
         <a class="small-button" href="{{ url_for('goals') }}">Manage</a>
@@ -90,15 +93,15 @@
 </section>
 
 <section class="stats-grid">
-    <div class="stat-card blue"><span>🎯</span><h3>Goals</h3><p>{{ total_goals }}</p></div>
-    <div class="stat-card green"><span>✅</span><h3>Completed</h3><p>{{ completed_tasks }}</p></div>
-    <div class="stat-card orange"><span>⏳</span><h3>Pending</h3><p>{{ pending_tasks }}</p></div>
-    <div class="stat-card purple"><span>📚</span><h3>Total Tasks</h3><p>{{ total_tasks }}</p></div>
+    <div class="stat-card blue"><span>◎</span><h3>Goals</h3><p>{{ total_goals }}</p></div>
+    <div class="stat-card green"><span>✓</span><h3>Completed</h3><p>{{ completed_tasks }}</p></div>
+    <div class="stat-card orange"><span>◷</span><h3>Pending</h3><p>{{ pending_tasks }}</p></div>
+    <div class="stat-card purple"><span>▣</span><h3>Total Tasks</h3><p>{{ total_tasks }}</p></div>
 </section>
 
 <section class="grid-2">
     <div class="card">
-        <h2>🧠 Weakness Detection</h2>
+        <h2>Learning Insights</h2>
         {% if weak_skills %}
             {% for skill, score in weak_skills %}
                 <div class="weakness">
@@ -112,7 +115,7 @@
     </div>
 
     <div class="card">
-        <h2>✅ Recent Tasks</h2>
+        <h2>Recent Tasks</h2>
         {% for task in tasks %}
             <div class="task-mini">
                 <div>
@@ -126,5 +129,7 @@
         {% endfor %}
     </div>
 </section>
+
+<div class="app-version-footer">EduPath AI EZZALDEEN · v4.2 UI Final Polish</div>
 
 {% endblock %}

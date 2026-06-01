@@ -3,63 +3,52 @@
 {% block page_title %}AI Coach{% endblock %}
 {% block content %}
 
-<section class="hero compact coach-hero">
+<section class="hero compact coach-hero final-hero">
     <div>
-        <span class="tag">🧠 AI Coach Center</span>
-        <h2>One place for English improvement and scholarship preparation.</h2>
-        <p>Choose the coach you need today: improve your English answers, or prepare for scholarship interviews and applications.</p>
+        <span class="tag">✦ AI Coach Hub</span>
+        <h2>Choose the AI coach you need today.</h2>
+        <p>One organized place for English, scholarship preparation, and programming support.</p>
     </div>
-    <a class="button light" href="{{ url_for('tasks') }}">✅ Add Practice Task</a>
+    <a class="button light" href="{{ url_for('tasks') }}">▣ Add Practice Task</a>
 </section>
 
-<section class="card ai-status-card">
-    <h2>🧠 AI Access Status</h2>
+<section class="card ai-status-card final-status">
+    <h2>AI Access Status</h2>
     <div class="ai-status-grid">
         <div><strong>English Coach</strong><span>{{ english_ai.used }}/{{ english_ai.limit }} today</span></div>
         <div><strong>Scholarship Coach</strong><span>{{ scholarship_ai.used }}/{{ scholarship_ai.limit }} today</span></div>
         <div><strong>Code Coach</strong><span>{{ code_ai.used }}/{{ code_ai.limit }} today</span></div>
     </div>
-    <p class="muted">Goals and tasks remain unlimited. AI usage may be limited by the platform admin.</p>
+    <p class="muted">Goals and tasks stay unlimited. AI tools may be limited by the platform admin.</p>
 </section>
 
-<section class="coach-grid">
-    <a class="coach-card english-card" href="{{ url_for('english') }}">
-        <div class="coach-icon">🇬🇧</div>
+<section class="coach-grid final-coach-grid">
+    <a class="coach-card final-coach-card" href="{{ url_for('english') }}">
+        <div class="coach-icon">Aa</div>
         <div>
             <h2>English Coach</h2>
-            <p>Improve writing, interview answers, grammar, vocabulary, and natural English style.</p>
+            <p>Improve short answers, practice essays, correct mistakes, and build vocabulary.</p>
             <span>Open English Coach →</span>
         </div>
     </a>
 
-    <a class="coach-card scholarship-card" href="{{ url_for('interview') }}">
-        <div class="coach-icon">🎤</div>
+    <a class="coach-card final-coach-card" href="{{ url_for('interview') }}">
+        <div class="coach-icon">🎓</div>
         <div>
             <h2>Scholarship Coach</h2>
-            <p>Generate interview questions, evaluate answers, and prepare stronger scholarship responses.</p>
+            <p>Generate interview questions, evaluate answers, and improve scholarship responses.</p>
             <span>Open Scholarship Coach →</span>
         </div>
     </a>
-</section>
 
-<section class="grid-2">
-    <div class="card">
-        <h2>🇬🇧 English Practice Ideas</h2>
-        <div class="mini-list">
-            <a href="{{ url_for('english') }}">✍️ Rewrite my answer naturally</a>
-            <a href="{{ url_for('english') }}">🧠 Explain my English mistakes</a>
-            <a href="{{ url_for('tasks') }}">📅 Add daily English practice task</a>
+    <a class="coach-card final-coach-card" href="{{ url_for('programming') }}">
+        <div class="coach-icon">⌘</div>
+        <div>
+            <h2>Code Coach</h2>
+            <p>Track mistakes, review programming weaknesses, and strengthen practical coding skills.</p>
+            <span>Open Code Coach →</span>
         </div>
-    </div>
-
-    <div class="card">
-        <h2>🎤 Scholarship Practice Ideas</h2>
-        <div class="mini-list">
-            <a href="{{ url_for('interview') }}">🎓 Generate interview questions</a>
-            <a href="{{ url_for('interview') }}">📊 Evaluate my answer</a>
-            <a href="{{ url_for('tasks') }}">📅 Add scholarship preparation task</a>
-        </div>
-    </div>
+    </a>
 </section>
 
 <section class="card">
