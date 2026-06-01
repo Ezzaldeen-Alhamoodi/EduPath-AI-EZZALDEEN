@@ -266,14 +266,8 @@ const SMART_TASK_DATA = {
       "SAT": ["Reading and Writing","Mathematics"],
       "Other": ["Study","Practice","Mock Test","Review","Other"]
     },
-    detail: {
-      "Listening": ["Everyday Conversation","Everyday Monologue","Educational Discussion","Academic Lecture","Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk","Listen and Type","Interactive Listening","Other"],
-      "Reading": ["Academic Reading","General Training Reading","Complete the Words","Read in Daily Life","Read an Academic Passage","Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","Other"],
-      "Writing": ["Task 1 Academic","Task 2 Academic","Task 1 General","Task 2 General","Build a Sentence","Write an Email","Write for an Academic Discussion","Write About the Photo","Writing Sample","Interactive Writing","Other"],
-      "Speaking": ["Part 1","Part 2","Part 3","Listen and Repeat","Take an Interview","Speak About the Photo","Read Then Speak","Speaking Sample","Interactive Speaking","Other"],
-      "Other": ["General Topic","Other"]
-    },
-    training: ["Practice","Timed Practice","Mock Test","Review Mistakes","Note Taking","Draft Writing","Record Response","Vocabulary Focus","Comprehension Focus","Other"]
+    detail: {"Other": ["General Topic","Other"]},
+    training: ["Practice","Timed Practice","Mock Test","Review Mistakes","Other"]
   },
 
   "Daily Life": {
@@ -359,6 +353,69 @@ function renderTaskTypeCards() {
     });
 }
 
+
+function getOfficialExamDetails(exam, skill) {
+    const data = {
+        "IELTS": {
+            "Listening": ["Everyday Conversation","Everyday Monologue","Educational Discussion","Academic Lecture"],
+            "Reading": ["Academic Reading","General Training Reading"],
+            "Writing": ["Task 1 Academic","Task 2 Academic","Task 1 General","Task 2 General"],
+            "Speaking": ["Part 1","Part 2","Part 3"]
+        },
+        "TOEFL": {
+            "Reading": ["Complete the Words","Read in Daily Life","Read an Academic Passage"],
+            "Listening": ["Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk"],
+            "Writing": ["Build a Sentence","Write an Email","Write for an Academic Discussion"],
+            "Speaking": ["Listen and Repeat","Take an Interview"]
+        },
+        "Duolingo English Test": {
+            "Reading": ["Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading"],
+            "Listening": ["Listen and Type","Interactive Listening"],
+            "Writing": ["Write About the Photo","Writing Sample","Interactive Writing"],
+            "Speaking": ["Speak About the Photo","Read Then Speak","Speaking Sample","Interactive Speaking"]
+        },
+        "HSK": {
+            "Listening": ["Dialogue","Conversation","Announcement","Lecture"],
+            "Reading": ["Vocabulary Recognition","Sentence Completion","Passage Understanding"],
+            "Writing": ["Character Writing","Sentence Formation","Essay Writing"],
+            "Vocabulary": ["HSK Word List","Character Review","Pinyin Practice"],
+            "Characters": ["Stroke Order","Recognition","Writing Practice"]
+        }
+    };
+    return data[exam] && data[exam][skill] ? data[exam][skill] : null;
+}
+
+function getOfficialExamTraining(exam, skill) {
+    const data = {
+        "IELTS": {
+            "Listening": ["Multiple Choice","Matching","Plan Labelling","Map Labelling","Diagram Labelling","Form Completion","Note Completion","Table Completion","Flow Chart Completion","Summary Completion","Sentence Completion","Timed Practice","Review Mistakes"],
+            "Reading": ["Gap Filling","Table Completion","Matching Headings","Diagram Matching","Chart Matching","Sentence Completion","Short Answer Questions","Multiple Choice","Skimming","Scanning","Timed Practice","Review Mistakes"],
+            "Writing": ["Draft Response","Timed Writing","Task Analysis","Vocabulary Upgrade","Grammar Accuracy","Feedback Review","Rewrite Response"],
+            "Speaking": ["Mock Interview","Fluency Practice","Pronunciation Practice","Vocabulary Practice","Record Response","Review Mistakes"]
+        },
+        "TOEFL": {
+            "Reading": ["Practice","Timed Practice","Review Mistakes","Vocabulary Focus","Comprehension Focus","Mock Reading"],
+            "Listening": ["Practice","Note Taking","Listening for Details","Listening for Main Idea","Timed Practice","Review Mistakes"],
+            "Writing": ["Draft Writing","Timed Writing","Grammar Review","Feedback Review","Rewrite Response","Practice"],
+            "Speaking": ["Pronunciation Practice","Fluency Practice","Record Response","Shadowing","Mock Speaking","Review Mistakes"]
+        },
+        "Duolingo English Test": {
+            "Reading": ["Practice","Timed Practice","Accuracy Review","Vocabulary Review","Mistake Review"],
+            "Listening": ["Listen and Type Practice","Interactive Listening Practice","Dictation","Review Mistakes"],
+            "Writing": ["Timed Writing","Photo Description","Sample Writing","Interactive Writing","Feedback Review"],
+            "Speaking": ["Photo Speaking","Read Then Speak","Interactive Speaking","Record Response","Fluency Practice"]
+        },
+        "HSK": {
+            "Listening": ["Listening Practice","Dictation","Main Idea","Detail Review","Mock Test"],
+            "Reading": ["Reading Practice","Vocabulary Recognition","Sentence Completion","Passage Review"],
+            "Writing": ["Character Writing","Sentence Formation","Essay Practice","Mistake Review"],
+            "Vocabulary": ["Word Review","Flashcards","Spaced Repetition","Mock Vocabulary"],
+            "Characters": ["Stroke Practice","Recognition Practice","Writing Practice"]
+        }
+    };
+    return data[exam] && data[exam][skill] ? data[exam][skill] : null;
+}
+
 function updateSmartTaskFields() {
     const categoryInput = document.getElementById("categorySelect");
     const topicSelect = document.getElementById("topicSelect");
@@ -385,27 +442,35 @@ function updateSmartTaskFields() {
     }
 
     function refreshDetails() {
+        const selectedType = categoryInput.value || "General";
         const selectedTopic = topicSelect.value;
         const selectedSkill = skillSelect.value;
 
         let detailValues = null;
-        if (config.examDetails && config.examDetails[selectedTopic] && config.examDetails[selectedTopic][selectedSkill]) {
-            detailValues = config.examDetails[selectedTopic][selectedSkill];
+        let trainingValues = null;
+
+        // Languages section: exam is selected as Main Field, skill is Sub Field.
+        if (["IELTS","TOEFL","Duolingo English Test","HSK"].includes(selectedTopic)) {
+            detailValues = getOfficialExamDetails(selectedTopic, selectedSkill);
+            trainingValues = getOfficialExamTraining(selectedTopic, selectedSkill);
         }
+
+        // Exams & Certificates section: exam is also selected as Main Field.
+        if (!detailValues && selectedType === "Exams & Certificates" && ["IELTS","TOEFL","Duolingo English Test","HSK"].includes(selectedTopic)) {
+            detailValues = getOfficialExamDetails(selectedTopic, selectedSkill);
+            trainingValues = getOfficialExamTraining(selectedTopic, selectedSkill);
+        }
+
         if (!detailValues) {
             detailValues = (config.detail && (config.detail[selectedSkill] || config.detail[selectedTopic] || config.detail["Other"])) || ["General Topic", "Other"];
         }
 
-        const currentDetail = detailSelect.dataset.current || "";
-        fillSmartSelect(detailSelect, detailValues, selectedOrFirst(detailValues, currentDetail));
-
-        let trainingValues = null;
-        if (config.examTraining && config.examTraining[selectedTopic] && config.examTraining[selectedTopic][selectedSkill]) {
-            trainingValues = config.examTraining[selectedTopic][selectedSkill];
-        }
         if (!trainingValues) {
             trainingValues = config.training || ["Study", "Practice", "Review", "Other"];
         }
+
+        const currentDetail = detailSelect.dataset.current || "";
+        fillSmartSelect(detailSelect, detailValues, selectedOrFirst(detailValues, currentDetail));
 
         const currentTraining = trainingSelect.dataset.current || "";
         fillSmartSelect(trainingSelect, trainingValues, selectedOrFirst(trainingValues, currentTraining));

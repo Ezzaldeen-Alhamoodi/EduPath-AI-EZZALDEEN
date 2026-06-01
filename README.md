@@ -304,3 +304,10 @@ This build actually updates the application files.
 - Goal progress now detects related completed tasks by shared keywords, categories, skills, exams, and task fields.
 - Dashboard Current Focus v4.1 section.
 - Modernized emoji labels and visual progress.
+
+
+## v4.1.1 Exam Filter Fix
+
+- Fixed IELTS / TOEFL / Duolingo / HSK filtering in both Languages and Exams & Certificates.
+- Detailed Topic and Training Type now use only the selected exam and selected skill.
+- Prevented mixed IELTS/TOEFL/Duolingo task lists from appearing together.
