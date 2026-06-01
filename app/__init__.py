@@ -5,7 +5,7 @@ import logging
 import unicodedata
 from datetime import datetime, date, timedelta
 
-from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
+from flask import Flask, render_template, request, redirect, url_for, jsonify, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -283,6 +283,7 @@ def record_ai_usage(user, tool_name="general"):
 def create_app():
     app = Flask(__name__)
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
+    app.permanent_session_lifetime = timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30")))
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
         "DATABASE_URL",
         "sqlite:///edupath_ai_ezzaldeen.db",
@@ -366,7 +367,8 @@ def create_app():
             )
             db.session.add(user)
             db.session.commit()
-            login_user(user)
+            session.permanent = True
+            login_user(user, remember=True, duration=timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30"))))
             flash("Account created successfully. Welcome to EduPath AI EZZALDEEN.", "success")
             return redirect(url_for("index"))
 
@@ -383,6 +385,7 @@ def create_app():
 
             user = User.query.filter_by(email=email).first()
             if not user or not check_password_hash(user.password_hash, password):
+                logger.info("Login failed for email=%s user_exists=%s", email, bool(user))
                 flash("Invalid email or password.", "error")
                 return redirect(url_for("login"))
 
@@ -390,7 +393,8 @@ def create_app():
                 user.is_admin = True
                 db.session.commit()
 
-            login_user(user)
+            session.permanent = True
+            login_user(user, remember=True, duration=timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30"))))
             flash("Welcome back.", "success")
             return redirect(url_for("index"))
 
@@ -1068,11 +1072,19 @@ def calculate_goal_progress(goal):
 
 
 def ensure_database_columns():
-    """SQLite-safe migration for v3.0 Phase 1 authentication and user-owned data."""
+    """Safe lightweight migration for local SQLite only.
+
+    On PostgreSQL, db.create_all() creates the schema and SQLite PRAGMA must be skipped.
+    """
     try:
+        dialect = db.engine.dialect.name
+        if dialect != "sqlite":
+            logger.info("Skipping SQLite-only migration for database dialect: %s", dialect)
+            return
+
         with db.engine.connect() as connection:
             table_columns = {}
-            for table in ["goal", "study_task", "interview_answer", "mistake_log", "user"]:
+            for table in ["user", "goal", "study_task", "interview_answer", "mistake_log", "ai_usage"]:
                 try:
                     table_columns[table] = [row[1] for row in connection.exec_driver_sql(f"PRAGMA table_info({table})").fetchall()]
                 except Exception:
@@ -1084,10 +1096,10 @@ def ensure_database_columns():
                     "verification_sent_at": "ALTER TABLE user ADD COLUMN verification_sent_at DATETIME",
                     "is_admin": "ALTER TABLE user ADD COLUMN is_admin BOOLEAN DEFAULT 0",
                     "ai_enabled": "ALTER TABLE user ADD COLUMN ai_enabled BOOLEAN DEFAULT 1",
-                    "ai_daily_limit": "ALTER TABLE user ADD COLUMN ai_daily_limit INTEGER DEFAULT 1"
+                    "ai_daily_limit": "ALTER TABLE user ADD COLUMN ai_daily_limit INTEGER DEFAULT 1",
                 },
                 "goal": {
-                    "user_id": "ALTER TABLE goal ADD COLUMN user_id INTEGER"
+                    "user_id": "ALTER TABLE goal ADD COLUMN user_id INTEGER",
                 },
                 "study_task": {
                     "user_id": "ALTER TABLE study_task ADD COLUMN user_id INTEGER",
@@ -1095,14 +1107,14 @@ def ensure_database_columns():
                     "topic": "ALTER TABLE study_task ADD COLUMN topic VARCHAR(120)",
                     "custom_category": "ALTER TABLE study_task ADD COLUMN custom_category VARCHAR(120)",
                     "custom_topic": "ALTER TABLE study_task ADD COLUMN custom_topic VARCHAR(120)",
-                    "custom_skill": "ALTER TABLE study_task ADD COLUMN custom_skill VARCHAR(120)"
+                    "custom_skill": "ALTER TABLE study_task ADD COLUMN custom_skill VARCHAR(120)",
                 },
                 "interview_answer": {
-                    "user_id": "ALTER TABLE interview_answer ADD COLUMN user_id INTEGER"
+                    "user_id": "ALTER TABLE interview_answer ADD COLUMN user_id INTEGER",
                 },
                 "mistake_log": {
-                    "user_id": "ALTER TABLE mistake_log ADD COLUMN user_id INTEGER"
-                }
+                    "user_id": "ALTER TABLE mistake_log ADD COLUMN user_id INTEGER",
+                },
             }
 
             for table, cols in additions.items():

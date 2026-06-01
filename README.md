@@ -231,3 +231,21 @@ Set these in Render:
 - ADMIN_EMAILS=geni49607@gmail.com,another@example.com
 - DEFAULT_AI_DAILY_LIMIT=1
 - REQUIRE_EMAIL_VERIFICATION=false
+
+
+## v3.3.1 Login Persistence
+
+- Login now uses `remember=True`.
+- Sessions stay active for `REMEMBER_LOGIN_DAYS` days.
+- Default: 30 days.
+- Added login failure logs that show whether the user exists, without exposing passwords.
+- For stable accounts on Render, PostgreSQL via `DATABASE_URL` is still recommended.
+
+
+## v3.3.2 PostgreSQL Startup Fix
+
+- Fixed Render startup failure when using PostgreSQL.
+- SQLite-only PRAGMA migrations are now skipped on PostgreSQL.
+- PostgreSQL URL normalization is supported.
+- Replaced `psycopg2-binary` with `psycopg[binary]`.
+- Recommended Render setting: `REMEMBER_LOGIN_DAYS=365`.
