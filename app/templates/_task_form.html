@@ -1,16 +1,103 @@
 \
-<label>Task name</label><input name="title" value="{{ task.title if task else '' }}" placeholder="Example: Practice Python loops, Solve algebra problems, Write motivation paragraph">
-<label>Category</label><select name="category" id="categorySelect">{% for c in ["Language", "Programming", "Mathematics", "Scholarship", "AI", "General", "Other"] %}<option value="{{ c }}" {% if task and task.category == c %}selected{% endif %}>{{ c }}</option>{% endfor %}</select>
-<div class="conditional-field" id="customCategoryBox"><label>Custom category</label><input name="custom_category" id="customCategoryInput" value="{{ task.custom_category if task else '' }}" placeholder="Write your own category"></div>
-<label>Topic</label><select name="topic" id="topicSelect" data-current="{{ task.topic if task else '' }}"></select>
-<div class="conditional-field" id="customTopicBox"><label>Custom topic</label><input name="custom_topic" id="customTopicInput" value="{{ task.custom_topic if task else '' }}" placeholder="Write your own topic"></div>
-<label>Skill / Training type</label><select name="skill" id="skillSelect" data-current="{{ task.skill if task else '' }}"></select>
-<div class="conditional-field" id="customSkillBox"><label>Custom skill</label><input name="custom_skill" id="customSkillInput" value="{{ task.custom_skill if task else '' }}" placeholder="Write your own skill"></div>
-<label>Language optional</label><input name="language" value="{{ task.language if task else '' }}" placeholder="English, Turkish, Russian, Indonesian, Romanian...">
-<label>Practice type optional</label><select name="practice_type">{% for p in ["", "Reading", "Writing", "Listening", "Speaking", "Vocabulary", "Grammar", "Pronunciation", "Problem Solving", "Debugging", "Review"] %}<option value="{{ p }}" {% if task and task.practice_type == p %}selected{% endif %}>{{ p or "Not specific" }}</option>{% endfor %}</select>
-<label>Website / app / source</label><input name="source" value="{{ task.source if task else '' }}" placeholder="Example: YouTube, TOEFL book, Codeforces, Khan Academy, Coursera">
-<div class="form-row"><div><label>Difficulty 1-5</label><input name="difficulty" type="number" min="1" max="5" value="{{ task.difficulty if task else 1 }}"></div><div><label>Priority 1-5</label><input name="priority" type="number" min="1" max="5" value="{{ task.priority if task else 3 }}"></div></div>
-<label>Estimated minutes</label><input name="estimated_minutes" type="number" min="5" value="{{ task.estimated_minutes if task else 30 }}"><div class="form-row"><div><label>Start date</label><input name="start_date" type="date" value="{{ task.start_date if task else '' }}"></div><div><label>End / due date</label><input name="due_date" type="date" value="{{ task.due_date if task else '' }}"></div></div>
-<label>Reminder time</label><input name="reminder_time" type="time" value="{{ task.reminder_time if task else '' }}"><label>Repeat</label><select name="repeat_type">{% for r in ["daily", "weekly", "selected_days", "once"] %}<option {% if task and task.repeat_type == r %}selected{% endif %}>{{ r }}</option>{% endfor %}</select>
-<div class="repeat-days-box"><label>Repeat on specific days optional</label><small class="hint">Use this when Repeat = selected_days. Choose any days that fit your schedule.</small><div class="weekday-grid">{% set selected_days = (task.repeat_days.split(",") if task and task.repeat_days else []) %}{% for day_value, day_label in [("0", "Mon"),("1", "Tue"),("2", "Wed"),("3", "Thu"),("4", "Fri"),("5", "Sat"),("6", "Sun")] %}<label class="weekday-pill"><input type="checkbox" name="repeat_days" value="{{ day_value }}" {% if day_value in selected_days %}checked{% endif %}><span>{{ day_label }}</span></label>{% endfor %}</div></div>
-<label>Notes</label><textarea name="notes" rows="3">{{ task.notes if task else "" }}</textarea>
+<div class="smart-task-form">
+    <div class="smart-step">
+        <h3>1. Choose Task Type</h3>
+        <p class="muted">Only the fields related to your choice will appear. This keeps the task system simple and personal.</p>
+        <div class="task-type-grid" id="taskTypeCards"></div>
+    </div>
+
+    <input type="hidden" name="category" id="categorySelect" value="{{ task.category if task else '' }}">
+
+    <div class="conditional-field" id="customCategoryBox">
+        <label>Other Task Type</label>
+        <input name="custom_category" id="customCategoryInput" value="{{ task.custom_category if task else '' }}" placeholder="Write your own task type">
+    </div>
+
+    <div id="taskDetailsArea" class="smart-details">
+        <label>Task Name</label>
+        <input name="title" value="{{ task.title if task else '' }}" placeholder="Example: Solve Python OOP exercises, Review Quran memorization, Edit motivation letter" required>
+
+        <label>Main Field</label>
+        <select name="topic" id="topicSelect" data-current="{{ task.topic if task else '' }}"></select>
+        <div class="conditional-field" id="customTopicBox">
+            <label>Other Main Field</label>
+            <input name="custom_topic" id="customTopicInput" value="{{ task.custom_topic if task else '' }}" placeholder="Write your own main field">
+        </div>
+
+        <label>Sub Field</label>
+        <select name="skill" id="skillSelect" data-current="{{ task.skill if task else '' }}"></select>
+        <div class="conditional-field" id="customSkillBox">
+            <label>Other Sub Field</label>
+            <input name="custom_skill" id="customSkillInput" value="{{ task.custom_skill if task else '' }}" placeholder="Write your own sub field">
+        </div>
+
+        <label>Detailed Topic</label>
+        <select name="language" id="detailedTopicSelect" data-current="{{ task.language if task else '' }}"></select>
+        <div class="conditional-field" id="customDetailedTopicBox">
+            <label>Other Detailed Topic</label>
+            <input name="language_custom" id="customDetailedTopicInput" value="" placeholder="Write a detailed topic">
+        </div>
+
+        <label>Training Type</label>
+        <select name="practice_type" id="trainingTypeSelect" data-current="{{ task.practice_type if task else '' }}"></select>
+        <div class="conditional-field" id="customTrainingTypeBox">
+            <label>Other Training Type</label>
+            <input name="practice_type_custom" id="customTrainingTypeInput" value="" placeholder="Write your training type">
+        </div>
+
+        <label>Source / Link</label>
+        <input name="source" value="{{ task.source if task else '' }}" placeholder="Book, website, YouTube, Coursera, Codeforces, document link...">
+
+        <div class="form-row">
+            <div>
+                <label>Difficulty 1-5</label>
+                <input name="difficulty" type="number" min="1" max="5" value="{{ task.difficulty if task else 1 }}">
+            </div>
+            <div>
+                <label>Priority 1-5</label>
+                <input name="priority" type="number" min="1" max="5" value="{{ task.priority if task else 3 }}">
+            </div>
+        </div>
+
+        <label>Expected Time in Minutes</label>
+        <input name="estimated_minutes" type="number" min="5" value="{{ task.estimated_minutes if task else 30 }}">
+
+        <div class="form-row">
+            <div>
+                <label>Start Date</label>
+                <input name="start_date" type="date" value="{{ task.start_date if task else '' }}">
+            </div>
+            <div>
+                <label>End Date / Deadline</label>
+                <input name="due_date" type="date" value="{{ task.due_date if task else '' }}">
+            </div>
+        </div>
+
+        <label>Reminder Time</label>
+        <input name="reminder_time" type="time" value="{{ task.reminder_time if task else '' }}">
+
+        <label>Repeat</label>
+        <select name="repeat_type" id="repeatTypeSelect">
+            {% for value, label in [("once", "No Repeat / Once"), ("daily", "Daily"), ("weekly", "Weekly"), ("monthly", "Monthly"), ("selected_days", "Custom Days")] %}
+                <option value="{{ value }}" {% if task and task.repeat_type == value %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+
+        <div class="repeat-days-box" id="repeatDaysBox">
+            <label>Repeat Days</label>
+            <small class="hint">Choose any days that fit this task. Useful for intensive weekends, language routines, or study schedules.</small>
+            <div class="weekday-grid">
+                {% set selected_days = (task.repeat_days.split(",") if task and task.repeat_days else []) %}
+                {% for day_value, day_label in [("0", "Mon"),("1", "Tue"),("2", "Wed"),("3", "Thu"),("4", "Fri"),("5", "Sat"),("6", "Sun")] %}
+                    <label class="weekday-pill">
+                        <input type="checkbox" name="repeat_days" value="{{ day_value }}" {% if day_value in selected_days %}checked{% endif %}>
+                        <span>{{ day_label }}</span>
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <label>Notes</label>
+        <textarea name="notes" rows="3" placeholder="Any notes, plan, link details, or personal instructions...">{{ task.notes if task else "" }}</textarea>
+    </div>
+</div>

@@ -716,8 +716,8 @@ def create_app():
                 custom_topic=request.form.get("custom_topic", "").strip(),
                 skill=request.form.get("skill", "General").strip(),
                 custom_skill=request.form.get("custom_skill", "").strip(),
-                language=request.form.get("language", "").strip(),
-                practice_type=request.form.get("practice_type", "").strip(),
+                language=(request.form.get("language_custom", "").strip() if request.form.get("language", "").strip() == "Other" else request.form.get("language", "").strip()),
+                practice_type=(request.form.get("practice_type_custom", "").strip() if request.form.get("practice_type", "").strip() == "Other" else request.form.get("practice_type", "").strip()),
                 source=request.form.get("source", "").strip(),
                 difficulty=int(request.form.get("difficulty", 1) or 1),
                 priority=int(request.form.get("priority", 3) or 3),
@@ -760,8 +760,8 @@ def create_app():
             task.custom_topic = request.form.get("custom_topic", "").strip()
             task.skill = request.form.get("skill", "General").strip()
             task.custom_skill = request.form.get("custom_skill", "").strip()
-            task.language = request.form.get("language", "").strip()
-            task.practice_type = request.form.get("practice_type", "").strip()
+            task.language = (request.form.get("language_custom", "").strip() if request.form.get("language", "").strip() == "Other" else request.form.get("language", "").strip())
+            task.practice_type = (request.form.get("practice_type_custom", "").strip() if request.form.get("practice_type", "").strip() == "Other" else request.form.get("practice_type", "").strip())
             task.source = request.form.get("source", "").strip()
             task.difficulty = int(request.form.get("difficulty", 1) or 1)
             task.priority = int(request.form.get("priority", 3) or 3)

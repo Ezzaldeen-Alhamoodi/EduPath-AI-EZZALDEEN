@@ -249,3 +249,32 @@ Set these in Render:
 - PostgreSQL URL normalization is supported.
 - Replaced `psycopg2-binary` with `psycopg[binary]`.
 - Recommended Render setting: `REMEMBER_LOGIN_DAYS=365`.
+
+
+## EduPath AI v4.0 Smart Adaptive Task System
+
+### Added
+- Adaptive task creation flow:
+  - Task Type
+  - Main Field
+  - Sub Field
+  - Detailed Topic
+  - Training Type
+  - Schedule / Reminder / Repeat
+- Large task type coverage:
+  - Secondary School
+  - University
+  - Languages
+  - Programming & Technology
+  - Artificial Intelligence
+  - Mathematics
+  - Scholarships
+  - Daily Life
+  - Projects
+  - Exams & Certificates
+  - Reading & Research
+  - General
+  - Other
+- Every level includes `Other` for custom input.
+- The form only shows options related to the previous choice.
+- Existing database structure is preserved for PostgreSQL stability.

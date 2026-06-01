@@ -1370,3 +1370,107 @@ body.dark-mode .ai-status-grid div {
         grid-template-columns: 1fr;
     }
 }
+
+
+
+/* EduPath AI v4.0 Smart Adaptive Task System */
+.tasks-hero {
+    background: linear-gradient(135deg, #2563eb, #0f172a);
+}
+
+.smart-task-form {
+    display: grid;
+    gap: 16px;
+}
+
+.smart-step {
+    border: 1px solid var(--border);
+    background: rgba(248, 250, 252, 0.75);
+    border-radius: 22px;
+    padding: 16px;
+}
+
+.smart-step h3 {
+    margin: 0 0 6px;
+}
+
+.task-type-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.task-type-card {
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    border-radius: 18px;
+    padding: 14px 10px;
+    min-height: 92px;
+    display: grid;
+    place-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-weight: 900;
+    text-align: center;
+    transition: 0.18s ease;
+}
+
+.task-type-card span {
+    font-size: 28px;
+    line-height: 1;
+}
+
+.task-type-card strong {
+    font-size: 13px;
+    line-height: 1.25;
+}
+
+.task-type-card:hover,
+.task-type-card.active {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(124, 58, 237, 0.12));
+    border-color: rgba(37, 99, 235, 0.45);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.smart-details {
+    display: grid;
+    gap: 10px;
+}
+
+.conditional-field {
+    display: none;
+}
+
+body.dark-mode .smart-step,
+body.dark-mode .task-type-card {
+    background: rgba(30, 41, 59, 0.86);
+}
+
+@media (max-width: 900px) {
+    .task-type-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .task-type-card {
+        min-height: 82px;
+        padding: 12px 8px;
+    }
+}
+
+@media (max-width: 420px) {
+    .task-type-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .task-type-card span {
+        font-size: 24px;
+    }
+
+    .task-type-card strong {
+        font-size: 12px;
+    }
+}
