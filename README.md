@@ -228,7 +228,7 @@ Set these in Render:
 - Dashboard version updated to v3.3.
 
 ### Environment Variables
-- ADMIN_EMAILS=geni**2005**@gmail.com,another@example.com
+- ADMIN_EMAILS=geni49607@gmail.com,another@example.com
 - DEFAULT_AI_DAILY_LIMIT=1
 - REQUIRE_EMAIL_VERIFICATION=false
 
@@ -278,3 +278,29 @@ Set these in Render:
 - Every level includes `Other` for custom input.
 - The form only shows options related to the previous choice.
 - Existing database structure is preserved for PostgreSQL stability.
+
+
+## REAL v4.1 Smart Goals & Exam Intelligence
+
+This build actually updates the application files.
+
+### Updated Tasks
+- IELTS official structure:
+  - Listening: Everyday Conversation, Everyday Monologue, Educational Discussion, Academic Lecture.
+  - Reading: Academic Reading, General Training Reading.
+  - Writing: Task 1 Academic, Task 2 Academic, Task 1 General, Task 2 General.
+  - Speaking: Part 1, Part 2, Part 3.
+- TOEFL official structure provided by the project owner:
+  - Reading: Complete the Words, Read in Daily Life, Read an Academic Passage.
+  - Listening: Listen and Choose a Response, Listen to a Conversation, Listen to an Announcement, Listen to an Academic Talk.
+  - Writing: Build a Sentence, Write an Email, Write for an Academic Discussion.
+  - Speaking: Listen and Repeat, Take an Interview.
+- Duolingo English Test:
+  - Reading, Listening, Writing, Speaking task types.
+- Exam-aware task dropdowns now adapt more deeply based on the selected exam and skill.
+
+### Updated Goals
+- Smart Goals page.
+- Goal progress now detects related completed tasks by shared keywords, categories, skills, exams, and task fields.
+- Dashboard Current Focus v4.1 section.
+- Modernized emoji labels and visual progress.

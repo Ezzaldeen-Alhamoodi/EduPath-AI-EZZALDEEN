@@ -121,22 +121,15 @@ document.addEventListener("DOMContentLoaded", () => {
 /* EduPath AI v4.0 Smart Adaptive Task System */
 const SMART_TASK_DATA = {
   "Secondary School": {
-    icon: "🏫",
+    icon: "🏛️",
     main: ["Quran","Islamic Studies","Arabic Language","English Language","Mathematics","Physics","Chemistry","Biology","History","Geography","Society / Social Studies","Computer Science","General Review","Exams","Homework","Other"],
     sub: {
       "Quran": ["Memorization","Revision","Recitation","Tajweed","Interpretation","Other"],
       "English Language": ["Reading","Writing","Listening","Speaking","Grammar","Vocabulary","Translation","Exam Questions","Other"],
       "Mathematics": ["Algebra","Geometry","Trigonometry","Calculus Basics","Probability","Statistics","Equations","Functions","Past Exams","Other"],
-      "Computer Science": ["Programming Basics","Algorithms","Computer Basics","Internet","Office Programs","Projects","Other"],
-      "Exams": ["Past Exams","Mock Test","Timed Practice","Final Review","Other"],
-      "Homework": ["Daily Homework","Assignment","Worksheet","Review","Other"],
       "Other": ["General Study","Review","Practice","Other"]
     },
-    detail: {
-      "Quran": ["Surah Review","Daily Portion","New Memorization","Old Memorization","Tajweed Rule","Mistake Correction","Other"],
-      "Mathematics": ["Lesson Review","Formula Review","Past Questions","Difficult Problems","Other"],
-      "English Language": ["Paragraph","Vocabulary Set","Grammar Rule","Listening File","Reading Passage","Other"]
-    },
+    detail: {"Quran": ["Surah Review","Daily Portion","New Memorization","Old Memorization","Tajweed Rule","Mistake Correction","Other"], "Mathematics": ["Lesson Review","Formula Review","Past Questions","Difficult Problems","Other"], "Other": ["General Topic","Other"]},
     training: ["Study Lesson","Solve Exercises","Review Mistakes","Timed Practice","Prepare for Exam","Memorize Formulas","Memorize","Review","Listen","Recite","Correct Mistakes","Write Paragraph","Listen and Repeat","Other"]
   },
 
@@ -148,200 +141,167 @@ const SMART_TASK_DATA = {
       "Accounting": ["Financial Accounting","Managerial Accounting","Cost Accounting","Auditing","Tax Accounting","Accounting Systems","Reports","Budgeting","Other"],
       "Law": ["Civil Law","Criminal Law","Commercial Law","International Law","Legal Writing","Case Analysis","Legal Research","Other"],
       "Sharia and Law": ["Civil Law","Criminal Law","Commercial Law","International Law","Islamic Jurisprudence","Legal Writing","Case Analysis","Legal Research","Other"],
-      "Business Administration": ["Management","Marketing","Finance","HR","Operations","Reports","Presentations","Other"],
-      "Engineering": ["Calculus","Physics","Drawing","Mechanics","Labs","Projects","Other"],
-      "Medicine": ["Anatomy","Physiology","Biochemistry","Pathology","Clinical Skills","Revision","Other"],
       "Other": ["Lecture","Assignment","Research","Project","Exam Review","Other"]
     },
-    detail: {
-      "Computer Science": ["Lecture Topic","Lab Task","Assignment Question","Project Feature","Exam Chapter","Other"],
-      "Accounting": ["Exercise Set","Report","Chapter","Terms","Other"],
-      "Law": ["Case","Legal Text","Research Question","Summary","Other"]
-    },
+    detail: {"Computer Science": ["Lecture Topic","Lab Task","Assignment Question","Project Feature","Exam Chapter","Other"], "Other": ["Topic","Chapter","Lecture","Other"]},
     training: ["Lecture Study","Assignment","Lab Practice","Project Work","Exam Review","Research","Presentation","Problem Solving","Study Lecture","Solve Exercises","Prepare Report","Review Terms","Practice Problems","Analyze Case","Memorize Terms","Other"]
   },
 
   "Languages": {
-    icon: "🌍",
+    icon: "🌐",
     main: ["English","Turkish","Russian","Chinese","Indonesian","Romanian","Arabic","French","German","Other"],
     sub: {
-      "English": ["General Language","IELTS","TOEFL","Duolingo English Test","Grammar","Vocabulary","Pronunciation","Reading","Writing","Listening","Speaking","Translation","Academic Language","Mock Test","Other"],
-      "Chinese": ["General Language","HSK","Grammar","Vocabulary","Pronunciation","Reading","Writing","Listening","Speaking","Characters","Translation","Mock Test","Other"],
-      "Turkish": ["General Language","Grammar","Vocabulary","Pronunciation","Reading","Writing","Listening","Speaking","Translation","Other"],
-      "Russian": ["General Language","Grammar","Vocabulary","Pronunciation","Reading","Writing","Listening","Speaking","Translation","Other"],
-      "Indonesian": ["General Language","Grammar","Vocabulary","Pronunciation","Reading","Writing","Listening","Speaking","Translation","Other"],
-      "Romanian": ["General Language","Grammar","Vocabulary","Pronunciation","Reading","Writing","Listening","Speaking","Translation","Other"],
+      "English": ["General English","IELTS","TOEFL","Duolingo English Test","Grammar","Vocabulary","Pronunciation","Reading","Writing","Listening","Speaking","Academic English","Other"],
+      "Chinese": ["General Chinese","HSK","Grammar","Vocabulary","Pronunciation","Reading","Writing","Listening","Speaking","Characters","Translation","Other"],
+      "Turkish": ["General Turkish","Grammar","Vocabulary","Pronunciation","Reading","Writing","Listening","Speaking","Translation","Other"],
+      "Russian": ["General Russian","Grammar","Vocabulary","Pronunciation","Reading","Writing","Listening","Speaking","Translation","Other"],
       "Other": ["General Language","Grammar","Vocabulary","Reading","Writing","Listening","Speaking","Other"]
     },
     detail: {
-      "English": ["ELSA","IELTS Reading","IELTS Listening","TOEFL Speaking","TOEFL Writing","Vocabulary List","Grammar Rule","Other"],
-      "Chinese": ["HSK Vocabulary","Characters","Pinyin","Listening Audio","Reading Text","Other"]
+      "IELTS": ["Listening","Reading","Writing","Speaking"],
+      "TOEFL": ["Reading","Listening","Writing","Speaking"],
+      "Duolingo English Test": ["Reading","Listening","Writing","Speaking"],
+      "HSK": ["Listening","Reading","Writing","Vocabulary","Characters"],
+      "General English": ["Daily Conversation","Grammar Review","Vocabulary Building","Pronunciation","Academic English","Other"],
+      "Grammar": ["Tenses","Articles","Prepositions","Sentence Structure","Error Correction","Other"],
+      "Vocabulary": ["Academic Words","Daily Words","IELTS Words","TOEFL Words","Review Set","Other"],
+      "Other": ["General Topic","Other"]
     },
-    training: ["Reading Practice","Writing Practice","Listening Practice","Speaking Practice","Vocabulary Review","Grammar Practice","Pronunciation Practice","Dictation","Shadowing","Mock Test","Mistake Review","Other"]
+    training: ["Practice","Timed Practice","Review Mistakes","Vocabulary Review","Grammar Practice","Pronunciation Practice","Dictation","Shadowing","Mock Test","Other"],
+    examDetails: {
+      "IELTS": {
+        "Listening": ["Everyday Conversation","Everyday Monologue","Educational Discussion","Academic Lecture"],
+        "Reading": ["Academic Reading","General Training Reading"],
+        "Writing": ["Task 1 Academic","Task 2 Academic","Task 1 General","Task 2 General"],
+        "Speaking": ["Part 1","Part 2","Part 3"]
+      },
+      "TOEFL": {
+        "Reading": ["Complete the Words","Read in Daily Life","Read an Academic Passage"],
+        "Listening": ["Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk"],
+        "Writing": ["Build a Sentence","Write an Email","Write for an Academic Discussion"],
+        "Speaking": ["Listen and Repeat","Take an Interview"]
+      },
+      "Duolingo English Test": {
+        "Reading": ["Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading"],
+        "Listening": ["Listen and Type","Interactive Listening"],
+        "Writing": ["Write About the Photo","Writing Sample","Interactive Writing"],
+        "Speaking": ["Speak About the Photo","Read Then Speak","Speaking Sample","Interactive Speaking"]
+      },
+      "HSK": {
+        "Listening": ["Dialogue","Conversation","Announcement","Lecture"],
+        "Reading": ["Vocabulary Recognition","Sentence Completion","Passage Understanding"],
+        "Writing": ["Character Writing","Sentence Formation","Essay Writing"],
+        "Vocabulary": ["HSK Word List","Character Review","Pinyin Practice"],
+        "Characters": ["Stroke Order","Recognition","Writing Practice"]
+      }
+    },
+    examTraining: {
+      "IELTS": {
+        "Listening": ["Multiple Choice","Matching","Plan Labelling","Map Labelling","Diagram Labelling","Form Completion","Note Completion","Table Completion","Flow Chart Completion","Summary Completion","Sentence Completion","Timed Practice","Review Mistakes"],
+        "Reading": ["Gap Filling","Table Completion","Matching Headings","Diagram Matching","Chart Matching","Sentence Completion","Short Answer Questions","Multiple Choice","Skimming","Scanning","Timed Practice","Review Mistakes"],
+        "Writing": ["Draft Response","Timed Writing","Task Analysis","Vocabulary Upgrade","Grammar Accuracy","Feedback Review","Rewrite Response"],
+        "Speaking": ["Mock Interview","Fluency Practice","Pronunciation Practice","Vocabulary Practice","Record Response","Review Mistakes"]
+      },
+      "TOEFL": {
+        "Reading": ["Practice","Timed Practice","Review Mistakes","Vocabulary Focus","Comprehension Focus","Mock Reading"],
+        "Listening": ["Practice","Note Taking","Listening for Details","Listening for Main Idea","Timed Practice","Review Mistakes"],
+        "Writing": ["Draft Writing","Timed Writing","Grammar Review","Feedback Review","Rewrite Response","Practice"],
+        "Speaking": ["Pronunciation Practice","Fluency Practice","Record Response","Shadowing","Mock Speaking","Review Mistakes"]
+      },
+      "Duolingo English Test": {
+        "Reading": ["Practice","Timed Practice","Accuracy Review","Vocabulary Review","Mistake Review"],
+        "Listening": ["Listen and Type Practice","Interactive Listening Practice","Dictation","Review Mistakes"],
+        "Writing": ["Timed Writing","Photo Description","Sample Writing","Interactive Writing","Feedback Review"],
+        "Speaking": ["Photo Speaking","Read Then Speak","Interactive Speaking","Record Response","Fluency Practice"]
+      }
+    }
   },
 
   "Programming & Technology": {
-    icon: "💻",
-    main: ["Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","Flask","Django","React","Node.js","PHP","C#","Go","Rust","Kotlin","Swift","Bash / Linux Shell","Git / GitHub","Web Development","Frontend Development","Backend Development","Full Stack Development","Mobile App Development","Desktop App Development","Databases","Algorithms","Data Structures","Problem Solving","Debugging","Software Engineering","Software Testing","Operating Systems","Computer Networks","Cybersecurity","Information Technology","IT Security","Cloud Computing","DevOps","APIs","Memory Management","Hardware","Computer Architecture","Embedded Systems","Artificial Intelligence","Machine Learning","Data Science","Projects","Documentation","Other"],
+    icon: "🧑‍💻",
+    main: ["Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","Flask","Django","React","Node.js","Git / GitHub","Web Development","Frontend Development","Backend Development","Full Stack Development","Databases","Algorithms","Data Structures","Problem Solving","Debugging","Software Engineering","Software Testing","Operating Systems","Computer Networks","Cybersecurity","Cloud Computing","DevOps","APIs","Artificial Intelligence","Machine Learning","Data Science","Projects","Documentation","Other"],
     sub: {
       "Python": ["Syntax","Variables","Data Types","Conditions","Loops","Functions","Lists","Tuples","Dictionaries","Sets","Files","OOP","Modules","Libraries","Virtual Environment","APIs","Flask","Data Analysis","Automation","Web Scraping","Machine Learning","Projects","Debugging","Other"],
       "Web Development": ["HTML","CSS","JavaScript","Frontend","Backend","Full Stack","Responsive Design","Forms","Authentication","APIs","Databases","Deployment","Performance","Security","Other"],
       "Algorithms": ["Searching","Sorting","Recursion","Greedy Algorithms","Dynamic Programming","Graph Algorithms","Tree Algorithms","Backtracking","Divide and Conquer","Complexity Analysis","Other"],
-      "Cybersecurity": ["Security Basics","Network Security","Web Security","Linux Security","Cryptography","Ethical Hacking Basics","Vulnerabilities","Authentication","OWASP Basics","Malware Basics","Digital Forensics Basics","Other"],
-      "JavaScript": ["Syntax","DOM","Events","APIs","Async/Await","Frontend","Debugging","Projects","Other"],
-      "Databases": ["SQL","SQLite","PostgreSQL","MySQL","Schema Design","Queries","Joins","Indexes","Other"],
-      "Data Structures": ["Arrays","Linked Lists","Stacks","Queues","Trees","Graphs","Hash Tables","Heaps","Other"],
-      "Git / GitHub": ["Git Basics","Commits","Branches","Pull Requests","GitHub Pages","Collaboration","Other"],
+      "Cybersecurity": ["Security Basics","Network Security","Web Security","Linux Security","Cryptography","Ethical Hacking Basics","Vulnerabilities","Authentication","OWASP Basics","Other"],
       "Other": ["Concepts","Practice","Project","Debugging","Review","Other"]
     },
-    detail: {
-      "Python": ["Classes and Objects","Inheritance","File Handling","List Practice","Dictionary Practice","API Request","Flask Route","DataFrame","Other"],
-      "Web Development": ["Landing Page","Login Form","Dashboard UI","API Integration","Responsive Navbar","Deployment Fix","Other"],
-      "Algorithms": ["Problem Set","Time Complexity","Code Implementation","Mistake Review","Other"],
-      "Cybersecurity": ["OWASP Top 10","Authentication Flow","Vulnerability Note","Linux Command","Other"]
-    },
-    training: ["Study Concept","Write Code","Solve Exercises","Build Mini Project","Debug Code","Read Documentation","Review Mistakes","Refactor Code","Practice Syntax","Build App","Build Page","Design Layout","Fix Bug","Connect Backend","Create Form","Make Responsive","Deploy Website","Improve UI","Practice Project","Understand Concept","Solve Problem","Analyze Time Complexity","Timed Practice","Code Implementation","Study Theory","Practice Lab","Read Article","Analyze Case","Secure App","Review Vulnerability","Other"]
+    detail: {"Python": ["Classes and Objects","Inheritance","File Handling","List Practice","Dictionary Practice","API Request","Flask Route","Other"], "Algorithms": ["Problem Set","Time Complexity","Code Implementation","Mistake Review","Other"], "Other": ["General Topic","Other"]},
+    training: ["Study Concept","Write Code","Solve Exercises","Build Mini Project","Debug Code","Read Documentation","Review Mistakes","Refactor Code","Practice Syntax","Build App","Build Page","Design Layout","Fix Bug","Connect Backend","Create Form","Make Responsive","Deploy Website","Improve UI","Practice Project","Other"]
   },
 
   "Artificial Intelligence": {
-    icon: "🤖",
+    icon: "🧠",
     main: ["Artificial Intelligence","Machine Learning","Deep Learning","Data Science","NLP","Computer Vision","Reinforcement Learning","AI Projects","Other"],
-    sub: {
-      "Machine Learning": ["Data Cleaning","Feature Engineering","Models","Training","Evaluation","Scikit-learn","Projects","Other"],
-      "Deep Learning": ["Neural Networks","CNN","RNN","Transformers","Training","Evaluation","Other"],
-      "Data Science": ["Pandas","Visualization","Statistics","Reports","Cleaning","Analysis","Other"],
-      "NLP": ["Text Cleaning","Tokenization","Embeddings","Classification","Chatbots","Other"],
-      "Computer Vision": ["Images","CNN","Object Detection","Classification","Other"],
-      "Other": ["Study","Practice","Project","Review","Other"]
-    },
-    detail: {
-      "Machine Learning": ["Dataset","Model Comparison","Accuracy","Feature Selection","Other"],
-      "AI Projects": ["Idea","Dataset","Model","Evaluation","Deployment","Other"]
-    },
+    sub: {"Machine Learning": ["Data Cleaning","Feature Engineering","Models","Training","Evaluation","Scikit-learn","Projects","Other"], "Deep Learning": ["Neural Networks","CNN","RNN","Transformers","Training","Evaluation","Other"], "Other": ["Study","Practice","Project","Review","Other"]},
+    detail: {"Machine Learning": ["Dataset","Model Comparison","Accuracy","Feature Selection","Other"], "Other": ["Topic","Other"]},
     training: ["Study Concept","Code Implementation","Experiment","Evaluate Model","Build Project","Read Paper","Review Mistakes","Other"]
   },
 
   "Mathematics": {
     icon: "🧮",
     main: ["Algebra","Geometry","Trigonometry","Calculus","Probability","Statistics","Linear Algebra","Discrete Mathematics","Equations","Functions","Past Exams","Other"],
-    sub: {
-      "Algebra": ["Equations","Inequalities","Functions","Word Problems","Polynomials","Other"],
-      "Geometry": ["Triangles","Circles","Coordinate Geometry","Proofs","Theorems","Other"],
-      "Calculus": ["Limits","Derivatives","Integrals","Applications","Other"],
-      "Probability": ["Basic Probability","Conditional Probability","Counting","Random Variables","Other"],
-      "Statistics": ["Mean","Variance","Charts","Distributions","Inference","Other"],
-      "Other": ["Concepts","Examples","Exercises","Review","Other"]
-    },
-    detail: {
-      "Algebra": ["Exercise Set","Formula","Past Question","Difficult Topic","Other"],
-      "Calculus": ["Derivative Rules","Integral Practice","Limit Problems","Other"]
-    },
+    sub: {"Algebra": ["Equations","Inequalities","Functions","Word Problems","Polynomials","Other"], "Calculus": ["Limits","Derivatives","Integrals","Applications","Other"], "Other": ["Concepts","Examples","Exercises","Review","Other"]},
+    detail: {"Algebra": ["Exercise Set","Formula","Past Question","Difficult Topic","Other"], "Other": ["General Topic","Other"]},
     training: ["Study Lesson","Solve Exercises","Review Mistakes","Timed Practice","Prepare for Exam","Memorize Formulas","Other"]
   },
 
   "Scholarships": {
-    icon: "🎓",
+    icon: "🎖️",
     main: ["Scholarship Search","University Research","Application Form","Documents","CV","Motivation Letter","Personal Statement","Recommendation Letter","Interview","Language Test","Portfolio","Email Communication","Visa","Travel Preparation","Follow-up","Other"],
-    sub: {
-      "Scholarship Search": ["Requirements","Deadline","Eligibility","Funding","Major Selection","University Selection","Other"],
-      "Motivation Letter": ["Bachelor Scholarship","Computer Science","Draft","Edit","Personalize","Final Review","Other"],
-      "CV": ["Academic CV","Activities","Projects","Certificates","Formatting","Other"],
-      "Interview": ["Self Introduction","Why Major","Why Scholarship","Future Plans","Mock Interview","Other"],
-      "Documents": ["Preparation","Translation","Review","Upload","Final Check","Other"],
-      "Visa": ["Requirements","Documents","Appointment","Travel Plan","Other"],
-      "Other": ["Search","Prepare","Review","Submit","Other"]
-    },
-    detail: {
-      "Motivation Letter": ["Opening Paragraph","Achievements","Projects","Future Goals","University Fit","Other"],
-      "Interview": ["Question Practice","Answer Improvement","Mock Interview","Feedback","Other"],
-      "Documents": ["Passport","Transcript","Certificate","Bank Statement","Recommendation","Other"]
-    },
+    sub: {"Motivation Letter": ["Bachelor Scholarship","Computer Science","Draft","Edit","Personalize","Final Review","Other"], "Interview": ["Self Introduction","Why Major","Why Scholarship","Future Plans","Mock Interview","Other"], "Documents": ["Preparation","Translation","Review","Upload","Final Check","Other"], "Other": ["Search","Prepare","Review","Submit","Other"]},
+    detail: {"Motivation Letter": ["Opening Paragraph","Achievements","Projects","Future Goals","University Fit","Other"], "Interview": ["Question Practice","Answer Improvement","Mock Interview","Feedback","Other"], "Other": ["Topic","Other"]},
     training: ["Search","Compare","Prepare","Write","Edit","Review","Upload","Submit","Follow Up","Practice Interview","Final Check","Other"]
   },
 
-  "Daily Life": {
-    icon: "🌱",
-    main: ["Health","Exercise","Sleep","Food","Water","Personal Routine","Family","Finance","Cleaning","Shopping","Time Management","Reading","Religious Routine","Appointments","Other"],
+  "Exams & Certificates": {
+    icon: "🧪",
+    main: ["IELTS","TOEFL","Duolingo English Test","HSK","SAT","ACT","University Exam","School Exam","Programming Certificate","Online Course","Other"],
     sub: {
-      "Health": ["Daily Habit","Weekly Routine","Self-care","Appointment","Other"],
-      "Exercise": ["Workout","Walking","Stretching","Routine","Other"],
-      "Religious Routine": ["Prayer","Quran","Dhikr","Reading","Other"],
-      "Time Management": ["Plan Day","Review Progress","Weekly Plan","Other"],
-      "Other": ["Daily Habit","Weekly Routine","Reminder","Personal Task","Important Appointment","Self-care","Other"]
+      "IELTS": ["Listening","Reading","Writing","Speaking"],
+      "TOEFL": ["Reading","Listening","Writing","Speaking"],
+      "Duolingo English Test": ["Reading","Listening","Writing","Speaking"],
+      "HSK": ["Listening","Reading","Writing","Vocabulary","Characters"],
+      "SAT": ["Reading and Writing","Mathematics"],
+      "Other": ["Study","Practice","Mock Test","Review","Other"]
     },
     detail: {
-      "Health": ["Habit Check","Medicine Reminder","Routine Improvement","Other"],
-      "Reading": ["Book Chapter","Summary","Reflection","Other"]
+      "Listening": ["Everyday Conversation","Everyday Monologue","Educational Discussion","Academic Lecture","Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk","Listen and Type","Interactive Listening","Other"],
+      "Reading": ["Academic Reading","General Training Reading","Complete the Words","Read in Daily Life","Read an Academic Passage","Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","Other"],
+      "Writing": ["Task 1 Academic","Task 2 Academic","Task 1 General","Task 2 General","Build a Sentence","Write an Email","Write for an Academic Discussion","Write About the Photo","Writing Sample","Interactive Writing","Other"],
+      "Speaking": ["Part 1","Part 2","Part 3","Listen and Repeat","Take an Interview","Speak About the Photo","Read Then Speak","Speaking Sample","Interactive Speaking","Other"],
+      "Other": ["General Topic","Other"]
     },
+    training: ["Practice","Timed Practice","Mock Test","Review Mistakes","Note Taking","Draft Writing","Record Response","Vocabulary Focus","Comprehension Focus","Other"]
+  },
+
+  "Daily Life": {
+    icon: "🗓️",
+    main: ["Health","Exercise","Sleep","Food","Water","Personal Routine","Family","Finance","Cleaning","Shopping","Time Management","Reading","Religious Routine","Appointments","Other"],
+    sub: {"Other": ["Daily Habit","Weekly Routine","Reminder","Personal Task","Important Appointment","Self-care","Other"]},
+    detail: {"Other": ["General Topic","Other"]},
     training: ["Do Task","Review Progress","Repeat Habit","Prepare","Check","Improve Routine","Other"]
   },
 
   "Projects": {
     icon: "🚀",
     main: ["Programming Project","AI Project","Web Project","Mobile App","Research Project","School Project","University Project","Scholarship Portfolio","Personal Project","Other"],
-    sub: {
-      "Programming Project": ["Idea","Planning","Design","Frontend","Backend","Database","Testing","Debugging","Deployment","Documentation","Presentation","Other"],
-      "AI Project": ["Idea","Dataset","AI Model","Training","Testing","Deployment","Documentation","Other"],
-      "Web Project": ["Frontend","Backend","Database","Authentication","Deployment","UI","Other"],
-      "Other": ["Idea","Planning","Build","Test","Improve","Other"]
-    },
-    detail: {
-      "Programming Project": ["Feature","Bug","Page","API","Database Table","Other"],
-      "AI Project": ["Dataset","Model","Evaluation","Demo","Other"]
-    },
+    sub: {"Programming Project": ["Idea","Planning","Design","Frontend","Backend","Database","Testing","Debugging","Deployment","Documentation","Presentation","Other"], "Other": ["Idea","Planning","Build","Test","Improve","Other"]},
+    detail: {"Programming Project": ["Feature","Bug","Page","API","Database Table","Other"], "Other": ["Topic","Other"]},
     training: ["Brainstorm","Build","Code","Test","Improve","Deploy","Write Documentation","Review","Other"]
-  },
-
-  "Exams & Certificates": {
-    icon: "📜",
-    main: ["IELTS","TOEFL","Duolingo English Test","HSK","SAT","ACT","University Exam","School Exam","Programming Certificate","Online Course","Other"],
-    sub: {
-      "IELTS": ["Reading","Listening","Writing","Speaking","Vocabulary","Mock Test","Other"],
-      "TOEFL": ["Reading","Listening","Speaking","Writing","Mock Test","Other"],
-      "HSK": ["Vocabulary","Characters","Listening","Reading","Mock Test","Other"],
-      "Programming Certificate": ["Course Videos","Exercises","Project","Final Exam","Other"],
-      "Other": ["Study","Practice","Mock Test","Review","Other"]
-    },
-    detail: {
-      "IELTS": ["Cambridge Test","Task 1","Task 2","Speaking Part 2","Other"],
-      "TOEFL": ["Integrated Writing","Speaking Question","Reading Passage","Other"]
-    },
-    training: ["Study","Practice","Mock Test","Review Mistakes","Timed Practice","Final Review","Other"]
   },
 
   "Reading & Research": {
     icon: "📚",
     main: ["Book Reading","Article Reading","Research Paper","Summary","Notes","Literature Review","Critical Thinking","Other"],
-    sub: {
-      "Book Reading": ["Chapter","Summary","Reflection","Vocabulary","Other"],
-      "Research Paper": ["Abstract","Introduction","Methodology","Results","Discussion","References","Other"],
-      "Other": ["Read","Summarize","Analyze","Take Notes","Other"]
-    },
-    detail: {
-      "Research Paper": ["Key Ideas","Methods","Limitations","Findings","Other"]
-    },
+    sub: {"Research Paper": ["Abstract","Introduction","Methodology","Results","Discussion","References","Other"], "Other": ["Read","Summarize","Analyze","Take Notes","Other"]},
+    detail: {"Research Paper": ["Key Ideas","Methods","Limitations","Findings","Other"], "Other": ["Topic","Other"]},
     training: ["Read","Summarize","Analyze","Take Notes","Review","Discuss","Other"]
   },
 
-  "General": {
-    icon: "⭐",
-    main: ["Study","Planning","Review","Reminder","Personal Task","Other"],
-    sub: {
-      "Study": ["Learning","Practice","Review","Application","Other"],
-      "Planning": ["Daily Plan","Weekly Plan","Progress Check","Other"],
-      "Other": ["General","Other"]
-    },
-    detail: {"Other": ["General","Other"]},
-    training: ["Do Task","Study","Practice","Review","Prepare","Other"]
-  },
-
-  "Other": {
-    icon: "➕",
-    main: ["Other"],
-    sub: {"Other": ["Other"]},
-    detail: {"Other": ["Other"]},
-    training: ["Other"]
-  }
+  "General": {icon: "✨", main: ["Study","Planning","Review","Reminder","Personal Task","Other"], sub: {"Study": ["Learning","Practice","Review","Application","Other"], "Other": ["General","Other"]}, detail: {"Other": ["General","Other"]}, training: ["Do Task","Study","Practice","Review","Prepare","Other"]},
+  "Other": {icon: "🧩", main: ["Other"], sub: {"Other": ["Other"]}, detail: {"Other": ["Other"]}, training: ["Other"]}
 };
 
 function fillSmartSelect(select, values, selectedValue) {
@@ -427,11 +387,26 @@ function updateSmartTaskFields() {
     function refreshDetails() {
         const selectedTopic = topicSelect.value;
         const selectedSkill = skillSelect.value;
-        const detailValues = (config.detail && (config.detail[selectedSkill] || config.detail[selectedTopic] || config.detail["Other"])) || ["General Topic", "Other"];
+
+        let detailValues = null;
+        if (config.examDetails && config.examDetails[selectedTopic] && config.examDetails[selectedTopic][selectedSkill]) {
+            detailValues = config.examDetails[selectedTopic][selectedSkill];
+        }
+        if (!detailValues) {
+            detailValues = (config.detail && (config.detail[selectedSkill] || config.detail[selectedTopic] || config.detail["Other"])) || ["General Topic", "Other"];
+        }
+
         const currentDetail = detailSelect.dataset.current || "";
         fillSmartSelect(detailSelect, detailValues, selectedOrFirst(detailValues, currentDetail));
 
-        const trainingValues = config.training || ["Study", "Practice", "Review", "Other"];
+        let trainingValues = null;
+        if (config.examTraining && config.examTraining[selectedTopic] && config.examTraining[selectedTopic][selectedSkill]) {
+            trainingValues = config.examTraining[selectedTopic][selectedSkill];
+        }
+        if (!trainingValues) {
+            trainingValues = config.training || ["Study", "Practice", "Review", "Other"];
+        }
+
         const currentTraining = trainingSelect.dataset.current || "";
         fillSmartSelect(trainingSelect, trainingValues, selectedOrFirst(trainingValues, currentTraining));
 

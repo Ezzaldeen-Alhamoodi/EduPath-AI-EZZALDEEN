@@ -4,8 +4,8 @@
 
 <section class="hero v21-hero">
     <div>
-        <span class="tag">EduPath AI v3.3</span>
-        <h2>Build your future with private accounts, clear goals, and controlled AI coaching.</h2>
+        <span class="tag">EduPath AI v4.1</span>
+        <h2>Smart goals, exam-aware tasks, and focused progress for your learning path.</h2>
         <p>Track your goals, manage tasks, practice languages, prepare scholarships, and improve coding with AI support.</p>
         <div class="hero-actions">
             <a class="button light" href="{{ url_for('goals') }}">🎯 New Goal</a>
@@ -17,6 +17,27 @@
         <p>Task Progress</p>
     </div>
 </section>
+
+
+<section class="card current-focus-v41">
+    <h2>🔥 Current Focus v4.1</h2>
+    <p class="muted">Your most important goals based on progress and recent planning.</p>
+    <div class="focus-grid-v41">
+        {% for goal in goals[:3] %}
+            <div class="focus-card-v41">
+                <span>🎯</span>
+                <strong>{{ goal.title }}</strong>
+                <small>{{ goal.category }} · {{ goal.goal_progress if goal.goal_progress is defined else 0 }}%</small>
+                <div class="goal-progress-track">
+                    <div class="goal-progress-fill" style="width: {{ goal.goal_progress if goal.goal_progress is defined else 0 }}%;"></div>
+                </div>
+            </div>
+        {% else %}
+            <p class="muted">Create goals to see your current focus here.</p>
+        {% endfor %}
+    </div>
+</section>
+
 
 <section class="quick-actions">
     <a href="{{ url_for('languages') }}">🇬🇧<span>Language</span></a>

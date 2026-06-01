@@ -1474,3 +1474,127 @@ body.dark-mode .task-type-card {
         font-size: 12px;
     }
 }
+
+
+
+/* EduPath AI v4.1 Smart Goals & Exam Intelligence */
+.goals-hero-v41 {
+    background: linear-gradient(135deg, #0f172a, #2563eb, #7c3aed);
+}
+
+.goal-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 2px 0 10px;
+}
+
+.goal-suggestions span {
+    border: 1px solid var(--border);
+    background: rgba(37, 99, 235, 0.08);
+    border-radius: 999px;
+    padding: 8px 10px;
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.goal-card-v41,
+.focus-card-v41 {
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: rgba(248, 250, 252, 0.78);
+    padding: 16px;
+    margin-bottom: 14px;
+}
+
+.goal-topline {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+
+.goal-topline strong {
+    font-size: 17px;
+}
+
+.goal-topline span {
+    border-radius: 999px;
+    padding: 6px 9px;
+    background: rgba(124, 58, 237, 0.1);
+    color: var(--purple);
+    font-weight: 900;
+    font-size: 12px;
+}
+
+.goal-progress-track {
+    height: 10px;
+    background: rgba(148, 163, 184, 0.25);
+    border-radius: 999px;
+    margin: 12px 0;
+    overflow: hidden;
+}
+
+.goal-progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #2563eb, #7c3aed, #06b6d4);
+}
+
+.goal-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.goal-meta-grid span {
+    font-size: 13px;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 8px;
+}
+
+.current-focus-v41 {
+    margin-bottom: 22px;
+}
+
+.focus-grid-v41 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.focus-card-v41 {
+    margin-bottom: 0;
+}
+
+.focus-card-v41 span {
+    font-size: 28px;
+}
+
+.focus-card-v41 strong,
+.focus-card-v41 small {
+    display: block;
+}
+
+.focus-card-v41 small {
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+body.dark-mode .goal-card-v41,
+body.dark-mode .focus-card-v41,
+body.dark-mode .goal-meta-grid span {
+    background: rgba(30, 41, 59, 0.86);
+}
+
+@media (max-width: 800px) {
+    .focus-grid-v41,
+    .goal-meta-grid {
+        grid-template-columns: 1fr;
+    }
+}

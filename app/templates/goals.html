@@ -1,6 +1,114 @@
 \
 {% extends "base.html" %}
-{% block page_title %}Goals{% endblock %}
+{% block page_title %}Smart Goals{% endblock %}
 {% block content %}
-<section class="grid-2"><div class="card"><h2>🎯 Create New Goal</h2><p class="muted">A goal is a big result you want to achieve. Tasks are added separately from the Tasks page.</p><form method="POST" class="form"><label>Goal name</label><input name="title" placeholder="Example: Master Python, Improve Mathematics, Prepare for Scholarship Interview"><label>Category</label><select name="category"><option>General</option><option>English</option><option>Language</option><option>Programming</option><option>Mathematics</option><option>Scholarship</option><option>AI</option></select><label>Current level</label><select name="current_level"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select><label>Daily target time in minutes optional</label><input name="daily_minutes" type="number" value="60" min="0"><div class="form-row"><div><label>Start date</label><input name="start_date" type="date"></div><div><label>Expected completion date</label><input name="deadline" type="date"></div></div><label>Daily reminder time optional</label><input name="reminder_time" type="time"><label>Notes</label><textarea name="notes" rows="3" placeholder="Why is this goal important? What result do you want?"></textarea><button type="submit">💾 Save Goal</button></form></div><div class="card"><h2>📌 Saved Goals</h2>{% for goal in goals %}<div class="item goal-item"><strong>{{ goal.title }}</strong><span>{{ goal.category }} · {{ goal.current_level }} · {{ goal.daily_minutes }} min/day target</span><span>Start: {{ goal.start_date or "not set" }} · Expected completion: {{ goal.deadline or "not set" }}</span>{% if goal.time_left %}{% if goal.time_left.status == "remaining" %}<span class="countdown good">{{ goal.time_left.days }} days · {{ goal.time_left.weeks }} weeks · {{ goal.time_left.months }} months remaining</span>{% else %}<span class="countdown danger-text">Overdue by {{ -goal.time_left.days }} days</span>{% endif %}{% else %}<span class="muted">No deadline set.</span>{% endif %}<div class="actions"><a class="small-button warning" href="{{ url_for('edit_goal', goal_id=goal.id) }}">✏️ Edit</a><a class="small-button danger" href="{{ url_for('delete_goal', goal_id=goal.id) }}">🗑 Delete</a></div></div>{% else %}<p class="muted">No goals saved yet.</p>{% endfor %}</div></section>
+
+<section class="hero compact goals-hero-v41">
+    <div>
+        <span class="tag">🎯 EduPath AI v4.1</span>
+        <h2>Smart Goals & Progress Intelligence</h2>
+        <p>Create goals that connect naturally with your tasks: exams, languages, programming, scholarships, university, and daily improvement.</p>
+    </div>
+    <a class="button light" href="{{ url_for('tasks') }}">🗂️ Add Related Task</a>
+</section>
+
+<section class="grid-2">
+    <div class="card">
+        <h2>🎯 Create Smart Goal</h2>
+        <p class="muted">Use a clear title and category. Related tasks will improve your progress when they share the same field, exam, skill, or keywords.</p>
+
+        <form method="POST" class="form smart-goal-form">
+            <label>Goal Title</label>
+            <input name="title" placeholder="Example: IELTS Writing Band 7, Master Python OOP, Prepare Scholarship Interview" required>
+
+            <label>Goal Type</label>
+            <select name="category" id="goalTypeSelect">
+                <option>Language</option>
+                <option>Exam</option>
+                <option>Programming</option>
+                <option>Scholarship</option>
+                <option>University</option>
+                <option>Mathematics</option>
+                <option>AI</option>
+                <option>Project</option>
+                <option>Daily Life</option>
+                <option>General</option>
+            </select>
+
+            <div class="goal-suggestions" id="goalSuggestions">
+                <span>🌐 IELTS / TOEFL / Duolingo / HSK</span>
+                <span>🧑‍💻 Python / Web / Algorithms</span>
+                <span>🎖️ Interview / Motivation Letter</span>
+            </div>
+
+            <label>Current Level / Score</label>
+            <input name="current_level" placeholder="Example: IELTS 5.5, Beginner, Intermediate, TOEFL 70">
+
+            <div class="form-row">
+                <div>
+                    <label>Daily Minutes</label>
+                    <input name="daily_minutes" type="number" min="5" value="60">
+                </div>
+                <div>
+                    <label>Start Date</label>
+                    <input name="start_date" type="date">
+                </div>
+            </div>
+
+            <label>Deadline / Exam Date / Target Date</label>
+            <input name="deadline" type="date">
+
+            <label>Reminder Time</label>
+            <input name="reminder_time" type="time">
+
+            <label>Notes</label>
+            <textarea name="notes" rows="4" placeholder="Target score, weekly hours, resources, target skill, exam date, or personal plan..."></textarea>
+
+            <button type="submit">💾 Save Smart Goal</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>🔥 Current Goals</h2>
+        {% for goal in goals %}
+            <div class="goal-card-v41">
+                <div class="goal-topline">
+                    <strong>{{ goal.title }}</strong>
+                    <span>{{ goal.category }}</span>
+                </div>
+
+                <div class="goal-progress-track">
+                    <div class="goal-progress-fill" style="width: {{ goal.goal_progress if goal.goal_progress is defined else 0 }}%;"></div>
+                </div>
+
+                <div class="goal-meta-grid">
+                    <span>📊 {{ goal.goal_progress if goal.goal_progress is defined else 0 }}% progress</span>
+                    <span>⏳ {{ goal.time_left if goal.time_left is defined else "No deadline" }}</span>
+                    <span>⏱️ {{ goal.daily_minutes }} min/day</span>
+                    <span>📌 {{ goal.current_level }}</span>
+                </div>
+
+                {% if goal.notes %}
+                    <p class="muted">{{ goal.notes }}</p>
+                {% endif %}
+
+                <div class="actions">
+                    <a class="small-button warning" href="{{ url_for('edit_goal', goal_id=goal.id) }}">✏️ Edit</a>
+                    <a class="small-button danger" href="{{ url_for('delete_goal', goal_id=goal.id) }}">🗑 Delete</a>
+                </div>
+            </div>
+        {% else %}
+            <p class="muted">No goals yet. Create your first smart goal.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="card">
+    <h2>🧠 How Smart Progress Works</h2>
+    <p class="improved">
+        EduPath AI connects a goal with related completed tasks using category, field, skill, exam name, and keywords.
+        For example, tasks about IELTS Writing, Task 2, essays, grammar, and mistake review can support an IELTS Writing goal.
+    </p>
+</section>
+
 {% endblock %}

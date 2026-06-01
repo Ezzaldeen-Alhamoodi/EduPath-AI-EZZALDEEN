@@ -1061,15 +1061,67 @@ def calculate_goal_time_left(deadline):
 
 
 def calculate_goal_progress(goal):
+    """Smart progress based on completed tasks that are directly attached or semantically related."""
     try:
-        tasks = list(goal.tasks)
-        if not tasks:
+        all_tasks = StudyTask.query.filter_by(user_id=goal.user_id).all()
+        if not all_tasks:
             return 0
-        done = sum(1 for task in tasks if task.status == "done")
-        return int((done / len(tasks)) * 100)
-    except Exception:
-        return 0
 
+        goal_text = " ".join([
+            goal.title or "",
+            goal.category or "",
+            goal.current_level or "",
+            goal.notes or "",
+        ]).lower()
+
+        strong_terms = [
+            "ielts", "toefl", "duolingo", "hsk", "sat",
+            "english", "writing", "reading", "listening", "speaking",
+            "python", "javascript", "algorithm", "data", "scholarship",
+            "interview", "motivation", "cv", "mathematics", "math",
+            "ai", "machine learning", "project"
+        ]
+
+        related = []
+        for task in all_tasks:
+            task_text = " ".join([
+                task.title or "",
+                task.category or "",
+                task.custom_category or "",
+                task.topic or "",
+                task.custom_topic or "",
+                task.skill or "",
+                task.custom_skill or "",
+                task.language or "",
+                task.practice_type or "",
+                task.notes or "",
+            ]).lower()
+
+            if task.goal_id == goal.id:
+                related.append(task)
+                continue
+
+            score = 0
+            for term in strong_terms:
+                if term in goal_text and term in task_text:
+                    score += 2
+
+            goal_words = [w for w in re.findall(r"[a-zA-Z0-9]+", goal_text) if len(w) >= 4]
+            for word in goal_words:
+                if word in task_text:
+                    score += 1
+
+            if score >= 2:
+                related.append(task)
+
+        if not related:
+            return 0
+
+        done = sum(1 for task in related if task.status == "done")
+        return min(100, int((done / len(related)) * 100))
+    except Exception:
+        logger.exception("Smart goal progress calculation failed")
+        return 0
 
 def ensure_database_columns():
     """Safe lightweight migration for local SQLite only.
