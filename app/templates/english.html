@@ -3,26 +3,58 @@
 {% block page_title %}English Coach{% endblock %}
 {% block content %}
 
-<section class="card">
-    <h2>✍️ Improve Your English</h2>
-    <form method="POST" class="form">
-        <label>Your text</label>
-        <textarea name="text" rows="8" placeholder="Write your English answer here..."></textarea>
+<section class="hero compact english-hero-v412">
+    <div>
+        <span class="tag">🌐 EduPath AI v4.1.2</span>
+        <h2>English Coach & Essay Trainer</h2>
+        <p>Improve short answers, rewrite scholarship responses, or practice full essays with correction, writing advice, and topic vocabulary.</p>
+    </div>
+</section>
 
-        <label>Mode</label>
-        <select name="mode">
-            <option value="natural">Natural interview English</option>
-            <option value="simple">Simple and clear English</option>
-            <option value="formal">Formal scholarship style</option>
-        </select>
+<section class="grid-2">
+    <div class="card">
+        <h2>⚡ Quick English Improvement</h2>
+        <p class="muted">Use this for short answers, interview responses, emails, and simple paragraphs.</p>
 
-        <button type="submit">✨ Improve Text</button>
-    </form>
+        <form method="POST" class="form">
+            <input type="hidden" name="coach_type" value="quick">
+
+            <label>Your text</label>
+            <textarea name="text" rows="8" placeholder="Write your English answer here..."></textarea>
+
+            <label>Mode</label>
+            <select name="mode">
+                <option value="natural">Natural interview English</option>
+                <option value="simple">Simple and clear English</option>
+                <option value="formal">Formal scholarship style</option>
+            </select>
+
+            <button type="submit">✨ Improve Text</button>
+        </form>
+    </div>
+
+    <div class="card essay-coach-card">
+        <h2>📝 Essay Practice</h2>
+        <p class="muted">Write the topic/question, then write your essay. EduPath AI will correct errors, explain them, and give topic vocabulary.</p>
+
+        <form method="POST" class="form">
+            <input type="hidden" name="coach_type" value="essay">
+
+            <label>Essay Question / Topic</label>
+            <input name="essay_topic" placeholder="Example: Some people think technology improves education. Discuss both views and give your opinion.">
+
+            <label>Your Essay</label>
+            <textarea name="essay_text" rows="10" placeholder="Write your essay here..."></textarea>
+
+            <button type="submit">🧠 Analyze My Essay</button>
+        </form>
+    </div>
 </section>
 
 {% if result %}
 <section class="card">
-    <h2>Result</h2>
+    <h2>⚡ Quick Improvement Result</h2>
+
     <h3>Corrected Text</h3>
     <p class="improved">{{ result.corrected_text }}</p>
 
@@ -34,6 +66,57 @@
 
     <h3>Useful Vocabulary</h3>
     <ul>{% for item in result.useful_vocabulary %}<li>{{ item }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+
+{% if essay_result %}
+<section class="card essay-result-card">
+    <h2>📝 Essay Analysis Result</h2>
+
+    <h3>1. Corrected Essay</h3>
+    <p class="improved">{{ essay_result.corrected_text }}</p>
+
+    <h3>2. Corrections and Explanations</h3>
+    {% if essay_result.corrections %}
+        <div class="correction-list">
+            {% for item in essay_result.corrections %}
+                <div class="correction-card">
+                    <strong>Original:</strong>
+                    <p>{{ item.original }}</p>
+                    <strong>Correction:</strong>
+                    <p class="improved mini">{{ item.correction }}</p>
+                    <strong>Why it is wrong or weak:</strong>
+                    <p>{{ item.why }}</p>
+                    <strong>How to improve:</strong>
+                    <p>{{ item.how_to_improve }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="muted">No detailed corrections were returned.</p>
+    {% endif %}
+
+    <h3>3. Writing Tips: Better Writing in Less Time</h3>
+    <ul>
+        {% for tip in essay_result.writing_tips %}
+            <li>{{ tip }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>4. Topic Vocabulary and Phrases</h3>
+    {% if essay_result.topic_vocabulary %}
+        <div class="vocab-grid">
+            {% for vocab in essay_result.topic_vocabulary %}
+                <div class="vocab-card">
+                    <strong>{{ vocab.word_or_phrase }}</strong>
+                    <span>{{ vocab.meaning }}</span>
+                    <p>{{ vocab.example }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="muted">No topic vocabulary was returned.</p>
+    {% endif %}
 </section>
 {% endif %}
 

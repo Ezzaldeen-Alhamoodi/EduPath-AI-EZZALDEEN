@@ -923,16 +923,77 @@ Evaluate the answer. Return valid JSON only:
     @login_required
     def english():
         result = None
+        essay_result = None
+        active_tab = "quick"
 
         if request.method == "POST":
-            text = request.form.get("text", "").strip()
-            mode = request.form.get("mode", "natural").strip()
+            coach_type = request.form.get("coach_type", "quick").strip()
+            active_tab = coach_type
 
-            if not text:
-                flash("Please write text first.", "error")
+            status = ai_usage_status(current_user, "english")
+            if not status["allowed"]:
+                flash("Your daily English Coach limit has been reached. You can still use goals and tasks.", "error")
                 return redirect(url_for("english"))
 
-            prompt = f"""
+            if coach_type == "essay":
+                topic = request.form.get("essay_topic", "").strip()
+                essay = request.form.get("essay_text", "").strip()
+
+                if not topic or not essay:
+                    flash("Please write both the essay topic/question and your essay.", "error")
+                    return redirect(url_for("english"))
+
+                prompt = f"""
+You are EduPath AI Essay Coach for English learners and scholarship/test preparation students.
+
+Essay topic or question:
+{topic}
+
+Student essay:
+{essay}
+
+Analyze the essay carefully. Return valid JSON only with this exact structure:
+{{
+  "corrected_text": "A corrected version of the student's essay. Keep the student's meaning, but fix spelling, grammar, word choice, unclear expressions, illogical usage, and sentences that do not fit the topic.",
+  "corrections": [
+    {{
+      "original": "the wrong word, phrase, sentence, or idea",
+      "correction": "the corrected version",
+      "why": "explain clearly why it is wrong or weak",
+      "how_to_improve": "explain how the student can avoid this mistake"
+    }}
+  ],
+  "writing_tips": [
+    "practical advice to write better and faster under time pressure"
+  ],
+  "topic_vocabulary": [
+    {{
+      "word_or_phrase": "useful word or phrase not used by the student",
+      "meaning": "short meaning",
+      "example": "short example sentence related to the topic"
+    }}
+  ]
+}}
+
+Rules:
+- Be practical, clear, and encouraging.
+- If the essay includes ideas unrelated to the topic, mention that clearly in corrections.
+- Vocabulary must be related to the topic and should mostly be different from words already used by the student.
+- Do not add markdown outside JSON.
+"""
+                ai_text = call_ai(ai_client, prompt, max_tokens=1400, temperature=0.35)
+                record_ai_usage(current_user, "english")
+                essay_result = parse_json_object(ai_text)
+
+            else:
+                text = request.form.get("text", "").strip()
+                mode = request.form.get("mode", "natural").strip()
+
+                if not text:
+                    flash("Please write text first.", "error")
+                    return redirect(url_for("english"))
+
+                prompt = f"""
 You are an English coach for a scholarship student.
 
 Mode: {mode}
@@ -948,17 +1009,11 @@ Return valid JSON only:
   "useful_vocabulary": ["..."]
 }}
 """
-            status = ai_usage_status(current_user, "english")
-            if not status["allowed"]:
-                flash("Your daily English Coach limit has been reached. You can still use goals and tasks.", "error")
-                return redirect(url_for("english"))
+                ai_text = call_ai(ai_client, prompt, max_tokens=700, temperature=0.4)
+                record_ai_usage(current_user, "english")
+                result = parse_json_object(ai_text)
 
-            ai_text = call_ai(ai_client, prompt, max_tokens=700, temperature=0.4)
-            record_ai_usage(current_user, "english")
-            result = parse_json_object(ai_text)
-
-        return render_template("english.html", result=result)
-
+        return render_template("english.html", result=result, essay_result=essay_result, active_tab=active_tab)
     @app.route("/programming", methods=["GET", "POST"])
     @login_required
     def programming():

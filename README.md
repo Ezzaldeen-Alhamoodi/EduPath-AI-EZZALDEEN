@@ -311,3 +311,16 @@ This build actually updates the application files.
 - Fixed IELTS / TOEFL / Duolingo / HSK filtering in both Languages and Exams & Certificates.
 - Detailed Topic and Training Type now use only the selected exam and selected skill.
 - Prevented mixed IELTS/TOEFL/Duolingo task lists from appearing together.
+
+
+## v4.1.2 Essay Coach
+
+- Added Essay Practice inside English Coach.
+- Essay form includes:
+  - Essay question/topic.
+  - Student essay.
+- AI result includes:
+  - Corrected essay.
+  - Detailed corrections with explanation and improvement guidance.
+  - Writing tips for faster and stronger writing.
+  - Topic vocabulary and phrases with meanings and examples.

@@ -1598,3 +1598,72 @@ body.dark-mode .goal-meta-grid span {
         grid-template-columns: 1fr;
     }
 }
+
+
+
+/* EduPath AI v4.1.2 Essay Coach */
+.english-hero-v412 {
+    background: linear-gradient(135deg, #0f172a, #2563eb, #06b6d4);
+}
+
+.essay-coach-card {
+    border-color: rgba(37, 99, 235, 0.25);
+}
+
+.essay-result-card h3 {
+    margin-top: 22px;
+}
+
+.correction-list {
+    display: grid;
+    gap: 14px;
+}
+
+.correction-card {
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 14px;
+    background: rgba(248, 250, 252, 0.8);
+}
+
+.correction-card strong {
+    color: var(--primary);
+}
+
+.improved.mini {
+    margin: 8px 0 12px;
+}
+
+.vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.vocab-card {
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 14px;
+    background: rgba(37, 99, 235, 0.06);
+}
+
+.vocab-card strong,
+.vocab-card span {
+    display: block;
+}
+
+.vocab-card span {
+    color: var(--muted);
+    margin: 6px 0;
+}
+
+body.dark-mode .correction-card,
+body.dark-mode .vocab-card {
+    background: rgba(30, 41, 59, 0.86);
+}
+
+@media (max-width: 800px) {
+    .vocab-grid {
+        grid-template-columns: 1fr;
+    }
+}
