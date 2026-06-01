@@ -6,16 +6,16 @@
 <section class="hero compact tasks-hero">
     <div>
         <span class="tag">EduPath AI</span>
-        <h2>Smart Adaptive Task System</h2>
-        <p>Create tasks that feel personal: study, university, languages, programming, scholarships, life routines, projects, exams, and more.</p>
+        <h2><span data-i18n="tasks.title">Smart Adaptive Task System</span></h2>
+        <p><span data-i18n="tasks.desc">Create tasks that feel personal: study, university, languages, programming, scholarships, life routines, projects, exams, and more.</span></p>
     </div>
     <button class="button light" type="button" onclick="document.getElementById('addTaskCard').scrollIntoView({behavior:'smooth'});">➕ Add Task</button>
 </section>
 
 <section class="grid-2">
     <div class="card" id="addTaskCard">
-        <h2>➕ Add Smart Task</h2>
-        <p class="muted">Start with Task Type, then the form adapts automatically step by step.</p>
+        <h2>➕ <span data-i18n="tasks.add">Add Smart Task</span></h2>
+        <p class="muted"><span data-i18n="tasks.add_desc">Start with Task Type, then the form adapts automatically step by step.</span></p>
         <form method="POST" class="form">
             {% set task = None %}
             {% include "_task_form.html" %}
@@ -24,7 +24,7 @@
     </div>
 
     <div class="card">
-        <h2>✅ Your Tasks</h2>
+        <h2>✅ <span data-i18n="tasks.your">Your Tasks</span></h2>
         {% for task in tasks %}
             <div class="task-card {{ task.status }}">
                 <div>
@@ -50,7 +50,7 @@
                 </div>
             </div>
         {% else %}
-            <p class="muted">No tasks yet. Create your first smart task.</p>
+            <p class="muted"><span data-i18n="tasks.empty">No tasks yet. Create your first smart task.</span></p>
         {% endfor %}
     </div>
 </section>

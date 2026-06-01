@@ -6,9 +6,9 @@
 
 <section class="hero v21-hero">
     <div>
-        <span class="tag">Smart Learning Workspace</span>
-        <h2>Smart goals, exam-aware tasks, and focused progress for your learning path.</h2>
-        <p>Track your goals, manage tasks, practice languages, prepare scholarships, and improve coding with AI support.</p>
+        <span class="tag"><span data-i18n="dashboard.tag">Smart Learning Workspace</span></span>
+        <h2><span data-i18n="dashboard.hero_title">Smart goals, exam-aware tasks, and focused progress for your learning path.</span></h2>
+        <p><span data-i18n="dashboard.hero_desc">Track your goals, manage tasks, practice languages, prepare scholarships, and improve coding with AI support.</span></p>
         <div class="hero-actions">
             <a class="button light" href="{{ url_for('goals') }}">◎ New Goal</a>
             <a class="button ghost" href="{{ url_for('tasks') }}">▣ Add Task</a>
@@ -22,8 +22,8 @@
 
 
 <section class="card current-focus-v41">
-    <h2>Current Focus</h2>
-    <p class="muted">Your most important goals based on progress and recent planning.</p>
+    <h2><span data-i18n="dashboard.focus">Current Focus</span></h2>
+    <p class="muted"><span data-i18n="dashboard.focus_desc">Your most important goals based on progress and recent planning.</span></p>
     <div class="focus-grid-v41">
         {% for goal in goals[:3] %}
             <div class="focus-card-v41">
@@ -51,8 +51,8 @@
 <section class="card focus-goals">
     <div class="section-title-row">
         <div>
-            <h2>Active Goals</h2>
-            <p class="muted">Keep your long-term targets visible. Your tasks are the daily steps.</p>
+            <h2><span data-i18n="dashboard.active_goals">Active Goals</span></h2>
+            <p class="muted"><span data-i18n="dashboard.active_desc">Keep your long-term targets visible. Your tasks are the daily steps.</span></p>
         </div>
         <a class="small-button" href="{{ url_for('goals') }}">Manage</a>
     </div>
@@ -101,7 +101,7 @@
 
 <section class="grid-2">
     <div class="card">
-        <h2>Learning Insights</h2>
+        <h2><span data-i18n="dashboard.insights">Learning Insights</span></h2>
         {% if weak_skills %}
             {% for skill, score in weak_skills %}
                 <div class="weakness">
@@ -115,7 +115,7 @@
     </div>
 
     <div class="card">
-        <h2>Recent Tasks</h2>
+        <h2><span data-i18n="dashboard.recent_tasks">Recent Tasks</span></h2>
         {% for task in tasks %}
             <div class="task-mini">
                 <div>

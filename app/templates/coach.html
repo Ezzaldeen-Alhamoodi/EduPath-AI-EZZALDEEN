@@ -5,15 +5,15 @@
 
 <section class="hero compact coach-hero final-hero">
     <div>
-        <span class="tag">✦ AI Coach Hub</span>
-        <h2>Choose the AI coach you need today.</h2>
-        <p>One organized place for English, scholarship preparation, and programming support.</p>
+        <span class="tag">✦ <span data-i18n="coach.tag">AI Coach Hub</span></span>
+        <h2><span data-i18n="coach.title">Choose the AI coach you need today.</span></h2>
+        <p><span data-i18n="coach.desc">One organized place for English, scholarship preparation, and programming support.</span></p>
     </div>
     <a class="button light" href="{{ url_for('tasks') }}">▣ Add Practice Task</a>
 </section>
 
 <section class="card ai-status-card final-status">
-    <h2>AI Access Status</h2>
+    <h2><span data-i18n="coach.status">AI Access Status</span></h2>
     <div class="ai-status-grid">
         <div><strong>English Coach</strong><span>{{ english_ai.used }}/{{ english_ai.limit }} today</span></div>
         <div><strong>Scholarship Coach</strong><span>{{ scholarship_ai.used }}/{{ scholarship_ai.limit }} today</span></div>

@@ -338,3 +338,12 @@ This build actually updates the application files.
 - Improved mobile bottom navigation.
 - Version number appears only at the bottom of Dashboard.
 - Updated icon style to cleaner, more modern symbols.
+
+
+## v4.3 Bilingual Arabic-English
+
+- Added Arabic / English language toggle.
+- Language choice is saved in the browser.
+- Arabic mode switches the interface to RTL.
+- Translates main navigation, dashboard, goals, tasks, and AI Coach hub labels.
+- English Coach, Scholarship Coach, and Code Coach core content remain English-focused as requested.

@@ -533,3 +533,153 @@ document.addEventListener("DOMContentLoaded", () => {
         repeatSelect.addEventListener("change", updateRepeatDaysVisibility);
     }
 });
+
+
+
+/* EduPath AI v4.3 Bilingual Arabic-English UI */
+const EDUPATH_I18N = {
+    en: {
+        "nav.dashboard": "⌂ Dashboard",
+        "nav.goals": "◎ Goals",
+        "nav.tasks": "▣ Tasks",
+        "nav.languages": "◌ Languages",
+        "nav.coach": "✦ AI Coach",
+        "nav.profile": "◉ Profile",
+        "nav.admin": "⚙ Admin",
+        "user.profile": "Profile",
+        "user.admin": "Admin",
+        "user.logout": "Logout",
+        "user.login": "Login",
+        "user.register": "Register",
+        "topbar.pwa": "Responsive Web App",
+        "topbar.subtitle": "Smart learning, goals, exams, and AI coaching in one workspace.",
+        "mobile.home": "Home",
+        "mobile.goals": "Goals",
+        "mobile.tasks": "Tasks",
+        "mobile.coach": "Coach",
+        "mobile.lang": "Lang",
+        "mobile.profile": "Profile",
+        "dashboard.tag": "Smart Learning Workspace",
+        "dashboard.hero_title": "Smart goals, exam-aware tasks, and focused progress for your learning path.",
+        "dashboard.hero_desc": "Track your goals, manage tasks, practice languages, prepare scholarships, and improve coding with AI support.",
+        "dashboard.focus": "Current Focus",
+        "dashboard.focus_desc": "Your most important goals based on progress and recent planning.",
+        "dashboard.active_goals": "Active Goals",
+        "dashboard.active_desc": "Keep your long-term targets visible. Your tasks are the daily steps.",
+        "dashboard.insights": "Learning Insights",
+        "dashboard.recent_tasks": "Recent Tasks",
+        "goals.title": "Smart Goals & Progress Intelligence",
+        "goals.desc": "Create goals that connect naturally with your tasks: exams, languages, programming, scholarships, university, and daily improvement.",
+        "goals.create": "Create Smart Goal",
+        "goals.goal_title": "Goal Title",
+        "goals.goal_type": "Goal Type",
+        "goals.current_level": "Current Level / Score",
+        "goals.daily_minutes": "Daily Minutes",
+        "goals.start_date": "Start Date",
+        "goals.deadline": "Deadline / Exam Date / Target Date",
+        "goals.reminder": "Reminder Time",
+        "goals.notes": "Notes",
+        "goals.save": "Save Smart Goal",
+        "goals.current_goals": "Current Goals",
+        "goals.how": "How Smart Progress Works",
+        "tasks.title": "Smart Adaptive Task System",
+        "tasks.desc": "Create tasks that feel personal: study, university, languages, programming, scholarships, life routines, projects, exams, and more.",
+        "tasks.add": "Add Smart Task",
+        "tasks.add_desc": "Start with Task Type, then the form adapts automatically step by step.",
+        "tasks.your": "Your Tasks",
+        "tasks.empty": "No tasks yet. Create your first smart task.",
+        "coach.tag": "AI Coach Hub",
+        "coach.title": "Choose the AI coach you need today.",
+        "coach.desc": "One organized place for English, scholarship preparation, and programming support.",
+        "coach.status": "AI Access Status"
+    },
+    ar: {
+        "nav.dashboard": "⌂ الرئيسية",
+        "nav.goals": "◎ الأهداف",
+        "nav.tasks": "▣ المهام",
+        "nav.languages": "◌ اللغات",
+        "nav.coach": "✦ مدرب الذكاء الاصطناعي",
+        "nav.profile": "◉ الحساب",
+        "nav.admin": "⚙ الإدارة",
+        "user.profile": "الحساب",
+        "user.admin": "الإدارة",
+        "user.logout": "تسجيل الخروج",
+        "user.login": "تسجيل الدخول",
+        "user.register": "إنشاء حساب",
+        "topbar.pwa": "تطبيق ويب متجاوب",
+        "topbar.subtitle": "منصة واحدة للتعلم الذكي، الأهداف، الاختبارات، ومدربي الذكاء الاصطناعي.",
+        "mobile.home": "الرئيسية",
+        "mobile.goals": "الأهداف",
+        "mobile.tasks": "المهام",
+        "mobile.coach": "المدرب",
+        "mobile.lang": "اللغات",
+        "mobile.profile": "الحساب",
+        "dashboard.tag": "مساحة تعلم ذكية",
+        "dashboard.hero_title": "أهداف ذكية، مهام مخصصة للاختبارات، وتقدم واضح في مسارك التعليمي.",
+        "dashboard.hero_desc": "تابع أهدافك، نظّم مهامك، مارس اللغات، استعد للمنح، وطوّر البرمجة بدعم الذكاء الاصطناعي.",
+        "dashboard.focus": "التركيز الحالي",
+        "dashboard.focus_desc": "أهم أهدافك حسب التقدم والخطة الحالية.",
+        "dashboard.active_goals": "الأهداف النشطة",
+        "dashboard.active_desc": "اجعل أهدافك الطويلة أمامك دائمًا، والمهام هي خطواتك اليومية.",
+        "dashboard.insights": "تحليل التعلم",
+        "dashboard.recent_tasks": "آخر المهام",
+        "goals.title": "أهداف ذكية وتحليل التقدم",
+        "goals.desc": "أنشئ أهدافًا ترتبط تلقائيًا بمهامك في الاختبارات واللغات والبرمجة والمنح والجامعة وتطوير الذات.",
+        "goals.create": "إنشاء هدف ذكي",
+        "goals.goal_title": "عنوان الهدف",
+        "goals.goal_type": "نوع الهدف",
+        "goals.current_level": "المستوى أو الدرجة الحالية",
+        "goals.daily_minutes": "الدقائق اليومية",
+        "goals.start_date": "تاريخ البداية",
+        "goals.deadline": "الموعد النهائي / تاريخ الاختبار",
+        "goals.reminder": "وقت التذكير",
+        "goals.notes": "ملاحظات",
+        "goals.save": "حفظ الهدف الذكي",
+        "goals.current_goals": "الأهداف الحالية",
+        "goals.how": "كيف يعمل التقدم الذكي",
+        "tasks.title": "نظام مهام ذكي ومتكيف",
+        "tasks.desc": "أنشئ مهامًا مخصصة للدراسة والجامعة واللغات والبرمجة والمنح والحياة اليومية والمشاريع والاختبارات.",
+        "tasks.add": "إضافة مهمة ذكية",
+        "tasks.add_desc": "ابدأ بنوع المهمة، ثم يتكيف النموذج تلقائيًا خطوة بخطوة.",
+        "tasks.your": "مهامك",
+        "tasks.empty": "لا توجد مهام بعد. أنشئ أول مهمة ذكية.",
+        "coach.tag": "مركز مدرب الذكاء الاصطناعي",
+        "coach.title": "اختر المدرب الذي تحتاجه اليوم.",
+        "coach.desc": "مكان واحد منظم للإنجليزية والمنح والبرمجة.",
+        "coach.status": "حالة استخدام الذكاء الاصطناعي"
+    }
+};
+
+function applyEduPathLanguage(lang) {
+    const selected = lang === "ar" ? "ar" : "en";
+    localStorage.setItem("edupath-language", selected);
+    document.documentElement.lang = selected;
+    document.documentElement.dir = selected === "ar" ? "rtl" : "ltr";
+    document.body.classList.toggle("rtl-mode", selected === "ar");
+
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (EDUPATH_I18N[selected] && EDUPATH_I18N[selected][key]) {
+            el.textContent = EDUPATH_I18N[selected][key];
+        }
+    });
+
+    const toggle = document.getElementById("languageToggle");
+    if (toggle) {
+        toggle.textContent = selected === "ar" ? "English | عربي" : "عربي | EN";
+        toggle.setAttribute("aria-label", selected === "ar" ? "Switch to English" : "التبديل إلى العربية");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const savedLang = localStorage.getItem("edupath-language") || "en";
+    applyEduPathLanguage(savedLang);
+
+    const toggle = document.getElementById("languageToggle");
+    if (toggle) {
+        toggle.addEventListener("click", () => {
+            const current = localStorage.getItem("edupath-language") || "en";
+            applyEduPathLanguage(current === "ar" ? "en" : "ar");
+        });
+    }
+});

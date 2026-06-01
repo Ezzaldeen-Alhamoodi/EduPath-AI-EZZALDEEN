@@ -1920,3 +1920,86 @@ body.dark-mode .quick-actions.final-quick-actions small {
         grid-template-columns: 1fr;
     }
 }
+
+
+
+/* EduPath AI v4.3 Bilingual Arabic-English UI */
+.language-toggle {
+    border: 1px solid rgba(37, 99, 235, 0.22);
+    background: rgba(37, 99, 235, 0.08);
+    color: var(--primary);
+    border-radius: 16px;
+    padding: 10px 12px;
+    font-weight: 900;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.language-toggle:hover {
+    background: rgba(37, 99, 235, 0.14);
+}
+
+html[dir="rtl"] body {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="rtl"] .sidebar {
+    right: 0;
+    left: auto;
+    border-right: 0;
+    border-left: 1px solid rgba(148, 163, 184, 0.18);
+    box-shadow: -8px 0 30px rgba(15, 23, 42, 0.04);
+}
+
+html[dir="rtl"] .main {
+    margin-left: 0;
+    margin-right: var(--sidebar-width, 280px);
+}
+
+html[dir="rtl"] .main-nav a:hover,
+html[dir="rtl"] .sidebar nav a:hover {
+    transform: translateX(-3px);
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] select {
+    text-align: right;
+}
+
+html[dir="rtl"] input[name="email"],
+html[dir="rtl"] input[type="url"],
+html[dir="rtl"] input[type="time"],
+html[dir="rtl"] input[type="date"] {
+    direction: ltr;
+    text-align: left;
+}
+
+html[dir="rtl"] .goal-topline,
+html[dir="rtl"] .section-title-row,
+html[dir="rtl"] .topbar,
+html[dir="rtl"] .brand-block {
+    direction: rtl;
+}
+
+html[dir="rtl"] .hero-actions,
+html[dir="rtl"] .actions {
+    direction: rtl;
+}
+
+html[dir="rtl"] .app-version-footer {
+    direction: ltr;
+}
+
+@media (max-width: 900px) {
+    html[dir="rtl"] .main {
+        margin-right: 0;
+    }
+
+    html[dir="rtl"] .sidebar {
+        right: auto;
+        left: auto;
+    }
+}

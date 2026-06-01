@@ -20,6 +20,7 @@
         </div>
 
         <button class="theme-toggle" id="themeToggle" type="button">🌙 Dark Mode</button>
+        <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language">عربي | EN</button>
 
         <div class="user-mini-panel">
             {% if current_user.is_authenticated %}
@@ -28,23 +29,23 @@
                     <strong>{{ current_user.name }}</strong>
                     <span>{{ current_user.email }}</span>
                 </div>
-                <a class="mini-link" href="{{ url_for('profile') }}">Profile</a>
-                {% if current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS %}<a class="mini-link" href="{{ url_for('admin_dashboard') }}">Admin</a>{% endif %}
-                <a class="mini-link logout" href="{{ url_for('logout') }}">Logout</a>
+                <a class="mini-link" href="{{ url_for('profile') }}"><span data-i18n="user.profile">Profile</span></a>
+                {% if current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS %}<a class="mini-link" href="{{ url_for('admin_dashboard') }}"><span data-i18n="user.admin">Admin</span></a>{% endif %}
+                <a class="mini-link logout" href="{{ url_for('logout') }}"><span data-i18n="user.logout">Logout</span></a>
             {% else %}
-                <a class="mini-link" href="{{ url_for('login') }}">Login</a>
-                <a class="mini-link" href="{{ url_for('register') }}">Register</a>
+                <a class="mini-link" href="{{ url_for('login') }}"><span data-i18n="user.login">Login</span></a>
+                <a class="mini-link" href="{{ url_for('register') }}"><span data-i18n="user.register">Register</span></a>
             {% endif %}
         </div>
 
         <nav class="main-nav">
-            <a href="{{ url_for('index') }}">⌂ Dashboard</a>
-            <a href="{{ url_for('goals') }}">◎ Goals</a>
-            <a href="{{ url_for('tasks') }}">▣ Tasks</a>
-            <a href="{{ url_for('languages') }}">◌ Languages</a>
-            <a href="{{ url_for('coach') }}">✦ AI Coach</a>
-            {% if current_user.is_authenticated %}<a href="{{ url_for('profile') }}">◉ Profile</a>{% endif %}
-            {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}<a href="{{ url_for('admin_dashboard') }}">⚙ Admin</a>{% endif %}
+            <a href="{{ url_for('index') }}"><span data-i18n="nav.dashboard">⌂ Dashboard</span></a>
+            <a href="{{ url_for('goals') }}"><span data-i18n="nav.goals">◎ Goals</span></a>
+            <a href="{{ url_for('tasks') }}"><span data-i18n="nav.tasks">▣ Tasks</span></a>
+            <a href="{{ url_for('languages') }}"><span data-i18n="nav.languages">◌ Languages</span></a>
+            <a href="{{ url_for('coach') }}"><span data-i18n="nav.coach">✦ AI Coach</span></a>
+            {% if current_user.is_authenticated %}<a href="{{ url_for('profile') }}"><span data-i18n="nav.profile">◉ Profile</span></a>{% endif %}
+            {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}<a href="{{ url_for('admin_dashboard') }}"><span data-i18n="nav.admin">⚙ Admin</span></a>{% endif %}
         </nav>
 
         <button class="notify-btn" id="enableNotifications">🔔 Enable Reminders</button>
@@ -54,9 +55,9 @@
         <header class="topbar">
             <div>
                 <h1>{% block page_title %}EduPath AI EZZALDEEN{% endblock %}</h1>
-                <p>Smart learning, goals, exams, and AI coaching in one workspace.</p>
+                <p><span data-i18n="topbar.subtitle">Smart learning, goals, exams, and AI coaching in one workspace.</span></p>
             </div>
-            <div class="pill">Responsive Web App</div>
+            <div class="pill"><span data-i18n="topbar.pwa">Responsive Web App</span></div>
         </header>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -73,12 +74,12 @@
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
     <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
-        <a href="{{ url_for('index') }}"><span>⌂</span><small>Home</small></a>
-        <a href="{{ url_for('goals') }}"><span>◎</span><small>Goals</small></a>
-        <a href="{{ url_for('tasks') }}"><span>▣</span><small>Tasks</small></a>
-        <a href="{{ url_for('coach') }}"><span>✦</span><small>Coach</small></a>
-        <a href="{{ url_for('languages') }}"><span>◌</span><small>Lang</small></a>
-        <a href="{{ url_for('profile') }}"><span>◉</span><small>Profile</small></a>
+        <a href="{{ url_for('index') }}"><span>⌂</span><small data-i18n="mobile.home">Home</small></a>
+        <a href="{{ url_for('goals') }}"><span>◎</span><small data-i18n="mobile.goals">Goals</small></a>
+        <a href="{{ url_for('tasks') }}"><span>▣</span><small data-i18n="mobile.tasks">Tasks</small></a>
+        <a href="{{ url_for('coach') }}"><span>✦</span><small data-i18n="mobile.coach">Coach</small></a>
+        <a href="{{ url_for('languages') }}"><span>◌</span><small data-i18n="mobile.lang">Lang</small></a>
+        <a href="{{ url_for('profile') }}"><span>◉</span><small data-i18n="mobile.profile">Profile</small></a>
     </nav>
 
 </body>

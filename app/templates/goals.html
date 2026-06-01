@@ -6,22 +6,22 @@
 <section class="hero compact goals-hero-v41">
     <div>
         <span class="tag">EduPath AI</span>
-        <h2>Smart Goals & Progress Intelligence</h2>
-        <p>Create goals that connect naturally with your tasks: exams, languages, programming, scholarships, university, and daily improvement.</p>
+        <h2><span data-i18n="goals.title">Smart Goals & Progress Intelligence</span></h2>
+        <p><span data-i18n="goals.desc">Create goals that connect naturally with your tasks: exams, languages, programming, scholarships, university, and daily improvement.</span></p>
     </div>
     <a class="button light" href="{{ url_for('tasks') }}">🗂️ Add Related Task</a>
 </section>
 
 <section class="grid-2">
     <div class="card">
-        <h2>🎯 Create Smart Goal</h2>
+        <h2>🎯 <span data-i18n="goals.create">Create Smart Goal</span></h2>
         <p class="muted">Use a clear title and category. Related tasks will improve your progress when they share the same field, exam, skill, or keywords.</p>
 
         <form method="POST" class="form smart-goal-form">
-            <label>Goal Title</label>
+            <label><span data-i18n="goals.goal_title">Goal Title</span></label>
             <input name="title" placeholder="Example: IELTS Writing Band 7, Master Python OOP, Prepare Scholarship Interview" required>
 
-            <label>Goal Type</label>
+            <label><span data-i18n="goals.goal_type">Goal Type</span></label>
             <select name="category" id="goalTypeSelect">
                 <option>Language</option>
                 <option>Exam</option>
@@ -41,35 +41,35 @@
                 <span>🎖️ Interview / Motivation Letter</span>
             </div>
 
-            <label>Current Level / Score</label>
+            <label><span data-i18n="goals.current_level">Current Level / Score</span></label>
             <input name="current_level" placeholder="Example: IELTS 5.5, Beginner, Intermediate, TOEFL 70">
 
             <div class="form-row">
                 <div>
-                    <label>Daily Minutes</label>
+                    <label><span data-i18n="goals.daily_minutes">Daily Minutes</span></label>
                     <input name="daily_minutes" type="number" min="5" value="60">
                 </div>
                 <div>
-                    <label>Start Date</label>
+                    <label><span data-i18n="goals.start_date">Start Date</span></label>
                     <input name="start_date" type="date">
                 </div>
             </div>
 
-            <label>Deadline / Exam Date / Target Date</label>
+            <label><span data-i18n="goals.deadline">Deadline / Exam Date / Target Date</span></label>
             <input name="deadline" type="date">
 
-            <label>Reminder Time</label>
+            <label><span data-i18n="goals.reminder">Reminder Time</span></label>
             <input name="reminder_time" type="time">
 
-            <label>Notes</label>
+            <label><span data-i18n="goals.notes">Notes</span></label>
             <textarea name="notes" rows="4" placeholder="Target score, weekly hours, resources, target skill, exam date, or personal plan..."></textarea>
 
-            <button type="submit">💾 Save Smart Goal</button>
+            <button type="submit">💾 <span data-i18n="goals.save">Save Smart Goal</span></button>
         </form>
     </div>
 
     <div class="card">
-        <h2>🔥 Current Goals</h2>
+        <h2>🔥 <span data-i18n="goals.current_goals">Current Goals</span></h2>
         {% for goal in goals %}
             <div class="goal-card-v41">
                 <div class="goal-topline">
@@ -104,7 +104,7 @@
 </section>
 
 <section class="card">
-    <h2>🧠 How Smart Progress Works</h2>
+    <h2>🧠 <span data-i18n="goals.how">How Smart Progress Works</span></h2>
     <p class="improved">
         EduPath AI connects a goal with related completed tasks using category, field, skill, exam name, and keywords.
         For example, tasks about IELTS Writing, Task 2, essays, grammar, and mistake review can support an IELTS Writing goal.
