@@ -228,7 +228,7 @@ Set these in Render:
 - Dashboard version updated to v3.3.
 
 ### Environment Variables
-- ADMIN_EMAILS=geni49607@gmail.com,another@example.com
+- ADMIN_EMAILS=geni**2005**@gmail.com,another@example.com
 - DEFAULT_AI_DAILY_LIMIT=1
 - REQUIRE_EMAIL_VERIFICATION=false
 
