@@ -411,3 +411,12 @@ CSCA topics include:
 - Chemistry: Basic Chemical Concepts and Calculations, Properties and Reactions of Substances, Chemical Theories and Laws, Chemical Experiments and Applications.
 
 No database migration was required. CSCA values are stored using the existing task fields.
+
+
+## v4.5.1 Database Migration Fix
+
+- Fixed possible Internal Server Error after deploying v4.5.
+- Added safe PostgreSQL lightweight migration for new task email columns:
+  - `email_reminder_sent_at`
+  - `completion_email_sent_at`
+- Existing user data, tasks, and goals are preserved.

@@ -1353,14 +1353,55 @@ def calculate_goal_progress(goal):
         return 0
 
 def ensure_database_columns():
-    """Safe lightweight migration for local SQLite only.
+    """Safe lightweight migration for SQLite and PostgreSQL.
 
-    On PostgreSQL, db.create_all() creates the schema and SQLite PRAGMA must be skipped.
+    This prevents Internal Server Error after adding new columns while keeping existing data.
     """
     try:
         dialect = db.engine.dialect.name
+
+        if dialect == "postgresql":
+            with db.engine.connect() as connection:
+                postgres_sql = [
+                    'ALTER TABLE "user" ADD COLUMN IF NOT EXISTS email_verified BOOLEAN DEFAULT FALSE',
+                    'ALTER TABLE "user" ADD COLUMN IF NOT EXISTS verification_sent_at TIMESTAMP',
+                    'ALTER TABLE "user" ADD COLUMN IF NOT EXISTS is_admin BOOLEAN DEFAULT FALSE',
+                    'ALTER TABLE "user" ADD COLUMN IF NOT EXISTS ai_enabled BOOLEAN DEFAULT TRUE',
+                    'ALTER TABLE "user" ADD COLUMN IF NOT EXISTS ai_daily_limit INTEGER DEFAULT 1',
+
+                    'ALTER TABLE goal ADD COLUMN IF NOT EXISTS user_id INTEGER',
+
+                    'ALTER TABLE study_task ADD COLUMN IF NOT EXISTS user_id INTEGER',
+                    'ALTER TABLE study_task ADD COLUMN IF NOT EXISTS repeat_days VARCHAR(120)',
+                    'ALTER TABLE study_task ADD COLUMN IF NOT EXISTS topic VARCHAR(120)',
+                    'ALTER TABLE study_task ADD COLUMN IF NOT EXISTS custom_category VARCHAR(120)',
+                    'ALTER TABLE study_task ADD COLUMN IF NOT EXISTS custom_topic VARCHAR(120)',
+                    'ALTER TABLE study_task ADD COLUMN IF NOT EXISTS custom_skill VARCHAR(120)',
+                    'ALTER TABLE study_task ADD COLUMN IF NOT EXISTS email_reminder_sent_at VARCHAR(40)',
+                    'ALTER TABLE study_task ADD COLUMN IF NOT EXISTS completion_email_sent_at VARCHAR(40)',
+
+                    'ALTER TABLE interview_answer ADD COLUMN IF NOT EXISTS user_id INTEGER',
+                    'ALTER TABLE mistake_log ADD COLUMN IF NOT EXISTS user_id INTEGER',
+
+                    """CREATE TABLE IF NOT EXISTS ai_usage (
+                        id SERIAL PRIMARY KEY,
+                        user_id INTEGER NOT NULL,
+                        tool_name VARCHAR(80) NOT NULL DEFAULT 'general',
+                        usage_date VARCHAR(20) NOT NULL,
+                        count INTEGER NOT NULL DEFAULT 0,
+                        created_at TIMESTAMP
+                    )""",
+                ]
+
+                for sql in postgres_sql:
+                    connection.exec_driver_sql(sql)
+
+                connection.commit()
+                logger.info("PostgreSQL lightweight migration completed")
+            return
+
         if dialect != "sqlite":
-            logger.info("Skipping SQLite-only migration for database dialect: %s", dialect)
+            logger.info("Skipping migration for unsupported database dialect: %s", dialect)
             return
 
         with db.engine.connect() as connection:
@@ -1389,6 +1430,8 @@ def ensure_database_columns():
                     "custom_category": "ALTER TABLE study_task ADD COLUMN custom_category VARCHAR(120)",
                     "custom_topic": "ALTER TABLE study_task ADD COLUMN custom_topic VARCHAR(120)",
                     "custom_skill": "ALTER TABLE study_task ADD COLUMN custom_skill VARCHAR(120)",
+                    "email_reminder_sent_at": "ALTER TABLE study_task ADD COLUMN email_reminder_sent_at VARCHAR(40)",
+                    "completion_email_sent_at": "ALTER TABLE study_task ADD COLUMN completion_email_sent_at VARCHAR(40)",
                 },
                 "interview_answer": {
                     "user_id": "ALTER TABLE interview_answer ADD COLUMN user_id INTEGER",
@@ -1415,6 +1458,7 @@ def ensure_database_columns():
                 )
             """)
             connection.commit()
+            logger.info("SQLite lightweight migration completed")
     except Exception:
         logger.exception("Database column migration failed")
 
