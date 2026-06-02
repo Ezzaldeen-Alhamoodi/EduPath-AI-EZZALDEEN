@@ -89,7 +89,7 @@
 
         <label><span data-i18n="taskform.repeat">Repeat</span></label>
         <select name="repeat_type" id="repeatTypeSelect">
-            {% for value, label in [("once", "No <span data-i18n="taskform.repeat">Repeat</span> / Once"), ("daily", "Daily"), ("weekly", "Weekly"), ("monthly", "Monthly"), ("selected_days", "Custom Days")] %}
+            {% for value, label in [("once", "No Repeat / Once"), ("daily", "Daily"), ("weekly", "Weekly"), ("monthly", "Monthly"), ("selected_days", "Custom Days")] %}
                 <option value="{{ value }}" {% if task and task.repeat_type == value %}selected{% endif %}>{{ label }}</option>
             {% endfor %}
         </select>

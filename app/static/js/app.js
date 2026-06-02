@@ -1145,3 +1145,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     applyEduPathLanguage(localStorage.getItem("edupath-language") || "en");
 });
+
+
+
+/* v4.6.6.1 Safe Arabic repeat labels */
+function translateRepeatOptionsSafely() {
+    const lang = localStorage.getItem("edupath-language") || "en";
+    const repeatSelect = document.getElementById("repeatTypeSelect");
+    if (!repeatSelect) return;
+    const ar = {
+        "No Repeat / Once": "بدون تكرار / مرة واحدة",
+        "Daily": "يوميًا",
+        "Weekly": "أسبوعيًا",
+        "Monthly": "شهريًا",
+        "Custom Days": "أيام مخصصة"
+    };
+    [...repeatSelect.options].forEach(option => {
+        if (!option.dataset.originalText) option.dataset.originalText = option.textContent;
+        option.textContent = lang === "ar" ? (ar[option.dataset.originalText] || option.dataset.originalText) : option.dataset.originalText;
+    });
+}
+document.addEventListener("DOMContentLoaded", () => {
+    translateRepeatOptionsSafely();
+    const langBtn = document.getElementById("languageToggle");
+    const mobileLangBtn = document.getElementById("mobileMenuLanguage");
+    if (langBtn) langBtn.addEventListener("click", () => setTimeout(translateRepeatOptionsSafely, 120));
+    if (mobileLangBtn) mobileLangBtn.addEventListener("click", () => setTimeout(translateRepeatOptionsSafely, 160));
+});

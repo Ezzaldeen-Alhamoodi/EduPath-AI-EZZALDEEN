@@ -525,3 +525,11 @@ Email can be re-enabled later after confirming SMTP works reliably.
 - Quran Memorization category is designed to be Arabic-first and suitable for Quran learners.
 - The program name remains EduPath AI.
 - AI Coach pages remain English-focused as requested.
+
+
+## v4.6.6.1 Arabic Template Fix
+
+- Fixed Jinja template error in `_task_form.html`.
+- Arabic translation remains client-side only and does not affect stored task values or smart goal progress logic.
+- Added safe Arabic labels for repeat options without modifying Jinja tuples.
+- Keeps app performance light and avoids backend translation overhead.
