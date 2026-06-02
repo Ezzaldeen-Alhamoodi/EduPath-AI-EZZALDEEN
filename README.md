@@ -437,3 +437,14 @@ No database migration was required. CSCA values are stored using the existing ta
   - Admin motivational email messaging to selected users.
 - Recommended ADMIN_EMAILS:
   `geni49607@gmail.com,edupath.ai.ezzaldeen.app@outlook.com`
+
+
+## v4.6.1 Email Timeout Fix
+
+- Fixed Internal Server Error during registration/login when SMTP connection is slow or blocked.
+- Added `MAIL_TIMEOUT=8`.
+- Added optional `MAIL_ENABLED=true/false`.
+- Email sending now fails gracefully instead of crashing the request.
+- Recommended while testing email:
+  - `REQUIRE_EMAIL_VERIFICATION=false`
+- Enable verification only after confirming Outlook SMTP sends successfully.

@@ -168,7 +168,7 @@ def verify_token(token, purpose, max_age=3600):
     return serializer.loads(token, salt=f"edupath-{purpose}", max_age=max_age)
 
 def send_email_message(subject, recipients, body):
-    """Send email if SMTP is configured. Otherwise log the email body for development."""
+    """Send email if SMTP is configured. Never break the user's request if SMTP fails."""
     try:
         if not current_app_mail_is_configured():
             logger.info("Email not configured. Subject: %s | Recipients: %s | Body: %s", subject, recipients, body)
@@ -176,11 +176,14 @@ def send_email_message(subject, recipients, body):
         message = Message(subject=subject, recipients=recipients, body=body)
         mail.send(message)
         return True
-    except Exception:
-        logger.exception("Email sending failed")
+    except BaseException:
+        # Gunicorn can interrupt slow SMTP connections with SystemExit; never crash registration/login.
+        logger.exception("Email sending failed or timed out")
         return False
 
 def current_app_mail_is_configured():
+    if os.environ.get("MAIL_ENABLED", "true").lower() != "true":
+        return False
     return bool(os.environ.get("MAIL_SERVER") and os.environ.get("MAIL_USERNAME") and os.environ.get("MAIL_PASSWORD"))
 
 def send_verification_email(user):
@@ -431,6 +434,7 @@ def create_app():
     app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME", "")
     app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD", "")
     app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("MAIL_DEFAULT_SENDER", app.config["MAIL_USERNAME"] or "noreply@edupath.ai")
+    app.config["MAIL_TIMEOUT"] = int(os.environ.get("MAIL_TIMEOUT", "8"))
 
 
     db.init_app(app)
@@ -503,8 +507,10 @@ def create_app():
             db.session.commit()
 
             if app.config.get("REQUIRE_EMAIL_VERIFICATION", False):
-                send_verification_email(user)
-                flash("Account created. Please check your email to verify your account before logging in.", "success")
+                if send_verification_email(user):
+                    flash("Account created. Please check your email to verify your account before logging in.", "success")
+                else:
+                    flash("Account created, but the verification email could not be sent. Please contact the admin or try again later.", "error")
                 return redirect(url_for("login"))
 
             send_welcome_email(user)
@@ -531,8 +537,10 @@ def create_app():
                 return redirect(url_for("login"))
 
             if app.config.get("REQUIRE_EMAIL_VERIFICATION", False) and not user.email_verified:
-                send_verification_email(user)
-                flash("Please verify your email before logging in. A verification link has been sent.", "error")
+                if send_verification_email(user):
+                    flash("Please verify your email before logging in. A verification link has been sent.", "error")
+                else:
+                    flash("Your email is not verified, and the verification email could not be sent now. Please contact the admin.", "error")
                 return redirect(url_for("login"))
 
             if email in app.config["ADMIN_EMAILS"] and not user.is_admin:
