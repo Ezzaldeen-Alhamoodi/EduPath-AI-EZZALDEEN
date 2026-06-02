@@ -2285,3 +2285,203 @@ html[dir="rtl"] .toast-container {
         left: 12px;
     }
 }
+
+
+
+/* EduPath AI v4.6.4 Mobile Dashboard Polish */
+.mobile-app-header {
+    display: none;
+}
+
+.dashboard-page-title {
+    display: none;
+}
+
+.app-version-footer {
+    line-height: 1.65;
+}
+
+.app-version-footer span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+@media (max-width: 900px) {
+    .sidebar .theme-toggle,
+    .sidebar .language-toggle {
+        display: none !important;
+    }
+
+    .mobile-app-header {
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+        display: grid;
+        grid-template-columns: 44px 1fr 44px;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px 8px;
+        background: rgba(248, 250, 252, 0.86);
+        backdrop-filter: blur(18px);
+        border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+    }
+
+    body.dark-mode .mobile-app-header {
+        background: rgba(15, 23, 42, 0.88);
+    }
+
+    .mobile-icon-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 16px;
+        border: 1px solid rgba(37, 99, 235, 0.18);
+        background: rgba(37, 99, 235, 0.08);
+        color: var(--primary);
+        font-weight: 950;
+        font-size: 15px;
+        display: grid;
+        place-items: center;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .mobile-app-logo {
+        width: 52px;
+        height: 52px;
+        justify-self: center;
+        border-radius: 20px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #2563eb, #06b6d4);
+        color: #fff;
+        text-decoration: none;
+        box-shadow: 0 12px 28px rgba(37, 99, 235, 0.28);
+    }
+
+    .mobile-app-logo span {
+        font-size: 27px;
+        font-weight: 950;
+        line-height: 1;
+    }
+
+    .topbar {
+        padding: 0 !important;
+        margin: 8px 14px 4px !important;
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        min-height: auto !important;
+    }
+
+    .topbar h1 {
+        display: none !important;
+    }
+
+    .topbar p,
+    .topbar .pill {
+        display: none !important;
+    }
+
+    .dashboard-page-title {
+        display: block;
+        margin: 4px 16px 10px;
+        font-size: 22px;
+        letter-spacing: -0.04em;
+        font-weight: 950;
+        color: var(--text);
+    }
+
+    .hero.v21-hero {
+        margin-top: 0 !important;
+        padding: 22px 18px !important;
+        border-radius: 28px !important;
+    }
+
+    .hero.v21-hero .tag {
+        display: inline-flex;
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+
+    .hero.v21-hero h2 {
+        font-size: 25px !important;
+        line-height: 1.08;
+        margin-bottom: 10px;
+    }
+
+    .hero.v21-hero p {
+        font-size: 14px;
+        line-height: 1.55;
+    }
+
+    .hero.v21-hero .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 16px;
+    }
+
+    .hero.v21-hero .button {
+        padding: 11px 10px;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .hero.v21-hero .hero-card {
+        margin-top: 14px;
+        padding: 14px;
+        border-radius: 22px;
+    }
+
+    .hero.v21-hero .progress-circle {
+        width: 92px;
+        height: 92px;
+        font-size: 24px;
+    }
+
+    .stats-grid {
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 14px 10px !important;
+    }
+
+    .stat-card span {
+        font-size: 24px !important;
+    }
+
+    .stat-card h3 {
+        font-size: 13px !important;
+    }
+
+    .stat-card p {
+        font-size: 22px !important;
+    }
+
+    .card {
+        padding: 16px !important;
+    }
+
+    .app-version-footer {
+        margin: 26px 0 88px !important;
+        padding: 0 14px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 420px) {
+    .mobile-app-header {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .hero.v21-hero h2 {
+        font-size: 23px !important;
+    }
+
+    .hero.v21-hero .hero-actions {
+        grid-template-columns: 1fr;
+    }
+}

@@ -808,3 +808,31 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 500 + index * 900);
     });
 });
+
+
+
+/* EduPath AI v4.6.4 Mobile Header Controls */
+document.addEventListener("DOMContentLoaded", () => {
+    const desktopTheme = document.getElementById("themeToggle");
+    const mobileTheme = document.getElementById("mobileThemeToggle");
+    if (mobileTheme && desktopTheme) {
+        mobileTheme.addEventListener("click", () => desktopTheme.click());
+        const updateMobileThemeIcon = () => {
+            mobileTheme.textContent = document.body.classList.contains("dark-mode") ? "☀" : "☾";
+        };
+        updateMobileThemeIcon();
+        desktopTheme.addEventListener("click", () => setTimeout(updateMobileThemeIcon, 50));
+    }
+
+    const desktopLang = document.getElementById("languageToggle");
+    const mobileLang = document.getElementById("mobileLanguageToggle");
+    if (mobileLang && desktopLang) {
+        mobileLang.addEventListener("click", () => desktopLang.click());
+        const updateMobileLangIcon = () => {
+            const current = localStorage.getItem("edupath-language") || "en";
+            mobileLang.textContent = current === "ar" ? "EN" : "ع";
+        };
+        updateMobileLangIcon();
+        desktopLang.addEventListener("click", () => setTimeout(updateMobileLangIcon, 80));
+    }
+});

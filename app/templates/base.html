@@ -10,6 +10,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+
+    <header class="mobile-app-header">
+        <button class="mobile-icon-btn" id="mobileThemeToggle" type="button" aria-label="Toggle dark mode">☾</button>
+        <a class="mobile-app-logo" href="{{ url_for('index') }}" aria-label="EduPath AI Home">
+            <span>✦</span>
+        </a>
+        <button class="mobile-icon-btn" id="mobileLanguageToggle" type="button" aria-label="Switch language">ع</button>
+    </header>
+
     <aside class="sidebar">
         <div class="brand-block">
             <div class="logo">✦</div>

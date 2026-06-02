@@ -483,3 +483,19 @@ Email can be re-enabled later after confirming SMTP works reliably.
 - Automatic motivational notification appears after task completion.
 - Admin can still send motivational notifications manually.
 - Task completion email is disabled by default unless `SEND_TASK_COMPLETION_EMAILS=true`.
+
+
+## v4.6.4 Mobile Dashboard Polish
+
+- Improved mobile dashboard layout.
+- Added compact mobile header:
+  - dark/light mode icon
+  - centered app icon
+  - language switch icon
+- Removed repeated dashboard subtitle/pill on mobile.
+- Dashboard title appears directly above the blue hero card.
+- Footer now shows only:
+  - app name
+  - version number
+  - official contact email
+- Improved spacing, hero sizing, and mobile card layout.
