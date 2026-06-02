@@ -420,3 +420,20 @@ No database migration was required. CSCA values are stored using the existing ta
   - `email_reminder_sent_at`
   - `completion_email_sent_at`
 - Existing user data, tasks, and goals are preserved.
+
+
+## v4.6 Final Admin Control
+
+- Dashboard version updated to v4.6 Final Admin Control.
+- Admin panel improved with:
+  - Per-user goals count.
+  - Per-user tasks count.
+  - Completed and pending task counts.
+  - Progress percentage.
+  - AI usage today for English, Scholarship, Code, and General AI.
+  - AI enable/disable per user.
+  - Daily AI limit per regular user.
+  - Admin users are unlimited.
+  - Admin motivational email messaging to selected users.
+- Recommended ADMIN_EMAILS:
+  `geni49607@gmail.com,edupath.ai.ezzaldeen.app@outlook.com`

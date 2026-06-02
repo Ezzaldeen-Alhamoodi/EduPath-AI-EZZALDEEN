@@ -230,6 +230,32 @@ EduPath AI EZZALDEEN
     return send_email_message("Welcome to EduPath AI EZZALDEEN", [user.email], body)
 
 
+
+def send_admin_motivation_email(user, message_type, custom_message=""):
+    presets = {
+        "completed": "Congratulations! You are making real progress. Completing tasks means you are building discipline step by step.",
+        "not_completed": "Do not worry if you did not complete everything today. Start again with one small task. Progress is built by returning, not by being perfect.",
+        "partial": "You completed part of your work, and that matters. Now try to finish one more task and keep your momentum.",
+        "encouragement": "Keep going. Your goals are closer when you continue with small daily steps.",
+        "custom": custom_message or "Keep going. EduPath AI believes in your progress."
+    }
+    subject_map = {
+        "completed": "Great progress from EduPath AI",
+        "not_completed": "A gentle reminder from EduPath AI",
+        "partial": "Keep your momentum going",
+        "encouragement": "You can do this",
+        "custom": "Message from EduPath AI Admin"
+    }
+    body = f"""Hello {user.name},
+
+{presets.get(message_type, presets["encouragement"])}
+
+Your learning journey is important. Continue step by step.
+
+EduPath AI EZZALDEEN
+"""
+    return send_email_message(subject_map.get(message_type, "Message from EduPath AI"), [user.email], body)
+
 def task_display_line(task):
     parts = [
         task.title or "Your task",
@@ -347,7 +373,7 @@ def is_valid_email(value):
 def user_is_admin(user):
     if not user or not getattr(user, "is_authenticated", False):
         return False
-    admin_emails = [email.strip().lower() for email in os.environ.get("ADMIN_EMAILS", "geni49607@gmail.com").split(",") if email.strip()]
+    admin_emails = [email.strip().lower() for email in os.environ.get("ADMIN_EMAILS", "geni49607@gmail.com,edupath.ai.ezzaldeen.app@outlook.com").split(",") if email.strip()]
     return bool(getattr(user, "is_admin", False) or getattr(user, "email", "").lower() in admin_emails)
 
 def admin_required(view_func):
@@ -411,7 +437,7 @@ def create_app():
     login_manager.init_app(app)
 
     app.config["REQUIRE_EMAIL_VERIFICATION"] = os.environ.get("REQUIRE_EMAIL_VERIFICATION", "false").lower() == "true"
-    app.config["ADMIN_EMAILS"] = [email.strip().lower() for email in os.environ.get("ADMIN_EMAILS", "geni49607@gmail.com").split(",") if email.strip()]
+    app.config["ADMIN_EMAILS"] = [email.strip().lower() for email in os.environ.get("ADMIN_EMAILS", "geni49607@gmail.com,edupath.ai.ezzaldeen.app@outlook.com").split(",") if email.strip()]
     app.config["DEFAULT_AI_DAILY_LIMIT"] = int(os.environ.get("DEFAULT_AI_DAILY_LIMIT", "1"))
 
     mail.init_app(app)
@@ -696,18 +722,63 @@ def create_app():
         total_goals = Goal.query.count()
         total_tasks = StudyTask.query.count()
         completed_tasks = StudyTask.query.filter_by(status="done").count()
+        pending_tasks = StudyTask.query.filter(StudyTask.status != "done").count()
         today_value = str(date.today())
         ai_today = db.session.query(db.func.sum(AIUsage.count)).filter_by(usage_date=today_value).scalar() or 0
+
+        user_stats = []
+        for user in users:
+            goals_count = Goal.query.filter_by(user_id=user.id).count()
+            tasks_count = StudyTask.query.filter_by(user_id=user.id).count()
+            done_count = StudyTask.query.filter_by(user_id=user.id, status="done").count()
+            pending_count = StudyTask.query.filter(StudyTask.user_id == user.id, StudyTask.status != "done").count()
+
+            usage_rows = AIUsage.query.filter_by(user_id=user.id, usage_date=today_value).all()
+            usage_map = {row.tool_name: row.count for row in usage_rows}
+
+            user_stats.append({
+                "user": user,
+                "goals_count": goals_count,
+                "tasks_count": tasks_count,
+                "done_count": done_count,
+                "pending_count": pending_count,
+                "progress": int((done_count / tasks_count) * 100) if tasks_count else 0,
+                "english_used": usage_map.get("english", 0),
+                "scholarship_used": usage_map.get("scholarship", 0),
+                "code_used": usage_map.get("code", 0),
+                "general_used": usage_map.get("general", 0),
+                "is_unlimited": user_is_admin(user),
+            })
 
         return render_template(
             "admin.html",
             users=users,
+            user_stats=user_stats,
             total_users=total_users,
             total_goals=total_goals,
             total_tasks=total_tasks,
             completed_tasks=completed_tasks,
+            pending_tasks=pending_tasks,
             ai_today=ai_today,
         )
+
+
+    @app.route("/admin/send-message", methods=["POST"])
+    @login_required
+    @admin_required
+    def admin_send_message():
+        user_id = int(request.form.get("user_id", 0) or 0)
+        message_type = request.form.get("message_type", "encouragement").strip()
+        custom_message = request.form.get("custom_message", "").strip()
+
+        user = User.query.get_or_404(user_id)
+        if send_admin_motivation_email(user, message_type, custom_message):
+            flash("Motivational message sent successfully.", "success")
+        else:
+            flash("Message could not be sent. Check email configuration.", "error")
+
+        return redirect(url_for("admin_dashboard"))
+
 
     @app.route("/admin/user/<int:user_id>/update", methods=["POST"])
     @login_required

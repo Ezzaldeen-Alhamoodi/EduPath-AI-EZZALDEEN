@@ -1,39 +1,89 @@
 \
 {% extends "base.html" %}
-{% block page_title %}Admin Panel{% endblock %}
+{% block page_title %}Admin Control Center{% endblock %}
 {% block content %}
 
 <section class="hero compact admin-hero">
     <div>
-        <span class="tag">EduPath AI</span>
-        <h2>Admin Panel</h2>
-        <p>Control users, AI Coach access, daily AI limits, and platform statistics.</p>
+        <span class="tag">Admin Control Center</span>
+        <h2>Application Control & Student Progress</h2>
+        <p>Manage users, AI access, daily limits, progress tracking, and motivational messages.</p>
     </div>
-    <a class="button light" href="{{ url_for('profile') }}">👤 My Profile</a>
+    <a class="button light" href="{{ url_for('profile') }}">◉ My Profile</a>
 </section>
 
 <section class="stats-grid">
-    <div class="stat-card blue"><span>👥</span><h3>Users</h3><p>{{ total_users }}</p></div>
-    <div class="stat-card purple"><span>🎯</span><h3>Goals</h3><p>{{ total_goals }}</p></div>
-    <div class="stat-card orange"><span>✅</span><h3>Tasks</h3><p>{{ total_tasks }}</p></div>
-    <div class="stat-card green"><span>🧠</span><h3>AI Uses Today</h3><p>{{ ai_today }}</p></div>
+    <div class="stat-card blue"><span>◉</span><h3>Users</h3><p>{{ total_users }}</p></div>
+    <div class="stat-card purple"><span>◎</span><h3>Goals</h3><p>{{ total_goals }}</p></div>
+    <div class="stat-card green"><span>✓</span><h3>Completed Tasks</h3><p>{{ completed_tasks }}</p></div>
+    <div class="stat-card orange"><span>◷</span><h3>Pending Tasks</h3><p>{{ pending_tasks }}</p></div>
+    <div class="stat-card purple"><span>✦</span><h3>AI Uses Today</h3><p>{{ ai_today }}</p></div>
+</section>
+
+<section class="card admin-message-card">
+    <h2>Send Motivational Message</h2>
+    <p class="muted">Send a private encouragement email to a selected user. Useful for brothers, students, or anyone you are helping.</p>
+
+    <form method="POST" action="{{ url_for('admin_send_message') }}" class="form admin-message-form">
+        <label>Select User</label>
+        <select name="user_id" required>
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.name }} — {{ user.email }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Message Type</label>
+        <select name="message_type" id="adminMessageType">
+            <option value="completed">Congratulations for completing tasks</option>
+            <option value="partial">Encourage after partial completion</option>
+            <option value="not_completed">Gentle reminder for incomplete tasks</option>
+            <option value="encouragement">General encouragement</option>
+            <option value="custom">Other / Custom message</option>
+        </select>
+
+        <label>Custom Message</label>
+        <textarea name="custom_message" rows="4" placeholder="Write your own message if you choose Other / Custom..."></textarea>
+
+        <button type="submit">Send Message</button>
+    </form>
 </section>
 
 <section class="card">
-    <h2>👥 Users & AI Access</h2>
-    <p class="muted">Goals and tasks are free for everyone. AI Coaches can be limited per user to protect your OpenRouter quota.</p>
+    <h2>Users, Progress & AI Controls</h2>
+    <p class="muted">Admins are unlimited. Regular users can be limited per day to protect your OpenRouter quota.</p>
 
-    <div class="admin-users">
-        {% for user in users %}
-            <div class="admin-user-card">
-                <div>
-                    <strong>{{ user.name }}</strong>
-                    <span>{{ user.email }}</span>
-                    <span>
-                        Goals: {{ user.goals|length }} ·
-                        Tasks: {{ user.tasks|length }} ·
-                        Admin: {{ "Yes" if user.is_admin else "No" }}
-                    </span>
+    <div class="admin-users final-admin-users">
+        {% for item in user_stats %}
+            {% set user = item.user %}
+            <div class="admin-user-card final-admin-card">
+                <div class="admin-user-summary">
+                    <div>
+                        <strong>{{ user.name }}</strong>
+                        <span>{{ user.email }}</span>
+                    </div>
+                    <div class="admin-badges">
+                        {% if item.is_unlimited %}
+                            <span class="admin-badge unlimited">Unlimited Admin</span>
+                        {% else %}
+                            <span class="admin-badge">Limit: {{ user.ai_daily_limit }}/day</span>
+                        {% endif %}
+                        <span class="admin-badge">{{ "AI On" if user.ai_enabled else "AI Off" }}</span>
+                    </div>
+                </div>
+
+                <div class="admin-progress-grid">
+                    <div><strong>{{ item.goals_count }}</strong><span>Goals</span></div>
+                    <div><strong>{{ item.tasks_count }}</strong><span>Tasks</span></div>
+                    <div><strong>{{ item.done_count }}</strong><span>Completed</span></div>
+                    <div><strong>{{ item.pending_count }}</strong><span>Pending</span></div>
+                    <div><strong>{{ item.progress }}%</strong><span>Progress</span></div>
+                </div>
+
+                <div class="admin-ai-grid">
+                    <div><strong>{{ item.english_used }}</strong><span>English Coach today</span></div>
+                    <div><strong>{{ item.scholarship_used }}</strong><span>Scholarship Coach today</span></div>
+                    <div><strong>{{ item.code_used }}</strong><span>Code Coach today</span></div>
+                    <div><strong>{{ item.general_used }}</strong><span>General AI today</span></div>
                 </div>
 
                 <form method="POST" action="{{ url_for('admin_update_user', user_id=user.id) }}" class="admin-user-form">
@@ -45,20 +95,20 @@
                         <span>Allow AI Coach</span>
                     </label>
 
-                    <label>Daily AI limit</label>
+                    <label>Daily AI limit for regular user</label>
                     <input type="number" name="ai_daily_limit" min="0" value="{{ user.ai_daily_limit }}">
 
                     <label class="checkbox-row">
                         <input type="checkbox" name="is_admin" {% if user.is_admin %}checked{% endif %} {% if user.id == current_user.id %}disabled{% endif %}>
-                        <span>Admin</span>
+                        <span>Admin / Unlimited AI</span>
                     </label>
 
-                    <button type="submit">💾 Save</button>
+                    <button type="submit">Save User Control</button>
                 </form>
 
                 {% if user.id != current_user.id %}
                     <form method="POST" action="{{ url_for('admin_delete_user', user_id=user.id) }}" onsubmit="return confirm('Delete this user and all related data?')" class="admin-delete-form">
-                        <button type="submit" class="danger">🗑 Delete User</button>
+                        <button type="submit" class="danger">Delete User</button>
                     </form>
                 {% endif %}
             </div>
