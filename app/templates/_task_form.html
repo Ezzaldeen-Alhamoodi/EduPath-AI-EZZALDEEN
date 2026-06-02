@@ -1,102 +1,102 @@
 \
 <div class="smart-task-form">
     <div class="smart-step">
-        <h3>1. Choose Task Type</h3>
-        <p class="muted">Only the fields related to your choice will appear. This keeps the task system simple and personal.</p>
+        <h3><span data-i18n="taskform.choose_type">1. Choose Task Type</span></h3>
+        <p class="muted"><span data-i18n="taskform.choose_desc">Only the fields related to your choice will appear. This keeps the task system simple and personal.</span></p>
         <div class="task-type-grid" id="taskTypeCards"></div>
     </div>
 
     <input type="hidden" name="category" id="categorySelect" value="{{ task.category if task else '' }}">
 
     <div class="conditional-field" id="customCategoryBox">
-        <label>Other Task Type</label>
-        <input name="custom_category" id="customCategoryInput" value="{{ task.custom_category if task else '' }}" placeholder="Write your own task type">
+        <label><span data-i18n="taskform.other_type">Other Task Type</span></label>
+        <input name="custom_category" id="customCategoryInput" value="{{ task.custom_category if task else '' }}" placeholder="Write your own task type / اكتب نوع المهمة">
     </div>
 
     <div id="taskDetailsArea" class="smart-details">
-        <label>Task Name</label>
-        <input name="title" value="{{ task.title if task else '' }}" placeholder="Example: Solve Python OOP exercises, Review Quran memorization, Edit motivation letter" required>
+        <label><span data-i18n="taskform.task_name">Task Name</span></label>
+        <input name="title" value="{{ task.title if task else '' }}" placeholder="Example: Review Quran memorization / مثال: مراجعة حفظ القرآن" required>
 
         <label id="topicLabel">Main Field</label>
         <select name="topic" id="topicSelect" data-current="{{ task.topic if task else '' }}"></select>
         <div class="conditional-field" id="customTopicBox">
-            <label>Other Main Field</label>
-            <input name="custom_topic" id="customTopicInput" value="{{ task.custom_topic if task else '' }}" placeholder="Write your own main field">
+            <label><span data-i18n="taskform.other_main">Other Main Field</span></label>
+            <input name="custom_topic" id="customTopicInput" value="{{ task.custom_topic if task else '' }}" placeholder="Write your own main field / اكتب المجال الرئيسي">
         </div>
 
         <label id="skillLabel">Sub Field</label>
         <select name="skill" id="skillSelect" data-current="{{ task.skill if task else '' }}"></select>
         <div class="conditional-field" id="customSkillBox">
-            <label>Other Sub Field</label>
-            <input name="custom_skill" id="customSkillInput" value="{{ task.custom_skill if task else '' }}" placeholder="Write your own sub field">
+            <label><span data-i18n="taskform.other_sub">Other Sub Field</span></label>
+            <input name="custom_skill" id="customSkillInput" value="{{ task.custom_skill if task else '' }}" placeholder="Write your own sub field / اكتب المجال الفرعي">
         </div>
 
         <label id="detailLabel">Detailed Topic</label>
         <select name="language" id="detailedTopicSelect" data-current="{{ task.language if task else '' }}"></select>
         <div class="conditional-field" id="customDetailedTopicBox">
-            <label>Other Detailed Topic</label>
-            <input name="language_custom" id="customDetailedTopicInput" value="" placeholder="Write a detailed topic">
+            <label><span data-i18n="taskform.other_detail">Other Detailed Topic</span></label>
+            <input name="language_custom" id="customDetailedTopicInput" value="" placeholder="Write a detailed topic / اكتب الموضوع التفصيلي">
         </div>
 
         <label id="trainingLabel">Training Type</label>
         <select name="practice_type" id="trainingTypeSelect" data-current="{{ task.practice_type if task else '' }}"></select>
 
         <div class="csca-extra-box" id="cscaExtraBox">
-            <label>CSCA Detailed Topic</label>
+            <label><span data-i18n="taskform.csca_detail">CSCA Detailed Topic</span></label>
             <select name="csca_detailed_topic" id="cscaDetailedTopicSelect"></select>
 
-            <label>CSCA Training Type</label>
+            <label><span data-i18n="taskform.csca_training">CSCA Training Type</span></label>
             <select name="csca_training_type" id="cscaTrainingTypeSelect"></select>
 
-            <small class="hint">CSCA structure: Exam → Language → Subject → Main Topic → Detailed Topic → Training Type</small>
+            <small class="hint"><span data-i18n="taskform.csca_hint">CSCA structure: Exam → Language → Subject → Main Topic → Detailed Topic → Training Type</span></small>
         </div>
 
         <div class="conditional-field" id="customTrainingTypeBox">
-            <label>Other Training Type</label>
-            <input name="practice_type_custom" id="customTrainingTypeInput" value="" placeholder="Write your training type">
+            <label><span data-i18n="taskform.other_training">Other Training Type</span></label>
+            <input name="practice_type_custom" id="customTrainingTypeInput" value="" placeholder="Write your training type / اكتب نوع التدريب">
         </div>
 
-        <label>Source / Link</label>
-        <input name="source" value="{{ task.source if task else '' }}" placeholder="Book, website, YouTube, Coursera, Codeforces, document link...">
+        <label><span data-i18n="taskform.source">Source / Link</span></label>
+        <input name="source" value="{{ task.source if task else '' }}" placeholder="Book, website, YouTube, document link... / كتاب أو رابط أو مصدر">
 
         <div class="form-row">
             <div>
-                <label>Difficulty 1-5</label>
+                <label><span data-i18n="taskform.difficulty">Difficulty 1-5</span></label>
                 <input name="difficulty" type="number" min="1" max="5" value="{{ task.difficulty if task else 1 }}">
             </div>
             <div>
-                <label>Priority 1-5</label>
+                <label><span data-i18n="taskform.priority">Priority 1-5</span></label>
                 <input name="priority" type="number" min="1" max="5" value="{{ task.priority if task else 3 }}">
             </div>
         </div>
 
-        <label>Expected Time in Minutes</label>
+        <label><span data-i18n="taskform.expected">Expected Time in Minutes</span></label>
         <input name="estimated_minutes" type="number" min="5" value="{{ task.estimated_minutes if task else 30 }}">
 
         <div class="form-row">
             <div>
-                <label>Start Date</label>
+                <label><span data-i18n="taskform.start_date">Start Date</span></label>
                 <input name="start_date" type="date" value="{{ task.start_date if task else '' }}">
             </div>
             <div>
-                <label>End Date / Deadline</label>
+                <label><span data-i18n="taskform.end_date">End Date / Deadline</span></label>
                 <input name="due_date" type="date" value="{{ task.due_date if task else '' }}">
             </div>
         </div>
 
-        <label>Reminder Time</label>
+        <label><span data-i18n="taskform.reminder">Reminder Time</span></label>
         <input name="reminder_time" type="time" value="{{ task.reminder_time if task else '' }}">
 
-        <label>Repeat</label>
+        <label><span data-i18n="taskform.repeat">Repeat</span></label>
         <select name="repeat_type" id="repeatTypeSelect">
-            {% for value, label in [("once", "No Repeat / Once"), ("daily", "Daily"), ("weekly", "Weekly"), ("monthly", "Monthly"), ("selected_days", "Custom Days")] %}
+            {% for value, label in [("once", "No <span data-i18n="taskform.repeat">Repeat</span> / Once"), ("daily", "Daily"), ("weekly", "Weekly"), ("monthly", "Monthly"), ("selected_days", "Custom Days")] %}
                 <option value="{{ value }}" {% if task and task.repeat_type == value %}selected{% endif %}>{{ label }}</option>
             {% endfor %}
         </select>
 
         <div class="repeat-days-box" id="repeatDaysBox">
-            <label>Repeat Days</label>
-            <small class="hint">Choose any days that fit this task. Useful for intensive weekends, language routines, or study schedules.</small>
+            <label><span data-i18n="taskform.repeat">Repeat</span> Days</label>
+            <small class="hint"><span data-i18n="taskform.repeat_hint">Choose any days that fit this task. Useful for intensive weekends, language routines, or study schedules.</span></small>
             <div class="weekday-grid">
                 {% set selected_days = (task.repeat_days.split(",") if task and task.repeat_days else []) %}
                 {% for day_value, day_label in [("0", "Mon"),("1", "Tue"),("2", "Wed"),("3", "Thu"),("4", "Fri"),("5", "Sat"),("6", "Sun")] %}
@@ -108,7 +108,7 @@
             </div>
         </div>
 
-        <label>Notes</label>
-        <textarea name="notes" rows="3" placeholder="Any notes, plan, link details, or personal instructions...">{{ task.notes if task else "" }}</textarea>
+        <label><span data-i18n="taskform.notes">Notes</span></label>
+        <textarea name="notes" rows="3" placeholder="Any notes or plan... / اكتب أي ملاحظات أو خطة">{{ task.notes if task else "" }}</textarea>
     </div>
 </div>

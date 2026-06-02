@@ -323,6 +323,203 @@ const SMART_TASK_DATA = {
   "Other": {icon: "🧩", main: ["Other"], sub: {"Other": ["Other"]}, detail: {"Other": ["Other"]}, training: ["Other"]}
 };
 
+
+/* EduPath AI v4.6.6 Full Arabic UI */
+const EDUPATH_LABEL_AR = {
+    "Secondary School": "المرحلة الثانوية",
+    "University": "المرحلة الجامعية",
+    "Languages": "اللغات",
+    "Programming & Technology": "البرمجة والتكنولوجيا",
+    "Artificial Intelligence": "الذكاء الاصطناعي",
+    "Mathematics": "الرياضيات",
+    "Scholarships": "المنح الدراسية",
+    "Exams & Certificates": "الاختبارات والشهادات",
+    "Daily Life": "الحياة اليومية",
+    "Projects": "المشاريع",
+    "Reading & Research": "القراءة والبحث",
+    "General": "عام",
+    "Other": "أخرى",
+    "Quran Memorization": "حفظ القرآن الكريم",
+
+    "Quran": "القرآن الكريم",
+    "Islamic Studies": "التربية الإسلامية",
+    "Arabic Language": "اللغة العربية",
+    "English Language": "اللغة الإنجليزية",
+    "Computer Science": "علوم الحاسوب",
+    "General Review": "مراجعة عامة",
+    "Exams": "اختبارات",
+    "Homework": "واجبات",
+
+    "English": "الإنجليزية",
+    "Turkish": "التركية",
+    "Russian": "الروسية",
+    "Chinese": "الصينية",
+    "Arabic": "العربية",
+    "French": "الفرنسية",
+    "German": "الألمانية",
+    "General English": "إنجليزية عامة",
+    "Grammar": "القواعد",
+    "Vocabulary": "المفردات",
+    "Pronunciation": "النطق",
+    "Reading": "القراءة",
+    "Writing": "الكتابة",
+    "Listening": "الاستماع",
+    "Speaking": "التحدث",
+    "Academic English": "الإنجليزية الأكاديمية",
+
+    "Programming": "البرمجة",
+    "Algorithms": "الخوارزميات",
+    "Data Structures": "هياكل البيانات",
+    "Databases": "قواعد البيانات",
+    "Operating Systems": "أنظمة التشغيل",
+    "Computer Networks": "شبكات الحاسوب",
+    "Software Engineering": "هندسة البرمجيات",
+    "Web Development": "تطوير الويب",
+    "Cybersecurity": "الأمن السيبراني",
+    "Discrete Mathematics": "الرياضيات المتقطعة",
+    "Computer Architecture": "معمارية الحاسوب",
+    "Graduation Project": "مشروع التخرج",
+
+    "Python": "بايثون",
+    "C": "سي",
+    "C++": "سي بلس بلس",
+    "Java": "جافا",
+    "JavaScript": "جافاسكريبت",
+    "HTML": "HTML",
+    "CSS": "CSS",
+    "SQL": "SQL",
+    "Flask": "Flask",
+    "React": "React",
+    "Git / GitHub": "Git / GitHub",
+    "Frontend Development": "تطوير الواجهة الأمامية",
+    "Backend Development": "تطوير الخلفية",
+    "Full Stack Development": "تطوير متكامل",
+    "Problem Solving": "حل المشكلات",
+    "Debugging": "تصحيح الأخطاء",
+    "Syntax": "الصياغة البرمجية",
+    "Variables": "المتغيرات",
+    "Data Types": "أنواع البيانات",
+    "Conditions": "الشروط",
+    "Loops": "الحلقات",
+    "Functions": "الدوال",
+    "Lists": "القوائم",
+    "Dictionaries": "القواميس",
+    "Files": "الملفات",
+    "OOP": "البرمجة الكائنية",
+    "Projects": "المشاريع",
+
+    "Study Concept": "دراسة المفهوم",
+    "Write Code": "كتابة كود",
+    "Solve Exercises": "حل تمارين",
+    "Build Mini Project": "بناء مشروع صغير",
+    "Debug Code": "تصحيح الكود",
+    "Read Documentation": "قراءة التوثيق",
+    "Review Mistakes": "مراجعة الأخطاء",
+    "Practice Syntax": "تدريب الصياغة",
+    "Build App": "بناء تطبيق",
+    "Practice": "تدريب",
+    "Timed Practice": "تدريب بوقت محدد",
+    "Mock Test": "اختبار تجريبي",
+    "Final Revision": "مراجعة نهائية",
+
+    "Scholarship Search": "البحث عن منحة",
+    "University Research": "بحث عن جامعة",
+    "Application Form": "نموذج التقديم",
+    "Documents": "المستندات",
+    "CV": "السيرة الذاتية",
+    "Motivation Letter": "خطاب الدافع",
+    "Personal Statement": "البيان الشخصي",
+    "Recommendation Letter": "خطاب التوصية",
+    "Interview": "المقابلة",
+    "Language Test": "اختبار اللغة",
+    "Portfolio": "الملف الشخصي",
+    "Email Communication": "التواصل بالبريد",
+    "Visa": "التأشيرة",
+    "Travel Preparation": "الاستعداد للسفر",
+    "Follow-up": "المتابعة",
+
+    "Health": "الصحة",
+    "Exercise": "الرياضة",
+    "Sleep": "النوم",
+    "Food": "الطعام",
+    "Water": "الماء",
+    "Personal Routine": "الروتين الشخصي",
+    "Family": "العائلة",
+    "Finance": "المال",
+    "Cleaning": "التنظيف",
+    "Shopping": "التسوق",
+    "Time Management": "إدارة الوقت",
+    "Reading": "القراءة",
+    "Religious Routine": "الروتين الديني",
+    "Appointments": "المواعيد",
+
+    "IELTS": "IELTS",
+    "TOEFL": "TOEFL",
+    "Duolingo English Test": "Duolingo English Test",
+    "HSK": "HSK",
+    "SAT": "SAT",
+    "ACT": "ACT",
+    "GRE": "GRE",
+    "GMAT": "GMAT",
+    "CSCA": "CSCA",
+
+    "Mathematics": "الرياضيات",
+    "Physics": "الفيزياء",
+    "Chemistry": "الكيمياء",
+    "Sets and Inequalities": "المجموعات والمتباينات",
+    "Functions": "الدوال",
+    "Geometry and Algebra": "الهندسة والجبر",
+    "Probability and Statistics": "الاحتمالات والإحصاء",
+    "Mechanics": "الميكانيكا",
+    "Electromagnetism": "الكهرومغناطيسية",
+    "Thermodynamics": "الديناميكا الحرارية",
+    "Optics": "البصريات",
+    "Modern Physics": "الفيزياء الحديثة",
+    "Basic Chemical Concepts and Calculations": "المفاهيم والحسابات الكيميائية الأساسية",
+    "Properties and Reactions of Substances": "خصائص وتفاعلات المواد",
+    "Chemical Theories and Laws": "النظريات والقوانين الكيميائية",
+    "Chemical Experiments and Applications": "التجارب والتطبيقات الكيميائية",
+
+    "Study Theory": "دراسة نظرية",
+    "Concept Review": "مراجعة المفهوم",
+    "Solved Examples": "أمثلة محلولة",
+    "Practice Questions": "أسئلة تدريبية",
+    "Formula Review": "مراجعة القوانين",
+    "Flashcards": "بطاقات مراجعة",
+    "Weakness Training": "تدريب نقاط الضعف",
+    "Full Exam Simulation": "محاكاة اختبار كامل",
+
+    "حفظ جديد": "حفظ جديد",
+    "مراجعة": "مراجعة",
+    "تسميع": "تسميع",
+    "تجويد": "تجويد",
+    "تفسير مبسط": "تفسير مبسط",
+    "خطة حفظ": "خطة حفظ",
+    "اختبار حفظ": "اختبار حفظ",
+    "Other": "أخرى"
+};
+
+function labelForUI(value) {
+    const lang = localStorage.getItem("edupath-language") || "en";
+    if (lang !== "ar") return value;
+    return EDUPATH_LABEL_AR[value] || value;
+}
+
+function translateDynamicOptions() {
+    const lang = localStorage.getItem("edupath-language") || "en";
+    document.querySelectorAll("select option").forEach(option => {
+        if (!option.dataset.originalText) option.dataset.originalText = option.textContent;
+        const original = option.dataset.originalText;
+        option.textContent = lang === "ar" ? (EDUPATH_LABEL_AR[original] || original) : original;
+    });
+
+    document.querySelectorAll(".task-type-card strong").forEach(el => {
+        if (!el.dataset.originalText) el.dataset.originalText = el.textContent;
+        const original = el.dataset.originalText;
+        el.textContent = lang === "ar" ? (EDUPATH_LABEL_AR[original] || original) : original;
+    });
+}
+
 function fillSmartSelect(select, values, selectedValue) {
     if (!select) return;
     select.innerHTML = "";
@@ -330,7 +527,7 @@ function fillSmartSelect(select, values, selectedValue) {
     unique.forEach(value => {
         const option = document.createElement("option");
         option.value = value;
-        option.textContent = value;
+        option.textContent = labelForUI(value);
         if (selectedValue && value === selectedValue) option.selected = true;
         select.appendChild(option);
     });
@@ -358,7 +555,7 @@ function renderTaskTypeCards() {
         button.type = "button";
         button.className = "task-type-card" + (type === current ? " active" : "");
         button.dataset.type = type;
-        button.innerHTML = `<span>${config.icon || "⭐"}</span><strong>${type}</strong>`;
+        button.innerHTML = `<span>${config.icon || "⭐"}</span><strong>${labelForUI(type)}</strong>`;
         button.addEventListener("click", () => {
             categoryInput.value = type;
             document.querySelectorAll(".task-type-card").forEach(card => card.classList.remove("active"));
@@ -779,6 +976,8 @@ function applyEduPathLanguage(lang) {
         }
     });
 
+    translateDynamicOptions();
+
     const toggle = document.getElementById("languageToggle");
     if (toggle) {
         toggle.textContent = selected === "ar" ? "English | عربي" : "عربي | EN";
@@ -896,4 +1095,53 @@ document.addEventListener("DOMContentLoaded", () => {
             moreMenu?.classList.remove("open");
         });
     }
+});
+
+
+
+/* Extra static Arabic translations v4.6.6 */
+document.addEventListener("DOMContentLoaded", () => {
+    const extra = {
+        "taskform.choose_type": ["1. Choose Task Type", "١. اختر نوع المهمة"],
+        "taskform.choose_desc": ["Only the fields related to your choice will appear. This keeps the task system simple and personal.", "ستظهر فقط الحقول المرتبطة باختيارك حتى يبقى النظام بسيطًا ومخصصًا لك."],
+        "taskform.other_type": ["Other Task Type", "نوع مهمة آخر"],
+        "taskform.task_name": ["Task Name", "اسم المهمة"],
+        "taskform.other_main": ["Other Main Field", "مجال رئيسي آخر"],
+        "taskform.other_sub": ["Other Sub Field", "مجال فرعي آخر"],
+        "taskform.other_detail": ["Other Detailed Topic", "موضوع تفصيلي آخر"],
+        "taskform.csca_detail": ["CSCA Detailed Topic", "موضوع CSCA التفصيلي"],
+        "taskform.csca_training": ["CSCA Training Type", "نوع تدريب CSCA"],
+        "taskform.csca_hint": ["CSCA structure: Exam → Language → Subject → Main Topic → Detailed Topic → Training Type", "هيكل CSCA: الاختبار ← لغة الاختبار ← المادة ← الموضوع الرئيسي ← الموضوع التفصيلي ← نوع التدريب"],
+        "taskform.other_training": ["Other Training Type", "نوع تدريب آخر"],
+        "taskform.source": ["Source / Link", "المصدر / الرابط"],
+        "taskform.difficulty": ["Difficulty 1-5", "الصعوبة من ١ إلى ٥"],
+        "taskform.priority": ["Priority 1-5", "الأولوية من ١ إلى ٥"],
+        "taskform.expected": ["Expected Time in Minutes", "الوقت المتوقع بالدقائق"],
+        "taskform.start_date": ["Start Date", "تاريخ البداية"],
+        "taskform.end_date": ["End Date / Deadline", "تاريخ النهاية / الموعد النهائي"],
+        "taskform.reminder": ["Reminder Time", "وقت التذكير"],
+        "taskform.repeat": ["Repeat", "التكرار"],
+        "taskform.repeat_days": ["Repeat Days", "أيام التكرار"],
+        "taskform.repeat_hint": ["Choose any days that fit this task. Useful for intensive weekends, language routines, or study schedules.", "اختر الأيام المناسبة لهذه المهمة، مثل أيام الدراسة المكثفة أو روتين اللغة أو جدول الحفظ."],
+        "taskform.notes": ["Notes", "ملاحظات"],
+        "tasks.add_btn": ["Add Task", "إضافة مهمة"],
+        "tasks.save": ["Save Task", "حفظ المهمة"],
+        "tasks.done": ["Done", "تم"],
+        "tasks.pending": ["Pending", "قيد الانتظار"],
+        "tasks.edit": ["Edit", "تعديل"],
+        "tasks.delete": ["Delete", "حذف"],
+        "tasklabels.type": ["Task Type:", "نوع المهمة:"],
+        "tasklabels.main": ["Main Field:", "المجال الرئيسي:"],
+        "tasklabels.sub": ["Sub Field:", "المجال الفرعي:"],
+        "tasklabels.detail": ["Detailed Topic:", "الموضوع التفصيلي:"],
+        "tasklabels.training": ["Training Type:", "نوع التدريب:"],
+        "tasklabels.source": ["Source:", "المصدر:"]
+    };
+
+    Object.entries(extra).forEach(([key, values]) => {
+        if (!EDUPATH_I18N.en[key]) EDUPATH_I18N.en[key] = values[0];
+        if (!EDUPATH_I18N.ar[key]) EDUPATH_I18N.ar[key] = values[1];
+    });
+
+    applyEduPathLanguage(localStorage.getItem("edupath-language") || "en");
 });

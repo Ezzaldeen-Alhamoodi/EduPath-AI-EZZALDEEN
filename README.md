@@ -516,3 +516,12 @@ Email can be re-enabled later after confirming SMTP works reliably.
 - Admin manual messages still appear to users as app-style toast notifications.
 - Removed recent message archive from Admin to keep control panel clean.
 - Added Quran Memorization as a dedicated adaptive task category in Arabic.
+
+
+## v4.6.6 Full Arabic UI
+
+- Expanded Arabic interface translation.
+- Task form labels, main task categories, dynamic dropdowns, and many options now appear in Arabic when Arabic mode is enabled.
+- Quran Memorization category is designed to be Arabic-first and suitable for Quran learners.
+- The program name remains EduPath AI.
+- AI Coach pages remain English-focused as requested.

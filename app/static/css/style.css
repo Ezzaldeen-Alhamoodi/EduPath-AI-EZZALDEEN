@@ -2602,3 +2602,22 @@ body.dark-mode .mobile-more-menu button {
     background: rgba(37, 99, 235, 0.15);
     color: #e5e7eb;
 }
+
+
+
+/* EduPath AI v4.6.6 Full Arabic UI */
+html[dir="rtl"] .smart-task-form label,
+html[dir="rtl"] .smart-step h3,
+html[dir="rtl"] .smart-step p,
+html[dir="rtl"] .task-card span,
+html[dir="rtl"] .task-card strong {
+    text-align: right;
+}
+
+html[dir="rtl"] .task-type-card {
+    direction: rtl;
+}
+
+html[dir="rtl"] select {
+    direction: rtl;
+}
