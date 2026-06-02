@@ -448,3 +448,28 @@ No database migration was required. CSCA values are stored using the existing ta
 - Recommended while testing email:
   - `REQUIRE_EMAIL_VERIFICATION=false`
 - Enable verification only after confirming Outlook SMTP sends successfully.
+
+
+## v4.6.2 Auth & In-App Notifications
+
+### Fixed
+- Registration and login no longer depend on SMTP email.
+- Welcome emails, verification emails, and reset emails are disabled by default unless explicitly enabled.
+- This avoids Render/Gunicorn timeout when Outlook SMTP is slow or blocked.
+
+### Added
+- In-app admin messages.
+- Admin can send motivational messages from the Admin Panel.
+- User sees admin messages directly on the Dashboard.
+- Admin panel shows recent sent in-app messages.
+
+### Recommended Render Environment while testing
+```text
+REQUIRE_EMAIL_VERIFICATION=false
+MAIL_ENABLED=false
+SEND_AUTH_EMAILS=false
+SEND_WELCOME_EMAIL=false
+SEND_ADMIN_EMAILS=false
+```
+
+Email can be re-enabled later after confirming SMTP works reliably.

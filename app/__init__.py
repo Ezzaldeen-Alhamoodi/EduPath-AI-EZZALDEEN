@@ -58,6 +58,21 @@ class AIUsage(db.Model):
     user = db.relationship("User", backref="ai_usage_records")
 
 
+class AdminMessage(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, index=True)
+    admin_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
+    message_type = db.Column(db.String(60), nullable=False, default="encouragement")
+    title = db.Column(db.String(180), nullable=False, default="Message from EduPath AI")
+    body = db.Column(db.Text, nullable=False)
+    is_read = db.Column(db.Boolean, nullable=False, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    user = db.relationship("User", foreign_keys=[user_id], backref="admin_messages")
+    admin = db.relationship("User", foreign_keys=[admin_id])
+
+
+
 class Goal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
@@ -232,6 +247,34 @@ EduPath AI EZZALDEEN
 """
     return send_email_message("Welcome to EduPath AI EZZALDEEN", [user.email], body)
 
+
+
+
+def create_admin_message(user, admin, message_type, custom_message=""):
+    presets = {
+        "completed": "Congratulations! You are making real progress. Completing tasks means you are building discipline step by step.",
+        "not_completed": "Do not worry if you did not complete everything today. Start again with one small task. Progress is built by returning, not by being perfect.",
+        "partial": "You completed part of your work, and that matters. Now try to finish one more task and keep your momentum.",
+        "encouragement": "Keep going. Your goals are closer when you continue with small daily steps.",
+        "custom": custom_message or "Keep going. EduPath AI believes in your progress."
+    }
+    title_map = {
+        "completed": "Great progress!",
+        "not_completed": "A gentle reminder",
+        "partial": "Keep your momentum",
+        "encouragement": "You can do this",
+        "custom": "Message from EduPath AI Admin"
+    }
+    message = AdminMessage(
+        user_id=user.id,
+        admin_id=admin.id if admin and getattr(admin, "is_authenticated", False) else None,
+        message_type=message_type,
+        title=title_map.get(message_type, "Message from EduPath AI"),
+        body=presets.get(message_type, presets["encouragement"]),
+    )
+    db.session.add(message)
+    db.session.commit()
+    return message
 
 
 def send_admin_motivation_email(user, message_type, custom_message=""):
@@ -507,13 +550,13 @@ def create_app():
             db.session.commit()
 
             if app.config.get("REQUIRE_EMAIL_VERIFICATION", False):
-                if send_verification_email(user):
+                if os.environ.get("SEND_AUTH_EMAILS", "false").lower() == "true" and send_verification_email(user):
                     flash("Account created. Please check your email to verify your account before logging in.", "success")
                 else:
-                    flash("Account created, but the verification email could not be sent. Please contact the admin or try again later.", "error")
+                    flash("Account created. Email verification is enabled, but sending email is currently disabled or unavailable. Please contact the admin.", "error")
                 return redirect(url_for("login"))
 
-            send_welcome_email(user)
+            send_welcome_email(user) if os.environ.get("SEND_WELCOME_EMAIL", "false").lower() == "true" else False
             session.permanent = True
             login_user(user, remember=True, duration=timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30"))))
             flash("Account created successfully. Welcome to EduPath AI EZZALDEEN.", "success")
@@ -537,7 +580,7 @@ def create_app():
                 return redirect(url_for("login"))
 
             if app.config.get("REQUIRE_EMAIL_VERIFICATION", False) and not user.email_verified:
-                if send_verification_email(user):
+                if os.environ.get("SEND_AUTH_EMAILS", "false").lower() == "true" and send_verification_email(user):
                     flash("Please verify your email before logging in. A verification link has been sent.", "error")
                 else:
                     flash("Your email is not verified, and the verification email could not be sent now. Please contact the admin.", "error")
@@ -619,9 +662,9 @@ def create_app():
         if request.method == "POST":
             email = sanitize_email(request.form.get("email", ""))
             user = User.query.filter_by(email=email).first()
-            if user:
+            if user and os.environ.get("SEND_AUTH_EMAILS", "false").lower() == "true":
                 send_password_reset_email(user)
-            flash("If this email exists, a password reset link has been sent.", "success")
+            flash("If this email exists and email sending is enabled, a password reset link has been sent.", "success")
             return redirect(url_for("login"))
 
         return render_template("forgot_password.html")
@@ -721,6 +764,16 @@ def create_app():
         return jsonify({"ok": True, "checked": checked, "sent": sent, "now": now_dt.isoformat()})
 
 
+
+    @app.route("/message/<int:message_id>/read")
+    @login_required
+    def mark_admin_message_read(message_id):
+        message = AdminMessage.query.filter_by(id=message_id, user_id=current_user.id).first_or_404()
+        message.is_read = True
+        db.session.commit()
+        return redirect(url_for("index"))
+
+
     @app.route("/admin")
     @login_required
     @admin_required
@@ -733,6 +786,8 @@ def create_app():
         pending_tasks = StudyTask.query.filter(StudyTask.status != "done").count()
         today_value = str(date.today())
         ai_today = db.session.query(db.func.sum(AIUsage.count)).filter_by(usage_date=today_value).scalar() or 0
+
+        recent_admin_messages = AdminMessage.query.order_by(AdminMessage.id.desc()).limit(10).all()
 
         user_stats = []
         for user in users:
@@ -768,6 +823,7 @@ def create_app():
             completed_tasks=completed_tasks,
             pending_tasks=pending_tasks,
             ai_today=ai_today,
+            recent_admin_messages=recent_admin_messages,
         )
 
 
@@ -780,10 +836,16 @@ def create_app():
         custom_message = request.form.get("custom_message", "").strip()
 
         user = User.query.get_or_404(user_id)
-        if send_admin_motivation_email(user, message_type, custom_message):
-            flash("Motivational message sent successfully.", "success")
+        create_admin_message(user, current_user, message_type, custom_message)
+
+        email_sent = False
+        if os.environ.get("SEND_ADMIN_EMAILS", "false").lower() == "true":
+            email_sent = send_admin_motivation_email(user, message_type, custom_message)
+
+        if email_sent:
+            flash("In-app message created and email sent successfully.", "success")
         else:
-            flash("Message could not be sent. Check email configuration.", "error")
+            flash("In-app message created successfully. Email sending is disabled or unavailable.", "success")
 
         return redirect(url_for("admin_dashboard"))
 
@@ -854,6 +916,8 @@ def create_app():
         progress = int((completed_tasks / total_tasks) * 100) if total_tasks else 0
 
         weak_skills = detect_weaknesses()
+        admin_messages = AdminMessage.query.filter_by(user_id=current_user.id).order_by(AdminMessage.id.desc()).limit(5).all()
+        unread_admin_messages = AdminMessage.query.filter_by(user_id=current_user.id, is_read=False).count()
 
         return render_template(
             "index.html",
@@ -866,6 +930,8 @@ def create_app():
             total_goals=total_goals,
             progress=progress,
             weak_skills=weak_skills,
+            admin_messages=admin_messages,
+            unread_admin_messages=unread_admin_messages,
         )
 
     @app.route("/goals", methods=["GET", "POST"])
@@ -1470,6 +1536,16 @@ def ensure_database_columns():
                         count INTEGER NOT NULL DEFAULT 0,
                         created_at TIMESTAMP
                     )""",
+                    """CREATE TABLE IF NOT EXISTS admin_message (
+                        id SERIAL PRIMARY KEY,
+                        user_id INTEGER NOT NULL,
+                        admin_id INTEGER,
+                        message_type VARCHAR(60) NOT NULL DEFAULT 'encouragement',
+                        title VARCHAR(180) NOT NULL DEFAULT 'Message from EduPath AI',
+                        body TEXT NOT NULL,
+                        is_read BOOLEAN NOT NULL DEFAULT FALSE,
+                        created_at TIMESTAMP
+                    )""",
                 ]
 
                 for sql in postgres_sql:
@@ -1533,6 +1609,18 @@ def ensure_database_columns():
                     tool_name VARCHAR(80) NOT NULL DEFAULT 'general',
                     usage_date VARCHAR(20) NOT NULL,
                     count INTEGER NOT NULL DEFAULT 0,
+                    created_at DATETIME
+                )
+            """)
+            connection.exec_driver_sql("""
+                CREATE TABLE IF NOT EXISTS admin_message (
+                    id INTEGER PRIMARY KEY,
+                    user_id INTEGER NOT NULL,
+                    admin_id INTEGER,
+                    message_type VARCHAR(60) NOT NULL DEFAULT 'encouragement',
+                    title VARCHAR(180) NOT NULL DEFAULT 'Message from EduPath AI',
+                    body TEXT NOT NULL,
+                    is_read BOOLEAN NOT NULL DEFAULT 0,
                     created_at DATETIME
                 )
             """)

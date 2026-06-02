@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block page_title %}Dashboard<div class="app-version-footer">EduPath AI EZZALDEEN · v4.6 Final Admin Control</div>
+{% block page_title %}Dashboard<div class="app-version-footer">EduPath AI EZZALDEEN · v4.6.2 Auth & In-App Notifications</div>
 
 {% endblock %}
 {% block content %}
@@ -39,6 +39,28 @@
         {% endfor %}
     </div>
 </section>
+
+
+<section class="card admin-messages-card">
+    <h2>Admin Messages {% if unread_admin_messages %}<span class="admin-badge">{{ unread_admin_messages }} new</span>{% endif %}</h2>
+    <p class="muted">Private messages and encouragement from the EduPath AI admin.</p>
+
+    {% for message in admin_messages %}
+        <div class="admin-message-item {% if not message.is_read %}unread{% endif %}">
+            <div>
+                <strong>{{ message.title }}</strong>
+                <span>{{ message.created_at.strftime("%Y-%m-%d %H:%M") if message.created_at else "" }} · {{ message.message_type }}</span>
+                <p>{{ message.body }}</p>
+            </div>
+            {% if not message.is_read %}
+                <a class="small-button" href="{{ url_for('mark_admin_message_read', message_id=message.id) }}">Mark as read</a>
+            {% endif %}
+        </div>
+    {% else %}
+        <p class="muted">No admin messages yet.</p>
+    {% endfor %}
+</section>
+
 
 
 <section class="quick-actions final-quick-actions">
@@ -130,6 +152,6 @@
     </div>
 </section>
 
-<div class="app-version-footer">EduPath AI EZZALDEEN · v4.6 Final Admin Control</div>
+<div class="app-version-footer">EduPath AI EZZALDEEN · v4.6.2 Auth & In-App Notifications</div>
 
 {% endblock %}

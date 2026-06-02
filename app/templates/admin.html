@@ -48,6 +48,23 @@
     </form>
 </section>
 
+
+<section class="card">
+    <h2>Recent In-App Messages</h2>
+    <p class="muted">Messages sent from this panel appear inside the user's dashboard.</p>
+    <div class="admin-users">
+        {% for message in recent_admin_messages %}
+            <div class="item">
+                <strong>{{ message.title }}</strong>
+                <span>User ID: {{ message.user_id }} · {{ message.message_type }} · {{ message.created_at.strftime("%Y-%m-%d %H:%M") if message.created_at else "" }}</span>
+                <p>{{ message.body }}</p>
+            </div>
+        {% else %}
+            <p class="muted">No in-app messages sent yet.</p>
+        {% endfor %}
+    </div>
+</section>
+
 <section class="card">
     <h2>Users, Progress & AI Controls</h2>
     <p class="muted">Admins are unlimited. Regular users can be limited per day to protect your OpenRouter quota.</p>
