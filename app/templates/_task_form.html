@@ -17,29 +17,40 @@
         <label>Task Name</label>
         <input name="title" value="{{ task.title if task else '' }}" placeholder="Example: Solve Python OOP exercises, Review Quran memorization, Edit motivation letter" required>
 
-        <label>Main Field</label>
+        <label id="topicLabel">Main Field</label>
         <select name="topic" id="topicSelect" data-current="{{ task.topic if task else '' }}"></select>
         <div class="conditional-field" id="customTopicBox">
             <label>Other Main Field</label>
             <input name="custom_topic" id="customTopicInput" value="{{ task.custom_topic if task else '' }}" placeholder="Write your own main field">
         </div>
 
-        <label>Sub Field</label>
+        <label id="skillLabel">Sub Field</label>
         <select name="skill" id="skillSelect" data-current="{{ task.skill if task else '' }}"></select>
         <div class="conditional-field" id="customSkillBox">
             <label>Other Sub Field</label>
             <input name="custom_skill" id="customSkillInput" value="{{ task.custom_skill if task else '' }}" placeholder="Write your own sub field">
         </div>
 
-        <label>Detailed Topic</label>
+        <label id="detailLabel">Detailed Topic</label>
         <select name="language" id="detailedTopicSelect" data-current="{{ task.language if task else '' }}"></select>
         <div class="conditional-field" id="customDetailedTopicBox">
             <label>Other Detailed Topic</label>
             <input name="language_custom" id="customDetailedTopicInput" value="" placeholder="Write a detailed topic">
         </div>
 
-        <label>Training Type</label>
+        <label id="trainingLabel">Training Type</label>
         <select name="practice_type" id="trainingTypeSelect" data-current="{{ task.practice_type if task else '' }}"></select>
+
+        <div class="csca-extra-box" id="cscaExtraBox">
+            <label>CSCA Detailed Topic</label>
+            <select name="csca_detailed_topic" id="cscaDetailedTopicSelect"></select>
+
+            <label>CSCA Training Type</label>
+            <select name="csca_training_type" id="cscaTrainingTypeSelect"></select>
+
+            <small class="hint">CSCA structure: Exam → Language → Subject → Main Topic → Detailed Topic → Training Type</small>
+        </div>
+
         <div class="conditional-field" id="customTrainingTypeBox">
             <label>Other Training Type</label>
             <input name="practice_type_custom" id="customTrainingTypeInput" value="" placeholder="Write your training type">

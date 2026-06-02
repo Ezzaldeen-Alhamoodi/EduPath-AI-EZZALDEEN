@@ -2003,3 +2003,21 @@ html[dir="rtl"] .app-version-footer {
         left: auto;
     }
 }
+
+
+
+/* EduPath AI v4.5 CSCA Exam Tasks */
+.csca-extra-box {
+    display: none;
+    border: 1px solid rgba(37, 99, 235, 0.22);
+    background: rgba(37, 99, 235, 0.06);
+    border-radius: 22px;
+    padding: 14px;
+    margin: 8px 0;
+}
+
+.csca-extra-box .hint {
+    display: block;
+    margin-top: 8px;
+    color: var(--muted);
+}

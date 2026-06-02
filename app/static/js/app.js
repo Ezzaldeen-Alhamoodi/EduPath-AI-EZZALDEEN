@@ -257,13 +257,14 @@ const SMART_TASK_DATA = {
 
   "Exams & Certificates": {
     icon: "🧪",
-    main: ["IELTS","TOEFL","Duolingo English Test","HSK","SAT","ACT","University Exam","School Exam","Programming Certificate","Online Course","Other"],
+    main: ["IELTS","TOEFL","Duolingo English Test","HSK","SAT","ACT","GRE","GMAT","CSCA","Other"],
     sub: {
       "IELTS": ["Listening","Reading","Writing","Speaking"],
       "TOEFL": ["Reading","Listening","Writing","Speaking"],
       "Duolingo English Test": ["Reading","Listening","Writing","Speaking"],
       "HSK": ["Listening","Reading","Writing","Vocabulary","Characters"],
       "SAT": ["Reading and Writing","Mathematics"],
+      "CSCA": ["Chinese","English"],
       "Other": ["Study","Practice","Mock Test","Review","Other"]
     },
     detail: {"Other": ["General Topic","Other"]},
@@ -354,6 +355,36 @@ function renderTaskTypeCards() {
 }
 
 
+
+const CSCA_SUBJECTS = ["Mathematics","Physics","Chemistry"];
+
+const CSCA_MAIN_TOPICS = {
+    "Mathematics": ["Sets and Inequalities","Functions","Geometry and Algebra","Probability and Statistics"],
+    "Physics": ["Mechanics","Electromagnetism","Thermodynamics","Optics","Modern Physics"],
+    "Chemistry": ["Basic Chemical Concepts and Calculations","Properties and Reactions of Substances","Chemical Theories and Laws","Chemical Experiments and Applications"]
+};
+
+const CSCA_DETAILED_TOPICS = {
+    "Sets and Inequalities": ["Definition of Sets","Set Operations","Set Representation","Quadratic Inequalities","Rational Inequalities","Solving Inequalities","Properties of Inequalities"],
+    "Functions": ["Function Concepts","Domain","Range","Monotonicity","Parity","Power Functions","Exponential Functions","Logarithmic Functions","Trigonometric Functions","Sequences","Arithmetic Sequences","Geometric Sequences","Series Summation","Derivatives","Geometric Meaning of Derivatives","Applications of Derivatives"],
+    "Geometry and Algebra": ["Lines","Circles","Ellipses","Hyperbolas","Parabolas","Vectors","Vector Operations","Complex Numbers","Complex Operations","Coordinate Geometry","Space Coordinates","Solid Geometry","Properties of Solids"],
+    "Probability and Statistics": ["Classical Probability","Probability Calculations","Mean","Variance","Data Analysis","Normal Distribution"],
+
+    "Mechanics": ["Displacement","Velocity","Acceleration","Uniform Acceleration","Free Fall","Newton Laws","Applications of Newton Laws","Momentum","Impulse","Conservation of Momentum","Work","Energy","Conservation of Mechanical Energy","Circular Motion","Universal Gravitation","Simple Harmonic Motion","Mechanical Waves"],
+    "Electromagnetism": ["Coulomb Law","Electric Field","Electric Potential","Ohm Law","Series Circuits","Parallel Circuits","Magnetic Induction","Ampere Force","Lorentz Force","Faraday Law","Lenz Law"],
+    "Thermodynamics": ["Kinetic Theory of Gases","Ideal Gas Equation","First Law of Thermodynamics"],
+    "Optics": ["Reflection","Refraction","Interference","Diffraction"],
+    "Modern Physics": ["Photoelectric Effect","Atomic Structure","Nuclear Physics"],
+
+    "Basic Chemical Concepts and Calculations": ["Classification of Matter","State Changes","Chemical Notation","Chemical Equations","Solution Concentration","pH Calculations","Amount of Substance","Mole Calculations","Ideal Gas Law"],
+    "Properties and Reactions of Substances": ["Elements","Oxides","Acids","Bases","Salts","Hydrocarbons","Organic Derivatives","Redox Reactions","Ionic Reactions","Chemical Testing Methods"],
+    "Chemical Theories and Laws": ["Atomic Structure","Periodic Law","Chemical Bonds","Intermolecular Forces","Reaction Rate","Chemical Equilibrium","Electrolyte Solutions"],
+    "Chemical Experiments and Applications": ["Laboratory Safety","Laboratory Apparatus","Gas Preparation","Gas Identification","Separation Methods","Purification Methods","Industrial Chemical Processes","Ammonia Synthesis"]
+};
+
+const CSCA_TRAINING_TYPES = ["Study Theory","Concept Review","Solved Examples","Practice Questions","Timed Practice","Mock Test","Review Mistakes","Formula Review","Flashcards","Weakness Training","Final Revision","Full Exam Simulation","Other"];
+
+
 function getOfficialExamDetails(exam, skill) {
     const data = {
         "IELTS": {
@@ -373,6 +404,10 @@ function getOfficialExamDetails(exam, skill) {
             "Listening": ["Listen and Type","Interactive Listening"],
             "Writing": ["Write About the Photo","Writing Sample","Interactive Writing"],
             "Speaking": ["Speak About the Photo","Read Then Speak","Speaking Sample","Interactive Speaking"]
+        },
+        "CSCA": {
+            "Chinese": ["Mathematics","Physics","Chemistry"],
+            "English": ["Mathematics","Physics","Chemistry"]
         },
         "HSK": {
             "Listening": ["Dialogue","Conversation","Announcement","Lecture"],
@@ -405,6 +440,10 @@ function getOfficialExamTraining(exam, skill) {
             "Writing": ["Timed Writing","Photo Description","Sample Writing","Interactive Writing","Feedback Review"],
             "Speaking": ["Photo Speaking","Read Then Speak","Interactive Speaking","Record Response","Fluency Practice"]
         },
+        "CSCA": {
+            "Chinese": ["Study Theory","Concept Review","Practice Questions","Timed Practice","Mock Test","Review Mistakes"],
+            "English": ["Study Theory","Concept Review","Practice Questions","Timed Practice","Mock Test","Review Mistakes"]
+        },
         "HSK": {
             "Listening": ["Listening Practice","Dictation","Main Idea","Detail Review","Mock Test"],
             "Reading": ["Reading Practice","Vocabulary Recognition","Sentence Completion","Passage Review"],
@@ -415,6 +454,50 @@ function getOfficialExamTraining(exam, skill) {
     };
     return data[exam] && data[exam][skill] ? data[exam][skill] : null;
 }
+
+
+function updateCSCAExtraFields() {
+    const topicSelect = document.getElementById("topicSelect");
+    const skillSelect = document.getElementById("skillSelect");
+    const detailSelect = document.getElementById("detailedTopicSelect");
+    const trainingSelect = document.getElementById("trainingTypeSelect");
+    const cscaBox = document.getElementById("cscaExtraBox");
+    const cscaDetailed = document.getElementById("cscaDetailedTopicSelect");
+    const cscaTraining = document.getElementById("cscaTrainingTypeSelect");
+
+    if (!topicSelect || !skillSelect || !detailSelect || !trainingSelect || !cscaBox || !cscaDetailed || !cscaTraining) return;
+
+    const isCSCA = topicSelect.value === "CSCA";
+    cscaBox.style.display = isCSCA ? "block" : "none";
+
+    const topicLabel = document.getElementById("topicLabel");
+    const skillLabel = document.getElementById("skillLabel");
+    const detailLabel = document.getElementById("detailLabel");
+    const trainingLabel = document.getElementById("trainingLabel");
+
+    if (isCSCA) {
+        if (topicLabel) topicLabel.textContent = "Exam";
+        if (skillLabel) skillLabel.textContent = "Exam Language";
+        if (detailLabel) detailLabel.textContent = "CSCA Subject";
+        if (trainingLabel) trainingLabel.textContent = "CSCA Main Topic";
+
+        fillSmartSelect(detailSelect, CSCA_SUBJECTS, detailSelect.value && CSCA_SUBJECTS.includes(detailSelect.value) ? detailSelect.value : "Mathematics");
+
+        const mainTopics = CSCA_MAIN_TOPICS[detailSelect.value] || CSCA_MAIN_TOPICS["Mathematics"];
+        fillSmartSelect(trainingSelect, mainTopics, trainingSelect.value && mainTopics.includes(trainingSelect.value) ? trainingSelect.value : mainTopics[0]);
+
+        const detailedTopics = CSCA_DETAILED_TOPICS[trainingSelect.value] || ["Other"];
+        fillSmartSelect(cscaDetailed, detailedTopics, cscaDetailed.value && detailedTopics.includes(cscaDetailed.value) ? cscaDetailed.value : detailedTopics[0]);
+
+        fillSmartSelect(cscaTraining, CSCA_TRAINING_TYPES, cscaTraining.value && CSCA_TRAINING_TYPES.includes(cscaTraining.value) ? cscaTraining.value : "Study Theory");
+    } else {
+        if (topicLabel) topicLabel.textContent = "Main Field";
+        if (skillLabel) skillLabel.textContent = "Sub Field";
+        if (detailLabel) detailLabel.textContent = "Detailed Topic";
+        if (trainingLabel) trainingLabel.textContent = "Training Type";
+    }
+}
+
 
 function updateSmartTaskFields() {
     const categoryInput = document.getElementById("categorySelect");
@@ -450,13 +533,13 @@ function updateSmartTaskFields() {
         let trainingValues = null;
 
         // Languages section: exam is selected as Main Field, skill is Sub Field.
-        if (["IELTS","TOEFL","Duolingo English Test","HSK"].includes(selectedTopic)) {
+        if (["IELTS","TOEFL","Duolingo English Test","HSK","CSCA"].includes(selectedTopic)) {
             detailValues = getOfficialExamDetails(selectedTopic, selectedSkill);
             trainingValues = getOfficialExamTraining(selectedTopic, selectedSkill);
         }
 
         // Exams & Certificates section: exam is also selected as Main Field.
-        if (!detailValues && selectedType === "Exams & Certificates" && ["IELTS","TOEFL","Duolingo English Test","HSK"].includes(selectedTopic)) {
+        if (!detailValues && selectedType === "Exams & Certificates" && ["IELTS","TOEFL","Duolingo English Test","HSK","CSCA"].includes(selectedTopic)) {
             detailValues = getOfficialExamDetails(selectedTopic, selectedSkill);
             trainingValues = getOfficialExamTraining(selectedTopic, selectedSkill);
         }
@@ -475,6 +558,7 @@ function updateSmartTaskFields() {
         const currentTraining = trainingSelect.dataset.current || "";
         fillSmartSelect(trainingSelect, trainingValues, selectedOrFirst(trainingValues, currentTraining));
 
+        updateCSCAExtraFields();
         toggleOtherBoxes();
     }
 
@@ -498,6 +582,7 @@ function updateSmartTaskFields() {
         detailSelect.dataset.current = "";
         trainingSelect.dataset.current = "";
         refreshSubFields();
+        updateCSCAExtraFields();
     };
 
     skillSelect.onchange = () => {
@@ -506,8 +591,14 @@ function updateSmartTaskFields() {
         refreshDetails();
     };
 
-    detailSelect.onchange = toggleOtherBoxes;
-    trainingSelect.onchange = toggleOtherBoxes;
+    detailSelect.onchange = () => {
+        updateCSCAExtraFields();
+        toggleOtherBoxes();
+    };
+    trainingSelect.onchange = () => {
+        updateCSCAExtraFields();
+        toggleOtherBoxes();
+    };
 
     refreshSubFields();
 }

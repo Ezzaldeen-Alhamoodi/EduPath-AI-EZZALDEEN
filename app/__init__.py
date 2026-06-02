@@ -3,6 +3,7 @@ import os
 import json
 import logging
 import unicodedata
+import secrets
 from datetime import datetime, date, timedelta
 
 from flask import Flask, render_template, request, redirect, url_for, jsonify, flash, session
@@ -96,6 +97,8 @@ class StudyTask(db.Model):
     status = db.Column(db.String(30), nullable=False, default="pending")
     review_count = db.Column(db.Integer, nullable=False, default=0)
     last_reviewed = db.Column(db.String(40), nullable=True)
+    email_reminder_sent_at = db.Column(db.String(40), nullable=True)
+    completion_email_sent_at = db.Column(db.String(40), nullable=True)
     notes = db.Column(db.Text, nullable=True)
 
     goal = db.relationship("Goal", backref="tasks")
@@ -211,6 +214,111 @@ This link is valid for 1 hour.
 If you did not request this, ignore this email.
 """
     return send_email_message("Reset your EduPath AI password", [user.email], body)
+
+
+def send_welcome_email(user):
+    body = f"""Hello {user.name},
+
+Welcome to EduPath AI EZZALDEEN.
+
+Your account is ready. You can now organize your goals, tasks, learning plan, and AI coaching.
+
+Keep going step by step. Small daily progress becomes a big achievement.
+
+EduPath AI EZZALDEEN
+"""
+    return send_email_message("Welcome to EduPath AI EZZALDEEN", [user.email], body)
+
+
+def task_display_line(task):
+    parts = [
+        task.title or "Your task",
+        task.category or "",
+        task.topic or "",
+        task.skill or "",
+        task.language or "",
+        task.practice_type or "",
+    ]
+    return " | ".join([p for p in parts if p])
+
+
+def send_task_reminder_email(user, task):
+    body = f"""Hello {user.name},
+
+This is a reminder from EduPath AI EZZALDEEN.
+
+You have a task to work on now:
+
+{task_display_line(task)}
+
+Expected time: {task.estimated_minutes or 30} minutes
+Reminder time: {task.reminder_time or "Not set"}
+Deadline: {task.due_date or "Not set"}
+
+Start with a small step. You do not need perfect energy; you only need to begin.
+
+EduPath AI EZZALDEEN
+"""
+    return send_email_message("Task reminder: " + (task.title or "EduPath AI task"), [user.email], body)
+
+
+def send_task_completion_email(user, task):
+    body = f"""Congratulations {user.name},
+
+You completed a task in EduPath AI EZZALDEEN:
+
+{task_display_line(task)}
+
+This is real progress. Keep your momentum and continue with the next small step.
+
+Every completed task makes your goals closer.
+
+EduPath AI EZZALDEEN
+"""
+    return send_email_message("Great work! Task completed", [user.email], body)
+
+
+def task_due_for_email_reminder(task, now_dt):
+    if not task.reminder_time or task.status == "done":
+        return False
+
+    today_value = str(now_dt.date())
+    current_time = now_dt.strftime("%H:%M")
+
+    if task.email_reminder_sent_at == today_value:
+        return False
+
+    if task.start_date and task.start_date > today_value:
+        return False
+
+    if task.due_date and task.due_date < today_value:
+        return False
+
+    if task.repeat_type == "once" and task.due_date and task.due_date != today_value:
+        return False
+
+    if task.repeat_type == "selected_days":
+        # Python Monday=0 ... Sunday=6, same as the frontend values.
+        days = [d for d in (task.repeat_days or "").split(",") if d != ""]
+        if str(now_dt.weekday()) not in days:
+            return False
+
+    if task.repeat_type == "weekly" and task.due_date:
+        try:
+            due_weekday = datetime.strptime(task.due_date, "%Y-%m-%d").weekday()
+            if now_dt.weekday() != due_weekday:
+                return False
+        except Exception:
+            pass
+
+    # Allow a small window so Render Cron does not need to run exactly at the minute.
+    try:
+        reminder = datetime.strptime(task.reminder_time, "%H:%M").time()
+        reminder_minutes = reminder.hour * 60 + reminder.minute
+        now_minutes = now_dt.hour * 60 + now_dt.minute
+        return 0 <= (now_minutes - reminder_minutes) <= int(os.environ.get("EMAIL_REMINDER_WINDOW_MINUTES", "15"))
+    except Exception:
+        return current_time == task.reminder_time
 
 
 @login_manager.user_loader
@@ -363,10 +471,17 @@ def create_app():
                 is_admin=email in app.config["ADMIN_EMAILS"],
                 ai_enabled=True,
                 ai_daily_limit=app.config["DEFAULT_AI_DAILY_LIMIT"],
-                email_verified=True,
+                email_verified=not app.config.get("REQUIRE_EMAIL_VERIFICATION", False),
             )
             db.session.add(user)
             db.session.commit()
+
+            if app.config.get("REQUIRE_EMAIL_VERIFICATION", False):
+                send_verification_email(user)
+                flash("Account created. Please check your email to verify your account before logging in.", "success")
+                return redirect(url_for("login"))
+
+            send_welcome_email(user)
             session.permanent = True
             login_user(user, remember=True, duration=timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30"))))
             flash("Account created successfully. Welcome to EduPath AI EZZALDEEN.", "success")
@@ -387,6 +502,11 @@ def create_app():
             if not user or not check_password_hash(user.password_hash, password):
                 logger.info("Login failed for email=%s user_exists=%s", email, bool(user))
                 flash("Invalid email or password.", "error")
+                return redirect(url_for("login"))
+
+            if app.config.get("REQUIRE_EMAIL_VERIFICATION", False) and not user.email_verified:
+                send_verification_email(user)
+                flash("Please verify your email before logging in. A verification link has been sent.", "error")
                 return redirect(url_for("login"))
 
             if email in app.config["ADMIN_EMAILS"] and not user.is_admin:
@@ -537,6 +657,34 @@ def create_app():
 
 
 
+
+
+
+    @app.route("/cron/send-task-reminders")
+    def cron_send_task_reminders():
+        cron_secret = os.environ.get("CRON_SECRET", "")
+        provided = request.headers.get("X-Cron-Secret") or request.args.get("secret", "")
+
+        if cron_secret and not secrets.compare_digest(provided, cron_secret):
+            return jsonify({"ok": False, "error": "unauthorized"}), 401
+
+        now_dt = datetime.utcnow() + timedelta(hours=int(os.environ.get("APP_TIMEZONE_OFFSET_HOURS", "3")))
+        sent = 0
+        checked = 0
+
+        tasks = StudyTask.query.filter(StudyTask.status != "done").all()
+        for task in tasks:
+            checked += 1
+            if not task.user or not task.user.email:
+                continue
+
+            if task_due_for_email_reminder(task, now_dt):
+                if send_task_reminder_email(task.user, task):
+                    task.email_reminder_sent_at = str(now_dt.date())
+                    sent += 1
+
+        db.session.commit()
+        return jsonify({"ok": True, "checked": checked, "sent": sent, "now": now_dt.isoformat()})
 
 
     @app.route("/admin")
@@ -716,8 +864,20 @@ def create_app():
                 custom_topic=request.form.get("custom_topic", "").strip(),
                 skill=request.form.get("skill", "General").strip(),
                 custom_skill=request.form.get("custom_skill", "").strip(),
-                language=(request.form.get("language_custom", "").strip() if request.form.get("language", "").strip() == "Other" else request.form.get("language", "").strip()),
-                practice_type=(request.form.get("practice_type_custom", "").strip() if request.form.get("practice_type", "").strip() == "Other" else request.form.get("practice_type", "").strip()),
+                language=(
+                    " > ".join([p for p in [
+                        request.form.get("language", "").strip(),
+                        request.form.get("practice_type", "").strip(),
+                        request.form.get("csca_detailed_topic", "").strip()
+                    ] if p])
+                    if request.form.get("topic", "").strip() == "CSCA"
+                    else (request.form.get("language_custom", "").strip() if request.form.get("language", "").strip() == "Other" else request.form.get("language", "").strip())
+                ),
+                practice_type=(
+                    request.form.get("csca_training_type", "").strip()
+                    if request.form.get("topic", "").strip() == "CSCA"
+                    else (request.form.get("practice_type_custom", "").strip() if request.form.get("practice_type", "").strip() == "Other" else request.form.get("practice_type", "").strip())
+                ),
                 source=request.form.get("source", "").strip(),
                 difficulty=int(request.form.get("difficulty", 1) or 1),
                 priority=int(request.form.get("priority", 3) or 3),
@@ -760,8 +920,16 @@ def create_app():
             task.custom_topic = request.form.get("custom_topic", "").strip()
             task.skill = request.form.get("skill", "General").strip()
             task.custom_skill = request.form.get("custom_skill", "").strip()
-            task.language = (request.form.get("language_custom", "").strip() if request.form.get("language", "").strip() == "Other" else request.form.get("language", "").strip())
-            task.practice_type = (request.form.get("practice_type_custom", "").strip() if request.form.get("practice_type", "").strip() == "Other" else request.form.get("practice_type", "").strip())
+            if request.form.get("topic", "").strip() == "CSCA":
+                task.language = " > ".join([p for p in [
+                    request.form.get("language", "").strip(),
+                    request.form.get("practice_type", "").strip(),
+                    request.form.get("csca_detailed_topic", "").strip()
+                ] if p])
+                task.practice_type = request.form.get("csca_training_type", "").strip()
+            else:
+                task.language = (request.form.get("language_custom", "").strip() if request.form.get("language", "").strip() == "Other" else request.form.get("language", "").strip())
+                task.practice_type = (request.form.get("practice_type_custom", "").strip() if request.form.get("practice_type", "").strip() == "Other" else request.form.get("practice_type", "").strip())
             task.source = request.form.get("source", "").strip()
             task.difficulty = int(request.form.get("difficulty", 1) or 1)
             task.priority = int(request.form.get("priority", 3) or 3)
@@ -786,6 +954,12 @@ def create_app():
         task.review_count += 1
         task.last_reviewed = str(date.today())
         db.session.commit()
+
+        if task.completion_email_sent_at != str(date.today()):
+            if send_task_completion_email(current_user, task):
+                task.completion_email_sent_at = str(date.today())
+                db.session.commit()
+
         flash("Task marked as done.", "success")
         return redirect(url_for("tasks"))
 

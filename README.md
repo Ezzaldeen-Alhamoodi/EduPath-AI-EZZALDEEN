@@ -347,3 +347,67 @@ This build actually updates the application files.
 - Arabic mode switches the interface to RTL.
 - Translates main navigation, dashboard, goals, tasks, and AI Coach hub labels.
 - English Coach, Scholarship Coach, and Code Coach core content remain English-focused as requested.
+
+
+## v4.4 Email System & Smart Reminders
+
+### Added
+- SMTP email support using Outlook.
+- Account verification emails when `REQUIRE_EMAIL_VERIFICATION=true`.
+- Password reset emails.
+- Welcome email after registration when verification is disabled.
+- Email reminders for tasks based on each task reminder time.
+- Encouragement email after completing a task.
+- Lightweight cron endpoint without Celery/Redis:
+  `/cron/send-task-reminders`
+
+### Render Environment Variables
+
+```text
+MAIL_SERVER=smtp-mail.outlook.com
+MAIL_PORT=587
+MAIL_USE_TLS=true
+MAIL_USE_SSL=false
+MAIL_USERNAME=edupath.ai.ezzaldeen.app@outlook.com
+MAIL_PASSWORD=your_outlook_app_password_here
+MAIL_DEFAULT_SENDER=edupath.ai.ezzaldeen.app@outlook.com
+REQUIRE_EMAIL_VERIFICATION=true
+CRON_SECRET=change-this-long-random-secret
+APP_TIMEZONE_OFFSET_HOURS=3
+EMAIL_REMINDER_WINDOW_MINUTES=15
+```
+
+### Render Cron Job
+
+Create a Render Cron Job that calls:
+
+```text
+https://YOUR-APP.onrender.com/cron/send-task-reminders?secret=YOUR_CRON_SECRET
+```
+
+Recommended schedule:
+
+```text
+*/15 * * * *
+```
+
+This checks task reminders every 15 minutes without adding Redis/Celery cost.
+
+
+## v4.5 CSCA Exam Tasks
+
+Added CSCA to Exams & Certificates with adaptive structure:
+
+- Exam: CSCA
+- Exam Language: Chinese / English
+- Subject: Mathematics / Physics / Chemistry
+- Main Topic
+- Detailed Topic
+- Training Type
+
+CSCA topics include:
+- Mathematics: Sets and Inequalities, Functions, Geometry and Algebra, Probability and Statistics.
+- Physics: Mechanics, Electromagnetism, Thermodynamics, Optics, Modern Physics.
+- Chemistry: Basic Chemical Concepts and Calculations, Properties and Reactions of Substances, Chemical Theories and Laws, Chemical Experiments and Applications.
+
+No database migration was required. CSCA values are stored using the existing task fields.
