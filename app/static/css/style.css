@@ -2485,3 +2485,120 @@ html[dir="rtl"] .toast-container {
         grid-template-columns: 1fr;
     }
 }
+
+
+
+/* EduPath AI v4.6.5 Quran + Mobile More Menu */
+@media (max-width: 900px) {
+    .mobile-app-header {
+        grid-template-columns: 1fr !important;
+        justify-items: center;
+        padding: 8px 16px 6px !important;
+    }
+
+    .mobile-app-logo.mobile-app-logo-named {
+        width: auto !important;
+        height: auto !important;
+        min-width: 78px;
+        padding: 8px 12px;
+        display: grid !important;
+        gap: 3px;
+        border-radius: 18px;
+        text-align: center;
+        box-shadow: 0 10px 24px rgba(37, 99, 235, 0.22);
+    }
+
+    .mobile-app-logo.mobile-app-logo-named span {
+        font-size: 24px !important;
+    }
+
+    .mobile-app-logo.mobile-app-logo-named small {
+        color: #fff;
+        font-size: 11px;
+        font-weight: 950;
+        letter-spacing: -0.03em;
+    }
+
+    .mobile-bottom-nav {
+        grid-template-columns: repeat(6, 1fr) !important;
+    }
+
+    .mobile-bottom-nav .mobile-more-btn {
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        display: grid;
+        place-items: center;
+        gap: 2px;
+        font-weight: 900;
+        padding: 6px 2px;
+        box-shadow: none;
+    }
+
+    .mobile-bottom-nav .mobile-more-btn span {
+        color: var(--primary);
+        font-size: 24px;
+        line-height: 1;
+    }
+
+    .mobile-bottom-nav .mobile-more-btn small {
+        font-size: 10px;
+        color: var(--muted);
+    }
+
+    .mobile-more-menu {
+        position: fixed;
+        right: 14px;
+        bottom: 86px;
+        z-index: 99998;
+        width: min(250px, calc(100vw - 28px));
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        border-radius: 22px;
+        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+        padding: 10px;
+        display: none;
+        backdrop-filter: blur(18px);
+    }
+
+    .mobile-more-menu.open {
+        display: grid;
+        gap: 7px;
+    }
+
+    .mobile-more-menu a,
+    .mobile-more-menu button {
+        width: 100%;
+        border: 0;
+        background: rgba(37, 99, 235, 0.07);
+        color: var(--text);
+        text-decoration: none;
+        padding: 11px 12px;
+        border-radius: 15px;
+        font-weight: 900;
+        text-align: start;
+        box-shadow: none;
+    }
+
+    .mobile-more-menu a:hover,
+    .mobile-more-menu button:hover {
+        background: rgba(37, 99, 235, 0.13);
+        color: var(--primary);
+    }
+
+    html[dir="rtl"] .mobile-more-menu {
+        right: auto;
+        left: 14px;
+    }
+}
+
+body.dark-mode .mobile-more-menu {
+    background: rgba(15, 23, 42, 0.96);
+    border-color: rgba(96, 165, 250, 0.22);
+}
+
+body.dark-mode .mobile-more-menu a,
+body.dark-mode .mobile-more-menu button {
+    background: rgba(37, 99, 235, 0.15);
+    color: #e5e7eb;
+}

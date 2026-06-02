@@ -499,3 +499,20 @@ Email can be re-enabled later after confirming SMTP works reliably.
   - version number
   - official contact email
 - Improved spacing, hero sizing, and mobile card layout.
+
+
+## v4.6.5 Quran + Mobile More Menu
+
+- Mobile header now shows only one app icon/name at the top.
+- Profile button in the bottom mobile bar was replaced by a three-dot More menu.
+- More menu includes:
+  - Theme toggle
+  - Language toggle
+  - Profile
+  - Admin when available
+  - Logout
+- EduPath AI toast notifications now appear across all pages.
+- Task completion motivation appears immediately without storing daily completion messages in the admin panel.
+- Admin manual messages still appear to users as app-style toast notifications.
+- Removed recent message archive from Admin to keep control panel clean.
+- Added Quran Memorization as a dedicated adaptive task category in Arabic.

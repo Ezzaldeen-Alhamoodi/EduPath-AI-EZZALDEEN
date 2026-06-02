@@ -12,11 +12,10 @@
 <body>
 
     <header class="mobile-app-header">
-        <button class="mobile-icon-btn" id="mobileThemeToggle" type="button" aria-label="Toggle dark mode">☾</button>
-        <a class="mobile-app-logo" href="{{ url_for('index') }}" aria-label="EduPath AI Home">
+        <a class="mobile-app-logo mobile-app-logo-named" href="{{ url_for('index') }}" aria-label="EduPath AI Home">
             <span>✦</span>
+            <small>EduPath AI</small>
         </a>
-        <button class="mobile-icon-btn" id="mobileLanguageToggle" type="button" aria-label="Switch language">ع</button>
     </header>
 
     <aside class="sidebar">
@@ -80,6 +79,15 @@
         {% block content %}{% endblock %}
     </main>
 
+
+{% if toast_notifications %}
+<div id="globalToastData" class="hidden-toast-data">
+    {% for toast in toast_notifications %}
+        <div class="toast-data-item" data-title="{{ toast.title }}" data-body="{{ toast.body }}"></div>
+    {% endfor %}
+</div>
+{% endif %}
+
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
     <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
@@ -88,8 +96,19 @@
         <a href="{{ url_for('tasks') }}"><span>▣</span><small data-i18n="mobile.tasks">Tasks</small></a>
         <a href="{{ url_for('coach') }}"><span>✦</span><small data-i18n="mobile.coach">Coach</small></a>
         <a href="{{ url_for('languages') }}"><span>◌</span><small data-i18n="mobile.lang">Lang</small></a>
-        <a href="{{ url_for('profile') }}"><span>◉</span><small data-i18n="mobile.profile">Profile</small></a>
+        <button class="mobile-more-btn" id="mobileMoreToggle" type="button"><span>⋮</span><small>More</small></button>
     </nav>
+
+
+<div class="mobile-more-menu" id="mobileMoreMenu">
+    <button type="button" id="mobileMenuTheme">☾ Theme</button>
+    <button type="button" id="mobileMenuLanguage">عربي / EN</button>
+    <a href="{{ url_for('profile') }}">◉ Profile</a>
+    {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}
+        <a href="{{ url_for('admin_dashboard') }}">⚙ Admin</a>
+    {% endif %}
+    <a href="{{ url_for('logout') }}">Logout</a>
+</div>
 
 <div id="toastContainer" class="toast-container"></div>
 </body>

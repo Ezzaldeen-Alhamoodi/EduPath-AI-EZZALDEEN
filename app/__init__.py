@@ -900,6 +900,23 @@ def create_app():
             code_ai=ai_usage_status(current_user, "code"),
         )
 
+
+    @app.context_processor
+    def inject_toast_notifications():
+        toast_notifications = session.pop("toast_notifications", []) if current_user.is_authenticated else []
+        if current_user.is_authenticated:
+            try:
+                unread = AdminMessage.query.filter_by(user_id=current_user.id, is_read=False).order_by(AdminMessage.id.desc()).limit(5).all()
+                for message in unread:
+                    toast_notifications.append({"title": message.title, "body": message.body})
+                    message.is_read = True
+                if unread:
+                    db.session.commit()
+            except Exception:
+                logger.exception("Failed to load toast notifications")
+        return {"toast_notifications": toast_notifications}
+
+
     @app.route("/")
     @login_required
     def index():
@@ -917,12 +934,8 @@ def create_app():
         progress = int((completed_tasks / total_tasks) * 100) if total_tasks else 0
 
         weak_skills = detect_weaknesses()
-        admin_messages = AdminMessage.query.filter_by(user_id=current_user.id, is_read=False).order_by(AdminMessage.id.desc()).limit(5).all()
-        unread_admin_messages = len(admin_messages)
-        for message in admin_messages:
-            message.is_read = True
-        if admin_messages:
-            db.session.commit()
+        admin_messages = []
+        unread_admin_messages = 0
 
         return render_template(
             "index.html",
@@ -1110,15 +1123,10 @@ def create_app():
                 task.completion_email_sent_at = str(date.today())
                 db.session.commit()
 
-        try:
-            create_admin_message(
-                current_user,
-                None,
-                "completed",
-                f"Great work! You completed: {task.title}. Keep your momentum going."
-            )
-        except Exception:
-            logger.exception("Automatic completion notification failed")
+        session["toast_notifications"] = [{
+            "title": "Great work!",
+            "body": f"You completed: {task.title}. Keep your momentum going."
+        }]
 
         flash("Task marked as done.", "success")
         return redirect(url_for("tasks"))

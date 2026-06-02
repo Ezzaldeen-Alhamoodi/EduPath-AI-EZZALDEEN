@@ -22,13 +22,7 @@
 
 
 
-{% if admin_messages %}
-<div id="adminToastData" class="hidden-toast-data">
-    {% for message in admin_messages %}
-        <div class="toast-data-item" data-title="{{ message.title }}" data-body="{{ message.body }}"></div>
-    {% endfor %}
-</div>
-{% endif %}
+
 
 <section class="card current-focus-v41">
     <h2><span data-i18n="dashboard.focus">Current Focus</span></h2>
@@ -142,6 +136,6 @@
     </div>
 </section>
 
-<div class="app-version-footer">EduPath AI EZZALDEEN · v4.6.4<br><span>Contact: edupath.ai.ezzaldeen.app@outlook.com</span></div>
+<div class="app-version-footer">EduPath AI EZZALDEEN · v4.6.5<br><span>Contact: edupath.ai.ezzaldeen.app@outlook.com</span></div>
 
 {% endblock %}

@@ -22,7 +22,7 @@
 
 <section class="card admin-message-card">
     <h2>Send EduPath AI Motivation</h2>
-    <p class="muted">Send a private encouragement email to a selected user. Useful for brothers, students, or anyone you are helping.</p>
+    <p class="muted">Send an EduPath AI in-app notification to a selected user. It appears briefly like a phone notification.</p>
 
     <form method="POST" action="{{ url_for('admin_send_message') }}" class="form admin-message-form">
         <label>Select User</label>
@@ -49,21 +49,6 @@
 </section>
 
 
-<section class="card">
-    <h2>Recent EduPath AI Notifications</h2>
-    <p class="muted">Messages sent from this panel appear as EduPath AI in-app notifications.</p>
-    <div class="admin-users">
-        {% for message in recent_admin_messages %}
-            <div class="item">
-                <strong>{{ message.title }}</strong>
-                <span>User ID: {{ message.user_id }} · {{ message.message_type }} · {{ message.created_at.strftime("%Y-%m-%d %H:%M") if message.created_at else "" }}</span>
-                <p>{{ message.body }}</p>
-            </div>
-        {% else %}
-            <p class="muted">No in-app messages sent yet.</p>
-        {% endfor %}
-    </div>
-</section>
 
 <section class="card">
     <h2>Users, Progress & AI Controls</h2>

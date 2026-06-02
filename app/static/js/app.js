@@ -120,6 +120,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* EduPath AI v4.0 Smart Adaptive Task System */
 const SMART_TASK_DATA = {
+
+  "Quran Memorization": {
+    icon: "☪",
+    main: ["حفظ جديد","مراجعة","تسميع","تجويد","تفسير مبسط","خطة حفظ","اختبار حفظ","Other"],
+    sub: {
+      "حفظ جديد": ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس","Other"],
+      "مراجعة": ["مراجعة يومية","مراجعة أسبوعية","مراجعة جزء","مراجعة حزب","مراجعة سورة","مراجعة أخطاء","Other"],
+      "تسميع": ["تسميع ذاتي","تسميع مع شخص","تسميع صفحة","تسميع سورة","تسميع جزء","Other"],
+      "تجويد": ["مخارج الحروف","أحكام النون الساكنة والتنوين","أحكام الميم الساكنة","المدود","القلقلة","الغنة","أحكام الراء","Other"],
+      "تفسير مبسط": ["معاني الكلمات","سبب النزول","الفكرة العامة","فوائد عملية","Other"],
+      "خطة حفظ": ["ورد يومي","ورد أسبوعي","تثبيت الحفظ","تقسيم السورة","Other"],
+      "اختبار حفظ": ["اختبار صفحة","اختبار سورة","اختبار جزء","اختبار أخطاء","Other"],
+      "Other": ["Other"]
+    },
+    detail: {
+      "حفظ جديد": ["آية واحدة","نصف صفحة","صفحة كاملة","وجه كامل","مقطع قصير","مقطع متوسط","Other"],
+      "مراجعة": ["مراجعة بدون مصحف","مراجعة بالمصحف","تكرار 3 مرات","تكرار 5 مرات","تثبيت مواضع الخطأ","Other"],
+      "تسميع": ["بدون أخطاء","مع تسجيل صوتي","مع تصحيح الأخطاء","تسميع متكرر","Other"],
+      "تجويد": ["تطبيق الحكم على آيات","استماع لقارئ","تصحيح النطق","تدريب عملي","Other"],
+      "Other": ["Other"]
+    },
+    training: ["حفظ","تكرار","مراجعة","تسميع","استماع لقارئ","تصحيح الأخطاء","تثبيت الحفظ","اختبار ذاتي","مراجعة متباعدة","خطة أسبوعية","Other"]
+  },
+
   "Secondary School": {
     icon: "🏛️",
     main: ["Quran","Islamic Studies","Arabic Language","English Language","Mathematics","Physics","Chemistry","Biology","History","Geography","Society / Social Studies","Computer Science","General Review","Exams","Homework","Other"],
@@ -797,11 +821,11 @@ function showEduPathToast(title, body) {
     setTimeout(() => {
         toast.classList.remove("show");
         setTimeout(() => toast.remove(), 400);
-    }, 6500);
+    }, 8500);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const toastItems = document.querySelectorAll("#adminToastData .toast-data-item");
+    const toastItems = document.querySelectorAll("#adminToastData .toast-data-item, #globalToastData .toast-data-item");
     toastItems.forEach((item, index) => {
         setTimeout(() => {
             showEduPathToast(item.dataset.title, item.dataset.body);
@@ -834,5 +858,42 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         updateMobileLangIcon();
         desktopLang.addEventListener("click", () => setTimeout(updateMobileLangIcon, 80));
+    }
+});
+
+
+
+/* EduPath AI v4.6.5 Mobile More Menu */
+document.addEventListener("DOMContentLoaded", () => {
+    const moreToggle = document.getElementById("mobileMoreToggle");
+    const moreMenu = document.getElementById("mobileMoreMenu");
+    if (moreToggle && moreMenu) {
+        moreToggle.addEventListener("click", () => {
+            moreMenu.classList.toggle("open");
+        });
+
+        document.addEventListener("click", (event) => {
+            if (!moreMenu.contains(event.target) && !moreToggle.contains(event.target)) {
+                moreMenu.classList.remove("open");
+            }
+        });
+    }
+
+    const themeButton = document.getElementById("mobileMenuTheme");
+    const desktopTheme = document.getElementById("themeToggle");
+    if (themeButton && desktopTheme) {
+        themeButton.addEventListener("click", () => {
+            desktopTheme.click();
+            moreMenu?.classList.remove("open");
+        });
+    }
+
+    const langButton = document.getElementById("mobileMenuLanguage");
+    const desktopLang = document.getElementById("languageToggle");
+    if (langButton && desktopLang) {
+        langButton.addEventListener("click", () => {
+            desktopLang.click();
+            moreMenu?.classList.remove("open");
+        });
     }
 });
