@@ -473,3 +473,13 @@ SEND_ADMIN_EMAILS=false
 ```
 
 Email can be re-enabled later after confirming SMTP works reliably.
+
+
+## v4.6.3 Fast Toast Notifications
+
+- Improved database connection reliability with SQLAlchemy pool pre-ping and recycling.
+- Admin messages now appear as EduPath AI in-app toast notifications.
+- Toast notifications appear briefly and disappear without occupying dashboard space.
+- Automatic motivational notification appears after task completion.
+- Admin can still send motivational notifications manually.
+- Task completion email is disabled by default unless `SEND_TASK_COMPLETION_EMAILS=true`.

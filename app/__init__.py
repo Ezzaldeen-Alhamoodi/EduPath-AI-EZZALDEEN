@@ -263,14 +263,14 @@ def create_admin_message(user, admin, message_type, custom_message=""):
         "not_completed": "A gentle reminder",
         "partial": "Keep your momentum",
         "encouragement": "You can do this",
-        "custom": "Message from EduPath AI Admin"
+        "custom": "EduPath AI Message"
     }
     message = AdminMessage(
         user_id=user.id,
         admin_id=admin.id if admin and getattr(admin, "is_authenticated", False) else None,
         message_type=message_type,
-        title=title_map.get(message_type, "Message from EduPath AI"),
-        body=presets.get(message_type, presets["encouragement"]),
+        title=title_map.get(message_type, "EduPath AI Message"),
+        body=(custom_message if message_type == "custom" and custom_message else presets.get(message_type, presets["encouragement"])),
     )
     db.session.add(message)
     db.session.commit()
@@ -290,7 +290,7 @@ def send_admin_motivation_email(user, message_type, custom_message=""):
         "not_completed": "A gentle reminder from EduPath AI",
         "partial": "Keep your momentum going",
         "encouragement": "You can do this",
-        "custom": "Message from EduPath AI Admin"
+        "custom": "EduPath AI Message"
     }
     body = f"""Hello {user.name},
 
@@ -469,6 +469,7 @@ def create_app():
         "sqlite:///edupath_ai_ezzaldeen.db",
     )
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_pre_ping": True, "pool_recycle": 280, "pool_timeout": 10}
 
     app.config["MAIL_SERVER"] = os.environ.get("MAIL_SERVER", "")
     app.config["MAIL_PORT"] = int(os.environ.get("MAIL_PORT", "587"))
@@ -916,8 +917,12 @@ def create_app():
         progress = int((completed_tasks / total_tasks) * 100) if total_tasks else 0
 
         weak_skills = detect_weaknesses()
-        admin_messages = AdminMessage.query.filter_by(user_id=current_user.id).order_by(AdminMessage.id.desc()).limit(5).all()
-        unread_admin_messages = AdminMessage.query.filter_by(user_id=current_user.id, is_read=False).count()
+        admin_messages = AdminMessage.query.filter_by(user_id=current_user.id, is_read=False).order_by(AdminMessage.id.desc()).limit(5).all()
+        unread_admin_messages = len(admin_messages)
+        for message in admin_messages:
+            message.is_read = True
+        if admin_messages:
+            db.session.commit()
 
         return render_template(
             "index.html",
@@ -1100,10 +1105,20 @@ def create_app():
         task.last_reviewed = str(date.today())
         db.session.commit()
 
-        if task.completion_email_sent_at != str(date.today()):
+        if os.environ.get("SEND_TASK_COMPLETION_EMAILS", "false").lower() == "true" and task.completion_email_sent_at != str(date.today()):
             if send_task_completion_email(current_user, task):
                 task.completion_email_sent_at = str(date.today())
                 db.session.commit()
+
+        try:
+            create_admin_message(
+                current_user,
+                None,
+                "completed",
+                f"Great work! You completed: {task.title}. Keep your momentum going."
+            )
+        except Exception:
+            logger.exception("Automatic completion notification failed")
 
         flash("Task marked as done.", "success")
         return redirect(url_for("tasks"))

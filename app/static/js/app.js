@@ -774,3 +774,37 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+
+
+/* EduPath AI v4.6.3 Fast Toast Notifications */
+function showEduPathToast(title, body) {
+    const container = document.getElementById("toastContainer");
+    if (!container) return;
+
+    const toast = document.createElement("div");
+    toast.className = "edupath-toast";
+    toast.innerHTML = `
+        <div class="toast-mark">✦</div>
+        <div>
+            <strong>${title || "EduPath AI"}</strong>
+            <p>${body || ""}</p>
+        </div>
+    `;
+    container.appendChild(toast);
+
+    setTimeout(() => toast.classList.add("show"), 50);
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 400);
+    }, 6500);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const toastItems = document.querySelectorAll("#adminToastData .toast-data-item");
+    toastItems.forEach((item, index) => {
+        setTimeout(() => {
+            showEduPathToast(item.dataset.title, item.dataset.body);
+        }, 500 + index * 900);
+    });
+});
