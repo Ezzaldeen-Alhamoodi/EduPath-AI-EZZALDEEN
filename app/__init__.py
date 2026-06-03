@@ -983,7 +983,7 @@ def create_app():
                 title=request.form.get("title", "").strip(),
                 category=request.form.get("category", "General").strip(),
                 current_level=current_state,
-                daily_minutes=int(request.form.get("daily_minutes", 60) or 60),
+                daily_minutes=0,
                 start_date=request.form.get("start_date", "").strip(),
                 deadline=request.form.get("deadline", "").strip(),
                 reminder_time="",
@@ -1015,12 +1015,14 @@ def create_app():
 
         if request.method == "POST":
             goal.title = request.form.get("title", "").strip()
-            goal.category = request.form.get("category", "General").strip()
-            goal.current_level = request.form.get("current_level", "Beginner").strip()
-            goal.daily_minutes = int(request.form.get("daily_minutes", 60) or 60)
+            goal.category = request.form.get("category", goal.category or "General").strip()
+            current_level = request.form.get("current_level", "").strip()
+            if current_level:
+                goal.current_level = current_level
             goal.start_date = request.form.get("start_date", "").strip()
             goal.deadline = request.form.get("deadline", "").strip()
-            goal.reminder_time = request.form.get("reminder_time", "").strip()
+            # Keep reminder empty for goals; reminders belong to tasks.
+            goal.reminder_time = ""
             goal.notes = request.form.get("notes", "").strip()
             db.session.commit()
             flash("Goal changes saved.", "success")
@@ -1032,11 +1034,17 @@ def create_app():
     @login_required
     def delete_goal(goal_id):
         goal = Goal.query.filter_by(id=goal_id, user_id=current_user.id).first_or_404()
+
+        # Delete smart links first so PostgreSQL does not try to set goal_id to NULL.
+        GoalTaskLink.query.filter_by(goal_id=goal.id, user_id=current_user.id).delete(synchronize_session=False)
+
+        # Do not delete user-created tasks. A task can exist independently from the goal.
         for task in list(goal.tasks):
-            db.session.delete(task)
+            task.goal_id = None
+
         db.session.delete(goal)
         db.session.commit()
-        flash("Goal and its tasks were deleted.", "success")
+        flash("Goal deleted. Your tasks were kept safely.", "success")
         return redirect(url_for("goals"))
 
     @app.route("/tasks", methods=["GET", "POST"])

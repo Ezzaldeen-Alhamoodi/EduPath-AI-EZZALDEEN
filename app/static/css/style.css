@@ -2787,3 +2787,26 @@ html[dir="rtl"] .goal-path-line {
 html[dir="rtl"] .smart-system-note {
     text-align: right;
 }
+
+
+
+/* EduPath AI v4.6.11 Goals/Tasks Refinement */
+.custom-goal-fields input {
+    width: 100%;
+}
+
+#customCategoryBox,
+#customPathBox,
+#customCurrentBox,
+#customTargetBox,
+#customCommitmentBox {
+    display: none;
+}
+
+.smart-goal-form input[type="hidden"] {
+    display: none !important;
+}
+
+.goal-philosophy-card {
+    display: none !important;
+}

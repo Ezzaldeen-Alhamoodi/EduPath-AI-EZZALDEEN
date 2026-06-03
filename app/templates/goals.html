@@ -12,15 +12,6 @@
     <a class="button light" href="{{ url_for('tasks') }}">▣ Create Your Tasks</a>
 </section>
 
-<section class="card goal-philosophy-card">
-    <h2>How Smart Goals Work</h2>
-    <p class="improved">
-        EduPath AI does not create tasks automatically. You create your own tasks, and the app intelligently connects completed tasks to related goals to update your progress.
-    </p>
-    <p class="improved ar-note">
-        التطبيق لا ينشئ مهامًا تلقائيًا. أنت تنشئ مهامك بنفسك، والتطبيق يربط المهام المكتملة بالأهداف المناسبة لقياس تقدمك.
-    </p>
-</section>
 
 <section class="grid-2">
     <div class="card">
@@ -73,14 +64,11 @@
 
                 <label id="goalOutcomeLabel">Goal Outcome</label>
                 <input name="goal_outcome" id="goalOutcomeInput" placeholder="What should happen when this goal is achieved?">
-
-                <label id="milestonesLabel">Milestones</label>
-                <textarea name="milestones" id="milestonesInput" rows="3" placeholder="Band 5.5 → 6.0 → 6.5 → 7.0"></textarea>
+                <input type="hidden" name="milestones" id="milestonesInput">
 
                 <label id="commitmentLabel">Daily / Weekly Commitment</label>
                 <select name="commitment" id="commitmentSelect"></select>
                 <input type="hidden" name="keywords" id="keywordsInput">
-                <p class="smart-system-note" id="keywordsSystemNote">Smart linking keywords are generated automatically by the system from your choices.</p>
 
                 <div class="custom-goal-fields" id="customGoalFields">
                     <div class="form-row">
@@ -109,17 +97,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="form-row">
-                <div>
-                    <label>Daily Minutes</label>
-                    <input name="daily_minutes" type="number" min="5" value="60">
-                </div>
-                <div>
-                    <label>Start Date</label>
-                    <input name="start_date" type="date">
-                </div>
-            </div>
+            <label>Start Date</label>
+            <input name="start_date" type="date">
 
             <label>Target Date</label>
             <input name="deadline" type="date">

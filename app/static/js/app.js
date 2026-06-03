@@ -1334,7 +1334,7 @@ function fillGoalSelectV4610(select, values) {
 }
 
 function shouldShowCustom(value) {
-    return ["Other", "أخرى", "Custom", "Custom Plan", "خطة مخصصة", "تحديد يدوي"].includes(value);
+    return isOtherLikeEduPath(value);
 }
 
 function toggleGoalCustomFieldsV4610() {
@@ -1354,6 +1354,23 @@ function toggleGoalCustomFieldsV4610() {
         const box = document.getElementById(id);
         if (box) box.style.display = select && shouldShowCustom(select.value) ? "block" : "none";
     });
+}
+
+
+function generatedMilestonesForGoalV4611(typeValue, categoryValue, pathValue, targetValue) {
+    const selected = `${typeValue} ${categoryValue} ${pathValue} ${targetValue}`.toLowerCase();
+    if (pathValue === "حفظ جزء محدد" || targetValue === "حفظ جزء عم" || selected.includes("جزء عم")) {
+        return JUZ_AMMA_MILESTONES_V4610.join(", ");
+    }
+    if (selected.includes("ielts")) return "Band 5.5 → Band 6.0 → Band 6.5 → Band 7.0";
+    if (selected.includes("toefl")) return "Reading, Listening, Writing, Speaking, Full Mock Test";
+    if (selected.includes("duolingo")) return "Reading, Listening, Writing, Speaking, Full Mock Test";
+    if (selected.includes("csca")) return "Mathematics, Physics, Chemistry, Full Exam Simulation";
+    if (selected.includes("python") || selected.includes("flask")) return "Syntax, Functions, OOP, Flask Basics, Database, Final Project, Deployment";
+    if (selected.includes("scholarship") || selected.includes("منحة")) return "University Selection, Documents, Motivation Letter, Application Review, Submission, Follow-up";
+    if (typeValue === "Project") return "Idea, Planning, Build, Testing, Documentation, Deployment";
+    if (typeValue === "Daily Life") return "Start, Consistency, Weekly Review, Improvement";
+    return [categoryValue, pathValue, targetValue].filter(Boolean).join(", ");
 }
 
 function updateSmartGoalsV4610(changedId = "") {
@@ -1400,7 +1417,7 @@ function updateSmartGoalsV4610(changedId = "") {
         labels.current.textContent = "الحالة الحالية";
         labels.target.textContent = "الهدف المستهدف";
         labels.outcome.textContent = "النتيجة النهائية";
-        labels.milestones.textContent = "المحطات";
+        if (labels.milestones) labels.milestones.textContent = "المحطات";
         labels.commitment.textContent = "الالتزام اليومي / الأسبوعي";
         if (outcome && !outcome.value) outcome.placeholder = "مثال: إتمام حفظ جزء عم وتثبيته";
     } else {
@@ -1409,27 +1426,15 @@ function updateSmartGoalsV4610(changedId = "") {
         labels.current.textContent = "Current State";
         labels.target.textContent = "Target State";
         labels.outcome.textContent = "Goal Outcome";
-        labels.milestones.textContent = "Milestones";
+        if (labels.milestones) labels.milestones.textContent = "Milestones";
         labels.commitment.textContent = "Daily / Weekly Commitment";
     }
 
     const selected = `${type.value} ${category.value} ${path.value} ${target.value}`.toLowerCase();
     const shouldRefreshSuggestions = ["goalTypeSelect", "goalCategorySelect", "goalPathSelect", "targetStateSelect"].includes(changedId);
 
-    if (milestones && (!milestones.value || shouldRefreshSuggestions)) {
-        if (path.value === "حفظ جزء محدد" || target.value === "حفظ جزء عم" || selected.includes("جزء عم")) {
-            milestones.value = JUZ_AMMA_MILESTONES_V4610.join(", ");
-        } else if (selected.includes("ielts")) {
-            milestones.value = "Band 5.5 → Band 6.0 → Band 6.5 → Band 7.0";
-        } else if (selected.includes("toefl")) {
-            milestones.value = "Reading, Listening, Writing, Speaking, Full Mock Test";
-        } else if (selected.includes("csca")) {
-            milestones.value = "Mathematics, Physics, Chemistry, Full Exam Simulation";
-        } else if (selected.includes("python") || selected.includes("flask")) {
-            milestones.value = "Syntax, Functions, OOP, Flask Basics, Database, Final Project, Deployment";
-        } else if (selected.includes("scholarship") || selected.includes("منحة")) {
-            milestones.value = "University Selection, Documents, Motivation Letter, Application Review, Submission, Follow-up";
-        }
+    if (milestones && (shouldRefreshSuggestions || !milestones.value)) {
+        milestones.value = generatedMilestonesForGoalV4611(type.value, category.value, path.value, target.value);
     }
 
     if (keywords) {
@@ -1446,4 +1451,45 @@ document.addEventListener("DOMContentLoaded", () => {
         if (el) el.addEventListener("change", () => updateSmartGoalsV4610(id));
     });
     updateSmartGoalsV4610("goalTypeSelect");
+});
+
+
+
+/* EduPath AI v4.6.11 Robust Other/Custom Fields */
+function isOtherLikeEduPath(value) {
+    return ["Other", "أخرى", "Custom", "Custom Plan", "خطة مخصصة", "تحديد يدوي", "Other / أخرى"].includes(value);
+}
+
+function forceTaskCustomBoxes() {
+    const categoryInput = document.getElementById("categorySelect");
+    const topicSelect = document.getElementById("topicSelect");
+    const skillSelect = document.getElementById("skillSelect");
+    const detailSelect = document.getElementById("detailedTopicSelect");
+    const trainingSelect = document.getElementById("trainingTypeSelect");
+
+    const pairs = [
+        ["customCategoryBox", categoryInput ? categoryInput.value : ""],
+        ["customTopicBox", topicSelect ? topicSelect.value : ""],
+        ["customSkillBox", skillSelect ? skillSelect.value : ""],
+        ["customDetailedTopicBox", detailSelect ? detailSelect.value : ""],
+        ["customTrainingTypeBox", trainingSelect ? trainingSelect.value : ""],
+    ];
+
+    pairs.forEach(([boxId, value]) => {
+        const box = document.getElementById(boxId);
+        if (box) box.style.display = isOtherLikeEduPath(value) ? "block" : "none";
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    ["topicSelect","skillSelect","detailedTopicSelect","trainingTypeSelect"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener("change", () => setTimeout(forceTaskCustomBoxes, 30));
+    });
+
+    document.querySelectorAll(".task-type-card").forEach(card => {
+        card.addEventListener("click", () => setTimeout(forceTaskCustomBoxes, 80));
+    });
+
+    setTimeout(forceTaskCustomBoxes, 120);
 });

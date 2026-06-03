@@ -638,3 +638,16 @@ gunicorn server:app
   - IELTS/TOEFL/Duolingo/CSCA no longer mix unrelated task structures in the same path list.
 - Goal progress remains based only on user-created completed tasks.
 - No automatic task creation.
+
+
+## v4.6.11 Goals/Tasks Refinement
+
+- Fixed deleting goals linked to completed tasks.
+- Goal deletion now removes GoalTaskLink rows first and keeps user-created tasks safely.
+- Removed Daily Minutes from Smart Goals.
+- Removed Reminder Time from Smart Goals.
+- Removed repeated explanatory block from Goals page.
+- Hidden keywords are generated automatically by the system and are not shown to users.
+- Milestones are generated adaptively and stored internally.
+- Added robust Other/Custom fields for Smart Goals and Smart Tasks.
+- Goal progress remains based only on user-created completed tasks.
