@@ -47,15 +47,14 @@
         </div>
 
         <nav class="main-nav">
-            <a href="{{ url_for('index') }}"><span data-i18n="nav.dashboard">⌂ Dashboard</span></a>
-            <a href="{{ url_for('goals') }}"><span data-i18n="nav.goals">◎ Goals</span></a>
-            <a href="{{ url_for('tasks') }}"><span data-i18n="nav.tasks">▣ Tasks</span></a>
-            <a href="{{ url_for('resources') }}"><span data-i18n="nav.resources">▤ Resources</span></a>
-            <a href="{{ url_for('my_resources') }}"><span data-i18n="nav.my_resources">⭐ My Resources</span></a>
-            <a href="{{ url_for('languages') }}"><span data-i18n="nav.languages">◌ Languages</span></a>
-            <a href="{{ url_for('coach') }}"><span data-i18n="nav.coach">✦ AI Coach</span></a>
-            {% if current_user.is_authenticated %}<a href="{{ url_for('profile') }}"><span data-i18n="nav.profile">◉ Profile</span></a>{% endif %}
-            {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}<a href="{{ url_for('admin_dashboard') }}"><span data-i18n="nav.admin">⚙ Admin</span></a>{% endif %}
+            <a href="{{ url_for('index') }}"><span data-i18n="nav.dashboard">Dashboard</span></a>
+            <a href="{{ url_for('goals') }}"><span data-i18n="nav.goals">Goals</span></a>
+            <a href="{{ url_for('tasks') }}"><span data-i18n="nav.tasks">Tasks</span></a>
+            <a href="{{ url_for('resources') }}"><span data-i18n="nav.resources">Resources</span></a>
+            <a href="{{ url_for('my_resources') }}"><span data-i18n="nav.my_resources">My Resources</span></a>
+            <a href="{{ url_for('coach') }}"><span data-i18n="nav.coach">AI Coach</span></a>
+            {% if current_user.is_authenticated %}<a href="{{ url_for('profile') }}"><span data-i18n="nav.profile">Profile</span></a>{% endif %}
+            {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}<a href="{{ url_for('admin_dashboard') }}"><span data-i18n="nav.admin">Admin</span></a>{% endif %}
         </nav>
 
         <button class="notify-btn" id="enableNotifications">🔔 Enable Reminders</button>
@@ -92,24 +91,23 @@
 
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
-    <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
-        <a href="{{ url_for('index') }}"><span>⌂</span><small data-i18n="mobile.home">Home</small></a>
-        <a href="{{ url_for('goals') }}"><span>◎</span><small data-i18n="mobile.goals">Goals</small></a>
-        <a href="{{ url_for('tasks') }}"><span>▣</span><small data-i18n="mobile.tasks">Tasks</small></a>
-        <a href="{{ url_for('resources') }}"><span>▤</span><small data-i18n="mobile.resources">Resources</small></a>
-        <a href="{{ url_for('my_resources') }}"><span>⭐</span><small data-i18n="mobile.my_resources">My</small></a>
-        <a href="{{ url_for('coach') }}"><span>✦</span><small data-i18n="mobile.coach">Coach</small></a>
-        <a href="{{ url_for('languages') }}"><span>◌</span><small data-i18n="mobile.lang">Lang</small></a>
-        <button class="mobile-more-btn" id="mobileMoreToggle" type="button"><span>⋮</span><small>More</small></button>
+    <nav class="mobile-bottom-nav compact-bottom-nav-v473" aria-label="Mobile navigation">
+        <a href="{{ url_for('index') }}"><small data-i18n="mobile.home">Home</small></a>
+        <a href="{{ url_for('goals') }}"><small data-i18n="mobile.goals">Goals</small></a>
+        <a href="{{ url_for('tasks') }}"><small data-i18n="mobile.tasks">Tasks</small></a>
+        <a href="{{ url_for('resources') }}"><small data-i18n="mobile.resources">Resources</small></a>
+        <a href="{{ url_for('my_resources') }}"><small data-i18n="mobile.my_resources">My</small></a>
+        <a href="{{ url_for('coach') }}"><small data-i18n="mobile.coach">Coach</small></a>
+        <button class="mobile-more-btn" id="mobileMoreToggle" type="button"><small>More</small></button>
     </nav>
 
 
 <div class="mobile-more-menu" id="mobileMoreMenu">
-    <button type="button" id="mobileMenuTheme">☾ Theme</button>
+    <button type="button" id="mobileMenuTheme">Theme</button>
     <button type="button" id="mobileMenuLanguage">عربي / EN</button>
-    <a href="{{ url_for('profile') }}">◉ Profile</a>
+    <a href="{{ url_for('profile') }}">Profile</a>
     {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}
-        <a href="{{ url_for('admin_dashboard') }}">⚙ Admin</a>
+        <a href="{{ url_for('admin_dashboard') }}">Admin</a>
     {% endif %}
     <a href="{{ url_for('logout') }}">Logout</a>
 </div>

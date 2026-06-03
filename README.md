@@ -907,3 +907,25 @@ Safe zero-AI update.
 - 0 API calls.
 - 0 OpenRouter usage.
 - 0 cost.
+
+
+## v4.7.3 Navigation Cleanup
+
+Design/navigation refinement.
+
+### Changed
+- Removed Languages from desktop navigation.
+- Removed Languages from mobile bottom navigation.
+- Kept the old Languages route/page in code for safety, but it is no longer shown in navigation.
+- Made desktop sidebar links smaller and cleaner.
+- Removed emoji/icons from main navigation labels to reduce width and clutter.
+- Made mobile bottom navigation more compact.
+- Kept AI Coach visible in both desktop and mobile navigation.
+- Removed the repeated mobile brand block by hiding the sidebar/brand area on mobile.
+- Kept only the top mobile app logo visible on phones.
+- Reduced bottom navigation height to improve usable screen space.
+
+### AI usage
+- 0 API calls.
+- 0 OpenRouter usage.
+- 0 cost.

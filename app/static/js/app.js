@@ -1657,8 +1657,8 @@ document.addEventListener("DOMContentLoaded", () => {
 /* EduPath AI v4.6.16 Resources i18n */
 document.addEventListener("DOMContentLoaded", () => {
     if (typeof EDUPATH_I18N !== "undefined") {
-        EDUPATH_I18N.en["nav.resources"] = "▤ Resources";
-        EDUPATH_I18N.ar["nav.resources"] = "▤ المصادر";
+        EDUPATH_I18N.en["nav.resources"] = "Resources";
+        EDUPATH_I18N.ar["nav.resources"] = "المصادر";
         EDUPATH_I18N.en["mobile.resources"] = "Resources";
         EDUPATH_I18N.ar["mobile.resources"] = "مصادر";
         if (typeof applyEduPathLanguage === "function") {
@@ -1672,8 +1672,8 @@ document.addEventListener("DOMContentLoaded", () => {
 /* EduPath AI v4.7.2 My Resources i18n */
 document.addEventListener("DOMContentLoaded", () => {
     if (typeof EDUPATH_I18N !== "undefined") {
-        EDUPATH_I18N.en["nav.my_resources"] = "⭐ My Resources";
-        EDUPATH_I18N.ar["nav.my_resources"] = "⭐ مصادري";
+        EDUPATH_I18N.en["nav.my_resources"] = "My Resources";
+        EDUPATH_I18N.ar["nav.my_resources"] = "مصادري";
         EDUPATH_I18N.en["mobile.my_resources"] = "My";
         EDUPATH_I18N.ar["mobile.my_resources"] = "مصادري";
         if (typeof applyEduPathLanguage === "function") {

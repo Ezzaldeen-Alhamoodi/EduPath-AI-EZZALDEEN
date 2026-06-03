@@ -3572,3 +3572,140 @@ body.dark-mode .saved-resource-edit-v472 {
         justify-content: center;
     }
 }
+
+
+
+/* EduPath AI v4.7.3 Navigation Cleanup */
+:root {
+    --bottom-nav-height: 48px;
+}
+
+.main-nav,
+.sidebar nav {
+    gap: 5px !important;
+}
+
+.main-nav a,
+.sidebar nav a {
+    padding: 8px 10px !important;
+    border-radius: 12px !important;
+    font-size: 14px !important;
+    line-height: 1.15 !important;
+    gap: 0 !important;
+}
+
+.sidebar {
+    gap: 14px !important;
+}
+
+.brand-block {
+    margin-bottom: 2px;
+}
+
+.notify-btn {
+    padding: 10px 12px !important;
+    border-radius: 14px !important;
+    font-size: 13px !important;
+}
+
+.compact-bottom-nav-v473 {
+    height: 48px !important;
+    min-height: 48px !important;
+    padding: 4px 5px calc(4px + env(safe-area-inset-bottom)) !important;
+    gap: 3px !important;
+    align-items: center !important;
+}
+
+.compact-bottom-nav-v473 a,
+.compact-bottom-nav-v473 button {
+    min-width: 0 !important;
+    min-height: 34px !important;
+    padding: 4px 3px !important;
+    border-radius: 12px !important;
+    gap: 0 !important;
+    display: grid !important;
+    place-items: center !important;
+}
+
+.compact-bottom-nav-v473 small {
+    font-size: 10.5px !important;
+    line-height: 1 !important;
+    font-weight: 900 !important;
+    white-space: nowrap !important;
+    letter-spacing: -0.02em;
+}
+
+.compact-bottom-nav-v473 span {
+    display: none !important;
+}
+
+.compact-bottom-nav-v473 .mobile-more-btn {
+    font-size: 10.5px !important;
+}
+
+@media (max-width: 980px) {
+    body {
+        padding-bottom: calc(48px + 10px + env(safe-area-inset-bottom)) !important;
+    }
+
+    .sidebar {
+        display: none !important;
+    }
+
+    .main {
+        margin-left: 0 !important;
+        padding: 10px 12px 14px !important;
+    }
+
+    .topbar {
+        margin: 6px 0 8px !important;
+    }
+
+    .mobile-app-header + .sidebar + .main .topbar,
+    .topbar {
+        display: none !important;
+    }
+
+    .mobile-app-header {
+        min-height: 58px !important;
+        padding: 8px 14px !important;
+        grid-template-columns: 1fr !important;
+    }
+
+    .mobile-app-logo {
+        width: 48px !important;
+        height: 48px !important;
+        border-radius: 18px !important;
+    }
+
+    .mobile-app-logo span {
+        font-size: 18px !important;
+    }
+
+    .mobile-app-logo small {
+        font-size: 8px !important;
+        font-weight: 950 !important;
+        letter-spacing: -0.04em;
+    }
+
+    .brand-block {
+        display: none !important;
+    }
+}
+
+@media (min-width: 981px) {
+    .mobile-app-header,
+    .mobile-bottom-nav,
+    .mobile-more-menu {
+        display: none !important;
+    }
+
+    .sidebar {
+        width: 248px !important;
+        padding: 18px !important;
+    }
+
+    .main {
+        margin-left: 248px !important;
+    }
+}
