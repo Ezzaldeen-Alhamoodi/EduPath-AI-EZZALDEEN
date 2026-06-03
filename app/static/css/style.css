@@ -3474,3 +3474,101 @@ body.dark-mode .learning-step {
         padding: 0 12px;
     }
 }
+
+
+
+/* EduPath AI v4.7.2 My Resources / Favorites */
+.resources-hero-actions-v472 {
+    align-items: center;
+}
+
+.resource-actions-v472 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.resource-actions-v472 form {
+    margin: 0;
+}
+
+.resource-actions-v472 button,
+.resource-actions-v472 a {
+    min-height: 36px;
+}
+
+.resource-actions-v472.compact {
+    margin-top: 10px;
+}
+
+.resource-actions-v472.compact a {
+    font-weight: 950;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.saved-status {
+    background: rgba(37, 99, 235, 0.12);
+    color: var(--primary);
+    border-color: rgba(37, 99, 235, 0.22);
+}
+
+.saved-resource-card-v472 {
+    position: relative;
+}
+
+.saved-resource-edit-v472 {
+    display: grid;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 18px;
+    background: rgba(37, 99, 235, 0.045);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+}
+
+.saved-resource-edit-v472 label {
+    font-size: 13px;
+    font-weight: 950;
+}
+
+.saved-resource-edit-v472 select,
+.saved-resource-edit-v472 textarea {
+    width: 100%;
+}
+
+.delete-saved-resource-v472 {
+    margin-top: 10px;
+}
+
+.my-resources-filter-v472 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+body.dark-mode .saved-resource-edit-v472 {
+    background: rgba(15, 23, 42, 0.62);
+}
+
+@media (max-width: 760px) {
+    .resources-hero-actions-v472 {
+        display: grid;
+    }
+
+    .resources-hero-actions-v472 .button {
+        width: fit-content;
+    }
+
+    .resource-actions-v472,
+    .my-resources-filter-v472 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .resource-actions-v472 button,
+    .resource-actions-v472 a,
+    .delete-saved-resource-v472 button {
+        width: 100%;
+        justify-content: center;
+    }
+}

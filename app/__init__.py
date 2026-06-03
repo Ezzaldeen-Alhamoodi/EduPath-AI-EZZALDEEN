@@ -147,6 +147,20 @@ class LearningResource(db.Model):
             return []
 
 
+class SavedResource(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, index=True)
+    resource_id = db.Column(db.Integer, db.ForeignKey("learning_resource.id"), nullable=False, index=True)
+    status = db.Column(db.String(40), nullable=False, default="Not Started")
+    notes = db.Column(db.Text, nullable=True)
+    last_opened = db.Column(db.DateTime, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+
+    user = db.relationship("User", backref="saved_resources")
+    resource = db.relationship("LearningResource", backref="saved_by_users")
+
+
+
 class EnglishCoachSavedAnswer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, index=True)
@@ -1274,6 +1288,10 @@ def create_app():
         types = sorted(set(RESOURCE_TYPE_OPTIONS + db_types))
 
         learning_path = build_resource_learning_path(category=category, exam=exam, skill=skill, level=level)
+        saved_resource_ids = {
+            item.resource_id
+            for item in SavedResource.query.filter_by(user_id=current_user.id).all()
+        }
 
         return render_template(
             "resources.html",
@@ -1282,11 +1300,97 @@ def create_app():
             exams=exams,
             types=types,
             learning_path=learning_path,
+            saved_resource_ids=saved_resource_ids,
             selected={
                 "q": query, "category": category, "skill": skill, "exam": exam,
                 "level": level, "type": resource_type, "official": official, "free": free
             }
         )
+
+
+    @app.route("/resources/<int:resource_id>/save", methods=["POST"])
+    @login_required
+    def save_resource(resource_id):
+        seed_learning_resources()
+        resource = LearningResource.query.get_or_404(resource_id)
+        existing = SavedResource.query.filter_by(user_id=current_user.id, resource_id=resource.id).first()
+        if existing:
+            flash("This resource is already in My Resources.", "success")
+            return redirect(request.referrer or url_for("resources"))
+
+        saved = SavedResource(
+            user_id=current_user.id,
+            resource_id=resource.id,
+            status="Not Started",
+            notes="",
+        )
+        db.session.add(saved)
+        db.session.commit()
+        flash("Resource saved to My Resources.", "success")
+        return redirect(request.referrer or url_for("resources"))
+
+    @app.route("/resources/<int:resource_id>/unsave", methods=["POST"])
+    @login_required
+    def unsave_resource(resource_id):
+        saved = SavedResource.query.filter_by(user_id=current_user.id, resource_id=resource_id).first_or_404()
+        db.session.delete(saved)
+        db.session.commit()
+        flash("Resource removed from My Resources.", "success")
+        return redirect(request.referrer or url_for("resources"))
+
+    @app.route("/my-resources")
+    @login_required
+    def my_resources():
+        seed_learning_resources()
+        category = request.args.get("category", "").strip()
+        status = request.args.get("status", "").strip()
+
+        saved_query = SavedResource.query.join(LearningResource).filter(SavedResource.user_id == current_user.id)
+
+        if category:
+            saved_query = saved_query.filter(LearningResource.category == category)
+        if status:
+            saved_query = saved_query.filter(SavedResource.status == status)
+
+        saved_items = saved_query.order_by(SavedResource.id.desc()).all()
+        categories = sorted({item.resource.category for item in saved_items if item.resource and item.resource.category})
+        statuses = ["Not Started", "In Progress", "Completed"]
+
+        return render_template(
+            "my_resources.html",
+            saved_items=saved_items,
+            categories=categories,
+            statuses=statuses,
+            selected={"category": category, "status": status}
+        )
+
+    @app.route("/my-resources/<int:saved_id>/update", methods=["POST"])
+    @login_required
+    def update_saved_resource(saved_id):
+        item = SavedResource.query.filter_by(id=saved_id, user_id=current_user.id).first_or_404()
+        item.status = request.form.get("status", item.status).strip() or "Not Started"
+        item.notes = request.form.get("notes", "").strip()
+        db.session.commit()
+        flash("Resource notes updated.", "success")
+        return redirect(url_for("my_resources"))
+
+    @app.route("/my-resources/<int:saved_id>/delete", methods=["POST"])
+    @login_required
+    def delete_saved_resource(saved_id):
+        item = SavedResource.query.filter_by(id=saved_id, user_id=current_user.id).first_or_404()
+        db.session.delete(item)
+        db.session.commit()
+        flash("Saved resource deleted.", "success")
+        return redirect(url_for("my_resources"))
+
+    @app.route("/my-resources/<int:saved_id>/open")
+    @login_required
+    def open_saved_resource(saved_id):
+        item = SavedResource.query.filter_by(id=saved_id, user_id=current_user.id).first_or_404()
+        item.last_opened = datetime.utcnow()
+        db.session.commit()
+        return redirect(item.resource.url)
+
 
     @app.route("/api/resources/suggest")
     @login_required
@@ -2548,6 +2652,16 @@ def ensure_database_columns():
                         created_at TIMESTAMP
                     )""",
 
+                    """CREATE TABLE IF NOT EXISTS saved_resource (
+                        id SERIAL PRIMARY KEY,
+                        user_id INTEGER NOT NULL,
+                        resource_id INTEGER NOT NULL,
+                        status VARCHAR(40) NOT NULL DEFAULT 'Not Started',
+                        notes TEXT,
+                        last_opened TIMESTAMP,
+                        created_at TIMESTAMP
+                    )""",
+
                 ]
 
                 for sql in postgres_sql:
@@ -2669,6 +2783,18 @@ def ensure_database_columns():
                     is_official BOOLEAN NOT NULL DEFAULT 0,
                     is_free BOOLEAN NOT NULL DEFAULT 1,
                     language VARCHAR(40),
+                    created_at DATETIME
+                )
+            """)
+
+            connection.exec_driver_sql("""
+                CREATE TABLE IF NOT EXISTS saved_resource (
+                    id INTEGER PRIMARY KEY,
+                    user_id INTEGER NOT NULL,
+                    resource_id INTEGER NOT NULL,
+                    status VARCHAR(40) NOT NULL DEFAULT 'Not Started',
+                    notes TEXT,
+                    last_opened DATETIME,
                     created_at DATETIME
                 )
             """)

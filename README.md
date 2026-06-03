@@ -874,3 +874,36 @@ Major expansion of the Resources Engine.
 - Added level filter.
 - Added Beginner Friendly and Advanced badges.
 - Still no AI usage; resources remain static, fast, and free-first.
+
+
+## v4.7.2 My Resources / Favorites
+
+Safe zero-AI update.
+
+### Added
+- New SavedResource table:
+  - user_id
+  - resource_id
+  - status
+  - notes
+  - last_opened
+  - created_at
+- Save / Remove buttons on every resource card.
+- Save / Remove buttons on recommended learning path resources.
+- New page:
+  - `/my-resources`
+- My Resources features:
+  - filter by category
+  - filter by status
+  - update status
+  - write personal notes
+  - open resource and track last opened date
+  - remove saved resource
+- Navigation:
+  - desktop My Resources link
+  - mobile My Resources shortcut
+
+### AI usage
+- 0 API calls.
+- 0 OpenRouter usage.
+- 0 cost.

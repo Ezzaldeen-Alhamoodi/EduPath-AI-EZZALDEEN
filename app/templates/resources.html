@@ -3,12 +3,13 @@
 {% block page_title %}Smart Resources{% endblock %}
 {% block content %}
 
-<section class="hero compact resources-hero-v4616">
+<section class="hero compact resources-hero-v4616 resources-hero-actions-v472">
     <div>
         <span class="tag">EduPath AI</span>
         <h2>Smart Resources Engine</h2>
         <p>Find the right learning resources for your goals, tasks, exams, skills, and daily study plan. Resources are updated automatically when this page opens.</p>
     </div>
+    <a class="button light" href="{{ url_for('my_resources') }}">⭐ My Resources</a>
 </section>
 
 <section class="resource-category-strip">
@@ -111,7 +112,18 @@
                     {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">Beginner Friendly</span>{% endif %}
                     {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">Advanced</span>{% endif %}
                     </div>
-                    <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">Open ↗</a>
+                    <div class="resource-actions-v472 compact">
+                        {% if resource.id in saved_resource_ids %}
+                            <form method="POST" action="{{ url_for('unsave_resource', resource_id=resource.id) }}">
+                                <button type="submit" class="small-button warning">★ Saved</button>
+                            </form>
+                        {% else %}
+                            <form method="POST" action="{{ url_for('save_resource', resource_id=resource.id) }}">
+                                <button type="submit" class="small-button">☆ Save</button>
+                            </form>
+                        {% endif %}
+                        <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">Open ↗</a>
+                    </div>
                 </div>
             </div>
         {% endfor %}
@@ -168,7 +180,18 @@
                 </div>
             {% endif %}
 
-            <a class="button resource-open" href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">Open Resource ↗</a>
+            <div class="resource-actions-v472">
+                {% if resource.id in saved_resource_ids %}
+                    <form method="POST" action="{{ url_for('unsave_resource', resource_id=resource.id) }}">
+                        <button type="submit" class="small-button warning">★ Saved</button>
+                    </form>
+                {% else %}
+                    <form method="POST" action="{{ url_for('save_resource', resource_id=resource.id) }}">
+                        <button type="submit" class="small-button">☆ Save</button>
+                    </form>
+                {% endif %}
+                <a class="button resource-open" href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">Open Resource ↗</a>
+            </div>
         </article>
     {% else %}
         <div class="card">
