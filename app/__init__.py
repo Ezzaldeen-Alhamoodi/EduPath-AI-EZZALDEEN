@@ -15,6 +15,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 from flask_mail import Mail, Message
+from markupsafe import Markup, escape
 
 load_dotenv(override=True)
 
@@ -914,8 +915,37 @@ def resource_match_score(resource, text):
 
 
 
+
+def render_clickable_sources(value):
+    """Render source text safely: plain text stays plain, URLs become clickable links.
+    Multiple sources can be separated by &.
+    """
+    if not value:
+        return Markup('<span class="muted">not set</span>')
+
+    parts = [part.strip() for part in str(value).split("&") if part.strip()]
+    if not parts:
+        return Markup('<span class="muted">not set</span>')
+
+    rendered = []
+    url_re = re.compile(r"^https?://[^\s]+$", re.IGNORECASE)
+
+    for part in parts:
+        safe_text = escape(part)
+        if url_re.match(part):
+            rendered.append(
+                f'<a class="task-source-link" href="{safe_text}" target="_blank" rel="noopener noreferrer">{safe_text}</a>'
+            )
+        else:
+            rendered.append(f'<span class="task-source-text">{safe_text}</span>')
+
+    return Markup('<span class="task-source-list">' + '<span class="source-separator">&</span>'.join(rendered) + '</span>')
+
+
+
 def create_app():
     app = Flask(__name__)
+    app.jinja_env.filters["clickable_sources"] = render_clickable_sources
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
     app.permanent_session_lifetime = timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30")))
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(

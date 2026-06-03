@@ -982,3 +982,34 @@ Design refinement update.
   - AI Coach
   - Quran and Islamic Goals
   - daily use workflow
+
+
+## v4.7.6 Smart Tasks Design and Source Links
+
+### Task design
+- Improved Task Type cards with compact colored icon boxes.
+- Reduced oversized icons and labels in the task creation section.
+- Made task type cards more modern and easier to scan.
+- Improved saved task cards layout.
+- Saved tasks now appear in two columns on wide screens and one column on smaller screens.
+- Reduced vertical clutter in saved task cards.
+
+### Arabic task sections
+- Quran Memorization now displays as:
+  - حفظ القرآن
+- Secondary School now displays as:
+  - المرحلة الثانوية
+- These two task sections keep Arabic labels because they are intended for Arabic-speaking students and Quran learners.
+- Added more Arabic labels for school/Quran task options.
+
+### Source / Link intelligence
+- Source text remains plain text if the user writes a book name or normal source.
+- Links starting with http:// or https:// become clickable.
+- Multiple links can be separated using:
+  - &
+- Each link is rendered separately and safely.
+
+### AI usage
+- 0 API calls.
+- 0 OpenRouter usage.
+- 0 cost.

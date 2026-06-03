@@ -3966,3 +3966,196 @@ body.dark-mode .home-footer-v475 {
         padding: 13px;
     }
 }
+
+
+
+/* EduPath AI v4.7.6 Smart Tasks Design + Clickable Sources */
+.tasks-hero {
+    padding: clamp(18px, 2.8vw, 26px) !important;
+}
+
+.smart-step h3 {
+    font-size: 18px !important;
+    margin-bottom: 4px !important;
+}
+
+.smart-step .muted {
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+}
+
+.task-type-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)) !important;
+    gap: 10px !important;
+    margin-top: 12px !important;
+}
+
+.task-type-card {
+    min-height: 72px !important;
+    padding: 10px !important;
+    border-radius: 18px !important;
+    display: grid !important;
+    grid-template-columns: 34px 1fr !important;
+    gap: 9px !important;
+    align-items: center !important;
+    text-align: start !important;
+    background: rgba(255,255,255,.86) !important;
+    border: 1px solid rgba(37,99,235,.14) !important;
+    box-shadow: 0 8px 18px rgba(15,23,42,.05) !important;
+}
+
+.task-type-card span {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 12px !important;
+    display: grid !important;
+    place-items: center !important;
+    color: white !important;
+    font-size: 12px !important;
+    font-weight: 950 !important;
+    line-height: 1 !important;
+    background: linear-gradient(135deg, #2563eb, #06b6d4) !important;
+}
+
+.task-type-card:nth-child(2n) span { background: linear-gradient(135deg, #7c3aed, #2563eb) !important; }
+.task-type-card:nth-child(3n) span { background: linear-gradient(135deg, #0f766e, #14b8a6) !important; }
+.task-type-card:nth-child(4n) span { background: linear-gradient(135deg, #ea580c, #f59e0b) !important; }
+.task-type-card:nth-child(5n) span { background: linear-gradient(135deg, #9333ea, #ec4899) !important; }
+
+.task-type-card strong {
+    font-size: 13px !important;
+    line-height: 1.22 !important;
+    font-weight: 950 !important;
+}
+
+.task-type-card.active {
+    transform: translateY(-1px);
+    border-color: rgba(37,99,235,.42) !important;
+    background: rgba(37,99,235,.08) !important;
+    box-shadow: 0 14px 28px rgba(37,99,235,.12) !important;
+}
+
+.smart-task-form label,
+.smart-details label {
+    font-size: 13px !important;
+    font-weight: 950 !important;
+}
+
+.smart-details input,
+.smart-details select,
+.smart-details textarea {
+    min-height: 42px !important;
+    font-size: 14px !important;
+}
+
+.tasks-list-card-v476 {
+    min-width: 0;
+}
+
+.tasks-board-v476 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.task-card {
+    padding: 13px !important;
+    border-radius: 18px !important;
+    gap: 10px !important;
+    align-items: start !important;
+}
+
+.task-card strong {
+    font-size: 15px !important;
+    line-height: 1.3 !important;
+}
+
+.task-card span {
+    font-size: 12.5px !important;
+    line-height: 1.45 !important;
+}
+
+.task-card .actions {
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+}
+
+.task-card .small-button {
+    padding: 7px 9px !important;
+    font-size: 12px !important;
+    min-height: 32px !important;
+}
+
+.task-source-list {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.task-source-link {
+    display: inline-flex;
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    color: var(--primary);
+    font-weight: 900;
+    text-decoration: none;
+    border-bottom: 1px dashed currentColor;
+}
+
+.task-source-link:hover {
+    text-decoration: underline;
+}
+
+.task-source-text {
+    color: var(--muted);
+}
+
+.source-separator {
+    color: var(--muted);
+    font-weight: 950;
+}
+
+.arabic-task-mode .smart-details,
+.arabic-task-mode .smart-task-form {
+    direction: rtl;
+    text-align: right;
+}
+
+body.dark-mode .task-type-card {
+    background: rgba(15,23,42,.78) !important;
+    border-color: rgba(96,165,250,.16) !important;
+}
+
+@media (max-width: 1120px) {
+    .tasks-board-v476 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 760px) {
+    .task-type-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+    }
+
+    .task-type-card {
+        min-height: 64px !important;
+        grid-template-columns: 30px 1fr !important;
+        padding: 8px !important;
+    }
+
+    .task-type-card span {
+        width: 28px !important;
+        height: 28px !important;
+        border-radius: 10px !important;
+        font-size: 10.5px !important;
+    }
+
+    .task-type-card strong {
+        font-size: 11.5px !important;
+    }
+}

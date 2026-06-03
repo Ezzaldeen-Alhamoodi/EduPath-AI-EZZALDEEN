@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const SMART_TASK_DATA = {
 
   "Quran Memorization": {
-    icon: "☪",
+    icon: "ق",
     main: ["حفظ جديد","مراجعة","تسميع","تجويد","تفسير مبسط","خطة حفظ","اختبار حفظ","Other"],
     sub: {
       "حفظ جديد": ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس","Other"],
@@ -145,7 +145,7 @@ const SMART_TASK_DATA = {
   },
 
   "Secondary School": {
-    icon: "🏛️",
+    icon: "ث",
     main: ["Quran","Islamic Studies","Arabic Language","English Language","Mathematics","Physics","Chemistry","Biology","History","Geography","Society / Social Studies","Computer Science","General Review","Exams","Homework","Other"],
     sub: {
       "Quran": ["Memorization","Revision","Recitation","Tajweed","Interpretation","Other"],
@@ -158,7 +158,7 @@ const SMART_TASK_DATA = {
   },
 
   "University": {
-    icon: "🎓",
+    icon: "ج",
     main: ["Computer Science","Information Technology","Computer Engineering","Software Engineering","Artificial Intelligence","Data Science","Cybersecurity","Engineering","Medicine","Pharmacy","Dentistry","Nursing","Business Administration","Accounting","Finance","Economics","Marketing","Management","Law","Sharia and Law","Islamic Studies","Education","English Language","Arabic Language","Translation","Media","Political Science","Psychology","Sociology","Mathematics","Physics","Chemistry","Biology","Architecture","Agriculture","Other"],
     sub: {
       "Computer Science": ["Programming","Algorithms","Data Structures","Databases","Operating Systems","Computer Networks","Software Engineering","Web Development","AI","Cybersecurity","Discrete Mathematics","Computer Architecture","Graduation Project","Other"],
@@ -242,7 +242,7 @@ const SMART_TASK_DATA = {
   },
 
   "Programming & Technology": {
-    icon: "🧑‍💻",
+    icon: "بر",
     main: ["Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","Flask","Django","React","Node.js","Git / GitHub","Web Development","Frontend Development","Backend Development","Full Stack Development","Databases","Algorithms","Data Structures","Problem Solving","Debugging","Software Engineering","Software Testing","Operating Systems","Computer Networks","Cybersecurity","Cloud Computing","DevOps","APIs","Artificial Intelligence","Machine Learning","Data Science","Projects","Documentation","Other"],
     sub: {
       "Python": ["Syntax","Variables","Data Types","Conditions","Loops","Functions","Lists","Tuples","Dictionaries","Sets","Files","OOP","Modules","Libraries","Virtual Environment","APIs","Flask","Data Analysis","Automation","Web Scraping","Machine Learning","Projects","Debugging","Other"],
@@ -256,7 +256,7 @@ const SMART_TASK_DATA = {
   },
 
   "Artificial Intelligence": {
-    icon: "🧠",
+    icon: "AI",
     main: ["Artificial Intelligence","Machine Learning","Deep Learning","Data Science","NLP","Computer Vision","Reinforcement Learning","AI Projects","Other"],
     sub: {"Machine Learning": ["Data Cleaning","Feature Engineering","Models","Training","Evaluation","Scikit-learn","Projects","Other"], "Deep Learning": ["Neural Networks","CNN","RNN","Transformers","Training","Evaluation","Other"], "Other": ["Study","Practice","Project","Review","Other"]},
     detail: {"Machine Learning": ["Dataset","Model Comparison","Accuracy","Feature Selection","Other"], "Other": ["Topic","Other"]},
@@ -280,7 +280,7 @@ const SMART_TASK_DATA = {
   },
 
   "Exams & Certificates": {
-    icon: "🧪",
+    icon: "اخ",
     main: ["IELTS","TOEFL","Duolingo English Test","HSK","SAT","ACT","GRE","GMAT","CSCA","Other"],
     sub: {
       "IELTS": ["Listening","Reading","Writing","Speaking"],
@@ -312,7 +312,7 @@ const SMART_TASK_DATA = {
   },
 
   "Reading & Research": {
-    icon: "📚",
+    icon: "ق",
     main: ["Book Reading","Article Reading","Research Paper","Summary","Notes","Literature Review","Critical Thinking","Other"],
     sub: {"Research Paper": ["Abstract","Introduction","Methodology","Results","Discussion","References","Other"], "Other": ["Read","Summarize","Analyze","Take Notes","Other"]},
     detail: {"Research Paper": ["Key Ideas","Methods","Limitations","Findings","Other"], "Other": ["Topic","Other"]},
@@ -499,7 +499,40 @@ const EDUPATH_LABEL_AR = {
     "Other": "أخرى"
 };
 
+
+Object.assign(EDUPATH_LABEL_AR, {
+    "Memorization": "الحفظ",
+    "Revision": "المراجعة",
+    "Recitation": "التلاوة",
+    "Tajweed": "التجويد",
+    "Interpretation": "التفسير",
+    "History": "التاريخ",
+    "Geography": "الجغرافيا",
+    "Society / Social Studies": "المجتمع / الدراسات الاجتماعية",
+    "Biology": "الأحياء",
+    "Physics": "الفيزياء",
+    "Chemistry": "الكيمياء",
+    "Lesson Review": "مراجعة الدرس",
+    "Formula Review": "مراجعة القوانين",
+    "Past Questions": "أسئلة سابقة",
+    "Difficult Problems": "مسائل صعبة",
+    "Study Lesson": "دراسة الدرس",
+    "Solve Exercises": "حل التمارين",
+    "Review Mistakes": "مراجعة الأخطاء",
+    "Timed Practice": "تدريب مؤقت",
+    "Prepare for Exam": "التحضير للاختبار",
+    "Memorize Formulas": "حفظ القوانين",
+    "Write Paragraph": "كتابة فقرة",
+    "Listen and Repeat": "استماع وتكرار",
+    "Other": "أخرى"
+});
+
 function labelForUI(value) {
+    const alwaysArabic = {
+        "Quran Memorization": "حفظ القرآن",
+        "Secondary School": "المرحلة الثانوية"
+    };
+    if (alwaysArabic[value]) return alwaysArabic[value];
     const lang = localStorage.getItem("edupath-language") || "en";
     if (lang !== "ar") return value;
     return EDUPATH_LABEL_AR[value] || value;
@@ -1680,4 +1713,36 @@ document.addEventListener("DOMContentLoaded", () => {
             applyEduPathLanguage(localStorage.getItem("edupath-language") || "en");
         }
     }
+});
+
+
+
+/* EduPath AI v4.7.6 Arabic task section labels */
+function applyArabicSpecialTaskLabelsV476() {
+    const type = document.getElementById("categorySelect")?.value || "";
+    const arabicMode = type === "Quran Memorization" || type === "Secondary School";
+    const map = {
+        topicLabel: arabicMode ? "المجال الرئيسي" : "Main Field",
+        skillLabel: arabicMode ? "المجال الفرعي" : "Sub Field",
+        detailLabel: arabicMode ? "الموضوع التفصيلي" : "Detailed Topic",
+        trainingLabel: arabicMode ? "نوع التدريب" : "Training Type"
+    };
+    Object.entries(map).forEach(([id, text]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+    });
+    document.body.classList.toggle("arabic-task-mode", arabicMode);
+}
+document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("click", e => {
+        if (e.target.closest(".task-type-card")) {
+            setTimeout(applyArabicSpecialTaskLabelsV476, 80);
+            setTimeout(translateDynamicOptions, 120);
+        }
+    });
+    ["topicSelect","skillSelect","detailedTopicSelect","trainingTypeSelect"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener("change", () => setTimeout(translateDynamicOptions, 50));
+    });
+    setTimeout(applyArabicSpecialTaskLabelsV476, 250);
 });
