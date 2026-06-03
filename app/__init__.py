@@ -2051,3 +2051,7 @@ def parse_json_object(text):
             pass
 
     return {"raw": text}
+
+# Render/Gunicorn compatibility:
+# Supports both `gunicorn run:app` and `gunicorn app:app`.
+app = create_app()

@@ -558,3 +558,14 @@ Email can be re-enabled later after confirming SMTP works reliably.
 - Smart goal metadata is stored inside goal notes to avoid risky database migrations.
 - Optional automatic starter tasks are created and linked to the goal.
 - Progress intelligence remains based on related tasks and keywords; translation stays UI-only and does not break stored values.
+
+
+## v4.6.7.1 Render Run Fix
+
+- Fixed Render/Gunicorn startup compatibility.
+- The project now supports:
+  - `gunicorn run:app`
+  - `gunicorn app:app`
+  - `gunicorn wsgi:app`
+- Recommended Render Start Command:
+  `gunicorn run:app`
