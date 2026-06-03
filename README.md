@@ -762,3 +762,67 @@ gunicorn server:app
   - Scholarships
   - Islamic Learning
 - Reinforced Resources link in desktop and mobile navigation.
+
+
+## v4.7.0 Big Smart Resources Database
+
+Major expansion of the Resources Engine.
+
+### Added
+- Breaking News English.
+- Much larger English skills resource set:
+  - Reading
+  - Listening
+  - Speaking
+  - Writing
+  - Vocabulary
+  - Grammar
+  - Pronunciation
+- Expanded English exam resources:
+  - IELTS
+  - TOEFL
+  - Duolingo English Test
+- Added SAT resources:
+  - College Board SAT
+  - Bluebook
+  - Khan Academy SAT
+  - SAT Suite Question Bank
+  - Erica Meltzer
+  - Scalar Learning
+  - PrepScholar SAT
+- Added ACT resources.
+- Added GRE resources.
+- Added GMAT resources.
+- Expanded HSK and Chinese resources.
+- Expanded CSCA math, physics, and chemistry resources.
+- Expanded programming resources:
+  - Python
+  - Flask
+  - SQL
+  - Web Development
+  - Algorithms
+  - Problem Solving
+- Expanded AI and data science resources.
+- Expanded scholarships resources:
+  - Türkiye Scholarships
+  - MEXT
+  - Chevening
+  - Fulbright
+  - Erasmus Mundus
+  - Commonwealth
+  - Stipendium Hungaricum
+  - Study in Korea
+  - Campus China
+- Expanded Islamic learning resources:
+  - Quran memorization
+  - Quran audio
+  - Tajweed
+  - Tafsir
+  - Hadith
+  - Islamic library
+
+### Safety
+- No AI credits are used.
+- Resources are seeded/upserted automatically.
+- Existing resources are not deleted.
+- Missing resources are added on deployment/opening Resources.
