@@ -826,3 +826,51 @@ Major expansion of the Resources Engine.
 - Resources are seeded/upserted automatically.
 - Existing resources are not deleted.
 - Missing resources are added on deployment/opening Resources.
+
+
+## v4.7.1 Resource Learning Paths + Keyboard Typing
+
+- Added many more mathematics resources:
+  - Arithmetic
+  - Pre-Algebra
+  - Algebra
+  - Geometry
+  - Trigonometry
+  - Precalculus
+  - Calculus
+  - Linear Algebra
+  - Statistics
+  - Olympiad / problem solving
+  - Math tools
+- Added a new category: Keyboard Typing.
+- Added typing resources:
+  - TypingClub
+  - Typing.com
+  - Ratatype
+  - Keybr
+  - Monkeytype
+  - TypeRacer
+  - Nitro Type
+  - Typing.io
+  - SpeedCoder
+  - KeyHero
+  - 10FastFingers
+- Added more CSCA physics and chemistry resources.
+- Added Resource Learning Path section:
+  - IELTS
+  - TOEFL
+  - Duolingo English Test
+  - SAT
+  - ACT
+  - GRE
+  - GMAT
+  - HSK
+  - CSCA
+  - Mathematics
+  - Keyboard Typing
+  - Python / Flask
+  - Scholarships
+  - Quran
+- Added level filter.
+- Added Beginner Friendly and Advanced badges.
+- Still no AI usage; resources remain static, fast, and free-first.

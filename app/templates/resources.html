@@ -45,8 +45,18 @@
         </div>
 
         <div>
-            <label>Skill</label>
-            <input name="skill" value="{{ selected.skill }}" placeholder="Reading, Writing, Python, Quran...">
+            <label>Skill / Topic</label>
+            <input name="skill" value="{{ selected.skill }}" placeholder="Reading, Writing, Algebra, Python, Quran...">
+        </div>
+
+        <div>
+            <label>Level</label>
+            <select name="level">
+                <option value="">All Levels</option>
+                <option value="Beginner" {% if selected.level == "Beginner" %}selected{% endif %}>Beginner</option>
+                <option value="Intermediate" {% if selected.level == "Intermediate" %}selected{% endif %}>Intermediate</option>
+                <option value="Advanced" {% if selected.level == "Advanced" %}selected{% endif %}>Advanced</option>
+            </select>
         </div>
 
         <div>
@@ -76,6 +86,39 @@
     </form>
 </section>
 
+
+{% if learning_path %}
+<section class="card learning-path-card">
+    <div class="learning-path-head">
+        <div>
+            <span class="tag">Recommended Path</span>
+            <h2>⭐ Start Here</h2>
+            <p class="muted">A simple suggested order so you do not get lost among many resources.</p>
+        </div>
+    </div>
+
+    <div class="learning-path-steps">
+        {% for resource in learning_path %}
+            <div class="learning-step">
+                <span class="step-number">{{ loop.index }}</span>
+                <div>
+                    <strong>{{ resource.name }}</strong>
+                    <p>{{ resource.description }}</p>
+                    <div class="resource-badges">
+                        {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
+                        {% if resource.is_free %}<span class="badge free">Free</span>{% endif %}
+                        {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
+                    {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">Beginner Friendly</span>{% endif %}
+                    {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">Advanced</span>{% endif %}
+                    </div>
+                    <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">Open ↗</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
 <section class="resources-summary-row">
     <div class="mini-stat-card">
         <strong>{{ resources|length }}</strong>
@@ -103,6 +146,8 @@
                     {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
                     {% if resource.is_free %}<span class="badge free">Free</span>{% endif %}
                     {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
+                    {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">Beginner Friendly</span>{% endif %}
+                    {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">Advanced</span>{% endif %}
                 </div>
             </div>
 

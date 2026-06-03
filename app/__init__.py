@@ -571,6 +571,52 @@ RESOURCE_TYPE_OPTIONS = [
 
 def default_learning_resources():
     return [
+        {"name":"Khan Academy Arithmetic","category":"Mathematics","subcategory":"Arithmetic","skill":"Arithmetic, Numbers, Fractions","exam":"","level":"Beginner","resource_type":"Course","url":"https://www.khanacademy.org/math/arithmetic","description":"Foundational arithmetic lessons and practice.","tags":["math", "arithmetic", "beginner", "recommended"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Khan Academy Pre-Algebra","category":"Mathematics","subcategory":"Pre-Algebra","skill":"Pre-Algebra, Equations","exam":"","level":"Beginner","resource_type":"Course","url":"https://www.khanacademy.org/math/pre-algebra","description":"Pre-algebra foundations for school, SAT, and CSCA preparation.","tags":["math", "pre algebra", "beginner", "recommended"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Khan Academy Algebra 1","category":"Mathematics","subcategory":"Algebra","skill":"Algebra, Equations, Functions","exam":"","level":"Beginner → Intermediate","resource_type":"Course","url":"https://www.khanacademy.org/math/algebra","description":"Strong free algebra course with practice exercises.","tags":["math", "algebra", "functions", "recommended"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Khan Academy Algebra 2","category":"Mathematics","subcategory":"Algebra","skill":"Advanced Algebra, Functions","exam":"","level":"Intermediate","resource_type":"Course","url":"https://www.khanacademy.org/math/algebra2","description":"Advanced algebra and functions practice.","tags":["math", "algebra", "functions"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Khan Academy Geometry","category":"Mathematics","subcategory":"Geometry","skill":"Geometry, Proofs, Shapes","exam":"","level":"Beginner → Intermediate","resource_type":"Course","url":"https://www.khanacademy.org/math/geometry","description":"Geometry lessons and exercises.","tags":["math", "geometry", "proofs"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Khan Academy Trigonometry","category":"Mathematics","subcategory":"Trigonometry","skill":"Trigonometry, Unit Circle","exam":"","level":"Intermediate","resource_type":"Course","url":"https://www.khanacademy.org/math/trigonometry","description":"Trigonometry lessons useful for CSCA and SAT math.","tags":["math", "trigonometry", "csca", "sat"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Khan Academy Precalculus","category":"Mathematics","subcategory":"Precalculus","skill":"Functions, Trigonometry, Sequences","exam":"","level":"Intermediate → Advanced","resource_type":"Course","url":"https://www.khanacademy.org/math/precalculus","description":"Precalculus course covering functions and advanced topics.","tags":["math", "precalculus", "functions"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Khan Academy Calculus","category":"Mathematics","subcategory":"Calculus","skill":"Limits, Derivatives, Integrals","exam":"","level":"Intermediate → Advanced","resource_type":"Course","url":"https://www.khanacademy.org/math/calculus-1","description":"Calculus lessons and practice.","tags":["math", "calculus", "derivatives", "integrals"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Khan Academy Statistics","category":"Mathematics","subcategory":"Statistics","skill":"Statistics, Probability","exam":"","level":"Beginner → Intermediate","resource_type":"Course","url":"https://www.khanacademy.org/math/statistics-probability","description":"Statistics and probability course.","tags":["math", "statistics", "probability"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Math Is Fun","category":"Mathematics","subcategory":"Foundations","skill":"Arithmetic, Algebra, Geometry, Statistics","exam":"","level":"Beginner → Intermediate","resource_type":"Website","url":"https://www.mathsisfun.com/","description":"Friendly explanations for many math topics.","tags":["math", "beginner", "algebra", "geometry"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Purplemath","category":"Mathematics","subcategory":"Algebra","skill":"Algebra","exam":"","level":"Beginner → Intermediate","resource_type":"Website","url":"https://www.purplemath.com/","description":"Clear algebra explanations and examples.","tags":["math", "algebra", "beginner"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Math Planet","category":"Mathematics","subcategory":"Algebra & Geometry","skill":"Algebra, Geometry, SAT Math","exam":"","level":"Beginner → Intermediate","resource_type":"Course","url":"https://www.mathplanet.com/","description":"Math lessons for algebra, geometry, and SAT math.","tags":["math", "sat", "algebra", "geometry"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"CK-12 Math","category":"Mathematics","subcategory":"School Math","skill":"Algebra, Geometry, Calculus, Statistics","exam":"","level":"Beginner → Advanced","resource_type":"Course","url":"https://www.ck12.org/student/","description":"Free interactive math textbooks and practice.","tags":["math", "school", "practice"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"OpenStax Prealgebra","category":"Mathematics","subcategory":"Pre-Algebra","skill":"Pre-Algebra","exam":"","level":"Beginner","resource_type":"Book","url":"https://openstax.org/details/books/prealgebra-2e","description":"Free prealgebra textbook.","tags":["math", "prealgebra", "book"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"OpenStax Algebra and Trigonometry","category":"Mathematics","subcategory":"Algebra & Trigonometry","skill":"Algebra, Trigonometry","exam":"","level":"Intermediate","resource_type":"Book","url":"https://openstax.org/details/books/algebra-and-trigonometry-2e","description":"Free algebra and trigonometry textbook.","tags":["math", "algebra", "trigonometry", "book"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"OpenStax Calculus Volume 1","category":"Mathematics","subcategory":"Calculus","skill":"Limits, Derivatives, Integrals","exam":"","level":"Intermediate → Advanced","resource_type":"Book","url":"https://openstax.org/details/books/calculus-volume-1","description":"Free calculus textbook volume 1.","tags":["math", "calculus", "book"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"OpenStax Calculus Volume 2","category":"Mathematics","subcategory":"Calculus","skill":"Integration, Series","exam":"","level":"Advanced","resource_type":"Book","url":"https://openstax.org/details/books/calculus-volume-2","description":"Free calculus textbook volume 2.","tags":["math", "calculus", "series", "book"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"OpenIntro Statistics","category":"Mathematics","subcategory":"Statistics","skill":"Statistics, Probability","exam":"","level":"Intermediate","resource_type":"Book","url":"https://www.openintro.org/book/os/","description":"Free statistics textbook and resources.","tags":["statistics", "probability", "math"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"StatQuest","category":"Mathematics","subcategory":"Statistics","skill":"Statistics, Machine Learning Math","exam":"","level":"Beginner → Advanced","resource_type":"Video Lessons","url":"https://www.youtube.com/@statquest","description":"Clear statistics and ML math explanations.","tags":["statistics", "statquest", "machine learning"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"3Blue1Brown Essence of Linear Algebra","category":"Mathematics","subcategory":"Linear Algebra","skill":"Vectors, Matrices, Linear Algebra","exam":"","level":"Intermediate","resource_type":"Video Lessons","url":"https://www.3blue1brown.com/topics/linear-algebra","description":"Visual linear algebra series.","tags":["linear algebra", "vectors", "matrices"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"MIT OCW Single Variable Calculus","category":"Mathematics","subcategory":"Calculus","skill":"Calculus","exam":"","level":"Advanced","resource_type":"Course","url":"https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/","description":"MIT OpenCourseWare calculus course.","tags":["mit", "calculus", "advanced"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"MIT OCW Linear Algebra","category":"Mathematics","subcategory":"Linear Algebra","skill":"Linear Algebra, Matrices","exam":"","level":"Advanced","resource_type":"Course","url":"https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/","description":"MIT Linear Algebra course by Gilbert Strang.","tags":["mit", "linear algebra", "advanced"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"GeoGebra","category":"Mathematics","subcategory":"Geometry","skill":"Geometry, Graphing, Visualization","exam":"","level":"Beginner → Advanced","resource_type":"Tool","url":"https://www.geogebra.org/","description":"Interactive math visualization and geometry tools.","tags":["geometry", "graphing", "visualization"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Desmos Graphing Calculator","category":"Mathematics","subcategory":"Functions","skill":"Graphing, Functions","exam":"","level":"Beginner → Advanced","resource_type":"Tool","url":"https://www.desmos.com/calculator","description":"Online graphing calculator for functions and visualization.","tags":["functions", "graphing", "desmos"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Symbolab","category":"Mathematics","subcategory":"Problem Solving","skill":"Algebra, Calculus, Step-by-step","exam":"","level":"Beginner → Advanced","resource_type":"Tool","url":"https://www.symbolab.com/","description":"Step-by-step math solver for checking work.","tags":["math", "solver", "algebra", "calculus"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Wolfram Alpha","category":"Mathematics","subcategory":"Problem Solving","skill":"Math Computation","exam":"","level":"Intermediate → Advanced","resource_type":"Tool","url":"https://www.wolframalpha.com/","description":"Computational knowledge engine for math checking and exploration.","tags":["math", "computation", "tool"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Project Euler","category":"Mathematics","subcategory":"Problem Solving","skill":"Math, Programming, Logic","exam":"","level":"Intermediate → Advanced","resource_type":"Practice","url":"https://projecteuler.net/","description":"Challenging mathematical programming problems.","tags":["math", "programming", "problem solving"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Cut The Knot","category":"Mathematics","subcategory":"Olympiad Mathematics","skill":"Proofs, Geometry, Problem Solving","exam":"","level":"Advanced","resource_type":"Website","url":"https://www.cut-the-knot.org/","description":"Mathematical proofs, puzzles, and problem-solving resources.","tags":["math", "olympiad", "proofs"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Math StackExchange","category":"Mathematics","subcategory":"Problem Solving","skill":"All Math Topics","exam":"","level":"Intermediate → Advanced","resource_type":"Community","url":"https://math.stackexchange.com/","description":"Community questions and answers for math topics.","tags":["math", "community", "problem solving"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"TypingClub","category":"Keyboard Typing","subcategory":"Touch Typing","skill":"10-Finger Typing, Accuracy","exam":"","level":"Beginner → Intermediate","resource_type":"Practice","url":"https://www.typingclub.com/","description":"Structured touch typing lessons for beginners.","tags":["typing", "keyboard", "touch typing", "beginner", "recommended"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Typing.com","category":"Keyboard Typing","subcategory":"Touch Typing","skill":"Typing Speed, Accuracy","exam":"","level":"Beginner → Intermediate","resource_type":"Practice","url":"https://www.typing.com/","description":"Free typing lessons, tests, and practice.","tags":["typing", "speed", "accuracy", "beginner"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Ratatype","category":"Keyboard Typing","subcategory":"Touch Typing","skill":"Typing Speed, Accuracy","exam":"","level":"Beginner → Intermediate","resource_type":"Practice","url":"https://www.ratatype.com/","description":"Typing tutor and speed tests.","tags":["typing", "speed", "accuracy"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Keybr","category":"Keyboard Typing","subcategory":"Typing Accuracy","skill":"Touch Typing, Accuracy","exam":"","level":"Intermediate","resource_type":"Practice","url":"https://www.keybr.com/","description":"Adaptive typing practice focused on weak letters.","tags":["typing", "keybr", "accuracy", "adaptive"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Monkeytype","category":"Keyboard Typing","subcategory":"Typing Speed","skill":"Typing Speed, Accuracy","exam":"","level":"Intermediate → Advanced","resource_type":"Practice","url":"https://monkeytype.com/","description":"Minimal modern typing test with many modes.","tags":["typing", "monkeytype", "speed", "advanced", "recommended"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"TypeRacer","category":"Keyboard Typing","subcategory":"Typing Speed","skill":"Typing Speed, Competition","exam":"","level":"Intermediate → Advanced","resource_type":"Practice","url":"https://play.typeracer.com/","description":"Typing races to improve speed and consistency.","tags":["typing", "speed", "competition"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Nitro Type","category":"Keyboard Typing","subcategory":"Typing Speed","skill":"Typing Speed, Competition","exam":"","level":"Beginner → Advanced","resource_type":"Practice","url":"https://www.nitrotype.com/","description":"Typing racing game for speed practice.","tags":["typing", "speed", "game"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Typing.io","category":"Keyboard Typing","subcategory":"Programming Typing","skill":"Code Typing, Programming","exam":"","level":"Intermediate → Advanced","resource_type":"Practice","url":"https://typing.io/","description":"Typing practice using real code snippets for programmers.","tags":["typing", "programming", "code"],"is_official":False,"is_free":False,"language":"English"},
+        {"name":"SpeedCoder","category":"Keyboard Typing","subcategory":"Programming Typing","skill":"Code Typing, Programming","exam":"","level":"Intermediate → Advanced","resource_type":"Practice","url":"https://www.speedcoder.net/","description":"Typing practice for code in multiple programming languages.","tags":["typing", "programming", "code", "speed"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"KeyHero","category":"Keyboard Typing","subcategory":"Typing Test","skill":"Typing Speed, Accuracy","exam":"","level":"Beginner → Advanced","resource_type":"Practice","url":"https://www.keyhero.com/","description":"Typing tests and progress tracking.","tags":["typing", "test", "speed"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"10FastFingers","category":"Keyboard Typing","subcategory":"Typing Test","skill":"Typing Speed","exam":"","level":"Beginner → Advanced","resource_type":"Practice","url":"https://10fastfingers.com/","description":"Quick typing speed tests in many languages.","tags":["typing", "speed", "test"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"The Physics Classroom","category":"CSCA","subcategory":"Physics","skill":"Mechanics, Waves, Electricity","exam":"CSCA","level":"Beginner → Intermediate","resource_type":"Course","url":"https://www.physicsclassroom.com/","description":"Clear physics tutorials and practice.","tags":["csca", "physics", "mechanics", "electricity"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Flipping Physics","category":"CSCA","subcategory":"Physics","skill":"Mechanics, AP Physics Concepts","exam":"CSCA","level":"Intermediate","resource_type":"Video Lessons","url":"https://www.flippingphysics.com/","description":"Physics videos and practice explanations.","tags":["physics", "mechanics", "csca"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Chemguide","category":"CSCA","subcategory":"Chemistry","skill":"Chemical Concepts, Equilibrium, Reactions","exam":"CSCA","level":"Intermediate → Advanced","resource_type":"Website","url":"https://www.chemguide.co.uk/","description":"Detailed chemistry explanations for high school and early university.","tags":["chemistry", "csca", "equilibrium"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Tyler DeWitt Chemistry","category":"CSCA","subcategory":"Chemistry","skill":"Basic Chemistry, Mole, Reactions","exam":"CSCA","level":"Beginner → Intermediate","resource_type":"Video Lessons","url":"https://www.youtube.com/@tdewitt451","description":"Clear chemistry videos for beginners.","tags":["chemistry", "beginner", "mole", "reactions"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Crash Course Chemistry","category":"CSCA","subcategory":"Chemistry","skill":"Chemistry Concepts","exam":"CSCA","level":"Beginner → Intermediate","resource_type":"Video Lessons","url":"https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr","description":"Fast-paced chemistry overview videos.","tags":["chemistry", "crash course", "csca"],"is_official":False,"is_free":True,"language":"English"},
+
         {"name":"Breaking News English","category":"English Skills","subcategory":"Reading","skill":"Reading, Vocabulary, Listening","exam":"","level":"Beginner → Advanced","resource_type":"Practice","url":"https://breakingnewsenglish.com/","description":"Daily news lessons with multiple levels, reading, listening, vocabulary, and exercises.","tags":["english", "reading", "news", "listening", "vocabulary", "daily"],"is_official":False,"is_free":True,"language":"English"},
         {"name":"News in Levels","category":"English Skills","subcategory":"Reading","skill":"Reading, Listening, Vocabulary","exam":"","level":"Beginner → Intermediate","resource_type":"Website","url":"https://www.newsinlevels.com/","description":"News stories written in three levels for English learners.","tags":["english", "reading", "news", "listening"],"is_official":False,"is_free":True,"language":"English"},
         {"name":"CommonLit","category":"English Skills","subcategory":"Reading","skill":"Reading Comprehension","exam":"","level":"Intermediate → Advanced","resource_type":"Practice","url":"https://www.commonlit.org/","description":"Free reading passages and comprehension questions, useful for academic reading practice.","tags":["english", "reading", "comprehension", "academic"],"is_official":False,"is_free":True,"language":"English"},
@@ -789,6 +835,48 @@ def seed_learning_resources():
             logger.info("Learning resources seeded/updated: %s new resources", added)
     except Exception:
         logger.exception("Failed to seed learning resources")
+
+
+
+
+def build_resource_learning_path(category="", exam="", skill="", level=""):
+    key = " ".join([category or "", exam or "", skill or "", level or ""]).lower()
+
+    paths = {
+        "ielts": ["BBC Learning English", "ReadTheory", "Breaking News English", "IELTS Liz", "IELTS Advantage", "British Council IELTS Practice"],
+        "toefl": ["BBC Learning English", "TOEFL TestReady", "TST Prep TOEFL", "TOEFL Resources", "ETS TOEFL Practice Sets"],
+        "duolingo": ["Duolingo English Test Official Practice", "Duolingo English Test Readiness Guide", "Arno DET Practice", "Teacher Luke DET"],
+        "sat": ["College Board SAT", "Bluebook SAT App", "Khan Academy SAT", "SAT Suite Question Bank", "Erica Meltzer SAT Reading", "Scalar Learning SAT Math"],
+        "act": ["ACT Official", "ACT Test Prep", "CrackACT", "PrepScholar ACT Blog"],
+        "gre": ["ETS GRE Official", "GregMat", "Magoosh GRE Blog", "Manhattan Prep GRE", "GRE Prep Club"],
+        "gmat": ["GMAT Official", "GMAT Club", "Manhattan Prep GMAT", "Magoosh GMAT Blog"],
+        "hsk": ["HSK Official Test Info", "HelloChinese", "Mandarin Bean", "Chinese Grammar Wiki", "HSK Academy", "Du Chinese"],
+        "csca": ["Khan Academy Mathematics", "Khan Academy Physics", "Khan Academy Chemistry", "OpenStax Physics", "OpenStax Chemistry", "PhET Simulations"],
+        "mathematics": ["Khan Academy Math", "Math Is Fun", "Khan Academy Algebra 1", "GeoGebra", "Paul's Online Math Notes", "OpenStax Calculus Volume 1"],
+        "keyboard typing": ["TypingClub", "Typing.com", "Ratatype", "Keybr", "Monkeytype", "TypeRacer"],
+        "python": ["Python for Everybody", "Automate the Boring Stuff", "Python Docs", "Real Python", "Kaggle Learn"],
+        "flask": ["Python for Everybody", "Flask Documentation", "Real Python", "CS50x"],
+        "scholarship": ["ScholarshipPortal", "Studyportals", "Europass CV", "Study in China CSC", "Türkiye Scholarships", "DAAD Scholarship Database"],
+        "quran": ["Quran.com", "Ayah by Quran.com", "Quranicaudio", "Tarteel AI", "Tanzil Quran"],
+    }
+
+    selected_key = None
+    for k in paths:
+        if k in key:
+            selected_key = k
+            break
+
+    if not selected_key:
+        if category:
+            selected_key = category.lower()
+
+    names = paths.get(selected_key, [])
+    result = []
+    for name in names:
+        resource = LearningResource.query.filter_by(name=name).first()
+        if resource:
+            result.append(resource)
+    return result
 
 
 
@@ -1185,12 +1273,15 @@ def create_app():
         exams = sorted(set(RESOURCE_EXAM_OPTIONS + db_exams))
         types = sorted(set(RESOURCE_TYPE_OPTIONS + db_types))
 
+        learning_path = build_resource_learning_path(category=category, exam=exam, skill=skill, level=level)
+
         return render_template(
             "resources.html",
             resources=resources_list,
             categories=categories,
             exams=exams,
             types=types,
+            learning_path=learning_path,
             selected={
                 "q": query, "category": category, "skill": skill, "exam": exam,
                 "level": level, "type": resource_type, "official": official, "free": free
