@@ -1,4 +1,4 @@
-from app import app
+from app import create_app
 
-# Optional conventional WSGI entrypoint.
-# Render can run: gunicorn wsgi:app
+app = create_app()
+application = app

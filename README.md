@@ -569,3 +569,16 @@ Email can be re-enabled later after confirming SMTP works reliably.
   - `gunicorn wsgi:app`
 - Recommended Render Start Command:
   `gunicorn run:app`
+
+
+## v4.6.7.2 Strict Render Run Fix
+
+- Strictly defines `app = create_app()` inside `run.py`.
+- Also defines `application = app` for compatibility.
+- Keeps `Procfile` as `web: gunicorn run:app`.
+- Removes package-level auto app creation to avoid double startup and keep Render lighter.
+
+Recommended Render Start Command:
+```bash
+gunicorn run:app
+```
