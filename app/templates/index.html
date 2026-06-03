@@ -6,12 +6,13 @@
 
 <section class="hero v21-hero">
     <div>
-        <span class="tag"><span data-i18n="dashboard.tag">Smart Learning Workspace</span></span>
-        <h2><span data-i18n="dashboard.hero_title">Smart goals, exam-aware tasks, and focused progress for your learning path.</span></h2>
-        <p><span data-i18n="dashboard.hero_desc">Track your goals, manage tasks, practice languages, prepare scholarships, and improve coding with AI support.</span></p>
+        <span class="tag"><span data-i18n="dashboard.tag">Smart Learning & Resources Workspace</span></span>
+        <h2><span data-i18n="dashboard.hero_title">Plan goals, organize daily tasks, and reach the right learning resources faster.</span></h2>
+        <p><span data-i18n="dashboard.hero_desc">EduPath AI helps you turn long-term goals into organized tasks, connect progress automatically, and use trusted resources for exams, programming, languages, Quran, typing, scholarships, and self-learning.</span></p>
         <div class="hero-actions">
-            <a class="button light" href="{{ url_for('goals') }}">◎ New Goal</a>
-            <a class="button ghost" href="{{ url_for('tasks') }}">▣ Add Task</a>
+            <a class="button light" href="{{ url_for('goals') }}">New Goal</a>
+            <a class="button ghost" href="{{ url_for('tasks') }}">Add Task</a>
+            <a class="button ghost" href="{{ url_for('resources') }}">Explore Resources</a>
         </div>
     </div>
     <div class="hero-card">
@@ -50,8 +51,8 @@
 <section class="quick-actions final-quick-actions">
     <a href="{{ url_for('goals') }}"><span>◎</span><small>Goals</small></a>
     <a href="{{ url_for('tasks') }}"><span>▣</span><small>Tasks</small></a>
+    <a href="{{ url_for('resources') }}"><span>▤</span><small>Resources</small></a>
     <a href="{{ url_for('coach') }}"><span>✦</span><small>AI Coach</small></a>
-    <a href="{{ url_for('languages') }}"><span>◌</span><small>Languages</small></a>
 </section>
 
 <section class="card focus-goals">
@@ -136,6 +137,11 @@
     </div>
 </section>
 
-<div class="app-version-footer">EduPath AI EZZALDEEN · v4.7.4<br><span>Contact: edupath.ai.ezzaldeen.app@outlook.com</span></div>
+<div class="app-version-footer home-footer-v475">
+    EduPath AI EZZALDEEN · v4.7.5<br>
+    <span>Contact: edupath.ai.ezzaldeen.app@outlook.com</span><br>
+    <span>لمعرفة كيفية استخدام التطبيق على أكمل وجه والاستفادة من جميع المميزات، يرجى الضغط على <a href="{{ url_for('user_guide') }}">دليل الاستخدام</a>.</span><br>
+    <span class="copyright-line">جميع الحقوق محفوظة © EZZALDEEN AL-HAMOODI — عزالدين الحمودي. يمنع منعًا باتًا اقتباس أو تقليد فكرة التطبيق أو تصميمه أو محتواه أو مميزاته دون إذن صريح.</span>
+</div>
 
 {% endblock %}

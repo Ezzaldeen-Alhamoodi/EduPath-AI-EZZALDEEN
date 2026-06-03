@@ -955,3 +955,30 @@ Design refinement update.
 - 0 API calls.
 - 0 OpenRouter usage.
 - 0 cost.
+
+
+## v4.7.5 Home Text and Arabic User Guide
+
+- Updated dashboard hero text to match the current app direction:
+  - smart goals
+  - adaptive tasks
+  - resources
+  - My Resources
+  - learning progress
+- Removed outdated homepage emphasis on languages/scholarship interviews as the main wording.
+- Replaced Languages quick action with Resources.
+- Added Arabic User Guide page:
+  - `/user-guide`
+- Added User Guide link under the official app contact email in the homepage footer.
+- Added copyright notice for:
+  - EZZALDEEN AL-HAMOODI
+  - عزالدين الحمودي
+- Added Arabic usage instructions explaining:
+  - Dashboard
+  - Goals
+  - Tasks
+  - Resources
+  - My Resources
+  - AI Coach
+  - Quran and Islamic Goals
+  - daily use workflow

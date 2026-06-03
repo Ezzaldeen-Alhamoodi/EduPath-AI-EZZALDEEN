@@ -1230,6 +1230,13 @@ def create_app():
 
 
 
+
+    @app.route("/user-guide")
+    @login_required
+    def user_guide():
+        return render_template("user_guide.html")
+
+
     @app.route("/resources")
     @login_required
     def resources():
