@@ -123,38 +123,60 @@ const SMART_TASK_DATA = {
 
   "Quran Memorization": {
     icon: "ق",
-    main: ["حفظ جديد","مراجعة","تسميع","تجويد","تفسير مبسط","خطة حفظ","اختبار حفظ","Other"],
+    main: ["حفظ جديد","مراجعة","تسميع","تجويد","تفسير مبسط","خطة حفظ","اختبار حفظ","أخرى"],
     sub: {
-      "حفظ جديد": ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس","Other"],
-      "مراجعة": ["مراجعة يومية","مراجعة أسبوعية","مراجعة جزء","مراجعة حزب","مراجعة سورة","مراجعة أخطاء","Other"],
-      "تسميع": ["تسميع ذاتي","تسميع مع شخص","تسميع صفحة","تسميع سورة","تسميع جزء","Other"],
-      "تجويد": ["مخارج الحروف","أحكام النون الساكنة والتنوين","أحكام الميم الساكنة","المدود","القلقلة","الغنة","أحكام الراء","Other"],
-      "تفسير مبسط": ["معاني الكلمات","سبب النزول","الفكرة العامة","فوائد عملية","Other"],
-      "خطة حفظ": ["ورد يومي","ورد أسبوعي","تثبيت الحفظ","تقسيم السورة","Other"],
-      "اختبار حفظ": ["اختبار صفحة","اختبار سورة","اختبار جزء","اختبار أخطاء","Other"],
-      "Other": ["Other"]
+      "حفظ جديد": ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس","أخرى"],
+      "مراجعة": ["مراجعة يومية","مراجعة أسبوعية","مراجعة جزء","مراجعة حزب","مراجعة سورة","مراجعة أخطاء","أخرى"],
+      "تسميع": ["تسميع ذاتي","تسميع مع شخص","تسميع صفحة","تسميع سورة","تسميع جزء","أخرى"],
+      "تجويد": ["مخارج الحروف","أحكام النون الساكنة والتنوين","أحكام الميم الساكنة","المدود","القلقلة","الغنة","أحكام الراء","أخرى"],
+      "تفسير مبسط": ["معاني الكلمات","سبب النزول","الفكرة العامة","فوائد عملية","أخرى"],
+      "خطة حفظ": ["ورد يومي","ورد أسبوعي","تثبيت الحفظ","تقسيم السورة","أخرى"],
+      "اختبار حفظ": ["اختبار صفحة","اختبار سورة","اختبار جزء","اختبار أخطاء","أخرى"],
+      "أخرى": ["أخرى"]
     },
     detail: {
-      "حفظ جديد": ["آية واحدة","نصف صفحة","صفحة كاملة","وجه كامل","مقطع قصير","مقطع متوسط","Other"],
-      "مراجعة": ["مراجعة بدون مصحف","مراجعة بالمصحف","تكرار 3 مرات","تكرار 5 مرات","تثبيت مواضع الخطأ","Other"],
-      "تسميع": ["بدون أخطاء","مع تسجيل صوتي","مع تصحيح الأخطاء","تسميع متكرر","Other"],
-      "تجويد": ["تطبيق الحكم على آيات","استماع لقارئ","تصحيح النطق","تدريب عملي","Other"],
-      "Other": ["Other"]
+      "حفظ جديد": ["آية واحدة","نصف صفحة","صفحة كاملة","وجه كامل","مقطع قصير","مقطع متوسط","أخرى"],
+      "مراجعة": ["مراجعة بدون مصحف","مراجعة بالمصحف","تكرار 3 مرات","تكرار 5 مرات","تثبيت مواضع الخطأ","أخرى"],
+      "تسميع": ["بدون أخطاء","مع تسجيل صوتي","مع تصحيح الأخطاء","تسميع متكرر","أخرى"],
+      "تجويد": ["تطبيق الحكم على آيات","استماع لقارئ","تصحيح النطق","تدريب عملي","أخرى"],
+      "أخرى": ["أخرى"]
     },
-    training: ["حفظ","تكرار","مراجعة","تسميع","استماع لقارئ","تصحيح الأخطاء","تثبيت الحفظ","اختبار ذاتي","مراجعة متباعدة","خطة أسبوعية","Other"]
+    training: ["حفظ","تكرار","مراجعة","تسميع","استماع لقارئ","تصحيح الأخطاء","تثبيت الحفظ","اختبار ذاتي","مراجعة متباعدة","خطة أسبوعية","أخرى"]
   },
 
   "Secondary School": {
     icon: "ث",
-    main: ["Quran","Islamic Studies","Arabic Language","English Language","Mathematics","Physics","Chemistry","Biology","History","Geography","Society / Social Studies","Computer Science","General Review","Exams","Homework","Other"],
+    main: ["القرآن الكريم","التربية الإسلامية","اللغة العربية","اللغة الإنجليزية","الرياضيات","الفيزياء","الكيمياء","الأحياء","التاريخ","الجغرافيا","الدراسات الاجتماعية","علوم الحاسوب","مراجعة عامة","اختبارات","واجبات","أخرى"],
     sub: {
-      "Quran": ["Memorization","Revision","Recitation","Tajweed","Interpretation","Other"],
-      "English Language": ["Reading","Writing","Listening","Speaking","Grammar","Vocabulary","Translation","Exam Questions","Other"],
-      "Mathematics": ["Algebra","Geometry","Trigonometry","Calculus Basics","Probability","Statistics","Equations","Functions","Past Exams","Other"],
-      "Other": ["General Study","Review","Practice","Other"]
+      "القرآن الكريم": ["الحفظ","المراجعة","التلاوة","التجويد","التفسير","أخرى"],
+      "التربية الإسلامية": ["العقيدة","الفقه","الحديث","السيرة النبوية","التفسير","الأخلاق","أخرى"],
+      "اللغة العربية": ["النحو","الصرف","البلاغة","الأدب","القراءة","الكتابة","الإملاء","التعبير","أخرى"],
+      "اللغة الإنجليزية": ["القراءة","الكتابة","الاستماع","التحدث","القواعد","المفردات","الترجمة","أسئلة الاختبارات","أخرى"],
+      "الرياضيات": ["الجبر","الهندسة","المثلثات","مبادئ التفاضل والتكامل","الاحتمالات","الإحصاء","المعادلات","الدوال","اختبارات سابقة","أخرى"],
+      "الفيزياء": ["الميكانيكا","الكهرباء","المغناطيسية","الحرارة","الضوء","الموجات","القوانين","مسائل تطبيقية","أخرى"],
+      "الكيمياء": ["المفاهيم الأساسية","المعادلات الكيميائية","الحسابات الكيميائية","الأحماض والقواعد","الأملاح","الكيمياء العضوية","التجارب","أخرى"],
+      "الأحياء": ["الخلية","الوراثة","جسم الإنسان","النبات","البيئة","التصنيف","مراجعة عامة","أخرى"],
+      "التاريخ": ["مراجعة الدرس","حفظ التواريخ","الشخصيات","الأحداث","أسئلة سابقة","أخرى"],
+      "الجغرافيا": ["الخرائط","المناخ","السكان","الموارد","المواقع","أسئلة سابقة","أخرى"],
+      "الدراسات الاجتماعية": ["المجتمع","المواطنة","القيم","القوانين","مراجعة عامة","أخرى"],
+      "علوم الحاسوب": ["أساسيات الحاسوب","البرمجة","الشبكات","قواعد البيانات","أمن المعلومات","مشروع عملي","أخرى"],
+      "مراجعة عامة": ["مراجعة درس","مراجعة وحدة","مراجعة فصل","خطة مذاكرة","أخرى"],
+      "اختبارات": ["اختبار قصير","اختبار شهري","اختبار نهائي","اختبارات سابقة","محاكاة اختبار","أخرى"],
+      "واجبات": ["واجب منزلي","حل تمارين","تلخيص درس","بحث قصير","أخرى"],
+      "أخرى": ["دراسة عامة","مراجعة","تدريب","أخرى"]
     },
-    detail: {"Quran": ["Surah Review","Daily Portion","New Memorization","Old Memorization","Tajweed Rule","Mistake Correction","Other"], "Mathematics": ["Lesson Review","Formula Review","Past Questions","Difficult Problems","Other"], "Other": ["General Topic","Other"]},
-    training: ["Study Lesson","Solve Exercises","Review Mistakes","Timed Practice","Prepare for Exam","Memorize Formulas","Memorize","Review","Listen","Recite","Correct Mistakes","Write Paragraph","Listen and Repeat","Other"]
+    detail: {
+      "القرآن الكريم": ["مراجعة سورة","ورد يومي","حفظ جديد","حفظ سابق","قاعدة تجويد","تصحيح أخطاء","أخرى"],
+      "التربية الإسلامية": ["مراجعة الدرس","حفظ الأدلة","تلخيص","أسئلة وأجوبة","أخرى"],
+      "اللغة العربية": ["تدريب قواعد","تحليل نص","كتابة فقرة","إملاء","تعبير كتابي","أخرى"],
+      "اللغة الإنجليزية": ["تدريب قراءة","تدريب كتابة","استماع وتكرار","مفردات جديدة","قواعد","أخرى"],
+      "الرياضيات": ["مراجعة الدرس","مراجعة القوانين","أسئلة سابقة","مسائل صعبة","تدريب مؤقت","أخرى"],
+      "الفيزياء": ["مراجعة القوانين","حل مسائل","تجربة","أسئلة سابقة","تطبيقات","أخرى"],
+      "الكيمياء": ["حفظ مفاهيم","حل مسائل","مراجعة معادلات","تجربة","أسئلة سابقة","أخرى"],
+      "الأحياء": ["حفظ مصطلحات","رسم مخطط","تلخيص درس","أسئلة سابقة","أخرى"],
+      "أخرى": ["موضوع عام","أخرى"]
+    },
+    training: ["دراسة الدرس","حل التمارين","مراجعة الأخطاء","تدريب مؤقت","التحضير للاختبار","حفظ القوانين","حفظ","مراجعة","استماع","تلاوة","تصحيح الأخطاء","كتابة فقرة","استماع وتكرار","تلخيص","اختبار ذاتي","أخرى"]
   },
 
   "University": {
@@ -1745,4 +1767,115 @@ document.addEventListener("DOMContentLoaded", () => {
         if (el) el.addEventListener("change", () => setTimeout(translateDynamicOptions, 50));
     });
     setTimeout(applyArabicSpecialTaskLabelsV476, 250);
+});
+
+
+
+/* EduPath AI v4.7.7 Full Arabic Quran + Secondary Tasks */
+const EDUPATH_ARABIC_SPECIAL_TASK_TYPES_V477 = ["Quran Memorization", "Secondary School"];
+
+function isArabicSpecialTaskV477() {
+    const type = document.getElementById("categorySelect")?.value || "";
+    return EDUPATH_ARABIC_SPECIAL_TASK_TYPES_V477.includes(type);
+}
+
+function setTextV477(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+}
+
+function setPlaceholderV477(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.placeholder = text;
+}
+
+function translateOptionsArabicSpecialV477() {
+    if (!isArabicSpecialTaskV477()) return;
+    document.querySelectorAll("#topicSelect option, #skillSelect option, #detailedTopicSelect option, #trainingTypeSelect option, #repeatTypeSelect option").forEach(option => {
+        const original = option.value || option.textContent;
+        option.textContent = EDUPATH_LABEL_AR[original] || original;
+    });
+}
+
+function applyArabicSpecialTaskLabelsV477() {
+    const type = document.getElementById("categorySelect")?.value || "";
+    const arabicMode = isArabicSpecialTaskV477();
+
+    document.body.classList.toggle("arabic-task-mode", arabicMode);
+
+    if (!arabicMode) {
+        setTextV477("taskNameLabel", "Task Name");
+        setPlaceholderV477("taskTitleInput", "Example: Review Quran memorization / مثال: مراجعة حفظ القرآن");
+        setTextV477("topicLabel", "Main Field");
+        setTextV477("skillLabel", "Sub Field");
+        setTextV477("detailLabel", "Detailed Topic");
+        setTextV477("trainingLabel", "Training Type");
+        setTextV477("sourceLabel", "Source / Link");
+        setPlaceholderV477("sourceInput", "Book, website, YouTube, document link... / كتاب أو رابط أو مصدر");
+        setTextV477("difficultyLabel", "Difficulty 1-5");
+        setTextV477("priorityLabel", "Priority 1-5");
+        setTextV477("expectedTimeLabel", "Expected Time in Minutes");
+        setTextV477("startDateLabel", "Start Date");
+        setTextV477("endDateLabel", "End Date / Deadline");
+        setTextV477("reminderLabel", "Reminder Time");
+        setTextV477("repeatLabel", "Repeat");
+        setTextV477("repeatDaysLabel", "Repeat Days");
+        setTextV477("notesLabel", "Notes");
+        setPlaceholderV477("notesInput", "Any notes or plan... / اكتب أي ملاحظات أو خطة");
+        return;
+    }
+
+    setTextV477("taskNameLabel", type === "Quran Memorization" ? "اسم مهمة القرآن" : "اسم المهمة الدراسية");
+    setPlaceholderV477("taskTitleInput", type === "Quran Memorization" ? "مثال: حفظ سورة النبأ أو مراجعة جزء عم" : "مثال: حل تمارين الجبر أو مراجعة درس الفيزياء");
+    setTextV477("topicLabel", "المجال الرئيسي");
+    setTextV477("skillLabel", "المجال الفرعي");
+    setTextV477("detailLabel", "الموضوع التفصيلي");
+    setTextV477("trainingLabel", "نوع التدريب");
+    setTextV477("sourceLabel", "المصدر أو الرابط");
+    setPlaceholderV477("sourceInput", "اكتب اسم كتاب أو مصدر، أو رابط يبدأ بـ https:// ويمكن فصل أكثر من رابط بعلامة &");
+    setTextV477("difficultyLabel", "درجة الصعوبة من 1 إلى 5");
+    setTextV477("priorityLabel", "الأولوية من 1 إلى 5");
+    setTextV477("expectedTimeLabel", "الوقت المتوقع بالدقائق");
+    setTextV477("startDateLabel", "تاريخ البداية");
+    setTextV477("endDateLabel", "تاريخ النهاية / الموعد النهائي");
+    setTextV477("reminderLabel", "وقت التذكير");
+    setTextV477("repeatLabel", "التكرار");
+    setTextV477("repeatDaysLabel", "أيام التكرار");
+    setTextV477("notesLabel", "ملاحظات");
+    setPlaceholderV477("notesInput", "اكتب أي ملاحظات أو خطة مختصرة");
+
+    const repeatMap = {
+        "once": "بدون تكرار / مرة واحدة",
+        "daily": "يوميًا",
+        "weekly": "أسبوعيًا",
+        "monthly": "شهريًا",
+        "selected_days": "أيام محددة"
+    };
+    document.querySelectorAll("#repeatTypeSelect option").forEach(option => {
+        option.textContent = repeatMap[option.value] || option.textContent;
+    });
+
+    translateOptionsArabicSpecialV477();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("click", e => {
+        if (e.target.closest(".task-type-card")) {
+            setTimeout(applyArabicSpecialTaskLabelsV477, 90);
+            setTimeout(translateOptionsArabicSpecialV477, 150);
+        }
+    });
+
+    ["topicSelect","skillSelect","detailedTopicSelect","trainingTypeSelect","repeatTypeSelect"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener("change", () => {
+                setTimeout(applyArabicSpecialTaskLabelsV477, 70);
+                setTimeout(translateOptionsArabicSpecialV477, 120);
+            });
+        }
+    });
+
+    setTimeout(applyArabicSpecialTaskLabelsV477, 350);
+    setTimeout(translateOptionsArabicSpecialV477, 500);
 });

@@ -4159,3 +4159,36 @@ body.dark-mode .task-type-card {
         font-size: 11.5px !important;
     }
 }
+
+
+
+/* EduPath AI v4.7.7 Full Arabic Quran + Secondary Task Forms */
+.arabic-task-mode .smart-task-form,
+.arabic-task-mode .smart-details,
+.arabic-task-mode #taskDetailsArea {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.arabic-task-mode .form-row {
+    direction: rtl !important;
+}
+
+.arabic-task-mode input,
+.arabic-task-mode select,
+.arabic-task-mode textarea {
+    text-align: right !important;
+}
+
+.arabic-task-mode .conditional-field {
+    text-align: right !important;
+}
+
+.arabic-task-mode .weekday-grid {
+    direction: rtl !important;
+}
+
+.arabic-task-mode .hint {
+    display: block;
+    text-align: right !important;
+}

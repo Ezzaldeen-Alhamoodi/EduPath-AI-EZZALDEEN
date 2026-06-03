@@ -1013,3 +1013,39 @@ Design refinement update.
 - 0 API calls.
 - 0 OpenRouter usage.
 - 0 cost.
+
+
+## v4.7.7 Full Arabic Quran and Secondary Tasks
+
+Focused task-form update.
+
+### Changed
+- Quran Memorization task section is now fully Arabic:
+  - labels
+  - placeholders
+  - options
+  - repeat values
+  - form direction
+- Secondary School task section is now fully Arabic:
+  - subjects
+  - subfields
+  - detailed topics
+  - training types
+  - labels and placeholders
+- Fixed English remaining in the Secondary School task form such as:
+  - Mathematics
+  - Algebra
+  - Lesson Review
+  - Study Lesson
+  - Task Name
+  - Source / Link
+  - Expected Time in Minutes
+  - Repeat
+  - Notes
+- Kept other task sections in their normal language behavior.
+- No backend database changes.
+
+### AI usage
+- 0 API calls.
+- 0 OpenRouter usage.
+- 0 cost.
