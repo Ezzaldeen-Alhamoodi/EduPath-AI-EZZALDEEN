@@ -1564,3 +1564,42 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(eduPathRefreshAllCustomFields, 150);
     setTimeout(eduPathRefreshAllCustomFields, 500);
 });
+
+
+
+/* EduPath AI v4.6.13 Final Goal Custom Field Controller */
+function eduPathGoalCustomFinalV4613() {
+    const mapping = [
+        ["goalCategorySelect", "customCategoryBox"],
+        ["goalPathSelect", "customPathBox"],
+        ["currentStateSelect", "customCurrentBox"],
+        ["targetStateSelect", "customTargetBox"],
+        ["commitmentSelect", "customCommitmentBox"]
+    ];
+
+    mapping.forEach(([selectId, boxId]) => {
+        const select = document.getElementById(selectId);
+        const box = document.getElementById(boxId);
+        if (!select || !box) return;
+
+        const value = (select.value || "").trim().toLowerCase();
+        const shouldShow = ["other", "custom", "custom plan", "أخرى", "خطة مخصصة", "تحديد يدوي"].includes(value);
+
+        box.classList.toggle("edupath-visible-custom", shouldShow);
+        box.style.display = shouldShow ? "grid" : "none";
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    ["goalTypeSelect","goalCategorySelect","goalPathSelect","currentStateSelect","targetStateSelect","commitmentSelect"].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("change", () => {
+            setTimeout(eduPathGoalCustomFinalV4613, 60);
+            setTimeout(eduPathGoalCustomFinalV4613, 220);
+        });
+    });
+
+    setTimeout(eduPathGoalCustomFinalV4613, 200);
+    setTimeout(eduPathGoalCustomFinalV4613, 700);
+});

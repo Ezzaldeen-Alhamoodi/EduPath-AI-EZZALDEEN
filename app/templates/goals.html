@@ -13,96 +13,112 @@
 </section>
 
 
-<section class="grid-2">
-    <div class="card">
+<section class="grid-2 smart-goals-layout-v4613">
+    <div class="card smart-goal-create-card">
         <h2>◎ Create Smart Goal</h2>
 
-        <form method="POST" class="form smart-goal-form" id="smartGoalForm">
-            <label>Goal Title</label>
-            <input name="title" id="goalTitleInput" placeholder="Achieve IELTS Band 7 / حفظ جزء عم / Master Python Flask" required>
+        <form method="POST" class="form smart-goal-form-v4613" id="smartGoalForm">
+            <div class="goal-field goal-field-wide">
+                <label>Goal Title</label>
+                <input name="title" id="goalTitleInput" placeholder="Achieve IELTS Band 7 / حفظ جزء عم / Master Python Flask" required>
+            </div>
 
-            <label>Goal Type</label>
-            <select name="category" id="goalTypeSelect">
-                <option>Education</option>
-                <option>Language</option>
-                <option>Exam / Certificate</option>
-                <option>Programming & Technology</option>
-                <option>Artificial Intelligence</option>
-                <option>Scholarship</option>
-                <option>University</option>
-                <option>Mathematics</option>
-                <option>Project</option>
-                <option>Daily Life</option>
-                <option>Islamic Goals</option>
-                <option>General</option>
-                <option>Other</option>
-            </select>
+            <div class="goal-field goal-field-wide">
+                <label>Goal Type</label>
+                <select name="category" id="goalTypeSelect">
+                    <option>Education</option>
+                    <option>Language</option>
+                    <option>Exam / Certificate</option>
+                    <option>Programming & Technology</option>
+                    <option>Artificial Intelligence</option>
+                    <option>Scholarship</option>
+                    <option>University</option>
+                    <option>Mathematics</option>
+                    <option>Project</option>
+                    <option>Daily Life</option>
+                    <option>Islamic Goals</option>
+                    <option>General</option>
+                    <option>Other</option>
+                </select>
+            </div>
 
-            <div class="adaptive-goal-box smart-two-col-form" id="adaptiveGoalBox">
-                <div class="form-row">
-                    <div>
-                        <label id="goalCategoryLabel">Goal Category</label>
-                        <select name="goal_category" id="goalCategorySelect"></select>
-                    </div>
-                    <div>
-                        <label id="goalPathLabel">Goal Path</label>
-                        <select name="goal_path" id="goalPathSelect"></select>
-                    </div>
+            <div class="adaptive-goal-panel-v4613" id="adaptiveGoalBox">
+                <div class="goal-field">
+                    <label id="goalCategoryLabel">Goal Category</label>
+                    <select name="goal_category" id="goalCategorySelect"></select>
                 </div>
 
-                <div class="form-row">
-                    <div>
-                        <label id="currentStateLabel">Current State</label>
-                        <select name="current_state" id="currentStateSelect"></select>
-                    </div>
-                    <div>
-                        <label id="targetStateLabel">Target State</label>
-                        <select name="target_state" id="targetStateSelect"></select>
-                    </div>
+                <div class="goal-field">
+                    <label id="goalPathLabel">Goal Path</label>
+                    <select name="goal_path" id="goalPathSelect"></select>
                 </div>
 
-                <label id="goalOutcomeLabel">Goal Outcome</label>
-                <input name="goal_outcome" id="goalOutcomeInput" placeholder="What should happen when this goal is achieved?">
+                <div class="goal-field">
+                    <label id="currentStateLabel">Current State</label>
+                    <select name="current_state" id="currentStateSelect"></select>
+                </div>
+
+                <div class="goal-field">
+                    <label id="targetStateLabel">Target State</label>
+                    <select name="target_state" id="targetStateSelect"></select>
+                </div>
+
+                <div class="goal-field goal-field-wide">
+                    <label id="goalOutcomeLabel">Goal Outcome</label>
+                    <input name="goal_outcome" id="goalOutcomeInput" placeholder="What should happen when this goal is achieved?">
+                </div>
+
                 <input type="hidden" name="milestones" id="milestonesInput">
 
-                <label id="commitmentLabel">Daily / Weekly Commitment</label>
-                <select name="commitment" id="commitmentSelect"></select>
+                <div class="goal-field">
+                    <label id="commitmentLabel">Daily / Weekly Commitment</label>
+                    <select name="commitment" id="commitmentSelect"></select>
+                </div>
+
                 <input type="hidden" name="keywords" id="keywordsInput">
 
-                <div class="custom-goal-fields" id="customGoalFields">
-                    <div class="form-row">
-                        <div id="customCategoryBox">
-                            <label>Custom Goal Category</label>
-                            <input name="custom_goal_category" id="customGoalCategoryInput" placeholder="Write your custom category">
-                        </div>
-                        <div id="customPathBox">
-                            <label>Custom Goal Path</label>
-                            <input name="custom_goal_path" id="customGoalPathInput" placeholder="Write your custom path">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div id="customCurrentBox">
-                            <label>Custom Current State</label>
-                            <input name="custom_current_state" id="customCurrentInput" placeholder="Write your current state">
-                        </div>
-                        <div id="customTargetBox">
-                            <label>Custom Target State</label>
-                            <input name="custom_target_state" id="customTargetInput" placeholder="Write your target state">
-                        </div>
-                    </div>
-                    <div id="customCommitmentBox">
-                        <label>Custom Commitment</label>
-                        <input name="custom_commitment" id="customCommitmentInput" placeholder="Write your custom commitment">
-                    </div>
+                <div class="goal-field custom-goal-box-v4613" id="customCategoryBox">
+                    <label>Custom Goal Category</label>
+                    <input name="custom_goal_category" id="customGoalCategoryInput" placeholder="Write your custom category">
+                </div>
+
+                <div class="goal-field custom-goal-box-v4613" id="customPathBox">
+                    <label>Custom Goal Path</label>
+                    <input name="custom_goal_path" id="customGoalPathInput" placeholder="Write your custom path">
+                </div>
+
+                <div class="goal-field custom-goal-box-v4613" id="customCurrentBox">
+                    <label>Custom Current State</label>
+                    <input name="custom_current_state" id="customCurrentInput" placeholder="Write your current state">
+                </div>
+
+                <div class="goal-field custom-goal-box-v4613" id="customTargetBox">
+                    <label>Custom Target State</label>
+                    <input name="custom_target_state" id="customTargetInput" placeholder="Write your target state">
+                </div>
+
+                <div class="goal-field custom-goal-box-v4613" id="customCommitmentBox">
+                    <label>Custom Commitment</label>
+                    <input name="custom_commitment" id="customCommitmentInput" placeholder="Write your custom commitment">
                 </div>
             </div>
-            <label>Start Date</label>
-            <input name="start_date" type="date">
 
-            <label>Target Date</label>
-            <input name="deadline" type="date">
-<label>Notes</label>
-            <textarea name="notes" rows="4" placeholder="Extra details, resources, schedule, or personal instructions..."></textarea>
+            <div class="goal-form-bottom-grid">
+                <div class="goal-field">
+                    <label>Start Date</label>
+                    <input name="start_date" type="date">
+                </div>
+
+                <div class="goal-field">
+                    <label>Target Date</label>
+                    <input name="deadline" type="date">
+                </div>
+
+                <div class="goal-field goal-field-wide">
+                    <label>Notes</label>
+                    <textarea name="notes" rows="4" placeholder="Extra details, resources, schedule, or personal instructions..."></textarea>
+                </div>
+            </div>
 
             <button type="submit">💾 Save Smart Goal</button>
         </form>

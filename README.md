@@ -662,3 +662,13 @@ gunicorn server:app
 - Milestones and keywords remain internal for the Goal Intelligence Engine.
 - Improved layout to use two columns on larger screens and one column on narrow mobile screens.
 - Preserved smart goal-task linking without automatic task creation.
+
+
+## v4.6.13 Professional Smart Goals Layout
+
+- Rebuilt the Smart Goals form layout from the template level.
+- Removed the old nested/table-like adaptive fields structure.
+- Goal fields now use a clean professional two-column grid on wide screens and one column on smaller screens.
+- Other/Custom fields now appear as normal form fields inside the grid when selected.
+- Milestones and Goal Intelligence Details remain internal and are not shown in goal cards.
+- Goal intelligence continues to use hidden milestones and generated keywords internally.
