@@ -50,9 +50,9 @@
 
 
 
-<section class="card">
-    <h2>Users, Progress & AI Controls</h2>
-    <p class="muted">Admins are unlimited. Regular users can be limited per day to protect your OpenRouter quota.</p>
+<section class="card admin-users-card-v478">
+    <h2>Users, Limits, Paid Codes & Progress</h2>
+    <p class="muted">Admins are unlimited. Regular users can be limited for tasks, goals, and AI Coach. Subscription codes are visible only here.</p>
 
     <div class="admin-users final-admin-users">
         {% for item in user_stats %}
@@ -63,22 +63,26 @@
                         <strong>{{ user.name }}</strong>
                         <span>{{ user.email }}</span>
                     </div>
-                    <div class="admin-badges">
+                    <div class="admin-badges compact-admin-badges-v478">
                         {% if item.is_unlimited %}
                             <span class="admin-badge unlimited">Unlimited Admin</span>
+                        {% elif item.paid_active %}
+                            <span class="admin-badge paid">Paid Active</span>
                         {% else %}
-                            <span class="admin-badge">Limit: {{ user.ai_daily_limit }}/day</span>
+                            <span class="admin-badge">Free Plan</span>
                         {% endif %}
                         <span class="admin-badge">{{ "AI On" if user.ai_enabled else "AI Off" }}</span>
+                        <span class="admin-badge code">Code: {{ user.subscription_code or "pending" }}</span>
                     </div>
                 </div>
 
-                <div class="admin-progress-grid">
-                    <div><strong>{{ item.goals_count }}</strong><span>Goals</span></div>
-                    <div><strong>{{ item.tasks_count }}</strong><span>Tasks</span></div>
-                    <div><strong>{{ item.done_count }}</strong><span>Completed</span></div>
+                <div class="admin-progress-grid compact-progress-v478">
+                    <div><strong>{{ item.goals_count }}</strong><span>Goals / {{ item.goal_limit if item.goal_limit is not none else "∞" }}</span></div>
+                    <div><strong>{{ item.tasks_count }}</strong><span>Tasks / {{ item.task_limit if item.task_limit is not none else "∞" }}</span></div>
+                    <div><strong>{{ item.done_count }}</strong><span>Done</span></div>
                     <div><strong>{{ item.pending_count }}</strong><span>Pending</span></div>
                     <div><strong>{{ item.progress }}%</strong><span>Progress</span></div>
+                    <div><strong>{{ item.ai_limit if item.ai_limit is not none else "∞" }}</strong><span>AI limit/day</span></div>
                 </div>
 
                 <div class="admin-ai-grid">
@@ -97,12 +101,23 @@
                         <span>Allow AI Coach</span>
                     </label>
 
-                    <label>Daily AI limit for regular user</label>
-                    <input type="number" name="ai_daily_limit" min="0" value="{{ user.ai_daily_limit }}">
+                    <div class="admin-limit-grid-v478">
+                        <label>Free Tasks<input type="number" name="task_limit" min="0" value="{{ user.task_limit }}"></label>
+                        <label>Free Goals<input type="number" name="goal_limit" min="0" value="{{ user.goal_limit }}"></label>
+                        <label>Free AI/day<input type="number" name="ai_daily_limit" min="0" value="{{ user.ai_daily_limit }}"></label>
+                        <label>Paid Tasks<input type="number" name="paid_task_limit" min="0" value="{{ user.paid_task_limit }}"></label>
+                        <label>Paid Goals<input type="number" name="paid_goal_limit" min="0" value="{{ user.paid_goal_limit }}"></label>
+                        <label>Paid AI/day<input type="number" name="paid_ai_daily_limit" min="0" value="{{ user.paid_ai_daily_limit }}"></label>
+                    </div>
+
+                    <label class="checkbox-row">
+                        <input type="checkbox" name="paid_active" {% if user.paid_active %}checked{% endif %}>
+                        <span>Paid version active</span>
+                    </label>
 
                     <label class="checkbox-row">
                         <input type="checkbox" name="is_admin" {% if user.is_admin %}checked{% endif %} {% if user.id == current_user.id %}disabled{% endif %}>
-                        <span>Admin / Unlimited AI</span>
+                        <span>Admin / Unlimited access</span>
                     </label>
 
                     <button type="submit">Save User Control</button>

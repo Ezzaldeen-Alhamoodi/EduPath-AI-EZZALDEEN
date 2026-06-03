@@ -1049,3 +1049,40 @@ Focused task-form update.
 - 0 API calls.
 - 0 OpenRouter usage.
 - 0 cost.
+
+
+## v4.7.8 Admin Limits and Paid Codes
+
+### Admin control
+- Added compact user display in Admin page.
+- Admin can control per user:
+  - Free task limit
+  - Free goal limit
+  - Free daily AI limit
+  - Paid task limit
+  - Paid goal limit
+  - Paid daily AI limit
+  - Paid version active/inactive
+  - AI enabled/disabled
+  - Admin/unlimited access
+- Admin sees a unique subscription code beside every user.
+- Subscription code is hidden from the user.
+
+### User limits
+- Regular users are prevented from creating more tasks/goals after reaching their limits.
+- Regular users receive an upgrade message when exceeding:
+  - tasks limit
+  - goals limit
+  - AI Coach daily limit
+- Admin users remain unlimited.
+
+### Paid activation
+- Every user gets a unique complex code like:
+  - EDU-ABC123-XYZ789
+- In Profile, users can enter the code sent by the admin.
+- If correct, paid version is activated and higher limits apply.
+
+### Safety
+- Lightweight database migration only.
+- Existing users get codes automatically.
+- Existing data is not deleted.

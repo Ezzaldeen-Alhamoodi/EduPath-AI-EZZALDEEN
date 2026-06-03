@@ -4,6 +4,7 @@ import json
 import logging
 import unicodedata
 import secrets
+import string
 import re
 from datetime import datetime, date, timedelta
 
@@ -42,6 +43,14 @@ class User(UserMixin, db.Model):
     is_admin = db.Column(db.Boolean, nullable=False, default=False)
     ai_enabled = db.Column(db.Boolean, nullable=False, default=True)
     ai_daily_limit = db.Column(db.Integer, nullable=False, default=1)
+    task_limit = db.Column(db.Integer, nullable=False, default=20)
+    goal_limit = db.Column(db.Integer, nullable=False, default=5)
+    paid_ai_daily_limit = db.Column(db.Integer, nullable=False, default=50)
+    paid_task_limit = db.Column(db.Integer, nullable=False, default=500)
+    paid_goal_limit = db.Column(db.Integer, nullable=False, default=100)
+    subscription_code = db.Column(db.String(32), nullable=True, unique=True, index=True)
+    paid_active = db.Column(db.Boolean, nullable=False, default=False)
+    paid_activated_at = db.Column(db.DateTime, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     goals = db.relationship("Goal", backref="owner", lazy=True)
@@ -505,8 +514,52 @@ def admin_required(view_func):
 
     return wrapper
 
+
+def generate_subscription_code():
+    alphabet = string.ascii_uppercase + string.digits
+    return "EDU-" + "".join(secrets.choice(alphabet) for _ in range(6)) + "-" + "".join(secrets.choice(alphabet) for _ in range(6))
+
+
+def ensure_user_subscription_code(user):
+    if not getattr(user, "subscription_code", None):
+        code = generate_subscription_code()
+        while User.query.filter_by(subscription_code=code).first():
+            code = generate_subscription_code()
+        user.subscription_code = code
+    return user.subscription_code
+
+
+def user_has_unlimited_access(user):
+    return user_is_admin(user)
+
+
+def user_task_limit(user):
+    if user_has_unlimited_access(user):
+        return None
+    return (user.paid_task_limit if getattr(user, "paid_active", False) else user.task_limit) or 0
+
+
+def user_goal_limit(user):
+    if user_has_unlimited_access(user):
+        return None
+    return (user.paid_goal_limit if getattr(user, "paid_active", False) else user.goal_limit) or 0
+
+
+def user_ai_limit(user):
+    if user_has_unlimited_access(user):
+        return None
+    return (user.paid_ai_daily_limit if getattr(user, "paid_active", False) else user.ai_daily_limit) or 0
+
+
+def limit_upgrade_message(section_name):
+    return (
+        f"You have reached the allowed {section_name} limit for your current plan. "
+        "To use more, please contact EduPath AI administration to subscribe to the paid version."
+    )
+
+
 def ai_usage_status(user, tool_name="general"):
-    if user_is_admin(user):
+    if user_has_unlimited_access(user):
         return {"allowed": True, "used": 0, "limit": "unlimited"}
 
     if not getattr(user, "ai_enabled", True):
@@ -515,11 +568,11 @@ def ai_usage_status(user, tool_name="general"):
     today_value = str(date.today())
     record = AIUsage.query.filter_by(user_id=user.id, tool_name=tool_name, usage_date=today_value).first()
     used = record.count if record else 0
-    limit = getattr(user, "ai_daily_limit", 1) or 1
+    limit = user_ai_limit(user)
     return {"allowed": used < limit, "used": used, "limit": limit}
 
 def record_ai_usage(user, tool_name="general"):
-    if user_is_admin(user):
+    if user_has_unlimited_access(user):
         return
 
     today_value = str(date.today())
@@ -943,6 +996,30 @@ def render_clickable_sources(value):
 
 
 
+
+def ensure_all_users_subscription_codes():
+    try:
+        changed = False
+        for user in User.query.all():
+            if user.task_limit is None:
+                user.task_limit = 20
+            if user.goal_limit is None:
+                user.goal_limit = 5
+            if user.paid_ai_daily_limit is None:
+                user.paid_ai_daily_limit = 50
+            if user.paid_task_limit is None:
+                user.paid_task_limit = 500
+            if user.paid_goal_limit is None:
+                user.paid_goal_limit = 100
+            if not user.subscription_code:
+                ensure_user_subscription_code(user)
+            changed = True
+        if changed:
+            db.session.commit()
+    except Exception:
+        logger.exception("Failed to ensure subscription codes")
+
+
 def create_app():
     app = Flask(__name__)
     app.jinja_env.filters["clickable_sources"] = render_clickable_sources
@@ -1197,7 +1274,22 @@ def create_app():
     @app.route("/profile", methods=["GET", "POST"])
     @login_required
     def profile():
+        ensure_user_subscription_code(current_user)
+
         if request.method == "POST":
+            form_action = request.form.get("form_action", "profile").strip()
+
+            if form_action == "activate_paid":
+                code = request.form.get("subscription_code", "").strip().upper()
+                if code and code == (current_user.subscription_code or "").upper():
+                    current_user.paid_active = True
+                    current_user.paid_activated_at = datetime.utcnow()
+                    db.session.commit()
+                    flash("Paid version activated successfully. Your account now has higher limits.", "success")
+                else:
+                    flash("Invalid subscription code. Please check the code sent by EduPath AI administration.", "error")
+                return redirect(url_for("profile"))
+
             current_user.name = request.form.get("name", current_user.name).strip()
             current_user.country = request.form.get("country", "").strip()
             current_user.major = request.form.get("major", "").strip()
@@ -1215,6 +1307,9 @@ def create_app():
             total_goals=total_goals,
             total_tasks=total_tasks,
             completed_tasks=completed_tasks,
+            task_limit=user_task_limit(current_user),
+            goal_limit=user_goal_limit(current_user),
+            ai_limit=user_ai_limit(current_user),
         )
 
 
@@ -1478,6 +1573,7 @@ def create_app():
 
         user_stats = []
         for user in users:
+            ensure_user_subscription_code(user)
             goals_count = Goal.query.filter_by(user_id=user.id).count()
             tasks_count = StudyTask.query.filter_by(user_id=user.id).count()
             done_count = StudyTask.query.filter_by(user_id=user.id, status="done").count()
@@ -1498,7 +1594,13 @@ def create_app():
                 "code_used": usage_map.get("code", 0),
                 "general_used": usage_map.get("general", 0),
                 "is_unlimited": user_is_admin(user),
+                "paid_active": bool(getattr(user, "paid_active", False)),
+                "task_limit": user_task_limit(user),
+                "goal_limit": user_goal_limit(user),
+                "ai_limit": user_ai_limit(user),
             })
+
+        db.session.commit()
 
         return render_template(
             "admin.html",
@@ -1549,6 +1651,13 @@ def create_app():
 
         user.ai_enabled = request.form.get("ai_enabled") == "on"
         user.ai_daily_limit = int(request.form.get("ai_daily_limit", 1) or 1)
+        user.task_limit = int(request.form.get("task_limit", 20) or 20)
+        user.goal_limit = int(request.form.get("goal_limit", 5) or 5)
+        user.paid_ai_daily_limit = int(request.form.get("paid_ai_daily_limit", 50) or 50)
+        user.paid_task_limit = int(request.form.get("paid_task_limit", 500) or 500)
+        user.paid_goal_limit = int(request.form.get("paid_goal_limit", 100) or 100)
+        user.paid_active = request.form.get("paid_active") == "on"
+        ensure_user_subscription_code(user)
         user.name = request.form.get("name", user.name).strip() or user.name
         db.session.commit()
         flash("User updated.", "success")
@@ -1645,6 +1754,12 @@ def create_app():
     @login_required
     def goals():
         if request.method == "POST":
+            current_goal_count = Goal.query.filter_by(user_id=current_user.id).count()
+            allowed_goals = user_goal_limit(current_user)
+            if allowed_goals is not None and current_goal_count >= allowed_goals:
+                flash(limit_upgrade_message("goals"), "error")
+                return redirect(url_for("goals"))
+
             current_state = request.form.get("current_state", "").strip() or request.form.get("current_level", "").strip() or "Not started"
             if current_state in ["Custom", "تحديد يدوي"]:
                 current_state = request.form.get("custom_current_state", "").strip() or current_state
@@ -1721,6 +1836,12 @@ def create_app():
     @login_required
     def tasks():
         if request.method == "POST":
+            current_task_count = StudyTask.query.filter_by(user_id=current_user.id).count()
+            allowed_tasks = user_task_limit(current_user)
+            if allowed_tasks is not None and current_task_count >= allowed_tasks:
+                flash(limit_upgrade_message("tasks"), "error")
+                return redirect(url_for("tasks"))
+
             task = StudyTask(
                 user_id=current_user.id,
                 title=request.form.get("title", "").strip(),
@@ -1985,7 +2106,7 @@ Evaluate the answer. Return valid JSON only:
 
             status = ai_usage_status(current_user, "english")
             if not status["allowed"]:
-                flash("Your daily English Coach limit has been reached. You can still use goals and tasks.", "error")
+                flash(limit_upgrade_message("AI Coach daily usage"), "error")
                 return redirect(url_for("english"))
 
             if coach_type == "essay":
@@ -2699,6 +2820,14 @@ def ensure_database_columns():
                         created_at TIMESTAMP
                     )""",
 
+                    """ALTER TABLE "user" ADD COLUMN IF NOT EXISTS task_limit INTEGER DEFAULT 20""",
+                    """ALTER TABLE "user" ADD COLUMN IF NOT EXISTS goal_limit INTEGER DEFAULT 5""",
+                    """ALTER TABLE "user" ADD COLUMN IF NOT EXISTS paid_ai_daily_limit INTEGER DEFAULT 50""",
+                    """ALTER TABLE "user" ADD COLUMN IF NOT EXISTS paid_task_limit INTEGER DEFAULT 500""",
+                    """ALTER TABLE "user" ADD COLUMN IF NOT EXISTS paid_goal_limit INTEGER DEFAULT 100""",
+                    """ALTER TABLE "user" ADD COLUMN IF NOT EXISTS subscription_code VARCHAR(32)""",
+                    """ALTER TABLE "user" ADD COLUMN IF NOT EXISTS paid_active BOOLEAN DEFAULT FALSE""",
+                    """ALTER TABLE "user" ADD COLUMN IF NOT EXISTS paid_activated_at TIMESTAMP""",
                 ]
 
                 for sql in postgres_sql:
@@ -2835,6 +2964,23 @@ def ensure_database_columns():
                     created_at DATETIME
                 )
             """)
+
+
+            # v478_user_limits_columns
+            existing_user_cols = {row[1] for row in connection.exec_driver_sql("PRAGMA table_info(user)").fetchall()}
+            user_columns_to_add = {
+                "task_limit": "INTEGER DEFAULT 20",
+                "goal_limit": "INTEGER DEFAULT 5",
+                "paid_ai_daily_limit": "INTEGER DEFAULT 50",
+                "paid_task_limit": "INTEGER DEFAULT 500",
+                "paid_goal_limit": "INTEGER DEFAULT 100",
+                "subscription_code": "VARCHAR(32)",
+                "paid_active": "BOOLEAN DEFAULT 0",
+                "paid_activated_at": "DATETIME",
+            }
+            for column_name, column_type in user_columns_to_add.items():
+                if column_name not in existing_user_cols:
+                    connection.exec_driver_sql(f"ALTER TABLE user ADD COLUMN {column_name} {column_type}")
 
             connection.commit()
             logger.info("SQLite lightweight migration completed")

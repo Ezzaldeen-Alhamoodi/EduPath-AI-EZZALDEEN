@@ -4192,3 +4192,128 @@ body.dark-mode .task-type-card {
     display: block;
     text-align: right !important;
 }
+
+
+
+/* EduPath AI v4.7.8 Admin Limits + Paid Codes */
+.admin-users-card-v478 {
+    padding: 14px !important;
+}
+
+.final-admin-users {
+    gap: 10px !important;
+}
+
+.final-admin-card {
+    padding: 12px !important;
+    border-radius: 18px !important;
+}
+
+.admin-user-summary {
+    gap: 8px !important;
+    align-items: start !important;
+}
+
+.admin-user-summary strong {
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+}
+
+.admin-user-summary span {
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+    overflow-wrap: anywhere;
+}
+
+.compact-admin-badges-v478 {
+    gap: 5px !important;
+}
+
+.admin-badge {
+    font-size: 10.5px !important;
+    padding: 4px 7px !important;
+    border-radius: 999px !important;
+    line-height: 1 !important;
+}
+
+.admin-badge.code {
+    background: rgba(15, 23, 42, 0.06);
+    color: #0f172a;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: .02em;
+}
+
+.admin-badge.paid {
+    background: rgba(245, 158, 11, .14);
+    color: #92400e;
+    border-color: rgba(245, 158, 11, .25);
+}
+
+.compact-progress-v478,
+.admin-ai-grid {
+    gap: 7px !important;
+}
+
+.compact-progress-v478 div,
+.admin-ai-grid div {
+    padding: 8px !important;
+    border-radius: 14px !important;
+}
+
+.compact-progress-v478 strong,
+.admin-ai-grid strong {
+    font-size: 15px !important;
+}
+
+.compact-progress-v478 span,
+.admin-ai-grid span {
+    font-size: 10.5px !important;
+}
+
+.admin-user-form {
+    gap: 8px !important;
+}
+
+.admin-user-form label {
+    font-size: 11.5px !important;
+    font-weight: 950 !important;
+}
+
+.admin-user-form input {
+    min-height: 34px !important;
+    font-size: 12px !important;
+    padding: 7px 9px !important;
+}
+
+.admin-limit-grid-v478 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+}
+
+.admin-limit-grid-v478 label {
+    display: grid;
+    gap: 4px;
+}
+
+.admin-user-form button,
+.admin-delete-form button {
+    min-height: 34px !important;
+    font-size: 12px !important;
+    padding: 7px 10px !important;
+}
+
+.paid-profile-card-v478 {
+    border: 1px solid rgba(245, 158, 11, .24);
+    background: linear-gradient(135deg, rgba(245,158,11,.08), rgba(37,99,235,.04));
+}
+
+.compact-paid-form-v478 {
+    margin-top: 12px;
+}
+
+@media (max-width: 780px) {
+    .admin-limit-grid-v478 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

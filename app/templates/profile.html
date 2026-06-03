@@ -14,15 +14,17 @@
 </section>
 
 <section class="stats-grid">
-    <div class="stat-card blue"><span>🎯</span><h3>Your Goals</h3><p>{{ total_goals }}</p></div>
-    <div class="stat-card purple"><span>📚</span><h3>Your Tasks</h3><p>{{ total_tasks }}</p></div>
-    <div class="stat-card green"><span>✅</span><h3>Completed</h3><p>{{ completed_tasks }}</p></div>
+    <div class="stat-card blue"><span>◎</span><h3>Your Goals</h3><p>{{ total_goals }}{% if goal_limit is not none %}/{{ goal_limit }}{% endif %}</p></div>
+    <div class="stat-card purple"><span>▣</span><h3>Your Tasks</h3><p>{{ total_tasks }}{% if task_limit is not none %}/{{ task_limit }}{% endif %}</p></div>
+    <div class="stat-card green"><span>✓</span><h3>Completed</h3><p>{{ completed_tasks }}</p></div>
+    <div class="stat-card orange"><span>✦</span><h3>AI Daily Limit</h3><p>{{ ai_limit if ai_limit is not none else "∞" }}</p></div>
 </section>
 
 <section class="grid-2">
     <div class="card">
         <h2>✏️ Edit Profile</h2>
         <form method="POST" class="form">
+            <input type="hidden" name="form_action" value="profile">
             <label>Name</label>
             <input name="name" value="{{ current_user.name }}">
 
@@ -42,8 +44,26 @@
         </form>
     </div>
 
+    <div class="card paid-profile-card-v478">
+        <h2>Paid Version</h2>
+        {% if current_user.paid_active %}
+            <p class="improved">Your paid version is active. You now have higher limits for tasks, goals, and AI Coach.</p>
+            {% if current_user.paid_activated_at %}
+                <p class="muted">Activated at: {{ current_user.paid_activated_at.strftime("%Y-%m-%d") }}</p>
+            {% endif %}
+        {% else %}
+            <p class="muted">If you received a subscription code from EduPath AI administration, enter it here to activate the paid version.</p>
+            <form method="POST" class="form compact-paid-form-v478">
+                <input type="hidden" name="form_action" value="activate_paid">
+                <label>Subscription Code</label>
+                <input name="subscription_code" placeholder="Example: EDU-ABC123-XYZ789" autocomplete="off">
+                <button type="submit">Activate Paid Version</button>
+            </form>
+        {% endif %}
+    </div>
+
     <div class="card">
-        <h2>🔒 Privacy</h2>
+        <h2>Privacy</h2>
         <p class="improved">
             Your goals, tasks, scholarship plans, coding notes, and interview answers are linked to your account only.
             Other users cannot see or edit your data.
