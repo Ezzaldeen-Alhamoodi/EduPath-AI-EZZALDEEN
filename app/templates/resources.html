@@ -1,0 +1,135 @@
+\
+{% extends "base.html" %}
+{% block page_title %}Smart Resources{% endblock %}
+{% block content %}
+
+<section class="hero compact resources-hero-v4616">
+    <div>
+        <span class="tag">EduPath AI</span>
+        <h2>Smart Resources Engine</h2>
+        <p>Find the right learning resources for your goals, tasks, exams, skills, and daily study plan.</p>
+    </div>
+</section>
+
+<section class="resource-category-strip">
+    {% for cat in categories %}
+        <a href="{{ url_for('resources', category=cat) }}" class="{% if selected.category == cat %}active{% endif %}">{{ cat }}</a>
+    {% endfor %}
+</section>
+
+<section class="card resources-filter-card">
+    <form method="GET" class="resources-filter-grid">
+        <div class="filter-wide">
+            <label>Search Resources</label>
+            <input name="q" value="{{ selected.q }}" placeholder="IELTS Reading, Python Flask, CSCA Physics, Quran memorization...">
+        </div>
+
+        <div>
+            <label>Category</label>
+            <select name="category">
+                <option value="">All Categories</option>
+                {% for cat in categories %}
+                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label>Exam</label>
+            <select name="exam">
+                <option value="">All Exams</option>
+                {% for exam in exams %}
+                    <option value="{{ exam }}" {% if selected.exam == exam %}selected{% endif %}>{{ exam }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label>Skill</label>
+            <input name="skill" value="{{ selected.skill }}" placeholder="Reading, Writing, Python, Quran...">
+        </div>
+
+        <div>
+            <label>Type</label>
+            <select name="type">
+                <option value="">All Types</option>
+                {% for type in types %}
+                    <option value="{{ type }}" {% if selected.type == type %}selected{% endif %}>{{ type }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <label class="resource-check">
+            <input type="checkbox" name="official" value="1" {% if selected.official == "1" %}checked{% endif %}>
+            Official Only
+        </label>
+
+        <label class="resource-check">
+            <input type="checkbox" name="free" value="1" {% if selected.free == "1" %}checked{% endif %}>
+            Free Only
+        </label>
+
+        <div class="filter-actions">
+            <button type="submit">🔎 Find Resources</button>
+            <a class="small-button ghost" href="{{ url_for('resources') }}">Reset</a>
+        </div>
+    </form>
+</section>
+
+<section class="resources-summary-row">
+    <div class="mini-stat-card">
+        <strong>{{ resources|length }}</strong>
+        <span>Matching Resources</span>
+    </div>
+    <div class="mini-stat-card">
+        <strong>{{ categories|length }}</strong>
+        <span>Smart Categories</span>
+    </div>
+    <div class="mini-stat-card">
+        <strong>Free</strong>
+        <span>Designed to avoid extra cost</span>
+    </div>
+</section>
+
+<section class="resources-grid">
+    {% for resource in resources %}
+        <article class="resource-card">
+            <div class="resource-card-head">
+                <div>
+                    <h3>{{ resource.name }}</h3>
+                    <p>{{ resource.category }}{% if resource.subcategory %} · {{ resource.subcategory }}{% endif %}</p>
+                </div>
+                <div class="resource-badges">
+                    {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
+                    {% if resource.is_free %}<span class="badge free">Free</span>{% endif %}
+                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
+                </div>
+            </div>
+
+            <p class="resource-desc">{{ resource.description }}</p>
+
+            <div class="resource-meta">
+                {% if resource.exam %}<span>Exam: {{ resource.exam }}</span>{% endif %}
+                {% if resource.skill %}<span>Skill: {{ resource.skill }}</span>{% endif %}
+                {% if resource.level %}<span>Level: {{ resource.level }}</span>{% endif %}
+                {% if resource.language %}<span>Language: {{ resource.language }}</span>{% endif %}
+            </div>
+
+            {% if resource.tags %}
+                <div class="resource-tags">
+                    {% for tag in resource.tags[:8] %}
+                        <span>{{ tag }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <a class="button resource-open" href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">Open Resource ↗</a>
+        </article>
+    {% else %}
+        <div class="card">
+            <p class="muted">No resources found. Try a broader search or remove some filters.</p>
+        </div>
+    {% endfor %}
+</section>
+
+{% endblock %}

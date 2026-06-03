@@ -709,3 +709,36 @@ gunicorn server:app
   - Professional email
   - IELTS style
   - TOEFL style
+
+
+## v4.6.16 Smart Resources Engine
+
+- Added a new Smart Resources page:
+  - `/resources`
+- Added LearningResource database model.
+- Added lightweight PostgreSQL/SQLite migration for learning resources.
+- Added automatic seed data for:
+  - English Skills
+  - English Exams
+  - Chinese & HSK
+  - CSCA
+  - Programming & Technology
+  - AI & Data Science
+  - Scholarships
+  - Islamic Learning
+- Added search and smart filters:
+  - Category
+  - Exam
+  - Skill
+  - Resource Type
+  - Official Only
+  - Free Only
+- Added resource cards with:
+  - Official / Free badges
+  - Level
+  - Skill
+  - Exam
+  - Tags
+  - Open Resource button
+- Added `/api/resources/suggest` for future task/goal recommendation integration.
+- Resources are static, fast, free, and do not use AI credits.

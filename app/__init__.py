@@ -121,6 +121,32 @@ class StudyTask(db.Model):
 
 
 
+
+class LearningResource(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(180), nullable=False, index=True)
+    category = db.Column(db.String(80), nullable=False, index=True)
+    subcategory = db.Column(db.String(120), nullable=True, index=True)
+    skill = db.Column(db.String(120), nullable=True, index=True)
+    exam = db.Column(db.String(80), nullable=True, index=True)
+    level = db.Column(db.String(80), nullable=True)
+    resource_type = db.Column(db.String(80), nullable=True, index=True)
+    url = db.Column(db.Text, nullable=False)
+    description = db.Column(db.Text, nullable=True)
+    tags_json = db.Column(db.Text, nullable=True)
+    is_official = db.Column(db.Boolean, nullable=False, default=False)
+    is_free = db.Column(db.Boolean, nullable=False, default=True)
+    language = db.Column(db.String(40), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+
+    @property
+    def tags(self):
+        try:
+            return json.loads(self.tags_json or "[]")
+        except Exception:
+            return []
+
+
 class EnglishCoachSavedAnswer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, index=True)
@@ -490,6 +516,97 @@ def record_ai_usage(user, tool_name="general"):
     db.session.commit()
 
 
+
+def default_learning_resources():
+    return [
+        # English skills
+        {"name":"BBC Learning English","category":"English Skills","subcategory":"General English","skill":"Listening, Vocabulary, Pronunciation","exam":"","level":"Beginner → Advanced","resource_type":"Website","url":"https://www.bbc.co.uk/learningenglish","description":"Structured free lessons for listening, vocabulary, pronunciation, and everyday English.","tags":["english","listening","vocabulary","pronunciation","free"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"VOA Learning English","category":"English Skills","subcategory":"General English","skill":"Listening, Reading, Vocabulary","exam":"","level":"Beginner → Intermediate","resource_type":"Website","url":"https://learningenglish.voanews.com/","description":"Slow English news and learning programs for listening and vocabulary.","tags":["english","listening","reading","news"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"ELLLO","category":"English Skills","subcategory":"Listening","skill":"Listening, Speaking","exam":"","level":"Beginner → Advanced","resource_type":"Practice","url":"https://www.elllo.org/","description":"Large library of real listening conversations with transcripts and quizzes.","tags":["english","listening","speaking","conversation"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"ReadTheory","category":"English Skills","subcategory":"Reading","skill":"Reading Comprehension","exam":"","level":"Beginner → Advanced","resource_type":"Practice","url":"https://readtheory.org/","description":"Adaptive reading comprehension practice useful before IELTS/TOEFL reading.","tags":["english","reading","comprehension","practice"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Cambridge Dictionary","category":"English Skills","subcategory":"Vocabulary","skill":"Vocabulary, Pronunciation","exam":"","level":"All Levels","resource_type":"Dictionary","url":"https://dictionary.cambridge.org/","description":"Reliable definitions, examples, pronunciation, and vocabulary support.","tags":["english","vocabulary","dictionary","pronunciation"],"is_official":False,"is_free":True,"language":"English"},
+
+        # English exams
+        {"name":"IELTS Official","category":"English Exams","subcategory":"Official IELTS","skill":"All Skills","exam":"IELTS","level":"All Levels","resource_type":"Official","url":"https://ielts.org/","description":"Official IELTS information, test format, and practice resources.","tags":["ielts","official","listening","reading","writing","speaking"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"British Council IELTS Practice","category":"English Exams","subcategory":"IELTS Practice","skill":"All Skills","exam":"IELTS","level":"Beginner → Advanced","resource_type":"Practice","url":"https://takeielts.britishcouncil.org/take-ielts/prepare/free-ielts-practice-tests","description":"Free IELTS practice materials from the British Council.","tags":["ielts","british council","practice","mock test"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"IELTS Liz","category":"English Exams","subcategory":"IELTS Strategy","skill":"Writing, Speaking, Reading, Listening","exam":"IELTS","level":"Intermediate → Advanced","resource_type":"Website","url":"https://ieltsliz.com/","description":"Clear IELTS tips, model answers, and strategies for all skills.","tags":["ielts","writing","speaking","strategy"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"TOEFL TestReady","category":"English Exams","subcategory":"Official TOEFL","skill":"All Skills","exam":"TOEFL","level":"All Levels","resource_type":"Official","url":"https://www.ets.org/toefl/test-takers/ibt/prepare.html","description":"Official TOEFL preparation resources from ETS.","tags":["toefl","official","ets","reading","listening","writing","speaking"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"Duolingo English Test Official Practice","category":"English Exams","subcategory":"Official DET","skill":"All Skills","exam":"Duolingo English Test","level":"All Levels","resource_type":"Official","url":"https://englishtest.duolingo.com/practice","description":"Official Duolingo English Test practice and test readiness resources.","tags":["duolingo","det","official","practice"],"is_official":True,"is_free":True,"language":"English"},
+
+        # Chinese / HSK / CSCA
+        {"name":"HSK Official Test Info","category":"Chinese & HSK","subcategory":"HSK","skill":"Chinese Test","exam":"HSK","level":"HSK 1 → HSK 6","resource_type":"Official","url":"https://www.chinesetest.cn/","description":"Official Chinese test information and services.","tags":["chinese","hsk","official"],"is_official":True,"is_free":True,"language":"Chinese"},
+        {"name":"HelloChinese","category":"Chinese & HSK","subcategory":"Chinese Basics","skill":"Vocabulary, Pronunciation, Characters","exam":"HSK","level":"Beginner","resource_type":"App","url":"https://www.hellochinese.cc/","description":"Beginner-friendly Chinese learning app for pronunciation, characters, and vocabulary.","tags":["chinese","hsk","vocabulary","app"],"is_official":False,"is_free":True,"language":"Chinese"},
+        {"name":"CSCA Official Portal","category":"CSCA","subcategory":"Official CSCA","skill":"Mathematics, Physics, Chemistry","exam":"CSCA","level":"Admission Exam","resource_type":"Official","url":"https://www.csca.cn/","description":"Official CSCA exam information portal when accessible.","tags":["csca","mathematics","physics","chemistry","official"],"is_official":True,"is_free":True,"language":"Chinese/English"},
+        {"name":"Khan Academy Mathematics","category":"CSCA","subcategory":"Mathematics","skill":"Algebra, Functions, Geometry, Probability","exam":"CSCA","level":"Beginner → Advanced","resource_type":"Course","url":"https://www.khanacademy.org/math","description":"Strong free math practice useful for CSCA mathematics foundations.","tags":["csca","math","algebra","geometry","probability"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Khan Academy Physics","category":"CSCA","subcategory":"Physics","skill":"Mechanics, Electricity, Waves","exam":"CSCA","level":"Beginner → Advanced","resource_type":"Course","url":"https://www.khanacademy.org/science/physics","description":"Free physics foundations useful for CSCA physics preparation.","tags":["csca","physics","mechanics","electricity"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Khan Academy Chemistry","category":"CSCA","subcategory":"Chemistry","skill":"Chemical Concepts, Reactions, Equilibrium","exam":"CSCA","level":"Beginner → Advanced","resource_type":"Course","url":"https://www.khanacademy.org/science/chemistry","description":"Free chemistry foundations useful for CSCA chemistry preparation.","tags":["csca","chemistry","mole","equilibrium"],"is_official":False,"is_free":True,"language":"English"},
+
+        # Programming & AI
+        {"name":"CS50x","category":"Programming & Technology","subcategory":"Computer Science","skill":"Programming, Algorithms, C, Python","exam":"","level":"Beginner → Intermediate","resource_type":"Course","url":"https://cs50.harvard.edu/x/","description":"Harvard's free introduction to computer science and programming.","tags":["cs50","programming","algorithms","python","c"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"Python for Everybody","category":"Programming & Technology","subcategory":"Python","skill":"Python Basics","exam":"","level":"Beginner","resource_type":"Course","url":"https://www.py4e.com/","description":"Beginner-friendly Python course by Dr. Chuck.","tags":["python","beginner","programming"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"freeCodeCamp","category":"Programming & Technology","subcategory":"Web Development","skill":"HTML, CSS, JavaScript, Projects","exam":"","level":"Beginner → Advanced","resource_type":"Practice","url":"https://www.freecodecamp.org/","description":"Free interactive coding curriculum and projects.","tags":["web development","html","css","javascript","projects"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"MDN Web Docs","category":"Programming & Technology","subcategory":"Documentation","skill":"HTML, CSS, JavaScript, Web APIs","exam":"","level":"All Levels","resource_type":"Documentation","url":"https://developer.mozilla.org/","description":"High-quality web development documentation from MDN.","tags":["documentation","html","css","javascript","web"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"Kaggle Learn","category":"AI & Data Science","subcategory":"Data Science","skill":"Python, Pandas, Machine Learning","exam":"","level":"Beginner → Intermediate","resource_type":"Course","url":"https://www.kaggle.com/learn","description":"Short practical courses for Python, SQL, pandas, ML, and data visualization.","tags":["ai","data science","python","machine learning","sql"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"Google Machine Learning Crash Course","category":"AI & Data Science","subcategory":"Machine Learning","skill":"ML Concepts","exam":"","level":"Beginner → Intermediate","resource_type":"Course","url":"https://developers.google.com/machine-learning/crash-course","description":"Google's free introduction to machine learning concepts and practice.","tags":["machine learning","ai","google","course"],"is_official":True,"is_free":True,"language":"English"},
+
+        # Scholarships
+        {"name":"ScholarshipPortal","category":"Scholarships","subcategory":"Scholarship Search","skill":"Search, Compare","exam":"","level":"All Levels","resource_type":"Search Tool","url":"https://www.scholarshipportal.com/","description":"Search engine for scholarships around the world.","tags":["scholarship","search","university"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Studyportals","category":"Scholarships","subcategory":"University Research","skill":"University Search","exam":"","level":"All Levels","resource_type":"Search Tool","url":"https://www.studyportals.com/","description":"Explore international study programs and universities.","tags":["university","study abroad","scholarship"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Europass CV","category":"Scholarships","subcategory":"CV","skill":"CV Preparation","exam":"","level":"All Levels","resource_type":"Tool","url":"https://europa.eu/europass/en/create-europass-cv","description":"Free CV builder useful for scholarship applications.","tags":["cv","scholarship","documents"],"is_official":True,"is_free":True,"language":"English"},
+
+        # Islamic Learning
+        {"name":"Quran.com","category":"Islamic Learning","subcategory":"Quran","skill":"Recitation, Reading, Translation","exam":"","level":"All Levels","resource_type":"Website","url":"https://quran.com/","description":"Quran reading, recitations, translations, and study support.","tags":["quran","قرآن","recitation","translation"],"is_official":False,"is_free":True,"language":"Arabic"},
+        {"name":"Tanzil Quran","category":"Islamic Learning","subcategory":"Quran Text","skill":"Quran Text","exam":"","level":"All Levels","resource_type":"Website","url":"https://tanzil.net/","description":"Reliable Quran text and translations.","tags":["quran","قرآن","text"],"is_official":False,"is_free":True,"language":"Arabic"},
+        {"name":"Sunnah.com","category":"Islamic Learning","subcategory":"Hadith","skill":"Hadith Reading","exam":"","level":"All Levels","resource_type":"Website","url":"https://sunnah.com/","description":"Hadith collections in searchable format.","tags":["hadith","حديث","islamic"],"is_official":False,"is_free":True,"language":"Arabic/English"},
+    ]
+
+
+def seed_learning_resources():
+    try:
+        if LearningResource.query.first():
+            return
+        for item in default_learning_resources():
+            db.session.add(LearningResource(
+                name=item["name"],
+                category=item["category"],
+                subcategory=item.get("subcategory", ""),
+                skill=item.get("skill", ""),
+                exam=item.get("exam", ""),
+                level=item.get("level", ""),
+                resource_type=item.get("resource_type", ""),
+                url=item["url"],
+                description=item.get("description", ""),
+                tags_json=json.dumps(item.get("tags", []), ensure_ascii=False),
+                is_official=bool(item.get("is_official", False)),
+                is_free=bool(item.get("is_free", True)),
+                language=item.get("language", ""),
+            ))
+        db.session.commit()
+        logger.info("Default learning resources seeded")
+    except Exception:
+        logger.exception("Failed to seed learning resources")
+
+
+def resource_match_score(resource, text):
+    text = (text or "").lower()
+    searchable = " ".join([
+        resource.name or "",
+        resource.category or "",
+        resource.subcategory or "",
+        resource.skill or "",
+        resource.exam or "",
+        resource.description or "",
+        " ".join(resource.tags),
+    ]).lower()
+
+    score = 0
+    for token in tokenize_mixed_text(text):
+        if token.lower() in searchable:
+            score += 10
+    return min(score, 100)
+
+
+
 def create_app():
     app = Flask(__name__)
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
@@ -803,6 +920,100 @@ def create_app():
         message.is_read = True
         db.session.commit()
         return redirect(url_for("index"))
+
+
+
+    @app.route("/resources")
+    @login_required
+    def resources():
+        query = request.args.get("q", "").strip()
+        category = request.args.get("category", "").strip()
+        skill = request.args.get("skill", "").strip()
+        exam = request.args.get("exam", "").strip()
+        level = request.args.get("level", "").strip()
+        resource_type = request.args.get("type", "").strip()
+        official = request.args.get("official", "").strip()
+        free = request.args.get("free", "").strip()
+
+        resource_query = LearningResource.query
+
+        if category:
+            resource_query = resource_query.filter(LearningResource.category == category)
+        if skill:
+            resource_query = resource_query.filter(LearningResource.skill.ilike(f"%{skill}%"))
+        if exam:
+            resource_query = resource_query.filter(LearningResource.exam.ilike(f"%{exam}%"))
+        if level:
+            resource_query = resource_query.filter(LearningResource.level.ilike(f"%{level}%"))
+        if resource_type:
+            resource_query = resource_query.filter(LearningResource.resource_type == resource_type)
+        if official == "1":
+            resource_query = resource_query.filter(LearningResource.is_official.is_(True))
+        if free == "1":
+            resource_query = resource_query.filter(LearningResource.is_free.is_(True))
+        if query:
+            like = f"%{query}%"
+            resource_query = resource_query.filter(db.or_(
+                LearningResource.name.ilike(like),
+                LearningResource.category.ilike(like),
+                LearningResource.subcategory.ilike(like),
+                LearningResource.skill.ilike(like),
+                LearningResource.exam.ilike(like),
+                LearningResource.description.ilike(like),
+                LearningResource.tags_json.ilike(like),
+            ))
+
+        resources_list = resource_query.order_by(
+            LearningResource.is_official.desc(),
+            LearningResource.category.asc(),
+            LearningResource.name.asc()
+        ).all()
+
+        categories = [row[0] for row in db.session.query(LearningResource.category).distinct().order_by(LearningResource.category.asc()).all()]
+        exams = [row[0] for row in db.session.query(LearningResource.exam).distinct().all() if row[0]]
+        types = [row[0] for row in db.session.query(LearningResource.resource_type).distinct().all() if row[0]]
+
+        return render_template(
+            "resources.html",
+            resources=resources_list,
+            categories=categories,
+            exams=sorted(exams),
+            types=sorted(types),
+            selected={
+                "q": query, "category": category, "skill": skill, "exam": exam,
+                "level": level, "type": resource_type, "official": official, "free": free
+            }
+        )
+
+    @app.route("/api/resources/suggest")
+    @login_required
+    def suggest_resources():
+        text = request.args.get("text", "").strip()
+        limit = int(request.args.get("limit", 5) or 5)
+        all_resources = LearningResource.query.all()
+        ranked = []
+        for resource in all_resources:
+            score = resource_match_score(resource, text)
+            if score > 0:
+                ranked.append((score, resource))
+        ranked.sort(key=lambda item: item[0], reverse=True)
+        return jsonify([
+            {
+                "name": r.name,
+                "category": r.category,
+                "subcategory": r.subcategory,
+                "skill": r.skill,
+                "exam": r.exam,
+                "level": r.level,
+                "type": r.resource_type,
+                "url": r.url,
+                "description": r.description,
+                "official": r.is_official,
+                "free": r.is_free,
+                "score": score,
+            }
+            for score, r in ranked[:limit]
+        ])
 
 
     @app.route("/admin")
@@ -2015,6 +2226,24 @@ def ensure_database_columns():
                         created_at TIMESTAMP
                     )""",
 
+                    """CREATE TABLE IF NOT EXISTS learning_resource (
+                        id SERIAL PRIMARY KEY,
+                        name VARCHAR(180) NOT NULL,
+                        category VARCHAR(80) NOT NULL,
+                        subcategory VARCHAR(120),
+                        skill VARCHAR(120),
+                        exam VARCHAR(80),
+                        level VARCHAR(80),
+                        resource_type VARCHAR(80),
+                        url TEXT NOT NULL,
+                        description TEXT,
+                        tags_json TEXT,
+                        is_official BOOLEAN NOT NULL DEFAULT FALSE,
+                        is_free BOOLEAN NOT NULL DEFAULT TRUE,
+                        language VARCHAR(40),
+                        created_at TIMESTAMP
+                    )""",
+
                 ]
 
                 for sql in postgres_sql:
@@ -2116,6 +2345,26 @@ def ensure_database_columns():
                     topic TEXT,
                     original_text TEXT,
                     result_json TEXT NOT NULL,
+                    created_at DATETIME
+                )
+            """)
+
+            connection.exec_driver_sql("""
+                CREATE TABLE IF NOT EXISTS learning_resource (
+                    id INTEGER PRIMARY KEY,
+                    name VARCHAR(180) NOT NULL,
+                    category VARCHAR(80) NOT NULL,
+                    subcategory VARCHAR(120),
+                    skill VARCHAR(120),
+                    exam VARCHAR(80),
+                    level VARCHAR(80),
+                    resource_type VARCHAR(80),
+                    url TEXT NOT NULL,
+                    description TEXT,
+                    tags_json TEXT,
+                    is_official BOOLEAN NOT NULL DEFAULT 0,
+                    is_free BOOLEAN NOT NULL DEFAULT 1,
+                    language VARCHAR(40),
                     created_at DATETIME
                 )
             """)

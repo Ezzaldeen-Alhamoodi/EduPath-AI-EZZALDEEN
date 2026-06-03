@@ -3166,3 +3166,220 @@ body.dark-mode .saved-details {
         width: 100%;
     }
 }
+
+
+
+/* EduPath AI v4.6.16 Smart Resources Engine */
+.resources-hero-v4616 {
+    background: linear-gradient(135deg, #2563eb, #06b6d4);
+}
+
+.resource-category-strip {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 4px 2px 12px;
+    margin-bottom: 14px;
+}
+
+.resource-category-strip a {
+    flex: 0 0 auto;
+    text-decoration: none;
+    color: var(--primary);
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.18);
+    padding: 9px 13px;
+    border-radius: 999px;
+    font-weight: 950;
+    font-size: 13px;
+}
+
+.resource-category-strip a.active,
+.resource-category-strip a:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.resources-filter-card {
+    margin-bottom: 16px;
+}
+
+.resources-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    align-items: end;
+}
+
+.resources-filter-grid label {
+    font-weight: 950;
+    font-size: 13px;
+}
+
+.resources-filter-grid input,
+.resources-filter-grid select {
+    width: 100%;
+}
+
+.resources-filter-grid .filter-wide {
+    grid-column: span 2;
+}
+
+.resource-check {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid rgba(37, 99, 235, 0.16);
+    border-radius: 16px;
+    padding: 12px;
+    background: rgba(37, 99, 235, 0.05);
+    min-height: 48px;
+}
+
+.resource-check input {
+    width: auto;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.resources-summary-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.mini-stat-card {
+    border-radius: 22px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.74);
+    box-shadow: var(--shadow);
+    display: grid;
+    gap: 4px;
+}
+
+.mini-stat-card strong {
+    font-size: 24px;
+    color: var(--primary);
+}
+
+.mini-stat-card span {
+    color: var(--muted);
+    font-weight: 850;
+    font-size: 13px;
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.resource-card {
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    box-shadow: var(--shadow);
+    border-radius: 26px;
+    padding: 18px;
+    display: grid;
+    gap: 12px;
+}
+
+.resource-card-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.resource-card h3 {
+    margin: 0 0 4px;
+    font-size: 18px;
+}
+
+.resource-card-head p,
+.resource-desc {
+    margin: 0;
+    color: var(--muted);
+}
+
+.resource-badges,
+.resource-tags,
+.resource-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.badge,
+.resource-tags span,
+.resource-meta span {
+    border-radius: 999px;
+    padding: 6px 9px;
+    font-size: 12px;
+    font-weight: 950;
+    background: rgba(37, 99, 235, 0.08);
+    color: var(--primary);
+    border: 1px solid rgba(37, 99, 235, 0.14);
+}
+
+.badge.official {
+    background: rgba(16, 185, 129, 0.12);
+    color: #047857;
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.badge.free {
+    background: rgba(245, 158, 11, 0.12);
+    color: #92400e;
+    border-color: rgba(245, 158, 11, 0.2);
+}
+
+.resource-open {
+    justify-self: start;
+    margin-top: 4px;
+}
+
+body.dark-mode .resource-card,
+body.dark-mode .mini-stat-card {
+    background: rgba(15, 23, 42, 0.78);
+}
+
+@media (max-width: 1050px) {
+    .resources-filter-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .resources-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .resources-filter-grid,
+    .resources-summary-row {
+        grid-template-columns: 1fr;
+    }
+
+    .resources-filter-grid .filter-wide {
+        grid-column: auto;
+    }
+
+    .filter-actions {
+        display: grid;
+    }
+
+    .filter-actions button,
+    .filter-actions a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .resource-card-head {
+        display: grid;
+    }
+}
