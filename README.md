@@ -582,3 +582,41 @@ Recommended Render Start Command:
 ```bash
 gunicorn run:app
 ```
+
+
+## v4.6.9 Smart Goals Final - No Auto Tasks
+
+### Core rule
+- User creates goals.
+- User creates tasks.
+- EduPath AI links completed user-created tasks to related goals.
+- Goal progress increases only through related completed tasks.
+- The goal system does not create tasks automatically.
+
+### Added
+- Final adaptive Smart Goals form:
+  - Goal Type
+  - Goal Category
+  - Goal Path
+  - Current State
+  - Target State
+  - Goal Outcome
+  - Milestones
+  - Daily / Weekly Commitment
+  - Hidden Keywords
+- Islamic Goals are Arabic-first.
+- Quran goal paths and Juz Amma milestones are Arabic.
+- GoalTaskLink table stores intelligent relations:
+  - goal_id
+  - task_id
+  - match_score
+  - match_reason
+  - progress_added
+  - is_confirmed_by_user
+- When a task is marked done, the app calculates related goals and updates progress.
+- Render startup stabilized with `server.py`.
+
+Recommended Render Start Command:
+```bash
+gunicorn server:app
+```

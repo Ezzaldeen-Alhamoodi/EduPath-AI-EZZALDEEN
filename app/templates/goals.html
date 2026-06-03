@@ -6,43 +6,53 @@
 <section class="hero compact goals-hero-v41">
     <div>
         <span class="tag">EduPath AI</span>
-        <h2><span data-i18n="goals.title">Smart Goals & Progress Intelligence</span></h2>
-        <p><span data-i18n="goals.desc">Goals are not just wishes. They are long-term plans made of milestones and daily tasks.</span></p>
+        <h2>Smart Adaptive Goals</h2>
+        <p>Goals are the destination. Tasks are the daily actions. EduPath AI connects completed user-created tasks to the right goals automatically.</p>
     </div>
-    <a class="button light" href="{{ url_for('tasks') }}">▣ Add Related Task</a>
+    <a class="button light" href="{{ url_for('tasks') }}">▣ Create Your Tasks</a>
+</section>
+
+<section class="card goal-philosophy-card">
+    <h2>How Smart Goals Work</h2>
+    <p class="improved">
+        EduPath AI does not create tasks automatically. You create your own tasks, and the app intelligently connects completed tasks to related goals to update your progress.
+    </p>
+    <p class="improved ar-note">
+        التطبيق لا ينشئ مهامًا تلقائيًا. أنت تنشئ مهامك بنفسك، والتطبيق يربط المهام المكتملة بالأهداف المناسبة لقياس تقدمك.
+    </p>
 </section>
 
 <section class="grid-2">
     <div class="card">
-        <h2>◎ <span data-i18n="goals.create">Create Smart Goal</span></h2>
-        <p class="muted">Choose the goal type first. The form adapts automatically and creates a smarter long-term plan.</p>
+        <h2>◎ Create Smart Goal</h2>
+        <p class="muted">Choose the goal type first. The form adapts step by step without showing unnecessary fields.</p>
 
         <form method="POST" class="form smart-goal-form" id="smartGoalForm">
             <label>Goal Title</label>
-            <input name="title" id="goalTitleInput" placeholder="Example: حفظ جزء عم، IELTS Band 7, Master Python Flask" required>
+            <input name="title" id="goalTitleInput" placeholder="Achieve IELTS Band 7 / حفظ جزء عم / Master Python Flask" required>
 
             <label>Goal Type</label>
             <select name="category" id="goalTypeSelect">
+                <option>Education</option>
                 <option>Language</option>
-                <option>Exam</option>
+                <option>Exam / Certificate</option>
                 <option>Programming & Technology</option>
+                <option>Artificial Intelligence</option>
                 <option>Scholarship</option>
                 <option>University</option>
                 <option>Mathematics</option>
-                <option>Artificial Intelligence</option>
                 <option>Project</option>
                 <option>Daily Life</option>
                 <option>Islamic Goals</option>
-                <option>Quran</option>
                 <option>General</option>
                 <option>Other</option>
             </select>
 
-            <div class="adaptive-goal-box">
+            <div class="adaptive-goal-box" id="adaptiveGoalBox">
                 <div class="form-row">
                     <div>
-                        <label id="goalFieldLabel">Goal Category</label>
-                        <select name="goal_field" id="goalFieldSelect"></select>
+                        <label id="goalCategoryLabel">Goal Category</label>
+                        <select name="goal_category" id="goalCategorySelect"></select>
                     </div>
                     <div>
                         <label id="goalPathLabel">Goal Path</label>
@@ -52,35 +62,27 @@
 
                 <div class="form-row">
                     <div>
-                        <label id="goalScopeLabel">Goal Scope</label>
-                        <select name="goal_scope" id="goalScopeSelect"></select>
+                        <label id="currentStateLabel">Current State</label>
+                        <select name="current_state" id="currentStateSelect"></select>
                     </div>
                     <div>
-                        <label id="goalStrategyLabel">Goal Strategy</label>
-                        <select name="goal_strategy" id="goalStrategySelect"></select>
+                        <label id="targetStateLabel">Target State</label>
+                        <select name="target_state" id="targetStateSelect"></select>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div>
-                        <label>Current State</label>
-                        <select name="current_state_select" id="currentStateSelect"></select>
-                    </div>
-                    <div>
-                        <label>Target Outcome</label>
-                        <select name="target_outcome_select" id="targetOutcomeSelect"></select>
-                    </div>
-                </div>
+                <label id="goalOutcomeLabel">Goal Outcome</label>
+                <input name="goal_outcome" id="goalOutcomeInput" placeholder="What should happen when this goal is achieved?">
 
-                <label>Goal Motivation</label>
-                <select name="goal_motivation" id="goalMotivationSelect"></select>
+                <label id="milestonesLabel">Milestones</label>
+                <textarea name="milestones" id="milestonesInput" rows="3" placeholder="Band 5.5 → 6.0 → 6.5 → 7.0"></textarea>
+
+                <label id="commitmentLabel">Daily / Weekly Commitment</label>
+                <select name="commitment" id="commitmentSelect"></select>
+
+                <label id="keywordsLabel">Hidden Keywords for Smart Linking</label>
+                <textarea name="keywords" id="keywordsInput" rows="3" placeholder="IELTS, Reading, Writing, Task 2, Vocabulary..."></textarea>
             </div>
-
-            <label>Current State / Current Level</label>
-            <input name="current_level" id="currentLevelInput" placeholder="Example: لا أحفظ شيئًا، Band 5.5, Beginner, 60% documents ready">
-
-            <label>Goal Outcome</label>
-            <input name="goal_outcome" id="goalOutcomeInput" placeholder="Example: إتمام حفظ جزء عم، IELTS 7.0, Build a complete Flask project">
 
             <div class="form-row">
                 <div>
@@ -93,31 +95,37 @@
                 </div>
             </div>
 
-            <label>Deadline / Exam Date / Target Date</label>
+            <label>Target Date</label>
             <input name="deadline" type="date">
 
             <label>Reminder Time</label>
             <input name="reminder_time" type="time">
 
-            <label class="checkbox-row auto-plan-row">
-                <input type="checkbox" name="auto_create_tasks" value="yes" checked>
-                <span>Create starter tasks automatically for this goal</span>
-            </label>
-
             <label>Notes</label>
-            <textarea name="notes" rows="4" placeholder="Any extra details, resources, schedule, or personal instructions..."></textarea>
+            <textarea name="notes" rows="4" placeholder="Extra details, resources, schedule, or personal instructions..."></textarea>
 
             <button type="submit">💾 Save Smart Goal</button>
         </form>
     </div>
 
     <div class="card">
-        <h2>🔥 Current Goals</h2>
+        <h2>Current Goals</h2>
         {% for goal in goals %}
             <div class="goal-card-v41">
                 <div class="goal-topline">
                     <strong>{{ goal.title }}</strong>
                     <span>{{ goal.category }}</span>
+                </div>
+
+                <div class="goal-path-line">
+                    {% if goal.plan %}
+                        {{ goal.plan.get("Goal Category", "") }}{% if goal.plan.get("Goal Path") %} · {{ goal.plan.get("Goal Path") }}{% endif %}
+                    {% endif %}
+                </div>
+
+                <div class="goal-current-target">
+                    <span>Current: {{ goal.plan.get("Current State", goal.current_level) if goal.plan else goal.current_level }}</span>
+                    <span>Target: {{ goal.plan.get("Target State", "Not set") if goal.plan else "Not set" }}</span>
                 </div>
 
                 <div class="goal-progress-track">
@@ -126,14 +134,30 @@
 
                 <div class="goal-meta-grid">
                     <span>📊 {{ goal.goal_progress if goal.goal_progress is defined else 0 }}% progress</span>
+                    <span>🔗 {{ goal.goal_confidence.related_tasks if goal.goal_confidence is defined else 0 }} related tasks</span>
+                    <span>⏱️ {{ goal.goal_confidence.study_hours if goal.goal_confidence is defined else 0 }} hours</span>
                     <span>⏳ {{ goal.time_left if goal.time_left is defined else "No deadline" }}</span>
-                    <span>⏱️ {{ goal.daily_minutes }} min/day</span>
-                    <span>📌 {{ goal.current_level }}</span>
                 </div>
+
+                {% if goal.goal_confidence is defined and goal.goal_confidence.last_task %}
+                    <p class="muted">Last related task: {{ goal.goal_confidence.last_task }}</p>
+                {% endif %}
+
+                {% if goal.milestones %}
+                    <details class="goal-details">
+                        <summary>Milestones</summary>
+                        <div class="milestone-list">
+                            {% for milestone in goal.milestones[:12] %}
+                                <span>{{ milestone }}</span>
+                            {% endfor %}
+                            {% if goal.milestones|length > 12 %}<span>+{{ goal.milestones|length - 12 }} more</span>{% endif %}
+                        </div>
+                    </details>
+                {% endif %}
 
                 {% if goal.notes %}
                     <details class="goal-details">
-                        <summary>Goal plan details</summary>
+                        <summary>Goal Intelligence Details</summary>
                         <pre>{{ goal.notes }}</pre>
                     </details>
                 {% endif %}
@@ -147,13 +171,6 @@
             <p class="muted">No goals yet. Create your first smart goal.</p>
         {% endfor %}
     </div>
-</section>
-
-<section class="card">
-    <h2>🧠 Smart Goal Philosophy</h2>
-    <p class="improved">
-        Goal → Milestones → Tasks. EduPath AI connects completed tasks to goals using category, field, exam, skill, Quran path, and shared keywords.
-    </p>
 </section>
 
 {% endblock %}

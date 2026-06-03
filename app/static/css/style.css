@@ -2673,3 +2673,88 @@ html[dir="rtl"] .adaptive-goal-box label,
 html[dir="rtl"] .goal-details {
     text-align: right;
 }
+
+
+
+/* EduPath AI v4.6.9 Smart Goals Final */
+.goal-philosophy-card {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.07), rgba(6, 182, 212, 0.05));
+}
+
+.goal-philosophy-card .ar-note {
+    direction: rtl;
+    text-align: right;
+}
+
+.adaptive-goal-box {
+    border: 1px solid rgba(37, 99, 235, 0.22);
+    background: rgba(37, 99, 235, 0.06);
+    border-radius: 24px;
+    padding: 16px;
+    margin: 12px 0;
+}
+
+.goal-path-line {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 6px 0;
+    font-weight: 800;
+}
+
+.goal-current-target {
+    display: grid;
+    gap: 6px;
+    margin: 10px 0;
+    color: var(--text);
+    font-size: 13px;
+}
+
+.milestone-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.milestone-list span {
+    border: 1px solid rgba(37, 99, 235, 0.18);
+    background: rgba(37, 99, 235, 0.07);
+    color: var(--primary);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.goal-details {
+    margin-top: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 16px;
+    padding: 10px;
+    background: rgba(248, 250, 252, 0.74);
+}
+
+.goal-details summary {
+    cursor: pointer;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.goal-details pre {
+    white-space: pre-wrap;
+    font-family: inherit;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+body.dark-mode .adaptive-goal-box,
+body.dark-mode .goal-details {
+    background: rgba(30, 41, 59, 0.86);
+}
+
+html[dir="rtl"] .adaptive-goal-box label,
+html[dir="rtl"] .goal-current-target,
+html[dir="rtl"] .goal-path-line {
+    text-align: right;
+}

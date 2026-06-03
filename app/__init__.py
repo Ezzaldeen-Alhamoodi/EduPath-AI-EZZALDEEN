@@ -119,6 +119,21 @@ class StudyTask(db.Model):
     goal = db.relationship("Goal", backref="tasks")
 
 
+class GoalTaskLink(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    goal_id = db.Column(db.Integer, db.ForeignKey("goal.id"), nullable=False, index=True)
+    task_id = db.Column(db.Integer, db.ForeignKey("study_task.id"), nullable=False, index=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, index=True)
+    match_score = db.Column(db.Integer, nullable=False, default=0)
+    match_reason = db.Column(db.Text, nullable=True)
+    progress_added = db.Column(db.Float, nullable=False, default=0.0)
+    is_confirmed_by_user = db.Column(db.Boolean, nullable=False, default=False)
+    linked_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    goal = db.relationship("Goal", backref="smart_links")
+    task = db.relationship("StudyTask", backref="smart_goal_links")
+
+
 class InterviewAnswer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
@@ -953,122 +968,23 @@ def create_app():
         )
 
 
-def build_goal_metadata_from_form(form):
-    fields = {
-        "Goal Field": form.get("goal_field", "").strip(),
-        "Goal Path": form.get("goal_path", "").strip(),
-        "Goal Scope": form.get("goal_scope", "").strip(),
-        "Goal Strategy": form.get("goal_strategy", "").strip(),
-        "Current State": form.get("current_state_select", "").strip(),
-        "Target Outcome": form.get("target_outcome_select", "").strip() or form.get("goal_outcome", "").strip(),
-        "Motivation": form.get("goal_motivation", "").strip(),
-        "Extra Notes": form.get("notes", "").strip(),
-    }
-    lines = ["SMART_GOAL_PLAN"]
-    for key, value in fields.items():
-        if value:
-            lines.append(f"{key}: {value}")
-    return "\n".join(lines)
-
-
-def create_starter_tasks_for_goal(goal, form):
-    """Create a small starter plan without heavy AI or extra cost."""
-    goal_type = goal.category
-    field = form.get("goal_field", "").strip()
-    path = form.get("goal_path", "").strip()
-    scope = form.get("goal_scope", "").strip()
-    strategy = form.get("goal_strategy", "").strip()
-    daily_minutes = goal.daily_minutes or 30
-
-    tasks_to_create = []
-
-    if goal_type in ["Quran", "Islamic Goals"] or field == "القرآن الكريم":
-        target = scope or path or goal.title
-        tasks_to_create = [
-            ("حفظ جديد: " + target, "حفظ", "حفظ جديد", "تثبيت الحفظ"),
-            ("مراجعة محفوظ الأمس", "مراجعة", "مراجعة يومية", "مراجعة"),
-            ("تسميع بدون مصحف", "تسميع", "تسميع ذاتي", "تصحيح الأخطاء"),
-            ("مراجعة أسبوعية للتثبيت", "مراجعة", "مراجعة أسبوعية", "مراجعة متباعدة"),
-        ]
-        category = "Quran Memorization"
-    elif goal_type in ["Language", "Exam"]:
-        target = path or field or goal.title
-        tasks_to_create = [
-            (f"Practice {target} Reading", "Reading", target, "Practice"),
-            (f"Practice {target} Listening", "Listening", target, "Practice"),
-            (f"Write one {target} response", "Writing", target, "Timed Practice"),
-            (f"Review mistakes for {target}", "Mistake Review", target, "Review Mistakes"),
-        ]
-        category = "Languages" if goal_type == "Language" else "Exams & Certificates"
-    elif goal_type == "Programming & Technology":
-        target = path or field or goal.title
-        tasks_to_create = [
-            (f"Study {target} concept", "Study Concept", target, "Study Concept"),
-            (f"Solve {target} exercises", "Problem Solving", target, "Solve Exercises"),
-            (f"Build mini project with {target}", "Projects", target, "Build Mini Project"),
-            (f"Review {target} mistakes", "Debugging", target, "Review Mistakes"),
-        ]
-        category = "Programming & Technology"
-    elif goal_type == "Scholarship":
-        target = path or field or goal.title
-        tasks_to_create = [
-            (f"Check {target} requirements", "Requirements", target, "Search"),
-            (f"Prepare documents for {target}", "Documents", target, "Prepare"),
-            (f"Edit application text for {target}", "Motivation Letter", target, "Edit"),
-            (f"Final review for {target}", "Final Check", target, "Review"),
-        ]
-        category = "Scholarships"
-    else:
-        target = path or field or goal.title
-        tasks_to_create = [
-            (f"Plan first step for {target}", "Planning", target, "Prepare"),
-            (f"Work on {target}", "Practice", target, "Do Task"),
-            (f"Review progress for {target}", "Review", target, "Review Progress"),
-        ]
-        category = goal_type if goal_type else "General"
-
-    for title, skill, topic, practice_type in tasks_to_create:
-        db.session.add(StudyTask(
-            user_id=goal.user_id,
-            goal_id=goal.id,
-            title=title,
-            category=category,
-            topic=topic,
-            skill=skill,
-            language=scope or path,
-            practice_type=practice_type,
-            estimated_minutes=max(15, min(int(daily_minutes), 120)),
-            priority=4,
-            difficulty=2,
-            start_date=goal.start_date,
-            due_date=goal.deadline,
-            reminder_time=goal.reminder_time,
-            repeat_type="daily",
-            notes=f"Auto-created from smart goal: {goal.title}",
-        ))
-    db.session.commit()
 
 
     @app.route("/goals", methods=["GET", "POST"])
     @login_required
     def goals():
         if request.method == "POST":
-            goal_notes = build_goal_metadata_from_form(request.form)
-            selected_current_state = request.form.get("current_state_select", "").strip()
-            typed_current_level = request.form.get("current_level", "").strip()
-            selected_outcome = request.form.get("target_outcome_select", "").strip()
-            typed_outcome = request.form.get("goal_outcome", "").strip()
-
+            current_state = request.form.get("current_state", "").strip() or request.form.get("current_level", "").strip() or "Not started"
             goal = Goal(
                 user_id=current_user.id,
                 title=request.form.get("title", "").strip(),
                 category=request.form.get("category", "General").strip(),
-                current_level=typed_current_level or selected_current_state or "Beginner",
+                current_level=current_state,
                 daily_minutes=int(request.form.get("daily_minutes", 60) or 60),
                 start_date=request.form.get("start_date", "").strip(),
                 deadline=request.form.get("deadline", "").strip(),
                 reminder_time=request.form.get("reminder_time", "").strip(),
-                notes=goal_notes + ("\nGoal Outcome: " + (typed_outcome or selected_outcome) if (typed_outcome or selected_outcome) else ""),
+                notes=build_goal_notes_from_form(request.form),
             )
 
             if not goal.title:
@@ -1077,18 +993,16 @@ def create_starter_tasks_for_goal(goal, form):
 
             db.session.add(goal)
             db.session.commit()
-
-            if request.form.get("auto_create_tasks") == "yes":
-                create_starter_tasks_for_goal(goal, request.form)
-                flash("Smart goal saved and starter tasks were created automatically.", "success")
-            else:
-                flash("Smart goal saved. Add related tasks manually from the Tasks page.", "success")
+            flash("Smart goal saved. Create your own tasks, and EduPath AI will connect related completed tasks automatically.", "success")
             return redirect(url_for("goals"))
 
         all_goals = Goal.query.filter_by(user_id=current_user.id).order_by(Goal.id.desc()).all()
         for goal in all_goals:
             goal.time_left = calculate_goal_time_left(goal.deadline)
             goal.goal_progress = calculate_goal_progress(goal)
+            goal.goal_confidence = goal_confidence(goal)
+            goal.milestones = extract_goal_milestones(goal)
+            goal.plan = parse_goal_plan(goal)
         return render_template("goals.html", goals=all_goals)
 
     @app.route("/goal/<int:goal_id>/edit", methods=["GET", "POST"])
@@ -1226,14 +1140,19 @@ def create_starter_tasks_for_goal(goal, form):
         task.last_reviewed = str(date.today())
         db.session.commit()
 
+        linked_goals = link_completed_task_to_goals(task)
+
         if os.environ.get("SEND_TASK_COMPLETION_EMAILS", "false").lower() == "true" and task.completion_email_sent_at != str(date.today()):
             if send_task_completion_email(current_user, task):
                 task.completion_email_sent_at = str(date.today())
                 db.session.commit()
 
+        related_msg = ""
+        if linked_goals:
+            related_msg = " Related goal: " + linked_goals[0][0].title
         session["toast_notifications"] = [{
             "title": "Great work!",
-            "body": f"You completed: {task.title}. Keep your momentum going."
+            "body": f"You completed: {task.title}.{related_msg} Keep your momentum going."
         }]
 
         flash("Task marked as done.", "success")
@@ -1553,6 +1472,26 @@ Return valid JSON:
 
 
 
+def build_goal_notes_from_form(form):
+    fields = {
+        "Goal Type": form.get("category", "").strip(),
+        "Goal Category": form.get("goal_category", "").strip() or form.get("goal_field", "").strip(),
+        "Goal Path": form.get("goal_path", "").strip(),
+        "Current State": form.get("current_state", "").strip() or form.get("current_state_select", "").strip(),
+        "Target State": form.get("target_state", "").strip() or form.get("target_outcome_select", "").strip(),
+        "Goal Outcome": form.get("goal_outcome", "").strip(),
+        "Milestones": form.get("milestones", "").strip(),
+        "Commitment": form.get("commitment", "").strip() or form.get("goal_strategy", "").strip(),
+        "Keywords": form.get("keywords", "").strip(),
+        "User Notes": form.get("notes", "").strip(),
+    }
+    lines = ["SMART_GOAL_INTELLIGENCE"]
+    for key, value in fields.items():
+        if value:
+            lines.append(f"{key}: {value}")
+    return "\n".join(lines)
+
+
 def calculate_goal_time_left(deadline):
     if not deadline:
         return None
@@ -1565,12 +1504,229 @@ def calculate_goal_time_left(deadline):
 
 
 
+def parse_goal_plan(goal):
+    data = {}
+    text = goal.notes or ""
+    for line in text.splitlines():
+        if ":" in line:
+            key, value = line.split(":", 1)
+            data[key.strip()] = value.strip()
+    return data
+
+
+def tokenize_mixed_text(text):
+    text = (text or "").lower()
+    arabic_words = re.findall(r"[\u0600-\u06FF]{2,}", text)
+    latin_words = re.findall(r"[a-zA-Z0-9+#.]{2,}", text)
+    return set(arabic_words + latin_words)
+
+
+def task_match_text(task):
+    return " ".join([
+        task.title or "",
+        task.category or "",
+        task.custom_category or "",
+        task.topic or "",
+        task.custom_topic or "",
+        task.skill or "",
+        task.custom_skill or "",
+        task.language or "",
+        task.practice_type or "",
+        task.notes or "",
+    ])
+
+
+def goal_keywords(goal):
+    plan = parse_goal_plan(goal)
+    base = " ".join([
+        goal.title or "",
+        goal.category or "",
+        goal.current_level or "",
+        goal.notes or "",
+        plan.get("Goal Type", ""),
+        plan.get("Goal Category", ""),
+        plan.get("Goal Path", ""),
+        plan.get("Current State", ""),
+        plan.get("Target State", ""),
+        plan.get("Goal Outcome", ""),
+        plan.get("Milestones", ""),
+        plan.get("Keywords", ""),
+    ])
+
+    keywords = tokenize_mixed_text(base)
+    lower_base = base.lower()
+
+    if "ielts" in lower_base:
+        keywords.update(["ielts","english","reading","writing","listening","speaking","vocabulary","grammar","mock","task","academic"])
+    if "toefl" in lower_base:
+        keywords.update(["toefl","reading","listening","writing","speaking","academic","email","discussion"])
+    if "duolingo" in lower_base:
+        keywords.update(["duolingo","reading","listening","writing","speaking","interactive"])
+    if "csca" in lower_base:
+        keywords.update(["csca","mathematics","physics","chemistry","math","mechanics","algebra"])
+    if "python" in lower_base or "flask" in lower_base:
+        keywords.update(["python","flask","backend","web","routes","templates","database","login","api","deployment","oop"])
+    if "scholarship" in lower_base or "منحة" in lower_base:
+        keywords.update(["scholarship","منحة","cv","motivation","statement","interview","documents","application","university","visa"])
+    if "قرآن" in base or "القرآن" in base or "جزء عم" in base or "حفظ" in base:
+        keywords.update([
+            "قرآن","القرآن","حفظ","مراجعة","تسميع","تجويد","سورة","جزء","عم","جزء عم",
+            "النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج",
+            "الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح",
+            "التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر",
+            "العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر",
+            "المسد","الإخلاص","الفلق","الناس"
+        ])
+    return {k for k in keywords if len(k.strip()) >= 2}
+
+
+def calculate_match_score(goal, task):
+    plan = parse_goal_plan(goal)
+    task_text = task_match_text(task).lower()
+    goal_text = " ".join([
+        goal.title or "",
+        goal.category or "",
+        goal.current_level or "",
+        goal.notes or "",
+        plan.get("Goal Category", ""),
+        plan.get("Goal Path", ""),
+        plan.get("Goal Outcome", ""),
+    ]).lower()
+
+    score = 0
+    matched = []
+
+    for keyword in goal_keywords(goal):
+        key = keyword.lower().strip()
+        if key and key in task_text:
+            score += 8
+            matched.append(keyword)
+
+    for field in [goal.category, plan.get("Goal Category"), plan.get("Goal Path")]:
+        field = (field or "").lower().strip()
+        if field and field in task_text:
+            score += 22
+            matched.append(field)
+
+    if ("قرآن" in goal_text or "جزء عم" in goal_text or "حفظ" in goal_text) and any(x in task_text for x in ["قرآن","حفظ","مراجعة","تسميع","سورة"]):
+        score += 25
+        matched.append("Quran context")
+
+    score = min(score, 100)
+    reason = "Matched: " + ", ".join(sorted(set(str(x) for x in matched))[:12]) if matched else "No strong match"
+    return score, reason
+
+
+def calculate_progress_added(task, match_score):
+    minutes = task.estimated_minutes or 30
+    time_weight = min(1.5, max(0.15, minutes / 60))
+    if match_score >= 80:
+        multiplier = 1.0
+    elif match_score >= 60:
+        multiplier = 0.6
+    elif match_score >= 40:
+        multiplier = 0.3
+    else:
+        multiplier = 0
+    return round(time_weight * multiplier, 2)
+
+
+def link_completed_task_to_goals(task):
+    if task.status != "done":
+        return []
+    linked = []
+    goals = Goal.query.filter_by(user_id=task.user_id).all()
+    for goal in goals:
+        score, reason = calculate_match_score(goal, task)
+        if score < 40:
+            continue
+        progress_added = calculate_progress_added(task, score)
+        existing = GoalTaskLink.query.filter_by(goal_id=goal.id, task_id=task.id).first()
+        if existing:
+            existing.match_score = max(existing.match_score, score)
+            existing.match_reason = reason
+            existing.progress_added = max(existing.progress_added, progress_added)
+        else:
+            db.session.add(GoalTaskLink(
+                goal_id=goal.id,
+                task_id=task.id,
+                user_id=task.user_id,
+                match_score=score,
+                match_reason=reason,
+                progress_added=progress_added,
+                is_confirmed_by_user=False,
+            ))
+        linked.append((goal, score, reason))
+    db.session.commit()
+    return linked
+
+
+def extract_goal_milestones(goal):
+    plan = parse_goal_plan(goal)
+    milestones = plan.get("Milestones", "")
+    if milestones:
+        return [m.strip() for m in re.split(r",|→|\n", milestones) if m.strip()]
+    text = (goal.notes or "") + " " + (goal.title or "")
+    if "جزء عم" in text:
+        return ["النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"]
+    if "ielts" in text.lower():
+        return ["Band 5.5","Band 6.0","Band 6.5","Band 7.0"]
+    if "python" in text.lower() or "flask" in text.lower():
+        return ["Syntax","Functions","OOP","Flask Basics","Database","Final Project","Deployment"]
+    if "scholarship" in text.lower() or "منحة" in text:
+        return ["University Selection","Documents","Motivation Letter","Application Review","Submission","Follow-up"]
+    return []
+
+
 def calculate_goal_progress(goal):
-    """Smart progress based on completed tasks that are directly attached or semantically related."""
+    """Progress is based only on related user-created completed tasks."""
     try:
-        all_tasks = StudyTask.query.filter_by(user_id=goal.user_id).all()
-        if not all_tasks:
+        links = GoalTaskLink.query.filter_by(goal_id=goal.id).all()
+
+        if not links:
+            for task in StudyTask.query.filter_by(user_id=goal.user_id, status="done").all():
+                score, reason = calculate_match_score(goal, task)
+                if score >= 40:
+                    db.session.add(GoalTaskLink(
+                        goal_id=goal.id,
+                        task_id=task.id,
+                        user_id=goal.user_id,
+                        match_score=score,
+                        match_reason=reason,
+                        progress_added=calculate_progress_added(task, score),
+                        is_confirmed_by_user=False,
+                    ))
+            db.session.commit()
+            links = GoalTaskLink.query.filter_by(goal_id=goal.id).all()
+
+        if not links:
             return 0
+
+        progress_points = sum(link.progress_added for link in links if link.task and link.task.status == "done")
+        return min(100, int(progress_points * 10))
+    except Exception:
+        logger.exception("Smart goal progress calculation failed")
+        return 0
+
+
+def goal_confidence(goal):
+    try:
+        links = GoalTaskLink.query.filter_by(goal_id=goal.id).order_by(GoalTaskLink.id.desc()).all()
+        completed = [l for l in links if l.task and l.task.status == "done"]
+        hours = sum((l.task.estimated_minutes or 0) for l in completed) / 60
+        milestones = extract_goal_milestones(goal)
+        task_text = " ".join(task_match_text(l.task).lower() for l in completed if l.task)
+        touched = sum(1 for milestone in milestones if milestone.lower() in task_text)
+        return {
+            "related_tasks": len(completed),
+            "study_hours": round(hours, 1),
+            "milestones_touched": touched,
+            "last_task": completed[0].task.title if completed else None,
+        }
+    except Exception:
+        return {"related_tasks": 0, "study_hours": 0, "milestones_touched": 0, "last_task": None}
+
+
 
         goal_text = " ".join([
             goal.title or "",
@@ -1677,6 +1833,18 @@ def ensure_database_columns():
                         is_read BOOLEAN NOT NULL DEFAULT FALSE,
                         created_at TIMESTAMP
                     )""",
+                    """CREATE TABLE IF NOT EXISTS goal_task_link (
+                        id SERIAL PRIMARY KEY,
+                        goal_id INTEGER NOT NULL,
+                        task_id INTEGER NOT NULL,
+                        user_id INTEGER NOT NULL,
+                        match_score INTEGER NOT NULL DEFAULT 0,
+                        match_reason TEXT,
+                        progress_added DOUBLE PRECISION NOT NULL DEFAULT 0,
+                        is_confirmed_by_user BOOLEAN NOT NULL DEFAULT FALSE,
+                        linked_at TIMESTAMP
+                    )""",
+
                 ]
 
                 for sql in postgres_sql:
@@ -1755,6 +1923,20 @@ def ensure_database_columns():
                     created_at DATETIME
                 )
             """)
+            connection.exec_driver_sql("""
+                CREATE TABLE IF NOT EXISTS goal_task_link (
+                    id INTEGER PRIMARY KEY,
+                    goal_id INTEGER NOT NULL,
+                    task_id INTEGER NOT NULL,
+                    user_id INTEGER NOT NULL,
+                    match_score INTEGER NOT NULL DEFAULT 0,
+                    match_reason TEXT,
+                    progress_added REAL NOT NULL DEFAULT 0,
+                    is_confirmed_by_user BOOLEAN NOT NULL DEFAULT 0,
+                    linked_at DATETIME
+                )
+            """)
+
             connection.commit()
             logger.info("SQLite lightweight migration completed")
     except Exception:
