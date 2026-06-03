@@ -533,3 +533,28 @@ Email can be re-enabled later after confirming SMTP works reliably.
 - Arabic translation remains client-side only and does not affect stored task values or smart goal progress logic.
 - Added safe Arabic labels for repeat options without modifying Jinja tuples.
 - Keeps app performance light and avoids backend translation overhead.
+
+
+## v4.6.7 Smart Adaptive Goals
+
+- Upgraded Goals from a simple form to an adaptive smart goal system.
+- Added new goal types:
+  - Islamic Goals
+  - Quran
+  - Programming & Technology
+  - Exam
+  - Scholarship
+  - University
+  - Project
+  - Daily Life
+- Quran goal flow is Arabic-first:
+  - تصنيف الهدف
+  - مسار الهدف
+  - نطاق الهدف
+  - خطة المراجعة / الاستراتيجية
+  - المستوى الحالي
+  - الهدف المستهدف
+  - الدافع
+- Smart goal metadata is stored inside goal notes to avoid risky database migrations.
+- Optional automatic starter tasks are created and linked to the goal.
+- Progress intelligence remains based on related tasks and keywords; translation stays UI-only and does not break stored values.

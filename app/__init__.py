@@ -952,20 +952,123 @@ def create_app():
             unread_admin_messages=unread_admin_messages,
         )
 
+
+def build_goal_metadata_from_form(form):
+    fields = {
+        "Goal Field": form.get("goal_field", "").strip(),
+        "Goal Path": form.get("goal_path", "").strip(),
+        "Goal Scope": form.get("goal_scope", "").strip(),
+        "Goal Strategy": form.get("goal_strategy", "").strip(),
+        "Current State": form.get("current_state_select", "").strip(),
+        "Target Outcome": form.get("target_outcome_select", "").strip() or form.get("goal_outcome", "").strip(),
+        "Motivation": form.get("goal_motivation", "").strip(),
+        "Extra Notes": form.get("notes", "").strip(),
+    }
+    lines = ["SMART_GOAL_PLAN"]
+    for key, value in fields.items():
+        if value:
+            lines.append(f"{key}: {value}")
+    return "\n".join(lines)
+
+
+def create_starter_tasks_for_goal(goal, form):
+    """Create a small starter plan without heavy AI or extra cost."""
+    goal_type = goal.category
+    field = form.get("goal_field", "").strip()
+    path = form.get("goal_path", "").strip()
+    scope = form.get("goal_scope", "").strip()
+    strategy = form.get("goal_strategy", "").strip()
+    daily_minutes = goal.daily_minutes or 30
+
+    tasks_to_create = []
+
+    if goal_type in ["Quran", "Islamic Goals"] or field == "القرآن الكريم":
+        target = scope or path or goal.title
+        tasks_to_create = [
+            ("حفظ جديد: " + target, "حفظ", "حفظ جديد", "تثبيت الحفظ"),
+            ("مراجعة محفوظ الأمس", "مراجعة", "مراجعة يومية", "مراجعة"),
+            ("تسميع بدون مصحف", "تسميع", "تسميع ذاتي", "تصحيح الأخطاء"),
+            ("مراجعة أسبوعية للتثبيت", "مراجعة", "مراجعة أسبوعية", "مراجعة متباعدة"),
+        ]
+        category = "Quran Memorization"
+    elif goal_type in ["Language", "Exam"]:
+        target = path or field or goal.title
+        tasks_to_create = [
+            (f"Practice {target} Reading", "Reading", target, "Practice"),
+            (f"Practice {target} Listening", "Listening", target, "Practice"),
+            (f"Write one {target} response", "Writing", target, "Timed Practice"),
+            (f"Review mistakes for {target}", "Mistake Review", target, "Review Mistakes"),
+        ]
+        category = "Languages" if goal_type == "Language" else "Exams & Certificates"
+    elif goal_type == "Programming & Technology":
+        target = path or field or goal.title
+        tasks_to_create = [
+            (f"Study {target} concept", "Study Concept", target, "Study Concept"),
+            (f"Solve {target} exercises", "Problem Solving", target, "Solve Exercises"),
+            (f"Build mini project with {target}", "Projects", target, "Build Mini Project"),
+            (f"Review {target} mistakes", "Debugging", target, "Review Mistakes"),
+        ]
+        category = "Programming & Technology"
+    elif goal_type == "Scholarship":
+        target = path or field or goal.title
+        tasks_to_create = [
+            (f"Check {target} requirements", "Requirements", target, "Search"),
+            (f"Prepare documents for {target}", "Documents", target, "Prepare"),
+            (f"Edit application text for {target}", "Motivation Letter", target, "Edit"),
+            (f"Final review for {target}", "Final Check", target, "Review"),
+        ]
+        category = "Scholarships"
+    else:
+        target = path or field or goal.title
+        tasks_to_create = [
+            (f"Plan first step for {target}", "Planning", target, "Prepare"),
+            (f"Work on {target}", "Practice", target, "Do Task"),
+            (f"Review progress for {target}", "Review", target, "Review Progress"),
+        ]
+        category = goal_type if goal_type else "General"
+
+    for title, skill, topic, practice_type in tasks_to_create:
+        db.session.add(StudyTask(
+            user_id=goal.user_id,
+            goal_id=goal.id,
+            title=title,
+            category=category,
+            topic=topic,
+            skill=skill,
+            language=scope or path,
+            practice_type=practice_type,
+            estimated_minutes=max(15, min(int(daily_minutes), 120)),
+            priority=4,
+            difficulty=2,
+            start_date=goal.start_date,
+            due_date=goal.deadline,
+            reminder_time=goal.reminder_time,
+            repeat_type="daily",
+            notes=f"Auto-created from smart goal: {goal.title}",
+        ))
+    db.session.commit()
+
+
     @app.route("/goals", methods=["GET", "POST"])
     @login_required
     def goals():
         if request.method == "POST":
+            goal_notes = build_goal_metadata_from_form(request.form)
+            selected_current_state = request.form.get("current_state_select", "").strip()
+            typed_current_level = request.form.get("current_level", "").strip()
+            selected_outcome = request.form.get("target_outcome_select", "").strip()
+            typed_outcome = request.form.get("goal_outcome", "").strip()
+
             goal = Goal(
                 user_id=current_user.id,
                 title=request.form.get("title", "").strip(),
                 category=request.form.get("category", "General").strip(),
-                current_level=request.form.get("current_level", "Beginner").strip(),
+                current_level=typed_current_level or selected_current_state or "Beginner",
                 daily_minutes=int(request.form.get("daily_minutes", 60) or 60),
                 start_date=request.form.get("start_date", "").strip(),
                 deadline=request.form.get("deadline", "").strip(),
                 reminder_time=request.form.get("reminder_time", "").strip(),
-                notes=request.form.get("notes", "").strip(),
+                notes=goal_notes + ("\nGoal Outcome: " + (typed_outcome or selected_outcome) if (typed_outcome or selected_outcome) else ""),
             )
 
             if not goal.title:
@@ -974,7 +1077,12 @@ def create_app():
 
             db.session.add(goal)
             db.session.commit()
-            flash("Goal saved. Add related tasks manually from the Tasks page.", "success")
+
+            if request.form.get("auto_create_tasks") == "yes":
+                create_starter_tasks_for_goal(goal, request.form)
+                flash("Smart goal saved and starter tasks were created automatically.", "success")
+            else:
+                flash("Smart goal saved. Add related tasks manually from the Tasks page.", "success")
             return redirect(url_for("goals"))
 
         all_goals = Goal.query.filter_by(user_id=current_user.id).order_by(Goal.id.desc()).all()

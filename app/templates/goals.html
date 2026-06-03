@@ -7,69 +7,112 @@
     <div>
         <span class="tag">EduPath AI</span>
         <h2><span data-i18n="goals.title">Smart Goals & Progress Intelligence</span></h2>
-        <p><span data-i18n="goals.desc">Create goals that connect naturally with your tasks: exams, languages, programming, scholarships, university, and daily improvement.</span></p>
+        <p><span data-i18n="goals.desc">Goals are not just wishes. They are long-term plans made of milestones and daily tasks.</span></p>
     </div>
-    <a class="button light" href="{{ url_for('tasks') }}">🗂️ Add Related Task</a>
+    <a class="button light" href="{{ url_for('tasks') }}">▣ Add Related Task</a>
 </section>
 
 <section class="grid-2">
     <div class="card">
-        <h2>🎯 <span data-i18n="goals.create">Create Smart Goal</span></h2>
-        <p class="muted">Use a clear title and category. Related tasks will improve your progress when they share the same field, exam, skill, or keywords.</p>
+        <h2>◎ <span data-i18n="goals.create">Create Smart Goal</span></h2>
+        <p class="muted">Choose the goal type first. The form adapts automatically and creates a smarter long-term plan.</p>
 
-        <form method="POST" class="form smart-goal-form">
-            <label><span data-i18n="goals.goal_title">Goal Title</span></label>
-            <input name="title" placeholder="Example: IELTS Writing Band 7, Master Python OOP, Prepare Scholarship Interview" required>
+        <form method="POST" class="form smart-goal-form" id="smartGoalForm">
+            <label>Goal Title</label>
+            <input name="title" id="goalTitleInput" placeholder="Example: حفظ جزء عم، IELTS Band 7, Master Python Flask" required>
 
-            <label><span data-i18n="goals.goal_type">Goal Type</span></label>
+            <label>Goal Type</label>
             <select name="category" id="goalTypeSelect">
                 <option>Language</option>
                 <option>Exam</option>
-                <option>Programming</option>
+                <option>Programming & Technology</option>
                 <option>Scholarship</option>
                 <option>University</option>
                 <option>Mathematics</option>
-                <option>AI</option>
+                <option>Artificial Intelligence</option>
                 <option>Project</option>
                 <option>Daily Life</option>
+                <option>Islamic Goals</option>
+                <option>Quran</option>
                 <option>General</option>
+                <option>Other</option>
             </select>
 
-            <div class="goal-suggestions" id="goalSuggestions">
-                <span>🌐 IELTS / TOEFL / Duolingo / HSK</span>
-                <span>🧑‍💻 Python / Web / Algorithms</span>
-                <span>🎖️ Interview / Motivation Letter</span>
+            <div class="adaptive-goal-box">
+                <div class="form-row">
+                    <div>
+                        <label id="goalFieldLabel">Goal Category</label>
+                        <select name="goal_field" id="goalFieldSelect"></select>
+                    </div>
+                    <div>
+                        <label id="goalPathLabel">Goal Path</label>
+                        <select name="goal_path" id="goalPathSelect"></select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label id="goalScopeLabel">Goal Scope</label>
+                        <select name="goal_scope" id="goalScopeSelect"></select>
+                    </div>
+                    <div>
+                        <label id="goalStrategyLabel">Goal Strategy</label>
+                        <select name="goal_strategy" id="goalStrategySelect"></select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label>Current State</label>
+                        <select name="current_state_select" id="currentStateSelect"></select>
+                    </div>
+                    <div>
+                        <label>Target Outcome</label>
+                        <select name="target_outcome_select" id="targetOutcomeSelect"></select>
+                    </div>
+                </div>
+
+                <label>Goal Motivation</label>
+                <select name="goal_motivation" id="goalMotivationSelect"></select>
             </div>
 
-            <label><span data-i18n="goals.current_level">Current Level / Score</span></label>
-            <input name="current_level" placeholder="Example: IELTS 5.5, Beginner, Intermediate, TOEFL 70">
+            <label>Current State / Current Level</label>
+            <input name="current_level" id="currentLevelInput" placeholder="Example: لا أحفظ شيئًا، Band 5.5, Beginner, 60% documents ready">
+
+            <label>Goal Outcome</label>
+            <input name="goal_outcome" id="goalOutcomeInput" placeholder="Example: إتمام حفظ جزء عم، IELTS 7.0, Build a complete Flask project">
 
             <div class="form-row">
                 <div>
-                    <label><span data-i18n="goals.daily_minutes">Daily Minutes</span></label>
+                    <label>Daily Minutes</label>
                     <input name="daily_minutes" type="number" min="5" value="60">
                 </div>
                 <div>
-                    <label><span data-i18n="goals.start_date">Start Date</span></label>
+                    <label>Start Date</label>
                     <input name="start_date" type="date">
                 </div>
             </div>
 
-            <label><span data-i18n="goals.deadline">Deadline / Exam Date / Target Date</span></label>
+            <label>Deadline / Exam Date / Target Date</label>
             <input name="deadline" type="date">
 
-            <label><span data-i18n="goals.reminder">Reminder Time</span></label>
+            <label>Reminder Time</label>
             <input name="reminder_time" type="time">
 
-            <label><span data-i18n="goals.notes">Notes</span></label>
-            <textarea name="notes" rows="4" placeholder="Target score, weekly hours, resources, target skill, exam date, or personal plan..."></textarea>
+            <label class="checkbox-row auto-plan-row">
+                <input type="checkbox" name="auto_create_tasks" value="yes" checked>
+                <span>Create starter tasks automatically for this goal</span>
+            </label>
 
-            <button type="submit">💾 <span data-i18n="goals.save">Save Smart Goal</span></button>
+            <label>Notes</label>
+            <textarea name="notes" rows="4" placeholder="Any extra details, resources, schedule, or personal instructions..."></textarea>
+
+            <button type="submit">💾 Save Smart Goal</button>
         </form>
     </div>
 
     <div class="card">
-        <h2>🔥 <span data-i18n="goals.current_goals">Current Goals</span></h2>
+        <h2>🔥 Current Goals</h2>
         {% for goal in goals %}
             <div class="goal-card-v41">
                 <div class="goal-topline">
@@ -89,7 +132,10 @@
                 </div>
 
                 {% if goal.notes %}
-                    <p class="muted">{{ goal.notes }}</p>
+                    <details class="goal-details">
+                        <summary>Goal plan details</summary>
+                        <pre>{{ goal.notes }}</pre>
+                    </details>
                 {% endif %}
 
                 <div class="actions">
@@ -104,10 +150,9 @@
 </section>
 
 <section class="card">
-    <h2>🧠 <span data-i18n="goals.how">How Smart Progress Works</span></h2>
+    <h2>🧠 Smart Goal Philosophy</h2>
     <p class="improved">
-        EduPath AI connects a goal with related completed tasks using category, field, skill, exam name, and keywords.
-        For example, tasks about IELTS Writing, Task 2, essays, grammar, and mistake review can support an IELTS Writing goal.
+        Goal → Milestones → Tasks. EduPath AI connects completed tasks to goals using category, field, exam, skill, Quran path, and shared keywords.
     </p>
 </section>
 

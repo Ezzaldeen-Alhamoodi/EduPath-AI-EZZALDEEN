@@ -1172,3 +1172,184 @@ document.addEventListener("DOMContentLoaded", () => {
     if (langBtn) langBtn.addEventListener("click", () => setTimeout(translateRepeatOptionsSafely, 120));
     if (mobileLangBtn) mobileLangBtn.addEventListener("click", () => setTimeout(translateRepeatOptionsSafely, 160));
 });
+
+
+
+/* EduPath AI v4.6.7 Smart Adaptive Goals */
+const SMART_GOAL_DATA = {
+    "Language": {
+        field: ["English","Chinese","Turkish","Russian","Indonesian","Romanian","Arabic","French","German","Other"],
+        path: {
+            "English": ["IELTS","TOEFL","Duolingo English Test","General English","Academic English","Speaking","Writing","Reading","Listening","Vocabulary","Grammar","Other"],
+            "Chinese": ["HSK","General Chinese","Speaking","Writing","Reading","Listening","Characters","Vocabulary","Other"],
+            "Other": ["General Language","Exam Preparation","Speaking","Writing","Reading","Listening","Other"]
+        },
+        scope: ["Beginner","Intermediate","Advanced","Exam Preparation","Daily Practice","Other"],
+        strategy: ["Daily Practice","Skill Rotation","Mock Tests","Vocabulary System","Mistake Review","Other"],
+        current: ["Beginner","Intermediate","Advanced","IELTS 5.0","IELTS 5.5","IELTS 6.0","IELTS 6.5","Custom"],
+        target: ["IELTS 6.5","IELTS 7.0","TOEFL 90+","Duolingo 120+","HSK 4","HSK 5","Fluent Speaking","Academic Writing","Custom"],
+        motivation: ["Study Abroad","Scholarship","University Admission","Communication","Personal Growth","Other"]
+    },
+    "Exam": {
+        field: ["IELTS","TOEFL","Duolingo English Test","HSK","CSCA","SAT","ACT","GRE","GMAT","Other"],
+        path: {
+            "IELTS": ["Listening","Reading","Writing","Speaking","Full Test"],
+            "TOEFL": ["Reading","Listening","Writing","Speaking","Full Test"],
+            "Duolingo English Test": ["Reading","Listening","Writing","Speaking","Full Test"],
+            "CSCA": ["Mathematics","Physics","Chemistry","Full Exam"],
+            "Other": ["Subject Review","Mock Test","Weakness Training","Final Revision","Other"]
+        },
+        scope: ["One Skill","Two Skills","Full Exam","Weakness Plan","Custom"],
+        strategy: ["Timed Practice","Mock Test Cycle","Mistake Review","Formula Review","Daily Practice","Other"],
+        current: ["Beginner","Average","Good","Need Diagnostic","Custom"],
+        target: ["Pass Exam","High Score","Scholarship Requirement","University Requirement","Custom"],
+        motivation: ["Admission","Scholarship","Placement","Personal Goal","Other"]
+    },
+    "Programming & Technology": {
+        field: ["Python","C","C++","Java","JavaScript","SQL","Flask","Algorithms","Data Structures","Cybersecurity","AI","Data Science","Web Development","Projects","Other"],
+        path: {
+            "Python": ["Beginner Python","Intermediate Python","Advanced Python","Flask","Automation","Data Analysis","Machine Learning","Projects","Problem Solving","Other"],
+            "Web Development": ["Frontend","Backend","Full Stack","Responsive Design","Authentication","Deployment","Security","Other"],
+            "Algorithms": ["Searching","Sorting","Recursion","Greedy","Dynamic Programming","Graphs","Trees","Complexity","Other"],
+            "Other": ["Beginner Track","Project Track","Problem Solving","Documentation","Other"]
+        },
+        scope: ["Beginner","Intermediate","Advanced","Build Project","Solve Problems","Other"],
+        strategy: ["Concept + Practice","Build Mini Projects","Daily Coding","Debugging Review","Documentation Reading","Other"],
+        current: ["Beginner","Know Basics","Intermediate","Advanced","Custom"],
+        target: ["Build Complete Project","Solve 100 Problems","Master Basics","Internship Ready","Custom"],
+        motivation: ["Computer Science","Career","Scholarship Profile","Build Projects","Other"]
+    },
+    "Scholarship": {
+        field: ["Scholarship Search","University Research","Documents","CV","Motivation Letter","Personal Statement","Interview","Language Test","Portfolio","Email Communication","Visa","Other"],
+        path: {
+            "Scholarship Search": ["Find Scholarships","Compare Funding","Check Eligibility","Track Deadlines","Other"],
+            "Documents": ["Prepare Documents","Translate Documents","Review Documents","Upload Documents","Other"],
+            "Interview": ["Common Questions","Mock Interview","Answer Improvement","Confidence Practice","Other"],
+            "Other": ["Preparation","Submission","Follow Up","Final Check","Other"]
+        },
+        scope: ["One Application","Multiple Applications","Full Scholarship Cycle","Custom"],
+        strategy: ["Weekly Search","Document Checklist","Interview Practice","Final Review","Other"],
+        current: ["Not Started","Documents 30% Ready","Documents 60% Ready","Submitted Some Applications","Custom"],
+        target: ["Submit Application","Win Scholarship","Get Interview","Get Admission","Custom"],
+        motivation: ["Study Abroad","Financial Support","Bachelor Degree","Computer Science","Other"]
+    },
+    "University": {
+        field: ["Computer Science","Information Technology","Computer Engineering","Software Engineering","AI","Data Science","Cybersecurity","Engineering","Medicine","Business","Law","Education","Other"],
+        path: {
+            "Computer Science": ["Programming","Algorithms","Data Structures","Databases","Operating Systems","Networks","AI","Graduation Project","Other"],
+            "Other": ["Lecture Study","Assignments","Labs","Exams","Research","Other"]
+        },
+        scope: ["Course Goal","Semester Goal","Exam Goal","Project Goal","Other"],
+        strategy: ["Lecture Study","Assignments","Lab Practice","Exam Review","Research","Other"],
+        current: ["Start of Course","Need Review","Average","Strong","Custom"],
+        target: ["Pass Course","High Grade","Complete Project","Master Subject","Custom"],
+        motivation: ["Degree Progress","Career","Scholarship Continuation","Personal Growth","Other"]
+    },
+    "Islamic Goals": {
+        field: ["القرآن الكريم","الحديث الشريف","العقيدة","الفقه","السيرة النبوية","الأذكار","طلب العلم الشرعي","الدعوة","العبادات","أخرى"],
+        path: {
+            "القرآن الكريم": ["حفظ القرآن الكريم","مراجعة القرآن الكريم","إتقان التجويد","ختمة تلاوة","ختمة تدبر","حفظ سورة محددة","حفظ جزء محدد","أخرى"],
+            "الحديث الشريف": ["حفظ أحاديث","شرح أحاديث","مراجعة أحاديث","أخرى"],
+            "أخرى": ["خطة علمية","مراجعة","قراءة","حفظ","أخرى"]
+        },
+        scope: ["خطة يومية","خطة أسبوعية","خطة شهرية","خطة مخصصة","أخرى"],
+        strategy: ["مراجعة يومية","مراجعة أسبوعية","تثبيت متدرج","تكرار","أخرى"],
+        current: ["مبتدئ","متوسط","متقدم","تحديد يدوي"],
+        target: ["إنجاز ثابت","إتقان","استمرار يومي","تحديد يدوي"],
+        motivation: ["ابتغاء مرضاة الله","الاستعداد للإمامة","مسابقة","هدف شخصي","تشجيع الأسرة","أخرى"]
+    },
+    "Quran": {
+        field: ["حفظ القرآن الكريم","مراجعة القرآن الكريم","إتقان التجويد","ختمة تلاوة","ختمة تدبر","حفظ سورة محددة","حفظ جزء محدد","أخرى"],
+        path: {
+            "حفظ القرآن الكريم": ["حفظ كامل القرآن","حفظ 20 جزءًا","حفظ 15 جزءًا","حفظ 10 أجزاء","حفظ 5 أجزاء","حفظ جزء محدد","حفظ سورة محددة","خطة مخصصة"],
+            "مراجعة القرآن الكريم": ["مراجعة يومية","مراجعة أسبوعية","مراجعة جزء","مراجعة سورة","تثبيت الحفظ","خطة مخصصة"],
+            "إتقان التجويد": ["مخارج الحروف","أحكام النون الساكنة والتنوين","المدود","القلقلة","الغنة","تطبيق عملي","أخرى"],
+            "حفظ سورة محددة": ["الفاتحة","البقرة","آل عمران","الكهف","يس","الرحمن","الملك","النبأ","النازعات","عبس","الإخلاص","الفلق","الناس","أخرى"],
+            "حفظ جزء محدد": ["جزء عم","جزء تبارك","جزء قد سمع","جزء الذاريات","جزء الأحقاف","جزء كامل مخصص","أخرى"],
+            "أخرى": ["خطة مخصصة","أخرى"]
+        },
+        scope: ["القرآن كاملًا","جزء عم","جزء تبارك","جزء محدد","سورة محددة","ربع صفحة يوميًا","نصف صفحة يوميًا","صفحة يوميًا","آيات محددة يوميًا","خطة مخصصة"],
+        strategy: ["مراجعة يومية","مراجعة أسبوعية","مراجعة ذكية","مراجعة تراكمية","تسميع يومي","تثبيت الأخطاء","خطة مخصصة"],
+        current: ["لا أحفظ شيئًا","أحفظ جزءًا واحدًا","أحفظ جزأين","أحفظ 3 أجزاء","أحفظ 5 أجزاء","أحفظ 10 أجزاء","أحفظ 15 جزءًا","أحفظ 20 جزءًا","أحفظ 29 جزءًا","تحديد يدوي"],
+        target: ["حفظ جزء عم","حفظ جزأين","حفظ 5 أجزاء","حفظ 10 أجزاء","حفظ 15 جزءًا","حفظ 20 جزءًا","حفظ القرآن كاملًا","تثبيت الحفظ","تحديد يدوي"],
+        motivation: ["ابتغاء مرضاة الله","الاستعداد للإمامة","مسابقة قرآنية","هدف شخصي","تشجيع الأسرة","تعليم الآخرين","أخرى"]
+    },
+    "Project": {
+        field: ["Programming Project","AI Project","Web Project","Mobile App","Research Project","Scholarship Portfolio","Personal Project","Other"],
+        path: {"Other": ["Idea","Planning","Design","Build","Testing","Deployment","Documentation","Presentation","Other"]},
+        scope: ["Small Project","Medium Project","Complete Product","Portfolio Project","Other"],
+        strategy: ["Milestones","Weekly Build","Test and Improve","Documentation","Other"],
+        current: ["Idea Only","Planning","Started","Half Complete","Almost Done","Custom"],
+        target: ["Complete Project","Deploy Project","Portfolio Ready","Presentation Ready","Custom"],
+        motivation: ["Portfolio","Learning","Scholarship","Career","Other"]
+    },
+    "Daily Life": {
+        field: ["Health","Exercise","Sleep","Food","Water","Personal Routine","Family","Finance","Cleaning","Time Management","Religious Routine","Other"],
+        path: {"Other": ["Daily Habit","Weekly Routine","Reminder","Self-care","Important Appointment","Other"]},
+        scope: ["Daily","Weekly","Monthly","Custom"],
+        strategy: ["Habit Tracking","Small Steps","Reminder","Weekly Review","Other"],
+        current: ["Not Regular","Sometimes","Average","Good","Custom"],
+        target: ["Build Habit","Improve Routine","Stay Consistent","Custom"],
+        motivation: ["Health","Discipline","Family","Personal Growth","Other"]
+    },
+    "General": {
+        field: ["Personal Goal","Study Goal","Skill Goal","Habit Goal","Other"],
+        path: {"Other": ["Plan","Practice","Review","Milestone","Other"]},
+        scope: ["Short Term","Medium Term","Long Term","Custom"],
+        strategy: ["Daily Steps","Weekly Review","Milestones","Other"],
+        current: ["Beginner","In Progress","Custom"],
+        target: ["Complete Goal","Improve Level","Custom"],
+        motivation: ["Personal Growth","Discipline","Other"]
+    }
+};
+
+function updateSmartGoalFields() {
+    const type = document.getElementById("goalTypeSelect");
+    const field = document.getElementById("goalFieldSelect");
+    const path = document.getElementById("goalPathSelect");
+    const scope = document.getElementById("goalScopeSelect");
+    const strategy = document.getElementById("goalStrategySelect");
+    const current = document.getElementById("currentStateSelect");
+    const target = document.getElementById("targetOutcomeSelect");
+    const motivation = document.getElementById("goalMotivationSelect");
+    const titleInput = document.getElementById("goalTitleInput");
+    if (!type || !field || !path || !scope || !strategy || !current || !target || !motivation) return;
+
+    const data = SMART_GOAL_DATA[type.value] || SMART_GOAL_DATA["General"];
+
+    fillSmartSelect(field, data.field || ["Other"], field.value || (data.field || ["Other"])[0]);
+
+    const selectedField = field.value;
+    const paths = (data.path && (data.path[selectedField] || data.path["Other"])) || ["Other"];
+    fillSmartSelect(path, paths, path.value && paths.includes(path.value) ? path.value : paths[0]);
+
+    fillSmartSelect(scope, data.scope || ["Custom"], scope.value || (data.scope || ["Custom"])[0]);
+    fillSmartSelect(strategy, data.strategy || ["Custom"], strategy.value || (data.strategy || ["Custom"])[0]);
+    fillSmartSelect(current, data.current || ["Custom"], current.value || (data.current || ["Custom"])[0]);
+    fillSmartSelect(target, data.target || ["Custom"], target.value || (data.target || ["Custom"])[0]);
+    fillSmartSelect(motivation, data.motivation || ["Other"], motivation.value || (data.motivation || ["Other"])[0]);
+
+    if (type.value === "Quran" || type.value === "Islamic Goals") {
+        document.getElementById("goalFieldLabel").textContent = "تصنيف الهدف";
+        document.getElementById("goalPathLabel").textContent = "مسار الهدف";
+        document.getElementById("goalScopeLabel").textContent = "نطاق الهدف";
+        document.getElementById("goalStrategyLabel").textContent = "خطة المراجعة / الاستراتيجية";
+        if (titleInput && !titleInput.value) titleInput.placeholder = "مثال: حفظ جزء عم خلال ٣ أشهر";
+    } else {
+        document.getElementById("goalFieldLabel").textContent = "Goal Category";
+        document.getElementById("goalPathLabel").textContent = "Goal Path";
+        document.getElementById("goalScopeLabel").textContent = "Goal Scope";
+        document.getElementById("goalStrategyLabel").textContent = "Goal Strategy";
+    }
+
+    translateDynamicOptions();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const ids = ["goalTypeSelect","goalFieldSelect","goalPathSelect","goalScopeSelect","goalStrategySelect","currentStateSelect","targetOutcomeSelect","goalMotivationSelect"];
+    ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener("change", updateSmartGoalFields);
+    });
+    updateSmartGoalFields();
+});
