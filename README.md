@@ -742,3 +742,23 @@ gunicorn server:app
   - Open Resource button
 - Added `/api/resources/suggest` for future task/goal recommendation integration.
 - Resources are static, fast, free, and do not use AI credits.
+
+
+## v4.6.17 Resources Seed and Filter Fix
+
+- Fixed empty Category / Exam / Type dropdowns in Resources.
+- Resources are now seeded/updated when opening `/resources`.
+- Seed is now upsert-based:
+  - existing resources are kept
+  - missing resources are added automatically
+- Added fallback static filter options so dropdowns are never empty.
+- Expanded default resources:
+  - English Skills
+  - IELTS / TOEFL / Duolingo English Test
+  - Chinese & HSK
+  - CSCA Math / Physics / Chemistry
+  - Programming & Technology
+  - AI & Data Science
+  - Scholarships
+  - Islamic Learning
+- Reinforced Resources link in desktop and mobile navigation.

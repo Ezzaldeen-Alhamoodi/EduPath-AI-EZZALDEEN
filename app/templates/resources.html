@@ -27,7 +27,7 @@
         <div>
             <label>Category</label>
             <select name="category">
-                <option value="">All Categories</option>
+                <option value="">All Categories / جميع الفئات</option>
                 {% for cat in categories %}
                     <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat }}</option>
                 {% endfor %}
@@ -37,7 +37,7 @@
         <div>
             <label>Exam</label>
             <select name="exam">
-                <option value="">All Exams</option>
+                <option value="">All Exams / جميع الاختبارات</option>
                 {% for exam in exams %}
                     <option value="{{ exam }}" {% if selected.exam == exam %}selected{% endif %}>{{ exam }}</option>
                 {% endfor %}
@@ -52,7 +52,7 @@
         <div>
             <label>Type</label>
             <select name="type">
-                <option value="">All Types</option>
+                <option value="">All Types / جميع الأنواع</option>
                 {% for type in types %}
                     <option value="{{ type }}" {% if selected.type == type %}selected{% endif %}>{{ type }}</option>
                 {% endfor %}

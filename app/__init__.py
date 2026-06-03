@@ -517,6 +517,53 @@ def record_ai_usage(user, tool_name="general"):
 
 
 
+
+RESOURCE_CATEGORY_OPTIONS = [
+    "English Skills",
+    "English Exams",
+    "Chinese & HSK",
+    "CSCA",
+    "Programming & Technology",
+    "AI & Data Science",
+    "Scholarships",
+    "Islamic Learning",
+    "General Learning",
+]
+
+RESOURCE_EXAM_OPTIONS = [
+    "IELTS",
+    "TOEFL",
+    "Duolingo English Test",
+    "HSK",
+    "CSCA",
+    "SAT",
+    "ACT",
+    "GRE",
+    "GMAT",
+]
+
+RESOURCE_TYPE_OPTIONS = [
+    "Official",
+    "Practice",
+    "Course",
+    "Website",
+    "App",
+    "Book",
+    "Documentation",
+    "Tool",
+    "Search Tool",
+    "Official Portal",
+    "Official Search",
+    "Guide",
+    "Simulation",
+    "Audio",
+    "Library",
+    "Video Lessons",
+    "Notes",
+    "Dictionary",
+]
+
+
 def default_learning_resources():
     return [
         # English skills
@@ -558,14 +605,65 @@ def default_learning_resources():
         {"name":"Quran.com","category":"Islamic Learning","subcategory":"Quran","skill":"Recitation, Reading, Translation","exam":"","level":"All Levels","resource_type":"Website","url":"https://quran.com/","description":"Quran reading, recitations, translations, and study support.","tags":["quran","قرآن","recitation","translation"],"is_official":False,"is_free":True,"language":"Arabic"},
         {"name":"Tanzil Quran","category":"Islamic Learning","subcategory":"Quran Text","skill":"Quran Text","exam":"","level":"All Levels","resource_type":"Website","url":"https://tanzil.net/","description":"Reliable Quran text and translations.","tags":["quran","قرآن","text"],"is_official":False,"is_free":True,"language":"Arabic"},
         {"name":"Sunnah.com","category":"Islamic Learning","subcategory":"Hadith","skill":"Hadith Reading","exam":"","level":"All Levels","resource_type":"Website","url":"https://sunnah.com/","description":"Hadith collections in searchable format.","tags":["hadith","حديث","islamic"],"is_official":False,"is_free":True,"language":"Arabic/English"},
+
+        # More English Skills
+        {"name":"Perfect English Grammar","category":"English Skills","subcategory":"Grammar","skill":"Grammar","exam":"","level":"Beginner → Advanced","resource_type":"Website","url":"https://www.perfect-english-grammar.com/","description":"Clear grammar explanations and exercises for English learners.","tags":["english","grammar","practice"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Oxford Online English","category":"English Skills","subcategory":"Speaking & Writing","skill":"Speaking, Writing, Pronunciation","exam":"","level":"Beginner → Advanced","resource_type":"Video Lessons","url":"https://www.oxfordonlineenglish.com/free-english-lessons","description":"Free English lessons for speaking, pronunciation, writing, and grammar.","tags":["english","speaking","writing","pronunciation"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"English Club","category":"English Skills","subcategory":"General English","skill":"Grammar, Vocabulary, Listening, Speaking","exam":"","level":"Beginner → Advanced","resource_type":"Website","url":"https://www.englishclub.com/","description":"Large free English learning website covering many skills.","tags":["english","grammar","vocabulary","listening","speaking"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"ESL Lab","category":"English Skills","subcategory":"Listening","skill":"Listening","exam":"","level":"Beginner → Advanced","resource_type":"Practice","url":"https://www.esl-lab.com/","description":"Listening practice with quizzes and real-life situations.","tags":["english","listening","practice"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"YouGlish","category":"English Skills","subcategory":"Pronunciation","skill":"Pronunciation, Listening","exam":"","level":"All Levels","resource_type":"Tool","url":"https://youglish.com/","description":"Search words and hear real pronunciation examples from videos.","tags":["english","pronunciation","listening"],"is_official":False,"is_free":True,"language":"English"},
+
+        # More English Exams
+        {"name":"Cambridge IELTS Practice","category":"English Exams","subcategory":"IELTS Practice","skill":"Reading, Listening, Writing, Speaking","exam":"IELTS","level":"Intermediate → Advanced","resource_type":"Practice","url":"https://www.cambridgeenglish.org/learning-english/exam-preparation/","description":"Cambridge exam preparation resources and practice support.","tags":["ielts","cambridge","practice"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"Magoosh TOEFL Blog","category":"English Exams","subcategory":"TOEFL Strategy","skill":"Reading, Listening, Writing, Speaking","exam":"TOEFL","level":"Intermediate → Advanced","resource_type":"Website","url":"https://magoosh.com/toefl/","description":"TOEFL strategy articles, study plans, and practice advice.","tags":["toefl","strategy","practice"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"TestGlider TOEFL Resources","category":"English Exams","subcategory":"TOEFL Practice","skill":"All Skills","exam":"TOEFL","level":"Intermediate → Advanced","resource_type":"Practice","url":"https://www.testglider.com/blog","description":"TOEFL preparation articles and practice guidance.","tags":["toefl","practice","mock"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Duolingo English Test Readiness Guide","category":"English Exams","subcategory":"DET Guide","skill":"All Skills","exam":"Duolingo English Test","level":"All Levels","resource_type":"Official","url":"https://englishtest.duolingo.com/readiness","description":"Official readiness and preparation guidance for the Duolingo English Test.","tags":["duolingo","det","official","readiness"],"is_official":True,"is_free":True,"language":"English"},
+
+        # Chinese and HSK
+        {"name":"Mandarin Bean","category":"Chinese & HSK","subcategory":"Reading","skill":"Chinese Reading, Vocabulary","exam":"HSK","level":"HSK 1 → HSK 6","resource_type":"Practice","url":"https://mandarinbean.com/","description":"Chinese reading practice by HSK level with vocabulary support.","tags":["chinese","hsk","reading","vocabulary"],"is_official":False,"is_free":True,"language":"Chinese"},
+        {"name":"Chinese Grammar Wiki","category":"Chinese & HSK","subcategory":"Grammar","skill":"Chinese Grammar","exam":"HSK","level":"Beginner → Advanced","resource_type":"Documentation","url":"https://resources.allsetlearning.com/chinese/grammar/","description":"Clear Chinese grammar explanations by level.","tags":["chinese","grammar","hsk"],"is_official":False,"is_free":True,"language":"English/Chinese"},
+        {"name":"HSK Academy","category":"Chinese & HSK","subcategory":"HSK Vocabulary","skill":"Vocabulary, Characters","exam":"HSK","level":"HSK 1 → HSK 6","resource_type":"Practice","url":"https://hsk.academy/","description":"HSK vocabulary lists and practice tools.","tags":["hsk","vocabulary","characters"],"is_official":False,"is_free":True,"language":"Chinese"},
+        {"name":"Arch Chinese","category":"Chinese & HSK","subcategory":"Characters","skill":"Characters, Stroke Order","exam":"HSK","level":"Beginner → Advanced","resource_type":"Tool","url":"https://www.archchinese.com/","description":"Chinese character worksheets, stroke order, and vocabulary tools.","tags":["chinese","characters","stroke order"],"is_official":False,"is_free":True,"language":"English/Chinese"},
+
+        # CSCA expanded foundations
+        {"name":"Paul's Online Math Notes","category":"CSCA","subcategory":"Mathematics","skill":"Algebra, Calculus, Functions","exam":"CSCA","level":"Intermediate → Advanced","resource_type":"Notes","url":"https://tutorial.math.lamar.edu/","description":"Strong math notes and examples for algebra and calculus foundations.","tags":["csca","math","functions","calculus"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"OpenStax Physics","category":"CSCA","subcategory":"Physics","skill":"Mechanics, Electricity, Thermodynamics, Optics","exam":"CSCA","level":"Intermediate → Advanced","resource_type":"Book","url":"https://openstax.org/details/books/college-physics-2e","description":"Free physics textbook covering mechanics, electricity, waves, and optics.","tags":["csca","physics","mechanics","thermodynamics","optics"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"OpenStax Chemistry","category":"CSCA","subcategory":"Chemistry","skill":"Chemical Concepts, Reactions, Equilibrium","exam":"CSCA","level":"Intermediate → Advanced","resource_type":"Book","url":"https://openstax.org/details/books/chemistry-2e","description":"Free chemistry textbook covering chemical concepts, calculations, and reactions.","tags":["csca","chemistry","equilibrium","reactions"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"PhET Simulations","category":"CSCA","subcategory":"Science Simulations","skill":"Physics, Chemistry","exam":"CSCA","level":"Beginner → Advanced","resource_type":"Simulation","url":"https://phet.colorado.edu/","description":"Interactive simulations for physics and chemistry concepts.","tags":["physics","chemistry","simulation","csca"],"is_official":True,"is_free":True,"language":"English"},
+
+        # Programming expanded
+        {"name":"The Odin Project","category":"Programming & Technology","subcategory":"Full Stack Web","skill":"HTML, CSS, JavaScript, Git, Backend","exam":"","level":"Beginner → Advanced","resource_type":"Course","url":"https://www.theodinproject.com/","description":"Full-stack web development curriculum with projects.","tags":["web development","full stack","javascript","git"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"Flask Documentation","category":"Programming & Technology","subcategory":"Flask","skill":"Flask, Backend, Web Apps","exam":"","level":"Beginner → Advanced","resource_type":"Documentation","url":"https://flask.palletsprojects.com/","description":"Official Flask documentation for building Python web applications.","tags":["flask","python","backend","web app"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"SQLBolt","category":"Programming & Technology","subcategory":"SQL","skill":"SQL, Databases","exam":"","level":"Beginner","resource_type":"Practice","url":"https://sqlbolt.com/","description":"Interactive SQL lessons and exercises.","tags":["sql","database","practice"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"LeetCode","category":"Programming & Technology","subcategory":"Problem Solving","skill":"Algorithms, Data Structures","exam":"","level":"Beginner → Advanced","resource_type":"Practice","url":"https://leetcode.com/","description":"Coding problem practice for algorithms and data structures.","tags":["algorithms","data structures","problem solving"],"is_official":False,"is_free":True,"language":"English"},
+        {"name":"Codeforces","category":"Programming & Technology","subcategory":"Competitive Programming","skill":"Problem Solving, Algorithms","exam":"","level":"Intermediate → Advanced","resource_type":"Practice","url":"https://codeforces.com/","description":"Competitive programming platform for algorithmic problem solving.","tags":["algorithms","problem solving","competitive programming"],"is_official":False,"is_free":True,"language":"English"},
+
+        # AI expanded
+        {"name":"Elements of AI","category":"AI & Data Science","subcategory":"AI Fundamentals","skill":"AI Concepts","exam":"","level":"Beginner","resource_type":"Course","url":"https://www.elementsofai.com/","description":"Beginner-friendly AI course explaining key concepts without heavy math.","tags":["ai","fundamentals","beginner"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"fast.ai Practical Deep Learning","category":"AI & Data Science","subcategory":"Deep Learning","skill":"Deep Learning, Projects","exam":"","level":"Intermediate","resource_type":"Course","url":"https://course.fast.ai/","description":"Practical deep learning course focused on building useful models.","tags":["deep learning","ai","projects"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"Pandas Documentation","category":"AI & Data Science","subcategory":"Data Analysis","skill":"Pandas, Data Analysis","exam":"","level":"Beginner → Advanced","resource_type":"Documentation","url":"https://pandas.pydata.org/docs/","description":"Official pandas documentation for data analysis in Python.","tags":["pandas","data analysis","python"],"is_official":True,"is_free":True,"language":"English"},
+
+        # Scholarships expanded
+        {"name":"DAAD Scholarship Database","category":"Scholarships","subcategory":"Scholarship Search","skill":"Search, Eligibility","exam":"","level":"All Levels","resource_type":"Official Search","url":"https://www.daad.de/en/study-and-research-in-germany/scholarships/","description":"Official DAAD scholarship database for Germany.","tags":["scholarship","germany","daad","official"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"Campus France Scholarships","category":"Scholarships","subcategory":"Scholarship Search","skill":"Search, University Research","exam":"","level":"All Levels","resource_type":"Official Search","url":"https://www.campusfrance.org/en/bursaries-foreign-students","description":"Official scholarship information for studying in France.","tags":["scholarship","france","official"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"Study in China CSC","category":"Scholarships","subcategory":"Chinese Scholarship","skill":"Scholarship Search, Application","exam":"","level":"All Levels","resource_type":"Official Portal","url":"https://www.campuschina.org/","description":"Official Campus China portal for Chinese government scholarship information.","tags":["china","scholarship","csc","official"],"is_official":True,"is_free":True,"language":"English"},
+        {"name":"Common App Essay Guide","category":"Scholarships","subcategory":"Personal Statement","skill":"Essay Writing","exam":"","level":"All Levels","resource_type":"Guide","url":"https://www.commonapp.org/apply/essay-prompts","description":"Official essay prompts and guidance useful for application writing practice.","tags":["essay","personal statement","application"],"is_official":True,"is_free":True,"language":"English"},
+
+        # Islamic expanded
+        {"name":"Ayah by Quran.com","category":"Islamic Learning","subcategory":"Quran Memorization","skill":"Memorization, Recitation","exam":"","level":"All Levels","resource_type":"App","url":"https://ayah.app/","description":"Beautiful Quran app useful for reading, listening, and memorization.","tags":["quran","memorization","recitation","قرآن","حفظ"],"is_official":False,"is_free":True,"language":"Arabic"},
+        {"name":"Quranicaudio","category":"Islamic Learning","subcategory":"Quran Recitation","skill":"Listening, Recitation, Memorization","exam":"","level":"All Levels","resource_type":"Audio","url":"https://quranicaudio.com/","description":"Large collection of Quran recitations useful for memorization and revision.","tags":["quran","audio","recitation","حفظ","مراجعة"],"is_official":False,"is_free":True,"language":"Arabic"},
+        {"name":"IslamHouse","category":"Islamic Learning","subcategory":"Islamic Studies","skill":"Aqeedah, Fiqh, Seerah","exam":"","level":"All Levels","resource_type":"Library","url":"https://islamhouse.com/","description":"Large Islamic content library in many languages.","tags":["islamic","aqeedah","fiqh","seerah","Arabic"],"is_official":False,"is_free":True,"language":"Arabic/English"},
+
     ]
 
 
 def seed_learning_resources():
     try:
-        if LearningResource.query.first():
-            return
+        existing_names = {name for (name,) in db.session.query(LearningResource.name).all()}
+        added = 0
         for item in default_learning_resources():
+            if item["name"] in existing_names:
+                continue
             db.session.add(LearningResource(
                 name=item["name"],
                 category=item["category"],
@@ -581,10 +679,13 @@ def seed_learning_resources():
                 is_free=bool(item.get("is_free", True)),
                 language=item.get("language", ""),
             ))
-        db.session.commit()
-        logger.info("Default learning resources seeded")
+            added += 1
+        if added:
+            db.session.commit()
+            logger.info("Learning resources seeded/updated: %s new resources", added)
     except Exception:
         logger.exception("Failed to seed learning resources")
+
 
 
 def resource_match_score(resource, text):
@@ -926,6 +1027,9 @@ def create_app():
     @app.route("/resources")
     @login_required
     def resources():
+        # Keep resources available even after database resets or first deployment.
+        seed_learning_resources()
+
         query = request.args.get("q", "").strip()
         category = request.args.get("category", "").strip()
         skill = request.args.get("skill", "").strip()
@@ -969,16 +1073,20 @@ def create_app():
             LearningResource.name.asc()
         ).all()
 
-        categories = [row[0] for row in db.session.query(LearningResource.category).distinct().order_by(LearningResource.category.asc()).all()]
-        exams = [row[0] for row in db.session.query(LearningResource.exam).distinct().all() if row[0]]
-        types = [row[0] for row in db.session.query(LearningResource.resource_type).distinct().all() if row[0]]
+        db_categories = [row[0] for row in db.session.query(LearningResource.category).distinct().order_by(LearningResource.category.asc()).all() if row[0]]
+        db_exams = [row[0] for row in db.session.query(LearningResource.exam).distinct().all() if row[0]]
+        db_types = [row[0] for row in db.session.query(LearningResource.resource_type).distinct().all() if row[0]]
+
+        categories = sorted(set(RESOURCE_CATEGORY_OPTIONS + db_categories))
+        exams = sorted(set(RESOURCE_EXAM_OPTIONS + db_exams))
+        types = sorted(set(RESOURCE_TYPE_OPTIONS + db_types))
 
         return render_template(
             "resources.html",
             resources=resources_list,
             categories=categories,
-            exams=sorted(exams),
-            types=sorted(types),
+            exams=exams,
+            types=types,
             selected={
                 "q": query, "category": category, "skill": skill, "exam": exam,
                 "level": level, "type": resource_type, "official": official, "free": free
@@ -988,6 +1096,7 @@ def create_app():
     @app.route("/api/resources/suggest")
     @login_required
     def suggest_resources():
+        seed_learning_resources()
         text = request.args.get("text", "").strip()
         limit = int(request.args.get("limit", 5) or 5)
         all_resources = LearningResource.query.all()
