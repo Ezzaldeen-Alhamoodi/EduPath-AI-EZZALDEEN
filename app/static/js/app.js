@@ -1179,11 +1179,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-/* EduPath AI v4.6.9 Goal Intelligence Engine - No Auto Tasks */
-const SMART_GOALS_V469 = {
+
+
+
+/* EduPath AI v4.6.10 Smart Goals Adaptive Fix */
+const SMART_GOALS_V4610 = {
     "Education": {
         categories: ["School Study","University Study","Online Course","Research","Presentation","Other"],
-        paths: {"Other": ["Study Plan","Exam Review","Assignment","Project","Reading","Other"]},
+        paths: {
+            "School Study": ["Mathematics","Physics","Chemistry","Biology","English","Arabic","Exam Review","Homework","Other"],
+            "University Study": ["Course Study","Assignment","Lab","Research","Presentation","Exam Review","Other"],
+            "Other": ["Study Plan","Exam Review","Assignment","Project","Reading","Other"]
+        },
         current: ["Not started","Beginner","In progress","Need review","Custom"],
         target: ["Complete course","High grade","Finish project","Master topic","Custom"],
         commitment: ["30 minutes daily","60 minutes daily","Weekly review","Custom"]
@@ -1193,6 +1200,9 @@ const SMART_GOALS_V469 = {
         paths: {
             "English": ["IELTS Academic","TOEFL","Duolingo English Test","General English","Academic English","Speaking","Writing","Reading","Listening","Vocabulary","Grammar","Pronunciation","Other"],
             "Chinese": ["HSK","General Chinese","Speaking","Writing","Reading","Listening","Characters","Vocabulary","Other"],
+            "Turkish": ["General Turkish","Speaking","Writing","Reading","Listening","Vocabulary","Grammar","Other"],
+            "Russian": ["General Russian","Speaking","Writing","Reading","Listening","Vocabulary","Grammar","Other"],
+            "Arabic": ["Arabic for Quran","Writing","Reading","Grammar","Vocabulary","Other"],
             "Other": ["General Language","Exam Preparation","Speaking","Writing","Reading","Listening","Other"]
         },
         current: ["Beginner","Intermediate","Advanced","IELTS Band 5.0","IELTS Band 5.5","IELTS Band 6.0","Custom"],
@@ -1202,10 +1212,11 @@ const SMART_GOALS_V469 = {
     "Exam / Certificate": {
         categories: ["IELTS","TOEFL","Duolingo English Test","HSK","CSCA","SAT","ACT","GRE","GMAT","Other"],
         paths: {
-            "IELTS": ["Listening","Reading","Writing","Speaking","Full Test"],
-            "TOEFL": ["Reading","Listening","Writing","Speaking","Full Test"],
-            "Duolingo English Test": ["Reading","Listening","Writing","Speaking","Full Test"],
+            "IELTS": ["Listening","Reading","Writing Task 1","Writing Task 2","Speaking Part 1","Speaking Part 2","Speaking Part 3","Full Test"],
+            "TOEFL": ["Complete the Words","Read in Daily Life","Read an Academic Passage","Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk","Build a Sentence","Write an Email","Write for an Academic Discussion","Listen and Repeat","Take an Interview","Full Test"],
+            "Duolingo English Test": ["Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","Listen and Type","Interactive Listening","Write About the Photo","Writing Sample","Interactive Writing","Speak About the Photo","Read Then Speak","Speaking Sample","Interactive Speaking","Full Test"],
             "CSCA": ["Mathematics","Physics","Chemistry","Full Exam"],
+            "HSK": ["Vocabulary","Characters","Listening","Reading","Writing","Mock Test"],
             "Other": ["Subject Review","Mock Test","Weakness Training","Final Revision","Other"]
         },
         current: ["Beginner","Intermediate","Advanced","Need diagnostic","Custom"],
@@ -1217,6 +1228,7 @@ const SMART_GOALS_V469 = {
         paths: {
             "Python": ["Beginner Python","Intermediate Python","Advanced Python","OOP","Flask","Automation","Data Analysis","Machine Learning","Projects","Problem Solving","Other"],
             "Flask": ["Routes","Templates","Forms","Authentication","Database","Deployment","Full Web App","Other"],
+            "Web Development": ["Frontend","Backend","Full Stack","Responsive Design","Authentication","APIs","Databases","Deployment","Other"],
             "Algorithms": ["Searching","Sorting","Recursion","Greedy","Dynamic Programming","Graphs","Trees","Complexity","Other"],
             "Other": ["Beginner Track","Project Track","Problem Solving","Documentation","Other"]
         },
@@ -1226,7 +1238,11 @@ const SMART_GOALS_V469 = {
     },
     "Artificial Intelligence": {
         categories: ["Machine Learning","Deep Learning","Data Science","NLP","Computer Vision","AI Project","Other"],
-        paths: {"Other": ["Theory","Practice","Project","Dataset","Model Training","Deployment","Other"]},
+        paths: {
+            "Machine Learning": ["Supervised Learning","Unsupervised Learning","Model Evaluation","Feature Engineering","Projects","Other"],
+            "Data Science": ["Pandas","Data Cleaning","Visualization","Statistics","Projects","Other"],
+            "Other": ["Theory","Practice","Project","Dataset","Model Training","Deployment","Other"]
+        },
         current: ["Beginner","Know basics","Intermediate","Advanced","Custom"],
         target: ["Build AI project","Understand ML basics","Deploy model","Custom"],
         commitment: ["30 minutes daily","Project weekly","Reading + practice","Custom"]
@@ -1235,6 +1251,7 @@ const SMART_GOALS_V469 = {
         categories: ["Scholarship Search","University Research","Documents","CV","Motivation Letter","Personal Statement","Recommendation Letter","Interview","Application Form","Email Communication","Visa","Portfolio","Chinese Scholarship","Other"],
         paths: {
             "Chinese Scholarship": ["Full Application Preparation","Language Program","Bachelor Application","Documents","Interview","Email Follow-up","Other"],
+            "Documents": ["Prepare Documents","Translate Documents","Review Documents","Upload Documents","Other"],
             "Motivation Letter": ["First Draft","Personalization","Editing","Final Review","Other"],
             "Interview": ["Mock Interview","Common Questions","Answer Improvement","Confidence Practice","Other"],
             "Other": ["Preparation","Submission","Follow Up","Final Check","Other"]
@@ -1245,7 +1262,10 @@ const SMART_GOALS_V469 = {
     },
     "University": {
         categories: ["Computer Science","Information Technology","Computer Engineering","Software Engineering","Artificial Intelligence","Data Science","Cybersecurity","Engineering","Medicine","Business","Law","Education","Other"],
-        paths: {"Computer Science": ["Programming","Algorithms","Data Structures","Databases","Operating Systems","Networks","AI","Graduation Project","Other"], "Other": ["Course Study","Assignment","Lab","Exam","Research","Other"]},
+        paths: {
+            "Computer Science": ["Programming","Algorithms","Data Structures","Databases","Operating Systems","Networks","AI","Graduation Project","Other"],
+            "Other": ["Course Study","Assignment","Lab","Exam","Research","Other"]
+        },
         current: ["Start of course","Need review","Average","Strong","Custom"],
         target: ["Pass course","High grade","Complete project","Master subject","Custom"],
         commitment: ["Lecture study","Assignment schedule","Lab practice","Exam review","Custom"]
@@ -1298,9 +1318,9 @@ const SMART_GOALS_V469 = {
     }
 };
 
-const JUZ_AMMA_MILESTONES_V469 = ["النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
+const JUZ_AMMA_MILESTONES_V4610 = ["النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
 
-function fillGoalSelectV469(select, values) {
+function fillGoalSelectV4610(select, values) {
     if (!select) return;
     const previous = select.value;
     select.innerHTML = "";
@@ -1313,7 +1333,30 @@ function fillGoalSelectV469(select, values) {
     if (values.includes(previous)) select.value = previous;
 }
 
-function updateSmartGoalsV469() {
+function shouldShowCustom(value) {
+    return ["Other", "أخرى", "Custom", "Custom Plan", "خطة مخصصة", "تحديد يدوي"].includes(value);
+}
+
+function toggleGoalCustomFieldsV4610() {
+    const category = document.getElementById("goalCategorySelect");
+    const path = document.getElementById("goalPathSelect");
+    const current = document.getElementById("currentStateSelect");
+    const target = document.getElementById("targetStateSelect");
+    const commitment = document.getElementById("commitmentSelect");
+    const boxes = [
+        ["customCategoryBox", category],
+        ["customPathBox", path],
+        ["customCurrentBox", current],
+        ["customTargetBox", target],
+        ["customCommitmentBox", commitment]
+    ];
+    boxes.forEach(([id, select]) => {
+        const box = document.getElementById(id);
+        if (box) box.style.display = select && shouldShowCustom(select.value) ? "block" : "none";
+    });
+}
+
+function updateSmartGoalsV4610(changedId = "") {
     const type = document.getElementById("goalTypeSelect");
     const category = document.getElementById("goalCategorySelect");
     const path = document.getElementById("goalPathSelect");
@@ -1326,13 +1369,20 @@ function updateSmartGoalsV469() {
 
     if (!type || !category || !path || !current || !target || !commitment) return;
 
-    const data = SMART_GOALS_V469[type.value] || SMART_GOALS_V469["General"];
-    fillGoalSelectV469(category, data.categories || ["Other"]);
+    const data = SMART_GOALS_V4610[type.value] || SMART_GOALS_V4610["General"];
+
+    if (changedId === "goalTypeSelect" || !category.options.length) {
+        fillGoalSelectV4610(category, data.categories || ["Other"]);
+    }
+
     const paths = (data.paths && (data.paths[category.value] || data.paths["Other"])) || ["Other"];
-    fillGoalSelectV469(path, paths);
-    fillGoalSelectV469(current, data.current || ["Custom"]);
-    fillGoalSelectV469(target, data.target || ["Custom"]);
-    fillGoalSelectV469(commitment, data.commitment || ["Custom"]);
+    if (changedId === "goalTypeSelect" || changedId === "goalCategorySelect" || !path.options.length) {
+        fillGoalSelectV4610(path, paths);
+    }
+
+    if (!current.options.length || changedId === "goalTypeSelect") fillGoalSelectV4610(current, data.current || ["Custom"]);
+    if (!target.options.length || changedId === "goalTypeSelect") fillGoalSelectV4610(target, data.target || ["Custom"]);
+    if (!commitment.options.length || changedId === "goalTypeSelect") fillGoalSelectV4610(commitment, data.commitment || ["Custom"]);
 
     const labels = {
         cat: document.getElementById("goalCategoryLabel"),
@@ -1341,8 +1391,7 @@ function updateSmartGoalsV469() {
         target: document.getElementById("targetStateLabel"),
         outcome: document.getElementById("goalOutcomeLabel"),
         milestones: document.getElementById("milestonesLabel"),
-        commitment: document.getElementById("commitmentLabel"),
-        keywords: document.getElementById("keywordsLabel")
+        commitment: document.getElementById("commitmentLabel")
     };
 
     if (type.value === "Islamic Goals") {
@@ -1353,7 +1402,6 @@ function updateSmartGoalsV469() {
         labels.outcome.textContent = "النتيجة النهائية";
         labels.milestones.textContent = "المحطات";
         labels.commitment.textContent = "الالتزام اليومي / الأسبوعي";
-        labels.keywords.textContent = "كلمات الربط الذكية";
         if (outcome && !outcome.value) outcome.placeholder = "مثال: إتمام حفظ جزء عم وتثبيته";
     } else {
         labels.cat.textContent = "Goal Category";
@@ -1363,15 +1411,20 @@ function updateSmartGoalsV469() {
         labels.outcome.textContent = "Goal Outcome";
         labels.milestones.textContent = "Milestones";
         labels.commitment.textContent = "Daily / Weekly Commitment";
-        labels.keywords.textContent = "Hidden Keywords for Smart Linking";
     }
 
     const selected = `${type.value} ${category.value} ${path.value} ${target.value}`.toLowerCase();
-    if (milestones && !milestones.value) {
+    const shouldRefreshSuggestions = ["goalTypeSelect", "goalCategorySelect", "goalPathSelect", "targetStateSelect"].includes(changedId);
+
+    if (milestones && (!milestones.value || shouldRefreshSuggestions)) {
         if (path.value === "حفظ جزء محدد" || target.value === "حفظ جزء عم" || selected.includes("جزء عم")) {
-            milestones.value = JUZ_AMMA_MILESTONES_V469.join(", ");
+            milestones.value = JUZ_AMMA_MILESTONES_V4610.join(", ");
         } else if (selected.includes("ielts")) {
             milestones.value = "Band 5.5 → Band 6.0 → Band 6.5 → Band 7.0";
+        } else if (selected.includes("toefl")) {
+            milestones.value = "Reading, Listening, Writing, Speaking, Full Mock Test";
+        } else if (selected.includes("csca")) {
+            milestones.value = "Mathematics, Physics, Chemistry, Full Exam Simulation";
         } else if (selected.includes("python") || selected.includes("flask")) {
             milestones.value = "Syntax, Functions, OOP, Flask Basics, Database, Final Project, Deployment";
         } else if (selected.includes("scholarship") || selected.includes("منحة")) {
@@ -1379,17 +1432,18 @@ function updateSmartGoalsV469() {
         }
     }
 
-    if (keywords && !keywords.value) {
-        keywords.value = [type.value, category.value, path.value, current.value, target.value].filter(Boolean).join(", ");
+    if (keywords) {
+        keywords.value = [type.value, category.value, path.value, current.value, target.value, commitment.value, milestones ? milestones.value : ""].filter(Boolean).join(", ");
     }
 
+    toggleGoalCustomFieldsV4610();
     if (typeof translateDynamicOptions === "function") translateDynamicOptions();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     ["goalTypeSelect","goalCategorySelect","goalPathSelect","currentStateSelect","targetStateSelect","commitmentSelect"].forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.addEventListener("change", updateSmartGoalsV469);
+        if (el) el.addEventListener("change", () => updateSmartGoalsV4610(id));
     });
-    updateSmartGoalsV469();
+    updateSmartGoalsV4610("goalTypeSelect");
 });

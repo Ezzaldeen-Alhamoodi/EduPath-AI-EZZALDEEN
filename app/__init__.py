@@ -4,6 +4,7 @@ import json
 import logging
 import unicodedata
 import secrets
+import re
 from datetime import datetime, date, timedelta
 
 from flask import Flask, render_template, request, redirect, url_for, jsonify, flash, session
@@ -975,6 +976,8 @@ def create_app():
     def goals():
         if request.method == "POST":
             current_state = request.form.get("current_state", "").strip() or request.form.get("current_level", "").strip() or "Not started"
+            if current_state in ["Custom", "تحديد يدوي"]:
+                current_state = request.form.get("custom_current_state", "").strip() or current_state
             goal = Goal(
                 user_id=current_user.id,
                 title=request.form.get("title", "").strip(),
@@ -983,7 +986,7 @@ def create_app():
                 daily_minutes=int(request.form.get("daily_minutes", 60) or 60),
                 start_date=request.form.get("start_date", "").strip(),
                 deadline=request.form.get("deadline", "").strip(),
-                reminder_time=request.form.get("reminder_time", "").strip(),
+                reminder_time="",
                 notes=build_goal_notes_from_form(request.form),
             )
 
@@ -1069,7 +1072,7 @@ def create_app():
                 estimated_minutes=int(request.form.get("estimated_minutes", 30) or 30),
                 start_date=request.form.get("start_date", "").strip(),
                 due_date=request.form.get("due_date", "").strip(),
-                reminder_time=request.form.get("reminder_time", "").strip(),
+                reminder_time="",
                 repeat_type=request.form.get("repeat_type", "daily").strip(),
                 repeat_days=",".join(request.form.getlist("repeat_days")),
                 notes=request.form.get("notes", "").strip(),
@@ -1473,16 +1476,35 @@ Return valid JSON:
 
 
 def build_goal_notes_from_form(form):
+    goal_category = form.get("goal_category", "").strip()
+    goal_path = form.get("goal_path", "").strip()
+    current_state = form.get("current_state", "").strip()
+    target_state = form.get("target_state", "").strip()
+    commitment = form.get("commitment", "").strip()
+
+    if goal_category in ["Other", "أخرى", "Custom", "خطة مخصصة"]:
+        goal_category = form.get("custom_goal_category", "").strip() or goal_category
+    if goal_path in ["Other", "أخرى", "Custom Plan", "خطة مخصصة"]:
+        goal_path = form.get("custom_goal_path", "").strip() or goal_path
+    if current_state in ["Custom", "تحديد يدوي"]:
+        current_state = form.get("custom_current_state", "").strip() or current_state
+    if target_state in ["Custom", "خطة مخصصة", "تحديد يدوي"]:
+        target_state = form.get("custom_target_state", "").strip() or target_state
+    if commitment in ["Custom", "خطة مخصصة"]:
+        commitment = form.get("custom_commitment", "").strip() or commitment
+
+    generated_keywords = generate_goal_keywords_from_form(form, goal_category, goal_path, current_state, target_state, commitment)
+
     fields = {
         "Goal Type": form.get("category", "").strip(),
-        "Goal Category": form.get("goal_category", "").strip() or form.get("goal_field", "").strip(),
-        "Goal Path": form.get("goal_path", "").strip(),
-        "Current State": form.get("current_state", "").strip() or form.get("current_state_select", "").strip(),
-        "Target State": form.get("target_state", "").strip() or form.get("target_outcome_select", "").strip(),
+        "Goal Category": goal_category,
+        "Goal Path": goal_path,
+        "Current State": current_state,
+        "Target State": target_state,
         "Goal Outcome": form.get("goal_outcome", "").strip(),
         "Milestones": form.get("milestones", "").strip(),
-        "Commitment": form.get("commitment", "").strip() or form.get("goal_strategy", "").strip(),
-        "Keywords": form.get("keywords", "").strip(),
+        "Commitment": commitment,
+        "Keywords": ", ".join(generated_keywords),
         "User Notes": form.get("notes", "").strip(),
     }
     lines = ["SMART_GOAL_INTELLIGENCE"]
@@ -1490,6 +1512,39 @@ def build_goal_notes_from_form(form):
         if value:
             lines.append(f"{key}: {value}")
     return "\n".join(lines)
+
+
+def generate_goal_keywords_from_form(form, goal_category="", goal_path="", current_state="", target_state="", commitment=""):
+    raw = [
+        form.get("category", ""),
+        goal_category,
+        goal_path,
+        current_state,
+        target_state,
+        commitment,
+        form.get("goal_outcome", ""),
+        form.get("milestones", ""),
+    ]
+    text = " ".join(raw)
+    keywords = tokenize_mixed_text(text)
+
+    lower = text.lower()
+    if "ielts" in lower:
+        keywords.update(["IELTS","English","Reading","Writing","Listening","Speaking","Vocabulary","Grammar","Mock Test","Task 1","Task 2"])
+    if "toefl" in lower:
+        keywords.update(["TOEFL","Reading","Listening","Writing","Speaking","Academic Discussion","Email"])
+    if "duolingo" in lower:
+        keywords.update(["Duolingo","Interactive Reading","Interactive Listening","Interactive Writing","Interactive Speaking"])
+    if "csca" in lower:
+        keywords.update(["CSCA","Mathematics","Physics","Chemistry"])
+    if "python" in lower or "flask" in lower:
+        keywords.update(["Python","Flask","Backend","Web App","Routes","Templates","Database","Login","API","Deployment"])
+    if "scholarship" in lower or "منحة" in text:
+        keywords.update(["Scholarship","منحة","Documents","CV","Motivation Letter","Interview","Application","University"])
+    if "قرآن" in text or "القرآن" in text or "جزء عم" in text or "حفظ" in text:
+        keywords.update(["قرآن","حفظ","مراجعة","تسميع","تجويد","جزء عم","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"])
+    return sorted({k.strip() for k in keywords if k and len(k.strip()) >= 2})
+
 
 
 def calculate_goal_time_left(deadline):

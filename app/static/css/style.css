@@ -2758,3 +2758,32 @@ html[dir="rtl"] .goal-current-target,
 html[dir="rtl"] .goal-path-line {
     text-align: right;
 }
+
+
+
+/* EduPath AI v4.6.10 Smart Goals Fix */
+.smart-system-note {
+    border: 1px dashed rgba(37, 99, 235, 0.25);
+    background: rgba(37, 99, 235, 0.06);
+    color: var(--muted);
+    border-radius: 16px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 800;
+    margin: 8px 0 12px;
+}
+
+.custom-goal-fields {
+    display: grid;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.custom-goal-fields > div,
+.custom-goal-fields .form-row > div {
+    display: none;
+}
+
+html[dir="rtl"] .smart-system-note {
+    text-align: right;
+}

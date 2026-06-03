@@ -79,9 +79,35 @@
 
                 <label id="commitmentLabel">Daily / Weekly Commitment</label>
                 <select name="commitment" id="commitmentSelect"></select>
+                <input type="hidden" name="keywords" id="keywordsInput">
+                <p class="smart-system-note" id="keywordsSystemNote">Smart linking keywords are generated automatically by the system from your choices.</p>
 
-                <label id="keywordsLabel">Hidden Keywords for Smart Linking</label>
-                <textarea name="keywords" id="keywordsInput" rows="3" placeholder="IELTS, Reading, Writing, Task 2, Vocabulary..."></textarea>
+                <div class="custom-goal-fields" id="customGoalFields">
+                    <div class="form-row">
+                        <div id="customCategoryBox">
+                            <label>Custom Goal Category</label>
+                            <input name="custom_goal_category" id="customGoalCategoryInput" placeholder="Write your custom category">
+                        </div>
+                        <div id="customPathBox">
+                            <label>Custom Goal Path</label>
+                            <input name="custom_goal_path" id="customGoalPathInput" placeholder="Write your custom path">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="customCurrentBox">
+                            <label>Custom Current State</label>
+                            <input name="custom_current_state" id="customCurrentInput" placeholder="Write your current state">
+                        </div>
+                        <div id="customTargetBox">
+                            <label>Custom Target State</label>
+                            <input name="custom_target_state" id="customTargetInput" placeholder="Write your target state">
+                        </div>
+                    </div>
+                    <div id="customCommitmentBox">
+                        <label>Custom Commitment</label>
+                        <input name="custom_commitment" id="customCommitmentInput" placeholder="Write your custom commitment">
+                    </div>
+                </div>
             </div>
 
             <div class="form-row">
@@ -97,11 +123,7 @@
 
             <label>Target Date</label>
             <input name="deadline" type="date">
-
-            <label>Reminder Time</label>
-            <input name="reminder_time" type="time">
-
-            <label>Notes</label>
+<label>Notes</label>
             <textarea name="notes" rows="4" placeholder="Extra details, resources, schedule, or personal instructions..."></textarea>
 
             <button type="submit">💾 Save Smart Goal</button>
