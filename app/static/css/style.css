@@ -3064,3 +3064,105 @@ html[dir="rtl"] .adaptive-goal-panel-v4614 label {
 .smart-goal-form-v4613 #customCommitmentBox {
     grid-column: auto !important;
 }
+
+
+
+/* EduPath AI v4.6.15 English Coach Saved Answers */
+.english-hero-actions {
+    align-items: center;
+}
+
+.tiny-icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 34px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 950;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    white-space: nowrap;
+}
+
+.tiny-icon-link:hover {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.save-result-form {
+    margin-top: 18px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.saved-answer-card {
+    border: 1px solid rgba(37, 99, 235, 0.16);
+    background: rgba(248, 250, 252, 0.72);
+    border-radius: 24px;
+    padding: 18px;
+    margin: 16px 0;
+}
+
+.saved-answer-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.saved-answer-head strong {
+    display: block;
+    font-size: 17px;
+}
+
+.saved-answer-head span {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.saved-details {
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 16px;
+    padding: 10px 12px;
+    margin: 12px 0;
+    background: rgba(255, 255, 255, 0.56);
+}
+
+.saved-details summary {
+    cursor: pointer;
+    color: var(--primary);
+    font-weight: 950;
+}
+
+body.dark-mode .saved-answer-card,
+body.dark-mode .saved-details {
+    background: rgba(15, 23, 42, 0.72);
+}
+
+@media (max-width: 760px) {
+    .english-hero-actions {
+        gap: 12px;
+    }
+
+    .tiny-icon-link {
+        width: fit-content;
+    }
+
+    .saved-answer-head {
+        display: grid;
+    }
+
+    .save-result-form {
+        justify-content: stretch;
+    }
+
+    .save-result-form button {
+        width: 100%;
+    }
+}

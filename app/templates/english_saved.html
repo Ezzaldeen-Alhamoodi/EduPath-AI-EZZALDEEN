@@ -1,0 +1,105 @@
+\
+{% extends "base.html" %}
+{% block page_title %}Saved English Coach Answers{% endblock %}
+{% block content %}
+
+<section class="hero compact">
+    <div>
+        <span class="tag">EduPath AI</span>
+        <h2>Saved English Coach Answers</h2>
+        <p>Review or delete your saved corrections, essay analyses, vocabulary, and writing advice whenever you want.</p>
+    </div>
+    <a class="button light" href="{{ url_for('english') }}">← Back to English Coach</a>
+</section>
+
+<section class="card">
+    <h2>▣ Saved Answers</h2>
+
+    {% for item in saved_answers %}
+        <div class="saved-answer-card">
+            <div class="saved-answer-head">
+                <div>
+                    <strong>{{ "Essay Analysis" if item.coach_type == "essay" else "Quick English Improvement" }}</strong>
+                    <span>{{ item.created_at.strftime("%Y-%m-%d %H:%M") if item.created_at else "" }}</span>
+                </div>
+                <a class="small-button danger" href="{{ url_for('delete_saved_english_answer', item_id=item.id) }}">Delete</a>
+            </div>
+
+            {% if item.topic %}
+                <p class="muted"><strong>Topic:</strong> {{ item.topic }}</p>
+            {% endif %}
+
+            {% if item.mode %}
+                <p class="muted"><strong>Mode:</strong> {{ item.mode }}</p>
+            {% endif %}
+
+            {% if item.original_text %}
+                <details class="saved-details">
+                    <summary>Original text</summary>
+                    <p>{{ item.original_text }}</p>
+                </details>
+            {% endif %}
+
+            {% if item.coach_type == "essay" %}
+                <h3>Corrected Essay</h3>
+                <p class="improved">{{ item.parsed_result.corrected_text }}</p>
+
+                {% if item.parsed_result.corrections %}
+                    <details class="saved-details" open>
+                        <summary>Corrections and explanations</summary>
+                        {% for corr in item.parsed_result.corrections %}
+                            <div class="correction-card">
+                                <strong>Original:</strong>
+                                <p>{{ corr.original }}</p>
+                                <strong>Correction:</strong>
+                                <p class="improved mini">{{ corr.correction }}</p>
+                                <strong>Why:</strong>
+                                <p>{{ corr.why }}</p>
+                                <strong>How to improve:</strong>
+                                <p>{{ corr.how_to_improve }}</p>
+                            </div>
+                        {% endfor %}
+                    </details>
+                {% endif %}
+
+                {% if item.parsed_result.writing_tips %}
+                    <h3>Writing Tips</h3>
+                    <ul>{% for tip in item.parsed_result.writing_tips %}<li>{{ tip }}</li>{% endfor %}</ul>
+                {% endif %}
+
+                {% if item.parsed_result.topic_vocabulary %}
+                    <h3>Topic Vocabulary</h3>
+                    <div class="vocab-grid">
+                        {% for vocab in item.parsed_result.topic_vocabulary %}
+                            <div class="vocab-card">
+                                <strong>{{ vocab.word_or_phrase }}</strong>
+                                <span>{{ vocab.meaning }}</span>
+                                <p>{{ vocab.example }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% else %}
+                <h3>Corrected Text</h3>
+                <p class="improved">{{ item.parsed_result.corrected_text }}</p>
+
+                <h3>Natural Version</h3>
+                <p class="improved">{{ item.parsed_result.natural_version }}</p>
+
+                {% if item.parsed_result.simple_explanation %}
+                    <h3>Explanation</h3>
+                    <ul>{% for exp in item.parsed_result.simple_explanation %}<li>{{ exp }}</li>{% endfor %}</ul>
+                {% endif %}
+
+                {% if item.parsed_result.useful_vocabulary %}
+                    <h3>Useful Vocabulary</h3>
+                    <ul>{% for vocab in item.parsed_result.useful_vocabulary %}<li>{{ vocab }}</li>{% endfor %}</ul>
+                {% endif %}
+            {% endif %}
+        </div>
+    {% else %}
+        <p class="muted">No saved English Coach answers yet.</p>
+    {% endfor %}
+</section>
+
+{% endblock %}

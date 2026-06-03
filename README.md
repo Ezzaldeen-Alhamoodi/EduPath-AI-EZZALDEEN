@@ -683,3 +683,29 @@ gunicorn server:app
   - صفحتان يوميًا
 - Kept milestones and keywords internal.
 - Preserved goal-task linking without automatic task creation.
+
+
+## v4.6.15 English Coach Saved Answers
+
+- Added save/delete system for English Coach results.
+- Added a saved answers page:
+  - `/english/saved`
+- Added small Saved icon in the English Coach hero.
+- Users can save:
+  - Quick English Improvement results
+  - Essay Analysis results
+  - Corrections, explanations, tips, and vocabulary
+- Users can delete saved English Coach answers later.
+- Expanded Quick English Improvement modes:
+  - Natural
+  - Simple and clear
+  - Formal
+  - Interview answer
+  - Academic
+  - Friendly
+  - Concise and direct
+  - Grammar correction
+  - Stronger vocabulary
+  - Professional email
+  - IELTS style
+  - TOEFL style

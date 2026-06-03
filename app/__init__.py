@@ -120,6 +120,20 @@ class StudyTask(db.Model):
     goal = db.relationship("Goal", backref="tasks")
 
 
+
+class EnglishCoachSavedAnswer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, index=True)
+    coach_type = db.Column(db.String(30), nullable=False, default="quick")
+    mode = db.Column(db.String(80), nullable=True)
+    topic = db.Column(db.Text, nullable=True)
+    original_text = db.Column(db.Text, nullable=True)
+    result_json = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+
+    user = db.relationship("User", backref="saved_english_answers")
+
+
 class GoalTaskLink(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     goal_id = db.Column(db.Integer, db.ForeignKey("goal.id"), nullable=False, index=True)
@@ -1305,6 +1319,9 @@ Evaluate the answer. Return valid JSON only:
         result = None
         essay_result = None
         active_tab = "quick"
+        submitted_text = ""
+        submitted_topic = ""
+        selected_mode = "natural"
 
         if request.method == "POST":
             coach_type = request.form.get("coach_type", "quick").strip()
@@ -1318,6 +1335,8 @@ Evaluate the answer. Return valid JSON only:
             if coach_type == "essay":
                 topic = request.form.get("essay_topic", "").strip()
                 essay = request.form.get("essay_text", "").strip()
+                submitted_topic = topic
+                submitted_text = essay
 
                 if not topic or not essay:
                     flash("Please write both the essay topic/question and your essay.", "error")
@@ -1368,15 +1387,34 @@ Rules:
             else:
                 text = request.form.get("text", "").strip()
                 mode = request.form.get("mode", "natural").strip()
+                submitted_text = text
+                selected_mode = mode
 
                 if not text:
                     flash("Please write text first.", "error")
                     return redirect(url_for("english"))
 
+                mode_descriptions = {
+                    "natural": "Natural, fluent, everyday English that still sounds polished.",
+                    "simple": "Simple and clear English with easy vocabulary and short sentences.",
+                    "formal": "Formal scholarship or academic style.",
+                    "interview": "Confident spoken interview answer with simple vocabulary.",
+                    "academic": "Academic style with stronger structure and precise wording.",
+                    "friendly": "Friendly and warm tone.",
+                    "concise": "Shorter, direct, and focused version.",
+                    "grammar": "Focus mainly on grammar correction and explanation.",
+                    "vocabulary": "Improve vocabulary and expressions without making it too complex.",
+                    "email": "Professional email style.",
+                    "ielts": "IELTS-style answer with clear organization and appropriate vocabulary.",
+                    "toefl": "TOEFL-style answer with direct academic clarity."
+                }
+                mode_instruction = mode_descriptions.get(mode, mode_descriptions["natural"])
+
                 prompt = f"""
 You are an English coach for a scholarship student.
 
 Mode: {mode}
+Mode instruction: {mode_instruction}
 
 Student text:
 {text}
@@ -1393,7 +1431,65 @@ Return valid JSON only:
                 record_ai_usage(current_user, "english")
                 result = parse_json_object(ai_text)
 
-        return render_template("english.html", result=result, essay_result=essay_result, active_tab=active_tab)
+        return render_template(
+            "english.html",
+            result=result,
+            essay_result=essay_result,
+            active_tab=active_tab,
+            submitted_text=submitted_text,
+            submitted_topic=submitted_topic,
+            selected_mode=selected_mode
+        )
+
+    @app.route("/english/save", methods=["POST"])
+    @login_required
+    def save_english_answer():
+        coach_type = request.form.get("coach_type", "quick").strip()
+        mode = request.form.get("mode", "").strip()
+        topic = request.form.get("topic", "").strip()
+        original_text = request.form.get("original_text", "").strip()
+        result_json = request.form.get("result_json", "").strip()
+
+        if not result_json:
+            flash("Nothing to save.", "error")
+            return redirect(url_for("english"))
+
+        saved = EnglishCoachSavedAnswer(
+            user_id=current_user.id,
+            coach_type=coach_type,
+            mode=mode,
+            topic=topic,
+            original_text=original_text,
+            result_json=result_json,
+        )
+        db.session.add(saved)
+        db.session.commit()
+        flash("English Coach answer saved.", "success")
+        return redirect(url_for("saved_english_answers"))
+
+    @app.route("/english/saved")
+    @login_required
+    def saved_english_answers():
+        saved_answers = EnglishCoachSavedAnswer.query.filter_by(user_id=current_user.id).order_by(EnglishCoachSavedAnswer.id.desc()).all()
+        parsed_answers = []
+        for item in saved_answers:
+            try:
+                parsed = json.loads(item.result_json)
+            except Exception:
+                parsed = {}
+            item.parsed_result = parsed
+            parsed_answers.append(item)
+        return render_template("english_saved.html", saved_answers=parsed_answers)
+
+    @app.route("/english/saved/<int:item_id>/delete")
+    @login_required
+    def delete_saved_english_answer(item_id):
+        item = EnglishCoachSavedAnswer.query.filter_by(id=item_id, user_id=current_user.id).first_or_404()
+        db.session.delete(item)
+        db.session.commit()
+        flash("Saved English Coach answer deleted.", "success")
+        return redirect(url_for("saved_english_answers"))
+
     @app.route("/programming", methods=["GET", "POST"])
     @login_required
     def programming():
@@ -1908,6 +2004,17 @@ def ensure_database_columns():
                         linked_at TIMESTAMP
                     )""",
 
+                    """CREATE TABLE IF NOT EXISTS english_coach_saved_answer (
+                        id SERIAL PRIMARY KEY,
+                        user_id INTEGER NOT NULL,
+                        coach_type VARCHAR(30) NOT NULL DEFAULT 'quick',
+                        mode VARCHAR(80),
+                        topic TEXT,
+                        original_text TEXT,
+                        result_json TEXT NOT NULL,
+                        created_at TIMESTAMP
+                    )""",
+
                 ]
 
                 for sql in postgres_sql:
@@ -1997,6 +2104,19 @@ def ensure_database_columns():
                     progress_added REAL NOT NULL DEFAULT 0,
                     is_confirmed_by_user BOOLEAN NOT NULL DEFAULT 0,
                     linked_at DATETIME
+                )
+            """)
+
+            connection.exec_driver_sql("""
+                CREATE TABLE IF NOT EXISTS english_coach_saved_answer (
+                    id INTEGER PRIMARY KEY,
+                    user_id INTEGER NOT NULL,
+                    coach_type VARCHAR(30) NOT NULL DEFAULT 'quick',
+                    mode VARCHAR(80),
+                    topic TEXT,
+                    original_text TEXT,
+                    result_json TEXT NOT NULL,
+                    created_at DATETIME
                 )
             """)
 

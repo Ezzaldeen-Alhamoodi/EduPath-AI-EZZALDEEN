@@ -3,12 +3,13 @@
 {% block page_title %}English Coach{% endblock %}
 {% block content %}
 
-<section class="hero compact english-hero-v412">
+<section class="hero compact english-hero-v412 english-hero-actions">
     <div>
         <span class="tag">EduPath AI</span>
         <h2>English Coach & Essay Trainer</h2>
         <p>Improve short answers, rewrite scholarship responses, or practice full essays with correction, writing advice, and topic vocabulary.</p>
     </div>
+    <a class="tiny-icon-link" href="{{ url_for('saved_english_answers') }}" title="Saved English answers">▣ Saved</a>
 </section>
 
 <section class="grid-2">
@@ -24,9 +25,18 @@
 
             <label>Mode</label>
             <select name="mode">
-                <option value="natural">Natural interview English</option>
-                <option value="simple">Simple and clear English</option>
-                <option value="formal">Formal scholarship style</option>
+                <option value="natural">Natural</option>
+                <option value="simple">Simple and clear</option>
+                <option value="formal">Formal</option>
+                <option value="interview">Interview answer</option>
+                <option value="academic">Academic</option>
+                <option value="friendly">Friendly</option>
+                <option value="concise">Concise and direct</option>
+                <option value="grammar">Grammar correction</option>
+                <option value="vocabulary">Stronger vocabulary</option>
+                <option value="email">Professional email</option>
+                <option value="ielts">IELTS style</option>
+                <option value="toefl">TOEFL style</option>
             </select>
 
             <button type="submit">✨ Improve Text</button>
@@ -66,6 +76,15 @@
 
     <h3>Useful Vocabulary</h3>
     <ul>{% for item in result.useful_vocabulary %}<li>{{ item }}</li>{% endfor %}</ul>
+
+    <form method="POST" action="{{ url_for('save_english_answer') }}" class="save-result-form">
+        <input type="hidden" name="coach_type" value="quick">
+        <input type="hidden" name="mode" value="{{ selected_mode }}">
+        <input type="hidden" name="original_text" value="{{ submitted_text|e }}">
+        <input type="hidden" name="result_json" value='{{ result|tojson }}'>
+        <button type="submit" class="small-button">💾 Save Result</button>
+    </form>
+
 </section>
 {% endif %}
 
@@ -117,6 +136,15 @@
     {% else %}
         <p class="muted">No topic vocabulary was returned.</p>
     {% endif %}
+
+    <form method="POST" action="{{ url_for('save_english_answer') }}" class="save-result-form">
+        <input type="hidden" name="coach_type" value="essay">
+        <input type="hidden" name="topic" value="{{ submitted_topic|e }}">
+        <input type="hidden" name="original_text" value="{{ submitted_text|e }}">
+        <input type="hidden" name="result_json" value='{{ essay_result|tojson }}'>
+        <button type="submit" class="small-button">💾 Save Essay Analysis</button>
+    </form>
+
 </section>
 {% endif %}
 
