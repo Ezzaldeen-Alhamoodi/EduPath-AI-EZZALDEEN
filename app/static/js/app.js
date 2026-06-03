@@ -1300,7 +1300,7 @@ const SMART_GOALS_V4610 = {
         },
         current: ["لا أحفظ شيئًا","أحفظ أقل من جزء","أحفظ جزءًا واحدًا","أحفظ جزأين","أحفظ 5 أجزاء","أحفظ 10 أجزاء","أحفظ أكثر من ذلك","تحديد يدوي"],
         target: ["حفظ سورة محددة","حفظ جزء عم","حفظ 5 أجزاء","حفظ 10 أجزاء","حفظ 15 جزءًا","حفظ 20 جزءًا","حفظ القرآن كاملًا","خطة مخصصة"],
-        commitment: ["ربع صفحة يوميًا","نصف صفحة يوميًا","صفحة يوميًا","عدد آيات محدد يوميًا","مدة زمنية يومية","خطة مخصصة"]
+        commitment: ["ربع صفحة يوميًا","نصف صفحة يوميًا","صفحة يوميًا","صفحة ونصف يوميًا","صفحتان يوميًا","عدد آيات محدد يوميًا","مدة زمنية يومية","خطة مخصصة"]
     },
     "General": {
         categories: ["Personal Goal","Study Goal","Skill Goal","Habit Goal","Other"],
@@ -1602,4 +1602,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(eduPathGoalCustomFinalV4613, 200);
     setTimeout(eduPathGoalCustomFinalV4613, 700);
+});
+
+
+
+/* EduPath AI v4.6.14 Inline Custom + Arabic Islamic Labels */
+function eduPathApplyIslamicGoalCustomLabelsV4614() {
+    const type = document.getElementById("goalTypeSelect");
+    const isIslamic = type && type.value === "Islamic Goals";
+
+    const labelMap = {
+        customCategoryLabel: isIslamic ? "اكتب التصنيف المخصص" : "Custom Goal Category",
+        customPathLabel: isIslamic ? "اكتب المسار المخصص" : "Custom Goal Path",
+        customCurrentLabel: isIslamic ? "اكتب حالتك الحالية" : "Custom Current State",
+        customTargetLabel: isIslamic ? "اكتب هدفك المستهدف" : "Custom Target State",
+        customCommitmentLabel: isIslamic ? "اكتب الالتزام المخصص" : "Custom Commitment"
+    };
+
+    Object.entries(labelMap).forEach(([id, text]) => {
+        const label = document.getElementById(id);
+        if (label) label.textContent = text;
+    });
+
+    const placeholders = [
+        ["customGoalCategoryInput", isIslamic ? "مثال: القرآن الكريم، التجويد، حلقة التحفيظ" : "Write your custom category"],
+        ["customGoalPathInput", isIslamic ? "مثال: حفظ سورة محددة، مراجعة جزء محدد" : "Write your custom path"],
+        ["customCurrentInput", isIslamic ? "مثال: أحفظ جزءين وأحتاج مراجعة" : "Write your current state"],
+        ["customTargetInput", isIslamic ? "مثال: حفظ جزء عم كاملًا" : "Write your target state"],
+        ["customCommitmentInput", isIslamic ? "مثال: صفحة ونصف يوميًا" : "Write your custom commitment"]
+    ];
+
+    placeholders.forEach(([id, text]) => {
+        const input = document.getElementById(id);
+        if (input) input.placeholder = text;
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    ["goalTypeSelect","goalCategorySelect","goalPathSelect","currentStateSelect","targetStateSelect","commitmentSelect"].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("change", () => {
+            setTimeout(eduPathApplyIslamicGoalCustomLabelsV4614, 80);
+            setTimeout(eduPathGoalCustomFinalV4613, 100);
+        });
+    });
+
+    setTimeout(eduPathApplyIslamicGoalCustomLabelsV4614, 200);
+    setTimeout(eduPathGoalCustomFinalV4613, 220);
 });

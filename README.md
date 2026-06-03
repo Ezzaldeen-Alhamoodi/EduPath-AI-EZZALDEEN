@@ -672,3 +672,14 @@ gunicorn server:app
 - Other/Custom fields now appear as normal form fields inside the grid when selected.
 - Milestones and Goal Intelligence Details remain internal and are not shown in goal cards.
 - Goal intelligence continues to use hidden milestones and generated keywords internally.
+
+
+## v4.6.14 Inline Custom Goal Fields
+
+- Custom/Other fields in Smart Goals now open directly under their related dropdown.
+- Islamic Goals custom fields now use Arabic labels and Arabic placeholders.
+- Quran daily commitment options now include:
+  - صفحة ونصف يوميًا
+  - صفحتان يوميًا
+- Kept milestones and keywords internal.
+- Preserved goal-task linking without automatic task creation.

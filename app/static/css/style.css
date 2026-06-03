@@ -2996,3 +2996,71 @@ html[dir="rtl"] .goal-current-target {
         align-items: start;
     }
 }
+
+
+
+/* EduPath AI v4.6.14 Inline Custom Goal Fields */
+.adaptive-goal-panel-v4614 {
+    border: 1px solid rgba(37, 99, 235, 0.22);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.065), rgba(6, 182, 212, 0.045));
+    border-radius: 26px;
+    padding: 18px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: start;
+}
+
+.adaptive-goal-panel-v4614 .goal-field {
+    display: grid;
+    gap: 7px;
+    min-width: 0;
+}
+
+.adaptive-goal-panel-v4614 .goal-field-wide {
+    grid-column: 1 / -1;
+}
+
+.inline-custom-field {
+    display: none;
+    margin-top: 6px;
+    padding: 10px;
+    border-radius: 16px;
+    background: rgba(37, 99, 235, 0.06);
+    border: 1px dashed rgba(37, 99, 235, 0.22);
+}
+
+.inline-custom-field.edupath-visible-custom,
+#customCategoryBox.edupath-visible-custom,
+#customPathBox.edupath-visible-custom,
+#customCurrentBox.edupath-visible-custom,
+#customTargetBox.edupath-visible-custom,
+#customCommitmentBox.edupath-visible-custom {
+    display: grid !important;
+    gap: 7px;
+}
+
+.adaptive-goal-panel-v4614 input[type="hidden"] {
+    display: none !important;
+}
+
+html[dir="rtl"] .inline-custom-field,
+html[dir="rtl"] .adaptive-goal-panel-v4614 label {
+    text-align: right;
+}
+
+@media (max-width: 860px) {
+    .adaptive-goal-panel-v4614 {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Final override: custom boxes are inline inside their own goal-field, never pushed to form bottom. */
+.smart-goal-form-v4613 #customCategoryBox,
+.smart-goal-form-v4613 #customPathBox,
+.smart-goal-form-v4613 #customCurrentBox,
+.smart-goal-form-v4613 #customTargetBox,
+.smart-goal-form-v4613 #customCommitmentBox {
+    grid-column: auto !important;
+}
