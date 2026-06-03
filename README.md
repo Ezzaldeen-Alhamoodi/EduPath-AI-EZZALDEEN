@@ -929,3 +929,29 @@ Design/navigation refinement.
 - 0 API calls.
 - 0 OpenRouter usage.
 - 0 cost.
+
+
+## v4.7.4 Compact Icon Navigation
+
+Design refinement update.
+
+### Changed
+- Removed My Resources from direct desktop/mobile navigation to avoid duplication.
+- My Resources remains available from the Resources page.
+- Added compact colored icon boxes to the mobile bottom navigation:
+  - Home
+  - Goals
+  - Tasks
+  - Resources
+  - Coach
+  - More
+- Reduced mobile bottom navigation clutter while keeping it readable.
+- Reduced desktop sidebar width and spacing.
+- Reduced oversized cards, hero sections, and some repeated large spacing.
+- Kept AI Coach clearly visible in both desktop and mobile navigation.
+- Kept Languages hidden from navigation.
+
+### AI usage
+- 0 API calls.
+- 0 OpenRouter usage.
+- 0 cost.
