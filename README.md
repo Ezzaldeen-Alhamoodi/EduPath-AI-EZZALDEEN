@@ -651,3 +651,14 @@ gunicorn server:app
 - Milestones are generated adaptively and stored internally.
 - Added robust Other/Custom fields for Smart Goals and Smart Tasks.
 - Goal progress remains based only on user-created completed tasks.
+
+
+## v4.6.12 Custom Fields + Layout Fix
+
+- Fixed Other/Custom fields not opening in Smart Goals.
+- Strengthened Other/Custom field handling in Smart Tasks.
+- Removed Milestones display from user-facing goal cards.
+- Removed Goal Intelligence Details display from user-facing goal cards.
+- Milestones and keywords remain internal for the Goal Intelligence Engine.
+- Improved layout to use two columns on larger screens and one column on narrow mobile screens.
+- Preserved smart goal-task linking without automatic task creation.

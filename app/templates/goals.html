@@ -16,7 +16,6 @@
 <section class="grid-2">
     <div class="card">
         <h2>◎ Create Smart Goal</h2>
-        <p class="muted">Choose the goal type first. The form adapts step by step without showing unnecessary fields.</p>
 
         <form method="POST" class="form smart-goal-form" id="smartGoalForm">
             <label>Goal Title</label>
@@ -39,7 +38,7 @@
                 <option>Other</option>
             </select>
 
-            <div class="adaptive-goal-box" id="adaptiveGoalBox">
+            <div class="adaptive-goal-box smart-two-col-form" id="adaptiveGoalBox">
                 <div class="form-row">
                     <div>
                         <label id="goalCategoryLabel">Goal Category</label>
@@ -142,25 +141,6 @@
 
                 {% if goal.goal_confidence is defined and goal.goal_confidence.last_task %}
                     <p class="muted">Last related task: {{ goal.goal_confidence.last_task }}</p>
-                {% endif %}
-
-                {% if goal.milestones %}
-                    <details class="goal-details">
-                        <summary>Milestones</summary>
-                        <div class="milestone-list">
-                            {% for milestone in goal.milestones[:12] %}
-                                <span>{{ milestone }}</span>
-                            {% endfor %}
-                            {% if goal.milestones|length > 12 %}<span>+{{ goal.milestones|length - 12 }} more</span>{% endif %}
-                        </div>
-                    </details>
-                {% endif %}
-
-                {% if goal.notes %}
-                    <details class="goal-details">
-                        <summary>Goal Intelligence Details</summary>
-                        <pre>{{ goal.notes }}</pre>
-                    </details>
                 {% endif %}
 
                 <div class="actions">

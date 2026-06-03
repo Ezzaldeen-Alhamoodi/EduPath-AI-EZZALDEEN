@@ -1493,3 +1493,74 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(forceTaskCustomBoxes, 120);
 });
+
+
+
+/* EduPath AI v4.6.12 Custom Fields + Adaptive Layout Fix */
+function eduPathIsCustomValue(value) {
+    const normalized = (value || "").trim().toLowerCase();
+    return ["other", "custom", "custom plan", "other / أخرى", "أخرى", "خطة مخصصة", "تحديد يدوي"].includes(normalized);
+}
+
+function eduPathSetBoxVisible(boxId, visible) {
+    const box = document.getElementById(boxId);
+    if (!box) return;
+    box.classList.toggle("edupath-visible-custom", !!visible);
+    box.style.display = visible ? "block" : "none";
+}
+
+function eduPathRefreshGoalCustomFields() {
+    const category = document.getElementById("goalCategorySelect");
+    const path = document.getElementById("goalPathSelect");
+    const current = document.getElementById("currentStateSelect");
+    const target = document.getElementById("targetStateSelect");
+    const commitment = document.getElementById("commitmentSelect");
+
+    eduPathSetBoxVisible("customCategoryBox", category && eduPathIsCustomValue(category.value));
+    eduPathSetBoxVisible("customPathBox", path && eduPathIsCustomValue(path.value));
+    eduPathSetBoxVisible("customCurrentBox", current && eduPathIsCustomValue(current.value));
+    eduPathSetBoxVisible("customTargetBox", target && eduPathIsCustomValue(target.value));
+    eduPathSetBoxVisible("customCommitmentBox", commitment && eduPathIsCustomValue(commitment.value));
+}
+
+function eduPathRefreshTaskCustomFields() {
+    const categoryInput = document.getElementById("categorySelect");
+    const topic = document.getElementById("topicSelect");
+    const skill = document.getElementById("skillSelect");
+    const detail = document.getElementById("detailedTopicSelect");
+    const training = document.getElementById("trainingTypeSelect");
+
+    eduPathSetBoxVisible("customCategoryBox", categoryInput && eduPathIsCustomValue(categoryInput.value));
+    eduPathSetBoxVisible("customTopicBox", topic && eduPathIsCustomValue(topic.value));
+    eduPathSetBoxVisible("customSkillBox", skill && eduPathIsCustomValue(skill.value));
+    eduPathSetBoxVisible("customDetailedTopicBox", detail && eduPathIsCustomValue(detail.value));
+    eduPathSetBoxVisible("customTrainingTypeBox", training && eduPathIsCustomValue(training.value));
+}
+
+function eduPathRefreshAllCustomFields() {
+    eduPathRefreshGoalCustomFields();
+    eduPathRefreshTaskCustomFields();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    ["goalTypeSelect","goalCategorySelect","goalPathSelect","currentStateSelect","targetStateSelect","commitmentSelect",
+     "categorySelect","topicSelect","skillSelect","detailedTopicSelect","trainingTypeSelect"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener("change", () => {
+                setTimeout(eduPathRefreshAllCustomFields, 50);
+                setTimeout(eduPathRefreshAllCustomFields, 180);
+            });
+        }
+    });
+
+    document.addEventListener("click", event => {
+        if (event.target.closest(".task-type-card")) {
+            setTimeout(eduPathRefreshAllCustomFields, 120);
+            setTimeout(eduPathRefreshAllCustomFields, 300);
+        }
+    });
+
+    setTimeout(eduPathRefreshAllCustomFields, 150);
+    setTimeout(eduPathRefreshAllCustomFields, 500);
+});

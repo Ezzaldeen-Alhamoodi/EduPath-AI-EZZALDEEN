@@ -2810,3 +2810,98 @@ html[dir="rtl"] .smart-system-note {
 .goal-philosophy-card {
     display: none !important;
 }
+
+
+
+/* EduPath AI v4.6.12 Layout + Custom Fields Fix */
+.smart-two-col-form,
+.adaptive-goal-box {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 16px;
+    align-items: start;
+}
+
+.adaptive-goal-box > label,
+.adaptive-goal-box > input,
+.adaptive-goal-box > textarea,
+.adaptive-goal-box > select,
+.adaptive-goal-box > p {
+    grid-column: 1 / -1;
+}
+
+.adaptive-goal-box .form-row {
+    display: contents;
+}
+
+.adaptive-goal-box .form-row > div {
+    min-width: 0;
+}
+
+.custom-goal-fields {
+    grid-column: 1 / -1;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 16px;
+}
+
+.custom-goal-fields .form-row {
+    display: contents;
+}
+
+#customCategoryBox,
+#customPathBox,
+#customCurrentBox,
+#customTargetBox,
+#customCommitmentBox,
+#customTopicBox,
+#customSkillBox,
+#customDetailedTopicBox,
+#customTrainingTypeBox {
+    display: none;
+}
+
+#customCategoryBox.edupath-visible-custom,
+#customPathBox.edupath-visible-custom,
+#customCurrentBox.edupath-visible-custom,
+#customTargetBox.edupath-visible-custom,
+#customCommitmentBox.edupath-visible-custom,
+#customTopicBox.edupath-visible-custom,
+#customSkillBox.edupath-visible-custom,
+#customDetailedTopicBox.edupath-visible-custom,
+#customTrainingTypeBox.edupath-visible-custom {
+    display: block !important;
+}
+
+.form .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 16px;
+}
+
+.form label {
+    margin-top: 8px;
+}
+
+.goal-details {
+    display: none !important;
+}
+
+@media (max-width: 760px) {
+    .smart-two-col-form,
+    .adaptive-goal-box,
+    .custom-goal-fields,
+    .form .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .adaptive-goal-box .form-row {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .custom-goal-fields .form-row {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
