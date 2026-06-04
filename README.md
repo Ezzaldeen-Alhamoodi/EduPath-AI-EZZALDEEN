@@ -1361,3 +1361,33 @@ Dashboard-only responsive polish.
 - Dashboard-only CSS/content changes.
 - No database changes.
 - No adaptive JavaScript modifications.
+
+
+## v5.1.6 Dashboard Layout Fix
+
+Dashboard-only layout fix.
+
+### Desktop
+- Fixed right sidebar overlap.
+- Sidebar stays fixed on the right.
+- Main content starts after sidebar using `margin-right`.
+- Dashboard uses full available screen width without horizontal scroll.
+- Removed the harmful desktop effect of `.main { margin: 0 !important; }` by overriding it safely.
+
+### Hero
+- Rebuilt hero as a modern blue gradient SaaS-style section.
+- Text is white and readable.
+- Progress card is glass-style inside the hero.
+
+### Stats
+- Stat cards are compact.
+- Icon, label, and number are aligned together.
+
+### Mobile
+- Hero improved without changing the whole mobile structure.
+- Main content remains full-width with bottom navigation space.
+
+### Safety
+- Dashboard/CSS/base only.
+- No changes to Tasks, Goals, Resources adaptive logic.
+- No database changes.
