@@ -1203,3 +1203,35 @@ Focused desktop UI refinement.
 - 0 API calls.
 - 0 OpenRouter usage.
 - 0 cost.
+
+
+## v4.8.2 Admin Security Hardening
+
+Security-focused update.
+
+### Verified
+- Desktop Admin link is visible only if:
+  - current_user.is_admin
+  - or user email is in ADMIN_EMAILS
+- Mobile Admin link is visible only under the same condition.
+- Every backend route beginning with `/admin` is protected by:
+  - @login_required
+  - @admin_required
+
+### Hardened
+- `admin_required` now returns a real 403 Forbidden for non-admin users instead of a normal redirect.
+- Unauthenticated users are handled by Flask-Login unauthorized flow.
+- Directly typing `/admin` or any `/admin/...` URL as a non-admin user will not grant access.
+
+### Admin routes checked
+- /admin
+- /admin/send-message
+- /admin/subscription-codes/generate
+- /admin/subscription-codes/<id>/cancel
+- /admin/user/<id>/update
+- /admin/user/<id>/delete
+
+### AI usage
+- 0 API calls.
+- 0 OpenRouter usage.
+- 0 cost.

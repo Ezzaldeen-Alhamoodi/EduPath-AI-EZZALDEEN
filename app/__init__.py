@@ -8,7 +8,7 @@ import string
 import re
 from datetime import datetime, date, timedelta
 
-from flask import Flask, render_template, request, redirect, url_for, jsonify, flash, session
+from flask import Flask, render_template, request, redirect, url_for, jsonify, flash, session, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -536,9 +536,10 @@ def admin_required(view_func):
 
     @wraps(view_func)
     def wrapper(*args, **kwargs):
-        if not current_user.is_authenticated or not user_is_admin(current_user):
-            flash("Admin access only.", "error")
-            return redirect(url_for("index"))
+        if not current_user.is_authenticated:
+            return login_manager.unauthorized()
+        if not user_is_admin(current_user):
+            abort(403)
         return view_func(*args, **kwargs)
 
     return wrapper
