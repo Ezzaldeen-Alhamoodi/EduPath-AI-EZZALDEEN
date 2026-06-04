@@ -1253,7 +1253,7 @@ const SMART_GOAL_AR_LABELS_V520 = {
     "Islamic Goals": "الأهداف الإسلامية",
     "General": "عام",
     "Other": "أخرى",
-    "Custom": "مخصص",
+    "Custom": "أخرى",
     "School Study": "الدراسة المدرسية",
     "University Study": "الدراسة الجامعية",
     "Online Course": "دورة تعليمية",
@@ -1353,12 +1353,14 @@ const SMART_GOAL_AR_LABELS_V520 = {
     "طلب العلم الشرعي": "طلب العلم الشرعي",
     "العبادات": "العبادات",
     "أخرى": "أخرى",
-    "Custom Plan": "خطة مخصصة"
+    "Custom Plan": "أخرى"
 };
 
 function smartGoalLabelArV520(value) {
+    if (["Other", "Custom", "Custom Plan", "خطة مخصصة", "تحديد يدوي", "Other / أخرى", "أخرى"].includes(value)) return "أخرى";
     return SMART_GOAL_AR_LABELS_V520[value] || value;
 }
+
 
 const SMART_GOALS_V4610 = {
     "Education": {
@@ -1366,53 +1368,136 @@ const SMART_GOALS_V4610 = {
         paths: {
             "School Study": ["Mathematics","Physics","Chemistry","Biology","English","Arabic","Exam Review","Homework","Other"],
             "University Study": ["Course Study","Assignment","Lab","Research","Presentation","Exam Review","Other"],
+            "Online Course": ["Course Lessons","Practice","Project","Certificate","Other"],
+            "Research": ["Topic Selection","Reading","Summary","Writing","Presentation","Other"],
+            "Presentation": ["Content Preparation","Slides","Practice Speaking","Final Review","Other"],
             "Other": ["Study Plan","Exam Review","Assignment","Project","Reading","Other"]
         },
-        current: ["Not started","Beginner","In progress","Need review","Custom"],
-        target: ["Complete course","High grade","Finish project","Master topic","Custom"],
-        commitment: ["30 minutes daily","60 minutes daily","Weekly review","Custom"]
+        states: {
+            "Mathematics": {
+                current: ["لم أبدأ بعد","مستوى ضعيف","مستوى متوسط","مستوى جيد","مستوى قوي","Other"],
+                target: ["فهم الأساسيات","حل التمارين بثقة","تحقيق درجة عالية","إتقان الموضوع","Other"],
+                commitment: ["30 دقيقة يومياً","60 دقيقة يومياً","حل تمارين يومياً","مراجعة أسبوعية","Other"]
+            },
+            "English": {
+                current: ["Beginner","Intermediate","Advanced","Other"],
+                target: ["تحسين القراءة","تحسين الكتابة","تحسين الاستماع","تحسين التحدث","إتقان المنهج","Other"],
+                commitment: ["30 دقيقة يومياً","60 دقيقة يومياً","مراجعة أسبوعية","Other"]
+            },
+            "Other": {
+                current: ["لم أبدأ بعد","مبتدئ","قيد التقدم","أحتاج إلى مراجعة","Other"],
+                target: ["إكمال الهدف","تحقيق درجة عالية","إتقان الموضوع","Other"],
+                commitment: ["30 دقيقة يومياً","60 دقيقة يومياً","مراجعة أسبوعية","Other"]
+            }
+        }
     },
+
     "Language": {
         categories: ["English","Chinese","Turkish","Russian","Indonesian","Romanian","Arabic","French","German","Other"],
         paths: {
-            "English": ["IELTS Academic","TOEFL","Duolingo English Test","General English","Academic English","Speaking","Writing","Reading","Listening","Vocabulary","Grammar","Pronunciation","Other"],
+            "English": ["IELTS","TOEFL","Duolingo","General English","Academic English","Speaking","Writing","Reading","Listening","Vocabulary","Grammar","Pronunciation","Other"],
+            "IELTS": ["Full Official Test","Mock Test","Listening","Reading","Writing Task 1","Writing Task 2","Speaking Part 1","Speaking Part 2","Speaking Part 3","Vocabulary","Grammar","Matching Headings","True False Not Given","Multiple Choice","Sentence Completion","Summary Completion","Map Labelling","Form Completion","Note Completion","Flow Chart Completion","Other"],
+            "TOEFL": ["Full Official Test","Mock Test","Reading","Listening","Speaking","Writing","Academic Discussion","Integrated Writing","Independent Writing","Vocabulary","Grammar","Other"],
+            "Duolingo": ["Full Test","Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","Listen and Type","Interactive Listening","Write About the Photo","Writing Sample","Interactive Writing","Speak About the Photo","Read Then Speak","Speaking Sample","Interactive Speaking","Other"],
             "Chinese": ["HSK","General Chinese","Speaking","Writing","Reading","Listening","Characters","Vocabulary","Other"],
+            "HSK": ["HSK 1","HSK 2","HSK 3","HSK 4","HSK 5","HSK 6","Vocabulary","Characters","Listening","Reading","Writing","Mock Test","Other"],
             "Turkish": ["General Turkish","Speaking","Writing","Reading","Listening","Vocabulary","Grammar","Other"],
             "Russian": ["General Russian","Speaking","Writing","Reading","Listening","Vocabulary","Grammar","Other"],
             "Arabic": ["Arabic for Quran","Writing","Reading","Grammar","Vocabulary","Other"],
             "Other": ["General Language","Exam Preparation","Speaking","Writing","Reading","Listening","Other"]
         },
-        current: ["Beginner","Intermediate","Advanced","IELTS Band 5.0","IELTS Band 5.5","IELTS Band 6.0","Custom"],
-        target: ["IELTS Band 6.5","IELTS Band 7.0","TOEFL 90+","Duolingo 120+","HSK 4","HSK 5","Fluent Speaking","Custom"],
-        commitment: ["30 minutes daily","60 minutes daily","Skill rotation","Mock test weekly","Custom"]
+        states: {
+            "IELTS": {
+                current: ["Band 4","Band 4.5","Band 5","Band 5.5","Band 6","Band 6.5","Band 7","Band 7.5","Band 8","Other"],
+                target: ["Band 5","Band 5.5","Band 6","Band 6.5","Band 7","Band 7.5","Band 8","Band 8.5","Band 9","Other"],
+                commitment: ["30 دقيقة يومياً","45 دقيقة يومياً","60 دقيقة يومياً","90 دقيقة يومياً","اختبار أسبوعي","اختباران أسبوعياً","Other"]
+            },
+            "TOEFL": {
+                current: ["Beginner","40+","60+","70+","80+","90+","100+","Other"],
+                target: ["70+","80+","90+","100+","110+","Other"],
+                commitment: ["30 دقيقة يومياً","60 دقيقة يومياً","90 دقيقة يومياً","Mock Test أسبوعياً","Other"]
+            },
+            "Duolingo": {
+                current: ["80+","90+","100+","110+","120+","Other"],
+                target: ["100+","110+","120+","130+","140+","Other"],
+                commitment: ["30 دقيقة يومياً","60 دقيقة يومياً","تدريب يومي على الأسئلة","اختبار أسبوعي","Other"]
+            },
+            "HSK": {
+                current: ["HSK 1","HSK 2","HSK 3","HSK 4","HSK 5","Other"],
+                target: ["HSK 3","HSK 4","HSK 5","HSK 6","Other"],
+                commitment: ["30 دقيقة يومياً","60 دقيقة يومياً","مراجعة مفردات يومياً","Mock Test أسبوعياً","Other"]
+            },
+            "Other": {
+                current: ["Beginner","Intermediate","Advanced","Other"],
+                target: ["تحسين المستوى","إتقان مهارة محددة","الطلاقة","Other"],
+                commitment: ["30 دقيقة يومياً","60 دقيقة يومياً","تدريب مهارة يومياً","Other"]
+            }
+        }
     },
+
     "Exam / Certificate": {
-        categories: ["IELTS","TOEFL","Duolingo English Test","HSK","CSCA","SAT","ACT","GRE","GMAT","Other"],
+        categories: ["IELTS","TOEFL","Duolingo","HSK","CSCA","SAT","ACT","GRE","GMAT","Other"],
         paths: {
-            "IELTS": ["Listening","Reading","Writing Task 1","Writing Task 2","Speaking Part 1","Speaking Part 2","Speaking Part 3","Full Test"],
-            "TOEFL": ["Complete the Words","Read in Daily Life","Read an Academic Passage","Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk","Build a Sentence","Write an Email","Write for an Academic Discussion","Listen and Repeat","Take an Interview","Full Test"],
-            "Duolingo English Test": ["Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","Listen and Type","Interactive Listening","Write About the Photo","Writing Sample","Interactive Writing","Speak About the Photo","Read Then Speak","Speaking Sample","Interactive Speaking","Full Test"],
-            "CSCA": ["Mathematics","Physics","Chemistry","Full Exam"],
-            "HSK": ["Vocabulary","Characters","Listening","Reading","Writing","Mock Test"],
+            "IELTS": ["Full Official Test","Mock Test","Listening","Reading","Writing Task 1","Writing Task 2","Speaking Part 1","Speaking Part 2","Speaking Part 3","Vocabulary","Grammar","Matching Headings","True False Not Given","Multiple Choice","Sentence Completion","Summary Completion","Map Labelling","Form Completion","Note Completion","Flow Chart Completion","Other"],
+            "TOEFL": ["Full Official Test","Mock Test","Reading","Listening","Speaking","Writing","Academic Discussion","Integrated Writing","Independent Writing","Vocabulary","Grammar","Other"],
+            "Duolingo": ["Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","Listen and Type","Interactive Listening","Write About the Photo","Writing Sample","Interactive Writing","Speak About the Photo","Read Then Speak","Speaking Sample","Interactive Speaking","Full Test","Other"],
+            "CSCA": ["Mathematics","Physics","Chemistry","Full Exam","Algebra","Geometry","Calculus","Mechanics","Electricity","Organic Chemistry","Inorganic Chemistry","Other"],
+            "HSK": ["Vocabulary","Characters","Listening","Reading","Writing","Mock Test","Other"],
+            "SAT": ["Reading","Writing and Language","Math No Calculator","Math Calculator","Full Practice Test","Vocabulary","Grammar","Other"],
+            "ACT": ["English","Math","Reading","Science","Writing","Full Practice Test","Other"],
+            "GRE": ["Verbal Reasoning","Quantitative Reasoning","Analytical Writing","Vocabulary","Mock Test","Other"],
+            "GMAT": ["Quantitative","Verbal","Integrated Reasoning","Analytical Writing","Data Insights","Mock Test","Other"],
             "Other": ["Subject Review","Mock Test","Weakness Training","Final Revision","Other"]
         },
-        current: ["Beginner","Intermediate","Advanced","Need diagnostic","Custom"],
-        target: ["Pass exam","Strong score","Scholarship requirement","University requirement","Custom"],
-        commitment: ["Timed practice daily","Mock test weekly","Weakness review","Formula review","Custom"]
+        states: {
+            "IELTS": {
+                current: ["Band 4","Band 4.5","Band 5","Band 5.5","Band 6","Band 6.5","Band 7","Band 7.5","Band 8","Other"],
+                target: ["Band 5","Band 5.5","Band 6","Band 6.5","Band 7","Band 7.5","Band 8","Band 8.5","Band 9","Other"],
+                commitment: ["30 دقيقة يومياً","45 دقيقة يومياً","60 دقيقة يومياً","90 دقيقة يومياً","اختبار أسبوعي","اختباران أسبوعياً","Other"]
+            },
+            "CSCA": {
+                current: ["Beginner","Intermediate","Advanced","Need diagnostic","Other"],
+                target: ["اجتياز الاختبار","درجة قوية","استيفاء شرط الجامعة الصينية","Other"],
+                commitment: ["30 دقيقة يومياً","60 دقيقة يومياً","مراجعة قوانين","اختبار أسبوعي","Other"]
+            },
+            "Other": {
+                current: ["Beginner","Intermediate","Advanced","Need diagnostic","Other"],
+                target: ["اجتياز الاختبار","درجة قوية","استيفاء شرط القبول","Other"],
+                commitment: ["30 دقيقة يومياً","60 دقيقة يومياً","Mock Test أسبوعياً","مراجعة نقاط الضعف","Other"]
+            }
+        }
     },
+
     "Programming & Technology": {
         categories: ["Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","Flask","Django","React","Node.js","Git / GitHub","Algorithms","Data Structures","Databases","Cybersecurity","Information Technology","Computer Networks","Operating Systems","Software Engineering","Web Development","Projects","Problem Solving","Debugging","Other"],
         paths: {
             "Python": ["Beginner Python","Intermediate Python","Advanced Python","OOP","Flask","Automation","Data Analysis","Machine Learning","Projects","Problem Solving","Other"],
-            "Flask": ["Routes","Templates","Forms","Authentication","Database","Deployment","Full Web App","Other"],
-            "Web Development": ["Frontend","Backend","Full Stack","Responsive Design","Authentication","APIs","Databases","Deployment","Other"],
+            "Flask": ["Routes","Templates","Forms","Authentication","Database","Deployment","Full Web App","API","Login System","Other"],
+            "JavaScript": ["Basics","DOM","Events","Async JavaScript","Fetch API","Projects","Other"],
+            "React": ["Components","Props","State","Hooks","Routing","API Integration","Project","Other"],
             "Algorithms": ["Searching","Sorting","Recursion","Greedy","Dynamic Programming","Graphs","Trees","Complexity","Other"],
+            "Web Development": ["Frontend","Backend","Full Stack","Responsive Design","Authentication","APIs","Databases","Deployment","Other"],
             "Other": ["Beginner Track","Project Track","Problem Solving","Documentation","Other"]
         },
-        current: ["Beginner","Know basics","Intermediate","Advanced","Custom"],
-        target: ["Build a complete project","Deploy a useful web app","Solve 100 problems","Internship ready","Custom"],
-        commitment: ["30 minutes daily","60 minutes daily","Build weekly","Solve problems daily","Custom"]
+        states: {
+            "Python": {
+                current: ["مبتدئ","أعرف الأساسيات","متوسط","متقدم","Other"],
+                target: ["إتقان الأساسيات","بناء مشروع كامل","تعلم Flask","تحليل بيانات","Machine Learning","Other"],
+                commitment: ["30 دقيقة يومياً","ساعة يومياً","مشروع أسبوعي","حل مسائل يومية","Other"]
+            },
+            "Flask": {
+                current: ["مبتدئ","أعرف Routes","أعرف Templates","أعرف قواعد البيانات","Other"],
+                target: ["بناء تطبيق Flask كامل","نظام تسجيل دخول","نشر التطبيق","بناء API","Other"],
+                commitment: ["30 دقيقة يومياً","ساعة يومياً","مشروع أسبوعي","تطوير ميزة يومياً","Other"]
+            },
+            "Other": {
+                current: ["مبتدئ","أعرف الأساسيات","متوسط","متقدم","Other"],
+                target: ["بناء مشروع متكامل","الاستعداد للتدريب العملي","حل 100 مسألة","Other"],
+                commitment: ["30 دقيقة يومياً","ساعة يومياً","مشروع أسبوعي","حل مسائل يومية","Other"]
+            }
+        }
     },
+
     "Artificial Intelligence": {
         categories: ["Machine Learning","Deep Learning","Data Science","NLP","Computer Vision","AI Project","Other"],
         paths: {
@@ -1420,10 +1505,15 @@ const SMART_GOALS_V4610 = {
             "Data Science": ["Pandas","Data Cleaning","Visualization","Statistics","Projects","Other"],
             "Other": ["Theory","Practice","Project","Dataset","Model Training","Deployment","Other"]
         },
-        current: ["Beginner","Know basics","Intermediate","Advanced","Custom"],
-        target: ["Build AI project","Understand ML basics","Deploy model","Custom"],
-        commitment: ["30 minutes daily","Project weekly","Reading + practice","Custom"]
+        states: {
+            "Other": {
+                current: ["مبتدئ","أعرف الأساسيات","متوسط","متقدم","Other"],
+                target: ["فهم أساسيات ML","بناء مشروع AI","نشر نموذج","Other"],
+                commitment: ["30 دقيقة يومياً","مشروع أسبوعي","قراءة وتطبيق","Other"]
+            }
+        }
     },
+
     "Scholarship": {
         categories: ["Scholarship Search","University Research","Documents","CV","Motivation Letter","Personal Statement","Recommendation Letter","Interview","Application Form","Email Communication","Visa","Portfolio","Chinese Scholarship","Other"],
         paths: {
@@ -1433,65 +1523,109 @@ const SMART_GOALS_V4610 = {
             "Interview": ["Mock Interview","Common Questions","Answer Improvement","Confidence Practice","Other"],
             "Other": ["Preparation","Submission","Follow Up","Final Check","Other"]
         },
-        current: ["Not started","Documents 30% ready","Documents 50% ready","Documents 70% ready","Submitted some applications","Custom"],
-        target: ["Submit complete application","Get interview","Win full scholarship","Get admission","Custom"],
-        commitment: ["30 minutes daily","Weekly application review","Document checklist","Interview practice","Custom"]
+        states: {
+            "Other": {
+                current: ["لم أبدأ بعد","المستندات جاهزة 30٪","المستندات جاهزة 50٪","المستندات جاهزة 70٪","قدمت لبعض الجامعات","Other"],
+                target: ["إرسال طلب مكتمل","الحصول على مقابلة","الحصول على منحة كاملة","الحصول على قبول","Other"],
+                commitment: ["30 دقيقة يومياً","مراجعة أسبوعية للطلبات","قائمة تحقق للمستندات","تدريب مقابلة","Other"]
+            }
+        }
     },
+
     "University": {
         categories: ["Computer Science","Information Technology","Computer Engineering","Software Engineering","Artificial Intelligence","Data Science","Cybersecurity","Engineering","Medicine","Business","Law","Education","Other"],
         paths: {
             "Computer Science": ["Programming","Algorithms","Data Structures","Databases","Operating Systems","Networks","AI","Graduation Project","Other"],
             "Other": ["Course Study","Assignment","Lab","Exam","Research","Other"]
         },
-        current: ["Start of course","Need review","Average","Strong","Custom"],
-        target: ["Pass course","High grade","Complete project","Master subject","Custom"],
-        commitment: ["Lecture study","Assignment schedule","Lab practice","Exam review","Custom"]
+        states: {
+            "Other": {
+                current: ["بداية المقرر","أحتاج إلى مراجعة","متوسط","قوي","Other"],
+                target: ["اجتياز المقرر","تحقيق درجة عالية","إكمال مشروع","إتقان المادة","Other"],
+                commitment: ["دراسة محاضرة","جدول واجبات","تدريب عملي","مراجعة اختبار","Other"]
+            }
+        }
     },
+
     "Mathematics": {
         categories: ["Algebra","Geometry","Trigonometry","Calculus","Probability","Statistics","Problem Solving","Other"],
         paths: {"Other": ["Study theory","Solve exercises","Timed practice","Review mistakes","Other"]},
-        current: ["Beginner","Average","Good","Strong","Custom"],
-        target: ["Master topic","High exam score","Solve advanced problems","Custom"],
-        commitment: ["Daily exercises","Timed practice","Mistake review","Custom"]
+        states: {
+            "Other": {
+                current: ["مبتدئ","متوسط","جيد","قوي","Other"],
+                target: ["إتقان الموضوع","تحقيق درجة عالية","حل مسائل متقدمة","Other"],
+                commitment: ["تمارين يومية","تدريب مؤقت","مراجعة الأخطاء","Other"]
+            }
+        }
     },
+
     "Project": {
         categories: ["Programming Project","AI Project","Web Project","Mobile App","Research Project","Scholarship Portfolio","Personal Project","Other"],
         paths: {"Other": ["Idea","Planning","Design","Build","Testing","Deployment","Documentation","Presentation","Other"]},
-        current: ["Idea only","Planning","Started","Half complete","Almost done","Custom"],
-        target: ["Complete project","Deploy project","Portfolio ready","Presentation ready","Custom"],
-        commitment: ["Daily build","Weekly milestone","Testing cycle","Custom"]
+        states: {
+            "Other": {
+                current: ["مجرد فكرة","مرحلة التخطيط","بدأت التنفيذ","أنجزت النصف","قارب على الانتهاء","Other"],
+                target: ["إكمال المشروع","نشر المشروع","جاهز للمعرض/البورتفوليو","جاهز للعرض","Other"],
+                commitment: ["بناء يومي","محطة أسبوعية","دورة اختبار","Other"]
+            }
+        }
     },
+
     "Daily Life": {
         categories: ["Health","Exercise","Sleep","Food","Water","Personal Routine","Family","Finance","Cleaning","Time Management","Religious Routine","Other"],
         paths: {"Other": ["Daily Habit","Weekly Routine","Reminder","Self-care","Important Appointment","Other"]},
-        current: ["Not regular","Sometimes","Average","Good","Custom"],
-        target: ["Build habit","Improve routine","Stay consistent","Custom"],
-        commitment: ["Daily habit","Weekly review","Small steps","Custom"]
+        states: {
+            "Other": {
+                current: ["غير منتظم","أحياناً","متوسط","جيد","Other"],
+                target: ["بناء عادة","تحسين الروتين","الاستمرار","Other"],
+                commitment: ["عادة يومية","مراجعة أسبوعية","خطوات صغيرة","Other"]
+            }
+        }
     },
+
     "Islamic Goals": {
-        categories: ["القرآن الكريم","الحديث الشريف","العقيدة","الفقه","السيرة النبوية","الأذكار","طلب العلم الشرعي","الدعوة","العبادات","العربية للقرآن","أخرى"],
+        categories: ["القرآن الكريم","الحديث الشريف","العقيدة","الفقه","السيرة النبوية","الأذكار","طلب العلم الشرعي","الدعوة","العبادات","العربية للقرآن","Other"],
         paths: {
-            "القرآن الكريم": ["حفظ القرآن الكريم","مراجعة القرآن الكريم","إتقان التجويد","ختمة تلاوة","ختمة تدبر","حفظ سورة محددة","حفظ جزء محدد","تثبيت المحفوظ","أخرى"],
-            "الحديث الشريف": ["حفظ أحاديث","شرح أحاديث","مراجعة أحاديث","أخرى"],
-            "أخرى": ["خطة علمية","مراجعة","قراءة","حفظ","أخرى"]
+            "القرآن الكريم": ["حفظ القرآن","مراجعة القرآن","التجويد","التثبيت","التلاوة","التدبر","ختمة","حفظ سورة محددة","حفظ جزء محدد","Other"],
+            "الحديث الشريف": ["حفظ أحاديث","شرح أحاديث","مراجعة أحاديث","Other"],
+            "Other": ["خطة علمية","مراجعة","قراءة","حفظ","Other"]
         },
-        current: ["لا أحفظ شيئًا","أحفظ أقل من جزء","أحفظ جزءًا واحدًا","أحفظ جزأين","أحفظ 5 أجزاء","أحفظ 10 أجزاء","أحفظ أكثر من ذلك","تحديد يدوي"],
-        target: ["حفظ سورة محددة","حفظ جزء عم","حفظ 5 أجزاء","حفظ 10 أجزاء","حفظ 15 جزءًا","حفظ 20 جزءًا","حفظ القرآن كاملًا","خطة مخصصة"],
-        commitment: ["ربع صفحة يوميًا","نصف صفحة يوميًا","صفحة يوميًا","صفحة ونصف يوميًا","صفحتان يوميًا","عدد آيات محدد يوميًا","مدة زمنية يومية","خطة مخصصة"]
+        states: {
+            "القرآن الكريم": {
+                current: ["لا أحفظ شيئاً","أحفظ جزءاً واحداً","أحفظ 5 أجزاء","أحفظ 10 أجزاء","أحفظ 15 جزءاً","أحفظ 20 جزءاً","Other"],
+                target: ["جزء واحد","5 أجزاء","10 أجزاء","15 جزءاً","20 جزءاً","القرآن كاملاً","Other"],
+                commitment: ["ربع صفحة يومياً","نصف صفحة يومياً","صفحة يومياً","صفحتان يومياً","مراجعة يومية","مراجعة أسبوعية","Other"]
+            },
+            "Other": {
+                current: ["لم أبدأ بعد","مبتدئ","قيد التقدم","Other"],
+                target: ["إكمال الهدف","الاستمرار","إتقان المجال","Other"],
+                commitment: ["30 دقيقة يومياً","مراجعة يومية","مراجعة أسبوعية","Other"]
+            }
+        }
     },
+
     "General": {
         categories: ["Personal Goal","Study Goal","Skill Goal","Habit Goal","Other"],
         paths: {"Other": ["Plan","Practice","Review","Milestone","Other"]},
-        current: ["Not started","Beginner","In progress","Custom"],
-        target: ["Complete goal","Improve level","Custom"],
-        commitment: ["Daily steps","Weekly review","Milestones","Custom"]
+        states: {
+            "Other": {
+                current: ["لم أبدأ بعد","مبتدئ","قيد التقدم","Other"],
+                target: ["إكمال الهدف","تحسين المستوى","Other"],
+                commitment: ["خطوات يومية","مراجعة أسبوعية","محطات تقدم","Other"]
+            }
+        }
     },
+
     "Other": {
         categories: ["Other"],
-        paths: {"Other": ["Custom Plan","Other"]},
-        current: ["Not started","Custom"],
-        target: ["Custom"],
-        commitment: ["Custom"]
+        paths: {"Other": ["Other"]},
+        states: {
+            "Other": {
+                current: ["لم أبدأ بعد","Other"],
+                target: ["Other"],
+                commitment: ["Other"]
+            }
+        }
     }
 };
 
@@ -1569,14 +1703,30 @@ function updateSmartGoalsV4610(changedId = "") {
         fillGoalSelectV4610(category, data.categories || ["Other"]);
     }
 
-    const paths = (data.paths && (data.paths[category.value] || data.paths["Other"])) || ["Other"];
+    const firstLevelPaths = (data.paths && (data.paths[category.value] || data.paths["Other"])) || ["Other"];
     if (changedId === "goalTypeSelect" || changedId === "goalCategorySelect" || !path.options.length) {
-        fillGoalSelectV4610(path, paths);
+        fillGoalSelectV4610(path, firstLevelPaths);
     }
 
-    if (!current.options.length || changedId === "goalTypeSelect") fillGoalSelectV4610(current, data.current || ["Custom"]);
-    if (!target.options.length || changedId === "goalTypeSelect") fillGoalSelectV4610(target, data.target || ["Custom"]);
-    if (!commitment.options.length || changedId === "goalTypeSelect") fillGoalSelectV4610(commitment, data.commitment || ["Custom"]);
+    const secondLevelPaths = (data.paths && data.paths[path.value]) || null;
+    if (secondLevelPaths && changedId === "goalPathSelect") {
+        fillGoalSelectV4610(path, secondLevelPaths);
+    }
+
+    const stateKey = (data.states && (data.states[path.value] || data.states[category.value] || data.states["Other"])) || {};
+    const currentValues = stateKey.current || data.current || ["Other"];
+    const targetValues = stateKey.target || data.target || ["Other"];
+    const commitmentValues = stateKey.commitment || data.commitment || ["Other"];
+
+    if (["goalTypeSelect", "goalCategorySelect", "goalPathSelect"].includes(changedId) || !current.options.length) {
+        fillGoalSelectV4610(current, currentValues);
+    }
+    if (["goalTypeSelect", "goalCategorySelect", "goalPathSelect"].includes(changedId) || !target.options.length) {
+        fillGoalSelectV4610(target, targetValues);
+    }
+    if (["goalTypeSelect", "goalCategorySelect", "goalPathSelect"].includes(changedId) || !commitment.options.length) {
+        fillGoalSelectV4610(commitment, commitmentValues);
+    }
 
     const labels = {
         cat: document.getElementById("goalCategoryLabel"),

@@ -1446,3 +1446,43 @@ Dashboard-only layout fix.
 - No database migration.
 - No task page changes.
 - No resource page changes.
+
+
+## v5.2.1 Full Adaptive Arabic Goals
+
+### Goals page improvements
+- Removed remaining user-facing English labels from Goals page.
+- Unified visible custom option display to one Arabic word: "أخرى".
+- Custom fields under goal selects are Arabic and use Arabic placeholders.
+- Goal form remains adaptive:
+  - Goal Type
+  - Goal Category
+  - Goal Path
+  - Current State
+  - Target State
+  - Goal Outcome
+  - Commitment
+- Current/target/commitment now change based on the selected category/path, not only the goal type.
+
+### Exam paths
+- Added detailed official paths for:
+  - IELTS
+  - TOEFL
+  - Duolingo
+  - HSK
+  - CSCA
+  - SAT
+  - ACT
+  - GRE
+  - GMAT
+
+### Internal intelligence
+- Added hidden bilingual Arabic/English synonym expansion.
+- Improves task-goal linking by context, domain, skill, exam, and topic.
+- No task creation is automatic.
+
+### Safety
+- No database migration.
+- No changes to Tasks page.
+- No changes to Resources page.
+- Internal values remain stable.
