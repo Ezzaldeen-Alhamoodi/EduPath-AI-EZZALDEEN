@@ -15,8 +15,8 @@
 
 <section class="stats-grid">
     <div class="stat-card blue"><span>◎</span><h3>Your Goals</h3><p>{{ total_goals }}{% if goal_limit is not none %}/{{ goal_limit }}{% endif %}</p></div>
-    <div class="stat-card purple"><span>▣</span><h3>مهامك</h3><p>{{ total_tasks }}{% if task_limit is not none %}/{{ task_limit }}{% endif %}</p></div>
-    <div class="stat-card green"><span>✓</span><h3>المكتملة</h3><p>{{ completed_tasks }}</p></div>
+    <div class="stat-card purple"><span>▣</span><h3>Your Tasks</h3><p>{{ total_tasks }}{% if task_limit is not none %}/{{ task_limit }}{% endif %}</p></div>
+    <div class="stat-card green"><span>✓</span><h3>Completed</h3><p>{{ completed_tasks }}</p></div>
     <div class="stat-card orange"><span>✦</span><h3>AI Today</h3><p>{{ ai_used_today }}{% if ai_limit is not none %}/{{ ai_limit }}{% else %}/∞{% endif %}</p></div>
 </section>
 
@@ -25,13 +25,13 @@
         <h2>✏️ Edit Profile</h2>
         <form method="POST" class="form">
             <input type="hidden" name="form_action" value="profile">
-            <label>الاسم</label>
+            <label>Name</label>
             <input name="name" value="{{ current_user.name }}">
 
-            <label>الدولة</label>
+            <label>Country</label>
             <input name="country" value="{{ current_user.country or '' }}" placeholder="Example: Yemen">
 
-            <label>التخصص</label>
+            <label>Major</label>
             <input name="major" value="{{ current_user.major or '' }}" placeholder="Example: Computer Science">
 
             <label>Target Degree</label>
@@ -45,7 +45,7 @@
     </div>
 
     <div class="card paid-profile-card-v478">
-        <h2>النسخة المدفوعة</h2>
+        <h2>Paid Version</h2>
         {% if current_user.paid_active %}
             <p class="improved">Your paid version is active. You now have higher limits for tasks, goals, and AI Coach.</p>
             <div class="paid-status-grid-v479">
@@ -61,9 +61,9 @@
             <p class="muted">If you received a subscription code from EduPath AI administration, enter it here. Each code can be used once only, and the subscription duration starts from activation.</p>
             <form method="POST" class="form compact-paid-form-v478">
                 <input type="hidden" name="form_action" value="activate_paid">
-                <label>كود الاشتراك</label>
+                <label>Subscription Code</label>
                 <input name="subscription_code" placeholder="Example: EDU-ABC123-XYZ789" autocomplete="off">
-                <button type="submit">تفعيل النسخة المدفوعة</button>
+                <button type="submit">Activate Paid Version</button>
             </form>
         {% endif %}
     </div>

@@ -30,11 +30,11 @@
 <section class="card resources-filter-card">
     <form method="GET" class="resources-filter-grid my-resources-filter-v472">
         <div>
-            <label>الفئة</label>
+            <label>Category</label>
             <select name="category">
                 <option value="">All Categories</option>
                 {% for cat in categories %}
-                    <option value="{{ cat|ar_label }}" {% if selected.category == cat %}selected{% endif %}>{{ cat|ar_label }}</option>
+                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -44,14 +44,14 @@
             <select name="status">
                 <option value="">All Statuses</option>
                 {% for status in statuses %}
-                    <option value="{{ status|ar_label }}" {% if selected.status == status %}selected{% endif %}>{{ status|ar_label }}</option>
+                    <option value="{{ status }}" {% if selected.status == status %}selected{% endif %}>{{ status }}</option>
                 {% endfor %}
             </select>
         </div>
 
         <div class="filter-actions">
-            <button type="submit">تصفية</button>
-            <a class="small-button ghost" href="{{ url_for('my_resources') }}">إعادة ضبط</a>
+            <button type="submit">Filter</button>
+            <a class="small-button ghost" href="{{ url_for('my_resources') }}">Reset</a>
         </div>
     </form>
 </section>
@@ -63,22 +63,22 @@
             <div class="resource-card-head">
                 <div>
                     <h3>{{ resource.name }}</h3>
-                    <p>{{ resource.category|ar_label }}{% if resource.subcategory %} · {{ resource.subcategory|ar_label }}{% endif %}</p>
+                    <p>{{ resource.category }}{% if resource.subcategory %} · {{ resource.subcategory }}{% endif %}</p>
                 </div>
                 <div class="resource-badges">
-                    <span class="badge saved-status">{{ item.status|ar_label }}</span>
+                    <span class="badge saved-status">{{ item.status }}</span>
                     {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
                     {% if resource.is_free %}<span class="badge free">Free</span>{% endif %}
-                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type|ar_label }}</span>{% endif %}
+                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
                 </div>
             </div>
 
-            <p class="resource-desc">{{ resource|ar_resource_description }}</p>
+            <p class="resource-desc">{{ resource.description }}</p>
 
             <div class="resource-meta">
-                {% if resource.exam %}<span>Exam: {{ resource.exam|ar_label }}</span>{% endif %}
-                {% if resource.skill %}<span>Skill: {{ resource.skill|ar_label }}</span>{% endif %}
-                {% if resource.level %}<span>Level: {{ resource.level|ar_label }}</span>{% endif %}
+                {% if resource.exam %}<span>Exam: {{ resource.exam }}</span>{% endif %}
+                {% if resource.skill %}<span>Skill: {{ resource.skill }}</span>{% endif %}
+                {% if resource.level %}<span>Level: {{ resource.level }}</span>{% endif %}
                 {% if item.last_opened %}<span>Last opened: {{ item.last_opened.strftime("%Y-%m-%d") }}</span>{% endif %}
             </div>
 
@@ -86,7 +86,7 @@
                 <label>Status</label>
                 <select name="status">
                     {% for status in statuses %}
-                        <option value="{{ status|ar_label }}" {% if item.status == status %}selected{% endif %}>{{ status|ar_label }}</option>
+                        <option value="{{ status }}" {% if item.status == status %}selected{% endif %}>{{ status }}</option>
                     {% endfor %}
                 </select>
 

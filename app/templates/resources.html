@@ -6,7 +6,7 @@
 <section class="hero compact resources-hero-v4616 resources-hero-actions-v472">
     <div>
         <span class="tag">EduPath AI</span>
-        <h2>محرك المصادر الذكية</h2>
+        <h2>Smart Resources Engine</h2>
         <p>Find the right learning resources for your goals, tasks, exams, skills, and daily study plan. Resources are updated automatically when this page opens.</p>
     </div>
     <a class="button light" href="{{ url_for('my_resources') }}">⭐ My Resources</a>
@@ -14,46 +14,46 @@
 
 <section class="resource-category-strip">
     {% for cat in categories %}
-        <a href="{{ url_for('resources', category=cat) }}" class="{% if selected.category == cat %}active{% endif %}">{{ cat|ar_label }}</a>
+        <a href="{{ url_for('resources', category=cat) }}" class="{% if selected.category == cat %}active{% endif %}">{{ cat }}</a>
     {% endfor %}
 </section>
 
 <section class="card resources-filter-card">
     <form method="GET" class="resources-filter-grid">
         <div class="filter-wide">
-            <label>بحث في المصادر</label>
+            <label>Search Resources</label>
             <input name="q" value="{{ selected.q }}" placeholder="IELTS Reading, Python Flask, CSCA Physics, Quran memorization...">
         </div>
 
         <div>
-            <label>الفئة</label>
+            <label>Category</label>
             <select name="category">
                 <option value="">All Categories / جميع الفئات</option>
                 {% for cat in categories %}
-                    <option value="{{ cat|ar_label }}" {% if selected.category == cat %}selected{% endif %}>{{ cat|ar_label }}</option>
+                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat }}</option>
                 {% endfor %}
             </select>
         </div>
 
         <div>
-            <label>الاختبار</label>
+            <label>Exam</label>
             <select name="exam">
                 <option value="">All Exams / جميع الاختبارات</option>
                 {% for exam in exams %}
-                    <option value="{{ exam|ar_label }}" {% if selected.exam == exam %}selected{% endif %}>{{ exam|ar_label }}</option>
+                    <option value="{{ exam }}" {% if selected.exam == exam %}selected{% endif %}>{{ exam }}</option>
                 {% endfor %}
             </select>
         </div>
 
         <div>
-            <label>المهارة / الموضوع</label>
+            <label>Skill / Topic</label>
             <input name="skill" value="{{ selected.skill }}" placeholder="Reading, Writing, Algebra, Python, Quran...">
         </div>
 
         <div>
-            <label>المستوى</label>
+            <label>Level</label>
             <select name="level">
-                <option value="">كل المستويات</option>
+                <option value="">All Levels</option>
                 <option value="Beginner" {% if selected.level == "Beginner" %}selected{% endif %}>Beginner</option>
                 <option value="Intermediate" {% if selected.level == "Intermediate" %}selected{% endif %}>Intermediate</option>
                 <option value="Advanced" {% if selected.level == "Advanced" %}selected{% endif %}>Advanced</option>
@@ -61,11 +61,11 @@
         </div>
 
         <div>
-            <label>النوع</label>
+            <label>Type</label>
             <select name="type">
                 <option value="">All Types / جميع الأنواع</option>
                 {% for type in types %}
-                    <option value="{{ type|ar_label }}" {% if selected.type == type %}selected{% endif %}>{{ type|ar_label }}</option>
+                    <option value="{{ type }}" {% if selected.type == type %}selected{% endif %}>{{ type }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -82,7 +82,7 @@
 
         <div class="filter-actions">
             <button type="submit">🔎 Find Resources</button>
-            <a class="small-button ghost" href="{{ url_for('resources') }}">إعادة ضبط</a>
+            <a class="small-button ghost" href="{{ url_for('resources') }}">Reset</a>
         </div>
     </form>
 </section>
@@ -92,7 +92,7 @@
 <section class="card learning-path-card">
     <div class="learning-path-head">
         <div>
-            <span class="tag">المسار المقترح</span>
+            <span class="tag">Recommended Path</span>
             <h2>⭐ Start Here</h2>
             <p class="muted">A simple suggested order so you do not get lost among many resources.</p>
         </div>
@@ -104,11 +104,11 @@
                 <span class="step-number">{{ loop.index }}</span>
                 <div>
                     <strong>{{ resource.name }}</strong>
-                    <p>{{ resource|ar_resource_description }}</p>
+                    <p>{{ resource.description }}</p>
                     <div class="resource-badges">
                         {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
                         {% if resource.is_free %}<span class="badge free">Free</span>{% endif %}
-                        {% if resource.resource_type %}<span class="badge">{{ resource.resource_type|ar_label }}</span>{% endif %}
+                        {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
                     {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">Beginner Friendly</span>{% endif %}
                     {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">Advanced</span>{% endif %}
                     </div>
@@ -152,24 +152,24 @@
             <div class="resource-card-head">
                 <div>
                     <h3>{{ resource.name }}</h3>
-                    <p>{{ resource.category|ar_label }}{% if resource.subcategory %} · {{ resource.subcategory|ar_label }}{% endif %}</p>
+                    <p>{{ resource.category }}{% if resource.subcategory %} · {{ resource.subcategory }}{% endif %}</p>
                 </div>
                 <div class="resource-badges">
                     {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
                     {% if resource.is_free %}<span class="badge free">Free</span>{% endif %}
-                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type|ar_label }}</span>{% endif %}
+                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
                     {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">Beginner Friendly</span>{% endif %}
                     {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">Advanced</span>{% endif %}
                 </div>
             </div>
 
-            <p class="resource-desc">{{ resource|ar_resource_description }}</p>
+            <p class="resource-desc">{{ resource.description }}</p>
 
             <div class="resource-meta">
-                {% if resource.exam %}<span>Exam: {{ resource.exam|ar_label }}</span>{% endif %}
-                {% if resource.skill %}<span>Skill: {{ resource.skill|ar_label }}</span>{% endif %}
-                {% if resource.level %}<span>Level: {{ resource.level|ar_label }}</span>{% endif %}
-                {% if resource.language %}<span>Language: {{ resource.language|ar_label }}</span>{% endif %}
+                {% if resource.exam %}<span>Exam: {{ resource.exam }}</span>{% endif %}
+                {% if resource.skill %}<span>Skill: {{ resource.skill }}</span>{% endif %}
+                {% if resource.level %}<span>Level: {{ resource.level }}</span>{% endif %}
+                {% if resource.language %}<span>Language: {{ resource.language }}</span>{% endif %}
             </div>
 
             {% if resource.tags %}

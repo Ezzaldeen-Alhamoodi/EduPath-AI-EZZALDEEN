@@ -1261,12 +1261,23 @@ Desktop sidebar design refinement.
 - 0 cost.
 
 
-## v5.1.1 Arabic Rebuild Stable
+## v5.1.2 Dashboard Arabic Only
 
-- Rebuilt safely from clean v4.8.3.
-- Arabic is now the main interface language.
-- No i18n system and no language switcher.
-- Preserved all adaptive task fields and smart goal fields.
-- Arabic is display-only; internal values remain stable for AI and smart linking.
-- AI Coach sections remain English where appropriate.
-- No database migration.
+Safe staged Arabic conversion.
+
+### Scope
+- Restored from clean stable v4.8.3.
+- Converted only the dashboard/home page to Arabic.
+- Converted dashboard navigation labels and dashboard-visible dynamic values.
+- Added a small display-only dashboard Arabic filter:
+  - `dashboard_ar`
+
+### Important
+- Did not modify Tasks page.
+- Did not modify Goals page.
+- Did not modify Resources page.
+- Did not modify adaptive JavaScript logic.
+- Did not modify database values.
+- Did not modify task/goal adaptive IDs or fields.
+
+This version is intended as a safe step-by-step Arabic conversion.

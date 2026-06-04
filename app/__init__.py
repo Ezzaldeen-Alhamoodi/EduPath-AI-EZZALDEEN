@@ -1088,148 +1088,53 @@ def resource_match_score(resource, text):
 
 
 
-ARABIC_UI_LABELS = {
-    "Secondary School": "المرحلة الثانوية",
-    "University": "المرحلة الجامعية",
-    "Languages": "اللغات",
+DASHBOARD_AR_LABELS = {
+    "Programming": "البرمجة",
     "Programming & Technology": "البرمجة والتكنولوجيا",
-    "Artificial Intelligence": "الذكاء الاصطناعي",
     "Mathematics": "الرياضيات",
-    "Scholarships": "المنح الدراسية",
-    "Scholarship": "منحة دراسية",
-    "Exams & Certificates": "الاختبارات والشهادات",
+    "English": "الإنجليزية",
+    "Language": "اللغات",
+    "Scholarship": "المنح الدراسية",
+    "AI": "الذكاء الاصطناعي",
+    "Artificial Intelligence": "الذكاء الاصطناعي",
+    "Quran Memorization": "حفظ القرآن الكريم",
+    "Secondary School": "المرحلة الثانوية",
+    "University": "الجامعة",
     "Daily Life": "الحياة اليومية",
     "Projects": "المشاريع",
-    "Reading & Research": "القراءة والبحث",
     "General": "عام",
     "Other": "أخرى",
-    "Quran Memorization": "حفظ القرآن الكريم",
-    "Islamic Goals": "الأهداف الإسلامية",
-    "Education": "التعليم",
-    "Language": "اللغات",
-    "Exam / Certificate": "اختبار / شهادة",
-    "Project": "مشروع",
-    "Quran": "القرآن الكريم",
-    "Islamic Studies": "الدراسات الإسلامية",
-    "Arabic Language": "اللغة العربية",
-    "English Language": "اللغة الإنجليزية",
-    "Computer Science": "علوم الحاسوب",
-    "General Review": "مراجعة عامة",
-    "Exams": "اختبارات",
-    "Homework": "واجبات",
-    "English": "الإنجليزية",
-    "Turkish": "التركية",
-    "Russian": "الروسية",
-    "Chinese": "الصينية",
-    "Arabic": "العربية",
-    "French": "الفرنسية",
-    "German": "الألمانية",
-    "General English": "إنجليزية عامة",
-    "Grammar": "القواعد",
-    "Vocabulary": "المفردات",
-    "Pronunciation": "النطق",
+    "done": "مكتملة",
+    "pending": "قيد التنفيذ",
+    "Completed": "مكتملة",
+    "Pending": "قيد التنفيذ",
+    "Not set": "غير محدد",
+    "not set": "غير محدد",
+    "No reminder": "بدون تذكير",
+    "Python": "Python",
+    "Flask": "Flask",
+    "IELTS": "IELTS",
+    "TOEFL": "TOEFL",
+    "Duolingo English Test": "Duolingo English Test",
+    "CSCA": "CSCA",
+    "SAT": "SAT",
     "Reading": "القراءة",
     "Writing": "الكتابة",
     "Listening": "الاستماع",
     "Speaking": "التحدث",
-    "Academic English": "الإنجليزية الأكاديمية",
-    "Programming": "البرمجة",
-    "Algorithms": "الخوارزميات",
-    "Data Structures": "هياكل البيانات",
-    "Databases": "قواعد البيانات",
-    "Operating Systems": "أنظمة التشغيل",
-    "Computer Networks": "شبكات الحاسوب",
-    "Software Engineering": "هندسة البرمجيات",
-    "Web Development": "تطوير الويب",
-    "Cybersecurity": "الأمن السيبراني",
-    "Discrete Mathematics": "الرياضيات المتقطعة",
-    "Computer Architecture": "معمارية الحاسوب",
-    "Graduation Project": "مشروع التخرج",
-    "Python": "Python",
-    "C": "C",
-    "C++": "C++",
-    "Java": "Java",
-    "JavaScript": "JavaScript",
-    "HTML": "HTML",
-    "CSS": "CSS",
-    "SQL": "SQL",
-    "Flask": "Flask",
-    "React": "React",
-    "Git / GitHub": "Git / GitHub",
-    "Frontend Development": "تطوير الواجهة الأمامية",
-    "Backend Development": "تطوير الخلفية",
-    "Full Stack Development": "تطوير متكامل",
-    "Problem Solving": "حل المشكلات",
-    "Debugging": "تصحيح الأخطاء",
-    "Syntax": "الصياغة البرمجية",
-    "Variables": "المتغيرات",
-    "Data Types": "أنواع البيانات",
-    "Conditions": "الشروط",
-    "Loops": "الحلقات",
-    "Functions": "الدوال",
-    "Lists": "القوائم",
-    "Dictionaries": "القواميس",
-    "OOP": "البرمجة الكائنية",
-    "IELTS": "IELTS",
-    "TOEFL": "TOEFL",
-    "Duolingo English Test": "Duolingo English Test",
-    "HSK": "HSK",
-    "SAT": "SAT",
-    "ACT": "ACT",
-    "GRE": "GRE",
-    "GMAT": "GMAT",
-    "CSCA": "CSCA",
-    "IELTS Academic": "IELTS Academic",
-    "IELTS General Training": "IELTS General Training",
-    "Academic Reading": "القراءة الأكاديمية",
-    "General Training Reading": "قراءة التدريب العام",
-    "Task 1 Academic": "Task 1 Academic",
-    "Task 2 Academic": "Task 2 Academic",
-    "Course": "دورة",
-    "Website": "موقع",
-    "Book": "كتاب",
-    "Tool": "أداة",
-    "Practice": "تدريب",
-    "Video Lessons": "دروس فيديو",
-    "Community": "مجتمع",
-    "Official Practice": "تدريب رسمي",
-    "Question Bank": "بنك أسئلة",
-    "Mock Test": "اختبار تجريبي",
-    "Beginner": "مبتدئ",
-    "Intermediate": "متوسط",
-    "Advanced": "متقدم",
-    "Beginner → Intermediate": "مبتدئ → متوسط",
-    "Intermediate → Advanced": "متوسط → متقدم",
-    "Beginner → Advanced": "مبتدئ → متقدم",
-    "All Levels": "كل المستويات",
-    "Not set": "غير محدد",
-    "not set": "غير محدد",
-    "all/none": "الكل/لا شيء",
-    "once": "مرة واحدة",
-    "daily": "يوميًا",
-    "weekly": "أسبوعيًا",
-    "monthly": "شهريًا",
-    "selected_days": "أيام محددة",
-    "done": "مكتملة",
-    "pending": "قيد التنفيذ",
-    "Not Started": "لم يبدأ",
-    "In Progress": "قيد التقدم",
-    "Completed": "مكتمل",
+    "Grammar": "القواعد",
+    "Vocabulary": "المفردات",
+    "Algebra": "الجبر",
+    "Geometry": "الهندسة",
+    "Physics": "الفيزياء",
+    "Chemistry": "الكيمياء",
 }
 
-def ar_label(value):
+def dashboard_ar(value):
     if value is None:
-        return ""
-    return ARABIC_UI_LABELS.get(str(value), str(value))
-
-def ar_resource_description(resource):
-    if not resource:
-        return ""
-    text = getattr(resource, "description", "") or ""
-    repl = {"Free":"مجاني","Official":"رسمي","official":"رسمي","Practice":"تدريب","practice":"تدريب","Course":"دورة","course":"دورة","Lessons":"دروس","lessons":"دروس","Resources":"مصادر","resources":"مصادر","Exercises":"تمارين","exercises":"تمارين","Test":"اختبار","test":"اختبار","Beginner":"مبتدئ","beginner":"مبتدئ","Advanced":"متقدم","advanced":"متقدم","Intermediate":"متوسط","intermediate":"متوسط"}
-    for en, ar in repl.items():
-        text = text.replace(en, ar)
-    return text
+        return "غير محدد"
+    text = str(value)
+    return DASHBOARD_AR_LABELS.get(text, text)
 
 def render_clickable_sources(value):
     """Render source text safely: plain text stays plain, URLs become clickable links.
@@ -1287,8 +1192,7 @@ def ensure_all_users_subscription_codes():
 def create_app():
     app = Flask(__name__)
     app.jinja_env.filters["clickable_sources"] = render_clickable_sources
-    app.jinja_env.filters["ar_label"] = ar_label
-    app.jinja_env.filters["ar_resource_description"] = ar_resource_description
+    app.jinja_env.filters["dashboard_ar"] = dashboard_ar
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
     app.permanent_session_lifetime = timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30")))
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(

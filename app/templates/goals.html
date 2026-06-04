@@ -6,7 +6,7 @@
 <section class="hero compact goals-hero-v41">
     <div>
         <span class="tag">EduPath AI</span>
-        <h2>الأهداف الذكية التكيفية</h2>
+        <h2>Smart Adaptive Goals</h2>
         <p>Goals are the destination. Tasks are the daily actions. EduPath AI connects completed user-created tasks to the right goals automatically.</p>
     </div>
     <a class="button light" href="{{ url_for('tasks') }}">▣ Create Your Tasks</a>
@@ -19,12 +19,12 @@
 
         <form method="POST" class="form smart-goal-form-v4613" id="smartGoalForm">
             <div class="goal-field goal-field-wide">
-                <label>عنوان الهدف</label>
+                <label>Goal Title</label>
                 <input name="title" id="goalTitleInput" placeholder="Achieve IELTS Band 7 / حفظ جزء عم / Master Python Flask" required>
             </div>
 
             <div class="goal-field goal-field-wide">
-                <label>نوع الهدف</label>
+                <label>Goal Type</label>
                 <select name="category" id="goalTypeSelect">
                     <option>Education</option>
                     <option>Language</option>
@@ -44,25 +44,25 @@
 
             <div class="adaptive-goal-panel-v4614" id="adaptiveGoalBox">
                 <div class="goal-field">
-                    <label id="goalCategoryLabel">تصنيف الهدف</label>
+                    <label id="goalCategoryLabel">Goal Category</label>
                     <select name="goal_category" id="goalCategorySelect"></select>
                     <div class="inline-custom-field" id="customCategoryBox">
-                        <label id="customCategoryLabel">تصنيف مخصص</label>
+                        <label id="customCategoryLabel">Custom Goal Category</label>
                         <input name="custom_goal_category" id="customGoalCategoryInput" placeholder="Write your custom category">
                     </div>
                 </div>
 
                 <div class="goal-field">
-                    <label id="goalPathLabel">مسار الهدف</label>
+                    <label id="goalPathLabel">Goal Path</label>
                     <select name="goal_path" id="goalPathSelect"></select>
                     <div class="inline-custom-field" id="customPathBox">
-                        <label id="customPathLabel">مسار مخصص</label>
+                        <label id="customPathLabel">Custom Goal Path</label>
                         <input name="custom_goal_path" id="customGoalPathInput" placeholder="Write your custom path">
                     </div>
                 </div>
 
                 <div class="goal-field">
-                    <label id="currentStateLabel">الحالة الحالية</label>
+                    <label id="currentStateLabel">Current State</label>
                     <select name="current_state" id="currentStateSelect"></select>
                     <div class="inline-custom-field" id="customCurrentBox">
                         <label id="customCurrentLabel">Custom Current State</label>
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="goal-field">
-                    <label id="targetStateLabel">الحالة المستهدفة</label>
+                    <label id="targetStateLabel">Target State</label>
                     <select name="target_state" id="targetStateSelect"></select>
                     <div class="inline-custom-field" id="customTargetBox">
                         <label id="customTargetLabel">Custom Target State</label>
@@ -80,14 +80,14 @@
                 </div>
 
                 <div class="goal-field goal-field-wide">
-                    <label id="goalOutcomeLabel">النتيجة النهائية</label>
+                    <label id="goalOutcomeLabel">Goal Outcome</label>
                     <input name="goal_outcome" id="goalOutcomeInput" placeholder="What should happen when this goal is achieved?">
                 </div>
 
                 <input type="hidden" name="milestones" id="milestonesInput">
 
                 <div class="goal-field">
-                    <label id="commitmentLabel">الالتزام اليومي / الأسبوعي</label>
+                    <label id="commitmentLabel">Daily / Weekly Commitment</label>
                     <select name="commitment" id="commitmentSelect"></select>
                     <div class="inline-custom-field" id="customCommitmentBox">
                         <label id="customCommitmentLabel">Custom Commitment</label>
@@ -100,17 +100,17 @@
 
             <div class="goal-form-bottom-grid">
                 <div class="goal-field">
-                    <label>تاريخ البداية</label>
+                    <label>Start Date</label>
                     <input name="start_date" type="date">
                 </div>
 
                 <div class="goal-field">
-                    <label>تاريخ الهدف</label>
+                    <label>Target Date</label>
                     <input name="deadline" type="date">
                 </div>
 
                 <div class="goal-field goal-field-wide">
-                    <label>ملاحظات</label>
+                    <label>Notes</label>
                     <textarea name="notes" rows="4" placeholder="Extra details, resources, schedule, or personal instructions..."></textarea>
                 </div>
             </div>

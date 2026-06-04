@@ -4722,55 +4722,28 @@ body.dark-mode .desktop-icon-nav-v483 a {
 
 
 
-/* EduPath AI v5.1.1 Arabic Rebuild Stable */
-html[dir="rtl"] body {
-    direction: rtl;
-}
-
-html[dir="rtl"] input,
-html[dir="rtl"] select,
-html[dir="rtl"] textarea {
+/* EduPath AI v5.1.2 Dashboard Arabic Only */
+.dashboard-page-title,
+.v21-hero,
+.current-focus-v41,
+.quick-actions,
+.focus-goals,
+.stats-grid,
+.grid-2,
+.home-footer-v475 {
     direction: rtl;
     text-align: right;
 }
 
-@media (min-width: 981px) {
-    html[dir="rtl"] .sidebar,
-    html[dir="rtl"] .main {
-        direction: ltr;
-    }
-
-    html[dir="rtl"] .main .card,
-    html[dir="rtl"] .main .hero,
-    html[dir="rtl"] .main .topbar,
-    html[dir="rtl"] .main .task-card,
-    html[dir="rtl"] .main .goal-tile,
-    html[dir="rtl"] .main .resource-card,
-    html[dir="rtl"] .main .stat-card,
-    html[dir="rtl"] .main label,
-    html[dir="rtl"] .main p,
-    html[dir="rtl"] .main h1,
-    html[dir="rtl"] .main h2,
-    html[dir="rtl"] .main h3 {
-        direction: rtl;
-        text-align: right;
-    }
-
-    html[dir="rtl"] .desktop-icon-nav-v483 a,
-    html[dir="rtl"] .compact-user-panel-v481 {
-        direction: ltr;
-    }
-
-    html[dir="rtl"] .desktop-icon-nav-v483 a span,
-    html[dir="rtl"] .compact-user-panel-v481 a {
-        direction: rtl;
-        text-align: right;
-    }
+.v21-hero .hero-actions {
+    direction: rtl;
 }
 
-.language-toggle,
-#languageToggle,
-#mobileLanguageToggle,
-#mobileMenuLanguage {
-    display: none !important;
+@media (min-width: 981px) {
+    .desktop-icon-nav-v483 a span,
+    .compact-user-panel-v481 a,
+    .notify-btn {
+        direction: rtl;
+        text-align: right;
+    }
 }

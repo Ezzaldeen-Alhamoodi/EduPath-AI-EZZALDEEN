@@ -550,20 +550,28 @@ Object.assign(EDUPATH_LABEL_AR, {
 });
 
 function labelForUI(value) {
-    return (typeof EDUPATH_LABEL_AR !== "undefined" && EDUPATH_LABEL_AR[value]) ? EDUPATH_LABEL_AR[value] : value;
+    const alwaysArabic = {
+        "Quran Memorization": "حفظ القرآن",
+        "Secondary School": "المرحلة الثانوية"
+    };
+    if (alwaysArabic[value]) return alwaysArabic[value];
+    const lang = localStorage.getItem("edupath-language") || "en";
+    if (lang !== "ar") return value;
+    return EDUPATH_LABEL_AR[value] || value;
 }
 
 function translateDynamicOptions() {
+    const lang = localStorage.getItem("edupath-language") || "en";
     document.querySelectorAll("select option").forEach(option => {
         if (!option.dataset.originalText) option.dataset.originalText = option.textContent;
         const original = option.dataset.originalText;
-        option.textContent = EDUPATH_LABEL_AR[original] || original;
+        option.textContent = lang === "ar" ? (EDUPATH_LABEL_AR[original] || original) : original;
     });
 
     document.querySelectorAll(".task-type-card strong").forEach(el => {
         if (!el.dataset.originalText) el.dataset.originalText = el.textContent;
         const original = el.dataset.originalText;
-        el.textContent = EDUPATH_LABEL_AR[original] || original;
+        el.textContent = lang === "ar" ? (EDUPATH_LABEL_AR[original] || original) : original;
     });
 }
 
@@ -1033,9 +1041,16 @@ function applyEduPathLanguage(lang) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    localStorage.setItem("edupath-language", "ar");
-    if (typeof applyEduPathLanguage === "function") applyEduPathLanguage("ar");
-    if (typeof translateDynamicOptions === "function") translateDynamicOptions();
+    const savedLang = localStorage.getItem("edupath-language") || "en";
+    applyEduPathLanguage(savedLang);
+
+    const toggle = document.getElementById("languageToggle");
+    if (toggle) {
+        toggle.addEventListener("click", () => {
+            const current = localStorage.getItem("edupath-language") || "en";
+            applyEduPathLanguage(current === "ar" ? "en" : "ar");
+        });
+    }
 });
 
 

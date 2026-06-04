@@ -1,6 +1,6 @@
 \
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>EduPath AI EZZALDEEN</title>
@@ -33,21 +33,21 @@
 
         <div class="user-mini-panel compact-user-panel-v481">
             {% if current_user.is_authenticated %}
-                <a class="mini-link" href="{{ url_for('profile') }}"><span data-i18n="user.profile">الملف الشخصي</span></a>
-                <a class="mini-link logout" href="{{ url_for('logout') }}"><span data-i18n="user.logout">تسجيل الخروج</span></a>
+                <a class="mini-link" href="{{ url_for('profile') }}">الملف الشخصي</a>
+                <a class="mini-link logout" href="{{ url_for('logout') }}">تسجيل الخروج</a>
             {% else %}
-                <a class="mini-link" href="{{ url_for('login') }}"><span data-i18n="user.login">تسجيل الدخول</span></a>
-                <a class="mini-link" href="{{ url_for('register') }}"><span data-i18n="user.register">إنشاء حساب</span></a>
+                <a class="mini-link" href="{{ url_for('login') }}">تسجيل الدخول</a>
+                <a class="mini-link" href="{{ url_for('register') }}">إنشاء حساب</a>
             {% endif %}
         </div>
 
         <nav class="main-nav desktop-icon-nav-v483">
-            <a class="nav-dashboard" href="{{ url_for('index') }}"><i>⌂</i><span data-i18n="nav.dashboard">الرئيسية</span></a>
-            <a class="nav-goals" href="{{ url_for('goals') }}"><i>◎</i><span data-i18n="nav.goals">الأهداف</span></a>
-            <a class="nav-tasks" href="{{ url_for('tasks') }}"><i>▣</i><span data-i18n="nav.tasks">المهام</span></a>
-            <a class="nav-resources" href="{{ url_for('resources') }}"><i>▤</i><span data-i18n="nav.resources">المصادر</span></a>
-            <a class="nav-coach" href="{{ url_for('coach') }}"><i>✦</i><span data-i18n="nav.coach">مدرب الذكاء الاصطناعي</span></a>
-            {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}<a class="nav-admin" href="{{ url_for('admin_dashboard') }}"><i>⚙</i><span data-i18n="nav.admin">الإدارة</span></a>{% endif %}
+            <a class="nav-dashboard" href="{{ url_for('index') }}"><i>⌂</i>الرئيسية</a>
+            <a class="nav-goals" href="{{ url_for('goals') }}"><i>◎</i>الأهداف</a>
+            <a class="nav-tasks" href="{{ url_for('tasks') }}"><i>▣</i>المهام</a>
+            <a class="nav-resources" href="{{ url_for('resources') }}"><i>▤</i>المصادر</a>
+            <a class="nav-coach" href="{{ url_for('coach') }}"><i>✦</i>مدرب الذكاء الاصطناعي</a>
+            {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}<a class="nav-admin" href="{{ url_for('admin_dashboard') }}"><i>⚙</i>الإدارة</a>{% endif %}
         </nav>
 
         <button class="notify-btn" id="enableNotifications">تفعيل التذكيرات</button>
@@ -57,9 +57,9 @@
         <header class="topbar">
             <div>
                 <h1>{% block page_title %}EduPath AI EZZALDEEN{% endblock %}</h1>
-                <p><span data-i18n="topbar.subtitle">تعلم ذكي، أهداف، مهام، اختبارات، ومصادر في مساحة واحدة.</span></p>
+                <p>تعلم ذكي، أهداف، مهام، اختبارات، ومصادر في مساحة واحدة.</p>
             </div>
-            <div class="pill"><span data-i18n="topbar.pwa">تطبيق ويب متجاوب</span></div>
+            <div class="pill">تطبيق ويب متجاوب</div>
         </header>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -85,22 +85,22 @@
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
     <nav class="mobile-bottom-nav compact-icon-nav-v474" aria-label="Mobile navigation">
-        <a class="nav-home" href="{{ url_for('index') }}"><span>⌂</span><small data-i18n="mobile.home">الرئيسية</small></a>
-        <a class="nav-goals" href="{{ url_for('goals') }}"><span>◎</span><small data-i18n="mobile.goals">الأهداف</small></a>
-        <a class="nav-tasks" href="{{ url_for('tasks') }}"><span>▣</span><small data-i18n="mobile.tasks">المهام</small></a>
-        <a class="nav-resources" href="{{ url_for('resources') }}"><span>▤</span><small data-i18n="mobile.resources">المصادر</small></a>
-        <a class="nav-coach" href="{{ url_for('coach') }}"><span>✦</span><small data-i18n="mobile.coach">المدرب</small></a>
-        <button class="mobile-more-btn nav-more" id="mobileMoreToggle" type="button"><span>⋯</span><small>المزيد</small></button>
+        <a class="nav-home" href="{{ url_for('index') }}"><span>⌂</span><small>الرئيسية</small></a>
+        <a class="nav-goals" href="{{ url_for('goals') }}"><span>◎</span><small>الأهداف</small></a>
+        <a class="nav-tasks" href="{{ url_for('tasks') }}"><span>▣</span><small>المهام</small></a>
+        <a class="nav-resources" href="{{ url_for('resources') }}"><span>▤</span><small>المصادر</small></a>
+        <a class="nav-coach" href="{{ url_for('coach') }}"><span>✦</span><small>المدرب</small></a>
+        <button class="mobile-more-btn nav-more" id="mobileMoreToggle" type="button"><span>⋯</span><small>More</small></button>
     </nav>
 
 
 <div class="mobile-more-menu" id="mobileMoreMenu">
-    <button type="button" id="mobileMenuTheme">الوضع</button>
-<a href="{{ url_for('profile') }}">الملف الشخصي</a>
+    <button type="button" id="mobileMenuTheme">Theme</button>
+<a href="{{ url_for('profile') }}">Profile</a>
     {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}
-        <a href="{{ url_for('admin_dashboard') }}">الإدارة</a>
+        <a href="{{ url_for('admin_dashboard') }}">Admin</a>
     {% endif %}
-    <a href="{{ url_for('logout') }}">تسجيل الخروج</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
 </div>
 
 <div id="toastContainer" class="toast-container"></div>
