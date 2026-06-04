@@ -6,41 +6,41 @@
 <section class="hero compact resources-hero-v4616 resources-hero-actions-v472">
     <div>
         <span class="tag">EduPath AI</span>
-        <h2>{{ t("resources.title") }}</h2>
-        <p>{{ t("resources.desc") }}</p>
+        <h2>Smart Resources Engine</h2>
+        <p>Find the right learning resources for your goals, tasks, exams, skills, and daily study plan. Resources are updated automatically when this page opens.</p>
     </div>
-    <a class="button light" href="{{ url_for('my_resources') }}">⭐ {{ t("resources.my") }}</a>
+    <a class="button light" href="{{ url_for('my_resources') }}">⭐ My Resources</a>
 </section>
 
 <section class="resource-category-strip">
     {% for cat in categories %}
-        <a href="{{ url_for('resources', category=cat) }}" class="{% if selected.category == cat %}active{% endif %}">{{ cat|i18n_label }}</a>
+        <a href="{{ url_for('resources', category=cat) }}" class="{% if selected.category == cat %}active{% endif %}">{{ cat }}</a>
     {% endfor %}
 </section>
 
 <section class="card resources-filter-card">
     <form method="GET" class="resources-filter-grid">
         <div class="filter-wide">
-            <label>{{ t("common.search") }} Resources</label>
+            <label>Search Resources</label>
             <input name="q" value="{{ selected.q }}" placeholder="IELTS Reading, Python Flask, CSCA Physics, Quran memorization...">
         </div>
 
         <div>
-            <label>{{ t("common.category") }}</label>
+            <label>Category</label>
             <select name="category">
                 <option value="">All Categories / جميع الفئات</option>
                 {% for cat in categories %}
-                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat|i18n_label }}</option>
+                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat }}</option>
                 {% endfor %}
             </select>
         </div>
 
         <div>
-            <label>{{ t("common.exam") }}</label>
+            <label>Exam</label>
             <select name="exam">
-                <option value="">All {{ t("common.exam") }}s / جميع الاختبارات</option>
+                <option value="">All Exams / جميع الاختبارات</option>
                 {% for exam in exams %}
-                    <option value="{{ exam }}" {% if selected.exam == exam %}selected{% endif %}>{{ exam|i18n_label }}</option>
+                    <option value="{{ exam }}" {% if selected.exam == exam %}selected{% endif %}>{{ exam }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -51,9 +51,9 @@
         </div>
 
         <div>
-            <label>{{ t("common.level") }}</label>
+            <label>Level</label>
             <select name="level">
-                <option value="">All {{ t("common.level") }}s</option>
+                <option value="">All Levels</option>
                 <option value="Beginner" {% if selected.level == "Beginner" %}selected{% endif %}>Beginner</option>
                 <option value="Intermediate" {% if selected.level == "Intermediate" %}selected{% endif %}>Intermediate</option>
                 <option value="Advanced" {% if selected.level == "Advanced" %}selected{% endif %}>Advanced</option>
@@ -61,11 +61,11 @@
         </div>
 
         <div>
-            <label>{{ t("common.type") }}</label>
+            <label>Type</label>
             <select name="type">
-                <option value="">All {{ t("common.type") }}s / جميع الأنواع</option>
+                <option value="">All Types / جميع الأنواع</option>
                 {% for type in types %}
-                    <option value="{{ type }}" {% if selected.type == type %}selected{% endif %}>{{ type|i18n_label }}</option>
+                    <option value="{{ type }}" {% if selected.type == type %}selected{% endif %}>{{ type }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -82,7 +82,7 @@
 
         <div class="filter-actions">
             <button type="submit">🔎 Find Resources</button>
-            <a class="small-button ghost" href="{{ url_for('resources') }}">{{ t("common.reset") }}</a>
+            <a class="small-button ghost" href="{{ url_for('resources') }}">Reset</a>
         </div>
     </form>
 </section>
@@ -92,7 +92,7 @@
 <section class="card learning-path-card">
     <div class="learning-path-head">
         <div>
-            <span class="tag">{{ t("resources.recommended_path") }}</span>
+            <span class="tag">Recommended Path</span>
             <h2>⭐ Start Here</h2>
             <p class="muted">A simple suggested order so you do not get lost among many resources.</p>
         </div>
@@ -103,23 +103,23 @@
             <div class="learning-step">
                 <span class="step-number">{{ loop.index }}</span>
                 <div>
-                    <strong>{{ resource|i18n_resource_name }}</strong>
-                    <p>{{ resource|i18n_resource_description }}</p>
+                    <strong>{{ resource.name }}</strong>
+                    <p>{{ resource.description }}</p>
                     <div class="resource-badges">
                         {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
                         {% if resource.is_free %}<span class="badge free">Free</span>{% endif %}
-                        {% if resource.resource_type %}<span class="badge">{{ resource.resource_type|i18n_label }}</span>{% endif %}
+                        {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
                     {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">Beginner Friendly</span>{% endif %}
                     {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">Advanced</span>{% endif %}
                     </div>
                     <div class="resource-actions-v472 compact">
                         {% if resource.id in saved_resource_ids %}
                             <form method="POST" action="{{ url_for('unsave_resource', resource_id=resource.id) }}">
-                                <button type="submit" class="small-button warning">★ {{ t("resources.save") }}d</button>
+                                <button type="submit" class="small-button warning">★ Saved</button>
                             </form>
                         {% else %}
                             <form method="POST" action="{{ url_for('save_resource', resource_id=resource.id) }}">
-                                <button type="submit" class="small-button">☆ {{ t("resources.save") }}</button>
+                                <button type="submit" class="small-button">☆ Save</button>
                             </form>
                         {% endif %}
                         <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">Open ↗</a>
@@ -134,7 +134,7 @@
 <section class="resources-summary-row">
     <div class="mini-stat-card">
         <strong>{{ resources|length }}</strong>
-        <span>{{ t("resources.matching") }}</span>
+        <span>Matching Resources / المصادر المطابقة</span>
     </div>
     <div class="mini-stat-card">
         <strong>{{ categories|length }}</strong>
@@ -151,25 +151,25 @@
         <article class="resource-card">
             <div class="resource-card-head">
                 <div>
-                    <h3>{{ resource|i18n_resource_name }}</h3>
-                    <p>{{ resource.category|i18n_label }}{% if resource.subcategory %} · {{ resource.subcategory|i18n_label }}{% endif %}</p>
+                    <h3>{{ resource.name }}</h3>
+                    <p>{{ resource.category }}{% if resource.subcategory %} · {{ resource.subcategory }}{% endif %}</p>
                 </div>
                 <div class="resource-badges">
                     {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
                     {% if resource.is_free %}<span class="badge free">Free</span>{% endif %}
-                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type|i18n_label }}</span>{% endif %}
+                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
                     {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">Beginner Friendly</span>{% endif %}
                     {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">Advanced</span>{% endif %}
                 </div>
             </div>
 
-            <p class="resource-desc">{{ resource|i18n_resource_description }}</p>
+            <p class="resource-desc">{{ resource.description }}</p>
 
             <div class="resource-meta">
-                {% if resource.exam %}<span>{{ t("common.exam") }}: {{ resource.exam|i18n_label }}</span>{% endif %}
-                {% if resource.skill %}<span>Skill: {{ resource.skill|i18n_label }}</span>{% endif %}
-                {% if resource.level %}<span>{{ t("common.level") }}: {{ resource.level|i18n_label }}</span>{% endif %}
-                {% if resource.language %}<span>Language: {{ resource.language|i18n_label }}</span>{% endif %}
+                {% if resource.exam %}<span>Exam: {{ resource.exam }}</span>{% endif %}
+                {% if resource.skill %}<span>Skill: {{ resource.skill }}</span>{% endif %}
+                {% if resource.level %}<span>Level: {{ resource.level }}</span>{% endif %}
+                {% if resource.language %}<span>Language: {{ resource.language }}</span>{% endif %}
             </div>
 
             {% if resource.tags %}
@@ -183,14 +183,14 @@
             <div class="resource-actions-v472">
                 {% if resource.id in saved_resource_ids %}
                     <form method="POST" action="{{ url_for('unsave_resource', resource_id=resource.id) }}">
-                        <button type="submit" class="small-button warning">★ {{ t("resources.save") }}d</button>
+                        <button type="submit" class="small-button warning">★ Saved</button>
                     </form>
                 {% else %}
                     <form method="POST" action="{{ url_for('save_resource', resource_id=resource.id) }}">
-                        <button type="submit" class="small-button">☆ {{ t("resources.save") }}</button>
+                        <button type="submit" class="small-button">☆ Save</button>
                     </form>
                 {% endif %}
-                <a class="button resource-open" href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">{{ t("resources.open") }} ↗</a>
+                <a class="button resource-open" href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">Open Resource ↗</a>
             </div>
         </article>
     {% else %}

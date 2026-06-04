@@ -1,6 +1,6 @@
 \
 {% extends "base.html" %}
-{% block page_title %}{{ t("goals.title") }}{% endblock %}
+{% block page_title %}Smart Goals{% endblock %}
 {% block content %}
 
 <section class="hero compact goals-hero-v41">
@@ -19,12 +19,12 @@
 
         <form method="POST" class="form smart-goal-form-v4613" id="smartGoalForm">
             <div class="goal-field goal-field-wide">
-                <label>{{ t("goals.goal_title") }}</label>
+                <label>Goal Title</label>
                 <input name="title" id="goalTitleInput" placeholder="Achieve IELTS Band 7 / حفظ جزء عم / Master Python Flask" required>
             </div>
 
             <div class="goal-field goal-field-wide">
-                <label>{{ t("goals.goal_type") }}</label>
+                <label>Goal Type</label>
                 <select name="category" id="goalTypeSelect">
                     <option>Education</option>
                     <option>Language</option>
@@ -44,43 +44,43 @@
 
             <div class="adaptive-goal-panel-v4614" id="adaptiveGoalBox">
                 <div class="goal-field">
-                    <label id="goalCategoryLabel">{{ t("goals.category") }}</label>
+                    <label id="goalCategoryLabel">Goal Category</label>
                     <select name="goal_category" id="goalCategorySelect"></select>
                     <div class="inline-custom-field" id="customCategoryBox">
-                        <label id="customCategoryLabel">Custom {{ t("goals.category") }}</label>
+                        <label id="customCategoryLabel">Custom Goal Category</label>
                         <input name="custom_goal_category" id="customGoalCategoryInput" placeholder="Write your custom category">
                     </div>
                 </div>
 
                 <div class="goal-field">
-                    <label id="goalPathLabel">{{ t("goals.path") }}</label>
+                    <label id="goalPathLabel">Goal Path</label>
                     <select name="goal_path" id="goalPathSelect"></select>
                     <div class="inline-custom-field" id="customPathBox">
-                        <label id="customPathLabel">Custom {{ t("goals.path") }}</label>
+                        <label id="customPathLabel">Custom Goal Path</label>
                         <input name="custom_goal_path" id="customGoalPathInput" placeholder="Write your custom path">
                     </div>
                 </div>
 
                 <div class="goal-field">
-                    <label id="currentStateLabel">{{ t("goals.current") }}</label>
+                    <label id="currentStateLabel">Current State</label>
                     <select name="current_state" id="currentStateSelect"></select>
                     <div class="inline-custom-field" id="customCurrentBox">
-                        <label id="customCurrentLabel">Custom {{ t("goals.current") }}</label>
+                        <label id="customCurrentLabel">Custom Current State</label>
                         <input name="custom_current_state" id="customCurrentInput" placeholder="Write your current state">
                     </div>
                 </div>
 
                 <div class="goal-field">
-                    <label id="targetStateLabel">{{ t("goals.target") }}</label>
+                    <label id="targetStateLabel">Target State</label>
                     <select name="target_state" id="targetStateSelect"></select>
                     <div class="inline-custom-field" id="customTargetBox">
-                        <label id="customTargetLabel">Custom {{ t("goals.target") }}</label>
+                        <label id="customTargetLabel">Custom Target State</label>
                         <input name="custom_target_state" id="customTargetInput" placeholder="Write your target state">
                     </div>
                 </div>
 
                 <div class="goal-field goal-field-wide">
-                    <label id="goalOutcomeLabel">{{ t("goals.outcome") }}</label>
+                    <label id="goalOutcomeLabel">Goal Outcome</label>
                     <input name="goal_outcome" id="goalOutcomeInput" placeholder="What should happen when this goal is achieved?">
                 </div>
 
@@ -100,12 +100,12 @@
 
             <div class="goal-form-bottom-grid">
                 <div class="goal-field">
-                    <label>{{ t("goals.start_date") }}</label>
+                    <label>Start Date</label>
                     <input name="start_date" type="date">
                 </div>
 
                 <div class="goal-field">
-                    <label>{{ t("goals.target_date") }}</label>
+                    <label>Target Date</label>
                     <input name="deadline" type="date">
                 </div>
 
@@ -115,7 +115,7 @@
                 </div>
             </div>
 
-            <button type="submit">💾 {{ t("goals.save") }}</button>
+            <button type="submit">💾 Save Smart Goal</button>
         </form>
     </div>
 
@@ -135,8 +135,8 @@
                 </div>
 
                 <div class="goal-current-target">
-                    <span>{{ t("goals.current") }}: {{ goal.plan.get("Current State", goal.current_level) if goal.plan else goal.current_level }}</span>
-                    <span>{{ t("goals.target") }}: {{ goal.plan.get("Target State", "{{ "غير محدد" if current_locale()=="ar" else "Not set" }}") if goal.plan else "{{ "غير محدد" if current_locale()=="ar" else "Not set" }}" }}</span>
+                    <span>Current: {{ goal.plan.get("Current State", goal.current_level) if goal.plan else goal.current_level }}</span>
+                    <span>Target: {{ goal.plan.get("Target State", "Not set") if goal.plan else "Not set" }}</span>
                 </div>
 
                 <div class="goal-progress-track">
@@ -155,8 +155,8 @@
                 {% endif %}
 
                 <div class="actions">
-                    <a class="small-button warning" href="{{ url_for('edit_goal', goal_id=goal.id) }}">✏️ {{ t("common.edit") }}</a>
-                    <a class="small-button danger" href="{{ url_for('delete_goal', goal_id=goal.id) }}">🗑 {{ t("common.delete") }}</a>
+                    <a class="small-button warning" href="{{ url_for('edit_goal', goal_id=goal.id) }}">✏️ Edit</a>
+                    <a class="small-button danger" href="{{ url_for('delete_goal', goal_id=goal.id) }}">🗑 Delete</a>
                 </div>
             </div>
         {% else %}

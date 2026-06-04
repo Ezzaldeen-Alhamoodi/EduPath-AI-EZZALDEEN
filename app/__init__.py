@@ -13,7 +13,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
-from .i18n import gettext as _t, get_locale, text_dir, label as i18n_label, resource_name as i18n_resource_name, resource_description as i18n_resource_description
 from openai import OpenAI
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 from flask_mail import Mail, Message
@@ -1143,19 +1142,6 @@ def ensure_all_users_subscription_codes():
 
 def create_app():
     app = Flask(__name__)
-    @app.context_processor
-    def inject_i18n():
-        return {
-            "t": _t,
-            "current_locale": get_locale,
-            "text_dir": text_dir,
-            "is_arabic": lambda: get_locale() == "ar",
-        }
-
-    app.jinja_env.filters["i18n_label"] = i18n_label
-    app.jinja_env.filters["i18n_resource_name"] = i18n_resource_name
-    app.jinja_env.filters["i18n_resource_description"] = i18n_resource_description
-
     app.jinja_env.filters["clickable_sources"] = render_clickable_sources
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
     app.permanent_session_lifetime = timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30")))
@@ -1911,16 +1897,6 @@ def create_app():
             except Exception:
                 logger.exception("Failed to load toast notifications")
         return {"toast_notifications": toast_notifications}
-
-
-
-    @app.route("/set-language/<lang>")
-    def set_language(lang):
-        if lang not in ("en", "ar"):
-            lang = "en"
-        session["language"] = lang
-        next_url = request.args.get("next") or request.referrer or url_for("index")
-        return redirect(next_url)
 
 
     @app.route("/")

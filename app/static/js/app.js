@@ -549,15 +549,16 @@ Object.assign(EDUPATH_LABEL_AR, {
     "Other": "أخرى"
 });
 
-
 function labelForUI(value) {
-    const lang = window.EDUPATH_LOCALE || localStorage.getItem("edupath-language") || "en";
+    const alwaysArabic = {
+        "Quran Memorization": "حفظ القرآن",
+        "Secondary School": "المرحلة الثانوية"
+    };
+    if (alwaysArabic[value]) return alwaysArabic[value];
+    const lang = localStorage.getItem("edupath-language") || "en";
     if (lang !== "ar") return value;
-    if (typeof EDUPATH_LABEL_AR !== "undefined" && EDUPATH_LABEL_AR[value]) return EDUPATH_LABEL_AR[value];
-    if (typeof EDUPATH_TASK_DYNAMIC_AR_V486 !== "undefined" && EDUPATH_TASK_DYNAMIC_AR_V486[value]) return EDUPATH_TASK_DYNAMIC_AR_V486[value];
-    return value;
+    return EDUPATH_LABEL_AR[value] || value;
 }
-
 
 function translateDynamicOptions() {
     const lang = localStorage.getItem("edupath-language") || "en";

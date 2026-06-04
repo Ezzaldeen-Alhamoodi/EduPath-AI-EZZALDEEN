@@ -6,7 +6,7 @@
 <section class="hero compact admin-hero">
     <div>
         <span class="tag">Admin Control Center</span>
-        <h2>Application Control & Student {{ t("goals.progress") }}</h2>
+        <h2>Application Control & Student Progress</h2>
         <p>Manage users, AI access, daily limits, progress tracking, and motivational messages.</p>
     </div>
     <a class="button light" href="{{ url_for('profile') }}">◉ My Profile</a>
@@ -52,7 +52,7 @@
 
 
 <section class="card subscription-pool-card-v480">
-    <h2>Global {{ t("profile.subscription_code") }} Pool</h2>
+    <h2>Global Subscription Code Pool</h2>
     <p class="muted">Generate codes once, send any available code to any paid user. The code becomes linked to the user only after activation.</p>
 
     <div class="admin-progress-grid code-pool-stats-v480">
@@ -86,7 +86,7 @@
             <input name="note" placeholder="Optional note, e.g. June subscriptions">
         </label>
 
-        <button type="submit">{{ t("admin.generate_codes") }}</button>
+        <button type="submit">Generate Codes</button>
     </form>
 
     <div class="global-code-list-v480">
@@ -114,7 +114,7 @@
 
 
 <section class="card admin-users-card-v478">
-    <h2>Users, Limits & {{ t("goals.progress") }}</h2>
+    <h2>Users, Limits & Progress</h2>
     <p class="muted">Admins are unlimited. Regular users can be limited for tasks, goals, and AI Coach. Global subscription codes are managed in the code pool above.</p>
 
     <div class="admin-users final-admin-users">
@@ -147,7 +147,7 @@
                     <div><strong>{{ item.tasks_count }}</strong><span>Tasks / {{ item.task_limit if item.task_limit is not none else "∞" }}</span></div>
                     <div><strong>{{ item.done_count }}</strong><span>Done</span></div>
                     <div><strong>{{ item.pending_count }}</strong><span>Pending</span></div>
-                    <div><strong>{{ item.progress }}%</strong><span>{{ t("goals.progress") }}</span></div>
+                    <div><strong>{{ item.progress }}%</strong><span>Progress</span></div>
                     <div><strong>{{ item.ai_limit if item.ai_limit is not none else "∞" }}</strong><span>AI limit/day</span></div>
                 </div>
 
@@ -185,12 +185,12 @@
                         <span>Admin / Unlimited access</span>
                     </label>
 
-                    <button type="submit">{{ t("common.save") }}</button>
+                    <button type="submit">Save User Control</button>
                 </form>
 
                 {% if user.id != current_user.id %}
-                    <form method="POST" action="{{ url_for('admin_delete_user', user_id=user.id) }}" onsubmit="return confirm('{{ t("common.delete") }} this user and all related data?')" class="admin-delete-form">
-                        <button type="submit" class="danger">{{ t("common.delete") }} User</button>
+                    <form method="POST" action="{{ url_for('admin_delete_user', user_id=user.id) }}" onsubmit="return confirm('Delete this user and all related data?')" class="admin-delete-form">
+                        <button type="submit" class="danger">Delete User</button>
                     </form>
                 {% endif %}
             </div>
