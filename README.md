@@ -1293,3 +1293,30 @@ Desktop sidebar design refinement.
 - No AI usage.
 - No database changes.
 - Frontend-only translation layer.
+
+
+## v4.8.5 Arabic Interface Fix
+
+### Improved Arabic translation
+- Added many missing Arabic translations across:
+  - Dashboard
+  - Goals
+  - Tasks
+  - Resources
+  - My Resources
+  - Profile
+  - Admin
+  - Auth pages
+  - Buttons, labels, placeholders, options, and status words
+- Added fuzzy translation logic for text that contains icons, punctuation, or mixed words.
+- Improved translation of dynamic content that appears after clicking or changing fields.
+
+### Desktop design preservation
+- Fixed Arabic mode on desktop so it translates text without changing the main desktop layout.
+- Keeps the same sidebar position, icon colors, spacing, and card design.
+- Mobile remains as before.
+
+### AI Coach exception
+- AI Coach pages and outputs remain English.
+- No database changes.
+- No AI usage.

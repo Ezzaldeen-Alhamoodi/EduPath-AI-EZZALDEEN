@@ -2237,3 +2237,275 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     observer.observe(document.body, {childList: true, subtree: true});
 });
+
+
+
+/* EduPath AI v4.8.5 Arabic completion patch */
+Object.assign(EDUPATH_FULL_AR_TRANSLATIONS_V484, {
+  "Smart Learning Workspace": "مساحة التعلم الذكي",
+  "Smart goals, exam-aware tasks, and focused progress for your learning path.": "أهداف ذكية، مهام مناسبة للاختبارات، وتقدم واضح لمسارك التعليمي.",
+  "Track your goals, manage tasks, practice languages, prepare scholarships, and improve coding with AI support.": "تابع أهدافك، نظم مهامك، استخدم المصادر، واستفد من دعم الذكاء الاصطناعي عند الحاجة.",
+  "Study Time": "وقت الدراسة",
+  "Study Hours": "ساعات الدراسة",
+  "Today": "اليوم",
+  "This Week": "هذا الأسبوع",
+  "This Month": "هذا الشهر",
+  "Weak Areas": "نقاط الضعف",
+  "AI Suggestions": "اقتراحات ذكية",
+  "Suggested Resources": "مصادر مقترحة",
+  "Recommended Resources": "مصادر موصى بها",
+  "Learning Path": "مسار التعلم",
+  "Top Resources": "أفضل المصادر",
+  "View More": "عرض المزيد",
+  "Show More": "عرض المزيد",
+  "View": "عرض",
+  "Details": "التفاصيل",
+  "Overview": "نظرة عامة",
+  "Summary": "ملخص",
+  "Latest": "الأحدث",
+  "Recent": "الأخيرة",
+  "Actions": "الإجراءات",
+  "Created": "تم الإنشاء",
+  "Updated": "تم التحديث",
+  "Deadline": "الموعد النهائي",
+  "Remaining": "المتبقي",
+  "Days": "أيام",
+  "days": "أيام",
+  "minutes": "دقائق",
+  "hours": "ساعات",
+  "not set": "غير محدد",
+  "General": "عام",
+  "Custom": "مخصص",
+  "Other / Custom": "أخرى / مخصص",
+  "Write your custom value": "اكتب خيارك المخصص",
+  "Add": "إضافة",
+  "Save Changes": "حفظ التغييرات",
+  "Saved successfully.": "تم الحفظ بنجاح.",
+  "Deleted successfully.": "تم الحذف بنجاح.",
+  "Updated successfully.": "تم التحديث بنجاح.",
+  "Error": "خطأ",
+  "Success": "نجاح",
+  "Goal Overview": "نظرة عامة على الهدف",
+  "Progress Breakdown": "تفصيل التقدم",
+  "Milestones": "المحطات",
+  "Related Completed Tasks Count": "عدد المهام المكتملة المرتبطة",
+  "Confidence Score": "درجة الثقة",
+  "Goal Confidence Score": "درجة ثقة الهدف",
+  "Based on": "بناءً على",
+  "related tasks completed": "مهام مرتبطة مكتملة",
+  "study hours": "ساعات دراسة",
+  "milestones touched": "محطات تم التقدم فيها",
+  "Current State → Target State": "الحالة الحالية ← الحالة المستهدفة",
+  "Daily / Weekly Commitment": "الالتزام اليومي / الأسبوعي",
+  "Weekly Commitment": "الالتزام الأسبوعي",
+  "Goal Strategy": "استراتيجية الهدف",
+  "Goal Details": "تفاصيل الهدف",
+  "Smart Goal": "هدف ذكي",
+  "Create Goal": "إنشاء هدف",
+  "Edit Goal": "تعديل الهدف",
+  "Delete Goal": "حذف الهدف",
+  "No smart goals yet.": "لا توجد أهداف ذكية بعد.",
+  "Create your first smart goal.": "أنشئ أول هدف ذكي لك.",
+  "Create Task": "إنشاء مهمة",
+  "Edit Task": "تعديل المهمة",
+  "Delete Task": "حذف المهمة",
+  "Task Details": "تفاصيل المهمة",
+  "Smart Task": "مهمة ذكية",
+  "Completed Tasks": "المهام المكتملة",
+  "Pending Tasks": "المهام المتبقية",
+  "Expected Time": "الوقت المتوقع",
+  "Estimated Minutes": "الدقائق المتوقعة",
+  "Priority": "الأولوية",
+  "Difficulty": "الصعوبة",
+  "High": "عالية",
+  "Medium": "متوسطة",
+  "Low": "منخفضة",
+  "Main Category": "الفئة الرئيسية",
+  "Subcategory": "الفئة الفرعية",
+  "Practice Type": "نوع التدريب",
+  "Source": "المصدر",
+  "Source / Resource": "المصدر / المورد",
+  "No tasks yet. Create your first smart task.": "لا توجد مهام بعد. أنشئ أول مهمة ذكية لك.",
+  "Task completed.": "تم إنجاز المهمة.",
+  "Task saved.": "تم حفظ المهمة.",
+  "Resource": "مصدر",
+  "Resource Type": "نوع المصدر",
+  "Resource Notes": "ملاحظات المصدر",
+  "Open Last Used": "فتح آخر مصدر مستخدم",
+  "Last opened": "آخر فتح",
+  "Official Resources": "المصادر الرسمية",
+  "Practice Resources": "مصادر التدريب",
+  "Mock Tests": "اختبارات تجريبية",
+  "Strategy Resources": "مصادر الاستراتيجية",
+  "Advanced Resources": "مصادر متقدمة",
+  "Course": "دورة",
+  "Website": "موقع",
+  "Book": "كتاب",
+  "Tool": "أداة",
+  "Practice": "تدريب",
+  "Video Lessons": "دروس فيديو",
+  "Community": "مجتمع",
+  "Dictionary": "قاموس",
+  "Question Bank": "بنك أسئلة",
+  "Mock Test": "اختبار تجريبي",
+  "Exam Focused": "مخصص للاختبار",
+  "Practical": "عملي",
+  "Theory": "نظري",
+  "Matching Resources": "المصادر المطابقة",
+  "No matching resources found.": "لم يتم العثور على مصادر مطابقة.",
+  "Try changing filters or search keywords.": "جرّب تغيير الفلاتر أو كلمات البحث.",
+  "Profile updated.": "تم تحديث الملف الشخصي.",
+  "Paid version activated successfully.": "تم تفعيل النسخة المدفوعة بنجاح.",
+  "Invalid subscription code.": "كود الاشتراك غير صحيح.",
+  "Invalid or already used subscription code.": "كود الاشتراك غير صحيح أو مستخدم مسبقًا.",
+  "You already have an active paid subscription.": "لديك اشتراك مدفوع نشط بالفعل.",
+  "Too many failed activation attempts. Please try again later.": "محاولات كثيرة غير ناجحة. يرجى المحاولة لاحقًا.",
+  "Free Tasks": "مهام مجانية",
+  "Free Goals": "أهداف مجانية",
+  "Free AI/day": "ذكاء مجاني/يوم",
+  "Paid Tasks": "مهام مدفوعة",
+  "Paid Goals": "أهداف مدفوعة",
+  "Paid AI/day": "ذكاء مدفوع/يوم",
+  "Paid version active": "النسخة المدفوعة مفعلة",
+  "Admin / Unlimited access": "مشرف / وصول غير محدود",
+  "AI On": "الذكاء مفعل",
+  "AI Off": "الذكاء غير مفعل",
+  "Limit": "الحد",
+  "AI limit/day": "حد الذكاء/اليوم",
+  "Users": "المستخدمون",
+  "Total Users": "إجمالي المستخدمين",
+  "Total Goals": "إجمالي الأهداف",
+  "Total Tasks": "إجمالي المهام",
+  "Generate Codes": "إنشاء أكواد",
+  "Global Subscription Code Pool": "مخزون أكواد الاشتراك العام",
+  "Used by": "استخدمه",
+  "Expires": "ينتهي",
+  "Cancel": "إلغاء",
+  "Used codes cannot be cancelled.": "لا يمكن إلغاء الأكواد المستخدمة.",
+  "Subscription code cancelled.": "تم إلغاء كود الاشتراك.",
+  "subscription codes generated.": "تم إنشاء أكواد الاشتراك.",
+  "Full Name": "الاسم الكامل",
+  "Your Name": "اسمك",
+  "Your Email": "بريدك الإلكتروني",
+  "New Password": "كلمة المرور الجديدة",
+  "Current Password": "كلمة المرور الحالية",
+  "Already have an account?": "لديك حساب بالفعل؟",
+  "Don't have an account?": "ليس لديك حساب؟",
+  "Sign in": "تسجيل الدخول",
+  "Sign up": "إنشاء حساب",
+  "Log in": "تسجيل الدخول",
+  "Create your account": "أنشئ حسابك",
+  "Welcome back": "مرحبًا بعودتك",
+  "Account": "الحساب",
+  "User Guide": "دليل الاستخدام",
+  "Back to Dashboard": "العودة للرئيسية",
+  "How to use EduPath AI": "كيفية استخدام EduPath AI",
+  "Important Tip": "نصيحة مهمة",
+  "Monday": "الاثنين",
+  "Tuesday": "الثلاثاء",
+  "Wednesday": "الأربعاء",
+  "Thursday": "الخميس",
+  "Friday": "الجمعة",
+  "Saturday": "السبت",
+  "Sunday": "الأحد",
+  "Mon": "الاثنين",
+  "Tue": "الثلاثاء",
+  "Wed": "الأربعاء",
+  "Thu": "الخميس",
+  "Fri": "الجمعة",
+  "Sat": "السبت",
+  "Sun": "الأحد"
+});
+Object.assign(EDUPATH_FULL_AR_PLACEHOLDERS_V484, {
+  "Search...": "بحث...",
+  "Search tasks...": "ابحث في المهام...",
+  "Search goals...": "ابحث في الأهداف...",
+  "Search resources...": "ابحث في المصادر...",
+  "Write notes...": "اكتب ملاحظات...",
+  "Enter subscription code": "أدخل كود الاشتراك",
+  "Example: EPAI-XXXXX-XXXXX-XXXXX-XXXXX": "مثال: EPAI-XXXXX-XXXXX-XXXXX-XXXXX",
+  "Optional note": "ملاحظة اختيارية",
+  "Your answer...": "إجابتك..."
+});
+
+function preserveDesktopLayoutWhileArabicV485() {
+    const lang = localStorage.getItem("edupath-language") || "en";
+    document.body.classList.toggle("arabic-text-only-desktop-v485", lang === "ar" && window.innerWidth >= 981 && !edupathIsCoachPageV484());
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        preserveDesktopLayoutWhileArabicV485();
+        applyFullArabicInterfaceV484(document);
+    }, 180);
+
+    document.addEventListener("click", () => setTimeout(() => {
+        preserveDesktopLayoutWhileArabicV485();
+        applyFullArabicInterfaceV484(document);
+    }, 120));
+
+    window.addEventListener("resize", preserveDesktopLayoutWhileArabicV485);
+});
+
+
+
+/* EduPath AI v4.8.5 stronger fuzzy Arabic translation */
+function translateLooseTextV485(text) {
+    if (!text) return text;
+    let output = text;
+    const entries = Object.entries(EDUPATH_FULL_AR_TRANSLATIONS_V484)
+        .sort((a, b) => b[0].length - a[0].length);
+
+    for (const [en, ar] of entries) {
+        if (!en || !ar) continue;
+
+        const escaped = en.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const re = new RegExp(`(^|[\\s\\n\\t:·•\\-–—()\\[\\]{}])${escaped}($|[\\s\\n\\t:·•\\-–—()\\[\\]{}])`, "g");
+        output = output.replace(re, (match, p1, p2) => `${p1}${ar}${p2}`);
+    }
+    return output;
+}
+
+function applyLooseArabicTranslationV485(root=document) {
+    const lang = localStorage.getItem("edupath-language") || "en";
+    if (lang !== "ar" || edupathIsCoachPageV484()) return;
+
+    const walker = document.createTreeWalker(root.body || root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+            if (!node.parentElement) return NodeFilter.FILTER_REJECT;
+            if (node.parentElement.closest("script, style, code, pre, textarea")) return NodeFilter.FILTER_REJECT;
+            if (node.parentElement.closest(".ai-output, .coach-output, .answer-box, .saved-answer-card")) return NodeFilter.FILTER_REJECT;
+            return NodeFilter.FILTER_ACCEPT;
+        }
+    });
+
+    let node;
+    while ((node = walker.nextNode())) {
+        const before = node.nodeValue;
+        const after = translateLooseTextV485(before);
+        if (after !== before) node.nodeValue = after;
+    }
+
+    root.querySelectorAll("input, textarea, button, option, [placeholder], [title], [aria-label]").forEach(el => {
+        ["placeholder", "title", "aria-label"].forEach(attr => {
+            if (el.hasAttribute(attr)) el.setAttribute(attr, translateLooseTextV485(el.getAttribute(attr)));
+        });
+
+        if (el.tagName === "OPTION" || el.tagName === "BUTTON") {
+            el.textContent = translateLooseTextV485(el.textContent);
+        }
+
+        const type = (el.getAttribute("type") || "").toLowerCase();
+        if (["button","submit","reset"].includes(type) && el.value) {
+            el.value = translateLooseTextV485(el.value);
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => applyLooseArabicTranslationV485(document), 350);
+    setTimeout(() => applyLooseArabicTranslationV485(document), 1200);
+
+    document.addEventListener("click", () => setTimeout(() => applyLooseArabicTranslationV485(document), 180));
+    document.addEventListener("change", () => setTimeout(() => applyLooseArabicTranslationV485(document), 180));
+});
