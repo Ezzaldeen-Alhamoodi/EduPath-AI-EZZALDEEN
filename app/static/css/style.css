@@ -5154,3 +5154,172 @@ body.dark-mode .home-progress-ar-v513,
 body.dark-mode .home-shortcuts-ar-v513 a {
     background: rgba(15,23,42,.75);
 }
+
+
+
+/* EduPath AI v5.1.4 Dashboard Final Polish */
+@media (min-width: 981px) {
+    .dashboard-ar-v513 {
+        width: min(100%, 1680px) !important;
+        max-width: none !important;
+        margin-inline: auto !important;
+    }
+
+    .main {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+}
+
+.home-hero-blue-ar-v514 {
+    background: linear-gradient(135deg, #eaf2ff 0%, #eefdf8 48%, #fff7e6 100%) !important;
+    border: 1px solid rgba(37, 99, 235, .18) !important;
+    box-shadow: 0 14px 36px rgba(37, 99, 235, .08) !important;
+}
+
+.home-hero-blue-ar-v514 .home-hero-text-ar-v513 h1 {
+    max-width: 940px;
+}
+
+.home-progress-ar-v513 {
+    color: #0f172a !important;
+    background: rgba(255, 255, 255, .86) !important;
+}
+
+.home-progress-ar-v513 .progress-circle {
+    color: #2563eb !important;
+    background: radial-gradient(circle, rgba(37,99,235,.13), rgba(20,184,166,.08)) !important;
+    border: 1px solid rgba(37,99,235,.16) !important;
+    box-shadow: inset 0 0 0 8px rgba(37,99,235,.04) !important;
+    text-shadow: none !important;
+}
+
+.home-progress-ar-v513 strong,
+.home-progress-ar-v513 small {
+    color: #0f172a !important;
+}
+
+.home-compact-stats-ar-v513 {
+    gap: 8px !important;
+}
+
+.home-compact-stats-ar-v513 .stat-card {
+    min-height: 70px !important;
+    padding: 9px 11px !important;
+    display: grid !important;
+    grid-template-columns: 24px 1fr auto !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.home-compact-stats-ar-v513 .stat-card span {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 11px !important;
+    margin: 0 !important;
+    border-radius: 9px !important;
+}
+
+.home-compact-stats-ar-v513 .stat-card h3 {
+    font-size: 12px !important;
+    margin: 0 !important;
+    line-height: 1.35 !important;
+}
+
+.home-compact-stats-ar-v513 .stat-card p {
+    font-size: 21px !important;
+    margin: 0 !important;
+    justify-self: end !important;
+}
+
+.home-main-grid-ar-v513 {
+    grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr) !important;
+}
+
+.home-card-ar-v513 {
+    box-shadow: 0 10px 28px rgba(15,23,42,.045) !important;
+}
+
+.home-card-ar-v513 h2 {
+    font-size: 16px !important;
+}
+
+.compact-focus-ar-v513 .focus-card-v41 > span,
+.compact-goals-ar-v513 .goal-icon {
+    transform: scale(.88);
+}
+
+.compact-task-mini-ar-v513 .badge {
+    background: rgba(37,99,235,.08) !important;
+    color: #1d4ed8 !important;
+}
+
+.home-footer-clean-ar-v513 {
+    border-top: 1px solid rgba(148,163,184,.18);
+    margin-top: 6px;
+    padding-top: 12px !important;
+}
+
+@media (max-width: 980px) {
+    .home-compact-stats-ar-v513 .stat-card {
+        min-height: 58px !important;
+        padding: 8px !important;
+        grid-template-columns: 22px 1fr auto !important;
+    }
+
+    .home-compact-stats-ar-v513 .stat-card span {
+        width: 22px !important;
+        height: 22px !important;
+        font-size: 10px !important;
+    }
+
+    .home-compact-stats-ar-v513 .stat-card h3 {
+        font-size: 10.5px !important;
+    }
+
+    .home-compact-stats-ar-v513 .stat-card p {
+        font-size: 17px !important;
+    }
+
+    .home-hero-blue-ar-v514 {
+        padding: 12px !important;
+    }
+
+    .home-progress-ar-v513 {
+        display: grid;
+        grid-template-columns: 64px 1fr;
+        align-items: center;
+        text-align: right;
+        gap: 8px;
+    }
+
+    .home-progress-ar-v513 .progress-circle {
+        width: 58px !important;
+        height: 58px !important;
+        font-size: 16px !important;
+        margin: 0 !important;
+        grid-row: span 2;
+    }
+
+    .home-progress-ar-v513 strong {
+        font-size: 12px !important;
+    }
+
+    .home-progress-ar-v513 small {
+        font-size: 10.5px !important;
+    }
+}
+
+body.dark-mode .home-hero-blue-ar-v514 {
+    background: linear-gradient(135deg, rgba(37,99,235,.20), rgba(20,184,166,.14), rgba(245,158,11,.12)) !important;
+}
+
+body.dark-mode .home-progress-ar-v513 {
+    background: rgba(15,23,42,.78) !important;
+}
+
+body.dark-mode .home-progress-ar-v513,
+body.dark-mode .home-progress-ar-v513 strong,
+body.dark-mode .home-progress-ar-v513 small {
+    color: #e5e7eb !important;
+}

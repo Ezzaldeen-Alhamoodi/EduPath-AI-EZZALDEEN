@@ -1311,3 +1311,34 @@ Safe dashboard-only improvement.
 - Did not modify adaptive JavaScript logic.
 - Did not modify database values.
 - Did not modify task/goal adaptive fields.
+
+
+## v5.1.4 Dashboard Final Polish
+
+Dashboard-only final polish.
+
+### Fixed
+- Progress card text is now visible.
+- Dashboard stat labels are clearer:
+  - Number of goals
+  - Completed tasks
+  - Remaining tasks
+  - Total tasks
+- Removed duplicate dashboard shortcut cards because navigation already exists in sidebar/mobile bottom nav.
+- Added Arabic dashboard display labels for future visible words such as Submit, Study, Review, Practice, Homework, Exam, and Project.
+- Mobile More menu labels are Arabic.
+
+### Design
+- Dashboard uses more desktop width.
+- Hero section has a light blue professional background.
+- Stat cards and icons are smaller and more compact.
+- Footer is organized and remains simple:
+  - app name + version
+  - contact email
+  - user guide
+  - copyright
+
+### Safety
+- Dashboard only.
+- No changes to Tasks, Goals, Resources adaptive logic.
+- No database changes.
