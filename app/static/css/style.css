@@ -4645,3 +4645,77 @@ body.dark-mode .compact-user-panel-v481 .mini-link {
     background: rgba(96,165,250,.08);
     border-color: rgba(96,165,250,.16);
 }
+
+
+
+/* EduPath AI v4.8.3 Desktop Sidebar Icon Polish */
+@media (min-width: 981px) {
+    .desktop-icon-nav-v483 {
+        gap: 8px !important;
+        margin-top: 8px !important;
+    }
+
+    .desktop-icon-nav-v483 a {
+        min-height: 46px !important;
+        padding: 8px 10px !important;
+        border-radius: 16px !important;
+        display: grid !important;
+        grid-template-columns: 32px 1fr !important;
+        gap: 10px !important;
+        align-items: center !important;
+        background: rgba(255,255,255,.72) !important;
+        border: 1px solid rgba(148,163,184,.16) !important;
+        box-shadow: 0 8px 18px rgba(15,23,42,.04) !important;
+        font-size: 13.5px !important;
+        font-weight: 950 !important;
+    }
+
+    .desktop-icon-nav-v483 a:hover {
+        transform: translateY(-1px);
+        background: rgba(37,99,235,.07) !important;
+        border-color: rgba(37,99,235,.20) !important;
+    }
+
+    .desktop-icon-nav-v483 i {
+        width: 31px !important;
+        height: 31px !important;
+        border-radius: 12px !important;
+        display: grid !important;
+        place-items: center !important;
+        color: #fff !important;
+        font-style: normal !important;
+        font-size: 13px !important;
+        font-weight: 950 !important;
+        line-height: 1 !important;
+    }
+
+    .desktop-icon-nav-v483 .nav-dashboard i { background: linear-gradient(135deg, #2563eb, #06b6d4); }
+    .desktop-icon-nav-v483 .nav-goals i { background: linear-gradient(135deg, #7c3aed, #2563eb); }
+    .desktop-icon-nav-v483 .nav-tasks i { background: linear-gradient(135deg, #0f766e, #14b8a6); }
+    .desktop-icon-nav-v483 .nav-resources i { background: linear-gradient(135deg, #ea580c, #f59e0b); }
+    .desktop-icon-nav-v483 .nav-coach i { background: linear-gradient(135deg, #9333ea, #ec4899); }
+    .desktop-icon-nav-v483 .nav-admin i { background: linear-gradient(135deg, #475569, #0f172a); }
+
+    .compact-user-panel-v481 {
+        grid-template-columns: 1fr 1fr !important;
+        margin-bottom: 2px !important;
+    }
+
+    .compact-user-panel-v481 .mini-link {
+        min-height: 34px !important;
+        font-size: 12.5px !important;
+    }
+
+    .notify-btn {
+        margin-top: 8px !important;
+    }
+
+    .sidebar {
+        justify-content: flex-start !important;
+    }
+}
+
+body.dark-mode .desktop-icon-nav-v483 a {
+    background: rgba(15,23,42,.72) !important;
+    border-color: rgba(96,165,250,.15) !important;
+}

@@ -1235,3 +1235,27 @@ Security-focused update.
 - 0 API calls.
 - 0 OpenRouter usage.
 - 0 cost.
+
+
+## v4.8.3 Desktop Sidebar Icon Polish
+
+Desktop sidebar design refinement.
+
+### Changed
+- Removed duplicated Profile from the lower/main sidebar navigation.
+- Kept Profile only in the top compact user panel.
+- Added colored icon cards to desktop sidebar navigation:
+  - Dashboard
+  - Goals
+  - Tasks
+  - Resources
+  - AI Coach
+  - Admin
+- Admin remains visible only for admin accounts.
+- Improved desktop sidebar spacing and visual balance.
+- Matched the desktop sidebar style more closely with the mobile bottom navigation.
+
+### AI usage
+- 0 API calls.
+- 0 OpenRouter usage.
+- 0 cost.

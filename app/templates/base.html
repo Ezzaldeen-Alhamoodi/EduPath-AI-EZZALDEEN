@@ -42,14 +42,13 @@
             {% endif %}
         </div>
 
-        <nav class="main-nav">
-            <a href="{{ url_for('index') }}"><span data-i18n="nav.dashboard">Dashboard</span></a>
-            <a href="{{ url_for('goals') }}"><span data-i18n="nav.goals">Goals</span></a>
-            <a href="{{ url_for('tasks') }}"><span data-i18n="nav.tasks">Tasks</span></a>
-            <a href="{{ url_for('resources') }}"><span data-i18n="nav.resources">Resources</span></a>
-            <a href="{{ url_for('coach') }}"><span data-i18n="nav.coach">AI Coach</span></a>
-            {% if current_user.is_authenticated %}<a href="{{ url_for('profile') }}"><span data-i18n="nav.profile">Profile</span></a>{% endif %}
-            {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}<a href="{{ url_for('admin_dashboard') }}"><span data-i18n="nav.admin">Admin</span></a>{% endif %}
+        <nav class="main-nav desktop-icon-nav-v483">
+            <a class="nav-dashboard" href="{{ url_for('index') }}"><i>⌂</i><span data-i18n="nav.dashboard">Dashboard</span></a>
+            <a class="nav-goals" href="{{ url_for('goals') }}"><i>◎</i><span data-i18n="nav.goals">Goals</span></a>
+            <a class="nav-tasks" href="{{ url_for('tasks') }}"><i>▣</i><span data-i18n="nav.tasks">Tasks</span></a>
+            <a class="nav-resources" href="{{ url_for('resources') }}"><i>▤</i><span data-i18n="nav.resources">Resources</span></a>
+            <a class="nav-coach" href="{{ url_for('coach') }}"><i>✦</i><span data-i18n="nav.coach">AI Coach</span></a>
+            {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}<a class="nav-admin" href="{{ url_for('admin_dashboard') }}"><i>⚙</i><span data-i18n="nav.admin">Admin</span></a>{% endif %}
         </nav>
 
         <button class="notify-btn" id="enableNotifications">Enable Reminders</button>
