@@ -50,9 +50,72 @@
 
 
 
+
+<section class="card subscription-pool-card-v480">
+    <h2>Global Subscription Code Pool</h2>
+    <p class="muted">Generate codes once, send any available code to any paid user. The code becomes linked to the user only after activation.</p>
+
+    <div class="admin-progress-grid code-pool-stats-v480">
+        <div><strong>{{ available_codes }}</strong><span>Available</span></div>
+        <div><strong>{{ used_codes }}</strong><span>Used</span></div>
+        <div><strong>{{ cancelled_codes }}</strong><span>Cancelled</span></div>
+        <div><strong>{{ expired_subscriptions }}</strong><span>Expired</span></div>
+    </div>
+
+    <form method="POST" action="{{ url_for('admin_generate_global_subscription_codes') }}" class="generate-global-codes-v480">
+        <label>Quantity
+            <select name="quantity">
+                <option value="10">Generate 10 Codes</option>
+                <option value="50">Generate 50 Codes</option>
+                <option value="100">Generate 100 Codes</option>
+                <option value="200">Generate 200 Codes</option>
+            </select>
+        </label>
+
+        <label>Duration
+            <select name="duration_days">
+                <option value="30">30 days</option>
+                <option value="90">90 days</option>
+                <option value="180">180 days</option>
+                <option value="365">365 days</option>
+                <option value="3650">Lifetime-like / 10 years</option>
+            </select>
+        </label>
+
+        <label>Note
+            <input name="note" placeholder="Optional note, e.g. June subscriptions">
+        </label>
+
+        <button type="submit">Generate Codes</button>
+    </form>
+
+    <div class="global-code-list-v480">
+        {% for code in recent_codes %}
+            <div class="global-code-item-v480 {% if code.is_used %}used{% elif code.is_cancelled %}cancelled{% else %}available{% endif %}">
+                <code>{{ code.code }}</code>
+                <span>{{ code.duration_days }} days</span>
+                {% if code.is_used %}
+                    <span>Used by: {{ code.used_by_user.email if code.used_by_user else "unknown" }}</span>
+                    {% if code.expires_at %}<span>Expires: {{ code.expires_at.strftime("%Y-%m-%d") }}</span>{% endif %}
+                {% elif code.is_cancelled %}
+                    <span>Cancelled</span>
+                {% else %}
+                    <span>Available</span>
+                    <form method="POST" action="{{ url_for('admin_cancel_subscription_code', code_id=code.id) }}">
+                        <button type="submit" class="small-button danger">Cancel</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% else %}
+            <p class="muted">No subscription codes yet. Generate your first code batch.</p>
+        {% endfor %}
+    </div>
+</section>
+
+
 <section class="card admin-users-card-v478">
-    <h2>Users, Limits, Paid Codes & Progress</h2>
-    <p class="muted">Admins are unlimited. Regular users can be limited for tasks, goals, and AI Coach. Subscription codes are visible only here.</p>
+    <h2>Users, Limits & Progress</h2>
+    <p class="muted">Admins are unlimited. Regular users can be limited for tasks, goals, and AI Coach. Global subscription codes are managed in the code pool above.</p>
 
     <div class="admin-users final-admin-users">
         {% for item in user_stats %}
@@ -75,7 +138,7 @@
                         {% if item.paid_active %}
                             <span class="admin-badge paid">Days left: {{ item.paid_days_left }}</span>
                         {% endif %}
-                        <span class="admin-badge code">Codes: {{ item.subscription_codes|length }}</span>
+                        
                     </div>
                 </div>
 
@@ -94,24 +157,6 @@
                     <div><strong>{{ item.code_used }}</strong><span>Code Coach today</span></div>
                     <div><strong>{{ item.general_used }}</strong><span>General AI today</span></div>
                 </div>
-
-
-                <div class="subscription-codes-v479">
-                    <strong>Subscription Codes</strong>
-                    <div class="code-list-v479">
-                        {% for code in item.subscription_codes %}
-                            <span class="sub-code-v479 {% if code.is_used %}used{% else %}available{% endif %}">
-                                <code>{{ code.code }}</code>
-                                <small>{{ code.duration_days }} days · {{ "Used" if code.is_used else "Available" }}</small>
-                            </span>
-                        {% endfor %}
-                    </div>
-                    <form method="POST" action="{{ url_for('admin_generate_subscription_code', user_id=user.id) }}" class="generate-code-form-v479">
-                        <input type="number" name="duration_days" min="1" max="3650" value="30" title="Duration in days">
-                        <button type="submit" class="small-button">Generate Code</button>
-                    </form>
-                </div>
-
                 <form method="POST" action="{{ url_for('admin_update_user', user_id=user.id) }}" class="admin-user-form">
                     <label>Name</label>
                     <input name="name" value="{{ user.name }}">

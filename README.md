@@ -1122,3 +1122,62 @@ Focused task-form update.
 - Backward compatible with old single subscription_code field.
 - Existing users receive new multiple codes automatically.
 - No existing data is deleted.
+
+
+## v4.8.0 Global Subscription Code Pool
+
+Professional subscription-code system.
+
+### Changed from per-user codes to global code pool
+- Codes are no longer pre-assigned to specific users.
+- Admin generates a pool of available subscription codes.
+- Any available code can be sent to any paid user.
+- The code becomes linked to the user only after activation.
+- Used codes cannot be used again.
+
+### Code security
+- Codes are long and generated using Python `secrets`.
+- Format example:
+  - EPAI-ABCDE-12345-FGHIJ-67890
+- Each code can be used once only.
+- Cancelled codes cannot be used.
+- Used codes show as used and linked to the user who activated them.
+- Activation attempts are logged.
+- More than 5 failed attempts within 60 minutes blocks further activation attempts temporarily.
+
+### Admin code pool
+- Admin can generate:
+  - 10 codes
+  - 50 codes
+  - 100 codes
+  - 200 codes
+- Admin chooses duration:
+  - 30 days
+  - 90 days
+  - 180 days
+  - 365 days
+  - 10 years
+- Admin sees:
+  - available codes
+  - used codes
+  - cancelled codes
+  - expired subscriptions
+  - recent code list
+- Admin can cancel unused codes.
+
+### Paid expiry
+- Subscription duration starts when the user activates the code.
+- The activated code stores:
+  - used_by_user_id
+  - used_at
+  - expires_at
+- User account stores:
+  - paid_active
+  - paid_activated_at
+  - subscription_expires_at
+- Expired subscriptions automatically fall back to free plan.
+
+### Profile activation
+- User enters a code in Profile.
+- If valid and unused, the paid version activates.
+- If invalid, used, cancelled, or too many failed attempts, a safe error message appears.

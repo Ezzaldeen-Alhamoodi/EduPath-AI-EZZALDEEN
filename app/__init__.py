@@ -62,14 +62,29 @@ class User(UserMixin, db.Model):
 
 class SubscriptionCode(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, index=True)
-    code = db.Column(db.String(32), nullable=False, unique=True, index=True)
+    code = db.Column(db.String(48), nullable=False, unique=True, index=True)
     duration_days = db.Column(db.Integer, nullable=False, default=30)
     is_used = db.Column(db.Boolean, nullable=False, default=False)
+    used_by_user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
     used_at = db.Column(db.DateTime, nullable=True)
+    expires_at = db.Column(db.DateTime, nullable=True)
+    is_cancelled = db.Column(db.Boolean, nullable=False, default=False)
+    created_by_admin_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
+    note = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
 
-    user = db.relationship("User", backref="subscription_codes")
+    used_by_user = db.relationship("User", foreign_keys=[used_by_user_id], backref="activated_subscription_codes")
+    created_by_admin = db.relationship("User", foreign_keys=[created_by_admin_id], backref="created_subscription_codes")
+
+
+class SubscriptionActivationAttempt(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, index=True)
+    attempted_code = db.Column(db.String(80), nullable=True)
+    was_successful = db.Column(db.Boolean, nullable=False, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+
+    user = db.relationship("User", backref="subscription_activation_attempts")
 
 
 class AIUsage(db.Model):
@@ -531,37 +546,30 @@ def admin_required(view_func):
 
 def generate_subscription_code():
     alphabet = string.ascii_uppercase + string.digits
-    return "EDU-" + "".join(secrets.choice(alphabet) for _ in range(6)) + "-" + "".join(secrets.choice(alphabet) for _ in range(6))
+    # Long, random, human-readable code. Generated using secrets, not random.
+    return "EPAI-" + "-".join(
+        "".join(secrets.choice(alphabet) for _ in range(5))
+        for _ in range(4)
+    )
 
 
 def generate_unique_subscription_code():
     code = generate_subscription_code()
-    while SubscriptionCode.query.filter_by(code=code).first() or User.query.filter_by(subscription_code=code).first():
+    while SubscriptionCode.query.filter_by(code=code).first():
         code = generate_subscription_code()
     return code
 
 
 def ensure_user_subscription_code(user):
-    """Backward-compatible primary code field; Admin uses the new multiple-code table."""
+    """Legacy compatibility only. New system uses global SubscriptionCode pool."""
     if not getattr(user, "subscription_code", None):
-        code = generate_subscription_code()
-        while User.query.filter_by(subscription_code=code).first() or SubscriptionCode.query.filter_by(code=code).first():
-            code = generate_subscription_code()
-        user.subscription_code = code
+        user.subscription_code = generate_unique_subscription_code()
     return user.subscription_code
 
 
-def ensure_user_subscription_codes(user, minimum=3):
+def ensure_user_subscription_codes(user, minimum=0):
+    """Legacy compatibility no-op. Codes are no longer pre-assigned to users."""
     ensure_user_subscription_code(user)
-    existing_count = SubscriptionCode.query.filter_by(user_id=user.id).count()
-    while existing_count < minimum:
-        db.session.add(SubscriptionCode(
-            user_id=user.id,
-            code=generate_unique_subscription_code(),
-            duration_days=30,
-            is_used=False,
-        ))
-        existing_count += 1
 
 
 def deactivate_expired_subscription(user):
@@ -576,6 +584,63 @@ def paid_days_left(user):
         return 0
     delta = user.subscription_expires_at - datetime.utcnow()
     return max(0, delta.days + (1 if delta.seconds > 0 else 0))
+
+
+def too_many_subscription_attempts(user, max_attempts=5, within_minutes=60):
+    since = datetime.utcnow() - timedelta(minutes=within_minutes)
+    failed_count = SubscriptionActivationAttempt.query.filter(
+        SubscriptionActivationAttempt.user_id == user.id,
+        SubscriptionActivationAttempt.was_successful.is_(False),
+        SubscriptionActivationAttempt.created_at >= since,
+    ).count()
+    return failed_count >= max_attempts
+
+
+def record_subscription_attempt(user, code, success):
+    db.session.add(SubscriptionActivationAttempt(
+        user_id=user.id,
+        attempted_code=(code or "")[:80],
+        was_successful=bool(success),
+    ))
+
+
+def activate_subscription_code_for_user(user, raw_code):
+    code_value = (raw_code or "").strip().upper()
+    if too_many_subscription_attempts(user):
+        return False, "Too many failed activation attempts. Please try again later."
+
+    if getattr(user, "paid_active", False) and user.subscription_expires_at and datetime.utcnow() < user.subscription_expires_at:
+        return False, "You already have an active paid subscription."
+
+    subscription_code = SubscriptionCode.query.filter_by(code=code_value).first()
+    if not subscription_code:
+        record_subscription_attempt(user, code_value, False)
+        db.session.commit()
+        return False, "Invalid subscription code."
+
+    if subscription_code.is_cancelled:
+        record_subscription_attempt(user, code_value, False)
+        db.session.commit()
+        return False, "This subscription code has been cancelled."
+
+    if subscription_code.is_used:
+        record_subscription_attempt(user, code_value, False)
+        db.session.commit()
+        return False, "This subscription code has already been used."
+
+    now = datetime.utcnow()
+    subscription_code.is_used = True
+    subscription_code.used_by_user_id = user.id
+    subscription_code.used_at = now
+    subscription_code.expires_at = now + timedelta(days=subscription_code.duration_days)
+
+    user.paid_active = True
+    user.paid_activated_at = now
+    user.subscription_expires_at = subscription_code.expires_at
+
+    record_subscription_attempt(user, code_value, True)
+    db.session.commit()
+    return True, f"Paid version activated successfully for {subscription_code.duration_days} days."
 
 
 def user_has_unlimited_access(user):
@@ -1063,14 +1128,14 @@ def ensure_all_users_subscription_codes():
                 user.paid_task_limit = 500
             if user.paid_goal_limit is None:
                 user.paid_goal_limit = 100
-            ensure_user_subscription_codes(user, minimum=3)
+            ensure_user_subscription_code(user)
             if deactivate_expired_subscription(user):
                 changed = True
             changed = True
         if changed:
             db.session.commit()
     except Exception:
-        logger.exception("Failed to ensure subscription codes")
+        logger.exception("Failed to ensure user plan fields")
 
 
 
@@ -1334,24 +1399,11 @@ def create_app():
             form_action = request.form.get("form_action", "profile").strip()
 
             if form_action == "activate_paid":
-                code = request.form.get("subscription_code", "").strip().upper()
-                subscription_code = SubscriptionCode.query.filter_by(
-                    user_id=current_user.id,
-                    code=code,
-                    is_used=False
-                ).first()
-
-                if subscription_code:
-                    now = datetime.utcnow()
-                    current_user.paid_active = True
-                    current_user.paid_activated_at = now
-                    current_user.subscription_expires_at = now + timedelta(days=subscription_code.duration_days)
-                    subscription_code.is_used = True
-                    subscription_code.used_at = now
-                    db.session.commit()
-                    flash(f"Paid version activated successfully for {subscription_code.duration_days} days.", "success")
-                else:
-                    flash("Invalid or already used subscription code. Please check the code sent by EduPath AI administration.", "error")
+                ok, message = activate_subscription_code_for_user(
+                    current_user,
+                    request.form.get("subscription_code", "")
+                )
+                flash(message, "success" if ok else "error")
                 return redirect(url_for("profile"))
 
             current_user.name = request.form.get("name", current_user.name).strip()
@@ -1642,7 +1694,7 @@ def create_app():
 
         user_stats = []
         for user in users:
-            ensure_user_subscription_codes(user, minimum=3)
+            ensure_user_subscription_code(user)
             goals_count = Goal.query.filter_by(user_id=user.id).count()
             tasks_count = StudyTask.query.filter_by(user_id=user.id).count()
             done_count = StudyTask.query.filter_by(user_id=user.id, status="done").count()
@@ -1668,8 +1720,17 @@ def create_app():
                 "goal_limit": user_goal_limit(user),
                 "ai_limit": user_ai_limit(user),
                 "paid_days_left": paid_days_left(user),
-                "subscription_codes": SubscriptionCode.query.filter_by(user_id=user.id).order_by(SubscriptionCode.id.asc()).all(),
             })
+
+        available_codes = SubscriptionCode.query.filter_by(is_used=False, is_cancelled=False).count()
+        used_codes = SubscriptionCode.query.filter_by(is_used=True).count()
+        cancelled_codes = SubscriptionCode.query.filter_by(is_cancelled=True).count()
+        expired_subscriptions = SubscriptionCode.query.filter(
+            SubscriptionCode.is_used.is_(True),
+            SubscriptionCode.expires_at.isnot(None),
+            SubscriptionCode.expires_at < datetime.utcnow(),
+        ).count()
+        recent_codes = SubscriptionCode.query.order_by(SubscriptionCode.id.desc()).limit(30).all()
 
         db.session.commit()
 
@@ -1684,6 +1745,11 @@ def create_app():
             pending_tasks=pending_tasks,
             ai_today=ai_today,
             recent_admin_messages=recent_admin_messages,
+            available_codes=available_codes,
+            used_codes=used_codes,
+            cancelled_codes=cancelled_codes,
+            expired_subscriptions=expired_subscriptions,
+            recent_codes=recent_codes,
         )
 
 
@@ -1711,21 +1777,45 @@ def create_app():
 
 
 
-    @app.route("/admin/user/<int:user_id>/generate-code", methods=["POST"])
+
+
+
+    @app.route("/admin/subscription-codes/generate", methods=["POST"])
     @login_required
     @admin_required
-    def admin_generate_subscription_code(user_id):
-        user = User.query.get_or_404(user_id)
+    def admin_generate_global_subscription_codes():
+        quantity = int(request.form.get("quantity", 10) or 10)
         duration_days = int(request.form.get("duration_days", 30) or 30)
+        note = request.form.get("note", "").strip()
+
+        quantity = max(1, min(quantity, 200))
         duration_days = max(1, min(duration_days, 3650))
-        db.session.add(SubscriptionCode(
-            user_id=user.id,
-            code=generate_unique_subscription_code(),
-            duration_days=duration_days,
-            is_used=False,
-        ))
+
+        for _ in range(quantity):
+            db.session.add(SubscriptionCode(
+                code=generate_unique_subscription_code(),
+                duration_days=duration_days,
+                is_used=False,
+                is_cancelled=False,
+                created_by_admin_id=current_user.id,
+                note=note[:255],
+            ))
+
         db.session.commit()
-        flash("New subscription code generated.", "success")
+        flash(f"{quantity} subscription codes generated.", "success")
+        return redirect(url_for("admin_dashboard"))
+
+    @app.route("/admin/subscription-codes/<int:code_id>/cancel", methods=["POST"])
+    @login_required
+    @admin_required
+    def admin_cancel_subscription_code(code_id):
+        code = SubscriptionCode.query.get_or_404(code_id)
+        if code.is_used:
+            flash("Used codes cannot be cancelled.", "error")
+        else:
+            code.is_cancelled = True
+            db.session.commit()
+            flash("Subscription code cancelled.", "success")
         return redirect(url_for("admin_dashboard"))
 
 
@@ -2935,6 +3025,19 @@ def ensure_database_columns():
                     )""",
                     """ALTER TABLE "user" ADD COLUMN IF NOT EXISTS subscription_expires_at TIMESTAMP""",
 
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS used_by_user_id INTEGER""",
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS expires_at TIMESTAMP""",
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS is_cancelled BOOLEAN DEFAULT FALSE""",
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS created_by_admin_id INTEGER""",
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS note VARCHAR(255)""",
+                    """CREATE TABLE IF NOT EXISTS subscription_activation_attempt (
+                        id SERIAL PRIMARY KEY,
+                        user_id INTEGER NOT NULL,
+                        attempted_code VARCHAR(80),
+                        was_successful BOOLEAN NOT NULL DEFAULT FALSE,
+                        created_at TIMESTAMP
+                    )""",
+
                 ]
 
                 for sql in postgres_sql:
@@ -3087,6 +3190,28 @@ def ensure_database_columns():
             existing_user_cols = {row[1] for row in connection.exec_driver_sql("PRAGMA table_info(user)").fetchall()}
             if "subscription_expires_at" not in existing_user_cols:
                 connection.exec_driver_sql("ALTER TABLE user ADD COLUMN subscription_expires_at DATETIME")
+
+            # v480_global_subscription_code_pool
+            connection.exec_driver_sql("""
+                CREATE TABLE IF NOT EXISTS subscription_activation_attempt (
+                    id INTEGER PRIMARY KEY,
+                    user_id INTEGER NOT NULL,
+                    attempted_code VARCHAR(80),
+                    was_successful BOOLEAN NOT NULL DEFAULT 0,
+                    created_at DATETIME
+                )
+            """)
+            existing_code_cols = {row[1] for row in connection.exec_driver_sql("PRAGMA table_info(subscription_code)").fetchall()}
+            code_columns_to_add = {
+                "used_by_user_id": "INTEGER",
+                "expires_at": "DATETIME",
+                "is_cancelled": "BOOLEAN DEFAULT 0",
+                "created_by_admin_id": "INTEGER",
+                "note": "VARCHAR(255)",
+            }
+            for column_name, column_type in code_columns_to_add.items():
+                if column_name not in existing_code_cols:
+                    connection.exec_driver_sql(f"ALTER TABLE subscription_code ADD COLUMN {column_name} {column_type}")
 
             # v478_user_limits_columns
             existing_user_cols = {row[1] for row in connection.exec_driver_sql("PRAGMA table_info(user)").fetchall()}

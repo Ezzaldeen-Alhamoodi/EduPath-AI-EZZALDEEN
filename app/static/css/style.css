@@ -4426,3 +4426,109 @@ body.dark-mode .sub-code-v479 code {
         width: 100%;
     }
 }
+
+
+
+/* EduPath AI v4.8.0 Global Subscription Code Pool */
+.subscription-pool-card-v480 {
+    border: 1px solid rgba(245, 158, 11, .24);
+    background: linear-gradient(135deg, rgba(245,158,11,.07), rgba(37,99,235,.04));
+}
+
+.code-pool-stats-v480 {
+    margin: 12px 0;
+}
+
+.generate-global-codes-v480 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr auto;
+    gap: 10px;
+    align-items: end;
+    margin: 14px 0;
+}
+
+.generate-global-codes-v480 label {
+    display: grid;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 950;
+}
+
+.generate-global-codes-v480 select,
+.generate-global-codes-v480 input {
+    min-height: 38px;
+    font-size: 13px;
+}
+
+.global-code-list-v480 {
+    display: grid;
+    gap: 8px;
+    max-height: 420px;
+    overflow: auto;
+    padding-right: 2px;
+}
+
+.global-code-item-v480 {
+    display: grid;
+    grid-template-columns: minmax(190px, 1.4fr) .45fr 1fr .8fr auto;
+    gap: 8px;
+    align-items: center;
+    padding: 9px;
+    border-radius: 14px;
+    border: 1px solid rgba(148, 163, 184, .2);
+    background: rgba(255,255,255,.74);
+}
+
+.global-code-item-v480 code {
+    font-size: 11px;
+    font-weight: 950;
+    overflow-wrap: anywhere;
+    color: #0f172a;
+}
+
+.global-code-item-v480 span {
+    font-size: 11px;
+    font-weight: 850;
+    color: var(--muted);
+}
+
+.global-code-item-v480.available {
+    border-color: rgba(34,197,94,.28);
+    background: rgba(34,197,94,.08);
+}
+
+.global-code-item-v480.used {
+    opacity: .72;
+    background: rgba(148,163,184,.12);
+}
+
+.global-code-item-v480.used code {
+    text-decoration: line-through;
+}
+
+.global-code-item-v480.cancelled {
+    opacity: .52;
+    background: rgba(239,68,68,.08);
+}
+
+.global-code-item-v480.cancelled code {
+    text-decoration: line-through;
+}
+
+body.dark-mode .global-code-item-v480 {
+    background: rgba(15,23,42,.72);
+}
+
+body.dark-mode .global-code-item-v480 code {
+    color: #e2e8f0;
+}
+
+@media (max-width: 980px) {
+    .generate-global-codes-v480 {
+        grid-template-columns: 1fr;
+    }
+
+    .global-code-item-v480 {
+        grid-template-columns: 1fr;
+    }
+}

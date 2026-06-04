@@ -58,7 +58,7 @@
                 <p class="muted">Activated at: {{ current_user.paid_activated_at.strftime("%Y-%m-%d") }}</p>
             {% endif %}
         {% else %}
-            <p class="muted">If you received a subscription code from EduPath AI administration, enter it here to activate the paid version.</p>
+            <p class="muted">If you received a subscription code from EduPath AI administration, enter it here. Each code can be used once only, and the subscription duration starts from activation.</p>
             <form method="POST" class="form compact-paid-form-v478">
                 <input type="hidden" name="form_action" value="activate_paid">
                 <label>Subscription Code</label>
