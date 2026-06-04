@@ -6880,3 +6880,46 @@ body.dark-mode .home-progress-ar-v513 small {
         text-overflow: clip !important;
     }
 }
+
+
+
+/* EduPath AI v5.2.9 Native Arabic Tasks */
+.smart-task-form,
+.tasks-list-card-v476,
+.tasks-board-v476,
+.task-card {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.smart-task-form label,
+.smart-task-form input,
+.smart-task-form select,
+.smart-task-form textarea {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.smart-task-form select option {
+    direction: rtl !important;
+}
+
+.smart-task-form .conditional-field label {
+    color: #1d4ed8 !important;
+    font-weight: 900 !important;
+}
+
+.task-card span,
+.task-card strong {
+    line-height: 1.55 !important;
+}
+
+.task-type-card strong {
+    line-height: 1.4 !important;
+}
+
+@media (max-width: 980px) {
+    .smart-task-form label {
+        font-size: 12.5px !important;
+    }
+}

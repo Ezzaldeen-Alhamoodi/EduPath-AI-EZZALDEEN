@@ -1657,3 +1657,30 @@ Dashboard-only layout fix.
   - goal title
   - progress bar
 - No changes to detailed Goals page layout.
+
+
+## v5.2.9 Native Arabic Tasks
+
+### Tasks page
+- Converted the Tasks page into a native Arabic interface.
+- Arabic labels for all visible task form fields:
+  - اسم المهمة
+  - الفئة الرئيسية
+  - الفئة الفرعية
+  - الموضوع التفصيلي
+  - نوع التدريب
+  - المصدر أو الرابط
+  - مستوى الصعوبة
+  - الأولوية
+  - الوقت المتوقع
+  - تاريخ البدء
+  - تاريخ الانتهاء
+  - وقت التذكير
+  - التكرار
+  - ملاحظات إضافية
+- Arabic placeholders with natural examples.
+- Unified "Other" custom fields into Arabic labels and placeholders.
+- Saved task cards now display Arabic labels and Arabic field names.
+- Preserved all adaptive logic.
+- Did not modify Quran Memorization or Secondary School structures.
+- Official exam names, programming languages, and global technical names remain unchanged.

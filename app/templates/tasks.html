@@ -1,58 +1,58 @@
 \
 {% extends "base.html" %}
-{% block page_title %}Tasks{% endblock %}
+{% block page_title %}المهام{% endblock %}
 {% block content %}
 
 <section class="hero compact tasks-hero">
     <div>
         <span class="tag">EduPath AI</span>
-        <h2><span data-i18n="tasks.title">Smart Adaptive Task System</span></h2>
-        <p><span data-i18n="tasks.desc">Create tasks that feel personal: study, university, languages, programming, scholarships, life routines, projects, exams, and more.</span></p>
+        <h2>نظام المهام الذكية التكيفية</h2>
+        <p>أنشئ مهامًا مناسبة لهدفك: الدراسة، الجامعة، اللغات، البرمجة، المنح، الحياة اليومية، المشاريع، الاختبارات، وغير ذلك.</p>
     </div>
-    <button class="button light" type="button" onclick="document.getElementById('addTaskCard').scrollIntoView({behavior:'smooth'});"><span data-i18n="tasks.add_btn">Add Task</span></button>
+    <button class="button light" type="button" onclick="document.getElementById('addTaskCard').scrollIntoView({behavior:'smooth'});">إضافة مهمة</button>
 </section>
 
 <section class="grid-2">
     <div class="card" id="addTaskCard">
-        <h2><span data-i18n="tasks.add">Add Smart Task</span></h2>
-        <p class="muted"><span data-i18n="tasks.add_desc">Start with Task Type, then the form adapts automatically step by step.</span></p>
+        <h2>إضافة مهمة ذكية</h2>
+        <p class="muted">ابدأ بنوع المهمة، ثم يتكيف النموذج تلقائيًا خطوة بخطوة.</p>
         <form method="POST" class="form">
             {% set task = None %}
             {% include "_task_form.html" %}
-            <button type="submit"><span data-i18n="tasks.save">Save Task</span></button>
+            <button type="submit">حفظ المهمة</button>
         </form>
     </div>
 
     <div class="card tasks-list-card-v476">
-        <h2><span data-i18n="tasks.your">Your Tasks</span></h2>
+        <h2>مهامك</h2>
         <div class="tasks-board-v476">
         {% for task in tasks %}
             <div class="task-card {{ task.status }}">
                 <div>
                     <strong>{{ task.title }}</strong>
-                    <span><b><span data-i18n="tasklabels.type">Task Type:</span></b> {% if task.category == "Other" and task.custom_category %}{{ task.custom_category }}{% else %}{{ task.category }}{% endif %}</span>
-                    <span><b><span data-i18n="tasklabels.main">Main Field:</span></b> {% if task.topic == "Other" and task.custom_topic %}{{ task.custom_topic }}{% else %}{{ task.topic or "Not set" }}{% endif %}</span>
-                    <span><b><span data-i18n="tasklabels.sub">Sub Field:</span></b> {% if task.skill == "Other" and task.custom_skill %}{{ task.custom_skill }}{% else %}{{ task.skill or "Not set" }}{% endif %}</span>
-                    <span><b><span data-i18n="tasklabels.detail">Detailed Topic:</span></b> {{ task.language or "Not set" }}</span>
-                    <span><b><span data-i18n="tasklabels.training">Training Type:</span></b> {{ task.practice_type or "General" }}</span>
-                    <span><b><span data-i18n="tasklabels.source">Source:</span></b> {{ task.source|clickable_sources }}</span>
-                    <span>{{ task.estimated_minutes }} min · Priority {{ task.priority }} · Difficulty {{ task.difficulty }}</span>
-                    <span>From {{ task.start_date or "not set" }} to {{ task.due_date or "not set" }} · {{ task.repeat_type }} · Days: {{ task.repeat_days or "all/none" }}</span>
-                    <span>Reminder: {{ task.reminder_time or "not set" }}</span>
+                    <span><b>نوع المهمة:</b> {% if task.category == "Other" and task.custom_category %}{{ task.custom_category }}{% else %}{{ task.category|task_ar }}{% endif %}</span>
+                    <span><b>الفئة الرئيسية:</b> {% if task.topic == "Other" and task.custom_topic %}{{ task.custom_topic }}{% else %}{{ (task.topic or "غير محدد")|task_ar }}{% endif %}</span>
+                    <span><b>الفئة الفرعية:</b> {% if task.skill == "Other" and task.custom_skill %}{{ task.custom_skill }}{% else %}{{ (task.skill or "غير محدد")|task_ar }}{% endif %}</span>
+                    <span><b>الموضوع التفصيلي:</b> {{ (task.language or "غير محدد")|task_ar }}</span>
+                    <span><b>نوع التدريب:</b> {{ (task.practice_type or "عام")|task_ar }}</span>
+                    <span><b>المصدر:</b> {{ task.source|clickable_sources }}</span>
+                    <span>{{ task.estimated_minutes }} دقيقة · الأولوية {{ task.priority }} · الصعوبة {{ task.difficulty }}</span>
+                    <span>من {{ task.start_date or "غير محدد" }} إلى {{ task.due_date or "غير محدد" }} · {{ task.repeat_type|task_ar }} · الأيام: {{ task.repeat_days|repeat_days_ar }}</span>
+                    <span>وقت التذكير: {{ task.reminder_time|time_12h_ar }}</span>
                 </div>
 
                 <div class="actions">
                     {% if task.status == "pending" %}
-                        <a class="small-button success" href="{{ url_for('mark_task_done', task_id=task.id) }}"><span data-i18n="tasks.done">Done</span></a>
+                        <a class="small-button success" href="{{ url_for('mark_task_done', task_id=task.id) }}">تم الإنجاز</a>
                     {% else %}
-                        <a class="small-button cancel" href="{{ url_for('mark_task_pending', task_id=task.id) }}">↩ <span data-i18n="tasks.pending">Pending</span></a>
+                        <a class="small-button cancel" href="{{ url_for('mark_task_pending', task_id=task.id) }}">↩ إرجاع إلى قيد التنفيذ</a>
                     {% endif %}
-                    <a class="small-button warning" href="{{ url_for('edit_task', task_id=task.id) }}"><span data-i18n="tasks.edit">Edit</span></a>
-                    <a class="small-button danger" href="{{ url_for('delete_task', task_id=task.id) }}"><span data-i18n="tasks.delete">Delete</span></a>
+                    <a class="small-button warning" href="{{ url_for('edit_task', task_id=task.id) }}">تعديل</a>
+                    <a class="small-button danger" href="{{ url_for('delete_task', task_id=task.id) }}">حذف</a>
                 </div>
             </div>
         {% else %}
-            <p class="muted"><span data-i18n="tasks.empty">No tasks yet. Create your first smart task.</span></p>
+            <p class="muted">لا توجد مهام بعد. أنشئ أول مهمة ذكية.</p>
         {% endfor %}
         </div>
     </div>
