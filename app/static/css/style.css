@@ -4722,7 +4722,7 @@ body.dark-mode .desktop-icon-nav-v483 a {
 
 
 
-/* EduPath AI v5.1.0 Arabic Core Stable */
+/* EduPath AI v5.1.1 Arabic Rebuild Stable */
 html[dir="rtl"] body {
     direction: rtl;
 }
@@ -4746,7 +4746,12 @@ html[dir="rtl"] textarea {
     html[dir="rtl"] .main .task-card,
     html[dir="rtl"] .main .goal-tile,
     html[dir="rtl"] .main .resource-card,
-    html[dir="rtl"] .main .stat-card {
+    html[dir="rtl"] .main .stat-card,
+    html[dir="rtl"] .main label,
+    html[dir="rtl"] .main p,
+    html[dir="rtl"] .main h1,
+    html[dir="rtl"] .main h2,
+    html[dir="rtl"] .main h3 {
         direction: rtl;
         text-align: right;
     }

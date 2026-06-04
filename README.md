@@ -1261,43 +1261,12 @@ Desktop sidebar design refinement.
 - 0 cost.
 
 
-## v5.1.0 Arabic Core Stable
+## v5.1.1 Arabic Rebuild Stable
 
-### Arabic-first stable version
-- Arabic is now the only main interface language.
-- Removed visible language switching controls.
-- Kept AI Coach sections in English where appropriate:
-  - English Coach
-  - Scholarship Coach
-  - Code Coach
-- Preserved internal English values for smart linking and AI logic.
-- Added Arabic display filters only for user-facing labels:
-  - ar_label
-  - ar_resource_name
-  - ar_resource_description
-
-### Important design rule
-- The app displays Arabic to users.
-- Internal values remain stable, so:
-  - task-goal linking stays intelligent
-  - keyword matching stays safe
-  - database values are not changed
-  - no migration is required
-
-### UI
-- Main navigation is Arabic.
-- Dashboard, Goals, Tasks, Resources, Profile, and Admin are Arabic.
-- Adaptive task options are displayed in Arabic.
-- Official names remain official:
-  - IELTS
-  - TOEFL
-  - SAT
-  - CSCA
-  - Python
-  - Flask
-  - GitHub
-
-### Performance
-- No AI usage.
-- No database changes.
-- No JavaScript page-wide translation scanning.
+- Rebuilt safely from clean v4.8.3.
+- Arabic is now the main interface language.
+- No i18n system and no language switcher.
+- Preserved all adaptive task fields and smart goal fields.
+- Arabic is display-only; internal values remain stable for AI and smart linking.
+- AI Coach sections remain English where appropriate.
+- No database migration.

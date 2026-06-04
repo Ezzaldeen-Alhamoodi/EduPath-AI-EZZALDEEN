@@ -1,13 +1,13 @@
 \
 {% extends "base.html" %}
-{% block page_title %}مصادري{% endblock %}
+{% block page_title %}My Resources{% endblock %}
 {% block content %}
 
 <section class="hero compact resources-hero-v4616 resources-hero-actions-v472">
     <div>
         <span class="tag">EduPath AI</span>
-        <h2>⭐ مصادري</h2>
-        <p>Your personal learning library. حفظ your daily resources, track status, write notes, and open them quickly.</p>
+        <h2>⭐ My Resources</h2>
+        <p>Your personal learning library. Save your daily resources, track status, write notes, and open them quickly.</p>
     </div>
     <a class="button light" href="{{ url_for('resources') }}">＋ Browse Resources</a>
 </section>
@@ -15,7 +15,7 @@
 <section class="resources-summary-row">
     <div class="mini-stat-card">
         <strong>{{ saved_items|length }}</strong>
-        <span>حفظd Resources</span>
+        <span>Saved Resources</span>
     </div>
     <div class="mini-stat-card">
         <strong>{{ categories|length }}</strong>
@@ -62,7 +62,7 @@
         <article class="resource-card saved-resource-card-v472">
             <div class="resource-card-head">
                 <div>
-                    <h3>{{ resource|ar_resource_name }}</h3>
+                    <h3>{{ resource.name }}</h3>
                     <p>{{ resource.category|ar_label }}{% if resource.subcategory %} · {{ resource.subcategory|ar_label }}{% endif %}</p>
                 </div>
                 <div class="resource-badges">
@@ -76,9 +76,9 @@
             <p class="resource-desc">{{ resource|ar_resource_description }}</p>
 
             <div class="resource-meta">
-                {% if resource.exam %}<span>الاختبار: {{ resource.exam|ar_label }}</span>{% endif %}
+                {% if resource.exam %}<span>Exam: {{ resource.exam|ar_label }}</span>{% endif %}
                 {% if resource.skill %}<span>Skill: {{ resource.skill|ar_label }}</span>{% endif %}
-                {% if resource.level %}<span>المستوى: {{ resource.level|ar_label }}</span>{% endif %}
+                {% if resource.level %}<span>Level: {{ resource.level|ar_label }}</span>{% endif %}
                 {% if item.last_opened %}<span>Last opened: {{ item.last_opened.strftime("%Y-%m-%d") }}</span>{% endif %}
             </div>
 
@@ -90,22 +90,22 @@
                     {% endfor %}
                 </select>
 
-                <label>My ملاحظات</label>
-                <textarea name="notes" rows="3" placeholder="الاختبارple: Current speed 42 WPM, target 70 WPM...">{{ item.notes or "" }}</textarea>
+                <label>My Notes</label>
+                <textarea name="notes" rows="3" placeholder="Example: Current speed 42 WPM, target 70 WPM...">{{ item.notes or "" }}</textarea>
 
                 <div class="resource-actions-v472">
-                    <button type="submit" class="small-button">حفظ ملاحظات</button>
+                    <button type="submit" class="small-button">Save Notes</button>
                     <a class="button resource-open" href="{{ url_for('open_saved_resource', saved_id=item.id) }}" target="_blank" rel="noopener noreferrer">Open ↗</a>
                 </div>
             </form>
 
             <form method="POST" action="{{ url_for('delete_saved_resource', saved_id=item.id) }}" class="delete-saved-resource-v472">
-                <button type="submit" class="small-button danger">Remove from مصادري</button>
+                <button type="submit" class="small-button danger">Remove from My Resources</button>
             </form>
         </article>
     {% else %}
         <div class="card">
-            <p class="muted">No saved resources yet. Go to Resources and press حفظ on the sources you use daily.</p>
+            <p class="muted">No saved resources yet. Go to Resources and press Save on the sources you use daily.</p>
             <a class="button" href="{{ url_for('resources') }}">Browse Resources</a>
         </div>
     {% endfor %}

@@ -1,15 +1,15 @@
 \
 {% extends "base.html" %}
-{% block page_title %}المصادر الذكية{% endblock %}
+{% block page_title %}Smart Resources{% endblock %}
 {% block content %}
 
 <section class="hero compact resources-hero-v4616 resources-hero-actions-v472">
     <div>
         <span class="tag">EduPath AI</span>
         <h2>محرك المصادر الذكية</h2>
-        <p>اعثر على المصادر التعليمية المناسبة لأهدافك ومهامك واختباراتك ومهاراتك وخطتك اليومية.</p>
+        <p>Find the right learning resources for your goals, tasks, exams, skills, and daily study plan. Resources are updated automatically when this page opens.</p>
     </div>
-    <a class="button light" href="{{ url_for('my_resources') }}">⭐ مصادري</a>
+    <a class="button light" href="{{ url_for('my_resources') }}">⭐ My Resources</a>
 </section>
 
 <section class="resource-category-strip">
@@ -28,7 +28,7 @@
         <div>
             <label>الفئة</label>
             <select name="category">
-                <option value="">كل الفئات</option>
+                <option value="">All Categories / جميع الفئات</option>
                 {% for cat in categories %}
                     <option value="{{ cat|ar_label }}" {% if selected.category == cat %}selected{% endif %}>{{ cat|ar_label }}</option>
                 {% endfor %}
@@ -38,7 +38,7 @@
         <div>
             <label>الاختبار</label>
             <select name="exam">
-                <option value="">All الاختبارs / جميع الاختبارات</option>
+                <option value="">All Exams / جميع الاختبارات</option>
                 {% for exam in exams %}
                     <option value="{{ exam|ar_label }}" {% if selected.exam == exam %}selected{% endif %}>{{ exam|ar_label }}</option>
                 {% endfor %}
@@ -53,7 +53,7 @@
         <div>
             <label>المستوى</label>
             <select name="level">
-                <option value="">All المستوىs</option>
+                <option value="">كل المستويات</option>
                 <option value="Beginner" {% if selected.level == "Beginner" %}selected{% endif %}>Beginner</option>
                 <option value="Intermediate" {% if selected.level == "Intermediate" %}selected{% endif %}>Intermediate</option>
                 <option value="Advanced" {% if selected.level == "Advanced" %}selected{% endif %}>Advanced</option>
@@ -63,7 +63,7 @@
         <div>
             <label>النوع</label>
             <select name="type">
-                <option value="">All النوعs / جميع الأنواع</option>
+                <option value="">All Types / جميع الأنواع</option>
                 {% for type in types %}
                     <option value="{{ type|ar_label }}" {% if selected.type == type %}selected{% endif %}>{{ type|ar_label }}</option>
                 {% endfor %}
@@ -93,7 +93,7 @@
     <div class="learning-path-head">
         <div>
             <span class="tag">المسار المقترح</span>
-            <h2>⭐ ابدأ من هنا</h2>
+            <h2>⭐ Start Here</h2>
             <p class="muted">A simple suggested order so you do not get lost among many resources.</p>
         </div>
     </div>
@@ -103,7 +103,7 @@
             <div class="learning-step">
                 <span class="step-number">{{ loop.index }}</span>
                 <div>
-                    <strong>{{ resource|ar_resource_name }}</strong>
+                    <strong>{{ resource.name }}</strong>
                     <p>{{ resource|ar_resource_description }}</p>
                     <div class="resource-badges">
                         {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
@@ -115,11 +115,11 @@
                     <div class="resource-actions-v472 compact">
                         {% if resource.id in saved_resource_ids %}
                             <form method="POST" action="{{ url_for('unsave_resource', resource_id=resource.id) }}">
-                                <button type="submit" class="small-button warning">★ حفظd</button>
+                                <button type="submit" class="small-button warning">★ Saved</button>
                             </form>
                         {% else %}
                             <form method="POST" action="{{ url_for('save_resource', resource_id=resource.id) }}">
-                                <button type="submit" class="small-button">☆ حفظ</button>
+                                <button type="submit" class="small-button">☆ Save</button>
                             </form>
                         {% endif %}
                         <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">Open ↗</a>
@@ -134,7 +134,7 @@
 <section class="resources-summary-row">
     <div class="mini-stat-card">
         <strong>{{ resources|length }}</strong>
-        <span>المصادر المطابقة</span>
+        <span>Matching Resources / المصادر المطابقة</span>
     </div>
     <div class="mini-stat-card">
         <strong>{{ categories|length }}</strong>
@@ -151,7 +151,7 @@
         <article class="resource-card">
             <div class="resource-card-head">
                 <div>
-                    <h3>{{ resource|ar_resource_name }}</h3>
+                    <h3>{{ resource.name }}</h3>
                     <p>{{ resource.category|ar_label }}{% if resource.subcategory %} · {{ resource.subcategory|ar_label }}{% endif %}</p>
                 </div>
                 <div class="resource-badges">
@@ -166,9 +166,9 @@
             <p class="resource-desc">{{ resource|ar_resource_description }}</p>
 
             <div class="resource-meta">
-                {% if resource.exam %}<span>الاختبار: {{ resource.exam|ar_label }}</span>{% endif %}
+                {% if resource.exam %}<span>Exam: {{ resource.exam|ar_label }}</span>{% endif %}
                 {% if resource.skill %}<span>Skill: {{ resource.skill|ar_label }}</span>{% endif %}
-                {% if resource.level %}<span>المستوى: {{ resource.level|ar_label }}</span>{% endif %}
+                {% if resource.level %}<span>Level: {{ resource.level|ar_label }}</span>{% endif %}
                 {% if resource.language %}<span>Language: {{ resource.language|ar_label }}</span>{% endif %}
             </div>
 
@@ -183,14 +183,14 @@
             <div class="resource-actions-v472">
                 {% if resource.id in saved_resource_ids %}
                     <form method="POST" action="{{ url_for('unsave_resource', resource_id=resource.id) }}">
-                        <button type="submit" class="small-button warning">★ حفظd</button>
+                        <button type="submit" class="small-button warning">★ Saved</button>
                     </form>
                 {% else %}
                     <form method="POST" action="{{ url_for('save_resource', resource_id=resource.id) }}">
-                        <button type="submit" class="small-button">☆ حفظ</button>
+                        <button type="submit" class="small-button">☆ Save</button>
                     </form>
                 {% endif %}
-                <a class="button resource-open" href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">فتح المصدر ↗</a>
+                <a class="button resource-open" href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">Open Resource ↗</a>
             </div>
         </article>
     {% else %}

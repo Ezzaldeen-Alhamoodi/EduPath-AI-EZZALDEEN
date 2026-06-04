@@ -1,14 +1,14 @@
 {% extends "base.html" %}
-{% block page_title %}الرئيسية{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
 {% block content %}
-<h2 class="dashboard-page-title">Dashboard</h2>
+<h2 class="dashboard-page-title">الرئيسية</h2>
 
 
 <section class="hero v21-hero">
     <div>
         <span class="tag"><span data-i18n="dashboard.tag">مساحة ذكية للتعلم والمصادر</span></span>
         <h2><span data-i18n="dashboard.hero_title">خطط أهدافك، نظم مهامك اليومية، واصل إلى المصادر التعليمية المناسبة بسرعة.</span></h2>
-        <p><span data-i18n="dashboard.hero_desc">يساعدك EduPath AI على تحويل الأهداف طويلة المدى إلى مهام منظمة، وربط التقدم تلقائيًا، واستخدام مصادر موثوقة للاختبارات والبرمجة واللغات والقرآن وسرعة الكتابة والمنح والتعلم الذاتي.</span></p>
+        <p><span data-i18n="dashboard.hero_desc">EduPath AI helps you turn long-term goals into organized tasks, connect progress automatically, and use trusted resources for exams, programming, languages, Quran, typing, scholarships, and self-learning.</span></p>
         <div class="hero-actions">
             <a class="button light" href="{{ url_for('goals') }}">هدف جديد</a>
             <a class="button ghost" href="{{ url_for('tasks') }}">إضافة مهمة</a>
@@ -27,7 +27,7 @@
 
 <section class="card current-focus-v41">
     <h2><span data-i18n="dashboard.focus">التركيز الحالي</span></h2>
-    <p class="muted"><span data-i18n="dashboard.focus_desc">أهم أهدافك بناءً على التقدم والتخطيط الأخير.</span></p>
+    <p class="muted"><span data-i18n="dashboard.focus_desc">Your most important goals based on progress and recent planning.</span></p>
     <div class="focus-grid-v41">
         {% for goal in goals[:3] %}
             <div class="focus-card-v41">
@@ -39,7 +39,7 @@
                 </div>
             </div>
         {% else %}
-            <p class="muted">أنشئ أهدافًا لتظهر هنا منطقة تركيزك الحالية.</p>
+            <p class="muted">Create goals to see your current focus here.</p>
         {% endfor %}
     </div>
 </section>
@@ -50,7 +50,7 @@
 
 <section class="quick-actions final-quick-actions">
     <a href="{{ url_for('goals') }}"><span>◎</span><small>Goals</small></a>
-    <a href="{{ url_for('tasks') }}"><span>▣</span><small>Tasks</small></a>
+    <a href="{{ url_for('tasks') }}"><span>▣</span><small>المهام</small></a>
     <a href="{{ url_for('resources') }}"><span>▤</span><small>Resources</small></a>
     <a href="{{ url_for('coach') }}"><span>✦</span><small>AI Coach</small></a>
 </section>
@@ -59,7 +59,7 @@
     <div class="section-title-row">
         <div>
             <h2><span data-i18n="dashboard.active_goals">الأهداف النشطة</span></h2>
-            <p class="muted"><span data-i18n="dashboard.active_desc">اجعل أهدافك طويلة المدى واضحة أمامك. المهام هي خطواتك اليومية.</span></p>
+            <p class="muted"><span data-i18n="dashboard.active_desc">Keep your long-term targets visible. Your tasks are the daily steps.</span></p>
         </div>
         <a class="small-button" href="{{ url_for('goals') }}">Manage</a>
     </div>
@@ -129,7 +129,7 @@
                     <strong>{{ task.title }}</strong>
                     <span>{{ task.category }} · {{ task.skill }} · {{ task.estimated_minutes }} min · {{ task.status }}</span>
                 </div>
-                <span class="badge">{{ task.reminder_time or "بدون تذكير" }}</span>
+                <span class="badge">{{ task.reminder_time or "No reminder" }}</span>
             </div>
         {% else %}
             <p class="muted">No tasks yet.</p>
@@ -138,7 +138,7 @@
 </section>
 
 <div class="app-version-footer home-footer-v475">
-    EduPath AI EZZALDEEN · v5.1.0 Arabic Core Stable<br>
+    EduPath AI EZZALDEEN · v5.1.1 Arabic Rebuild Stable<br>
     <span>Contact: edupath.ai.ezzaldeen.app@outlook.com</span><br>
     <span>لمعرفة كيفية استخدام التطبيق على أكمل وجه والاستفادة من جميع المميزات، يرجى الضغط على <a href="{{ url_for('user_guide') }}">دليل الاستخدام</a>.</span><br>
     <span class="copyright-line">جميع الحقوق محفوظة © EZZALDEEN AL-HAMOODI — عزالدين الحمودي. يمنع منعًا باتًا اقتباس أو تقليد فكرة التطبيق أو تصميمه أو محتواه أو مميزاته دون إذن صريح.</span>

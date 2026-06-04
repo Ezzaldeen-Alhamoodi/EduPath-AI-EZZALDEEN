@@ -8,7 +8,7 @@
         <span class="tag">Private Profile</span>
         <h2>👤 {{ current_user.name }}</h2>
         <p>{{ current_user.email }}</p>
-        {% if current_user.email_verified %}<span class="tag verified">✅ البريد الإلكتروني verified</span>{% else %}<a class="button ghost" href="{{ url_for('resend_verification') }}">📩 Verify البريد الإلكتروني</a>{% endif %}
+        {% if current_user.email_verified %}<span class="tag verified">✅ Email verified</span>{% else %}<a class="button ghost" href="{{ url_for('resend_verification') }}">📩 Verify Email</a>{% endif %}
     </div>
     <a class="button light" href="{{ url_for('logout') }}">🚪 Logout</a>
 </section>
@@ -22,25 +22,25 @@
 
 <section class="grid-2">
     <div class="card">
-        <h2>✏️ تعديل Profile</h2>
+        <h2>✏️ Edit Profile</h2>
         <form method="POST" class="form">
             <input type="hidden" name="form_action" value="profile">
             <label>الاسم</label>
             <input name="name" value="{{ current_user.name }}">
 
             <label>الدولة</label>
-            <input name="country" value="{{ current_user.country or '' }}" placeholder="الاختبارple: Yemen">
+            <input name="country" value="{{ current_user.country or '' }}" placeholder="Example: Yemen">
 
             <label>التخصص</label>
-            <input name="major" value="{{ current_user.major or '' }}" placeholder="الاختبارple: Computer Science">
+            <input name="major" value="{{ current_user.major or '' }}" placeholder="Example: Computer Science">
 
-            <label>الدرجة المستهدفة</label>
-            <input name="target_degree" value="{{ current_user.target_degree or '' }}" placeholder="الاختبارple: Bachelor">
+            <label>Target Degree</label>
+            <input name="target_degree" value="{{ current_user.target_degree or '' }}" placeholder="Example: Bachelor">
 
             <label>Languages</label>
             <input name="languages" value="{{ current_user.languages or '' }}" placeholder="English, Chinese, Russian">
 
-            <button type="submit">💾 حفظ Profile</button>
+            <button type="submit">💾 Save Profile</button>
         </form>
     </div>
 
@@ -62,8 +62,8 @@
             <form method="POST" class="form compact-paid-form-v478">
                 <input type="hidden" name="form_action" value="activate_paid">
                 <label>كود الاشتراك</label>
-                <input name="subscription_code" placeholder="الاختبارple: EDU-ABC123-XYZ789" autocomplete="off">
-                <button type="submit">Activate النسخة المدفوعة</button>
+                <input name="subscription_code" placeholder="Example: EDU-ABC123-XYZ789" autocomplete="off">
+                <button type="submit">تفعيل النسخة المدفوعة</button>
             </form>
         {% endif %}
     </div>

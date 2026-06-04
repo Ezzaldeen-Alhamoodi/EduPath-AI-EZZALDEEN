@@ -1109,7 +1109,6 @@ ARABIC_UI_LABELS = {
     "Language": "اللغات",
     "Exam / Certificate": "اختبار / شهادة",
     "Project": "مشروع",
-
     "Quran": "القرآن الكريم",
     "Islamic Studies": "الدراسات الإسلامية",
     "Arabic Language": "اللغة العربية",
@@ -1118,7 +1117,6 @@ ARABIC_UI_LABELS = {
     "General Review": "مراجعة عامة",
     "Exams": "اختبارات",
     "Homework": "واجبات",
-
     "English": "الإنجليزية",
     "Turkish": "التركية",
     "Russian": "الروسية",
@@ -1135,7 +1133,6 @@ ARABIC_UI_LABELS = {
     "Listening": "الاستماع",
     "Speaking": "التحدث",
     "Academic English": "الإنجليزية الأكاديمية",
-
     "Programming": "البرمجة",
     "Algorithms": "الخوارزميات",
     "Data Structures": "هياكل البيانات",
@@ -1148,7 +1145,6 @@ ARABIC_UI_LABELS = {
     "Discrete Mathematics": "الرياضيات المتقطعة",
     "Computer Architecture": "معمارية الحاسوب",
     "Graduation Project": "مشروع التخرج",
-
     "Python": "Python",
     "C": "C",
     "C++": "C++",
@@ -1174,7 +1170,6 @@ ARABIC_UI_LABELS = {
     "Lists": "القوائم",
     "Dictionaries": "القواميس",
     "OOP": "البرمجة الكائنية",
-
     "IELTS": "IELTS",
     "TOEFL": "TOEFL",
     "Duolingo English Test": "Duolingo English Test",
@@ -1190,7 +1185,6 @@ ARABIC_UI_LABELS = {
     "General Training Reading": "قراءة التدريب العام",
     "Task 1 Academic": "Task 1 Academic",
     "Task 2 Academic": "Task 2 Academic",
-
     "Course": "دورة",
     "Website": "موقع",
     "Book": "كتاب",
@@ -1208,7 +1202,6 @@ ARABIC_UI_LABELS = {
     "Intermediate → Advanced": "متوسط → متقدم",
     "Beginner → Advanced": "مبتدئ → متقدم",
     "All Levels": "كل المستويات",
-
     "Not set": "غير محدد",
     "not set": "غير محدد",
     "all/none": "الكل/لا شيء",
@@ -1227,42 +1220,14 @@ ARABIC_UI_LABELS = {
 def ar_label(value):
     if value is None:
         return ""
-    text = str(value)
-    return ARABIC_UI_LABELS.get(text, text)
-
-def ar_resource_name(resource):
-    if not resource:
-        return ""
-    return ar_label(getattr(resource, "name", ""))
+    return ARABIC_UI_LABELS.get(str(value), str(value))
 
 def ar_resource_description(resource):
     if not resource:
         return ""
     text = getattr(resource, "description", "") or ""
-    replacements = {
-        "Free": "مجاني",
-        "Official": "رسمي",
-        "official": "رسمي",
-        "practice": "تدريب",
-        "Practice": "تدريب",
-        "course": "دورة",
-        "Course": "دورة",
-        "lessons": "دروس",
-        "Lessons": "دروس",
-        "resources": "مصادر",
-        "Resources": "مصادر",
-        "exercises": "تمارين",
-        "Exercises": "تمارين",
-        "test": "اختبار",
-        "Test": "اختبار",
-        "beginner": "مبتدئ",
-        "Beginner": "مبتدئ",
-        "advanced": "متقدم",
-        "Advanced": "متقدم",
-        "intermediate": "متوسط",
-        "Intermediate": "متوسط",
-    }
-    for en, ar in replacements.items():
+    repl = {"Free":"مجاني","Official":"رسمي","official":"رسمي","Practice":"تدريب","practice":"تدريب","Course":"دورة","course":"دورة","Lessons":"دروس","lessons":"دروس","Resources":"مصادر","resources":"مصادر","Exercises":"تمارين","exercises":"تمارين","Test":"اختبار","test":"اختبار","Beginner":"مبتدئ","beginner":"مبتدئ","Advanced":"متقدم","advanced":"متقدم","Intermediate":"متوسط","intermediate":"متوسط"}
+    for en, ar in repl.items():
         text = text.replace(en, ar)
     return text
 
@@ -1323,7 +1288,6 @@ def create_app():
     app = Flask(__name__)
     app.jinja_env.filters["clickable_sources"] = render_clickable_sources
     app.jinja_env.filters["ar_label"] = ar_label
-    app.jinja_env.filters["ar_resource_name"] = ar_resource_name
     app.jinja_env.filters["ar_resource_description"] = ar_resource_description
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
     app.permanent_session_lifetime = timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30")))

@@ -29,8 +29,7 @@
 
         <div class="desktop-quick-controls-v481">
             <button class="theme-toggle icon-toggle-v481" id="themeToggle" type="button" title="Toggle theme">🌙</button>
-            
-        </div>
+</div>
 
         <div class="user-mini-panel compact-user-panel-v481">
             {% if current_user.is_authenticated %}
@@ -97,8 +96,7 @@
 
 <div class="mobile-more-menu" id="mobileMoreMenu">
     <button type="button" id="mobileMenuTheme">الوضع</button>
-    
-    <a href="{{ url_for('profile') }}">الملف الشخصي</a>
+<a href="{{ url_for('profile') }}">الملف الشخصي</a>
     {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}
         <a href="{{ url_for('admin_dashboard') }}">الإدارة</a>
     {% endif %}

@@ -2,70 +2,70 @@
 <div class="smart-task-form">
     <div class="smart-step">
         <h3><span data-i18n="taskform.choose_type">١. اختر نوع المهمة</span></h3>
-        <p class="muted"><span data-i18n="taskform.choose_desc">ستظهر فقط الحقول المرتبطة باختيارك، وهذا يجعل نظام المهام بسيطًا ومناسبًا لك.</span></p>
-        <div class="task-type-grid" id="taskالنوعCards"></div>
+        <p class="muted"><span data-i18n="taskform.choose_desc">Only the fields related to your choice will appear. This keeps the task system simple and personal.</span></p>
+        <div class="task-type-grid" id="taskTypeCards"></div>
     </div>
 
     <input type="hidden" name="category" id="categorySelect" value="{{ task.category if task else '' }}">
 
-    <div class="conditional-field" id="customالفئةBox">
+    <div class="conditional-field" id="customCategoryBox">
         <label><span data-i18n="taskform.other_type">نوع مهمة آخر</span></label>
-        <input name="custom_category" id="customالفئةInput" value="{{ task.custom_category if task else '' }}" placeholder="اكتب نوع المهمة">
+        <input name="custom_category" id="customCategoryInput" value="{{ task.custom_category if task else '' }}" placeholder="Write your own task type / اكتب نوع المهمة">
     </div>
 
     <div id="taskDetailsArea" class="smart-details">
-        <label id="taskالاسمLabel"><span data-i18n="taskform.task_name">اسم المهمة</span></label>
-        <input id="taskTitleInput" name="title" value="{{ task.title if task else '' }}" placeholder="الاختبارple: Review Quran memorization / مثال: مراجعة حفظ القرآن" required>
+        <label id="taskNameLabel"><span data-i18n="taskform.task_name">اسم المهمة</span></label>
+        <input id="taskTitleInput" name="title" value="{{ task.title if task else '' }}" placeholder="Example: Review Quran memorization / مثال: مراجعة حفظ القرآن" required>
 
         <label id="topicLabel">المجال الرئيسي</label>
         <select name="topic" id="topicSelect" data-current="{{ task.topic if task else '' }}"></select>
         <div class="conditional-field" id="customTopicBox">
-            <label><span data-i18n="taskform.other_main">Other المجال الرئيسي</span></label>
-            <input name="custom_topic" id="customTopicInput" value="{{ task.custom_topic if task else '' }}" placeholder="اكتب المجال الرئيسي">
+            <label><span data-i18n="taskform.other_main">مجال رئيسي آخر</span></label>
+            <input name="custom_topic" id="customTopicInput" value="{{ task.custom_topic if task else '' }}" placeholder="Write your own main field / اكتب المجال الرئيسي">
         </div>
 
         <label id="skillLabel">المجال الفرعي</label>
         <select name="skill" id="skillSelect" data-current="{{ task.skill if task else '' }}"></select>
         <div class="conditional-field" id="customSkillBox">
-            <label><span data-i18n="taskform.other_sub">Other المجال الفرعي</span></label>
-            <input name="custom_skill" id="customSkillInput" value="{{ task.custom_skill if task else '' }}" placeholder="اكتب المجال الفرعي">
+            <label><span data-i18n="taskform.other_sub">مجال فرعي آخر</span></label>
+            <input name="custom_skill" id="customSkillInput" value="{{ task.custom_skill if task else '' }}" placeholder="Write your own sub field / اكتب المجال الفرعي">
         </div>
 
         <label id="detailLabel">الموضوع التفصيلي</label>
         <select name="language" id="detailedTopicSelect" data-current="{{ task.language if task else '' }}"></select>
         <div class="conditional-field" id="customDetailedTopicBox">
-            <label><span data-i18n="taskform.other_detail">Other الموضوع التفصيلي</span></label>
+            <label><span data-i18n="taskform.other_detail">موضوع تفصيلي آخر</span></label>
             <input name="language_custom" id="customDetailedTopicInput" value="" placeholder="Write a detailed topic / اكتب الموضوع التفصيلي">
         </div>
 
         <label id="trainingLabel">نوع التدريب</label>
-        <select name="practice_type" id="trainingالنوعSelect" data-current="{{ task.practice_type if task else '' }}"></select>
+        <select name="practice_type" id="trainingTypeSelect" data-current="{{ task.practice_type if task else '' }}"></select>
 
         <div class="csca-extra-box" id="cscaExtraBox">
-            <label><span data-i18n="taskform.csca_detail">CSCA الموضوع التفصيلي</span></label>
+            <label><span data-i18n="taskform.csca_detail">CSCA Detailed Topic</span></label>
             <select name="csca_detailed_topic" id="cscaDetailedTopicSelect"></select>
 
-            <label><span data-i18n="taskform.csca_training">CSCA نوع التدريب</span></label>
-            <select name="csca_training_type" id="cscaTrainingالنوعSelect"></select>
+            <label><span data-i18n="taskform.csca_training">CSCA Training Type</span></label>
+            <select name="csca_training_type" id="cscaTrainingTypeSelect"></select>
 
-            <small class="hint"><span data-i18n="taskform.csca_hint">CSCA structure: الاختبار → Language → Subject → Main Topic → الموضوع التفصيلي → نوع التدريب</span></small>
+            <small class="hint"><span data-i18n="taskform.csca_hint">CSCA structure: Exam → Language → Subject → Main Topic → Detailed Topic → Training Type</span></small>
         </div>
 
-        <div class="conditional-field" id="customTrainingالنوعBox">
-            <label><span data-i18n="taskform.other_training">Other نوع التدريب</span></label>
-            <input name="practice_type_custom" id="customTrainingالنوعInput" value="" placeholder="Write your training type / اكتب نوع التدريب">
+        <div class="conditional-field" id="customTrainingTypeBox">
+            <label><span data-i18n="taskform.other_training">نوع تدريب آخر</span></label>
+            <input name="practice_type_custom" id="customTrainingTypeInput" value="" placeholder="Write your training type / اكتب نوع التدريب">
         </div>
 
         <label id="sourceLabel"><span data-i18n="taskform.source">المصدر / الرابط</span></label>
-        <input id="sourceInput" name="source" value="{{ task.source if task else '' }}" placeholder="اكتب اسم كتاب أو رابط موقع أو قناة يوتيوب أو مستند">
+        <input id="sourceInput" name="source" value="{{ task.source if task else '' }}" placeholder="Book, website, YouTube, document link... / كتاب أو رابط أو مصدر">
 
         <div class="form-row">
             <div>
-                <label id="difficultyLabel"><span data-i18n="taskform.difficulty">الصعوبة 1-5</span></label>
+                <label id="difficultyLabel"><span data-i18n="taskform.difficulty">درجة الصعوبة من 1 إلى 5</span></label>
                 <input name="difficulty" type="number" min="1" max="5" value="{{ task.difficulty if task else 1 }}">
             </div>
             <div>
-                <label id="priorityLabel"><span data-i18n="taskform.priority">الأولوية 1-5</span></label>
+                <label id="priorityLabel"><span data-i18n="taskform.priority">الأولوية من 1 إلى 5</span></label>
                 <input name="priority" type="number" min="1" max="5" value="{{ task.priority if task else 3 }}">
             </div>
         </div>
@@ -88,8 +88,8 @@
         <input name="reminder_time" type="time" value="{{ task.reminder_time if task else '' }}">
 
         <label id="repeatLabel"><span data-i18n="taskform.repeat">التكرار</span></label>
-        <select name="repeat_type" id="repeatالنوعSelect">
-            {% for value, label in [("once", "No التكرار / Once"), ("daily", "يوميًا"), ("weekly", "أسبوعيًا"), ("monthly", "شهريًا"), ("selected_days", "Custom Days")] %}
+        <select name="repeat_type" id="repeatTypeSelect">
+            {% for value, label in [("once", "No Repeat / Once"), ("daily", "Daily"), ("weekly", "Weekly"), ("monthly", "Monthly"), ("selected_days", "Custom Days")] %}
                 <option value="{{ value }}" {% if task and task.repeat_type == value %}selected{% endif %}>{{ label }}</option>
             {% endfor %}
         </select>
@@ -109,6 +109,6 @@
         </div>
 
         <label id="notesLabel"><span data-i18n="taskform.notes">ملاحظات</span></label>
-        <textarea id="notesInput" name="notes" rows="3" placeholder="اكتب أي ملاحظات أو خطة">{{ task.notes if task else "" }}</textarea>
+        <textarea id="notesInput" name="notes" rows="3" placeholder="Any notes or plan... / اكتب أي ملاحظات أو خطة">{{ task.notes if task else "" }}</textarea>
     </div>
 </div>
