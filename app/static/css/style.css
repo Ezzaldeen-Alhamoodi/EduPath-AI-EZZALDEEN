@@ -6505,3 +6505,26 @@ body.dark-mode .home-progress-ar-v513 small {
         grid-template-columns: 1fr !important;
     }
 }
+
+
+
+/* EduPath AI v5.2.5 Final Unified Goals */
+.edit-goal-layout-v525 {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.goal-edit-note-v525 {
+    border-radius: 18px !important;
+    border: 1px solid rgba(37,99,235,.14) !important;
+    background: rgba(37,99,235,.045) !important;
+}
+
+.goal-meta-grid span {
+    line-height: 1.55 !important;
+}
+
+.goal-current-target span,
+.goal-path-line {
+    line-height: 1.6 !important;
+}

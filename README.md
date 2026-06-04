@@ -1565,3 +1565,29 @@ Dashboard-only layout fix.
 - No database migration.
 - No task page changes.
 - No resource page changes.
+
+
+## v5.2.5 Final Unified Goals
+
+### Fixed
+- Target State is saved, restored, displayed, and edited correctly.
+- Goal time left no longer displays raw developer dictionaries.
+- Time left now appears in Arabic, for example:
+  - متبقي 164 يوماً ≈ 23 أسبوعاً ≈ 5 أشهر
+- Edit Goal page now uses the same smart adaptive form as Create Goal.
+- Removed the old edit form:
+  - Goal name
+  - Category
+  - Current level
+  - Daily target minutes
+  - Keywords
+  - Milestones
+  - SMART_GOAL_INTELLIGENCE
+- SMART_GOAL_INTELLIGENCE, Keywords, Relations, Tags, and Knowledge Graph stay hidden.
+- User notes are separated from internal intelligence data.
+- Added a hidden Knowledge Graph for IELTS, TOEFL, Flask, Python, Quran, scholarships, education, university CS, and AI.
+
+### Safety
+- No database migration.
+- No task/resource page changes.
+- Uses the existing goal notes field internally, but never displays it raw.

@@ -1300,6 +1300,7 @@ def create_app():
     app = Flask(__name__)
     app.jinja_env.filters["clickable_sources"] = render_clickable_sources
     app.jinja_env.filters["goals_ar"] = goals_ar
+    app.jinja_env.filters["goal_time_ar"] = format_goal_time_left
     app.jinja_env.filters["dashboard_ar"] = dashboard_ar
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
     app.permanent_session_lifetime = timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30")))
@@ -2105,9 +2106,7 @@ def create_app():
                 flash(limit_upgrade_message("goals"), "error")
                 return redirect(url_for("goals"))
 
-            current_state = request.form.get("current_state", "").strip() or request.form.get("current_level", "").strip() or "Not started"
-            if current_state in ["Custom", "تحديد يدوي"]:
-                current_state = request.form.get("custom_current_state", "").strip() or current_state
+            current_state = _goal_form_value(request.form, "current_state", "custom_current_state") or request.form.get("current_level", "").strip() or "Not started"
             goal = Goal(
                 user_id=current_user.id,
                 title=request.form.get("title", "").strip(),
@@ -2146,18 +2145,20 @@ def create_app():
         if request.method == "POST":
             goal.title = request.form.get("title", "").strip()
             goal.category = request.form.get("category", goal.category or "General").strip()
-            current_level = request.form.get("current_level", "").strip()
-            if current_level:
-                goal.current_level = current_level
+            current_state = _goal_form_value(request.form, "current_state", "custom_current_state") or goal.current_level or "Not started"
+            goal.current_level = current_state
+            goal.daily_minutes = 0
             goal.start_date = request.form.get("start_date", "").strip()
             goal.deadline = request.form.get("deadline", "").strip()
             # Keep reminder empty for goals; reminders belong to tasks.
             goal.reminder_time = ""
-            goal.notes = request.form.get("notes", "").strip()
+            goal.notes = build_goal_notes_from_form(request.form)
             db.session.commit()
-            flash("Goal changes saved.", "success")
+            flash("تم حفظ تعديلات الهدف.", "success")
             return redirect(url_for("goals"))
 
+        goal.plan = parse_goal_plan(goal)
+        goal.visible_notes = visible_goal_notes(goal)
         return render_template("edit_goal.html", goal=goal)
 
     @app.route("/goal/<int:goal_id>/delete")
@@ -2701,43 +2702,74 @@ Return valid JSON:
 
 
 
+
+def _goal_form_value(form, main_name, custom_name=None):
+    value = (form.get(main_name, "") or "").strip()
+    if value in ["Other", "أخرى", "Custom", "Custom Plan", "خطة مخصصة", "تحديد يدوي", "Other / أخرى"] and custom_name:
+        return (form.get(custom_name, "") or "").strip() or value
+    return value
+
+
 def build_goal_notes_from_form(form):
-    goal_category = form.get("goal_category", "").strip()
-    goal_path = form.get("goal_path", "").strip()
-    current_state = form.get("current_state", "").strip()
-    target_state = form.get("target_state", "").strip()
-    commitment = form.get("commitment", "").strip()
+    """Store smart goal metadata internally.
 
-    if goal_category in ["Other", "أخرى", "Custom", "خطة مخصصة"]:
-        goal_category = form.get("custom_goal_category", "").strip() or goal_category
-    if goal_path in ["Other", "أخرى", "Custom Plan", "خطة مخصصة"]:
-        goal_path = form.get("custom_goal_path", "").strip() or goal_path
-    if current_state in ["Custom", "تحديد يدوي"]:
-        current_state = form.get("custom_current_state", "").strip() or current_state
-    if target_state in ["Custom", "خطة مخصصة", "تحديد يدوي"]:
-        target_state = form.get("custom_target_state", "").strip() or target_state
-    if commitment in ["Custom", "خطة مخصصة"]:
-        commitment = form.get("custom_commitment", "").strip() or commitment
+    This field is intentionally not displayed raw to the user.
+    User-facing notes are stored under User Notes only.
+    """
+    goal_type = (form.get("category", "") or "").strip()
+    goal_category = _goal_form_value(form, "goal_category", "custom_goal_category")
+    goal_path = _goal_form_value(form, "goal_path", "custom_goal_path")
+    current_state = _goal_form_value(form, "current_state", "custom_current_state")
+    target_state = _goal_form_value(form, "target_state", "custom_target_state")
+    commitment = _goal_form_value(form, "commitment", "custom_commitment")
+    outcome = (form.get("goal_outcome", "") or "").strip()
+    user_notes = (form.get("notes", "") or "").strip()
+    milestones = (form.get("milestones", "") or "").strip()
 
-    generated_keywords = generate_goal_keywords_from_form(form, goal_category, goal_path, current_state, target_state, commitment)
+    generated_keywords = generate_goal_keywords_from_form(
+        form, goal_category, goal_path, current_state, target_state, commitment
+    )
 
     fields = {
-        "Goal Type": form.get("category", "").strip(),
+        "Goal Type": goal_type,
         "Goal Category": goal_category,
         "Goal Path": goal_path,
         "Current State": current_state,
         "Target State": target_state,
-        "Goal Outcome": form.get("goal_outcome", "").strip(),
-        "Milestones": form.get("milestones", "").strip(),
+        "Goal Outcome": outcome,
+        "Milestones": milestones,
         "Commitment": commitment,
         "Keywords": ", ".join(generated_keywords),
-        "User Notes": form.get("notes", "").strip(),
+        "User Notes": user_notes,
     }
+
     lines = ["SMART_GOAL_INTELLIGENCE"]
     for key, value in fields.items():
         if value:
-            lines.append(f"{key}: {value}")
+            safe_value = str(value).replace("\r", " ").replace("\n", " ").strip()
+            lines.append(f"{key}: {safe_value}")
     return "\n".join(lines)
+
+
+def visible_goal_notes(goal):
+    plan = parse_goal_plan(goal)
+    return plan.get("User Notes", "") or ""
+
+
+def format_goal_time_left(time_left):
+    if not time_left:
+        return "لا يوجد موعد نهائي"
+    try:
+        days = int(time_left.get("days", 0))
+        weeks = int(round(float(time_left.get("weeks", 0))))
+        months = int(round(float(time_left.get("months", 0))))
+        if time_left.get("status") == "overdue" or days < 0:
+            days_abs = abs(days)
+            return f"متأخر {days_abs} يوماً عن تاريخ الهدف"
+        return f"متبقي {days} يوماً ≈ {weeks} أسبوعاً ≈ {months} أشهر"
+    except Exception:
+        return "لا يوجد موعد نهائي"
+
 
 
 
@@ -2828,6 +2860,79 @@ def expand_goal_intelligence_terms_v524(text):
     for key, values in GOAL_INTELLIGENCE_SYNONYMS_V524.items():
         if key in lower or any(str(v).lower() in lower for v in values):
             expanded.update(values)
+    return expanded
+
+
+GOAL_KNOWLEDGE_GRAPH_V525 = {
+    "ielts": [
+        "IELTS", "Academic English", "Band Score", "Writing Task 1", "Writing Task 2",
+        "Task Response", "Coherence", "Cohesion", "Lexical Resource", "Grammar Range",
+        "Grammar Accuracy", "Matching Headings", "True False Not Given", "Yes No Not Given",
+        "Sentence Completion", "Summary Completion", "Form Completion", "Note Completion",
+        "Map Labelling", "Flow Chart Completion", "Multiple Choice", "Short Answer",
+        "Skimming", "Scanning", "Essay", "Opinion Essay", "Discussion Essay",
+        "Problem Solution Essay", "Advantage Disadvantage Essay", "Speaking Part 1",
+        "Speaking Part 2", "Speaking Part 3", "Cue Card", "Mock Exam", "Practice Test",
+        "Official Test", "British Council", "IDP", "Academic", "General Training",
+        "قراءة", "كتابة", "استماع", "تحدث", "مفردات", "قواعد", "اختبار تجريبي"
+    ],
+    "toefl": [
+        "TOEFL", "Complete the Words", "Read in Daily Life", "Read an Academic Passage",
+        "Build a Sentence", "Write an Email", "Write for an Academic Discussion",
+        "Listen and Repeat", "Take an Interview", "Listen and Choose a Response",
+        "Listen to a Conversation", "Listen to an Announcement", "Listen to an Academic Talk",
+        "Vocabulary Building", "Grammar Practice", "Time Management", "Reading", "Listening",
+        "Speaking", "Writing"
+    ],
+    "flask": [
+        "Flask", "Python", "Programming", "Backend", "Web Development", "Routes",
+        "Templates", "Jinja", "Forms", "Authentication", "Login System", "Register",
+        "Session", "Database", "SQLAlchemy", "API", "Deployment", "Render", "Gunicorn",
+        "مشروع Flask", "تطبيق ويب", "مصادقة", "تسجيل دخول", "قاعدة بيانات"
+    ],
+    "python": [
+        "Python", "Programming", "OOP", "Functions", "Loops", "Lists", "Dictionaries",
+        "Files", "Automation", "Data Analysis", "Flask", "Pandas", "NumPy", "Problem Solving",
+        "برمجة", "بايثون", "مشروع", "حل مشكلات"
+    ],
+    "quran": [
+        "القرآن", "قرآن", "حفظ", "مراجعة", "تثبيت", "تجويد", "تلاوة", "تسميع",
+        "سورة", "جزء", "جزء عم", "البقرة", "آل عمران", "النساء", "المائدة",
+        "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس", "هود", "يوسف",
+        "النبأ", "النازعات", "عبس", "التكوير", "الإخلاص", "الفلق", "الناس"
+    ],
+    "scholarship": [
+        "منحة", "منح", "Scholarship", "Application", "Admission", "University",
+        "Documents", "CV", "Resume", "Motivation Letter", "Personal Statement",
+        "Recommendation Letter", "Interview", "Visa", "Passport", "Transcript",
+        "Certificate", "Translation", "Notarization", "Portfolio", "Email",
+        "تقديم", "قبول", "جامعة", "مستندات", "سيرة ذاتية", "خطاب الدافع", "مقابلة"
+    ],
+    "education": [
+        "التعليم", "الثانوية العامة", "مدرسة", "منهج", "اختبار نهائي", "رفع المعدل",
+        "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "اللغة العربية",
+        "اللغة الإنجليزية", "التاريخ", "الجغرافيا", "المجتمع", "واجب", "مراجعة"
+    ],
+    "university_cs": [
+        "علوم الحاسوب", "Computer Science", "Algorithms", "Data Structures", "Database",
+        "Operating Systems", "Networks", "AI", "Web Development", "Cybersecurity",
+        "OOP", "Projects", "الخوارزميات", "هياكل البيانات", "قواعد البيانات",
+        "تطوير الويب", "الأمن السيبراني", "البرمجة الكائنية"
+    ],
+    "ai": [
+        "AI", "Artificial Intelligence", "Machine Learning", "Deep Learning", "NLP",
+        "Computer Vision", "Data Science", "Dataset", "Data Cleaning", "Model Training",
+        "Evaluation", "Deployment", "ذكاء اصطناعي", "تعلم الآلة", "تنظيف البيانات",
+        "تدريب النموذج", "تقييم النموذج", "نشر المشروع"
+    ],
+}
+
+def expand_goal_knowledge_graph_v525(text):
+    lower = (text or "").lower()
+    expanded = set()
+    for node, terms in GOAL_KNOWLEDGE_GRAPH_V525.items():
+        if node in lower or any(str(t).lower() in lower or str(t) in (text or "") for t in terms):
+            expanded.update(terms)
     return expanded
 
 def generate_goal_keywords_from_form(form, goal_category="", goal_path="", current_state="", target_state="", commitment=""):
@@ -2977,6 +3082,9 @@ def calculate_match_score(goal, task):
 
     expanded_goal_terms_v524 = expand_goal_intelligence_terms_v524(goal_text)
     expanded_task_terms_v524 = expand_goal_intelligence_terms_v524(task_text)
+
+    expanded_goal_kg_v525 = expand_goal_knowledge_graph_v525(goal_text)
+    expanded_task_kg_v525 = expand_goal_knowledge_graph_v525(task_text)
 
     score = 0
     matched = []

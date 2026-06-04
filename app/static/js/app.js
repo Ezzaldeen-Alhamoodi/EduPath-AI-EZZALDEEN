@@ -2622,19 +2622,51 @@ function goalV524Label(value) {
 
 function fillGoalV524(select, values) {
     if (!select) return;
-    const old = select.value;
+    const old = select.value || select.dataset.saved || "";
     select.innerHTML = "";
-    (values || ["Other"]).forEach(value => {
+    const list = values || ["Other"];
+    list.forEach(value => {
         const opt = document.createElement("option");
         opt.value = value;
         opt.textContent = goalV524Label(value);
         select.appendChild(opt);
     });
-    if ([...select.options].some(o => o.value === old)) select.value = old;
+
+    if (old && [...select.options].some(o => o.value === old)) {
+        select.value = old;
+    } else if (old && list.length) {
+        const opt = document.createElement("option");
+        opt.value = old;
+        opt.textContent = goalV524Label(old);
+        select.appendChild(opt);
+        select.value = old;
+    }
 }
 
 function stateSetV524(data, categoryValue, pathValue) {
     return (data.states && (data.states[pathValue] || data.states[categoryValue] || data.states["Other"])) || {current:["Other"], target:["Other"], commitment:["Other"]};
+}
+
+
+function applyGoalSavedValueV525(select) {
+    if (!select || !select.dataset.saved) return;
+    const saved = select.dataset.saved;
+    if ([...select.options].some(o => o.value === saved)) {
+        select.value = saved;
+    } else if (saved) {
+        const opt = document.createElement("option");
+        opt.value = saved;
+        opt.textContent = goalV524Label(saved);
+        select.appendChild(opt);
+        select.value = saved;
+    }
+}
+
+function clearGoalSavedAfterFirstUseV525() {
+    ["goalTypeSelect","goalCategorySelect","goalPathSelect","currentStateSelect","targetStateSelect","commitmentSelect"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.dataset.savedApplied === "1") delete el.dataset.saved;
+    });
 }
 
 function showGoalOtherBoxesV524() {
@@ -2718,6 +2750,13 @@ function refreshGoalsArabicV524(changedId) {
         milestones.value = generatedMilestonesForGoalV4611(type.value, category.value, path.value, target.value);
     }
 
+    ["goalTypeSelect","goalCategorySelect","goalPathSelect","currentStateSelect","targetStateSelect","commitmentSelect"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.dataset.saved) {
+            applyGoalSavedValueV525(el);
+            el.dataset.savedApplied = "1";
+        }
+    });
     showGoalOtherBoxesV524();
 }
 
@@ -2732,5 +2771,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     setTimeout(() => refreshGoalsArabicV524("goalTypeSelect"), 60);
     setTimeout(showGoalOtherBoxesV524, 120);
+    setTimeout(clearGoalSavedAfterFirstUseV525, 300);
 });
 

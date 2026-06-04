@@ -1,6 +1,117 @@
-\
 {% extends "base.html" %}
-{% block page_title %}Edit Goal{% endblock %}
+{% block page_title %}تعديل الهدف{% endblock %}
 {% block content %}
-<section class="card"><h2>✏️ Edit Goal</h2><form method="POST" class="form"><label>Goal name</label><input name="title" value="{{ goal.title }}"><label>Category</label><select name="category">{% for c in ["General", "English", "Language", "Programming", "Mathematics", "Scholarship", "AI"] %}<option {% if goal.category == c %}selected{% endif %}>{{ c }}</option>{% endfor %}</select><label>Current level</label><select name="current_level">{% for l in ["Beginner", "Intermediate", "Advanced"] %}<option {% if goal.current_level == l %}selected{% endif %}>{{ l }}</option>{% endfor %}</select><label>Daily target minutes optional</label><input name="daily_minutes" type="number" value="{{ goal.daily_minutes }}" min="0"><div class="form-row"><div><label>Start date</label><input name="start_date" type="date" value="{{ goal.start_date }}"></div><div><label>Expected completion date</label><input name="deadline" type="date" value="{{ goal.deadline }}"></div></div><label>Daily reminder time optional</label><input name="reminder_time" type="time" value="{{ goal.reminder_time }}"><label>Notes</label><textarea name="notes" rows="4">{{ goal.notes or "" }}</textarea><div class="actions"><button type="submit">💾 Save Changes</button><a class="small-button cancel" href="{{ url_for('goals') }}">↩ Cancel</a></div></form></section>
+
+<section class="hero compact goals-hero-v41">
+    <div>
+        <span class="tag">EduPath AI</span>
+        <h2>تعديل الهدف الذكي</h2>
+        <p>عدّل نفس البيانات التي استخدمتها عند إنشاء الهدف، مع الحفاظ على القوائم التكيفية والربط الذكي في الخلفية.</p>
+    </div>
+    <a class="button light" href="{{ url_for('goals') }}">↩ العودة إلى الأهداف</a>
+</section>
+
+<section class="grid-2 smart-goals-layout-v4613 edit-goal-layout-v525">
+    <div class="card smart-goal-create-card">
+        <h2>✏️ تعديل الهدف</h2>
+
+        <form method="POST" class="form smart-goal-form-v4613" id="smartGoalForm">
+            <div class="goal-field goal-field-wide">
+                <label>عنوان الهدف</label>
+                <input name="title" id="goalTitleInput" value="{{ goal.title }}" placeholder="مثال: الحصول على IELTS 7 / حفظ جزء عم / إتقان Python Flask" required>
+            </div>
+
+            <div class="goal-field goal-field-wide">
+                <label>نوع الهدف</label>
+                <select name="category" id="goalTypeSelect" data-saved="{{ goal.category or 'Education' }}">
+                    <option value="{{ goal.category or 'Education' }}">{{ goal.category or 'Education' }}</option>
+                </select>
+            </div>
+
+            <div class="adaptive-goal-panel-v4614" id="adaptiveGoalBox">
+                <div class="goal-field">
+                    <label id="goalCategoryLabel">تصنيف الهدف</label>
+                    <select name="goal_category" id="goalCategorySelect" data-saved="{{ goal.plan.get('Goal Category', '') if goal.plan else '' }}"></select>
+                    <div class="inline-custom-field" id="customCategoryBox">
+                        <label id="customCategoryLabel">اكتب التصنيف</label>
+                        <input name="custom_goal_category" id="customGoalCategoryInput" placeholder="يرجى كتابة ما تريد">
+                    </div>
+                </div>
+
+                <div class="goal-field">
+                    <label id="goalPathLabel">مسار الهدف</label>
+                    <select name="goal_path" id="goalPathSelect" data-saved="{{ goal.plan.get('Goal Path', '') if goal.plan else '' }}"></select>
+                    <div class="inline-custom-field" id="customPathBox">
+                        <label id="customPathLabel">اكتب المسار</label>
+                        <input name="custom_goal_path" id="customGoalPathInput" placeholder="يرجى كتابة ما تريد">
+                    </div>
+                </div>
+
+                <div class="goal-field">
+                    <label id="currentStateLabel">الحالة الحالية</label>
+                    <select name="current_state" id="currentStateSelect" data-saved="{{ goal.plan.get('Current State', goal.current_level) if goal.plan else goal.current_level }}"></select>
+                    <div class="inline-custom-field" id="customCurrentBox">
+                        <label id="customCurrentLabel">اكتب الحالة الحالية</label>
+                        <input name="custom_current_state" id="customCurrentInput" placeholder="يرجى كتابة ما تريد">
+                    </div>
+                </div>
+
+                <div class="goal-field">
+                    <label id="targetStateLabel">الحالة المستهدفة</label>
+                    <select name="target_state" id="targetStateSelect" data-saved="{{ goal.plan.get('Target State', '') if goal.plan else '' }}"></select>
+                    <div class="inline-custom-field" id="customTargetBox">
+                        <label id="customTargetLabel">اكتب الحالة المستهدفة</label>
+                        <input name="custom_target_state" id="customTargetInput" placeholder="يرجى كتابة ما تريد">
+                    </div>
+                </div>
+
+                <div class="goal-field goal-field-wide">
+                    <label id="goalOutcomeLabel">النتيجة المستهدفة</label>
+                    <input name="goal_outcome" id="goalOutcomeInput" value="{{ goal.plan.get('Goal Outcome', '') if goal.plan else '' }}" placeholder="ماذا تريد أن يتحقق عند إنجاز هذا الهدف؟">
+                </div>
+
+                <input type="hidden" name="milestones" id="milestonesInput" value="{{ goal.plan.get('Milestones', '') if goal.plan else '' }}">
+
+                <div class="goal-field">
+                    <label id="commitmentLabel">الالتزام اليومي أو الأسبوعي</label>
+                    <select name="commitment" id="commitmentSelect" data-saved="{{ goal.plan.get('Commitment', '') if goal.plan else '' }}"></select>
+                    <div class="inline-custom-field" id="customCommitmentBox">
+                        <label id="customCommitmentLabel">اكتب الالتزام</label>
+                        <input name="custom_commitment" id="customCommitmentInput" placeholder="يرجى كتابة ما تريد">
+                    </div>
+                </div>
+
+                <input type="hidden" name="keywords" id="goalKeywordsInput">
+            </div>
+
+            <div class="goal-form-bottom-grid">
+                <div class="goal-field">
+                    <label>تاريخ البدء</label>
+                    <input name="start_date" type="date" value="{{ goal.start_date }}">
+                </div>
+
+                <div class="goal-field">
+                    <label>تاريخ الإنجاز المستهدف</label>
+                    <input name="deadline" type="date" value="{{ goal.deadline }}">
+                </div>
+
+                <div class="goal-field goal-field-wide">
+                    <label>ملاحظات إضافية</label>
+                    <textarea name="notes" rows="4" placeholder="اكتب أي ملاحظات إضافية أو مصادر أو خطة شخصية...">{{ goal.visible_notes or "" }}</textarea>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button type="submit">💾 حفظ التعديلات</button>
+                <a class="small-button cancel" href="{{ url_for('goals') }}">إلغاء</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="card goal-edit-note-v525">
+        <h2>معلومة مهمة</h2>
+        <p class="muted">بيانات الذكاء والربط والكلمات الداخلية تعمل في الخلفية فقط، ولا تظهر للمستخدم داخل صفحة التعديل أو الملاحظات.</p>
+    </div>
+</section>
+
 {% endblock %}
