@@ -1148,6 +1148,95 @@ def dashboard_ar(value):
     text = str(value)
     return DASHBOARD_AR_LABELS.get(text, text)
 
+
+GOALS_AR_LABELS = {
+    "Education": "التعليم",
+    "Language": "اللغات",
+    "Exam / Certificate": "الاختبارات الدولية",
+    "Programming & Technology": "البرمجة والتقنية",
+    "Artificial Intelligence": "الذكاء الاصطناعي",
+    "Scholarship": "المنح الدراسية",
+    "University": "الجامعة",
+    "Mathematics": "الرياضيات",
+    "Project": "المشاريع",
+    "Daily Life": "الحياة اليومية",
+    "Islamic Goals": "الأهداف الإسلامية",
+    "General": "عام",
+    "Other": "أخرى",
+    "School Study": "الدراسة المدرسية",
+    "University Study": "الدراسة الجامعية",
+    "Online Course": "دورة تعليمية",
+    "Research": "بحث",
+    "Presentation": "عرض تقديمي",
+    "English": "English",
+    "Chinese": "Chinese",
+    "Turkish": "Turkish",
+    "Russian": "Russian",
+    "Arabic": "Arabic",
+    "German": "German",
+    "French": "French",
+    "IELTS Academic": "IELTS Academic",
+    "TOEFL": "TOEFL",
+    "Duolingo English Test": "Duolingo",
+    "General English": "General English",
+    "Academic English": "Academic English",
+    "Speaking": "Speaking",
+    "Writing": "Writing",
+    "Reading": "Reading",
+    "Listening": "Listening",
+    "Vocabulary": "Vocabulary",
+    "Grammar": "Grammar",
+    "Pronunciation": "Pronunciation",
+    "Python": "Python",
+    "Flask": "Flask",
+    "JavaScript": "JavaScript",
+    "React": "React",
+    "Node.js": "Node.js",
+    "HTML": "HTML",
+    "CSS": "CSS",
+    "SQL": "SQL",
+    "Beginner": "مبتدئ",
+    "Intermediate": "متوسط",
+    "Advanced": "متقدم",
+    "Not started": "لم أبدأ بعد",
+    "In progress": "قيد التقدم",
+    "Need review": "أحتاج إلى مراجعة",
+    "Custom": "مخصص",
+    "Complete course": "إكمال الدورة",
+    "High grade": "تحقيق درجة عالية",
+    "Finish project": "إنهاء المشروع",
+    "Master topic": "إتقان الموضوع",
+    "30 minutes daily": "30 دقيقة يومياً",
+    "60 minutes daily": "60 دقيقة يومياً",
+    "3 hours weekly": "3 ساعات أسبوعياً",
+    "Weekly review": "مراجعة أسبوعية",
+    "IELTS Band 5.0": "IELTS Band 5.0",
+    "IELTS Band 5.5": "IELTS Band 5.5",
+    "IELTS Band 6.0": "IELTS Band 6.0",
+    "IELTS Band 6.5": "IELTS Band 6.5",
+    "IELTS Band 7.0": "IELTS Band 7.0",
+    "TOEFL 90+": "TOEFL 90+",
+    "Duolingo 120+": "Duolingo 120+",
+    "Fluent Speaking": "تحدث بطلاقة",
+    "Pass exam": "اجتياز الاختبار",
+    "Strong score": "تحقيق درجة قوية",
+    "Scholarship requirement": "استيفاء شرط المنحة",
+    "University requirement": "استيفاء شرط الجامعة",
+    "Build a complete project": "بناء مشروع متكامل",
+    "Deploy a useful web app": "نشر تطبيق ويب مفيد",
+    "Win full scholarship": "الحصول على منحة كاملة",
+    "Get admission": "الحصول على قبول",
+    "Submit complete application": "إرسال طلب مكتمل",
+    "No deadline": "لا يوجد موعد نهائي",
+    "Not set": "غير محدد",
+}
+
+def goals_ar(value):
+    if value is None:
+        return ""
+    text = str(value)
+    return GOALS_AR_LABELS.get(text, text)
+
 def render_clickable_sources(value):
     """Render source text safely: plain text stays plain, URLs become clickable links.
     Multiple sources can be separated by &.
@@ -1204,6 +1293,7 @@ def ensure_all_users_subscription_codes():
 def create_app():
     app = Flask(__name__)
     app.jinja_env.filters["clickable_sources"] = render_clickable_sources
+    app.jinja_env.filters["goals_ar"] = goals_ar
     app.jinja_env.filters["dashboard_ar"] = dashboard_ar
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
     app.permanent_session_lifetime = timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30")))
@@ -2644,6 +2734,32 @@ def build_goal_notes_from_form(form):
     return "\n".join(lines)
 
 
+
+GOAL_INTELLIGENCE_SYNONYMS_V520 = {
+    "ielts": ["IELTS", "آيلتس", "English", "الإنجليزية", "Reading", "قراءة", "Writing", "كتابة", "Listening", "استماع", "Speaking", "تحدث", "Vocabulary", "مفردات", "Grammar", "قواعد", "Mock Test", "اختبار تجريبي"],
+    "toefl": ["TOEFL", "توفل", "Reading", "قراءة", "Listening", "استماع", "Writing", "كتابة", "Speaking", "تحدث", "Academic Discussion", "مناقشة أكاديمية"],
+    "duolingo": ["Duolingo", "دولينجو", "Duolingo English Test", "Interactive Reading", "Interactive Listening", "Interactive Writing", "Interactive Speaking", "قراءة", "استماع", "كتابة", "تحدث"],
+    "python": ["Python", "بايثون", "Programming", "برمجة", "OOP", "Flask", "Backend", "API", "Database", "مشروع", "كود", "برمجية"],
+    "flask": ["Flask", "Python", "Backend", "Routes", "Templates", "Database", "Login", "API", "Deployment", "مشروع Flask", "تطبيق ويب"],
+    "scholarship": ["Scholarship", "منحة", "منح", "Documents", "مستندات", "CV", "سيرة ذاتية", "Motivation Letter", "خطاب الدافع", "Interview", "مقابلة", "Application", "تقديم", "جامعة", "قبول"],
+    "quran": ["قرآن", "القرآن", "حفظ", "مراجعة", "تثبيت", "تجويد", "تلاوة", "تسميع", "سورة", "جزء", "جزء عم"],
+    "mathematics": ["Mathematics", "رياضيات", "Algebra", "جبر", "Geometry", "هندسة", "Calculus", "تفاضل", "Statistics", "إحصاء", "Probability", "احتمالات"],
+    "csca": ["CSCA", "Mathematics", "Physics", "Chemistry", "رياضيات", "فيزياء", "كيمياء", "اختبار الصين"],
+}
+
+def expand_goal_intelligence_terms_v520(text):
+    lower = (text or "").lower()
+    expanded = set()
+    for key, values in GOAL_INTELLIGENCE_SYNONYMS_V520.items():
+        if key in lower or any(str(v).lower() in lower for v in values):
+            expanded.update(values)
+    if any(x in (text or "") for x in ["قرآن", "القرآن", "سورة", "جزء", "حفظ", "مراجعة"]):
+        expanded.update(GOAL_INTELLIGENCE_SYNONYMS_V520["quran"])
+    if any(x in (text or "") for x in ["منحة", "قبول", "مستندات", "خطاب الدافع", "تقديم"]):
+        expanded.update(GOAL_INTELLIGENCE_SYNONYMS_V520["scholarship"])
+    return expanded
+
+
 def generate_goal_keywords_from_form(form, goal_category="", goal_path="", current_state="", target_state="", commitment=""):
     raw = [
         form.get("category", ""),
@@ -2657,6 +2773,7 @@ def generate_goal_keywords_from_form(form, goal_category="", goal_path="", curre
     ]
     text = " ".join(raw)
     keywords = tokenize_mixed_text(text)
+    keywords.update(expand_goal_intelligence_terms_v520(text))
 
     lower = text.lower()
     if "ielts" in lower:
@@ -2778,10 +2895,14 @@ def calculate_match_score(goal, task):
         plan.get("Goal Outcome", ""),
     ]).lower()
 
+    expanded_goal_terms_v520 = expand_goal_intelligence_terms_v520(goal_text)
+    expanded_task_terms_v520 = expand_goal_intelligence_terms_v520(task_text)
+    combined_goal_terms_v520 = set(goal_keywords(goal)) | expanded_goal_terms_v520
+
     score = 0
     matched = []
 
-    for keyword in goal_keywords(goal):
+    for keyword in combined_goal_terms_v520:
         key = keyword.lower().strip()
         if key and key in task_text:
             score += 8
@@ -2792,6 +2913,11 @@ def calculate_match_score(goal, task):
         if field and field in task_text:
             score += 22
             matched.append(field)
+
+    if expanded_goal_terms_v520 and expanded_task_terms_v520 and (expanded_goal_terms_v520 & expanded_task_terms_v520):
+        overlap = sorted(expanded_goal_terms_v520 & expanded_task_terms_v520)
+        score += min(35, 7 * len(overlap[:5]))
+        matched.extend(overlap[:5])
 
     if ("قرآن" in goal_text or "جزء عم" in goal_text or "حفظ" in goal_text) and any(x in task_text for x in ["قرآن","حفظ","مراجعة","تسميع","سورة"]):
         score += 25

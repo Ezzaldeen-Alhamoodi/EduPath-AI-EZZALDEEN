@@ -6007,3 +6007,196 @@ body.dark-mode .home-progress-ar-v513 strong,
 body.dark-mode .home-progress-ar-v513 small {
     color: #fff !important;
 }
+
+
+
+/* EduPath AI v5.2.0 Smart Goals Arabic */
+.goals-hero-v41 {
+    direction: rtl;
+    text-align: right;
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 48%, #38bdf8 100%) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,.20) !important;
+    box-shadow: 0 20px 45px rgba(37,99,235,.22) !important;
+    border-radius: 24px !important;
+}
+
+.goals-hero-v41 h2,
+.goals-hero-v41 p,
+.goals-hero-v41 .tag {
+    color: #fff !important;
+}
+
+.goals-hero-v41 .tag {
+    background: rgba(255,255,255,.16) !important;
+    border: 1px solid rgba(255,255,255,.22) !important;
+}
+
+.smart-goals-layout-v4613 {
+    direction: rtl;
+    align-items: start;
+}
+
+.smart-goal-create-card {
+    border-radius: 22px !important;
+    box-shadow: 0 16px 35px rgba(15,23,42,.055) !important;
+}
+
+.smart-goal-create-card h2,
+.smart-goals-layout-v4613 .card h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.smart-goal-form-v4613 label {
+    font-weight: 850;
+    font-size: 13px;
+    color: var(--text);
+}
+
+.smart-goal-form-v4613 input,
+.smart-goal-form-v4613 select,
+.smart-goal-form-v4613 textarea {
+    direction: rtl;
+    text-align: right;
+    min-height: 42px;
+    border-radius: 13px;
+}
+
+.smart-goal-form-v4613 select option {
+    direction: rtl;
+}
+
+.adaptive-goal-panel-v4614,
+.goal-form-bottom-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+}
+
+.goal-field-wide {
+    grid-column: 1 / -1;
+}
+
+.inline-custom-field {
+    margin-top: 7px;
+    padding: 8px;
+    border-radius: 14px;
+    background: rgba(37,99,235,.055);
+    border: 1px dashed rgba(37,99,235,.18);
+}
+
+.smart-goal-form-v4613 button[type="submit"] {
+    width: 100%;
+    min-height: 44px;
+    border-radius: 15px;
+    font-weight: 950;
+    margin-top: 10px;
+}
+
+.goal-card-v41 {
+    direction: rtl;
+    text-align: right;
+    border-radius: 18px !important;
+    padding: 13px !important;
+    border: 1px solid rgba(148,163,184,.16);
+    box-shadow: 0 10px 24px rgba(15,23,42,.045);
+}
+
+.goal-topline {
+    align-items: center;
+    gap: 8px;
+}
+
+.goal-topline strong {
+    font-size: 15px;
+}
+
+.goal-topline span {
+    font-size: 11px;
+    padding: 5px 8px;
+    border-radius: 999px;
+    background: rgba(37,99,235,.08);
+    color: #1d4ed8;
+    font-weight: 800;
+}
+
+.goal-path-line,
+.goal-current-target,
+.goal-meta-grid {
+    font-size: 12px;
+}
+
+.goal-current-target {
+    display: grid;
+    gap: 4px;
+    margin: 8px 0;
+}
+
+.goal-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.goal-meta-grid span {
+    background: rgba(148,163,184,.08);
+    border-radius: 11px;
+    padding: 6px 8px;
+}
+
+.goal-card-v41 .actions {
+    justify-content: flex-start;
+    gap: 7px;
+    margin-top: 10px;
+}
+
+@media (min-width: 981px) {
+    .smart-goals-layout-v4613 {
+        grid-template-columns: minmax(420px, .95fr) minmax(0, 1.05fr) !important;
+        gap: 16px !important;
+    }
+}
+
+@media (max-width: 980px) {
+    .goals-hero-v41 {
+        padding: 16px !important;
+        border-radius: 20px !important;
+    }
+
+    .goals-hero-v41 h2 {
+        font-size: 23px !important;
+    }
+
+    .goals-hero-v41 p {
+        font-size: 13px !important;
+        line-height: 1.75 !important;
+    }
+
+    .smart-goals-layout-v4613 {
+        grid-template-columns: 1fr !important;
+        gap: 11px !important;
+    }
+
+    .smart-goal-create-card {
+        padding: 12px !important;
+    }
+
+    .adaptive-goal-panel-v4614,
+    .goal-form-bottom-grid {
+        grid-template-columns: 1fr !important;
+        gap: 9px !important;
+    }
+
+    .smart-goal-form-v4613 input,
+    .smart-goal-form-v4613 select,
+    .smart-goal-form-v4613 textarea {
+        min-height: 39px;
+        font-size: 13px;
+    }
+
+    .goal-meta-grid {
+        grid-template-columns: 1fr !important;
+    }
+}

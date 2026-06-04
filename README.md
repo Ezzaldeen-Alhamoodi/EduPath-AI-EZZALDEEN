@@ -1391,3 +1391,58 @@ Dashboard-only layout fix.
 - Dashboard/CSS/base only.
 - No changes to Tasks, Goals, Resources adaptive logic.
 - No database changes.
+
+
+## v5.2.0 Smart Goals Arabic
+
+### Scope
+- Goals page only.
+- Arabic user interface for Smart Goals.
+- Preserved official names:
+  - IELTS
+  - TOEFL
+  - Duolingo
+  - HSK
+  - CSCA
+  - SAT
+  - ACT
+  - GRE
+  - GMAT
+  - Python
+  - Flask
+  - JavaScript
+  - React
+  - Node.js
+
+### Adaptive Goals
+- Preserved all adaptive fields:
+  - Goal Type
+  - Goal Category
+  - Goal Path
+  - Current State
+  - Target State
+  - Goal Outcome
+  - Commitment
+  - Start Date
+  - Target Date
+  - Notes
+- Arabic labels are shown to the user.
+- Internal values remain stable for logic and database safety.
+
+### Other / Custom behavior
+- Existing custom boxes remain directly under their related select:
+  - category
+  - path
+  - current state
+  - target state
+  - commitment
+
+### Intelligence
+- Added hidden bilingual Arabic/English synonym expansion for goal-task linking.
+- The app still does not create tasks automatically.
+- Completed user-created tasks can be matched more accurately to goals.
+
+### Safety
+- No database migration.
+- No task page changes.
+- No resource page changes.

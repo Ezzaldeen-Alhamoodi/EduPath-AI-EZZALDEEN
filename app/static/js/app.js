@@ -1238,6 +1238,128 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* EduPath AI v4.6.10 Smart Goals Adaptive Fix */
+
+const SMART_GOAL_AR_LABELS_V520 = {
+    "Education": "التعليم",
+    "Language": "اللغات",
+    "Exam / Certificate": "الاختبارات الدولية",
+    "Programming & Technology": "البرمجة والتقنية",
+    "Artificial Intelligence": "الذكاء الاصطناعي",
+    "Scholarship": "المنح الدراسية",
+    "University": "الجامعة",
+    "Mathematics": "الرياضيات",
+    "Project": "المشاريع",
+    "Daily Life": "الحياة اليومية",
+    "Islamic Goals": "الأهداف الإسلامية",
+    "General": "عام",
+    "Other": "أخرى",
+    "Custom": "مخصص",
+    "School Study": "الدراسة المدرسية",
+    "University Study": "الدراسة الجامعية",
+    "Online Course": "دورة تعليمية",
+    "Research": "بحث",
+    "Presentation": "عرض تقديمي",
+    "English": "English",
+    "Chinese": "Chinese",
+    "Turkish": "Turkish",
+    "Russian": "Russian",
+    "Indonesian": "Indonesian",
+    "Romanian": "Romanian",
+    "Arabic": "Arabic",
+    "French": "French",
+    "German": "German",
+    "IELTS Academic": "IELTS Academic",
+    "TOEFL": "TOEFL",
+    "Duolingo English Test": "Duolingo",
+    "General English": "General English",
+    "Academic English": "Academic English",
+    "Speaking": "Speaking",
+    "Writing": "Writing",
+    "Reading": "Reading",
+    "Listening": "Listening",
+    "Vocabulary": "Vocabulary",
+    "Grammar": "Grammar",
+    "Pronunciation": "Pronunciation",
+    "IELTS": "IELTS",
+    "HSK": "HSK",
+    "CSCA": "CSCA",
+    "SAT": "SAT",
+    "ACT": "ACT",
+    "GRE": "GRE",
+    "GMAT": "GMAT",
+    "Python": "Python",
+    "C": "C",
+    "C++": "C++",
+    "Java": "Java",
+    "JavaScript": "JavaScript",
+    "HTML": "HTML",
+    "CSS": "CSS",
+    "SQL": "SQL",
+    "Flask": "Flask",
+    "React": "React",
+    "Node.js": "Node.js",
+    "Git / GitHub": "Git / GitHub",
+    "Algorithms": "الخوارزميات",
+    "Data Structures": "هياكل البيانات",
+    "Databases": "قواعد البيانات",
+    "Cybersecurity": "الأمن السيبراني",
+    "Information Technology": "تقنية المعلومات",
+    "Web Development": "تطوير الويب",
+    "Problem Solving": "حل المشكلات",
+    "Debugging": "تصحيح الأخطاء",
+    "Beginner": "مبتدئ",
+    "Intermediate": "متوسط",
+    "Advanced": "متقدم",
+    "Not started": "لم أبدأ بعد",
+    "In progress": "قيد التقدم",
+    "Need review": "أحتاج إلى مراجعة",
+    "Beginner Track": "مسار المبتدئين",
+    "Project Track": "مسار المشاريع",
+    "Complete course": "إكمال الدورة",
+    "High grade": "تحقيق درجة عالية",
+    "Finish project": "إنهاء المشروع",
+    "Master topic": "إتقان الموضوع",
+    "Build a complete project": "بناء مشروع متكامل",
+    "Deploy a useful web app": "نشر تطبيق ويب مفيد",
+    "Solve 100 problems": "حل 100 مسألة",
+    "Internship ready": "الاستعداد للتدريب العملي",
+    "Submit complete application": "إرسال طلب مكتمل",
+    "Get interview": "الحصول على مقابلة",
+    "Win full scholarship": "الحصول على منحة كاملة",
+    "Get admission": "الحصول على قبول",
+    "Pass exam": "اجتياز الاختبار",
+    "Strong score": "تحقيق درجة قوية",
+    "Scholarship requirement": "استيفاء شرط المنحة",
+    "University requirement": "استيفاء شرط الجامعة",
+    "30 minutes daily": "30 دقيقة يومياً",
+    "60 minutes daily": "60 دقيقة يومياً",
+    "3 hours weekly": "3 ساعات أسبوعياً",
+    "Weekly review": "مراجعة أسبوعية",
+    "Skill rotation": "تدوير المهارات",
+    "Mock test weekly": "اختبار تجريبي أسبوعي",
+    "Timed practice daily": "تدريب مؤقت يومياً",
+    "Weakness review": "مراجعة نقاط الضعف",
+    "Formula review": "مراجعة القوانين",
+    "Build weekly": "بناء مشروع أسبوعياً",
+    "Solve problems daily": "حل مسائل يومياً",
+    "Daily steps": "خطوات يومية",
+    "Milestones": "محطات تقدم",
+    "القرآن الكريم": "القرآن الكريم",
+    "الحديث الشريف": "الحديث الشريف",
+    "العقيدة": "العقيدة",
+    "الفقه": "الفقه",
+    "السيرة النبوية": "السيرة النبوية",
+    "الأذكار": "الأذكار",
+    "طلب العلم الشرعي": "طلب العلم الشرعي",
+    "العبادات": "العبادات",
+    "أخرى": "أخرى",
+    "Custom Plan": "خطة مخصصة"
+};
+
+function smartGoalLabelArV520(value) {
+    return SMART_GOAL_AR_LABELS_V520[value] || value;
+}
+
 const SMART_GOALS_V4610 = {
     "Education": {
         categories: ["School Study","University Study","Online Course","Research","Presentation","Other"],
@@ -1382,7 +1504,7 @@ function fillGoalSelectV4610(select, values) {
     values.forEach(value => {
         const option = document.createElement("option");
         option.value = value;
-        option.textContent = typeof labelForUI === "function" ? labelForUI(value) : value;
+        option.textContent = typeof smartGoalLabelArV520 === "function" ? smartGoalLabelArV520(value) : (typeof labelForUI === "function" ? labelForUI(value) : value);
         select.appendChild(option);
     });
     if (values.includes(previous)) select.value = previous;
@@ -1466,23 +1588,23 @@ function updateSmartGoalsV4610(changedId = "") {
         commitment: document.getElementById("commitmentLabel")
     };
 
-    if (type.value === "Islamic Goals") {
-        labels.cat.textContent = "التصنيف";
-        labels.path.textContent = "المسار";
-        labels.current.textContent = "الحالة الحالية";
-        labels.target.textContent = "الهدف المستهدف";
-        labels.outcome.textContent = "النتيجة النهائية";
-        if (labels.milestones) labels.milestones.textContent = "المحطات";
-        labels.commitment.textContent = "الالتزام اليومي / الأسبوعي";
-        if (outcome && !outcome.value) outcome.placeholder = "مثال: إتمام حفظ جزء عم وتثبيته";
-    } else {
-        labels.cat.textContent = "Goal Category";
-        labels.path.textContent = "Goal Path";
-        labels.current.textContent = "Current State";
-        labels.target.textContent = "Target State";
-        labels.outcome.textContent = "Goal Outcome";
-        if (labels.milestones) labels.milestones.textContent = "Milestones";
-        labels.commitment.textContent = "Daily / Weekly Commitment";
+    labels.cat.textContent = "تصنيف الهدف";
+    labels.path.textContent = "مسار الهدف";
+    labels.current.textContent = "الحالة الحالية";
+    labels.target.textContent = "الحالة المستهدفة";
+    labels.outcome.textContent = "النتيجة المستهدفة";
+    if (labels.milestones) labels.milestones.textContent = "محطات التقدم";
+    labels.commitment.textContent = "الالتزام اليومي أو الأسبوعي";
+    if (outcome && !outcome.value) {
+        if (type.value === "Islamic Goals") {
+            outcome.placeholder = "مثال: إتمام حفظ جزء عم وتثبيته";
+        } else if (type.value === "Scholarship") {
+            outcome.placeholder = "مثال: الحصول على منحة أو تقديم طلب قوي ومكتمل";
+        } else if (type.value === "Programming & Technology") {
+            outcome.placeholder = "مثال: بناء مشروع متكامل ونشره";
+        } else {
+            outcome.placeholder = "ماذا تريد أن يتحقق عند إنجاز هذا الهدف؟";
+        }
     }
 
     const selected = `${type.value} ${category.value} ${path.value} ${target.value}`.toLowerCase();

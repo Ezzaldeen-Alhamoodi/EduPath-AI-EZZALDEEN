@@ -1,30 +1,30 @@
 \
 {% extends "base.html" %}
-{% block page_title %}Smart Goals{% endblock %}
+{% block page_title %}الأهداف الذكية{% endblock %}
 {% block content %}
 
 <section class="hero compact goals-hero-v41">
     <div>
         <span class="tag">EduPath AI</span>
-        <h2>Smart Adaptive Goals</h2>
-        <p>Goals are the destination. Tasks are the daily actions. EduPath AI connects completed user-created tasks to the right goals automatically.</p>
+        <h2>الأهداف الذكية التكيفية</h2>
+        <p>الأهداف هي الوجهة طويلة المدى، والمهام هي الخطوات اليومية. يربط EduPath AI المهام المكتملة بالأهداف المناسبة بذكاء دون إنشاء مهام تلقائيًا.</p>
     </div>
-    <a class="button light" href="{{ url_for('tasks') }}">▣ Create Your Tasks</a>
+    <a class="button light" href="{{ url_for('tasks') }}">▣ إنشاء المهام</a>
 </section>
 
 
 <section class="grid-2 smart-goals-layout-v4613">
     <div class="card smart-goal-create-card">
-        <h2>◎ Create Smart Goal</h2>
+        <h2>◎ إنشاء هدف ذكي</h2>
 
         <form method="POST" class="form smart-goal-form-v4613" id="smartGoalForm">
             <div class="goal-field goal-field-wide">
-                <label>Goal Title</label>
-                <input name="title" id="goalTitleInput" placeholder="Achieve IELTS Band 7 / حفظ جزء عم / Master Python Flask" required>
+                <label>عنوان الهدف</label>
+                <input name="title" id="goalTitleInput" placeholder="مثال: الحصول على IELTS 7 / حفظ جزء عم / إتقان Python Flask" required>
             </div>
 
             <div class="goal-field goal-field-wide">
-                <label>Goal Type</label>
+                <label>نوع الهدف</label>
                 <select name="category" id="goalTypeSelect">
                     <option>Education</option>
                     <option>Language</option>
@@ -44,54 +44,54 @@
 
             <div class="adaptive-goal-panel-v4614" id="adaptiveGoalBox">
                 <div class="goal-field">
-                    <label id="goalCategoryLabel">Goal Category</label>
+                    <label id="goalCategoryLabel">تصنيف الهدف</label>
                     <select name="goal_category" id="goalCategorySelect"></select>
                     <div class="inline-custom-field" id="customCategoryBox">
-                        <label id="customCategoryLabel">Custom Goal Category</label>
-                        <input name="custom_goal_category" id="customGoalCategoryInput" placeholder="Write your custom category">
+                        <label id="customCategoryLabel">اكتب التصنيف الذي تريده</label>
+                        <input name="custom_goal_category" id="customGoalCategoryInput" placeholder="اكتب التصنيف المخصص">
                     </div>
                 </div>
 
                 <div class="goal-field">
-                    <label id="goalPathLabel">Goal Path</label>
+                    <label id="goalPathLabel">مسار الهدف</label>
                     <select name="goal_path" id="goalPathSelect"></select>
                     <div class="inline-custom-field" id="customPathBox">
-                        <label id="customPathLabel">Custom Goal Path</label>
-                        <input name="custom_goal_path" id="customGoalPathInput" placeholder="Write your custom path">
+                        <label id="customPathLabel">اكتب المسار الذي تريده</label>
+                        <input name="custom_goal_path" id="customGoalPathInput" placeholder="اكتب المسار المخصص">
                     </div>
                 </div>
 
                 <div class="goal-field">
-                    <label id="currentStateLabel">Current State</label>
+                    <label id="currentStateLabel">الحالة الحالية</label>
                     <select name="current_state" id="currentStateSelect"></select>
                     <div class="inline-custom-field" id="customCurrentBox">
-                        <label id="customCurrentLabel">Custom Current State</label>
-                        <input name="custom_current_state" id="customCurrentInput" placeholder="Write your current state">
+                        <label id="customCurrentLabel">اكتب حالتك الحالية</label>
+                        <input name="custom_current_state" id="customCurrentInput" placeholder="اكتب الحالة الحالية">
                     </div>
                 </div>
 
                 <div class="goal-field">
-                    <label id="targetStateLabel">Target State</label>
+                    <label id="targetStateLabel">الحالة المستهدفة</label>
                     <select name="target_state" id="targetStateSelect"></select>
                     <div class="inline-custom-field" id="customTargetBox">
-                        <label id="customTargetLabel">Custom Target State</label>
-                        <input name="custom_target_state" id="customTargetInput" placeholder="Write your target state">
+                        <label id="customTargetLabel">اكتب الحالة المستهدفة</label>
+                        <input name="custom_target_state" id="customTargetInput" placeholder="اكتب الحالة المستهدفة">
                     </div>
                 </div>
 
                 <div class="goal-field goal-field-wide">
-                    <label id="goalOutcomeLabel">Goal Outcome</label>
-                    <input name="goal_outcome" id="goalOutcomeInput" placeholder="What should happen when this goal is achieved?">
+                    <label id="goalOutcomeLabel">النتيجة المستهدفة</label>
+                    <input name="goal_outcome" id="goalOutcomeInput" placeholder="ماذا تريد أن يتحقق عند إنجاز هذا الهدف؟">
                 </div>
 
                 <input type="hidden" name="milestones" id="milestonesInput">
 
                 <div class="goal-field">
-                    <label id="commitmentLabel">Daily / Weekly Commitment</label>
+                    <label id="commitmentLabel">الالتزام اليومي أو الأسبوعي</label>
                     <select name="commitment" id="commitmentSelect"></select>
                     <div class="inline-custom-field" id="customCommitmentBox">
-                        <label id="customCommitmentLabel">Custom Commitment</label>
-                        <input name="custom_commitment" id="customCommitmentInput" placeholder="Write your custom commitment">
+                        <label id="customCommitmentLabel">اكتب الالتزام المخصص</label>
+                        <input name="custom_commitment" id="customCommitmentInput" placeholder="اكتب الالتزام المخصص">
                     </div>
                 </div>
 
@@ -100,43 +100,43 @@
 
             <div class="goal-form-bottom-grid">
                 <div class="goal-field">
-                    <label>Start Date</label>
+                    <label>تاريخ البدء</label>
                     <input name="start_date" type="date">
                 </div>
 
                 <div class="goal-field">
-                    <label>Target Date</label>
+                    <label>تاريخ الإنجاز المستهدف</label>
                     <input name="deadline" type="date">
                 </div>
 
                 <div class="goal-field goal-field-wide">
-                    <label>Notes</label>
-                    <textarea name="notes" rows="4" placeholder="Extra details, resources, schedule, or personal instructions..."></textarea>
+                    <label>ملاحظات إضافية</label>
+                    <textarea name="notes" rows="4" placeholder="اكتب أي ملاحظات إضافية، مصادر، خطة، أو تعليمات شخصية..."></textarea>
                 </div>
             </div>
 
-            <button type="submit">💾 Save Smart Goal</button>
+            <button type="submit">💾 حفظ الهدف</button>
         </form>
     </div>
 
     <div class="card">
-        <h2>Current Goals</h2>
+        <h2>أهدافك الحالية</h2>
         {% for goal in goals %}
             <div class="goal-card-v41">
                 <div class="goal-topline">
                     <strong>{{ goal.title }}</strong>
-                    <span>{{ goal.category }}</span>
+                    <span>{{ goal.category|goals_ar }}</span>
                 </div>
 
                 <div class="goal-path-line">
                     {% if goal.plan %}
-                        {{ goal.plan.get("Goal Category", "") }}{% if goal.plan.get("Goal Path") %} · {{ goal.plan.get("Goal Path") }}{% endif %}
+                        {{ goal.plan.get("Goal Category", "")|goals_ar }}{% if goal.plan.get("Goal Path") %} · {{ goal.plan.get("Goal Path")|goals_ar }}{% endif %}
                     {% endif %}
                 </div>
 
                 <div class="goal-current-target">
-                    <span>Current: {{ goal.plan.get("Current State", goal.current_level) if goal.plan else goal.current_level }}</span>
-                    <span>Target: {{ goal.plan.get("Target State", "Not set") if goal.plan else "Not set" }}</span>
+                    <span>الحالة الحالية: {{ (goal.plan.get("Current State", goal.current_level) if goal.plan else goal.current_level)|goals_ar }}</span>
+                    <span>الحالة المستهدفة: {{ (goal.plan.get("Target State", "Not set") if goal.plan else "Not set")|goals_ar }}</span>
                 </div>
 
                 <div class="goal-progress-track">
@@ -144,23 +144,23 @@
                 </div>
 
                 <div class="goal-meta-grid">
-                    <span>📊 {{ goal.goal_progress if goal.goal_progress is defined else 0 }}% progress</span>
-                    <span>🔗 {{ goal.goal_confidence.related_tasks if goal.goal_confidence is defined else 0 }} related tasks</span>
-                    <span>⏱️ {{ goal.goal_confidence.study_hours if goal.goal_confidence is defined else 0 }} hours</span>
-                    <span>⏳ {{ goal.time_left if goal.time_left is defined else "No deadline" }}</span>
+                    <span>📊 {{ goal.goal_progress if goal.goal_progress is defined else 0 }}% تقدم</span>
+                    <span>🔗 {{ goal.goal_confidence.related_tasks if goal.goal_confidence is defined else 0 }} مهام مرتبطة</span>
+                    <span>⏱️ {{ goal.goal_confidence.study_ساعات if goal.goal_confidence is defined else 0 }} ساعات</span>
+                    <span>⏳ {{ goal.time_left if goal.time_left is defined else "لا يوجد موعد نهائي" }}</span>
                 </div>
 
                 {% if goal.goal_confidence is defined and goal.goal_confidence.last_task %}
-                    <p class="muted">Last related task: {{ goal.goal_confidence.last_task }}</p>
+                    <p class="muted">آخر مهمة مرتبطة: {{ goal.goal_confidence.last_task }}</p>
                 {% endif %}
 
                 <div class="actions">
-                    <a class="small-button warning" href="{{ url_for('edit_goal', goal_id=goal.id) }}">✏️ Edit</a>
-                    <a class="small-button danger" href="{{ url_for('delete_goal', goal_id=goal.id) }}">🗑 Delete</a>
+                    <a class="small-button warning" href="{{ url_for('edit_goal', goal_id=goal.id) }}">✏️ تعديل</a>
+                    <a class="small-button danger" href="{{ url_for('delete_goal', goal_id=goal.id) }}">🗑 حذف</a>
                 </div>
             </div>
         {% else %}
-            <p class="muted">No goals yet. Create your first smart goal.</p>
+            <p class="muted">لا توجد أهداف بعد. أنشئ أول هدف ذكي لك.</p>
         {% endfor %}
     </div>
 </section>
