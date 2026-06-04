@@ -1261,131 +1261,40 @@ Desktop sidebar design refinement.
 - 0 cost.
 
 
-## v4.8.4 Full Arabic Interface
+## v5.0.0 True I18N System
 
-### Arabic interface
-- Added a broad Arabic UI translation layer.
-- When the user switches language to Arabic, nearly all app pages translate to Arabic:
-  - Dashboard
-  - Goals
-  - Tasks
-  - Resources
-  - My Resources
-  - Profile
-  - Admin
-  - Auth pages
-  - Buttons
-  - Labels
-  - Placeholders
-  - Select options
-- Added RTL layout support for Arabic pages.
+Major internationalization update.
 
-### Important exception
-- AI Coach pages remain English:
-  - Coach selection
-  - English Coach
-  - Scholarship Coach
-  - Code Coach
-  - AI outputs
-- This keeps AI coaching behavior and outputs consistent.
+### What changed
+- Removed broken patch-style Arabic translation layers.
+- Added a central server-side i18n module:
+  - `app/i18n.py`
+- Added translation catalogs:
+  - `app/translations_json/en.json`
+  - `app/translations_json/ar.json`
+- Added Babel-compatible files:
+  - `babel.cfg`
+  - `app/translations/ar/LC_MESSAGES/messages.po`
+- Added `Flask-Babel==4.0.0` to requirements for future gettext workflow compatibility.
+
+### How language switching works now
+- The language button changes the server-side session language.
+- Pages render directly in the selected language from the server.
+- This avoids delayed translation, broken Arabic words, and unstable JavaScript text replacement.
+
+### Dynamic data strategy
+- Internal values remain stable in English for logic and AI linking.
+- User-facing labels are translated through:
+  - `i18n_label`
+  - `i18n_resource_name`
+  - `i18n_resource_description`
+- Resources, tasks, and goals can display Arabic labels without changing stored internal values.
 
 ### Performance
-- No AI usage.
+- Translation is a small cached JSON lookup.
+- No AI calls.
 - No database changes.
-- Frontend-only translation layer.
+- No slow page scanning translation after load.
 
-
-## v4.8.5 Arabic Interface Fix
-
-### Improved Arabic translation
-- Added many missing Arabic translations across:
-  - Dashboard
-  - Goals
-  - Tasks
-  - Resources
-  - My Resources
-  - Profile
-  - Admin
-  - Auth pages
-  - Buttons, labels, placeholders, options, and status words
-- Added fuzzy translation logic for text that contains icons, punctuation, or mixed words.
-- Improved translation of dynamic content that appears after clicking or changing fields.
-
-### Desktop design preservation
-- Fixed Arabic mode on desktop so it translates text without changing the main desktop layout.
-- Keeps the same sidebar position, icon colors, spacing, and card design.
-- Mobile remains as before.
-
-### AI Coach exception
-- AI Coach pages and outputs remain English.
-- No database changes.
-- No AI usage.
-
-
-## v4.8.6 Full Arabic Dynamic Content
-
-### Stronger Arabic coverage
-- Added backend Arabic display filters for dynamic content:
-  - resource categories
-  - resource subcategories
-  - resource levels
-  - resource types
-  - task categories
-  - task fields
-  - task training types
-- Added data-ar attributes to dynamic templates so Arabic mode can translate server-rendered content.
-- Added a large adaptive task/resource Arabic map for JavaScript-generated task options.
-- Improved Resources and My Resources Arabic display.
-- Improved adaptive Tasks Arabic display.
-
-### Design preservation
-- Arabic mode keeps the same desktop design, colors, icons, and layout.
-- Mobile design remains unchanged.
-- AI Coach pages remain English.
-
-### AI usage
-- 0 API calls.
-- 0 OpenRouter usage.
-- 0 cost.
-
-
-## v4.8.7 True Bilingual I18N
-
-### Structural Arabic translation improvement
-This update moves beyond simple static JavaScript dictionaries.
-
-### Added
-- Backend Arabic display filters for dynamic values:
-  - `ar_ui`
-  - `ar_resource_name`
-  - `ar_resource_description`
-- Dynamic templates now include Arabic display data through `data-ar`.
-- Resources and My Resources now support Arabic display for:
-  - category
-  - subcategory
-  - skill
-  - exam
-  - level
-  - resource type
-  - description
-  - resource name hints
-- Tasks now support Arabic display for:
-  - task category
-  - main field
-  - sub field
-  - detailed topic
-  - training type
-  - repeat type
-  - task metadata labels
-- JavaScript adaptive task options now use a large direct Arabic map for dynamic select options.
-- The language toggle now directly applies all translation layers immediately.
-
-### Design
-- Arabic mode preserves the existing desktop and mobile design.
-- Colors, icons, sidebar layout, and cards remain unchanged.
-- AI Coach pages and AI outputs remain English.
-
-### Notes
-- Internal values remain stable in English for logic, matching, goals, and AI linking.
-- Arabic labels are display-only.
-- No database changes.
+### Important exception
+- AI Coach pages remain English as requested.

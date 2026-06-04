@@ -1,6 +1,6 @@
 \
 <!doctype html>
-<html lang="en">
+<html lang="{{ current_locale() }}" dir="{{ text_dir() }}">
 <head>
     <meta charset="utf-8">
     <title>EduPath AI EZZALDEEN</title>
@@ -8,6 +8,12 @@
     <meta name="theme-color" content="#2563eb">
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script>
+        window.EDUPATH_LOCALE = "{{ current_locale() }}";
+        window.EDUPATH_IS_AR = {{ "true" if current_locale()=="ar" else "false" }};
+    </script>
+
 </head>
 <body>
 
@@ -29,29 +35,29 @@
 
         <div class="desktop-quick-controls-v481">
             <button class="theme-toggle icon-toggle-v481" id="themeToggle" type="button" title="Toggle theme">🌙</button>
-            <button class="language-toggle icon-toggle-v481" id="languageToggle" type="button" aria-label="Switch language" title="Switch language">EN</button>
+            <a class="language-toggle icon-toggle-v481" id="languageToggle" href="{{ url_for('set_language', lang='en' if current_locale()=='ar' else 'ar', next=request.path) }}" title="Switch language">{{ "EN" if current_locale()=="ar" else "ع" }}</a>
         </div>
 
         <div class="user-mini-panel compact-user-panel-v481">
             {% if current_user.is_authenticated %}
-                <a class="mini-link" href="{{ url_for('profile') }}"><span data-i18n="user.profile">Profile</span></a>
-                <a class="mini-link logout" href="{{ url_for('logout') }}"><span data-i18n="user.logout">Logout</span></a>
+                <a class="mini-link" href="{{ url_for('profile') }}">{{ t("nav.profile") }}</a>
+                <a class="mini-link logout" href="{{ url_for('logout') }}">{{ t("nav.logout") }}</a>
             {% else %}
-                <a class="mini-link" href="{{ url_for('login') }}"><span data-i18n="user.login">Login</span></a>
-                <a class="mini-link" href="{{ url_for('register') }}"><span data-i18n="user.register">Register</span></a>
+                <a class="mini-link" href="{{ url_for('login') }}">{{ t("nav.login") }}</a>
+                <a class="mini-link" href="{{ url_for('register') }}">{{ t("nav.register") }}</a>
             {% endif %}
         </div>
 
         <nav class="main-nav desktop-icon-nav-v483">
-            <a class="nav-dashboard" href="{{ url_for('index') }}"><i>⌂</i><span data-i18n="nav.dashboard">Dashboard</span></a>
-            <a class="nav-goals" href="{{ url_for('goals') }}"><i>◎</i><span data-i18n="nav.goals">Goals</span></a>
-            <a class="nav-tasks" href="{{ url_for('tasks') }}"><i>▣</i><span data-i18n="nav.tasks">Tasks</span></a>
-            <a class="nav-resources" href="{{ url_for('resources') }}"><i>▤</i><span data-i18n="nav.resources">Resources</span></a>
-            <a class="nav-coach" href="{{ url_for('coach') }}"><i>✦</i><span data-i18n="nav.coach">AI Coach</span></a>
-            {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}<a class="nav-admin" href="{{ url_for('admin_dashboard') }}"><i>⚙</i><span data-i18n="nav.admin">Admin</span></a>{% endif %}
+            <a class="nav-dashboard" href="{{ url_for('index') }}"><i>⌂</i>{{ t("nav.dashboard") }}</a>
+            <a class="nav-goals" href="{{ url_for('goals') }}"><i>◎</i>{{ t("nav.goals") }}</a>
+            <a class="nav-tasks" href="{{ url_for('tasks') }}"><i>▣</i>{{ t("nav.tasks") }}</a>
+            <a class="nav-resources" href="{{ url_for('resources') }}"><i>▤</i>{{ t("nav.resources") }}</a>
+            <a class="nav-coach" href="{{ url_for('coach') }}"><i>✦</i>{{ t("nav.coach") }}</a>
+            {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}<a class="nav-admin" href="{{ url_for('admin_dashboard') }}"><i>⚙</i>{{ t("nav.admin") }}</a>{% endif %}
         </nav>
 
-        <button class="notify-btn" id="enableNotifications">Enable Reminders</button>
+        <button class="notify-btn" id="enableNotifications">{{ t("nav.reminders") }}</button>
     </aside>
 
     <main class="main">

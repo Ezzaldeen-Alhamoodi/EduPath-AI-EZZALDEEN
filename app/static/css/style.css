@@ -4722,111 +4722,54 @@ body.dark-mode .desktop-icon-nav-v483 a {
 
 
 
-/* EduPath AI v4.8.4 Full Arabic Interface */
-body.full-arabic-ui-v484 {
+/* EduPath AI v5.0.0 True I18N Layout */
+html[dir="rtl"] body {
+    direction: rtl;
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] select,
+html[dir="rtl"] textarea {
     direction: rtl;
     text-align: right;
 }
 
-body.full-arabic-ui-v484 .sidebar {
-    direction: rtl;
-}
-
-body.full-arabic-ui-v484 .main {
-    direction: rtl;
-    text-align: right;
-}
-
-body.full-arabic-ui-v484 input,
-body.full-arabic-ui-v484 select,
-body.full-arabic-ui-v484 textarea {
-    direction: rtl;
-    text-align: right;
-}
-
-body.full-arabic-ui-v484 .desktop-icon-nav-v483 a,
-body.full-arabic-ui-v484 .main-nav a,
-body.full-arabic-ui-v484 .mobile-bottom-nav a,
-body.full-arabic-ui-v484 .mobile-bottom-nav button {
-    direction: rtl;
-}
-
-body.full-arabic-ui-v484 .hero,
-body.full-arabic-ui-v484 .card,
-body.full-arabic-ui-v484 .resource-card,
-body.full-arabic-ui-v484 .goal-tile,
-body.full-arabic-ui-v484 .task-card,
-body.full-arabic-ui-v484 .stat-card {
-    text-align: right;
-}
-
-body.full-arabic-ui-v484 .resource-actions-v472,
-body.full-arabic-ui-v484 .hero-actions,
-body.full-arabic-ui-v484 .actions {
-    direction: rtl;
-}
-
-body.full-arabic-ui-v484 .topbar {
-    direction: rtl;
-}
-
-body.full-arabic-ui-v484 .topbar .pill {
-    margin-right: auto;
-    margin-left: 0;
-}
-
-/* Coach pages intentionally remain English */
-body:not(.full-arabic-ui-v484) .coach-page,
-body:not(.full-arabic-ui-v484) .coach-output,
-body:not(.full-arabic-ui-v484) .ai-output {
-    direction: ltr;
-    text-align: left;
-}
-
-
-
-/* EduPath AI v4.8.5 Arabic desktop layout preservation */
+/* Preserve desktop application layout exactly; only text inside cards becomes RTL. */
 @media (min-width: 981px) {
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 {
-        direction: ltr !important;
+    html[dir="rtl"] .sidebar,
+    html[dir="rtl"] .main {
+        direction: ltr;
     }
 
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .sidebar,
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .main {
-        direction: ltr !important;
+    html[dir="rtl"] .main .card,
+    html[dir="rtl"] .main .hero,
+    html[dir="rtl"] .main .topbar,
+    html[dir="rtl"] .main .resource-card,
+    html[dir="rtl"] .main .task-card,
+    html[dir="rtl"] .main .goal-tile,
+    html[dir="rtl"] .main .stat-card {
+        direction: rtl;
+        text-align: right;
     }
 
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .main {
-        text-align: left !important;
+    html[dir="rtl"] .desktop-icon-nav-v483 a,
+    html[dir="rtl"] .compact-user-panel-v481 {
+        direction: ltr;
     }
 
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .desktop-icon-nav-v483 a,
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .main-nav a,
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .compact-user-panel-v481 {
-        direction: ltr !important;
+    html[dir="rtl"] .desktop-icon-nav-v483 a span,
+    html[dir="rtl"] .compact-user-panel-v481 a {
+        direction: rtl;
+        text-align: right;
     }
+}
 
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .hero,
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .card,
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .resource-card,
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .goal-tile,
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .task-card,
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .stat-card,
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .topbar {
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .desktop-icon-nav-v483 a span,
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 .compact-user-panel-v481 a {
-        direction: rtl !important;
-        text-align: right !important;
-    }
-
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 input,
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 select,
-    body.full-arabic-ui-v484.arabic-text-only-desktop-v485 textarea {
-        direction: rtl !important;
-        text-align: right !important;
-    }
+/* AI Coach pages stay English. */
+.coach-page,
+.ai-coach-page,
+.english-coach-page,
+.scholarship-coach-page,
+.code-coach-page {
+    direction: ltr !important;
+    text-align: left !important;
 }

@@ -22,7 +22,7 @@
 
 <section class="grid-2">
     <div class="card">
-        <h2>✏️ Edit Profile</h2>
+        <h2>✏️ {{ t("common.edit") }} Profile</h2>
         <form method="POST" class="form">
             <input type="hidden" name="form_action" value="profile">
             <label>Name</label>
@@ -40,12 +40,12 @@
             <label>Languages</label>
             <input name="languages" value="{{ current_user.languages or '' }}" placeholder="English, Chinese, Russian">
 
-            <button type="submit">💾 Save Profile</button>
+            <button type="submit">💾 {{ t("common.save") }} Profile</button>
         </form>
     </div>
 
     <div class="card paid-profile-card-v478">
-        <h2>Paid Version</h2>
+        <h2>{{ t("profile.paid") }}</h2>
         {% if current_user.paid_active %}
             <p class="improved">Your paid version is active. You now have higher limits for tasks, goals, and AI Coach.</p>
             <div class="paid-status-grid-v479">
@@ -61,9 +61,9 @@
             <p class="muted">If you received a subscription code from EduPath AI administration, enter it here. Each code can be used once only, and the subscription duration starts from activation.</p>
             <form method="POST" class="form compact-paid-form-v478">
                 <input type="hidden" name="form_action" value="activate_paid">
-                <label>Subscription Code</label>
+                <label>{{ t("profile.subscription_code") }}</label>
                 <input name="subscription_code" placeholder="Example: EDU-ABC123-XYZ789" autocomplete="off">
-                <button type="submit">Activate Paid Version</button>
+                <button type="submit">Activate {{ t("profile.paid") }}</button>
             </form>
         {% endif %}
     </div>

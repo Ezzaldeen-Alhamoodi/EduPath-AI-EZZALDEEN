@@ -14,7 +14,7 @@
 
 <section class="grid-2">
     <div class="card" id="addTaskCard">
-        <h2><span data-i18n="tasks.add">Add Smart Task</span></h2>
+        <h2><span data-i18n="tasks.add">{{ t("tasks.add") }}</span></h2>
         <p class="muted"><span data-i18n="tasks.add_desc">Start with Task Type, then the form adapts automatically step by step.</span></p>
         <form method="POST" class="form">
             {% set task = None %}
@@ -24,31 +24,31 @@
     </div>
 
     <div class="card tasks-list-card-v476">
-        <h2><span data-i18n="tasks.your">Your Tasks</span></h2>
+        <h2><span data-i18n="tasks.your">{{ t("tasks.your") }}</span></h2>
         <div class="tasks-board-v476">
         {% for task in tasks %}
             <div class="task-card {{ task.status }}">
                 <div>
                     <strong>{{ task.title }}</strong>
-                    <span><b><span data-i18n="tasklabels.type">Task Type:</span></b> {% if task.category == "Other" and task.custom_category %}{{ task.custom_category }}{% else %}<span data-ar="{{ task.category|ar_ui }}">{{ task.category }}</span>{% endif %}</span>
-                    <span><b><span data-i18n="tasklabels.main">Main Field:</span></b> {% if task.topic == "Other" and task.custom_topic %}{{ task.custom_topic }}{% else %}<span data-ar="{{ (task.topic or 'Not set')|ar_ui }}">{{ task.topic or 'Not set' }}</span>{% endif %}</span>
-                    <span><b><span data-i18n="tasklabels.sub">Sub Field:</span></b> {% if task.skill == "Other" and task.custom_skill %}{{ task.custom_skill }}{% else %}<span data-ar="{{ (task.skill or 'Not set')|ar_ui }}">{{ task.skill or 'Not set' }}</span>{% endif %}</span>
-                    <span><b><span data-i18n="tasklabels.detail">Detailed Topic:</span></b> <span data-ar="{{ (task.language or 'Not set')|ar_ui }}">{{ task.language or 'Not set' }}</span></span>
-                    <span><b><span data-i18n="tasklabels.training">Training Type:</span></b> <span data-ar="{{ (task.practice_type or 'General')|ar_ui }}">{{ task.practice_type or 'General' }}</span></span>
-                    <span><b><span data-i18n="tasklabels.source">Source:</span></b> {{ task.source|clickable_sources }}</span>
-                    <span>{{ task.estimated_minutes }} <span data-ar="دقيقة">min</span> · <span data-ar="الأولوية">Priority</span> {{ task.priority }} · <span data-ar="الصعوبة">Difficulty</span> {{ task.difficulty }}</span>
-                    <span><span data-ar="من">From</span> {{ task.start_date or 'not set' }} <span data-ar="إلى">to</span> {{ task.due_date or 'not set' }} · <span data-ar="{{ task.repeat_type|ar_ui }}">{{ task.repeat_type }}</span> · <span data-ar="الأيام">Days</span>: <span data-ar="{{ (task.repeat_days or 'all/none')|ar_ui }}">{{ task.repeat_days or 'all/none' }}</span></span>
-                    <span><span data-ar="التذكير">Reminder</span>: {{ task.reminder_time or 'not set' }}</span>
+                    <span><b><span data-i18n="tasklabels.type">{{ t("tasks.task_type") }}:</span></b> {% if task.category == "Other" and task.custom_category %}{{ task.custom_category }}{% else %}{{ task.category|i18n_label }}{% endif %}</span>
+                    <span><b><span data-i18n="tasklabels.main">{{ t("tasks.main_field") }}:</span></b> {% if task.topic == "Other" and task.custom_topic %}{{ task.custom_topic }}{% else %}{{ (task.topic or "Not set")|i18n_label }}{% endif %}</span>
+                    <span><b><span data-i18n="tasklabels.sub">{{ t("tasks.sub_field") }}:</span></b> {% if task.skill == "Other" and task.custom_skill %}{{ task.custom_skill }}{% else %}{{ (task.skill or "Not set")|i18n_label }}{% endif %}</span>
+                    <span><b><span data-i18n="tasklabels.detail">{{ t("tasks.detailed_topic") }}:</span></b> {{ (task.language or "Not set")|i18n_label }}</span>
+                    <span><b><span data-i18n="tasklabels.training">{{ t("tasks.training_type") }}:</span></b> {{ (task.practice_type or "General")|i18n_label }}</span>
+                    <span><b><span data-i18n="tasklabels.source">{{ t("common.source") }}:</span></b> {{ task.source|clickable_sources }}</span>
+                    <span>{{ task.estimated_minutes }} min · {{ t("tasks.priority") }} {{ task.priority }} · {{ t("tasks.difficulty") }} {{ task.difficulty }}</span>
+                    <span>From {{ task.start_date or "not set" }} to {{ task.due_date or "not set" }} · {{ task.repeat_type|i18n_label }} · Days: {{ (task.repeat_days or "all/none")|i18n_label }}</span>
+                    <span>Reminder: {{ task.reminder_time or "not set" }}</span>
                 </div>
 
                 <div class="actions">
                     {% if task.status == "pending" %}
-                        <a class="small-button success" href="{{ url_for('mark_task_done', task_id=task.id) }}"><span data-i18n="tasks.done">Done</span></a>
+                        <a class="small-button success" href="{{ url_for('mark_task_done', task_id=task.id) }}"><span data-i18n="tasks.done">{{ t("common.done") }}</span></a>
                     {% else %}
-                        <a class="small-button cancel" href="{{ url_for('mark_task_pending', task_id=task.id) }}"><span data-i18n="tasks.pending">Pending</span></a>
+                        <a class="small-button cancel" href="{{ url_for('mark_task_pending', task_id=task.id) }}">↩ <span data-i18n="tasks.pending">{{ t("common.pending") }}</span></a>
                     {% endif %}
-                    <a class="small-button warning" href="{{ url_for('edit_task', task_id=task.id) }}"><span data-i18n="tasks.edit">Edit</span></a>
-                    <a class="small-button danger" href="{{ url_for('delete_task', task_id=task.id) }}"><span data-i18n="tasks.delete">Delete</span></a>
+                    <a class="small-button warning" href="{{ url_for('edit_task', task_id=task.id) }}"><span data-i18n="tasks.edit">{{ t("common.edit") }}</span></a>
+                    <a class="small-button danger" href="{{ url_for('delete_task', task_id=task.id) }}"><span data-i18n="tasks.delete">{{ t("common.delete") }}</span></a>
                 </div>
             </div>
         {% else %}

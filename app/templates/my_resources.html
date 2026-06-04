@@ -1,12 +1,12 @@
 \
 {% extends "base.html" %}
-{% block page_title %}My Resources{% endblock %}
+{% block page_title %}{{ t("resources.my") }}{% endblock %}
 {% block content %}
 
 <section class="hero compact resources-hero-v4616 resources-hero-actions-v472">
     <div>
         <span class="tag">EduPath AI</span>
-        <h2>⭐ My Resources</h2>
+        <h2>⭐ {{ t("resources.my") }}</h2>
         <p>Your personal learning library. Save your daily resources, track status, write notes, and open them quickly.</p>
     </div>
     <a class="button light" href="{{ url_for('resources') }}">＋ Browse Resources</a>
@@ -30,28 +30,28 @@
 <section class="card resources-filter-card">
     <form method="GET" class="resources-filter-grid my-resources-filter-v472">
         <div>
-            <label>Category</label>
+            <label>{{ t("common.category") }}</label>
             <select name="category">
                 <option value="">All Categories</option>
                 {% for cat in categories %}
-                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %} data-ar="{{ cat|ar_ui }}">{{ cat }}</option>
+                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat|i18n_label }}</option>
                 {% endfor %}
             </select>
         </div>
 
         <div>
-            <label>Status</label>
+            <label>{{ t("common.status") }}</label>
             <select name="status">
-                <option value="">All Statuses</option>
+                <option value="">All {{ t("common.status") }}es</option>
                 {% for status in statuses %}
-                    <option value="{{ status }}" {% if selected.status == status %}selected{% endif %} data-ar="{{ status|ar_ui }}">{{ status }}</option>
+                    <option value="{{ status }}" {% if selected.status == status %}selected{% endif %}>{{ status|i18n_label }}</option>
                 {% endfor %}
             </select>
         </div>
 
         <div class="filter-actions">
-            <button type="submit">Filter</button>
-            <a class="small-button ghost" href="{{ url_for('my_resources') }}">Reset</a>
+            <button type="submit">{{ t("common.filter") }}</button>
+            <a class="small-button ghost" href="{{ url_for('my_resources') }}">{{ t("common.reset") }}</a>
         </div>
     </form>
 </section>
@@ -62,31 +62,31 @@
         <article class="resource-card saved-resource-card-v472">
             <div class="resource-card-head">
                 <div>
-                    <h3 data-ar="{{ resource.name|ar_resource_name }}">{{ resource.name }}</h3>
-                    <p><span data-ar="{{ resource.category|ar_ui }}">{{ resource.category }}</span>{% if resource.subcategory %} · <span data-ar="{{ resource.subcategory|ar_ui }}">{{ resource.subcategory }}</span>{% endif %}</p>
+                    <h3>{{ resource|i18n_resource_name }}</h3>
+                    <p>{{ resource.category|i18n_label }}{% if resource.subcategory %} · {{ resource.subcategory|i18n_label }}{% endif %}</p>
                 </div>
                 <div class="resource-badges">
-                    <span class="badge saved-status" data-ar="{{ item.status|ar_ui }}">{{ item.status }}</span>
+                    <span class="badge saved-status">{{ item.status|i18n_label }}</span>
                     {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
                     {% if resource.is_free %}<span class="badge free">Free</span>{% endif %}
-                    {% if resource.resource_type %}<span class="badge" data-ar="{{ resource.resource_type|ar_ui }}">{{ resource.resource_type }}</span>{% endif %}
+                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type|i18n_label }}</span>{% endif %}
                 </div>
             </div>
 
-            <p class="resource-desc" data-ar="{{ resource.description|ar_resource_description }}">{{ resource.description }}</p>
+            <p class="resource-desc">{{ resource|i18n_resource_description }}</p>
 
             <div class="resource-meta">
-                {% if resource.exam %}<span><span data-ar="الاختبار">Exam</span>: <span data-ar="{{ resource.exam|ar_ui }}">{{ resource.exam }}</span></span>{% endif %}
-                {% if resource.skill %}<span><span data-ar="المهارة">Skill</span>: <span data-ar="{{ resource.skill|ar_ui }}">{{ resource.skill }}</span></span>{% endif %}
-                {% if resource.level %}<span><span data-ar="المستوى">Level</span>: <span data-ar="{{ resource.level|ar_ui }}">{{ resource.level }}</span></span>{% endif %}
-                {% if item.last_opened %}<span><span data-ar="آخر فتح">Last opened</span>: {{ item.last_opened.strftime("%Y-%m-%d") }}</span>{% endif %}
+                {% if resource.exam %}<span>Exam: {{ resource.exam|i18n_label }}</span>{% endif %}
+                {% if resource.skill %}<span>Skill: {{ resource.skill|i18n_label }}</span>{% endif %}
+                {% if resource.level %}<span>Level: {{ resource.level|i18n_label }}</span>{% endif %}
+                {% if item.last_opened %}<span>Last opened: {{ item.last_opened.strftime("%Y-%m-%d") }}</span>{% endif %}
             </div>
 
             <form method="POST" action="{{ url_for('update_saved_resource', saved_id=item.id) }}" class="saved-resource-edit-v472">
-                <label>Status</label>
+                <label>{{ t("common.status") }}</label>
                 <select name="status">
                     {% for status in statuses %}
-                        <option value="{{ status }}" {% if item.status == status %}selected{% endif %} data-ar="{{ status|ar_ui }}">{{ status }}</option>
+                        <option value="{{ status }}" {% if item.status == status %}selected{% endif %}>{{ status|i18n_label }}</option>
                     {% endfor %}
                 </select>
 
@@ -94,13 +94,13 @@
                 <textarea name="notes" rows="3" placeholder="Example: Current speed 42 WPM, target 70 WPM...">{{ item.notes or "" }}</textarea>
 
                 <div class="resource-actions-v472">
-                    <button type="submit" class="small-button">Save Notes</button>
-                    <a class="button resource-open" href="{{ url_for('open_saved_resource', saved_id=item.id) }}" target="_blank" rel="noopener noreferrer">Open ↗</a>
+                    <button type="submit" class="small-button">{{ t("common.save") }}</button>
+                    <a class="button resource-open" href="{{ url_for('open_saved_resource', saved_id=item.id) }}" target="_blank" rel="noopener noreferrer">{{ t("common.open") }} ↗</a>
                 </div>
             </form>
 
             <form method="POST" action="{{ url_for('delete_saved_resource', saved_id=item.id) }}" class="delete-saved-resource-v472">
-                <button type="submit" class="small-button danger">Remove from My Resources</button>
+                <button type="submit" class="small-button danger">{{ t("common.delete") }} from {{ t("resources.my") }}</button>
             </form>
         </article>
     {% else %}
