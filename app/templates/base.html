@@ -95,12 +95,12 @@
 
 
 <div class="mobile-more-menu" id="mobileMoreMenu">
-    <button type="button" id="mobileMenuTheme">Theme</button>
-<a href="{{ url_for('profile') }}">Profile</a>
+    <button type="button" id="mobileMenuTheme">الوضع</button>
+<a href="{{ url_for('profile') }}">الملف الشخصي</a>
     {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}
-        <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+        <a href="{{ url_for('admin_dashboard') }}">الإدارة</a>
     {% endif %}
-    <a href="{{ url_for('logout') }}">Logout</a>
+    <a href="{{ url_for('logout') }}">تسجيل الخروج</a>
 </div>
 
 <div id="toastContainer" class="toast-container"></div>

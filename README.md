@@ -1281,3 +1281,33 @@ Safe staged Arabic conversion.
 - Did not modify task/goal adaptive IDs or fields.
 
 This version is intended as a safe step-by-step Arabic conversion.
+
+
+## v5.1.3 Dashboard Arabic Polish
+
+Safe dashboard-only improvement.
+
+### Scope
+- Dashboard/home page only.
+- Redesigned the dashboard to use desktop width better.
+- Reduced oversized cards and icons.
+- Improved mobile layout while keeping the bottom mobile navigation unchanged.
+- Organized footer:
+  - app name and version only
+  - contact email
+  - user guide sentence
+  - copyright statement
+- Translated remaining dashboard text and dashboard-visible task/goal metadata.
+- Converted mobile More menu labels to Arabic:
+  - Theme
+  - Profile
+  - Admin
+  - Logout
+
+### Safety
+- Did not modify Tasks page.
+- Did not modify Goals page.
+- Did not modify Resources page.
+- Did not modify adaptive JavaScript logic.
+- Did not modify database values.
+- Did not modify task/goal adaptive fields.

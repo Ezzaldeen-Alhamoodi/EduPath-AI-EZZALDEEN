@@ -1,147 +1,152 @@
 {% extends "base.html" %}
 {% block page_title %}الرئيسية{% endblock %}
 {% block content %}
-<h2 class="dashboard-page-title">الرئيسية</h2>
+<div class="dashboard-ar-v513">
 
-
-<section class="hero v21-hero">
-    <div>
-        <span class="tag">مساحة ذكية للتعلم والمصادر</span>
-        <h2>خطط أهدافك، نظم مهامك اليومية، واصل إلى المصادر التعليمية المناسبة بسرعة.</h2>
-        <p>يساعدك EduPath AI على تحويل الأهداف طويلة المدى إلى مهام منظمة، وربط التقدم تلقائيًا، واستخدام مصادر موثوقة للاختبارات والبرمجة واللغات والقرآن وسرعة الكتابة والمنح والتعلم الذاتي.</p>
-        <div class="hero-actions">
-            <a class="button light" href="{{ url_for('goals') }}">هدف جديد</a>
-            <a class="button ghost" href="{{ url_for('tasks') }}">إضافة مهمة</a>
-            <a class="button ghost" href="{{ url_for('resources') }}">استكشاف المصادر</a>
-        </div>
-    </div>
-    <div class="hero-card">
-        <div class="progress-circle">{{ progress }}%</div>
-        <p>تقدم المهام</p>
-    </div>
-</section>
-
-
-
-
-
-<section class="card current-focus-v41">
-    <h2>التركيز الحالي</h2>
-    <p class="muted">أهم أهدافك بناءً على التقدم والتخطيط الأخير.</p>
-    <div class="focus-grid-v41">
-        {% for goal in goals[:3] %}
-            <div class="focus-card-v41">
-                <span>🎯</span>
-                <strong>{{ goal.title }}</strong>
-                <small>{{ goal.category|dashboard_ar }} · {{ goal.goal_progress if goal.goal_progress is defined else 0 }}%</small>
-                <div class="goal-progress-track">
-                    <div class="goal-progress-fill" style="width: {{ goal.goal_progress if goal.goal_progress is defined else 0 }}%;"></div>
-                </div>
+    <section class="home-hero-ar-v513">
+        <div class="home-hero-text-ar-v513">
+            <span class="home-tag-ar-v513">مساحة ذكية للتعلم وتنظيم الأهداف</span>
+            <h1>EduPath AI — نظّم تعلمك، تابع مهامك، وحقق أهدافك بخطة واضحة.</h1>
+            <p>
+                يجمع التطبيق بين الأهداف الذكية، المهام اليومية، المصادر التعليمية، ومتابعة التقدم؛
+                ليساعدك على تحويل الدراسة والحفظ والتعلم الذاتي إلى خطوات منظمة وقابلة للإنجاز.
+            </p>
+            <div class="home-actions-ar-v513">
+                <a class="button light" href="{{ url_for('goals') }}">إنشاء هدف</a>
+                <a class="button ghost" href="{{ url_for('tasks') }}">إضافة مهمة</a>
+                <a class="button ghost" href="{{ url_for('resources') }}">فتح المصادر</a>
             </div>
-        {% else %}
-            <p class="muted">أنشئ أهدافًا لتظهر هنا منطقة تركيزك الحالية.</p>
-        {% endfor %}
-    </div>
-</section>
-
-
-
-
-
-<section class="quick-actions final-quick-actions">
-    <a href="{{ url_for('goals') }}"><span>◎</span><small>الأهداف</small></a>
-    <a href="{{ url_for('tasks') }}"><span>▣</span><small>المهام</small></a>
-    <a href="{{ url_for('resources') }}"><span>▤</span><small>المصادر</small></a>
-    <a href="{{ url_for('coach') }}"><span>✦</span><small>مدرب الذكاء الاصطناعي</small></a>
-</section>
-
-<section class="card focus-goals">
-    <div class="section-title-row">
-        <div>
-            <h2>الأهداف النشطة</h2>
-            <p class="muted">اجعل أهدافك طويلة المدى واضحة أمامك. المهام هي خطواتك اليومية.</p>
         </div>
-        <a class="small-button" href="{{ url_for('goals') }}">إدارة</a>
-    </div>
 
-    <div class="goal-board">
-        {% for goal in goals %}
-            <div class="goal-tile">
-                <div class="goal-icon">
-                    {% if goal.category == "Programming" %}💻
-                    {% elif goal.category == "Mathematics" %}🧮
-                    {% elif goal.category in ["English", "Language"] %}🇬🇧
-                    {% elif goal.category == "Scholarship" %}🎓
-                    {% elif goal.category == "AI" %}🤖
-                    {% else %}⭐{% endif %}
-                </div>
-                <div class="goal-content">
-                    <strong>{{ goal.title }}</strong>
-                    <span>{{ goal.category|dashboard_ar }} · {{ goal.current_level|dashboard_ar }} · {{ goal.daily_minutes }} دقيقة يوميًا</span>
-                    <div class="goal-progress-line">
-                        <div class="goal-progress-fill" style="width: {{ goal.goal_progress or 0 }}%"></div>
-                    </div>
-                    <span class="progress-label">{{ goal.goal_progress or 0 }}% تقدم من المهام المرتبطة</span>
-                    {% if goal.time_left %}
-                        {% if goal.time_left.status == "remaining" %}
-                            <span class="countdown good">{{ goal.time_left.days }} يوم · {{ goal.time_left.weeks }} أسبوع · {{ goal.time_left.months }} شهر متبقي</span>
-                        {% else %}
-                            <span class="countdown danger-text">متأخر بمقدار {{ -goal.time_left.days }} يوم</span>
-                        {% endif %}
-                    {% else %}
-                        <span class="countdown muted">لا يوجد موعد نهائي بعد</span>
-                    {% endif %}
-                </div>
-            </div>
-        {% else %}
-            <p class="muted">لا توجد أهداف بعد. أنشئ أول هدف كبير لك.</p>
-        {% endfor %}
-    </div>
-</section>
+        <div class="home-progress-ar-v513">
+            <div class="progress-circle">{{ progress }}%</div>
+            <strong>تقدم المهام</strong>
+            <small>نسبة إنجاز المهام المكتملة من إجمالي مهامك.</small>
+        </div>
+    </section>
 
-<section class="stats-grid">
-    <div class="stat-card blue"><span>◎</span><h3>الأهداف</h3><p>{{ total_goals }}</p></div>
-    <div class="stat-card green"><span>✓</span><h3>المكتملة</h3><p>{{ completed_tasks }}</p></div>
-    <div class="stat-card orange"><span>◷</span><h3>المتبقية</h3><p>{{ pending_tasks }}</p></div>
-    <div class="stat-card purple"><span>▣</span><h3>إجمالي المهام</h3><p>{{ total_tasks }}</p></div>
-</section>
+    <section class="home-compact-stats-ar-v513">
+        <div class="stat-card blue"><span>◎</span><h3>الأهداف</h3><p>{{ total_goals }}</p></div>
+        <div class="stat-card green"><span>✓</span><h3>المكتملة</h3><p>{{ completed_tasks }}</p></div>
+        <div class="stat-card orange"><span>◷</span><h3>المتبقية</h3><p>{{ pending_tasks }}</p></div>
+        <div class="stat-card purple"><span>▣</span><h3>إجمالي المهام</h3><p>{{ total_tasks }}</p></div>
+    </section>
 
-<section class="grid-2">
-    <div class="card">
-        <h2>رؤى التعلم</h2>
-        {% if weak_skills %}
-            {% for skill, score in weak_skills %}
-                <div class="weakness">
-                    <span>{{ skill|dashboard_ar }}</span>
-                    <div class="bar"><div style="width: {{ [score * 10, 100] | min }}%"></div></div>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p class="muted">أكمل وأضف مهامًا حتى يكتشف التطبيق نقاط الضعف.</p>
-        {% endif %}
-    </div>
+    <section class="home-shortcuts-ar-v513">
+        <a href="{{ url_for('goals') }}"><span>◎</span><small>الأهداف</small></a>
+        <a href="{{ url_for('tasks') }}"><span>▣</span><small>المهام</small></a>
+        <a href="{{ url_for('resources') }}"><span>▤</span><small>المصادر</small></a>
+        <a href="{{ url_for('coach') }}"><span>✦</span><small>المدرب</small></a>
+    </section>
 
-    <div class="card">
-        <h2>المهام الحديثة</h2>
-        {% for task in tasks %}
-            <div class="task-mini">
+    <section class="home-main-grid-ar-v513">
+        <div class="card home-card-ar-v513">
+            <div class="section-title-row compact-title-ar-v513">
                 <div>
-                    <strong>{{ task.title }}</strong>
-                    <span>{{ task.category|dashboard_ar }} · {{ task.skill|dashboard_ar }} · {{ task.estimated_minutes }} دقيقة · {{ task.status|dashboard_ar }}</span>
+                    <h2>التركيز الحالي</h2>
+                    <p class="muted">أهم أهدافك القريبة بناءً على التقدم والتخطيط الأخير.</p>
                 </div>
-                <span class="badge">{{ task.reminder_time or "بدون تذكير" }}</span>
+                <a class="small-button" href="{{ url_for('goals') }}">إدارة الأهداف</a>
             </div>
-        {% else %}
-            <p class="muted">لا توجد مهام بعد.</p>
-        {% endfor %}
-    </div>
-</section>
 
-<div class="app-version-footer home-footer-v475">
-    EduPath AI EZZALDEEN · v5.1.2 Dashboard Arabic Only<br>
-    <span>للتواصل: edupath.ai.ezzaldeen.app@outlook.com</span><br>
-    <span>لمعرفة كيفية استخدام التطبيق على أكمل وجه والاستفادة من جميع المميزات، يرجى الضغط على <a href="{{ url_for('user_guide') }}">دليل الاستخدام</a>.</span><br>
-    <span class="copyright-line">جميع الحقوق محفوظة © EZZALDEEN AL-HAMOODI — عزالدين الحمودي. يمنع منعًا باتًا اقتباس أو تقليد فكرة التطبيق أو تصميمه أو محتواه أو مميزاته دون إذن صريح.</span>
+            <div class="focus-grid-v41 compact-focus-ar-v513">
+                {% for goal in goals[:3] %}
+                    <div class="focus-card-v41">
+                        <span>🎯</span>
+                        <strong>{{ goal.title }}</strong>
+                        <small>{{ goal.category|dashboard_ar }} · {{ goal.goal_progress if goal.goal_progress is defined else 0 }}%</small>
+                        <div class="goal-progress-track">
+                            <div class="goal-progress-fill" style="width: {{ goal.goal_progress if goal.goal_progress is defined else 0 }}%;"></div>
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="muted">أنشئ أهدافًا لتظهر هنا منطقة تركيزك الحالية.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card home-card-ar-v513">
+            <h2>رؤى التعلم</h2>
+            {% if weak_skills %}
+                {% for skill, score in weak_skills %}
+                    <div class="weakness compact-weakness-ar-v513">
+                        <span>{{ skill|dashboard_ar }}</span>
+                        <div class="bar"><div style="width: {{ [score * 10, 100] | min }}%"></div></div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="muted">أكمل وأضف مهامًا حتى يكتشف التطبيق نقاط الضعف ويقترح عليك ما يحتاج إلى مراجعة.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="home-main-grid-ar-v513">
+        <div class="card home-card-ar-v513">
+            <div class="section-title-row compact-title-ar-v513">
+                <div>
+                    <h2>الأهداف النشطة</h2>
+                    <p class="muted">الأهداف طويلة المدى التي تعمل عليها حاليًا.</p>
+                </div>
+                <a class="small-button" href="{{ url_for('goals') }}">عرض الكل</a>
+            </div>
+
+            <div class="goal-board compact-goals-ar-v513">
+                {% for goal in goals %}
+                    <div class="goal-tile">
+                        <div class="goal-icon">
+                            {% if goal.category == "Programming" %}💻
+                            {% elif goal.category == "Mathematics" %}🧮
+                            {% elif goal.category in ["English", "Language"] %}🇬🇧
+                            {% elif goal.category == "Scholarship" %}🎓
+                            {% elif goal.category == "AI" %}🤖
+                            {% else %}⭐{% endif %}
+                        </div>
+                        <div class="goal-content">
+                            <strong>{{ goal.title }}</strong>
+                            <span>{{ goal.category|dashboard_ar }} · {{ goal.current_level|dashboard_ar }} · {{ goal.daily_minutes }} دقيقة يوميًا</span>
+                            <div class="goal-progress-line">
+                                <div class="goal-progress-fill" style="width: {{ goal.goal_progress or 0 }}%"></div>
+                            </div>
+                            <span class="progress-label">{{ goal.goal_progress or 0 }}% من المهام المرتبطة</span>
+                            {% if goal.time_left %}
+                                {% if goal.time_left.status == "remaining" %}
+                                    <span class="countdown good">{{ goal.time_left.days }} يوم · {{ goal.time_left.weeks }} أسبوع · {{ goal.time_left.months }} شهر متبقي</span>
+                                {% else %}
+                                    <span class="countdown danger-text">متأخر بمقدار {{ -goal.time_left.days }} يوم</span>
+                                {% endif %}
+                            {% else %}
+                                <span class="countdown muted">لا يوجد موعد نهائي بعد</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="muted">لا توجد أهداف بعد. أنشئ أول هدف كبير لك.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card home-card-ar-v513">
+            <h2>المهام الحديثة</h2>
+            {% for task in tasks %}
+                <div class="task-mini compact-task-mini-ar-v513">
+                    <div>
+                        <strong>{{ task.title }}</strong>
+                        <span>{{ task.category|dashboard_ar }} · {{ task.skill|dashboard_ar }} · {{ task.estimated_minutes }} دقيقة · {{ task.status|dashboard_ar }}</span>
+                    </div>
+                    <span class="badge">{{ task.reminder_time or "بدون تذكير" }}</span>
+                </div>
+            {% else %}
+                <p class="muted">لا توجد مهام بعد.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <footer class="home-footer-clean-ar-v513">
+        <strong>EduPath AI EZZALDEEN · v5.1.3</strong>
+        <span>للتواصل: edupath.ai.ezzaldeen.app@outlook.com</span>
+        <span>لمعرفة كيفية استخدام التطبيق والاستفادة من جميع المميزات، يرجى الضغط على <a href="{{ url_for('user_guide') }}">دليل الاستخدام</a>.</span>
+        <small>جميع الحقوق محفوظة © EZZALDEEN AL-HAMOODI — عزالدين الحمودي. يمنع منعًا باتًا اقتباس أو تقليد فكرة التطبيق أو تصميمه أو محتواه أو مميزاته دون إذن صريح.</small>
+    </footer>
+
 </div>
-
 {% endblock %}
