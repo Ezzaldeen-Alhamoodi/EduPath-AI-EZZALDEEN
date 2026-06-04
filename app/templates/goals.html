@@ -130,13 +130,13 @@
 
                 <div class="goal-path-line">
                     {% if goal.plan %}
-                        {{ goal.plan.get("{{ t("goals.category") }}", "") }}{% if goal.plan.get("{{ t("goals.path") }}") %} · {{ goal.plan.get("{{ t("goals.path") }}") }}{% endif %}
+                        {{ goal.plan.get("Goal Category", "") }}{% if goal.plan.get("Goal Path") %} · {{ goal.plan.get("Goal Path") }}{% endif %}
                     {% endif %}
                 </div>
 
                 <div class="goal-current-target">
-                    <span>Current: {{ goal.plan.get("{{ t("goals.current") }}", goal.current_level) if goal.plan else goal.current_level }}</span>
-                    <span>Target: {{ goal.plan.get("{{ t("goals.target") }}", "Not set") if goal.plan else "Not set" }}</span>
+                    <span>{{ t("goals.current") }}: {{ goal.plan.get("Current State", goal.current_level) if goal.plan else goal.current_level }}</span>
+                    <span>{{ t("goals.target") }}: {{ goal.plan.get("Target State", "{{ "غير محدد" if current_locale()=="ar" else "Not set" }}") if goal.plan else "{{ "غير محدد" if current_locale()=="ar" else "Not set" }}" }}</span>
                 </div>
 
                 <div class="goal-progress-track">

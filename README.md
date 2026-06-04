@@ -1298,3 +1298,18 @@ Major internationalization update.
 
 ### Important exception
 - AI Coach pages remain English as requested.
+
+
+## v5.0.1 I18N Hotfix
+
+- Fixed `/goals` Jinja TemplateSyntaxError caused by translating internal dictionary keys.
+- Internal goal plan keys remain stable in English:
+  - Goal Category
+  - Goal Path
+  - Current State
+  - Target State
+- User-facing labels remain translated through `t()`.
+- Restored/secured language toggle visibility:
+  - desktop language toggle
+  - mobile language link
+- No database changes.

@@ -4773,3 +4773,15 @@ html[dir="rtl"] textarea {
     direction: ltr !important;
     text-align: left !important;
 }
+
+
+
+/* v5.0.1 language toggle visibility fix */
+.language-toggle.icon-toggle-v481 {
+    text-decoration: none;
+    display: grid !important;
+    place-items: center !important;
+}
+.mobile-more-menu a {
+    text-decoration: none;
+}
