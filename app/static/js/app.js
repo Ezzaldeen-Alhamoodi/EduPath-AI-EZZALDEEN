@@ -1032,6 +1032,10 @@ function applyEduPathLanguage(lang) {
     });
 
     translateDynamicOptions();
+    if (typeof applyFullArabicInterfaceV484 === "function") applyFullArabicInterfaceV484(document);
+    if (typeof applyLooseArabicTranslationV485 === "function") applyLooseArabicTranslationV485(document);
+    if (typeof applyDataArabicV486 === "function") applyDataArabicV486(document);
+    if (typeof translateAdaptiveOptionsV486 === "function") translateAdaptiveOptionsV486(document);
 
     const toggle = document.getElementById("languageToggle");
     if (toggle) {

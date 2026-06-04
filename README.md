@@ -1347,3 +1347,45 @@ Desktop sidebar design refinement.
 - 0 API calls.
 - 0 OpenRouter usage.
 - 0 cost.
+
+
+## v4.8.7 True Bilingual I18N
+
+### Structural Arabic translation improvement
+This update moves beyond simple static JavaScript dictionaries.
+
+### Added
+- Backend Arabic display filters for dynamic values:
+  - `ar_ui`
+  - `ar_resource_name`
+  - `ar_resource_description`
+- Dynamic templates now include Arabic display data through `data-ar`.
+- Resources and My Resources now support Arabic display for:
+  - category
+  - subcategory
+  - skill
+  - exam
+  - level
+  - resource type
+  - description
+  - resource name hints
+- Tasks now support Arabic display for:
+  - task category
+  - main field
+  - sub field
+  - detailed topic
+  - training type
+  - repeat type
+  - task metadata labels
+- JavaScript adaptive task options now use a large direct Arabic map for dynamic select options.
+- The language toggle now directly applies all translation layers immediately.
+
+### Design
+- Arabic mode preserves the existing desktop and mobile design.
+- Colors, icons, sidebar layout, and cards remain unchanged.
+- AI Coach pages and AI outputs remain English.
+
+### Notes
+- Internal values remain stable in English for logic, matching, goals, and AI linking.
+- Arabic labels are display-only.
+- No database changes.
