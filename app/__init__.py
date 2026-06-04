@@ -1301,6 +1301,7 @@ def create_app():
     app.jinja_env.filters["clickable_sources"] = render_clickable_sources
     app.jinja_env.filters["goals_ar"] = goals_ar
     app.jinja_env.filters["goal_time_ar"] = format_goal_time_left
+    app.jinja_env.filters["goal_time_compact_ar"] = format_goal_time_left_compact
     app.jinja_env.filters["dashboard_ar"] = dashboard_ar
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
     app.permanent_session_lifetime = timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30")))
@@ -2784,6 +2785,23 @@ GOAL_INTELLIGENCE_SYNONYMS_V520 = {
     "mathematics": ["Mathematics", "رياضيات", "Algebra", "جبر", "Geometry", "هندسة", "Calculus", "تفاضل", "Statistics", "إحصاء", "Probability", "احتمالات"],
     "csca": ["CSCA", "Mathematics", "Physics", "Chemistry", "رياضيات", "فيزياء", "كيمياء", "اختبار الصين"],
 }
+
+
+def format_goal_time_left_compact(time_left):
+    if not time_left:
+        return "لا يوجد موعد نهائي"
+    try:
+        days = int(time_left.get("days", 0))
+        weeks = int(round(float(time_left.get("weeks", 0))))
+        months = int(round(float(time_left.get("months", 0))))
+        if time_left.get("status") == "overdue" or days < 0:
+            return f"متأخر {abs(days)} يوم"
+        month_word = "شهر واحد" if months == 1 else f"{months} أشهر"
+        week_word = "أسبوع واحد" if weeks == 1 else f"{weeks} أسبوع"
+        return f"{days} يوم • {week_word} • {month_word}"
+    except Exception:
+        return "لا يوجد موعد نهائي"
+
 
 def expand_goal_intelligence_terms_v520(text):
     lower = (text or "").lower()

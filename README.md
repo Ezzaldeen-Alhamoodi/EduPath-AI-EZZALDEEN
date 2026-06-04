@@ -1591,3 +1591,26 @@ Dashboard-only layout fix.
 - No database migration.
 - No task/resource page changes.
 - Uses the existing goal notes field internally, but never displays it raw.
+
+
+## v5.2.6 Clean Goal Cards
+
+### Goals UX cleanup
+- Removed the "معلومة مهمة" box from Edit Goal.
+- Simplified goal cards.
+- Goal cards now show only:
+  - goal title
+  - current state → target state
+  - progress bar
+  - progress percentage
+  - remaining time
+- Removed category display from compact cards.
+- Removed related task count and study hours from compact cards.
+- Removed raw internal/technical information from the goal card.
+- Added compact Arabic time format:
+  - 164 يوم • 23 أسبوع • 5 أشهر
+
+### Safety
+- No database migration.
+- No task/resource changes.
+- No changes to goal-saving logic.
