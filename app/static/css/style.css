@@ -4719,3 +4719,53 @@ body.dark-mode .desktop-icon-nav-v483 a {
     background: rgba(15,23,42,.72) !important;
     border-color: rgba(96,165,250,.15) !important;
 }
+
+
+
+/* EduPath AI v5.1.0 Arabic Core Stable */
+html[dir="rtl"] body {
+    direction: rtl;
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] select,
+html[dir="rtl"] textarea {
+    direction: rtl;
+    text-align: right;
+}
+
+@media (min-width: 981px) {
+    html[dir="rtl"] .sidebar,
+    html[dir="rtl"] .main {
+        direction: ltr;
+    }
+
+    html[dir="rtl"] .main .card,
+    html[dir="rtl"] .main .hero,
+    html[dir="rtl"] .main .topbar,
+    html[dir="rtl"] .main .task-card,
+    html[dir="rtl"] .main .goal-tile,
+    html[dir="rtl"] .main .resource-card,
+    html[dir="rtl"] .main .stat-card {
+        direction: rtl;
+        text-align: right;
+    }
+
+    html[dir="rtl"] .desktop-icon-nav-v483 a,
+    html[dir="rtl"] .compact-user-panel-v481 {
+        direction: ltr;
+    }
+
+    html[dir="rtl"] .desktop-icon-nav-v483 a span,
+    html[dir="rtl"] .compact-user-panel-v481 a {
+        direction: rtl;
+        text-align: right;
+    }
+}
+
+.language-toggle,
+#languageToggle,
+#mobileLanguageToggle,
+#mobileMenuLanguage {
+    display: none !important;
+}

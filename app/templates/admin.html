@@ -15,8 +15,8 @@
 <section class="stats-grid">
     <div class="stat-card blue"><span>◉</span><h3>Users</h3><p>{{ total_users }}</p></div>
     <div class="stat-card purple"><span>◎</span><h3>Goals</h3><p>{{ total_goals }}</p></div>
-    <div class="stat-card green"><span>✓</span><h3>Completed Tasks</h3><p>{{ completed_tasks }}</p></div>
-    <div class="stat-card orange"><span>◷</span><h3>Pending Tasks</h3><p>{{ pending_tasks }}</p></div>
+    <div class="stat-card green"><span>✓</span><h3>المكتملة Tasks</h3><p>{{ completed_tasks }}</p></div>
+    <div class="stat-card orange"><span>◷</span><h3>المتبقية Tasks</h3><p>{{ pending_tasks }}</p></div>
     <div class="stat-card purple"><span>✦</span><h3>AI Uses Today</h3><p>{{ ai_today }}</p></div>
 </section>
 
@@ -32,8 +32,8 @@
             {% endfor %}
         </select>
 
-        <label>Message Type</label>
-        <select name="message_type" id="adminMessageType">
+        <label>Message النوع</label>
+        <select name="message_type" id="adminMessageالنوع">
             <option value="completed">Congratulations for completing tasks</option>
             <option value="partial">Encourage after partial completion</option>
             <option value="not_completed">Gentle reminder for incomplete tasks</option>
@@ -52,7 +52,7 @@
 
 
 <section class="card subscription-pool-card-v480">
-    <h2>Global Subscription Code Pool</h2>
+    <h2>Global كود الاشتراك Pool</h2>
     <p class="muted">Generate codes once, send any available code to any paid user. The code becomes linked to the user only after activation.</p>
 
     <div class="admin-progress-grid code-pool-stats-v480">
@@ -86,7 +86,7 @@
             <input name="note" placeholder="Optional note, e.g. June subscriptions">
         </label>
 
-        <button type="submit">Generate Codes</button>
+        <button type="submit">إنشاء أكواد</button>
     </form>
 
     <div class="global-code-list-v480">
@@ -114,7 +114,7 @@
 
 
 <section class="card admin-users-card-v478">
-    <h2>Users, Limits & Progress</h2>
+    <h2>المستخدمون والحدود والتقدم</h2>
     <p class="muted">Admins are unlimited. Regular users can be limited for tasks, goals, and AI Coach. Global subscription codes are managed in the code pool above.</p>
 
     <div class="admin-users final-admin-users">
@@ -145,8 +145,8 @@
                 <div class="admin-progress-grid compact-progress-v478">
                     <div><strong>{{ item.goals_count }}</strong><span>Goals / {{ item.goal_limit if item.goal_limit is not none else "∞" }}</span></div>
                     <div><strong>{{ item.tasks_count }}</strong><span>Tasks / {{ item.task_limit if item.task_limit is not none else "∞" }}</span></div>
-                    <div><strong>{{ item.done_count }}</strong><span>Done</span></div>
-                    <div><strong>{{ item.pending_count }}</strong><span>Pending</span></div>
+                    <div><strong>{{ item.done_count }}</strong><span>تم</span></div>
+                    <div><strong>{{ item.pending_count }}</strong><span>المتبقية</span></div>
                     <div><strong>{{ item.progress }}%</strong><span>Progress</span></div>
                     <div><strong>{{ item.ai_limit if item.ai_limit is not none else "∞" }}</strong><span>AI limit/day</span></div>
                 </div>
@@ -158,7 +158,7 @@
                     <div><strong>{{ item.general_used }}</strong><span>General AI today</span></div>
                 </div>
                 <form method="POST" action="{{ url_for('admin_update_user', user_id=user.id) }}" class="admin-user-form">
-                    <label>Name</label>
+                    <label>الاسم</label>
                     <input name="name" value="{{ user.name }}">
 
                     <label class="checkbox-row">
@@ -185,12 +185,12 @@
                         <span>Admin / Unlimited access</span>
                     </label>
 
-                    <button type="submit">Save User Control</button>
+                    <button type="submit">حفظ User Control</button>
                 </form>
 
                 {% if user.id != current_user.id %}
-                    <form method="POST" action="{{ url_for('admin_delete_user', user_id=user.id) }}" onsubmit="return confirm('Delete this user and all related data?')" class="admin-delete-form">
-                        <button type="submit" class="danger">Delete User</button>
+                    <form method="POST" action="{{ url_for('admin_delete_user', user_id=user.id) }}" onsubmit="return confirm('حذف this user and all related data?')" class="admin-delete-form">
+                        <button type="submit" class="danger">حذف User</button>
                     </form>
                 {% endif %}
             </div>

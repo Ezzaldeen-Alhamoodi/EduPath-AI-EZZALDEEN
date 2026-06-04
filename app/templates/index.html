@@ -1,23 +1,23 @@
 {% extends "base.html" %}
-{% block page_title %}Dashboard{% endblock %}
+{% block page_title %}الرئيسية{% endblock %}
 {% block content %}
 <h2 class="dashboard-page-title">Dashboard</h2>
 
 
 <section class="hero v21-hero">
     <div>
-        <span class="tag"><span data-i18n="dashboard.tag">Smart Learning & Resources Workspace</span></span>
-        <h2><span data-i18n="dashboard.hero_title">Plan goals, organize daily tasks, and reach the right learning resources faster.</span></h2>
-        <p><span data-i18n="dashboard.hero_desc">EduPath AI helps you turn long-term goals into organized tasks, connect progress automatically, and use trusted resources for exams, programming, languages, Quran, typing, scholarships, and self-learning.</span></p>
+        <span class="tag"><span data-i18n="dashboard.tag">مساحة ذكية للتعلم والمصادر</span></span>
+        <h2><span data-i18n="dashboard.hero_title">خطط أهدافك، نظم مهامك اليومية، واصل إلى المصادر التعليمية المناسبة بسرعة.</span></h2>
+        <p><span data-i18n="dashboard.hero_desc">يساعدك EduPath AI على تحويل الأهداف طويلة المدى إلى مهام منظمة، وربط التقدم تلقائيًا، واستخدام مصادر موثوقة للاختبارات والبرمجة واللغات والقرآن وسرعة الكتابة والمنح والتعلم الذاتي.</span></p>
         <div class="hero-actions">
-            <a class="button light" href="{{ url_for('goals') }}">New Goal</a>
-            <a class="button ghost" href="{{ url_for('tasks') }}">Add Task</a>
-            <a class="button ghost" href="{{ url_for('resources') }}">Explore Resources</a>
+            <a class="button light" href="{{ url_for('goals') }}">هدف جديد</a>
+            <a class="button ghost" href="{{ url_for('tasks') }}">إضافة مهمة</a>
+            <a class="button ghost" href="{{ url_for('resources') }}">استكشاف المصادر</a>
         </div>
     </div>
     <div class="hero-card">
         <div class="progress-circle">{{ progress }}%</div>
-        <p>Task Progress</p>
+        <p>تقدم المهام</p>
     </div>
 </section>
 
@@ -26,8 +26,8 @@
 
 
 <section class="card current-focus-v41">
-    <h2><span data-i18n="dashboard.focus">Current Focus</span></h2>
-    <p class="muted"><span data-i18n="dashboard.focus_desc">Your most important goals based on progress and recent planning.</span></p>
+    <h2><span data-i18n="dashboard.focus">التركيز الحالي</span></h2>
+    <p class="muted"><span data-i18n="dashboard.focus_desc">أهم أهدافك بناءً على التقدم والتخطيط الأخير.</span></p>
     <div class="focus-grid-v41">
         {% for goal in goals[:3] %}
             <div class="focus-card-v41">
@@ -39,7 +39,7 @@
                 </div>
             </div>
         {% else %}
-            <p class="muted">Create goals to see your current focus here.</p>
+            <p class="muted">أنشئ أهدافًا لتظهر هنا منطقة تركيزك الحالية.</p>
         {% endfor %}
     </div>
 </section>
@@ -58,8 +58,8 @@
 <section class="card focus-goals">
     <div class="section-title-row">
         <div>
-            <h2><span data-i18n="dashboard.active_goals">Active Goals</span></h2>
-            <p class="muted"><span data-i18n="dashboard.active_desc">Keep your long-term targets visible. Your tasks are the daily steps.</span></p>
+            <h2><span data-i18n="dashboard.active_goals">الأهداف النشطة</span></h2>
+            <p class="muted"><span data-i18n="dashboard.active_desc">اجعل أهدافك طويلة المدى واضحة أمامك. المهام هي خطواتك اليومية.</span></p>
         </div>
         <a class="small-button" href="{{ url_for('goals') }}">Manage</a>
     </div>
@@ -101,14 +101,14 @@
 
 <section class="stats-grid">
     <div class="stat-card blue"><span>◎</span><h3>Goals</h3><p>{{ total_goals }}</p></div>
-    <div class="stat-card green"><span>✓</span><h3>Completed</h3><p>{{ completed_tasks }}</p></div>
-    <div class="stat-card orange"><span>◷</span><h3>Pending</h3><p>{{ pending_tasks }}</p></div>
-    <div class="stat-card purple"><span>▣</span><h3>Total Tasks</h3><p>{{ total_tasks }}</p></div>
+    <div class="stat-card green"><span>✓</span><h3>المكتملة</h3><p>{{ completed_tasks }}</p></div>
+    <div class="stat-card orange"><span>◷</span><h3>المتبقية</h3><p>{{ pending_tasks }}</p></div>
+    <div class="stat-card purple"><span>▣</span><h3>إجمالي المهام</h3><p>{{ total_tasks }}</p></div>
 </section>
 
 <section class="grid-2">
     <div class="card">
-        <h2><span data-i18n="dashboard.insights">Learning Insights</span></h2>
+        <h2><span data-i18n="dashboard.insights">رؤى التعلم</span></h2>
         {% if weak_skills %}
             {% for skill, score in weak_skills %}
                 <div class="weakness">
@@ -122,14 +122,14 @@
     </div>
 
     <div class="card">
-        <h2><span data-i18n="dashboard.recent_tasks">Recent Tasks</span></h2>
+        <h2><span data-i18n="dashboard.recent_tasks">المهام الحديثة</span></h2>
         {% for task in tasks %}
             <div class="task-mini">
                 <div>
                     <strong>{{ task.title }}</strong>
                     <span>{{ task.category }} · {{ task.skill }} · {{ task.estimated_minutes }} min · {{ task.status }}</span>
                 </div>
-                <span class="badge">{{ task.reminder_time or "No reminder" }}</span>
+                <span class="badge">{{ task.reminder_time or "بدون تذكير" }}</span>
             </div>
         {% else %}
             <p class="muted">No tasks yet.</p>
@@ -138,7 +138,7 @@
 </section>
 
 <div class="app-version-footer home-footer-v475">
-    EduPath AI EZZALDEEN · v4.8.3<br>
+    EduPath AI EZZALDEEN · v5.1.0 Arabic Core Stable<br>
     <span>Contact: edupath.ai.ezzaldeen.app@outlook.com</span><br>
     <span>لمعرفة كيفية استخدام التطبيق على أكمل وجه والاستفادة من جميع المميزات، يرجى الضغط على <a href="{{ url_for('user_guide') }}">دليل الاستخدام</a>.</span><br>
     <span class="copyright-line">جميع الحقوق محفوظة © EZZALDEEN AL-HAMOODI — عزالدين الحمودي. يمنع منعًا باتًا اقتباس أو تقليد فكرة التطبيق أو تصميمه أو محتواه أو مميزاته دون إذن صريح.</span>
