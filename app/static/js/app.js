@@ -1899,3 +1899,341 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("click", () => setTimeout(compactDesktopControlsV481, 80));
     window.addEventListener("resize", compactDesktopControlsV481);
 });
+
+
+
+/* EduPath AI v4.8.4 Full Arabic Interface Layer
+   Full UI Arabic translation excluding AI Coach pages and AI outputs.
+*/
+const EDUPATH_FULL_AR_TRANSLATIONS_V484 = {
+  "Dashboard": "الرئيسية",
+  "Goals": "الأهداف",
+  "Tasks": "المهام",
+  "Resources": "المصادر",
+  "AI Coach": "مدرب الذكاء الاصطناعي",
+  "Profile": "الملف الشخصي",
+  "Logout": "تسجيل الخروج",
+  "Login": "تسجيل الدخول",
+  "Register": "إنشاء حساب",
+  "Admin": "الإدارة",
+  "Enable Reminders": "تفعيل التذكيرات",
+  "Responsive Web App": "تطبيق ويب متجاوب",
+  "Smart learning, goals, exams, and AI coaching in one workspace.": "تعلم ذكي، أهداف، مهام، اختبارات، ومصادر في مساحة واحدة.",
+  "Home": "الرئيسية",
+  "Coach": "المدرب",
+  "More": "المزيد",
+  "Theme": "الوضع",
+  "Switch language": "تبديل اللغة",
+  "Smart Learning & Resources Workspace": "مساحة ذكية للتعلم والمصادر",
+  "Plan goals, organize daily tasks, and reach the right learning resources faster.": "خطط أهدافك، نظم مهامك اليومية، واصل إلى المصادر التعليمية المناسبة بسرعة.",
+  "EduPath AI helps you turn long-term goals into organized tasks, connect progress automatically, and use trusted resources for exams, programming, languages, Quran, typing, scholarships, and self-learning.": "يساعدك EduPath AI على تحويل الأهداف طويلة المدى إلى مهام منظمة، وربط التقدم تلقائيًا، واستخدام مصادر موثوقة للاختبارات، البرمجة، اللغات، القرآن، سرعة الكتابة، المنح، والتعلم الذاتي.",
+  "New Goal": "هدف جديد",
+  "Add Task": "إضافة مهمة",
+  "Explore Resources": "استكشاف المصادر",
+  "Your Smart Progress": "تقدمك الذكي",
+  "Your Goals": "أهدافك",
+  "Your Tasks": "مهامك",
+  "Completed": "مكتمل",
+  "Pending": "المتبقية",
+  "Progress": "التقدم",
+  "Recent Tasks": "المهام الحديثة",
+  "Recent Goals": "الأهداف الحديثة",
+  "Quick Actions": "إجراءات سريعة",
+  "No tasks yet.": "لا توجد مهام بعد.",
+  "No goals yet.": "لا توجد أهداف بعد.",
+  "Contact": "التواصل",
+  "User Guide": "دليل الاستخدام",
+  "Smart Goals": "الأهداف الذكية",
+  "Add Smart Goal": "إضافة هدف ذكي",
+  "Save Smart Goal": "حفظ الهدف الذكي",
+  "Goal Title": "عنوان الهدف",
+  "Goal Type": "نوع الهدف",
+  "Goal Category": "تصنيف الهدف",
+  "Goal Path": "مسار الهدف",
+  "Current State": "الحالة الحالية",
+  "Target State": "الحالة المستهدفة",
+  "Goal Outcome": "النتيجة النهائية",
+  "Start Date": "تاريخ البداية",
+  "Target Date": "تاريخ الهدف",
+  "Notes": "ملاحظات",
+  "Edit": "تعديل",
+  "Delete": "حذف",
+  "View Details": "عرض التفاصيل",
+  "Time Remaining": "الوقت المتبقي",
+  "Related Tasks": "المهام المرتبطة",
+  "Last Related Task": "آخر مهمة مرتبطة",
+  "Current": "الحالي",
+  "Target": "المستهدف",
+  "Education": "التعليم",
+  "Language": "اللغات",
+  "Exam / Certificate": "اختبار / شهادة",
+  "Programming & Technology": "البرمجة والتكنولوجيا",
+  "Artificial Intelligence": "الذكاء الاصطناعي",
+  "Scholarship": "المنح الدراسية",
+  "University": "الجامعة",
+  "Mathematics": "الرياضيات",
+  "Project": "المشاريع",
+  "Daily Life": "الحياة اليومية",
+  "Islamic Goals": "الأهداف الإسلامية",
+  "General": "عام",
+  "Other": "أخرى",
+  "Smart Tasks": "المهام الذكية",
+  "Add Smart Task": "إضافة مهمة ذكية",
+  "Save Task": "حفظ المهمة",
+  "Task Name": "اسم المهمة",
+  "Task Type": "نوع المهمة",
+  "Main Field": "المجال الرئيسي",
+  "Sub Field": "المجال الفرعي",
+  "Detailed Topic": "الموضوع التفصيلي",
+  "Training Type": "نوع التدريب",
+  "Source / Link": "المصدر / الرابط",
+  "Difficulty 1-5": "درجة الصعوبة من 1 إلى 5",
+  "Priority 1-5": "الأولوية من 1 إلى 5",
+  "Expected Time in Minutes": "الوقت المتوقع بالدقائق",
+  "End Date / Deadline": "تاريخ النهاية / الموعد النهائي",
+  "Reminder Time": "وقت التذكير",
+  "Repeat": "التكرار",
+  "Repeat Days": "أيام التكرار",
+  "Done": "تم",
+  "Book, website, YouTube, document link... / كتاب أو رابط أو مصدر": "اكتب اسم كتاب أو موقع أو رابط يوتيوب أو مستند",
+  "Any notes or plan... / اكتب أي ملاحظات أو خطة": "اكتب أي ملاحظات أو خطة",
+  "No Repeat / Once": "بدون تكرار / مرة واحدة",
+  "Daily": "يوميًا",
+  "Weekly": "أسبوعيًا",
+  "Monthly": "شهريًا",
+  "Selected Days": "أيام محددة",
+  "Quran Memorization": "حفظ القرآن",
+  "Secondary School": "المرحلة الثانوية",
+  "Languages": "اللغات",
+  "Exams & Certificates": "الاختبارات والشهادات",
+  "Keyboard Typing": "الكتابة على الكيبورد",
+  "Smart Resources Engine": "محرك المصادر الذكية",
+  "Find the right learning resources for your goals, tasks, exams, skills, and daily study plan. Resources are updated automatically when this page opens.": "اعثر على المصادر التعليمية المناسبة لأهدافك ومهامك واختباراتك ومهاراتك وخطتك اليومية. يتم تحديث المصادر تلقائيًا عند فتح الصفحة.",
+  "My Resources": "مصادري",
+  "Browse Resources": "تصفح المصادر",
+  "Search": "بحث",
+  "Category": "الفئة",
+  "Skill / Topic": "المهارة / الموضوع",
+  "Exam": "الاختبار",
+  "Level": "المستوى",
+  "Type": "النوع",
+  "All Categories": "كل الفئات",
+  "All Exams": "كل الاختبارات",
+  "All Levels": "كل المستويات",
+  "All Types": "كل الأنواع",
+  "Official Only": "الرسمية فقط",
+  "Free Only": "المجانية فقط",
+  "Filter": "تصفية",
+  "Reset": "إعادة ضبط",
+  "Recommended Path": "المسار المقترح",
+  "Start Here": "ابدأ من هنا",
+  "A simple suggested order so you do not get lost among many resources.": "ترتيب مقترح بسيط حتى لا تتشتت بين كثرة المصادر.",
+  "Matching Resources / المصادر المطابقة": "المصادر المطابقة",
+  "Open Resource": "فتح المصدر",
+  "Open": "فتح",
+  "Save": "حفظ",
+  "Saved": "محفوظ",
+  "Remove": "إزالة",
+  "Beginner": "مبتدئ",
+  "Intermediate": "متوسط",
+  "Advanced": "متقدم",
+  "Beginner Friendly": "مناسب للمبتدئين",
+  "Official": "رسمي",
+  "Free": "مجاني",
+  "Your personal learning library. Save your daily resources, track status, write notes, and open them quickly.": "مكتبتك التعليمية الخاصة. احفظ مصادرك اليومية، تابع حالتها، اكتب ملاحظاتك، وافتحها بسرعة.",
+  "Saved Resources": "المصادر المحفوظة",
+  "Status": "الحالة",
+  "All Statuses": "كل الحالات",
+  "Not Started": "لم يبدأ",
+  "In Progress": "قيد التقدم",
+  "My Notes": "ملاحظاتي",
+  "Save Notes": "حفظ الملاحظات",
+  "Remove from My Resources": "إزالة من مصادري",
+  "No saved resources yet. Go to Resources and press Save on the sources you use daily.": "لا توجد مصادر محفوظة بعد. انتقل إلى صفحة المصادر واضغط حفظ على المصادر التي تستخدمها يوميًا.",
+  "Profile Settings": "إعدادات الملف الشخصي",
+  "Name": "الاسم",
+  "Country": "الدولة",
+  "Major": "التخصص",
+  "Target Degree": "الدرجة المستهدفة",
+  "Update Profile": "تحديث الملف الشخصي",
+  "Paid Version": "النسخة المدفوعة",
+  "Subscription Code": "كود الاشتراك",
+  "Activate Paid Version": "تفعيل النسخة المدفوعة",
+  "Your paid version is active. You now have higher limits for tasks, goals, and AI Coach.": "النسخة المدفوعة مفعلة. لديك الآن حدود أعلى للمهام والأهداف ومدرب الذكاء الاصطناعي.",
+  "Days left": "الأيام المتبقية",
+  "Expires": "ينتهي في",
+  "Privacy": "الخصوصية",
+  "AI Today": "استخدام الذكاء اليوم",
+  "AI Daily Limit": "حد الذكاء اليومي",
+  "Users, Limits & Progress": "المستخدمون والحدود والتقدم",
+  "Global Subscription Code Pool": "مخزون أكواد الاشتراك العام",
+  "Generate Codes": "إنشاء أكواد",
+  "Available": "متاح",
+  "Used": "مستخدم",
+  "Cancelled": "ملغي",
+  "Expired": "منتهي",
+  "Free Plan": "الخطة المجانية",
+  "Paid Active": "المدفوعة مفعلة",
+  "Unlimited Admin": "مشرف غير محدود",
+  "Save User Control": "حفظ تحكم المستخدم",
+  "Generate 10 Codes": "إنشاء 10 أكواد",
+  "Generate 50 Codes": "إنشاء 50 كود",
+  "Generate 100 Codes": "إنشاء 100 كود",
+  "Generate 200 Codes": "إنشاء 200 كود",
+  "Duration": "المدة",
+  "Quantity": "العدد",
+  "Note": "ملاحظة",
+  "Email": "البريد الإلكتروني",
+  "Password": "كلمة المرور",
+  "Confirm Password": "تأكيد كلمة المرور",
+  "Forgot Password?": "نسيت كلمة المرور؟",
+  "Remember me": "تذكرني",
+  "Create Account": "إنشاء حساب",
+  "Reset Password": "إعادة تعيين كلمة المرور",
+  "Send Reset Link": "إرسال رابط إعادة التعيين",
+  "Verify Email": "تأكيد البريد الإلكتروني",
+  "Resend Verification": "إعادة إرسال التحقق",
+  "Submit": "إرسال",
+  "Cancel": "إلغاء",
+  "Close": "إغلاق",
+  "Back": "رجوع",
+  "Next": "التالي",
+  "Previous": "السابق",
+  "Upload": "رفع",
+  "Download": "تحميل",
+  "Create": "إنشاء",
+  "Update": "تحديث",
+  "Confirm": "تأكيد",
+  "Yes": "نعم",
+  "No": "لا",
+  "Required": "مطلوب",
+  "Optional": "اختياري"
+};
+const EDUPATH_FULL_AR_PLACEHOLDERS_V484 = {
+  "Example: Review Quran memorization / مثال: مراجعة حفظ القرآن": "مثال: مراجعة حفظ القرآن",
+  "Book, website, YouTube, document link... / كتاب أو رابط أو مصدر": "اكتب اسم كتاب أو رابط موقع أو يوتيوب أو مستند",
+  "Any notes or plan... / اكتب أي ملاحظات أو خطة": "اكتب أي ملاحظات أو خطة",
+  "Search resources, exams, skills...": "ابحث عن مصادر أو اختبارات أو مهارات...",
+  "Reading, Writing, Algebra, Python, Quran...": "قراءة، كتابة، جبر، بايثون، قرآن...",
+  "Example: Achieve IELTS Band 7": "مثال: الوصول إلى IELTS Band 7",
+  "Example: Beginner, Band 5.5, 30% ready...": "مثال: مبتدئ، 30% جاهز...",
+  "Example: Band 7, complete project, memorize Juz Amma...": "مثال: إكمال مشروع، حفظ جزء عم...",
+  "Example: Apply strongly to a full scholarship": "مثال: تقديم قوي لمنحة كاملة",
+  "Optional note, e.g. June subscriptions": "ملاحظة اختيارية، مثل اشتراكات شهر يونيو",
+  "Example: EDU-ABC123-XYZ789": "مثال: EPAI-XXXXX-XXXXX-XXXXX-XXXXX"
+};
+
+function edupathIsCoachPageV484() {
+    const path = window.location.pathname.toLowerCase();
+    return path.startsWith("/coach") ||
+           path.startsWith("/english") ||
+           path.startsWith("/scholarship") ||
+           path.startsWith("/code") ||
+           path.startsWith("/code-center") ||
+           path.startsWith("/programming") ||
+           path.startsWith("/interview");
+}
+
+function normalizeEduPathTextV484(text) {
+    return (text || "").replace(/\s+/g, " ").trim();
+}
+
+function translateTextNodeV484(node) {
+    const original = normalizeEduPathTextV484(node.nodeValue);
+    if (!original) return;
+    const translated = EDUPATH_FULL_AR_TRANSLATIONS_V484[original];
+    if (translated) node.nodeValue = node.nodeValue.replace(original, translated);
+}
+
+function translateElementTextV484(el) {
+    if (!el || el.closest("script, style, code, pre, textarea")) return;
+    if (el.closest(".ai-output, .coach-output, .answer-box, .saved-answer-card")) return;
+
+    const children = Array.from(el.childNodes);
+    if (children.length === 1 && children[0].nodeType === Node.TEXT_NODE) {
+        const original = normalizeEduPathTextV484(el.textContent);
+        const translated = EDUPATH_FULL_AR_TRANSLATIONS_V484[original];
+        if (translated) el.textContent = translated;
+    }
+}
+
+function translateAttrsV484(el) {
+    if (!el || el.closest("script, style")) return;
+    ["placeholder", "title", "aria-label", "value"].forEach(attr => {
+        if (!el.hasAttribute(attr)) return;
+        const value = normalizeEduPathTextV484(el.getAttribute(attr));
+        const translated = EDUPATH_FULL_AR_PLACEHOLDERS_V484[value] || EDUPATH_FULL_AR_TRANSLATIONS_V484[value];
+        if (translated && !(attr === "value" && !["button","submit","reset"].includes((el.getAttribute("type") || "").toLowerCase()))) {
+            el.setAttribute(attr, translated);
+        }
+    });
+}
+
+function translateOptionsV484(root=document) {
+    root.querySelectorAll("option").forEach(option => {
+        const original = normalizeEduPathTextV484(option.textContent);
+        const translated = EDUPATH_FULL_AR_TRANSLATIONS_V484[original] || (typeof EDUPATH_LABEL_AR !== "undefined" ? EDUPATH_LABEL_AR[original] : null);
+        if (translated) option.textContent = translated;
+    });
+}
+
+function applyFullArabicInterfaceV484(root=document) {
+    const lang = localStorage.getItem("edupath-language") || "en";
+    const html = document.documentElement;
+
+    if (lang !== "ar" || edupathIsCoachPageV484()) {
+        if (edupathIsCoachPageV484()) {
+            html.setAttribute("dir", "ltr");
+            html.setAttribute("lang", "en");
+            document.body.classList.remove("full-arabic-ui-v484");
+        }
+        return;
+    }
+
+    html.setAttribute("dir", "rtl");
+    html.setAttribute("lang", "ar");
+    document.body.classList.add("full-arabic-ui-v484");
+
+    root.querySelectorAll("body, body *").forEach(el => {
+        if (el.closest && el.closest("script, style, code, pre")) return;
+        translateElementTextV484(el);
+        translateAttrsV484(el);
+    });
+
+    const walker = document.createTreeWalker(root.body || root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+            if (!node.parentElement) return NodeFilter.FILTER_REJECT;
+            if (node.parentElement.closest("script, style, code, pre, textarea")) return NodeFilter.FILTER_REJECT;
+            if (node.parentElement.closest(".ai-output, .coach-output, .answer-box, .saved-answer-card")) return NodeFilter.FILTER_REJECT;
+            return NodeFilter.FILTER_ACCEPT;
+        }
+    });
+
+    let node;
+    while ((node = walker.nextNode())) translateTextNodeV484(node);
+
+    translateOptionsV484(root);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => applyFullArabicInterfaceV484(document), 250);
+    setTimeout(() => applyFullArabicInterfaceV484(document), 900);
+
+    document.addEventListener("click", () => {
+        setTimeout(() => applyFullArabicInterfaceV484(document), 120);
+        setTimeout(() => applyFullArabicInterfaceV484(document), 500);
+    });
+
+    document.addEventListener("change", () => {
+        setTimeout(() => applyFullArabicInterfaceV484(document), 120);
+    });
+
+    const observer = new MutationObserver(() => {
+        const lang = localStorage.getItem("edupath-language") || "en";
+        if (lang === "ar" && !edupathIsCoachPageV484()) {
+            clearTimeout(window.__edupathArTimerV484);
+            window.__edupathArTimerV484 = setTimeout(() => applyFullArabicInterfaceV484(document), 80);
+        }
+    });
+    observer.observe(document.body, {childList: true, subtree: true});
+});

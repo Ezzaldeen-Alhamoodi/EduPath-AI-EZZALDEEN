@@ -1259,3 +1259,37 @@ Desktop sidebar design refinement.
 - 0 API calls.
 - 0 OpenRouter usage.
 - 0 cost.
+
+
+## v4.8.4 Full Arabic Interface
+
+### Arabic interface
+- Added a broad Arabic UI translation layer.
+- When the user switches language to Arabic, nearly all app pages translate to Arabic:
+  - Dashboard
+  - Goals
+  - Tasks
+  - Resources
+  - My Resources
+  - Profile
+  - Admin
+  - Auth pages
+  - Buttons
+  - Labels
+  - Placeholders
+  - Select options
+- Added RTL layout support for Arabic pages.
+
+### Important exception
+- AI Coach pages remain English:
+  - Coach selection
+  - English Coach
+  - Scholarship Coach
+  - Code Coach
+  - AI outputs
+- This keeps AI coaching behavior and outputs consistent.
+
+### Performance
+- No AI usage.
+- No database changes.
+- Frontend-only translation layer.

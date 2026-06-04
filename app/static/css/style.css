@@ -4719,3 +4719,66 @@ body.dark-mode .desktop-icon-nav-v483 a {
     background: rgba(15,23,42,.72) !important;
     border-color: rgba(96,165,250,.15) !important;
 }
+
+
+
+/* EduPath AI v4.8.4 Full Arabic Interface */
+body.full-arabic-ui-v484 {
+    direction: rtl;
+    text-align: right;
+}
+
+body.full-arabic-ui-v484 .sidebar {
+    direction: rtl;
+}
+
+body.full-arabic-ui-v484 .main {
+    direction: rtl;
+    text-align: right;
+}
+
+body.full-arabic-ui-v484 input,
+body.full-arabic-ui-v484 select,
+body.full-arabic-ui-v484 textarea {
+    direction: rtl;
+    text-align: right;
+}
+
+body.full-arabic-ui-v484 .desktop-icon-nav-v483 a,
+body.full-arabic-ui-v484 .main-nav a,
+body.full-arabic-ui-v484 .mobile-bottom-nav a,
+body.full-arabic-ui-v484 .mobile-bottom-nav button {
+    direction: rtl;
+}
+
+body.full-arabic-ui-v484 .hero,
+body.full-arabic-ui-v484 .card,
+body.full-arabic-ui-v484 .resource-card,
+body.full-arabic-ui-v484 .goal-tile,
+body.full-arabic-ui-v484 .task-card,
+body.full-arabic-ui-v484 .stat-card {
+    text-align: right;
+}
+
+body.full-arabic-ui-v484 .resource-actions-v472,
+body.full-arabic-ui-v484 .hero-actions,
+body.full-arabic-ui-v484 .actions {
+    direction: rtl;
+}
+
+body.full-arabic-ui-v484 .topbar {
+    direction: rtl;
+}
+
+body.full-arabic-ui-v484 .topbar .pill {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+/* Coach pages intentionally remain English */
+body:not(.full-arabic-ui-v484) .coach-page,
+body:not(.full-arabic-ui-v484) .coach-output,
+body:not(.full-arabic-ui-v484) .ai-output {
+    direction: ltr;
+    text-align: left;
+}
