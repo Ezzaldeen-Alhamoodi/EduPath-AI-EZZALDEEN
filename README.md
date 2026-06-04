@@ -1509,3 +1509,19 @@ Dashboard-only layout fix.
 - No changes to Tasks page.
 - No changes to Resources page.
 - Internal values stay stable.
+
+
+## v5.2.3 Complete Arabic Smart Goals
+
+- Added a stronger runtime layer for Goals page.
+- Removed remaining unnecessary English labels from visible goal controls.
+- Unified Other/Custom display to Arabic: أخرى.
+- Scholarship goal type is now Arabic and detailed.
+- International exams are fully adaptive by exam.
+- AI paths are Arabic while preserving technical category names.
+- University categories expanded in Arabic.
+- Mathematics and Daily Life categories rebuilt in natural Arabic.
+- Commitment options are adaptive by domain.
+- Strengthened hidden Arabic/English context matching for goals and tasks.
+- No database migration.
+- No task/resource page changes.

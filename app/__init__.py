@@ -2785,6 +2785,28 @@ def expand_goal_intelligence_terms_v522(text):
         expanded.update(GOAL_INTELLIGENCE_SYNONYMS_V522["scholarship"])
     return expanded
 
+
+GOAL_INTELLIGENCE_SYNONYMS_V523 = {
+    "ielts": ["IELTS", "آيلتس", "Reading", "قراءة", "Writing", "كتابة", "Listening", "استماع", "Speaking", "تحدث", "True False Not Given", "Matching Headings", "Writing Task 1", "Writing Task 2", "Mock Test", "اختبار تجريبي"],
+    "toefl": ["TOEFL", "توفل", "Academic Discussion", "Integrated Writing", "Reading", "Listening", "Speaking", "Writing"],
+    "duolingo": ["Duolingo", "دولينجو", "Interactive Reading", "Interactive Listening", "Interactive Writing", "Interactive Speaking", "Read and Select", "Listen and Type"],
+    "python_flask": ["Python", "Flask", "Authentication", "Login", "Database", "Routes", "Templates", "API", "Deployment", "مشروع Flask", "تطبيق ويب", "مصادقة"],
+    "quran": ["قرآن", "القرآن", "حفظ", "مراجعة", "تثبيت", "تجويد", "تلاوة", "تسميع", "سورة", "جزء", "النساء", "البقرة", "آل عمران", "جزء عم"],
+    "scholarship": ["منحة", "منح", "Scholarship", "Documents", "مستندات", "CV", "السيرة الذاتية", "Motivation Letter", "رسالة الدافع", "Interview", "مقابلة", "Visa", "تأشيرة", "Application", "تقديم", "قبول"],
+    "university": ["جامعة", "University", "مقرر", "واجب", "بحث", "مشروع تخرج", "تدريب عملي", "محاضرة", "اختبار"],
+    "math": ["رياضيات", "Mathematics", "جبر", "هندسة", "تفاضل", "تكامل", "إحصاء", "احتمالات", "معادلات", "دوال"],
+    "daily_life": ["روتين", "عادة", "صحة", "رياضة", "نوم", "شرب الماء", "إدارة الوقت", "تذكير"],
+    "ai": ["AI", "ذكاء اصطناعي", "Machine Learning", "Deep Learning", "NLP", "Computer Vision", "Data Science", "نموذج", "تدريب النموذج", "تنظيف البيانات", "تقييم النموذج"],
+}
+
+def expand_goal_intelligence_terms_v523(text):
+    lower = (text or "").lower()
+    expanded = set()
+    for key, values in GOAL_INTELLIGENCE_SYNONYMS_V523.items():
+        if key in lower or any(str(v).lower() in lower for v in values):
+            expanded.update(values)
+    return expanded
+
 def generate_goal_keywords_from_form(form, goal_category="", goal_path="", current_state="", target_state="", commitment=""):
     raw = [
         form.get("category", ""),
@@ -2926,6 +2948,9 @@ def calculate_match_score(goal, task):
 
     expanded_goal_terms_v522 = expand_goal_intelligence_terms_v522(goal_text)
     expanded_task_terms_v522 = expand_goal_intelligence_terms_v522(task_text)
+
+    expanded_goal_terms_v523 = expand_goal_intelligence_terms_v523(goal_text)
+    expanded_task_terms_v523 = expand_goal_intelligence_terms_v523(task_text)
 
     score = 0
     matched = []
