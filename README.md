@@ -1614,3 +1614,30 @@ Dashboard-only layout fix.
 - No database migration.
 - No task/resource changes.
 - No changes to goal-saving logic.
+
+
+## v5.2.7 Dashboard vs Goals Separation
+
+### Fixed the misunderstanding
+- Dashboard active goals are now compact summaries only:
+  - title
+  - current state → target state
+  - progress bar
+  - progress percentage
+  - remaining time
+- Goals page cards are detailed management cards and show the user's entered data:
+  - title
+  - goal type + category
+  - goal path
+  - current state → target state
+  - goal outcome
+  - commitment
+  - start date + target date
+  - progress bar
+  - progress percentage
+  - remaining time
+  - notes only if the user wrote notes
+  - edit/delete
+- Empty optional fields do not reserve empty space.
+- Dashboard recent task time now displays in 12-hour Arabic style, e.g. 3:30 مساءً.
+- No changes to task/resource logic.

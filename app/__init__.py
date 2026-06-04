@@ -1302,6 +1302,7 @@ def create_app():
     app.jinja_env.filters["goals_ar"] = goals_ar
     app.jinja_env.filters["goal_time_ar"] = format_goal_time_left
     app.jinja_env.filters["goal_time_compact_ar"] = format_goal_time_left_compact
+    app.jinja_env.filters["time_12h_ar"] = format_time_12h_ar
     app.jinja_env.filters["dashboard_ar"] = dashboard_ar
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
     app.permanent_session_lifetime = timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30")))
@@ -2136,6 +2137,7 @@ def create_app():
             goal.goal_confidence = goal_confidence(goal)
             goal.milestones = extract_goal_milestones(goal)
             goal.plan = parse_goal_plan(goal)
+            goal.visible_notes = visible_goal_notes(goal)
         return render_template("goals.html", goals=all_goals)
 
     @app.route("/goal/<int:goal_id>/edit", methods=["GET", "POST"])
@@ -2801,6 +2803,24 @@ def format_goal_time_left_compact(time_left):
         return f"{days} يوم • {week_word} • {month_word}"
     except Exception:
         return "لا يوجد موعد نهائي"
+
+
+
+def format_time_12h_ar(value):
+    if not value:
+        return "بدون تذكير"
+    text = str(value).strip()
+    try:
+        parts = text.split(":")
+        hour = int(parts[0])
+        minute = int(parts[1]) if len(parts) > 1 else 0
+        period = "صباحاً" if hour < 12 else "مساءً"
+        hour12 = hour % 12
+        if hour12 == 0:
+            hour12 = 12
+        return f"{hour12}:{minute:02d} {period}"
+    except Exception:
+        return text
 
 
 def expand_goal_intelligence_terms_v520(text):

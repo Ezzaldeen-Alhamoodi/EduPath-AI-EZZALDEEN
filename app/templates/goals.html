@@ -122,29 +122,75 @@
     <div class="card">
         <h2>أهدافك الحالية</h2>
         {% for goal in goals %}
-            <div class="goal-card-v41 clean-goal-card-v526">
-                <div class="clean-goal-title-v526">{{ goal.title }}</div>
+            <div class="goal-card-v41 detailed-goal-card-v527">
+                <div class="detailed-goal-title-v527">{{ goal.title }}</div>
 
-                <div class="clean-goal-state-v526">
+                {% if goal.category %}
+                    <div class="detailed-goal-type-v527">
+                        {{ goal.category|goals_ar }}
+                        {% if goal.plan and goal.plan.get("Goal Category") %}
+                            <span>•</span> {{ goal.plan.get("Goal Category")|goals_ar }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {% if goal.plan and goal.plan.get("Goal Path") %}
+                    <div class="detailed-goal-row-v527">
+                        <strong>مسار الهدف:</strong>
+                        <span>{{ goal.plan.get("Goal Path")|goals_ar }}</span>
+                    </div>
+                {% endif %}
+
+                <div class="detailed-goal-state-v527">
                     {{ (goal.plan.get("Current State", goal.current_level) if goal.plan else goal.current_level)|goals_ar }}
-                    <span class="state-arrow-v526">→</span>
+                    <span>→</span>
                     {{ (goal.plan.get("Target State", "غير محدد") if goal.plan else "غير محدد")|goals_ar }}
                 </div>
 
-                <div class="goal-progress-track clean-progress-track-v526">
-                    <div class="goal-progress-fill clean-progress-fill-v526" style="width: {{ goal.goal_progress if goal.goal_progress is defined else 0 }}%;"></div>
+                {% if goal.plan and goal.plan.get("Goal Outcome") %}
+                    <div class="detailed-goal-row-v527">
+                        <strong>النتيجة المستهدفة:</strong>
+                        <span>{{ goal.plan.get("Goal Outcome")|goals_ar }}</span>
+                    </div>
+                {% endif %}
+
+                {% if goal.plan and goal.plan.get("Commitment") %}
+                    <div class="detailed-goal-row-v527">
+                        <strong>الالتزام اليومي أو الأسبوعي:</strong>
+                        <span>{{ goal.plan.get("Commitment")|goals_ar }}</span>
+                    </div>
+                {% endif %}
+
+                <div class="detailed-goal-dates-v527">
+                    {% if goal.start_date %}
+                        <span><strong>تاريخ البدء:</strong> {{ goal.start_date }}</span>
+                    {% endif %}
+                    {% if goal.deadline %}
+                        <span><strong>تاريخ الإنجاز المستهدف:</strong> {{ goal.deadline }}</span>
+                    {% endif %}
                 </div>
 
-                <div class="clean-goal-progress-text-v526">
+                <div class="goal-progress-track detailed-progress-track-v527">
+                    <div class="goal-progress-fill detailed-progress-fill-v527" style="width: {{ goal.goal_progress if goal.goal_progress is defined else 0 }}%;"></div>
+                </div>
+
+                <div class="detailed-goal-progress-text-v527">
                     📊 {{ goal.goal_progress if goal.goal_progress is defined else 0 }}٪ تقدم
                 </div>
 
-                <div class="clean-goal-time-v526">
+                <div class="detailed-goal-time-v527">
                     <strong>⏳ الوقت المتبقي:</strong>
                     <span>{{ goal.time_left|goal_time_compact_ar }}</span>
                 </div>
 
-                <div class="actions clean-goal-actions-v526">
+                {% if goal.visible_notes %}
+                    <div class="detailed-goal-notes-v527">
+                        <strong>ملاحظات إضافية:</strong>
+                        <p>{{ goal.visible_notes }}</p>
+                    </div>
+                {% endif %}
+
+                <div class="actions detailed-goal-actions-v527">
                     <a class="small-button warning" href="{{ url_for('edit_goal', goal_id=goal.id) }}">✏️ تعديل</a>
                     <a class="small-button danger" href="{{ url_for('delete_goal', goal_id=goal.id) }}">🗑 حذف</a>
                 </div>

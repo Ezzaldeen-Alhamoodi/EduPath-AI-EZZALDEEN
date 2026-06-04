@@ -6617,3 +6617,225 @@ body.dark-mode .home-progress-ar-v513 small {
         font-size: 11.5px !important;
     }
 }
+
+
+
+/* EduPath AI v5.2.7 Dashboard vs Goals Separation */
+
+/* Dashboard active goals: compact summary only */
+.dashboard-goals-summary-v527 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 9px;
+}
+
+.dashboard-goal-tile-v527 {
+    padding: 10px !important;
+    border-radius: 15px !important;
+}
+
+.dashboard-goal-content-v527 {
+    display: grid !important;
+    gap: 6px !important;
+}
+
+.dashboard-goal-content-v527 strong {
+    font-size: 13.5px !important;
+    line-height: 1.45 !important;
+}
+
+.dashboard-goal-state-v527 {
+    font-size: 11.5px !important;
+    color: var(--muted) !important;
+    font-weight: 800 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    flex-wrap: wrap !important;
+}
+
+.dashboard-goal-state-v527 b {
+    color: #2563eb;
+    font-weight: 950;
+}
+
+.dashboard-goal-progress-v527 {
+    height: 7px !important;
+    margin-top: 2px !important;
+}
+
+.dashboard-goal-percent-v527 {
+    font-size: 11px !important;
+    color: #1d4ed8 !important;
+    font-weight: 850 !important;
+}
+
+.dashboard-goal-time-v527 {
+    display: grid !important;
+    gap: 3px !important;
+    font-size: 11px !important;
+    color: var(--muted) !important;
+    line-height: 1.45 !important;
+}
+
+.dashboard-goal-time-v527 strong {
+    color: var(--text) !important;
+}
+
+/* Goals page cards: detailed management view */
+.detailed-goal-card-v527 {
+    display: grid !important;
+    gap: 8px !important;
+    padding: 13px !important;
+    border-radius: 18px !important;
+    border: 1px solid rgba(148,163,184,.16) !important;
+    box-shadow: 0 10px 24px rgba(15,23,42,.045) !important;
+}
+
+.detailed-goal-title-v527 {
+    font-size: 16px !important;
+    font-weight: 950 !important;
+    line-height: 1.45 !important;
+    color: var(--text) !important;
+}
+
+.detailed-goal-type-v527 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 12px !important;
+    font-weight: 850 !important;
+    color: #1d4ed8 !important;
+    background: rgba(37,99,235,.07) !important;
+    width: fit-content !important;
+    max-width: 100% !important;
+    padding: 5px 9px !important;
+    border-radius: 999px !important;
+}
+
+.detailed-goal-row-v527 {
+    display: grid !important;
+    gap: 3px !important;
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+}
+
+.detailed-goal-row-v527 strong,
+.detailed-goal-dates-v527 strong,
+.detailed-goal-time-v527 strong,
+.detailed-goal-notes-v527 strong {
+    color: var(--text) !important;
+    font-weight: 900 !important;
+}
+
+.detailed-goal-row-v527 span {
+    color: var(--muted) !important;
+}
+
+.detailed-goal-state-v527 {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 7px !important;
+    padding: 8px 10px !important;
+    border-radius: 13px !important;
+    background: rgba(14,165,233,.075) !important;
+    font-size: 13px !important;
+    font-weight: 900 !important;
+    color: var(--text) !important;
+}
+
+.detailed-goal-state-v527 span {
+    color: #2563eb !important;
+    font-size: 15px !important;
+    font-weight: 950 !important;
+}
+
+.detailed-goal-dates-v527 {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+    font-size: 12px !important;
+    color: var(--muted) !important;
+}
+
+.detailed-goal-dates-v527 span {
+    padding: 7px 9px !important;
+    border-radius: 11px !important;
+    background: rgba(148,163,184,.075) !important;
+}
+
+.detailed-progress-track-v527 {
+    height: 8px !important;
+    border-radius: 999px !important;
+    background: rgba(148,163,184,.18) !important;
+    overflow: hidden !important;
+    margin-top: 2px !important;
+}
+
+.detailed-progress-fill-v527 {
+    height: 100% !important;
+    border-radius: 999px !important;
+    background: linear-gradient(90deg, #2563eb, #38bdf8) !important;
+}
+
+.detailed-goal-progress-text-v527 {
+    font-size: 12px !important;
+    color: #1d4ed8 !important;
+    font-weight: 900 !important;
+}
+
+.detailed-goal-time-v527 {
+    display: grid !important;
+    gap: 3px !important;
+    font-size: 12px !important;
+    line-height: 1.55 !important;
+    color: var(--muted) !important;
+}
+
+.detailed-goal-notes-v527 {
+    display: grid !important;
+    gap: 4px !important;
+    padding: 9px !important;
+    border-radius: 13px !important;
+    background: rgba(245,158,11,.08) !important;
+    font-size: 12px !important;
+    line-height: 1.65 !important;
+}
+
+.detailed-goal-notes-v527 p {
+    margin: 0 !important;
+    white-space: pre-wrap !important;
+    color: var(--muted) !important;
+}
+
+.detailed-goal-actions-v527 {
+    justify-content: flex-start !important;
+    gap: 7px !important;
+    margin-top: 3px !important;
+}
+
+@media (max-width: 980px) {
+    .dashboard-goals-summary-v527 {
+        grid-template-columns: 1fr !important;
+    }
+
+    .detailed-goal-card-v527 {
+        padding: 10px !important;
+        gap: 7px !important;
+    }
+
+    .detailed-goal-title-v527 {
+        font-size: 14.5px !important;
+    }
+
+    .detailed-goal-dates-v527 {
+        grid-template-columns: 1fr !important;
+    }
+
+    .detailed-goal-state-v527 {
+        font-size: 12px !important;
+        padding: 7px 8px !important;
+    }
+}
