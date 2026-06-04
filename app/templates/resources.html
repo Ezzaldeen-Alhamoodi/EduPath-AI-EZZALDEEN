@@ -14,7 +14,7 @@
 
 <section class="resource-category-strip">
     {% for cat in categories %}
-        <a href="{{ url_for('resources', category=cat) }}" class="{% if selected.category == cat %}active{% endif %}">{{ cat }}</a>
+        <a href="{{ url_for('resources', category=cat) }}" class="{% if selected.category == cat %}active{% endif %}" data-ar="{{ cat|ar_ui }}">{{ cat }}</a>
     {% endfor %}
 </section>
 
@@ -30,7 +30,7 @@
             <select name="category">
                 <option value="">All Categories / جميع الفئات</option>
                 {% for cat in categories %}
-                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat }}</option>
+                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %} data-ar="{{ cat|ar_ui }}">{{ cat }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -40,7 +40,7 @@
             <select name="exam">
                 <option value="">All Exams / جميع الاختبارات</option>
                 {% for exam in exams %}
-                    <option value="{{ exam }}" {% if selected.exam == exam %}selected{% endif %}>{{ exam }}</option>
+                    <option value="{{ exam }}" {% if selected.exam == exam %}selected{% endif %} data-ar="{{ exam|ar_ui }}">{{ exam }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -65,7 +65,7 @@
             <select name="type">
                 <option value="">All Types / جميع الأنواع</option>
                 {% for type in types %}
-                    <option value="{{ type }}" {% if selected.type == type %}selected{% endif %}>{{ type }}</option>
+                    <option value="{{ type }}" {% if selected.type == type %}selected{% endif %} data-ar="{{ type|ar_ui }}">{{ type }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -103,12 +103,12 @@
             <div class="learning-step">
                 <span class="step-number">{{ loop.index }}</span>
                 <div>
-                    <strong>{{ resource.name }}</strong>
-                    <p>{{ resource.description }}</p>
+                    <strong data-ar="{{ resource.name|ar_resource_name }}">{{ resource.name }}</strong>
+                    <p data-ar="{{ resource.description|ar_resource_description }}">{{ resource.description }}</p>
                     <div class="resource-badges">
                         {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
                         {% if resource.is_free %}<span class="badge free">Free</span>{% endif %}
-                        {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
+                        {% if resource.resource_type %}<span class="badge" data-ar="{{ resource.resource_type|ar_ui }}">{{ resource.resource_type }}</span>{% endif %}
                     {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">Beginner Friendly</span>{% endif %}
                     {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">Advanced</span>{% endif %}
                     </div>
@@ -151,25 +151,25 @@
         <article class="resource-card">
             <div class="resource-card-head">
                 <div>
-                    <h3>{{ resource.name }}</h3>
-                    <p>{{ resource.category }}{% if resource.subcategory %} · {{ resource.subcategory }}{% endif %}</p>
+                    <h3 data-ar="{{ resource.name|ar_resource_name }}">{{ resource.name }}</h3>
+                    <p><span data-ar="{{ resource.category|ar_ui }}">{{ resource.category }}</span>{% if resource.subcategory %} · <span data-ar="{{ resource.subcategory|ar_ui }}">{{ resource.subcategory }}</span>{% endif %}</p>
                 </div>
                 <div class="resource-badges">
                     {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
                     {% if resource.is_free %}<span class="badge free">Free</span>{% endif %}
-                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
+                    {% if resource.resource_type %}<span class="badge" data-ar="{{ resource.resource_type|ar_ui }}">{{ resource.resource_type }}</span>{% endif %}
                     {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">Beginner Friendly</span>{% endif %}
                     {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">Advanced</span>{% endif %}
                 </div>
             </div>
 
-            <p class="resource-desc">{{ resource.description }}</p>
+            <p class="resource-desc" data-ar="{{ resource.description|ar_resource_description }}">{{ resource.description }}</p>
 
             <div class="resource-meta">
-                {% if resource.exam %}<span>Exam: {{ resource.exam }}</span>{% endif %}
-                {% if resource.skill %}<span>Skill: {{ resource.skill }}</span>{% endif %}
-                {% if resource.level %}<span>Level: {{ resource.level }}</span>{% endif %}
-                {% if resource.language %}<span>Language: {{ resource.language }}</span>{% endif %}
+                {% if resource.exam %}<span><span data-ar="الاختبار">Exam</span>: <span data-ar="{{ resource.exam|ar_ui }}">{{ resource.exam }}</span></span>{% endif %}
+                {% if resource.skill %}<span><span data-ar="المهارة">Skill</span>: <span data-ar="{{ resource.skill|ar_ui }}">{{ resource.skill }}</span></span>{% endif %}
+                {% if resource.level %}<span><span data-ar="المستوى">Level</span>: <span data-ar="{{ resource.level|ar_ui }}">{{ resource.level }}</span></span>{% endif %}
+                {% if resource.language %}<span><span data-ar="اللغة">Language</span>: <span data-ar="{{ resource.language|ar_ui }}">{{ resource.language }}</span></span>{% endif %}
             </div>
 
             {% if resource.tags %}

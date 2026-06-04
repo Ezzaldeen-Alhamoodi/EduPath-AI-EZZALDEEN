@@ -30,15 +30,15 @@
             <div class="task-card {{ task.status }}">
                 <div>
                     <strong>{{ task.title }}</strong>
-                    <span><b><span data-i18n="tasklabels.type">Task Type:</span></b> {% if task.category == "Other" and task.custom_category %}{{ task.custom_category }}{% else %}{{ task.category }}{% endif %}</span>
-                    <span><b><span data-i18n="tasklabels.main">Main Field:</span></b> {% if task.topic == "Other" and task.custom_topic %}{{ task.custom_topic }}{% else %}{{ task.topic or "Not set" }}{% endif %}</span>
-                    <span><b><span data-i18n="tasklabels.sub">Sub Field:</span></b> {% if task.skill == "Other" and task.custom_skill %}{{ task.custom_skill }}{% else %}{{ task.skill or "Not set" }}{% endif %}</span>
-                    <span><b><span data-i18n="tasklabels.detail">Detailed Topic:</span></b> {{ task.language or "Not set" }}</span>
-                    <span><b><span data-i18n="tasklabels.training">Training Type:</span></b> {{ task.practice_type or "General" }}</span>
+                    <span><b><span data-i18n="tasklabels.type">Task Type:</span></b> {% if task.category == "Other" and task.custom_category %}{{ task.custom_category }}{% else %}<span data-ar="{{ task.category|ar_ui }}">{{ task.category }}</span>{% endif %}</span>
+                    <span><b><span data-i18n="tasklabels.main">Main Field:</span></b> {% if task.topic == "Other" and task.custom_topic %}{{ task.custom_topic }}{% else %}<span data-ar="{{ (task.topic or "Not set")|ar_ui }}">{{ task.topic or "Not set" }}</span>{% endif %}</span>
+                    <span><b><span data-i18n="tasklabels.sub">Sub Field:</span></b> {% if task.skill == "Other" and task.custom_skill %}{{ task.custom_skill }}{% else %}<span data-ar="{{ (task.skill or "Not set")|ar_ui }}">{{ task.skill or "Not set" }}</span>{% endif %}</span>
+                    <span><b><span data-i18n="tasklabels.detail">Detailed Topic:</span></b> <span data-ar="{{ (task.language or "Not set")|ar_ui }}">{{ task.language or "Not set" }}</span></span>
+                    <span><b><span data-i18n="tasklabels.training">Training Type:</span></b> <span data-ar="{{ (task.practice_type or "General")|ar_ui }}">{{ task.practice_type or "General" }}</span></span>
                     <span><b><span data-i18n="tasklabels.source">Source:</span></b> {{ task.source|clickable_sources }}</span>
-                    <span>{{ task.estimated_minutes }} min · Priority {{ task.priority }} · Difficulty {{ task.difficulty }}</span>
-                    <span>From {{ task.start_date or "not set" }} to {{ task.due_date or "not set" }} · {{ task.repeat_type }} · Days: {{ task.repeat_days or "all/none" }}</span>
-                    <span>Reminder: {{ task.reminder_time or "not set" }}</span>
+                    <span>{{ task.estimated_minutes }} min · <span data-ar="الأولوية">Priority</span> {{ task.priority }} · <span data-ar="الصعوبة">Difficulty</span> {{ task.difficulty }}</span>
+                    <span><span data-ar="من">From</span> {{ task.start_date or "not set" }} <span data-ar="إلى">to</span> {{ task.due_date or "not set" }} · <span data-ar="{{ task.repeat_type|ar_ui }}">{{ task.repeat_type }}</span> · <span data-ar="الأيام">Days</span>: <span data-ar="{{ (task.repeat_days or "all/none")|ar_ui }}">{{ task.repeat_days or "all/none" }}</span></span>
+                    <span><span data-ar="التذكير">Reminder</span>: {{ task.reminder_time or "not set" }}</span>
                 </div>
 
                 <div class="actions">

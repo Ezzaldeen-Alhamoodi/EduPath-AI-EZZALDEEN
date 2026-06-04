@@ -1320,3 +1320,30 @@ Desktop sidebar design refinement.
 - AI Coach pages and outputs remain English.
 - No database changes.
 - No AI usage.
+
+
+## v4.8.6 Full Arabic Dynamic Content
+
+### Stronger Arabic coverage
+- Added backend Arabic display filters for dynamic content:
+  - resource categories
+  - resource subcategories
+  - resource levels
+  - resource types
+  - task categories
+  - task fields
+  - task training types
+- Added data-ar attributes to dynamic templates so Arabic mode can translate server-rendered content.
+- Added a large adaptive task/resource Arabic map for JavaScript-generated task options.
+- Improved Resources and My Resources Arabic display.
+- Improved adaptive Tasks Arabic display.
+
+### Design preservation
+- Arabic mode keeps the same desktop design, colors, icons, and layout.
+- Mobile design remains unchanged.
+- AI Coach pages remain English.
+
+### AI usage
+- 0 API calls.
+- 0 OpenRouter usage.
+- 0 cost.

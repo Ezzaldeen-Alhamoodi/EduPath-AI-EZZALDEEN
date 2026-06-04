@@ -2509,3 +2509,149 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("click", () => setTimeout(() => applyLooseArabicTranslationV485(document), 180));
     document.addEventListener("change", () => setTimeout(() => applyLooseArabicTranslationV485(document), 180));
 });
+
+
+
+/* EduPath AI v4.8.6 adaptive task/resource Arabic map */
+const EDUPATH_TASK_DYNAMIC_AR_V486 = {
+    "Python": "بايثون", "C": "لغة C", "C++": "لغة C++", "Java": "جافا", "JavaScript": "جافاسكريبت",
+    "TypeScript": "تايب سكريبت", "HTML": "HTML", "CSS": "CSS", "SQL": "SQL", "Flask": "فلاسك",
+    "Django": "جانغو", "React": "رياكت", "Node.js": "نود.js", "PHP": "PHP", "C#": "C#",
+    "Go": "Go", "Rust": "Rust", "Kotlin": "كوتلن", "Swift": "سويفت",
+    "Bash / Linux Shell": "باش / أوامر لينكس", "Git / GitHub": "Git / GitHub",
+    "Web Development": "تطوير الويب", "Frontend Development": "تطوير الواجهة الأمامية",
+    "Backend Development": "تطوير الواجهة الخلفية", "Full Stack Development": "تطوير شامل",
+    "Mobile App Development": "تطوير تطبيقات الهاتف", "Desktop App Development": "تطوير تطبيقات سطح المكتب",
+    "Databases": "قواعد البيانات", "Algorithms": "الخوارزميات", "Data Structures": "هياكل البيانات",
+    "Problem Solving": "حل المشكلات", "Debugging": "تصحيح الأخطاء", "Software Engineering": "هندسة البرمجيات",
+    "Software Testing": "اختبار البرمجيات", "Operating Systems": "أنظمة التشغيل",
+    "Computer Networks": "شبكات الحاسوب", "Cybersecurity": "الأمن السيبراني",
+    "Information Technology": "تقنية المعلومات", "IT Security": "أمن تقنية المعلومات",
+    "Cloud Computing": "الحوسبة السحابية", "DevOps": "DevOps", "APIs": "واجهات API",
+    "Memory Management": "إدارة الذاكرة", "Hardware": "العتاد", "Computer Architecture": "معمارية الحاسوب",
+    "Embedded Systems": "الأنظمة المضمنة", "Artificial Intelligence": "الذكاء الاصطناعي",
+    "Machine Learning": "تعلم الآلة", "Data Science": "علم البيانات", "Projects": "المشاريع",
+    "Documentation": "التوثيق", "Syntax": "الصياغة", "Variables": "المتغيرات", "Data Types": "أنواع البيانات",
+    "Conditions": "الشروط", "Loops": "الحلقات", "Functions": "الدوال", "Lists": "القوائم",
+    "Tuples": "القوائم الثابتة", "Dictionaries": "القواميس", "Sets": "المجموعات", "Files": "الملفات",
+    "OOP": "البرمجة الكائنية", "Modules": "الوحدات", "Libraries": "المكتبات",
+    "Virtual Environment": "البيئة الافتراضية", "Data Analysis": "تحليل البيانات", "Automation": "الأتمتة",
+    "Web Scraping": "استخراج بيانات الويب", "Build Page": "بناء صفحة", "Design Layout": "تصميم التخطيط",
+    "Fix Bug": "إصلاح خطأ", "Connect Backend": "ربط الخلفية", "Create Form": "إنشاء نموذج",
+    "Make Responsive": "جعله متجاوبًا", "Deploy Website": "نشر الموقع", "Improve UI": "تحسين الواجهة",
+    "Practice Project": "تدريب مشروع", "Searching": "البحث", "Sorting": "الفرز", "Recursion": "الاستدعاء الذاتي",
+    "Greedy Algorithms": "الخوارزميات الجشعة", "Dynamic Programming": "البرمجة الديناميكية",
+    "Graph Algorithms": "خوارزميات الرسوم البيانية", "Tree Algorithms": "خوارزميات الأشجار",
+    "Backtracking": "التراجع", "Divide and Conquer": "فرّق تسد", "Complexity Analysis": "تحليل التعقيد",
+    "Understand Concept": "فهم المفهوم", "Solve Problem": "حل مسألة", "Analyze Time Complexity": "تحليل التعقيد الزمني",
+    "Code Implementation": "تطبيق بالكود", "Security Basics": "أساسيات الأمن", "Network Security": "أمن الشبكات",
+    "Web Security": "أمن الويب", "Linux Security": "أمن لينكس", "Cryptography": "التشفير",
+    "Ethical Hacking Basics": "أساسيات الاختراق الأخلاقي", "Vulnerabilities": "الثغرات",
+    "Authentication": "المصادقة", "OWASP Basics": "أساسيات OWASP", "Malware Basics": "أساسيات البرمجيات الخبيثة",
+    "Digital Forensics Basics": "أساسيات الأدلة الرقمية", "Study Theory": "دراسة نظرية", "Practice Lab": "تدريب عملي",
+    "Read Article": "قراءة مقال", "Analyze Case": "تحليل حالة", "Secure App": "تأمين تطبيق",
+    "Review Vulnerability": "مراجعة ثغرة",
+
+    "Computer Science": "علوم الحاسوب", "Computer Engineering": "هندسة الحاسوب", "Engineering": "الهندسة",
+    "Medicine": "الطب", "Pharmacy": "الصيدلة", "Dentistry": "طب الأسنان", "Nursing": "التمريض",
+    "Business Administration": "إدارة الأعمال", "Accounting": "المحاسبة", "Finance": "التمويل",
+    "Economics": "الاقتصاد", "Marketing": "التسويق", "Management": "الإدارة", "Law": "القانون",
+    "Sharia and Law": "الشريعة والقانون", "Islamic Studies": "الدراسات الإسلامية", "Education": "التربية والتعليم",
+    "English Language": "اللغة الإنجليزية", "Arabic Language": "اللغة العربية", "Translation": "الترجمة",
+    "Media": "الإعلام", "Political Science": "العلوم السياسية", "Psychology": "علم النفس", "Sociology": "علم الاجتماع",
+    "Architecture": "العمارة", "Agriculture": "الزراعة", "Programming": "البرمجة",
+    "Discrete Mathematics": "الرياضيات المتقطعة", "Graduation Project": "مشروع التخرج",
+    "Lecture Study": "دراسة محاضرة", "Assignment": "واجب", "Lab Practice": "تدريب مختبر",
+    "Project Work": "عمل مشروع", "Exam Review": "مراجعة اختبار", "Research": "بحث", "Presentation": "عرض تقديمي",
+
+    "English": "الإنجليزية", "Chinese": "الصينية", "Turkish": "التركية", "Russian": "الروسية",
+    "Indonesian": "الإندونيسية", "Romanian": "الرومانية", "Arabic": "العربية", "French": "الفرنسية", "German": "الألمانية",
+    "IELTS": "آيلتس", "TOEFL": "توفل", "Duolingo English Test": "اختبار دولينجو", "HSK": "HSK",
+    "Grammar": "القواعد", "Vocabulary": "المفردات", "Pronunciation": "النطق", "Reading": "القراءة",
+    "Writing": "الكتابة", "Listening": "الاستماع", "Speaking": "التحدث", "Academic Language": "اللغة الأكاديمية",
+    "Mock Test": "اختبار تجريبي", "Reading Practice": "تدريب القراءة", "Writing Practice": "تدريب الكتابة",
+    "Listening Practice": "تدريب الاستماع", "Speaking Practice": "تدريب التحدث", "Vocabulary Review": "مراجعة المفردات",
+    "Grammar Practice": "تدريب القواعد", "Pronunciation Practice": "تدريب النطق", "Dictation": "إملاء",
+    "Shadowing": "محاكاة النطق", "Mistake Review": "مراجعة الأخطاء",
+
+    "Scholarship Search": "البحث عن منح", "University Research": "البحث عن جامعات", "Application Form": "نموذج التقديم",
+    "Documents": "المستندات", "CV": "السيرة الذاتية", "Motivation Letter": "خطاب الدافع",
+    "Personal Statement": "البيان الشخصي", "Recommendation Letter": "خطاب توصية", "Interview": "المقابلة",
+    "Language Test": "اختبار اللغة", "Portfolio": "ملف الأعمال", "Email Communication": "التواصل بالبريد",
+    "Visa": "التأشيرة", "Travel Preparation": "التحضير للسفر", "Follow-up": "المتابعة",
+    "Requirements": "المتطلبات", "Eligibility": "الأهلية", "Funding": "التمويل",
+    "Major Selection": "اختيار التخصص", "University Selection": "اختيار الجامعة",
+    "Document Preparation": "تجهيز المستندات", "Document Translation": "ترجمة المستندات",
+    "Application Review": "مراجعة الطلب", "Submission": "الإرسال", "Interview Practice": "تدريب مقابلة",
+    "Search": "بحث", "Compare": "مقارنة", "Prepare": "تحضير", "Write": "كتابة", "Upload": "رفع",
+    "Submit": "إرسال", "Follow Up": "متابعة", "Practice Interview": "تدريب مقابلة", "Final Check": "فحص نهائي",
+
+    "Health": "الصحة", "Exercise": "الرياضة", "Sleep": "النوم", "Food": "الطعام", "Water": "الماء",
+    "Personal Routine": "الروتين الشخصي", "Family": "العائلة", "Cleaning": "التنظيف", "Shopping": "التسوق",
+    "Time Management": "إدارة الوقت", "Religious Routine": "الروتين الديني", "Appointments": "المواعيد",
+    "Daily Habit": "عادة يومية", "Weekly Routine": "روتين أسبوعي", "Reminder": "تذكير",
+    "Personal Task": "مهمة شخصية", "Important Appointment": "موعد مهم", "Self-care": "العناية بالنفس",
+    "Do Task": "تنفيذ المهمة", "Review Progress": "مراجعة التقدم", "Repeat Habit": "تكرار العادة",
+    "Improve Routine": "تحسين الروتين",
+
+    "Programming Project": "مشروع برمجي", "AI Project": "مشروع ذكاء اصطناعي", "Web Project": "مشروع ويب",
+    "Mobile App": "تطبيق هاتف", "Research Project": "مشروع بحثي", "School Project": "مشروع مدرسي",
+    "University Project": "مشروع جامعي", "Scholarship Portfolio": "ملف منحة", "Personal Project": "مشروع شخصي",
+    "Idea": "فكرة", "Planning": "تخطيط", "Design": "تصميم", "Frontend": "واجهة أمامية", "Backend": "واجهة خلفية",
+    "Database": "قاعدة بيانات", "AI Model": "نموذج ذكاء اصطناعي", "Testing": "اختبار", "Deployment": "نشر",
+    "Brainstorm": "عصف ذهني", "Build": "بناء", "Code": "برمجة", "Test": "اختبار", "Improve": "تحسين",
+    "Deploy": "نشر", "Write Documentation": "كتابة التوثيق",
+
+    "IELTS Academic": "آيلتس أكاديمي", "IELTS General Training": "آيلتس التدريب العام",
+    "Academic Reading": "قراءة أكاديمية", "General Training Reading": "قراءة التدريب العام",
+    "Task 1 Academic": "المهمة الأولى الأكاديمية", "Task 2 Academic": "المهمة الثانية الأكاديمية",
+    "Task 1 General": "المهمة الأولى العامة", "Task 2 General": "المهمة الثانية العامة",
+    "Part 1": "الجزء الأول", "Part 2": "الجزء الثاني", "Part 3": "الجزء الثالث",
+    "Read and Select": "اقرأ واختر", "Fill in the Blanks": "املأ الفراغات",
+    "Read and Complete": "اقرأ وأكمل", "Interactive Reading": "القراءة التفاعلية",
+    "Listen and Type": "استمع واكتب", "Interactive Listening": "الاستماع التفاعلي",
+    "Write About the Photo": "اكتب عن الصورة", "Writing Sample": "عينة كتابة",
+    "Interactive Writing": "الكتابة التفاعلية", "Speak About the Photo": "تحدث عن الصورة",
+    "Read Then Speak": "اقرأ ثم تحدث", "Speaking Sample": "عينة تحدث",
+    "Interactive Speaking": "التحدث التفاعلي", "Complete the Words": "أكمل الكلمات",
+    "Read in Daily Life": "القراءة في الحياة اليومية", "Read an Academic Passage": "قراءة نص أكاديمي",
+    "Listen and Choose a Response": "استمع واختر الرد", "Listen to a Conversation": "استمع إلى محادثة",
+    "Listen to an Announcement": "استمع إلى إعلان", "Listen to an Academic Talk": "استمع إلى حديث أكاديمي",
+    "Build a Sentence": "ابنِ جملة", "Write an Email": "اكتب بريدًا إلكترونيًا",
+    "Write for an Academic Discussion": "اكتب لمناقشة أكاديمية", "Take an Interview": "أجرِ مقابلة",
+
+    "Mathematics": "الرياضيات", "Arithmetic": "الحساب", "Pre-Algebra": "ما قبل الجبر", "Algebra": "الجبر",
+    "Geometry": "الهندسة", "Trigonometry": "المثلثات", "Calculus": "التفاضل والتكامل",
+    "Statistics": "الإحصاء", "Probability": "الاحتمالات", "Linear Algebra": "الجبر الخطي",
+    "Course": "دورة", "Website": "موقع", "Book": "كتاب", "Tool": "أداة", "Practice": "تدريب",
+    "Video Lessons": "دروس فيديو", "Community": "مجتمع", "App": "تطبيق", "Official Practice": "تدريب رسمي",
+    "Question Bank": "بنك أسئلة", "Beginner": "مبتدئ", "Intermediate": "متوسط", "Advanced": "متقدم",
+    "Beginner → Intermediate": "مبتدئ → متوسط", "Intermediate → Advanced": "متوسط → متقدم",
+    "Beginner → Advanced": "مبتدئ → متقدم", "All Levels": "كل المستويات",
+    "Islamic Learning": "التعلم الإسلامي", "Keyboard Typing": "الكتابة على الكيبورد"
+};
+
+function translateAdaptiveOptionsV486(root=document) {
+    const lang = localStorage.getItem("edupath-language") || "en";
+    if (lang !== "ar" || edupathIsCoachPageV484()) return;
+    root.querySelectorAll("option, .task-type-card strong, .task-card span, .task-card b, .resource-card span, .resource-card p, .resource-card h3, .resource-category-strip a").forEach(el => {
+        if (!el || el.closest("script, style, code, pre, textarea")) return;
+        const txt = normalizeEduPathTextV484(el.textContent);
+        if (EDUPATH_TASK_DYNAMIC_AR_V486[txt]) {
+            el.textContent = EDUPATH_TASK_DYNAMIC_AR_V486[txt];
+            return;
+        }
+        let output = el.textContent;
+        Object.entries(EDUPATH_TASK_DYNAMIC_AR_V486).sort((a,b)=>b[0].length-a[0].length).forEach(([en, ar]) => {
+            output = output.replace(new RegExp(en.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g"), ar);
+        });
+        if (output !== el.textContent) el.textContent = output;
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => { applyDataArabicV486(document); translateAdaptiveOptionsV486(document); }, 300);
+    setTimeout(() => { applyDataArabicV486(document); translateAdaptiveOptionsV486(document); }, 1000);
+    document.addEventListener("click", () => setTimeout(() => { applyDataArabicV486(document); translateAdaptiveOptionsV486(document); }, 160));
+    document.addEventListener("change", () => setTimeout(() => { applyDataArabicV486(document); translateAdaptiveOptionsV486(document); }, 160));
+});

@@ -1087,6 +1087,242 @@ def resource_match_score(resource, text):
 
 
 
+
+AR_UI_TERMS = {
+    # Resource categories
+    "Mathematics": "الرياضيات",
+    "English": "اللغة الإنجليزية",
+    "Languages": "اللغات",
+    "Programming": "البرمجة",
+    "Programming & Technology": "البرمجة والتكنولوجيا",
+    "Computer Science": "علوم الحاسوب",
+    "Artificial Intelligence": "الذكاء الاصطناعي",
+    "Data Science": "علم البيانات",
+    "Scholarship": "المنح الدراسية",
+    "Scholarships": "المنح الدراسية",
+    "Islamic Learning": "التعلم الإسلامي",
+    "Quran Memorization": "حفظ القرآن",
+    "Keyboard Typing": "الكتابة على الكيبورد",
+    "CSCA": "اختبار CSCA",
+    "IELTS": "آيلتس",
+    "TOEFL": "توفل",
+    "Duolingo English Test": "اختبار دولينجو للغة الإنجليزية",
+    "SAT": "اختبار SAT",
+    "ACT": "اختبار ACT",
+    "GRE": "اختبار GRE",
+    "GMAT": "اختبار GMAT",
+    "HSK": "اختبار HSK",
+    "Exam": "اختبار",
+    "Exams": "اختبارات",
+    "General": "عام",
+
+    # Resource subcategories/skills/types
+    "Arithmetic": "الحساب",
+    "Pre-Algebra": "ما قبل الجبر",
+    "Algebra": "الجبر",
+    "Geometry": "الهندسة",
+    "Trigonometry": "المثلثات",
+    "Precalculus": "ما قبل التفاضل والتكامل",
+    "Calculus": "التفاضل والتكامل",
+    "Linear Algebra": "الجبر الخطي",
+    "Statistics": "الإحصاء",
+    "Probability": "الاحتمالات",
+    "Discrete Mathematics": "الرياضيات المتقطعة",
+    "Problem Solving": "حل المشكلات",
+    "Olympiad Mathematics": "رياضيات الأولمبياد",
+    "Functions": "الدوال",
+    "Graphing": "الرسم البياني",
+    "School Math": "رياضيات المدرسة",
+    "Foundations": "الأساسيات",
+    "Algebra & Geometry": "الجبر والهندسة",
+    "Algebra & Trigonometry": "الجبر والمثلثات",
+    "Problem Solving": "حل المشكلات",
+    "Touch Typing": "الكتابة باللمس",
+    "Typing Speed": "سرعة الكتابة",
+    "Typing Accuracy": "دقة الكتابة",
+    "Typing Test": "اختبار الكتابة",
+    "Programming Typing": "الكتابة البرمجية",
+    "Reading": "القراءة",
+    "Writing": "الكتابة",
+    "Listening": "الاستماع",
+    "Speaking": "التحدث",
+    "Vocabulary": "المفردات",
+    "Grammar": "القواعد",
+    "Pronunciation": "النطق",
+    "Academic English": "الإنجليزية الأكاديمية",
+    "General English": "الإنجليزية العامة",
+    "Mechanics": "الميكانيكا",
+    "Physics": "الفيزياء",
+    "Chemistry": "الكيمياء",
+    "Biology": "الأحياء",
+    "Course": "دورة",
+    "Website": "موقع",
+    "Book": "كتاب",
+    "Tool": "أداة",
+    "Practice": "تدريب",
+    "Video Lessons": "دروس فيديو",
+    "Community": "مجتمع",
+    "App": "تطبيق",
+    "Official Practice": "تدريب رسمي",
+    "Mock Test": "اختبار تجريبي",
+    "Question Bank": "بنك أسئلة",
+    "Dictionary": "قاموس",
+    "Beginner": "مبتدئ",
+    "Intermediate": "متوسط",
+    "Advanced": "متقدم",
+    "Beginner → Intermediate": "مبتدئ → متوسط",
+    "Intermediate → Advanced": "متوسط → متقدم",
+    "Beginner → Advanced": "مبتدئ → متقدم",
+    "All Levels": "كل المستويات",
+    "English": "الإنجليزية",
+    "Arabic": "العربية",
+    "Arabic/English": "العربية/الإنجليزية",
+    "English/Arabic": "الإنجليزية/العربية",
+
+    # Task types/options
+    "Secondary School": "المرحلة الثانوية",
+    "University": "الجامعة",
+    "High School": "المرحلة الثانوية",
+    "Daily Life": "الحياة اليومية",
+    "Projects": "المشاريع",
+    "Project": "مشروع",
+    "Reading and Research": "القراءة والبحث",
+    "Other": "أخرى",
+    "Not set": "غير محدد",
+    "not set": "غير محدد",
+    "all/none": "الكل/لا شيء",
+    "once": "مرة واحدة",
+    "daily": "يوميًا",
+    "weekly": "أسبوعيًا",
+    "monthly": "شهريًا",
+    "selected_days": "أيام محددة",
+    "General": "عام",
+    "Study Concept": "دراسة مفهوم",
+    "Write Code": "كتابة كود",
+    "Solve Exercises": "حل تمارين",
+    "Build Mini Project": "بناء مشروع صغير",
+    "Debug Code": "تصحيح كود",
+    "Read Documentation": "قراءة التوثيق",
+    "Review Mistakes": "مراجعة الأخطاء",
+    "Practice Syntax": "تدريب القواعد البرمجية",
+    "Build App": "بناء تطبيق",
+    "Study Lesson": "دراسة الدرس",
+    "Timed Practice": "تدريب مؤقت",
+    "Prepare for Exam": "التحضير للاختبار",
+    "Memorize Formulas": "حفظ القوانين",
+    "Review": "مراجعة",
+    "Memorize": "حفظ",
+    "Listen": "استماع",
+    "Recite": "تلاوة",
+    "Correct Mistakes": "تصحيح الأخطاء",
+}
+
+AR_RESOURCE_NAME_HINTS = {
+    "Khan Academy": "أكاديمية خان",
+    "OpenStax": "أوبن ستاكس",
+    "Math Is Fun": "الرياضيات ممتعة",
+    "Purplemath": "بيربل ماث",
+    "Math Planet": "كوكب الرياضيات",
+    "GeoGebra": "جيوجبرا",
+    "Desmos": "ديسموس",
+    "StatQuest": "ستات كويست",
+    "TypingClub": "تايبنغ كلوب",
+    "Typing.com": "تايبنغ دوت كوم",
+    "Keybr": "كيبر",
+    "Monkeytype": "مونكي تايب",
+    "TypeRacer": "تايب ريسر",
+    "BBC Learning English": "BBC لتعلم الإنجليزية",
+    "Breaking News English": "Breaking News English",
+    "VOA Learning English": "VOA لتعلم الإنجليزية",
+    "ReadTheory": "ريد ثيوري",
+    "IELTS Liz": "آيلتس ليز",
+    "IELTS Advantage": "آيلتس أدفانتج",
+    "British Council": "المجلس الثقافي البريطاني",
+    "TOEFL": "توفل",
+    "Duolingo": "دولينجو",
+    "Quran.com": "موقع القرآن Quran.com",
+    "Tarteel": "ترتيل",
+    "Sunnah.com": "موقع السنة Sunnah.com",
+    "Dorar": "الدرر السنية",
+}
+
+AR_DESCRIPTION_REPLACEMENTS = {
+    "Free": "مجاني",
+    "official": "رسمي",
+    "Official": "رسمي",
+    "practice": "تدريب",
+    "Practice": "تدريب",
+    "course": "دورة",
+    "Course": "دورة",
+    "lessons": "دروس",
+    "Lessons": "دروس",
+    "resources": "مصادر",
+    "Resources": "مصادر",
+    "exercises": "تمارين",
+    "Exercises": "تمارين",
+    "test": "اختبار",
+    "Test": "اختبار",
+    "exam": "اختبار",
+    "Exam": "اختبار",
+    "math": "رياضيات",
+    "Math": "رياضيات",
+    "algebra": "جبر",
+    "Algebra": "جبر",
+    "geometry": "هندسة",
+    "Geometry": "هندسة",
+    "calculus": "تفاضل وتكامل",
+    "Calculus": "تفاضل وتكامل",
+    "statistics": "إحصاء",
+    "Statistics": "إحصاء",
+    "probability": "احتمالات",
+    "Probability": "احتمالات",
+    "typing": "كتابة على الكيبورد",
+    "Typing": "كتابة على الكيبورد",
+    "speed": "سرعة",
+    "Speed": "سرعة",
+    "accuracy": "دقة",
+    "Accuracy": "دقة",
+    "English": "الإنجليزية",
+    "Quran": "القرآن",
+    "programming": "برمجة",
+    "Programming": "برمجة",
+    "beginner": "مبتدئ",
+    "Beginner": "مبتدئ",
+    "advanced": "متقدم",
+    "Advanced": "متقدم",
+    "intermediate": "متوسط",
+    "Intermediate": "متوسط",
+}
+
+def ar_ui(value):
+    if value is None:
+        return ""
+    text = str(value)
+    # Only translate when Arabic language is selected on the client; use span with data fields for JS too.
+    translated = AR_UI_TERMS.get(text, text)
+    if translated == text:
+        for key, val in AR_RESOURCE_NAME_HINTS.items():
+            if key in text:
+                translated = text.replace(key, val)
+                break
+    if translated == text and len(text) <= 160:
+        translated = text
+        for key, val in AR_DESCRIPTION_REPLACEMENTS.items():
+            translated = re.sub(rf"\\b{re.escape(key)}\\b", val, translated)
+    return translated
+
+def ar_resource_name(value):
+    return ar_ui(value)
+
+def ar_resource_description(value):
+    if not value:
+        return ""
+    text = str(value)
+    for key, val in AR_DESCRIPTION_REPLACEMENTS.items():
+        text = re.sub(rf"\\b{re.escape(key)}\\b", val, text)
+    # Simple readable fallback for English descriptions
+    return text
+
 def render_clickable_sources(value):
     """Render source text safely: plain text stays plain, URLs become clickable links.
     Multiple sources can be separated by &.
@@ -1143,6 +1379,9 @@ def ensure_all_users_subscription_codes():
 def create_app():
     app = Flask(__name__)
     app.jinja_env.filters["clickable_sources"] = render_clickable_sources
+    app.jinja_env.filters["ar_ui"] = ar_ui
+    app.jinja_env.filters["ar_resource_name"] = ar_resource_name
+    app.jinja_env.filters["ar_resource_description"] = ar_resource_description
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
     app.permanent_session_lifetime = timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30")))
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
