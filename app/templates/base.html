@@ -27,18 +27,14 @@
             </div>
         </div>
 
-        <button class="theme-toggle" id="themeToggle" type="button">🌙 Dark Mode</button>
-        <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language">عربي | EN</button>
+        <div class="desktop-quick-controls-v481">
+            <button class="theme-toggle icon-toggle-v481" id="themeToggle" type="button" title="Toggle theme">🌙</button>
+            <button class="language-toggle icon-toggle-v481" id="languageToggle" type="button" aria-label="Switch language" title="Switch language">EN</button>
+        </div>
 
-        <div class="user-mini-panel">
+        <div class="user-mini-panel compact-user-panel-v481">
             {% if current_user.is_authenticated %}
-                <div class="user-avatar">👤</div>
-                <div>
-                    <strong>{{ current_user.name }}</strong>
-                    <span>{{ current_user.email }}</span>
-                </div>
                 <a class="mini-link" href="{{ url_for('profile') }}"><span data-i18n="user.profile">Profile</span></a>
-                {% if current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS %}<a class="mini-link" href="{{ url_for('admin_dashboard') }}"><span data-i18n="user.admin">Admin</span></a>{% endif %}
                 <a class="mini-link logout" href="{{ url_for('logout') }}"><span data-i18n="user.logout">Logout</span></a>
             {% else %}
                 <a class="mini-link" href="{{ url_for('login') }}"><span data-i18n="user.login">Login</span></a>
@@ -56,7 +52,7 @@
             {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}<a href="{{ url_for('admin_dashboard') }}"><span data-i18n="nav.admin">Admin</span></a>{% endif %}
         </nav>
 
-        <button class="notify-btn" id="enableNotifications">🔔 Enable Reminders</button>
+        <button class="notify-btn" id="enableNotifications">Enable Reminders</button>
     </aside>
 
     <main class="main">

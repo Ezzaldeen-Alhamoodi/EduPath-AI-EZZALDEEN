@@ -1879,3 +1879,23 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(applyArabicSpecialTaskLabelsV477, 350);
     setTimeout(translateOptionsArabicSpecialV477, 500);
 });
+
+
+
+/* EduPath AI v4.8.1 compact desktop controls */
+function compactDesktopControlsV481() {
+    const theme = document.getElementById("themeToggle");
+    const lang = document.getElementById("languageToggle");
+    if (theme && window.innerWidth >= 981) {
+        theme.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    }
+    if (lang && window.innerWidth >= 981) {
+        const current = localStorage.getItem("edupath-language") || "en";
+        lang.textContent = current === "ar" ? "EN" : "ع";
+    }
+}
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(compactDesktopControlsV481, 100);
+    document.addEventListener("click", () => setTimeout(compactDesktopControlsV481, 80));
+    window.addEventListener("resize", compactDesktopControlsV481);
+});

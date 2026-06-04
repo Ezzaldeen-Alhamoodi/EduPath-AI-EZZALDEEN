@@ -1181,3 +1181,25 @@ Professional subscription-code system.
 - User enters a code in Profile.
 - If valid and unused, the paid version activates.
 - If invalid, used, cancelled, or too many failed attempts, a safe error message appears.
+
+
+## v4.8.1 Desktop Navigation Polish
+
+Focused desktop UI refinement.
+
+### Changed
+- Made dark/light mode button compact on desktop.
+- Made language button compact on desktop.
+- Removed displayed user name and email from the desktop sidebar.
+- Kept user details available inside Profile only.
+- Removed duplicated Profile/Admin links from the mini user panel.
+- Kept Profile in the main navigation.
+- Kept Admin visible only to admin users.
+- Kept Enable Reminders as the last sidebar control.
+- Reduced desktop sidebar width and spacing for more workspace area.
+- No database changes.
+
+### AI usage
+- 0 API calls.
+- 0 OpenRouter usage.
+- 0 cost.
