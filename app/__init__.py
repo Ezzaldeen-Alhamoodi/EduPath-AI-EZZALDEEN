@@ -1128,13 +1128,18 @@ DASHBOARD_AR_LABELS = {
     "Geometry": "الهندسة",
     "Physics": "الفيزياء",
     "Chemistry": "الكيمياء",
-    "Submit": "تسليم",
+    "Submit": "تقديم",
     "Review": "مراجعة",
     "Study": "دراسة",
     "Practice": "تدريب",
     "Homework": "واجب",
     "Exam": "اختبار",
     "Project": "مشروع",
+    "Apply": "تقديم",
+    "Scholarship Application": "طلب منحة",
+    "Application Form": "نموذج التقديم",
+    "Upload": "رفع",
+    "Prepare": "تحضير",
 }
 
 def dashboard_ar(value):

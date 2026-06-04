@@ -1342,3 +1342,22 @@ Dashboard-only final polish.
 - Dashboard only.
 - No changes to Tasks, Goals, Resources adaptive logic.
 - No database changes.
+
+
+## v5.1.5 Dashboard Responsive Final
+
+Dashboard-only responsive polish.
+
+### Fixed
+- Desktop dashboard now uses the available width better.
+- Mobile dashboard layout repaired and compacted.
+- Hero box is now clearly blue-toned, not yellow.
+- Progress card text is visible in light and dark mode.
+- Statistic cards are compact; numbers sit beside labels instead of far away.
+- Dashboard future labels use meaning-based Arabic, for example Submit → تقديم.
+- No change to Tasks, Goals, Resources, or adaptive logic.
+
+### Safety
+- Dashboard-only CSS/content changes.
+- No database changes.
+- No adaptive JavaScript modifications.
