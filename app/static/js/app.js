@@ -2173,8 +2173,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/* EduPath AI v5.2.3 Complete Arabic Smart Goals */
-const GOAL_AR_V523 = {
+/* EduPath AI v5.2.4 Urgent Goals Fix */
+const GOAL_AR_V524 = {
     "Education": "التعليم",
     "Language": "اللغات",
     "Exam / Certificate": "الاختبارات الدولية",
@@ -2190,6 +2190,41 @@ const GOAL_AR_V523 = {
     "Other": "أخرى",
     "Custom": "أخرى",
     "Custom Plan": "أخرى",
+
+    "الثانوية العامة": "الثانوية العامة",
+    "الجامعة": "الجامعة",
+    "التعليم الذاتي": "التعليم الذاتي",
+    "التعليم عن بعد": "التعليم عن بعد",
+    "الدورات التدريبية": "الدورات التدريبية",
+    "القرآن الكريم": "القرآن الكريم",
+    "التربية الإسلامية": "التربية الإسلامية",
+    "اللغة العربية": "اللغة العربية",
+    "اللغة الإنجليزية": "اللغة الإنجليزية",
+    "الرياضيات": "الرياضيات",
+    "الفيزياء": "الفيزياء",
+    "الكيمياء": "الكيمياء",
+    "الأحياء": "الأحياء",
+    "التاريخ": "التاريخ",
+    "الجغرافيا": "الجغرافيا",
+    "المجتمع": "المجتمع",
+    "ضعيف": "ضعيف",
+    "مقبول": "مقبول",
+    "جيد": "جيد",
+    "جيد جداً": "جيد جداً",
+    "ممتاز": "ممتاز",
+    "رفع المعدل": "رفع المعدل",
+    "إتقان المنهج": "إتقان المنهج",
+    "الحصول على درجة كاملة": "الحصول على درجة كاملة",
+    "الاستعداد للاختبار النهائي": "الاستعداد للاختبار النهائي",
+    "حفظ مقرر": "حفظ مقرر",
+    "مراجعة دروس": "مراجعة دروس",
+    "حل واجبات": "حل واجبات",
+    "مراجعة يومية": "مراجعة يومية",
+    "مراجعة أسبوعية": "مراجعة أسبوعية",
+    "30 دقيقة يومياً": "30 دقيقة يومياً",
+    "45 دقيقة يومياً": "45 دقيقة يومياً",
+    "60 دقيقة يومياً": "60 دقيقة يومياً",
+    "90 دقيقة يومياً": "90 دقيقة يومياً",
 
     "English": "English",
     "Chinese": "Chinese",
@@ -2211,13 +2246,26 @@ const GOAL_AR_V523 = {
 
     "Full Official Test": "Full Official Test",
     "Mock Test": "Mock Test",
-    "Listening": "Listening",
     "Reading": "Reading",
-    "Writing": "Writing",
+    "Listening": "Listening",
     "Speaking": "Speaking",
-    "Vocabulary": "Vocabulary",
-    "Grammar": "Grammar",
-    "Pronunciation": "Pronunciation",
+    "Writing": "Writing",
+    "Complete the Words": "Complete the Words",
+    "Read in Daily Life": "Read in Daily Life",
+    "Read an Academic Passage": "Read an Academic Passage",
+    "Build a Sentence": "Build a Sentence",
+    "Write an Email": "Write an Email",
+    "Write for an Academic Discussion": "Write for an Academic Discussion",
+    "Listen and Repeat": "Listen and Repeat",
+    "Take an Interview": "Take an Interview",
+    "Listen and Choose a Response": "Listen and Choose a Response",
+    "Listen to a Conversation": "Listen to a Conversation",
+    "Listen to an Announcement": "Listen to an Announcement",
+    "Listen to an Academic Talk": "Listen to an Academic Talk",
+    "Vocabulary Building": "Vocabulary Building",
+    "Grammar Practice": "Grammar Practice",
+    "Time Management": "Time Management",
+
     "Writing Task 1": "Writing Task 1",
     "Writing Task 2": "Writing Task 2",
     "Speaking Part 1": "Speaking Part 1",
@@ -2232,9 +2280,6 @@ const GOAL_AR_V523 = {
     "Form Completion": "Form Completion",
     "Note Completion": "Note Completion",
     "Flow Chart Completion": "Flow Chart Completion",
-    "Academic Discussion": "Academic Discussion",
-    "Integrated Writing": "Integrated Writing",
-    "Independent Writing": "Independent Writing",
     "Read and Select": "Read and Select",
     "Fill in the Blanks": "Fill in the Blanks",
     "Read and Complete": "Read and Complete",
@@ -2254,53 +2299,36 @@ const GOAL_AR_V523 = {
     "C++": "C++",
     "Java": "Java",
     "JavaScript": "JavaScript",
-    "TypeScript": "TypeScript",
     "HTML": "HTML",
     "CSS": "CSS",
     "SQL": "SQL",
     "Flask": "Flask",
-    "Django": "Django",
     "React": "React",
     "Node.js": "Node.js",
     "Git / GitHub": "Git / GitHub",
+    "OOP": "OOP",
+    "Routes": "Routes",
+    "Templates": "Templates",
+    "Forms": "Forms",
+    "Authentication": "Authentication",
+    "Database": "Database",
+    "Deployment": "Deployment",
+    "API": "API",
 
     "Machine Learning": "Machine Learning",
     "Deep Learning": "Deep Learning",
     "NLP": "NLP",
     "Computer Vision": "Computer Vision",
     "Data Science": "Data Science",
-
-    "School Study": "الدراسة المدرسية",
-    "University Study": "الدراسة الجامعية",
-    "Online Course": "دورة تعليمية",
-    "Research": "بحث",
-    "Presentation": "عرض تقديمي",
-    "Mathematics": "الرياضيات",
-    "Physics": "الفيزياء",
-    "Chemistry": "الكيمياء",
-    "Biology": "الأحياء",
-    "Arabic": "Arabic",
-    "Exam Review": "مراجعة اختبار",
-    "Homework": "واجبات",
-    "Course Study": "دراسة مقرر",
-    "Assignment": "واجب جامعي",
-    "Lab": "تطبيق عملي",
-    "Course Lessons": "دروس الدورة",
-    "Practice": "تدريب",
-    "Certificate": "شهادة",
-    "Topic Selection": "اختيار الموضوع",
-    "Summary": "تلخيص",
-    "Content Preparation": "إعداد المحتوى",
-    "Slides": "العرض المرئي",
-    "Practice Speaking": "تدريب الإلقاء",
-    "Final Review": "مراجعة نهائية",
-
-    "General English": "General English",
-    "Academic English": "Academic English",
-    "General Chinese": "General Chinese",
-    "Characters": "Characters",
-    "General Language": "لغة عامة",
-    "Exam Preparation": "التحضير للاختبار",
+    "جمع البيانات": "جمع البيانات",
+    "تنظيف البيانات": "تنظيف البيانات",
+    "تحليل البيانات": "تحليل البيانات",
+    "تدريب النموذج": "تدريب النموذج",
+    "تقييم النموذج": "تقييم النموذج",
+    "تحسين النموذج": "تحسين النموذج",
+    "اختبار النموذج": "اختبار النموذج",
+    "نشر المشروع": "نشر المشروع",
+    "بناء مشروع عملي": "بناء مشروع عملي",
 
     "البحث عن منح": "البحث عن منح",
     "اختيار الجامعات": "اختيار الجامعات",
@@ -2321,32 +2349,6 @@ const GOAL_AR_V523 = {
     "التصديق": "التصديق",
     "رفع المستندات": "رفع المستندات",
     "مراجعة المستندات": "مراجعة المستندات",
-    "كتابة المسودة الأولى": "كتابة المسودة الأولى",
-    "تخصيص الرسالة": "تخصيص الرسالة",
-    "مراجعة اللغة": "مراجعة اللغة",
-    "المراجعة النهائية": "المراجعة النهائية",
-    "تدريب مقابلة": "تدريب مقابلة",
-    "أسئلة شائعة": "أسئلة شائعة",
-    "تحسين الإجابات": "تحسين الإجابات",
-    "زيادة الثقة": "زيادة الثقة",
-    "متابعة البريد": "متابعة البريد",
-    "فحص الطلب": "فحص الطلب",
-
-    "جمع البيانات": "جمع البيانات",
-    "تنظيف البيانات": "تنظيف البيانات",
-    "تحليل البيانات": "تحليل البيانات",
-    "تدريب النموذج": "تدريب النموذج",
-    "تقييم النموذج": "تقييم النموذج",
-    "تحسين النموذج": "تحسين النموذج",
-    "اختبار النموذج": "اختبار النموذج",
-    "نشر المشروع": "نشر المشروع",
-    "بناء مشروع عملي": "بناء مشروع عملي",
-    "فهم المفاهيم الأساسية": "فهم المفاهيم الأساسية",
-    "استخدام مكتبات أساسية": "استخدام مكتبات أساسية",
-    "تجربة نماذج جاهزة": "تجربة نماذج جاهزة",
-    "بناء نموذج بسيط": "بناء نموذج بسيط",
-    "بناء مشروع متكامل": "بناء مشروع متكامل",
-    "نشر نموذج قابل للاستخدام": "نشر نموذج قابل للاستخدام",
 
     "علوم الحاسوب": "علوم الحاسوب",
     "هندسة البرمجيات": "هندسة البرمجيات",
@@ -2365,19 +2367,15 @@ const GOAL_AR_V523 = {
     "الاقتصاد": "الاقتصاد",
     "القانون": "القانون",
     "الشريعة": "الشريعة",
-    "اللغة العربية": "اللغة العربية",
-    "اللغة الإنجليزية": "اللغة الإنجليزية",
     "التربية": "التربية",
     "الإعلام": "الإعلام",
     "العلوم السياسية": "العلوم السياسية",
-    "المقررات الأساسية": "المقررات الأساسية",
-    "المهارات العملية": "المهارات العملية",
-    "مشروع التخرج": "مشروع التخرج",
-    "التدريب العملي": "التدريب العملي",
-    "الاختبارات": "الاختبارات",
-    "الأبحاث": "الأبحاث",
-    "الواجبات": "الواجبات",
-    "المراجعة": "المراجعة",
+    "الخوارزميات": "الخوارزميات",
+    "هياكل البيانات": "هياكل البيانات",
+    "قواعد البيانات": "قواعد البيانات",
+    "تطوير الويب": "تطوير الويب",
+    "البرمجة الكائنية": "البرمجة الكائنية",
+    "المشاريع": "المشاريع",
 
     "الجبر": "الجبر",
     "الهندسة": "الهندسة",
@@ -2393,24 +2391,24 @@ const GOAL_AR_V523 = {
     "التحليل": "التحليل",
     "التطبيقات": "التطبيقات",
     "حل التمارين": "حل التمارين",
-    "القوانين": "القوانين",
-    "المسائل الكلامية": "المسائل الكلامية",
+    "الاختبارات": "الاختبارات",
+    "المراجعة": "المراجعة",
 
     "الصحة": "الصحة",
     "الرياضة": "الرياضة",
     "النوم": "النوم",
-    "التغذية": "التغذية",
     "شرب الماء": "شرب الماء",
+    "التغذية": "التغذية",
     "الروتين الشخصي": "الروتين الشخصي",
     "العائلة": "العائلة",
-    "إدارة المال": "إدارة المال",
-    "تنظيم المنزل": "تنظيم المنزل",
     "إدارة الوقت": "إدارة الوقت",
-    "العبادة اليومية": "العبادة اليومية",
-    "عادة يومية": "عادة يومية",
-    "روتين أسبوعي": "روتين أسبوعي",
-    "تذكير مهم": "تذكير مهم",
-    "العناية بالنفس": "العناية بالنفس",
+    "إدارة المال": "إدارة المال",
+    "الصلاة": "الصلاة",
+    "التسوق": "التسوق",
+    "ترتيب المنزل": "ترتيب المنزل",
+    "تنظيف المنزل": "تنظيف المنزل",
+    "القراءة": "القراءة",
+    "الاسترخاء": "الاسترخاء",
 
     "القرآن الكريم": "القرآن الكريم",
     "الحديث الشريف": "الحديث الشريف",
@@ -2429,16 +2427,23 @@ const GOAL_AR_V523 = {
     "التلاوة": "التلاوة",
     "التدبر": "التدبر",
     "ختمة": "ختمة",
-    "حفظ سورة محددة": "حفظ سورة محددة",
-    "حفظ جزء محدد": "حفظ جزء محدد",
 
+    "لا أعرف مستواي": "لا أعرف مستواي",
+    "لم أبدأ بعد": "لم أبدأ بعد",
     "مبتدئ": "مبتدئ",
     "متوسط": "متوسط",
     "متقدم": "متقدم",
-    "لم أبدأ بعد": "لم أبدأ بعد",
-    "قيد التقدم": "قيد التقدم",
-    "أحتاج إلى مراجعة": "أحتاج إلى مراجعة",
-    "لا أعرف مستواي": "لا أعرف مستواي",
+    "أعرف الأساسيات": "أعرف الأساسيات",
+    "أنهيت دورة": "أنهيت دورة",
+    "نفذت مشروعاً": "نفذت مشروعاً",
+    "بناء مشروع متكامل": "بناء مشروع متكامل",
+    "إتقان المجال": "إتقان المجال",
+    "الاستعداد لسوق العمل": "الاستعداد لسوق العمل",
+
+    "Band 4": "Band 4", "Band 4.5": "Band 4.5", "Band 5": "Band 5", "Band 5.5": "Band 5.5", "Band 6": "Band 6", "Band 6.5": "Band 6.5", "Band 7": "Band 7", "Band 7.5": "Band 7.5", "Band 8": "Band 8", "Band 8.5": "Band 8.5", "Band 9": "Band 9",
+    "0": "0", "1": "1", "2": "2", "3": "3", "4": "4", "5": "5", "6": "6",
+    "80+": "80+", "90+": "90+", "100+": "100+", "110+": "110+", "120+": "120+", "130+": "130+", "140+": "140+",
+
     "لا أحفظ شيئاً": "لا أحفظ شيئاً",
     "أحفظ جزءاً واحداً": "أحفظ جزءاً واحداً",
     "أحفظ 5 أجزاء": "أحفظ 5 أجزاء",
@@ -2452,50 +2457,34 @@ const GOAL_AR_V523 = {
     "20 جزءاً": "20 جزءاً",
     "القرآن كاملاً": "القرآن كاملاً",
 
-    "Band 4": "Band 4", "Band 4.5": "Band 4.5", "Band 5": "Band 5", "Band 5.5": "Band 5.5",
-    "Band 6": "Band 6", "Band 6.5": "Band 6.5", "Band 7": "Band 7", "Band 7.5": "Band 7.5",
-    "Band 8": "Band 8", "Band 8.5": "Band 8.5", "Band 9": "Band 9",
-    "80+": "80+", "90+": "90+", "100+": "100+", "110+": "110+", "120+": "120+", "130+": "130+", "140+": "140+",
-
-    "30 دقيقة يومياً": "30 دقيقة يومياً",
-    "45 دقيقة يومياً": "45 دقيقة يومياً",
-    "60 دقيقة يومياً": "60 دقيقة يومياً",
-    "90 دقيقة يومياً": "90 دقيقة يومياً",
+    "ساعة يومياً": "ساعة يومياً",
+    "مشروع أسبوعي": "مشروع أسبوعي",
+    "حل مسائل يومية": "حل مسائل يومية",
     "اختبار أسبوعي": "اختبار أسبوعي",
     "اختباران أسبوعياً": "اختباران أسبوعياً",
     "ربع صفحة يومياً": "ربع صفحة يومياً",
     "نصف صفحة يومياً": "نصف صفحة يومياً",
     "صفحة يومياً": "صفحة يومياً",
-    "صفحتان يومياً": "صفحتان يومياً",
-    "مراجعة يومية": "مراجعة يومية",
-    "مراجعة أسبوعية": "مراجعة أسبوعية",
-    "ساعة يومياً": "ساعة يومياً",
-    "مشروع أسبوعي": "مشروع أسبوعي",
-    "حل مسائل يومية": "حل مسائل يومية",
-    "متابعة أسبوعية": "متابعة أسبوعية",
-    "جلسة تدريب أسبوعية": "جلسة تدريب أسبوعية",
-    "محطة أسبوعية": "محطة أسبوعية"
+    "صفحتان يومياً": "صفحتان يومياً"
 };
 
-const GOAL_CONFIG_V523 = {
-    "Scholarship": {
-        categories: ["البحث عن منح","اختيار الجامعات","إعداد المستندات","السيرة الذاتية","رسالة الدافع","خطابات التوصية","المقابلات","اختبارات اللغة","إجراءات السفر","التأشيرة","المتابعة بعد التقديم","Other"],
+const GOAL_CONFIG_V524 = {
+    "Education": {
+        categories: ["الثانوية العامة","الجامعة","التعليم الذاتي","التعليم عن بعد","الدورات التدريبية","Other"],
         paths: {
-            "البحث عن منح": ["بحث يومي","قائمة منح مناسبة","مقارنة التمويل","شروط القبول","المواعيد النهائية","Other"],
-            "اختيار الجامعات": ["بحث التخصصات","مقارنة الجامعات","متطلبات اللغة","التمويل والسكن","قائمة نهائية","Other"],
-            "إعداد المستندات": ["السيرة الذاتية","كشف الدرجات","جواز السفر","شهادة التخرج","شهادة اللغة","الترجمة","التصديق","رفع المستندات","مراجعة المستندات","Other"],
-            "السيرة الذاتية": ["تجميع الإنجازات","تعديل التنسيق","تقوية الوصف","مراجعة نهائية","Other"],
-            "رسالة الدافع": ["كتابة المسودة الأولى","تخصيص الرسالة","مراجعة اللغة","تقوية الأمثلة","المراجعة النهائية","Other"],
-            "خطابات التوصية": ["اختيار الموصي","طلب الخطاب","مراجعة البيانات","رفع الخطاب","Other"],
-            "المقابلات": ["تدريب مقابلة","أسئلة شائعة","تحسين الإجابات","زيادة الثقة","محاكاة كاملة","Other"],
-            "اختبارات اللغة": ["IELTS","TOEFL","Duolingo","HSK","Other"],
-            "إجراءات السفر": ["الفحص الطبي","ترتيب السكن","حجز السفر","الاستعداد للوصول","Other"],
-            "التأشيرة": ["تجهيز المستندات","حجز الموعد","تعبئة النموذج","متابعة الطلب","Other"],
-            "المتابعة بعد التقديم": ["متابعة البريد","تحديث الطلب","الرد على الجامعة","فحص القبول","Other"],
-            "Other": ["تخطيط","تنفيذ","مراجعة","متابعة","Other"]
+            "الثانوية العامة": ["القرآن الكريم","التربية الإسلامية","اللغة العربية","اللغة الإنجليزية","الرياضيات","الفيزياء","الكيمياء","الأحياء","التاريخ","الجغرافيا","المجتمع","Other"],
+            "الجامعة": ["دراسة مقرر","واجب جامعي","بحث","مشروع","اختبار","Other"],
+            "التعليم الذاتي": ["خطة تعلم","دورة","قراءة","تطبيق عملي","مشروع","Other"],
+            "التعليم عن بعد": ["محاضرات","واجبات","اختبارات","مشروع","مراجعة","Other"],
+            "الدورات التدريبية": ["مشاهدة الدروس","حل التطبيقات","إكمال الشهادة","مشروع تطبيقي","Other"],
+            "Other": ["خطة دراسة","مراجعة","تطبيق","اختبار","Other"]
         },
         states: {
-            "Other": {current:["لم أبدأ بعد","أنجزت 25٪","أنجزت 50٪","أنجزت 75٪","جاهز للتقديم","Other"], target:["إرسال طلب مكتمل","الحصول على مقابلة","الحصول على منحة","الحصول على قبول","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","متابعة أسبوعية","جلسة تدريب أسبوعية","Other"]}
+            "الرياضيات": {current:["ضعيف","مقبول","جيد","جيد جداً","ممتاز","Other"], target:["رفع المعدل","إتقان المنهج","الحصول على درجة كاملة","الاستعداد للاختبار النهائي","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","حل تمارين يومياً","مراجعة أسبوعية","Other"]},
+            "الفيزياء": {current:["ضعيف","مقبول","جيد","جيد جداً","ممتاز","Other"], target:["فهم القوانين","حل المسائل","الحصول على درجة عالية","الاستعداد للاختبار النهائي","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","حل مسائل يومياً","مراجعة قوانين أسبوعياً","Other"]},
+            "الكيمياء": {current:["ضعيف","مقبول","جيد","جيد جداً","ممتاز","Other"], target:["فهم الدروس","إتقان المعادلات","الحصول على درجة عالية","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","مراجعة يومية","Other"]},
+            "القرآن الكريم": {current:["لا أحفظ شيئاً","أحفظ جزءاً واحداً","أحفظ 5 أجزاء","Other"], target:["حفظ مقرر","مراجعة مقرر","إتقان التلاوة","Other"], commitment:["ربع صفحة يومياً","نصف صفحة يومياً","صفحة يومياً","مراجعة يومية","Other"]},
+            "Other": {current:["ضعيف","مقبول","جيد","جيد جداً","ممتاز","Other"], target:["رفع المعدل","إتقان المنهج","الحصول على درجة عالية","الاستعداد للاختبار النهائي","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","مراجعة يومية","مراجعة أسبوعية","Other"]}
         }
     },
 
@@ -2503,7 +2492,7 @@ const GOAL_CONFIG_V523 = {
         categories: ["IELTS","TOEFL","Duolingo","HSK","CSCA","SAT","ACT","GRE","GMAT","Other"],
         paths: {
             "IELTS": ["Full Official Test","Mock Test","Listening","Reading","Writing Task 1","Writing Task 2","Speaking Part 1","Speaking Part 2","Speaking Part 3","Vocabulary","Grammar","Matching Headings","True False Not Given","Multiple Choice","Sentence Completion","Summary Completion","Map Labelling","Form Completion","Note Completion","Flow Chart Completion","Other"],
-            "TOEFL": ["Full Official Test","Mock Test","Reading","Listening","Speaking","Writing","Academic Discussion","Integrated Writing","Independent Writing","Vocabulary","Grammar","Other"],
+            "TOEFL": ["Full Official Test","Mock Test","Reading","Listening","Speaking","Writing","Complete the Words","Read in Daily Life","Read an Academic Passage","Build a Sentence","Write an Email","Write for an Academic Discussion","Listen and Repeat","Take an Interview","Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk","Vocabulary Building","Grammar Practice","Time Management","Other"],
             "Duolingo": ["Full Official Test","Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","Listen and Type","Interactive Listening","Write About the Photo","Writing Sample","Interactive Writing","Speak About the Photo","Read Then Speak","Speaking Sample","Interactive Speaking","Other"],
             "HSK": ["HSK 1","HSK 2","HSK 3","HSK 4","HSK 5","HSK 6","Vocabulary","Characters","Listening","Reading","Writing","Mock Test","Other"],
             "CSCA": ["Mathematics","Physics","Chemistry","Full Official Test","Algebra","Geometry","Calculus","Mechanics","Electricity","Organic Chemistry","Inorganic Chemistry","Other"],
@@ -2515,7 +2504,7 @@ const GOAL_CONFIG_V523 = {
         },
         states: {
             "IELTS": {current:["لا أعرف مستواي","Band 4","Band 4.5","Band 5","Band 5.5","Band 6","Band 6.5","Band 7","Band 7.5","Band 8","Other"], target:["Band 5","Band 5.5","Band 6","Band 6.5","Band 7","Band 7.5","Band 8","Band 8.5","Band 9","Other"], commitment:["30 دقيقة يومياً","45 دقيقة يومياً","60 دقيقة يومياً","90 دقيقة يومياً","اختبار أسبوعي","اختباران أسبوعياً","Other"]},
-            "TOEFL": {current:["لا أعرف مستواي","40+","60+","70+","80+","90+","100+","Other"], target:["70+","80+","90+","100+","110+","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","90 دقيقة يومياً","اختبار أسبوعي","Other"]},
+            "TOEFL": {current:["لا أعرف مستواي","0","1","2","3","4","5","6","Other"], target:["3","4","5","6","Other"], commitment:["30 دقيقة يومياً","45 دقيقة يومياً","60 دقيقة يومياً","90 دقيقة يومياً","اختبار أسبوعي","اختباران أسبوعياً","Other"]},
             "Duolingo": {current:["لا أعرف مستواي","80+","90+","100+","110+","120+","Other"], target:["100+","110+","120+","130+","140+","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","تدريب يومي على الأسئلة","اختبار أسبوعي","Other"]},
             "HSK": {current:["لا أعرف مستواي","HSK 1","HSK 2","HSK 3","HSK 4","HSK 5","Other"], target:["HSK 3","HSK 4","HSK 5","HSK 6","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","مراجعة مفردات يومياً","اختبار أسبوعي","Other"]},
             "CSCA": {current:["لا أعرف مستواي","مبتدئ","متوسط","متقدم","Other"], target:["اجتياز الاختبار","درجة قوية","استيفاء شرط الجامعة الصينية","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","مراجعة قوانين","اختبار أسبوعي","Other"]},
@@ -2523,30 +2512,29 @@ const GOAL_CONFIG_V523 = {
         }
     },
 
-    "Artificial Intelligence": {
-        categories: ["Machine Learning","Deep Learning","NLP","Computer Vision","Data Science","Other"],
+    "Scholarship": {
+        categories: ["البحث عن منح","اختيار الجامعات","إعداد المستندات","السيرة الذاتية","رسالة الدافع","خطابات التوصية","المقابلات","اختبارات اللغة","إجراءات السفر","التأشيرة","المتابعة بعد التقديم","Other"],
         paths: {
-            "Machine Learning": ["جمع البيانات","تنظيف البيانات","تحليل البيانات","تدريب النموذج","تقييم النموذج","تحسين النموذج","اختبار النموذج","نشر المشروع","بناء مشروع عملي","Other"],
-            "Deep Learning": ["جمع البيانات","تنظيف البيانات","تدريب النموذج","تقييم النموذج","تحسين النموذج","اختبار النموذج","نشر المشروع","بناء مشروع عملي","Other"],
-            "NLP": ["جمع البيانات النصية","تنظيف النصوص","تحليل النصوص","تدريب النموذج","تقييم النموذج","بناء تطبيق عملي","Other"],
-            "Computer Vision": ["جمع الصور","تنظيف البيانات","تدريب النموذج","تقييم النموذج","اختبار النموذج","نشر المشروع","Other"],
-            "Data Science": ["جمع البيانات","تنظيف البيانات","تحليل البيانات","تصوير البيانات","استخراج النتائج","بناء تقرير","Other"],
-            "Other": ["فهم المفاهيم الأساسية","استخدام مكتبات أساسية","تجربة نماذج جاهزة","بناء نموذج بسيط","بناء مشروع متكامل","نشر نموذج قابل للاستخدام","Other"]
+            "إعداد المستندات": ["السيرة الذاتية","كشف الدرجات","جواز السفر","شهادة التخرج","شهادة اللغة","الترجمة","التصديق","رفع المستندات","مراجعة المستندات","Other"],
+            "رسالة الدافع": ["كتابة المسودة الأولى","تخصيص الرسالة","مراجعة اللغة","تقوية الأمثلة","المراجعة النهائية","Other"],
+            "المقابلات": ["تدريب مقابلة","أسئلة شائعة","تحسين الإجابات","زيادة الثقة","محاكاة كاملة","Other"],
+            "Other": ["تخطيط","تنفيذ","مراجعة","متابعة","Other"]
         },
         states: {
-            "Other": {current:["لم أبدأ بعد","أعرف المفاهيم فقط","طبقت مثالاً بسيطاً","بنيت مشروعاً صغيراً","أحتاج إلى تدريب عملي","Other"], target:["فهم المفاهيم الأساسية","بناء مشروع عملي","تدريب نموذج جيد","نشر نموذج قابل للاستخدام","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","مشروع أسبوعي","تجربة نموذج أسبوعياً","Other"]}
+            "Other": {current:["لم أبدأ بعد","أنجزت 25٪","أنجزت 50٪","أنجزت 75٪","جاهز للتقديم","Other"], target:["إرسال طلب مكتمل","الحصول على مقابلة","الحصول على منحة","الحصول على قبول","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","متابعة أسبوعية","جلسة تدريب أسبوعية","Other"]}
         }
     },
 
     "University": {
         categories: ["علوم الحاسوب","هندسة البرمجيات","الذكاء الاصطناعي","الأمن السيبراني","تقنية المعلومات","الطب","الصيدلة","التمريض","الهندسة المدنية","الهندسة المعمارية","الهندسة الكهربائية","الهندسة الميكانيكية","إدارة الأعمال","المحاسبة","الاقتصاد","القانون","الشريعة","اللغة العربية","اللغة الإنجليزية","التربية","الإعلام","العلوم السياسية","Other"],
         paths: {
-            "علوم الحاسوب": ["البرمجة","الخوارزميات","هياكل البيانات","قواعد البيانات","أنظمة التشغيل","شبكات الحاسوب","الذكاء الاصطناعي","مشروع التخرج","Other"],
-            "هندسة البرمجيات": ["تحليل المتطلبات","تصميم الأنظمة","تطوير البرمجيات","اختبار البرمجيات","إدارة المشاريع","مشروع التخرج","Other"],
-            "الطب": ["التشريح","علم وظائف الأعضاء","الكيمياء الحيوية","المهارات السريرية","المراجعة","Other"],
+            "علوم الحاسوب": ["الخوارزميات","هياكل البيانات","قواعد البيانات","الذكاء الاصطناعي","تطوير الويب","الأمن السيبراني","البرمجة الكائنية","المشاريع","Other"],
+            "الذكاء الاصطناعي": ["Machine Learning","Deep Learning","NLP","Computer Vision","Data Science","بناء مشروع عملي","Other"],
             "Other": ["المقررات الأساسية","المهارات العملية","مشروع التخرج","التدريب العملي","الاختبارات","الأبحاث","الواجبات","المراجعة","Other"]
         },
         states: {
+            "الذكاء الاصطناعي": {current:["أعرف الأساسيات","أنهيت دورة","نفذت مشروعاً","Other"], target:["بناء مشروع متكامل","إتقان المجال","الاستعداد لسوق العمل","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","مشروع أسبوعي","تطبيق عملي أسبوعي","Other"]},
+            "الخوارزميات": {current:["مبتدئ","أفهم الأساسيات","أحل مسائل سهلة","أحل مسائل متوسطة","Other"], target:["إتقان الأساسيات","حل مسائل متقدمة","الاستعداد للمقابلات","Other"], commitment:["حل مسائل يومية","60 دقيقة يومياً","مراجعة أسبوعية","Other"]},
             "Other": {current:["بداية المقرر","أحتاج إلى مراجعة","متوسط","قوي","Other"], target:["اجتياز المقرر","تحقيق درجة عالية","إكمال مشروع","إتقان المادة","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","مراجعة محاضرة","حل واجبات","مراجعة أسبوعية","Other"]}
         }
     },
@@ -2555,25 +2543,32 @@ const GOAL_CONFIG_V523 = {
         categories: ["الجبر","الهندسة","التفاضل والتكامل","الإحصاء","الاحتمالات","المثلثات","الجبر الخطي","الرياضيات المتقطعة","Other"],
         paths: {
             "الجبر": ["المعادلات","المتباينات","الدوال","التحليل","التطبيقات","حل التمارين","الاختبارات","المراجعة","Other"],
-            "الهندسة": ["الأشكال","الزوايا","المثلثات","الدائرة","المساحة والحجم","البراهين","حل التمارين","Other"],
-            "التفاضل والتكامل": ["النهايات","المشتقات","التكامل","تطبيقات التفاضل","تطبيقات التكامل","حل التمارين","Other"],
             "Other": ["القوانين","حل التمارين","المسائل الكلامية","تدريب مؤقت","مراجعة الأخطاء","Other"]
         },
         states: {
-            "Other": {current:["لم أبدأ بعد","مستوى ضعيف","مستوى متوسط","مستوى جيد","مستوى قوي","Other"], target:["فهم الأساسيات","حل التمارين بثقة","تحقيق درجة عالية","إتقان الموضوع","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","حل تمارين يومياً","تدريب مؤقت","مراجعة الأخطاء","Other"]}
+            "Other": {current:["ضعيف","مقبول","جيد","جيد جداً","ممتاز","Other"], target:["فهم الأساسيات","حل التمارين بثقة","تحقيق درجة عالية","إتقان الموضوع","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","حل تمارين يومياً","تدريب مؤقت","مراجعة الأخطاء","Other"]}
         }
     },
 
     "Daily Life": {
-        categories: ["الصحة","الرياضة","النوم","التغذية","شرب الماء","الروتين الشخصي","العائلة","إدارة المال","تنظيم المنزل","إدارة الوقت","العبادة اليومية","Other"],
+        categories: ["الصحة","الرياضة","النوم","شرب الماء","التغذية","الروتين الشخصي","العائلة","إدارة الوقت","إدارة المال","الصلاة","التسوق","ترتيب المنزل","تنظيف المنزل","القراءة","الاسترخاء","Other"],
         paths: {
             "شرب الماء": ["تذكير شرب الماء","تتبع الكمية اليومية","تحسين العادة","Other"],
-            "الرياضة": ["تمارين خفيفة","مشي يومي","تمارين مقاومة","مرونة","Other"],
-            "النوم": ["تنظيم وقت النوم","تقليل السهر","روتين قبل النوم","Other"],
+            "الصلاة": ["الالتزام بالصلوات","صلاة الفجر","النوافل","مراجعة يومية","Other"],
             "Other": ["عادة يومية","روتين أسبوعي","تذكير مهم","العناية بالنفس","تحسين الاستمرارية","Other"]
         },
         states: {
             "Other": {current:["غير منتظم","أحياناً","متوسط","جيد","Other"], target:["بناء عادة ثابتة","تحسين الروتين","الاستمرار لمدة شهر","Other"], commitment:["خطوة يومية صغيرة","تذكير يومي","مراجعة أسبوعية","Other"]}
+        }
+    },
+
+    "Artificial Intelligence": {
+        categories: ["Machine Learning","Deep Learning","NLP","Computer Vision","Data Science","Other"],
+        paths: {
+            "Other": ["جمع البيانات","تنظيف البيانات","تحليل البيانات","تدريب النموذج","تقييم النموذج","تحسين النموذج","اختبار النموذج","نشر المشروع","بناء مشروع عملي","Other"]
+        },
+        states: {
+            "Other": {current:["لم أبدأ بعد","أعرف المفاهيم فقط","طبقت مثالاً بسيطاً","بنيت مشروعاً صغيراً","أحتاج إلى تدريب عملي","Other"], target:["فهم المفاهيم الأساسية","بناء مشروع عملي","تدريب نموذج جيد","نشر نموذج قابل للاستخدام","Other"], commitment:["30 دقيقة يومياً","60 دقيقة يومياً","مشروع أسبوعي","تجربة نموذج أسبوعياً","Other"]}
         }
     },
 
@@ -2620,35 +2615,35 @@ const GOAL_CONFIG_V523 = {
     "Other": {categories:["Other"], paths:{"Other":["Other"]}, states:{"Other":{current:["لم أبدأ بعد","Other"], target:["Other"], commitment:["Other"]}}}
 };
 
-function goalV523Label(value) {
+function goalV524Label(value) {
     if (["Other","Custom","Custom Plan","Other / أخرى","تحديد يدوي","خطة مخصصة","أخرى"].includes(value)) return "أخرى";
-    return GOAL_AR_V523[value] || value;
+    return GOAL_AR_V524[value] || value;
 }
 
-function fillGoalV523(select, values) {
+function fillGoalV524(select, values) {
     if (!select) return;
     const old = select.value;
     select.innerHTML = "";
     (values || ["Other"]).forEach(value => {
         const opt = document.createElement("option");
         opt.value = value;
-        opt.textContent = goalV523Label(value);
+        opt.textContent = goalV524Label(value);
         select.appendChild(opt);
     });
     if ([...select.options].some(o => o.value === old)) select.value = old;
 }
 
-function stateSetV523(data, categoryValue, pathValue) {
+function stateSetV524(data, categoryValue, pathValue) {
     return (data.states && (data.states[pathValue] || data.states[categoryValue] || data.states["Other"])) || {current:["Other"], target:["Other"], commitment:["Other"]};
 }
 
-function showGoalOtherBoxesV523() {
+function showGoalOtherBoxesV524() {
     const pairs = [
-        ["goalCategorySelect", "customCategoryBox", "اكتب التصنيف الذي تريده"],
-        ["goalPathSelect", "customPathBox", "اكتب مسار الهدف"],
+        ["goalCategorySelect", "customCategoryBox", "اكتب التصنيف"],
+        ["goalPathSelect", "customPathBox", "اكتب المسار"],
         ["currentStateSelect", "customCurrentBox", "اكتب الحالة الحالية"],
         ["targetStateSelect", "customTargetBox", "اكتب الحالة المستهدفة"],
-        ["commitmentSelect", "customCommitmentBox", "اكتب الالتزام الذي تريده"]
+        ["commitmentSelect", "customCommitmentBox", "اكتب الالتزام"]
     ];
     pairs.forEach(([selectId, boxId, labelText]) => {
         const select = document.getElementById(selectId);
@@ -2663,7 +2658,7 @@ function showGoalOtherBoxesV523() {
     });
 }
 
-function refreshGoalsArabicV523(changedId) {
+function refreshGoalsArabicV524(changedId) {
     const type = document.getElementById("goalTypeSelect");
     const category = document.getElementById("goalCategorySelect");
     const path = document.getElementById("goalPathSelect");
@@ -2675,26 +2670,28 @@ function refreshGoalsArabicV523(changedId) {
     const milestones = document.getElementById("milestonesInput");
     if (!type || !category || !path || !current || !target || !commitment) return;
 
-    if (!type.dataset.v523Ready) {
-        fillGoalV523(type, Object.keys(GOAL_CONFIG_V523));
-        type.dataset.v523Ready = "1";
+    if (!type.dataset.v524Ready) {
+        fillGoalV524(type, Object.keys(GOAL_CONFIG_V524));
+        type.dataset.v524Ready = "1";
     }
 
-    const data = GOAL_CONFIG_V523[type.value] || GOAL_CONFIG_V523["Education"];
-    if (changedId === "goalTypeSelect" || !category.options.length) fillGoalV523(category, data.categories || ["Other"]);
+    const data = GOAL_CONFIG_V524[type.value] || GOAL_CONFIG_V524["Education"];
+
+    if (changedId === "goalTypeSelect" || !category.options.length) {
+        fillGoalV524(category, data.categories || ["Other"]);
+    }
 
     const basePaths = (data.paths && (data.paths[category.value] || data.paths["Other"])) || ["Other"];
-    if (changedId === "goalTypeSelect" || changedId === "goalCategorySelect" || !path.options.length) fillGoalV523(path, basePaths);
+    if (changedId === "goalTypeSelect" || changedId === "goalCategorySelect" || !path.options.length) {
+        fillGoalV524(path, basePaths);
+    }
 
-    const deepPaths = data.paths && data.paths[path.value];
-    if (changedId === "goalPathSelect" && deepPaths) fillGoalV523(path, deepPaths);
+    const states = stateSetV524(data, category.value, path.value);
+    if (["goalTypeSelect","goalCategorySelect","goalPathSelect"].includes(changedId) || !current.options.length) fillGoalV524(current, states.current || ["Other"]);
+    if (["goalTypeSelect","goalCategorySelect","goalPathSelect"].includes(changedId) || !target.options.length) fillGoalV524(target, states.target || ["Other"]);
+    if (["goalTypeSelect","goalCategorySelect","goalPathSelect"].includes(changedId) || !commitment.options.length) fillGoalV524(commitment, states.commitment || ["Other"]);
 
-    const states = stateSetV523(data, category.value, path.value);
-    if (["goalTypeSelect","goalCategorySelect","goalPathSelect"].includes(changedId) || !current.options.length) fillGoalV523(current, states.current || ["Other"]);
-    if (["goalTypeSelect","goalCategorySelect","goalPathSelect"].includes(changedId) || !target.options.length) fillGoalV523(target, states.target || ["Other"]);
-    if (["goalTypeSelect","goalCategorySelect","goalPathSelect"].includes(changedId) || !commitment.options.length) fillGoalV523(commitment, states.commitment || ["Other"]);
-
-    const labels = {
+    const labelMap = {
         goalCategoryLabel: "تصنيف الهدف",
         goalPathLabel: "مسار الهدف",
         currentStateLabel: "الحالة الحالية",
@@ -2703,15 +2700,16 @@ function refreshGoalsArabicV523(changedId) {
         commitmentLabel: "الالتزام اليومي أو الأسبوعي",
         milestonesLabel: "محطات التقدم"
     };
-    Object.entries(labels).forEach(([id, text]) => {
+    Object.entries(labelMap).forEach(([id, text]) => {
         const el = document.getElementById(id);
         if (el) el.textContent = text;
     });
 
     if (outcome && !outcome.value) {
-        if (type.value === "Scholarship") outcome.placeholder = "مثال: الحصول على منحة أو إرسال طلب قوي ومكتمل";
-        else if (type.value === "Artificial Intelligence") outcome.placeholder = "مثال: بناء مشروع AI عملي قابل للاستخدام";
-        else if (type.value === "Islamic Goals") outcome.placeholder = "مثال: إتمام حفظ جزء عم وتثبيته";
+        if (type.value === "Education") outcome.placeholder = "مثال: رفع المعدل أو إتقان المنهج";
+        else if (type.value === "Scholarship") outcome.placeholder = "مثال: إرسال طلب منحة قوي ومكتمل";
+        else if (type.value === "University") outcome.placeholder = "مثال: إتقان المقرر أو بناء مشروع متكامل";
+        else if (type.value === "Daily Life") outcome.placeholder = "مثال: بناء عادة ثابتة والاستمرار عليها";
         else outcome.placeholder = "ماذا تريد أن يتحقق عند إنجاز هذا الهدف؟";
     }
 
@@ -2719,7 +2717,8 @@ function refreshGoalsArabicV523(changedId) {
     if (milestones && !milestones.value && typeof generatedMilestonesForGoalV4611 === "function") {
         milestones.value = generatedMilestonesForGoalV4611(type.value, category.value, path.value, target.value);
     }
-    showGoalOtherBoxesV523();
+
+    showGoalOtherBoxesV524();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -2727,11 +2726,11 @@ document.addEventListener("DOMContentLoaded", () => {
     ["goalTypeSelect","goalCategorySelect","goalPathSelect","currentStateSelect","targetStateSelect","commitmentSelect"].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.addEventListener("change", () => {
-            setTimeout(() => refreshGoalsArabicV523(id), 0);
-            setTimeout(showGoalOtherBoxesV523, 25);
+            setTimeout(() => refreshGoalsArabicV524(id), 0);
+            setTimeout(showGoalOtherBoxesV524, 25);
         });
     });
-    setTimeout(() => refreshGoalsArabicV523("goalTypeSelect"), 50);
-    setTimeout(showGoalOtherBoxesV523, 100);
+    setTimeout(() => refreshGoalsArabicV524("goalTypeSelect"), 60);
+    setTimeout(showGoalOtherBoxesV524, 120);
 });
 

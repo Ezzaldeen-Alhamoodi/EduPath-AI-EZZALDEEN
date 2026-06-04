@@ -1525,3 +1525,43 @@ Dashboard-only layout fix.
 - Strengthened hidden Arabic/English context matching for goals and tasks.
 - No database migration.
 - No task/resource page changes.
+
+
+## v5.2.4 Urgent Goals Fix
+
+### Goals page urgent fixes
+- Re-added the main goal type: Education / التعليم.
+- Education now includes:
+  - الثانوية العامة
+  - الجامعة
+  - التعليم الذاتي
+  - التعليم عن بعد
+  - الدورات التدريبية
+  - أخرى
+- Secondary school now includes Arabic school subjects:
+  - القرآن الكريم
+  - التربية الإسلامية
+  - اللغة العربية
+  - اللغة الإنجليزية
+  - الرياضيات
+  - الفيزياء
+  - الكيمياء
+  - الأحياء
+  - التاريخ
+  - الجغرافيا
+  - المجتمع
+- Fixed visible Custom labels in Goals page:
+  - Custom Goal Category → اكتب التصنيف
+  - Custom Goal Path → اكتب المسار
+  - Custom Goal State → Arabic custom labels
+- Updated TOEFL with modern visible paths and 0–6 score scale.
+- Improved Daily Life categories with natural Arabic labels.
+- Improved University paths, especially Computer Science and AI.
+- Made states and commitments more adaptive by category/path.
+- Strengthened hidden goal-task intelligence for education, TOEFL, daily life, university CS, and secondary school.
+
+### Safety
+- Goals page and goal intelligence only.
+- No database migration.
+- No task page changes.
+- No resource page changes.

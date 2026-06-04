@@ -1104,6 +1104,12 @@ DASHBOARD_AR_LABELS = {
     "Projects": "المشاريع",
     "General": "عام",
     "Other": "أخرى",
+    "Custom": "أخرى",
+    "Custom Plan": "أخرى",
+    "Custom Goal Category": "اكتب التصنيف",
+    "Custom Goal Path": "اكتب المسار",
+    "Custom Current State": "اكتب الحالة الحالية",
+    "Custom Target State": "اكتب الحالة المستهدفة",
     "done": "مكتملة",
     "pending": "قيد التنفيذ",
     "Completed": "مكتملة",
@@ -2807,6 +2813,23 @@ def expand_goal_intelligence_terms_v523(text):
             expanded.update(values)
     return expanded
 
+
+GOAL_INTELLIGENCE_SYNONYMS_V524 = {
+    "education": ["تعليم", "الثانوية العامة", "مدرسة", "جامعة", "تعليم ذاتي", "دورة", "مقرر", "واجب", "اختبار", "رفع المعدل"],
+    "secondary_school": ["الثانوية العامة", "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "اللغة العربية", "اللغة الإنجليزية", "الجغرافيا", "التاريخ", "المجتمع"],
+    "toefl_modern": ["TOEFL", "Complete the Words", "Read in Daily Life", "Read an Academic Passage", "Build a Sentence", "Write an Email", "Write for an Academic Discussion", "Listen and Repeat", "Take an Interview", "Listen and Choose a Response", "Listen to a Conversation", "Listen to an Announcement", "Listen to an Academic Talk"],
+    "daily_life": ["شرب الماء", "الصلاة", "النوم", "الرياضة", "التغذية", "إدارة الوقت", "إدارة المال", "تنظيف المنزل", "ترتيب المنزل", "قراءة", "استرخاء"],
+    "university_cs": ["علوم الحاسوب", "الخوارزميات", "هياكل البيانات", "قواعد البيانات", "الذكاء الاصطناعي", "تطوير الويب", "الأمن السيبراني", "البرمجة الكائنية", "مشاريع"],
+}
+
+def expand_goal_intelligence_terms_v524(text):
+    lower = (text or "").lower()
+    expanded = set()
+    for key, values in GOAL_INTELLIGENCE_SYNONYMS_V524.items():
+        if key in lower or any(str(v).lower() in lower for v in values):
+            expanded.update(values)
+    return expanded
+
 def generate_goal_keywords_from_form(form, goal_category="", goal_path="", current_state="", target_state="", commitment=""):
     raw = [
         form.get("category", ""),
@@ -2951,6 +2974,9 @@ def calculate_match_score(goal, task):
 
     expanded_goal_terms_v523 = expand_goal_intelligence_terms_v523(goal_text)
     expanded_task_terms_v523 = expand_goal_intelligence_terms_v523(task_text)
+
+    expanded_goal_terms_v524 = expand_goal_intelligence_terms_v524(goal_text)
+    expanded_task_terms_v524 = expand_goal_intelligence_terms_v524(task_text)
 
     score = 0
     matched = []
