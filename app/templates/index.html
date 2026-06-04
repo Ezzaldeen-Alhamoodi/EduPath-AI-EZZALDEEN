@@ -46,7 +46,6 @@
                     <div class="focus-card-v41">
                         <span>🎯</span>
                         <strong>{{ goal.title }}</strong>
-                        <small>{{ goal.category|dashboard_ar }} · {{ goal.goal_progress if goal.goal_progress is defined else 0 }}%</small>
                         <div class="goal-progress-track">
                             <div class="goal-progress-fill" style="width: {{ goal.goal_progress if goal.goal_progress is defined else 0 }}%;"></div>
                         </div>
@@ -89,9 +88,11 @@
                             <strong>{{ goal.title }}</strong>
 
                             <span class="dashboard-goal-state-v527">
-                                {{ (goal.plan.get("Current State", goal.current_level) if goal.plan else goal.current_level)|goals_ar }}
-                                <b>→</b>
-                                {{ (goal.plan.get("Target State", "غير محدد") if goal.plan else "غير محدد")|goals_ar }}
+                                {{ goal|dashboard_goal_current|goals_ar }}
+                                {% if goal|dashboard_goal_has_target %}
+                                    <b>→</b>
+                                    {{ goal|dashboard_goal_target|goals_ar }}
+                                {% endif %}
                             </span>
 
                             <div class="goal-progress-line dashboard-goal-progress-v527">
@@ -100,10 +101,7 @@
 
                             <span class="progress-label dashboard-goal-percent-v527">📊 {{ goal.goal_progress or 0 }}٪ تقدم</span>
 
-                            <span class="countdown dashboard-goal-time-v527">
-                                <strong>⏳ الوقت المتبقي:</strong>
-                                {{ goal.time_left|goal_time_compact_ar }}
-                            </span>
+                            <span class="countdown dashboard-goal-time-v527">⏳ الوقت المتبقي: {{ goal.time_left|goal_time_compact_ar }}</span>
                         </div>
                     </div>
                 {% else %}
@@ -129,7 +127,7 @@
     </section>
 
     <footer class="home-footer-clean-ar-v513">
-        <strong>EduPath AI EZZALDEEN · v5.2.7</strong>
+        <strong>EduPath AI EZZALDEEN · v5.2.8</strong>
         <span>للتواصل: edupath.ai.ezzaldeen.app@outlook.com</span>
         <span>لمعرفة كيفية استخدام التطبيق والاستفادة من جميع المميزات، يرجى الضغط على <a href="{{ url_for('user_guide') }}">دليل الاستخدام</a>.</span>
         <small>جميع الحقوق محفوظة © EZZALDEEN AL-HAMOODI — عزالدين الحمودي. يمنع منعًا باتًا اقتباس أو تقليد فكرة التطبيق أو تصميمه أو محتواه أو مميزاته دون إذن صريح.</small>

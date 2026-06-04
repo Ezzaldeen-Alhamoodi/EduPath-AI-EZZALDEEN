@@ -1641,3 +1641,19 @@ Dashboard-only layout fix.
 - Empty optional fields do not reserve empty space.
 - Dashboard recent task time now displays in 12-hour Arabic style, e.g. 3:30 مساءً.
 - No changes to task/resource logic.
+
+
+## v5.2.8 Dashboard Active Goals Fix
+
+### Dashboard only
+- Fixed active goals target state showing "غير محدد" when a target state exists.
+- Current state and target state now appear on one line:
+  - Band 6 → Band 8
+- If the target state is genuinely missing, the arrow and missing value are hidden.
+- Remaining time now appears on one line:
+  - ⏳ الوقت المتبقي: 164 يوم • 23 أسبوع • 5 أشهر
+- Removed approximation symbols from compact time display.
+- Current Focus cards now show only:
+  - goal title
+  - progress bar
+- No changes to detailed Goals page layout.

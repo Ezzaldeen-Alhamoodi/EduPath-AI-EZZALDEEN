@@ -1303,6 +1303,9 @@ def create_app():
     app.jinja_env.filters["goal_time_ar"] = format_goal_time_left
     app.jinja_env.filters["goal_time_compact_ar"] = format_goal_time_left_compact
     app.jinja_env.filters["time_12h_ar"] = format_time_12h_ar
+    app.jinja_env.filters["dashboard_goal_has_target"] = should_show_dashboard_goal_target
+    app.jinja_env.filters["dashboard_goal_target"] = dashboard_goal_target_state
+    app.jinja_env.filters["dashboard_goal_current"] = dashboard_goal_current_state
     app.jinja_env.filters["dashboard_ar"] = dashboard_ar
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
     app.permanent_session_lifetime = timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30")))
@@ -2789,6 +2792,32 @@ GOAL_INTELLIGENCE_SYNONYMS_V520 = {
 }
 
 
+
+def dashboard_goal_current_state(goal):
+    plan = parse_goal_plan(goal)
+    return (
+        plan.get("Current State")
+        or getattr(goal, "current_level", "")
+        or ""
+    )
+
+
+def dashboard_goal_target_state(goal):
+    plan = parse_goal_plan(goal)
+    value = (
+        plan.get("Target State")
+        or plan.get("target_state")
+        or plan.get("Target")
+        or ""
+    )
+    if value and str(value).strip().lower() not in ["not set", "غير محدد", "none", "null"]:
+        return str(value).strip()
+    return ""
+
+
+def should_show_dashboard_goal_target(goal):
+    return bool(dashboard_goal_target_state(goal))
+
 def format_goal_time_left_compact(time_left):
     if not time_left:
         return "لا يوجد موعد نهائي"
@@ -2803,7 +2832,6 @@ def format_goal_time_left_compact(time_left):
         return f"{days} يوم • {week_word} • {month_word}"
     except Exception:
         return "لا يوجد موعد نهائي"
-
 
 
 def format_time_12h_ar(value):
