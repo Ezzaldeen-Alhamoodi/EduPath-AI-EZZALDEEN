@@ -1086,3 +1086,39 @@ Focused task-form update.
 - Lightweight database migration only.
 - Existing users get codes automatically.
 - Existing data is not deleted.
+
+
+## v4.7.9 Subscription Codes Expiry and Usage Status
+
+### Subscription codes
+- Added a new `SubscriptionCode` table.
+- Each user now automatically gets at least 3 subscription codes.
+- Each code has:
+  - code
+  - duration_days
+  - used / available status
+  - used_at date
+  - created_at date
+- Admin can generate additional codes for any user.
+- Admin can choose code duration in days.
+- Used codes are shown with a line-through in Admin.
+- Available codes remain clearly visible.
+
+### Paid version expiry
+- Added `subscription_expires_at`.
+- Paid version now has a real expiry date.
+- When a code is activated, the user's paid version is enabled for the code duration.
+- Expired subscriptions are automatically disabled when checked.
+
+### Profile usage status
+- Profile now shows:
+  - goals used / limit
+  - tasks used / limit
+  - AI used today / daily limit
+  - paid days left
+  - paid expiry date
+
+### Safety
+- Backward compatible with old single subscription_code field.
+- Existing users receive new multiple codes automatically.
+- No existing data is deleted.

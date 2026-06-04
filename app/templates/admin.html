@@ -72,7 +72,10 @@
                             <span class="admin-badge">Free Plan</span>
                         {% endif %}
                         <span class="admin-badge">{{ "AI On" if user.ai_enabled else "AI Off" }}</span>
-                        <span class="admin-badge code">Code: {{ user.subscription_code or "pending" }}</span>
+                        {% if item.paid_active %}
+                            <span class="admin-badge paid">Days left: {{ item.paid_days_left }}</span>
+                        {% endif %}
+                        <span class="admin-badge code">Codes: {{ item.subscription_codes|length }}</span>
                     </div>
                 </div>
 
@@ -90,6 +93,23 @@
                     <div><strong>{{ item.scholarship_used }}</strong><span>Scholarship Coach today</span></div>
                     <div><strong>{{ item.code_used }}</strong><span>Code Coach today</span></div>
                     <div><strong>{{ item.general_used }}</strong><span>General AI today</span></div>
+                </div>
+
+
+                <div class="subscription-codes-v479">
+                    <strong>Subscription Codes</strong>
+                    <div class="code-list-v479">
+                        {% for code in item.subscription_codes %}
+                            <span class="sub-code-v479 {% if code.is_used %}used{% else %}available{% endif %}">
+                                <code>{{ code.code }}</code>
+                                <small>{{ code.duration_days }} days · {{ "Used" if code.is_used else "Available" }}</small>
+                            </span>
+                        {% endfor %}
+                    </div>
+                    <form method="POST" action="{{ url_for('admin_generate_subscription_code', user_id=user.id) }}" class="generate-code-form-v479">
+                        <input type="number" name="duration_days" min="1" max="3650" value="30" title="Duration in days">
+                        <button type="submit" class="small-button">Generate Code</button>
+                    </form>
                 </div>
 
                 <form method="POST" action="{{ url_for('admin_update_user', user_id=user.id) }}" class="admin-user-form">

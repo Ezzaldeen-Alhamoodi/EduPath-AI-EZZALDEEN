@@ -17,7 +17,7 @@
     <div class="stat-card blue"><span>◎</span><h3>Your Goals</h3><p>{{ total_goals }}{% if goal_limit is not none %}/{{ goal_limit }}{% endif %}</p></div>
     <div class="stat-card purple"><span>▣</span><h3>Your Tasks</h3><p>{{ total_tasks }}{% if task_limit is not none %}/{{ task_limit }}{% endif %}</p></div>
     <div class="stat-card green"><span>✓</span><h3>Completed</h3><p>{{ completed_tasks }}</p></div>
-    <div class="stat-card orange"><span>✦</span><h3>AI Daily Limit</h3><p>{{ ai_limit if ai_limit is not none else "∞" }}</p></div>
+    <div class="stat-card orange"><span>✦</span><h3>AI Today</h3><p>{{ ai_used_today }}{% if ai_limit is not none %}/{{ ai_limit }}{% else %}/∞{% endif %}</p></div>
 </section>
 
 <section class="grid-2">
@@ -48,6 +48,12 @@
         <h2>Paid Version</h2>
         {% if current_user.paid_active %}
             <p class="improved">Your paid version is active. You now have higher limits for tasks, goals, and AI Coach.</p>
+            <div class="paid-status-grid-v479">
+                <span>Days left: <b>{{ paid_days_left }}</b></span>
+                {% if current_user.subscription_expires_at %}
+                    <span>Expires: <b>{{ current_user.subscription_expires_at.strftime("%Y-%m-%d") }}</b></span>
+                {% endif %}
+            </div>
             {% if current_user.paid_activated_at %}
                 <p class="muted">Activated at: {{ current_user.paid_activated_at.strftime("%Y-%m-%d") }}</p>
             {% endif %}

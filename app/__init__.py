@@ -51,12 +51,26 @@ class User(UserMixin, db.Model):
     subscription_code = db.Column(db.String(32), nullable=True, unique=True, index=True)
     paid_active = db.Column(db.Boolean, nullable=False, default=False)
     paid_activated_at = db.Column(db.DateTime, nullable=True)
+    subscription_expires_at = db.Column(db.DateTime, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     goals = db.relationship("Goal", backref="owner", lazy=True)
     tasks = db.relationship("StudyTask", backref="owner", lazy=True)
     interview_answers = db.relationship("InterviewAnswer", backref="owner", lazy=True)
     mistakes = db.relationship("MistakeLog", backref="owner", lazy=True)
+
+
+class SubscriptionCode(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, index=True)
+    code = db.Column(db.String(32), nullable=False, unique=True, index=True)
+    duration_days = db.Column(db.Integer, nullable=False, default=30)
+    is_used = db.Column(db.Boolean, nullable=False, default=False)
+    used_at = db.Column(db.DateTime, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+
+    user = db.relationship("User", backref="subscription_codes")
+
 
 class AIUsage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -520,13 +534,48 @@ def generate_subscription_code():
     return "EDU-" + "".join(secrets.choice(alphabet) for _ in range(6)) + "-" + "".join(secrets.choice(alphabet) for _ in range(6))
 
 
+def generate_unique_subscription_code():
+    code = generate_subscription_code()
+    while SubscriptionCode.query.filter_by(code=code).first() or User.query.filter_by(subscription_code=code).first():
+        code = generate_subscription_code()
+    return code
+
+
 def ensure_user_subscription_code(user):
+    """Backward-compatible primary code field; Admin uses the new multiple-code table."""
     if not getattr(user, "subscription_code", None):
         code = generate_subscription_code()
-        while User.query.filter_by(subscription_code=code).first():
+        while User.query.filter_by(subscription_code=code).first() or SubscriptionCode.query.filter_by(code=code).first():
             code = generate_subscription_code()
         user.subscription_code = code
     return user.subscription_code
+
+
+def ensure_user_subscription_codes(user, minimum=3):
+    ensure_user_subscription_code(user)
+    existing_count = SubscriptionCode.query.filter_by(user_id=user.id).count()
+    while existing_count < minimum:
+        db.session.add(SubscriptionCode(
+            user_id=user.id,
+            code=generate_unique_subscription_code(),
+            duration_days=30,
+            is_used=False,
+        ))
+        existing_count += 1
+
+
+def deactivate_expired_subscription(user):
+    if getattr(user, "paid_active", False) and user.subscription_expires_at and datetime.utcnow() > user.subscription_expires_at:
+        user.paid_active = False
+        return True
+    return False
+
+
+def paid_days_left(user):
+    if not getattr(user, "paid_active", False) or not user.subscription_expires_at:
+        return 0
+    delta = user.subscription_expires_at - datetime.utcnow()
+    return max(0, delta.days + (1 if delta.seconds > 0 else 0))
 
 
 def user_has_unlimited_access(user):
@@ -534,18 +583,21 @@ def user_has_unlimited_access(user):
 
 
 def user_task_limit(user):
+    deactivate_expired_subscription(user)
     if user_has_unlimited_access(user):
         return None
     return (user.paid_task_limit if getattr(user, "paid_active", False) else user.task_limit) or 0
 
 
 def user_goal_limit(user):
+    deactivate_expired_subscription(user)
     if user_has_unlimited_access(user):
         return None
     return (user.paid_goal_limit if getattr(user, "paid_active", False) else user.goal_limit) or 0
 
 
 def user_ai_limit(user):
+    deactivate_expired_subscription(user)
     if user_has_unlimited_access(user):
         return None
     return (user.paid_ai_daily_limit if getattr(user, "paid_active", False) else user.ai_daily_limit) or 0
@@ -1011,13 +1063,15 @@ def ensure_all_users_subscription_codes():
                 user.paid_task_limit = 500
             if user.paid_goal_limit is None:
                 user.paid_goal_limit = 100
-            if not user.subscription_code:
-                ensure_user_subscription_code(user)
+            ensure_user_subscription_codes(user, minimum=3)
+            if deactivate_expired_subscription(user):
+                changed = True
             changed = True
         if changed:
             db.session.commit()
     except Exception:
         logger.exception("Failed to ensure subscription codes")
+
 
 
 def create_app():
@@ -1281,13 +1335,23 @@ def create_app():
 
             if form_action == "activate_paid":
                 code = request.form.get("subscription_code", "").strip().upper()
-                if code and code == (current_user.subscription_code or "").upper():
+                subscription_code = SubscriptionCode.query.filter_by(
+                    user_id=current_user.id,
+                    code=code,
+                    is_used=False
+                ).first()
+
+                if subscription_code:
+                    now = datetime.utcnow()
                     current_user.paid_active = True
-                    current_user.paid_activated_at = datetime.utcnow()
+                    current_user.paid_activated_at = now
+                    current_user.subscription_expires_at = now + timedelta(days=subscription_code.duration_days)
+                    subscription_code.is_used = True
+                    subscription_code.used_at = now
                     db.session.commit()
-                    flash("Paid version activated successfully. Your account now has higher limits.", "success")
+                    flash(f"Paid version activated successfully for {subscription_code.duration_days} days.", "success")
                 else:
-                    flash("Invalid subscription code. Please check the code sent by EduPath AI administration.", "error")
+                    flash("Invalid or already used subscription code. Please check the code sent by EduPath AI administration.", "error")
                 return redirect(url_for("profile"))
 
             current_user.name = request.form.get("name", current_user.name).strip()
@@ -1302,6 +1366,9 @@ def create_app():
         total_goals = Goal.query.filter_by(user_id=current_user.id).count()
         total_tasks = StudyTask.query.filter_by(user_id=current_user.id).count()
         completed_tasks = StudyTask.query.filter_by(user_id=current_user.id, status="done").count()
+        today_value = str(date.today())
+        ai_used_today = db.session.query(db.func.sum(AIUsage.count)).filter_by(user_id=current_user.id, usage_date=today_value).scalar() or 0
+        db.session.commit()
         return render_template(
             "profile.html",
             total_goals=total_goals,
@@ -1310,6 +1377,8 @@ def create_app():
             task_limit=user_task_limit(current_user),
             goal_limit=user_goal_limit(current_user),
             ai_limit=user_ai_limit(current_user),
+            ai_used_today=ai_used_today,
+            paid_days_left=paid_days_left(current_user),
         )
 
 
@@ -1573,7 +1642,7 @@ def create_app():
 
         user_stats = []
         for user in users:
-            ensure_user_subscription_code(user)
+            ensure_user_subscription_codes(user, minimum=3)
             goals_count = Goal.query.filter_by(user_id=user.id).count()
             tasks_count = StudyTask.query.filter_by(user_id=user.id).count()
             done_count = StudyTask.query.filter_by(user_id=user.id, status="done").count()
@@ -1598,6 +1667,8 @@ def create_app():
                 "task_limit": user_task_limit(user),
                 "goal_limit": user_goal_limit(user),
                 "ai_limit": user_ai_limit(user),
+                "paid_days_left": paid_days_left(user),
+                "subscription_codes": SubscriptionCode.query.filter_by(user_id=user.id).order_by(SubscriptionCode.id.asc()).all(),
             })
 
         db.session.commit()
@@ -1639,6 +1710,25 @@ def create_app():
         return redirect(url_for("admin_dashboard"))
 
 
+
+    @app.route("/admin/user/<int:user_id>/generate-code", methods=["POST"])
+    @login_required
+    @admin_required
+    def admin_generate_subscription_code(user_id):
+        user = User.query.get_or_404(user_id)
+        duration_days = int(request.form.get("duration_days", 30) or 30)
+        duration_days = max(1, min(duration_days, 3650))
+        db.session.add(SubscriptionCode(
+            user_id=user.id,
+            code=generate_unique_subscription_code(),
+            duration_days=duration_days,
+            is_used=False,
+        ))
+        db.session.commit()
+        flash("New subscription code generated.", "success")
+        return redirect(url_for("admin_dashboard"))
+
+
     @app.route("/admin/user/<int:user_id>/update", methods=["POST"])
     @login_required
     @admin_required
@@ -1656,8 +1746,14 @@ def create_app():
         user.paid_ai_daily_limit = int(request.form.get("paid_ai_daily_limit", 50) or 50)
         user.paid_task_limit = int(request.form.get("paid_task_limit", 500) or 500)
         user.paid_goal_limit = int(request.form.get("paid_goal_limit", 100) or 100)
+        previous_paid_active = bool(user.paid_active)
         user.paid_active = request.form.get("paid_active") == "on"
-        ensure_user_subscription_code(user)
+        if user.paid_active and not previous_paid_active and not user.subscription_expires_at:
+            user.paid_activated_at = datetime.utcnow()
+            user.subscription_expires_at = datetime.utcnow() + timedelta(days=30)
+        if not user.paid_active:
+            user.subscription_expires_at = None
+        ensure_user_subscription_codes(user, minimum=3)
         user.name = request.form.get("name", user.name).strip() or user.name
         db.session.commit()
         flash("User updated.", "success")
@@ -2828,6 +2924,17 @@ def ensure_database_columns():
                     """ALTER TABLE "user" ADD COLUMN IF NOT EXISTS subscription_code VARCHAR(32)""",
                     """ALTER TABLE "user" ADD COLUMN IF NOT EXISTS paid_active BOOLEAN DEFAULT FALSE""",
                     """ALTER TABLE "user" ADD COLUMN IF NOT EXISTS paid_activated_at TIMESTAMP""",
+                    """CREATE TABLE IF NOT EXISTS subscription_code (
+                        id SERIAL PRIMARY KEY,
+                        user_id INTEGER NOT NULL,
+                        code VARCHAR(32) NOT NULL UNIQUE,
+                        duration_days INTEGER NOT NULL DEFAULT 30,
+                        is_used BOOLEAN NOT NULL DEFAULT FALSE,
+                        used_at TIMESTAMP,
+                        created_at TIMESTAMP
+                    )""",
+                    """ALTER TABLE "user" ADD COLUMN IF NOT EXISTS subscription_expires_at TIMESTAMP""",
+
                 ]
 
                 for sql in postgres_sql:
@@ -2965,6 +3072,21 @@ def ensure_database_columns():
                 )
             """)
 
+
+            connection.exec_driver_sql("""
+                CREATE TABLE IF NOT EXISTS subscription_code (
+                    id INTEGER PRIMARY KEY,
+                    user_id INTEGER NOT NULL,
+                    code VARCHAR(32) NOT NULL UNIQUE,
+                    duration_days INTEGER NOT NULL DEFAULT 30,
+                    is_used BOOLEAN NOT NULL DEFAULT 0,
+                    used_at DATETIME,
+                    created_at DATETIME
+                )
+            """)
+            existing_user_cols = {row[1] for row in connection.exec_driver_sql("PRAGMA table_info(user)").fetchall()}
+            if "subscription_expires_at" not in existing_user_cols:
+                connection.exec_driver_sql("ALTER TABLE user ADD COLUMN subscription_expires_at DATETIME")
 
             # v478_user_limits_columns
             existing_user_cols = {row[1] for row in connection.exec_driver_sql("PRAGMA table_info(user)").fetchall()}
