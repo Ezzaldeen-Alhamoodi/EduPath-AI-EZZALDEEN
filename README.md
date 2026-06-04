@@ -1486,3 +1486,26 @@ Dashboard-only layout fix.
 - No changes to Tasks page.
 - No changes to Resources page.
 - Internal values remain stable.
+
+
+## v5.2.2 Force Full Adaptive Arabic Goals
+
+### What changed
+- Added a final runtime layer dedicated to Goals page only.
+- Forces Goals adaptive selects to render in Arabic where required.
+- Keeps official names unchanged:
+  - IELTS, TOEFL, Duolingo, HSK, CSCA, SAT, ACT, GRE, GMAT
+  - Python, C, C++, Java, JavaScript, HTML, CSS, SQL, Flask, React, Node.js
+  - official international question types.
+- Unifies all visible Other/Custom choices as: أخرى.
+- Ensures custom boxes appear below their related select and use Arabic labels/placeholders.
+- Makes current state, target state, and commitment adaptive by selected category/path.
+- Adds full detailed paths for IELTS, TOEFL, Duolingo, HSK, CSCA, SAT, ACT, GRE, and GMAT.
+- Strengthens hidden Arabic/English goal-task linking synonyms.
+
+### Safety
+- Goals page and goal intelligence only.
+- No database migration.
+- No changes to Tasks page.
+- No changes to Resources page.
+- Internal values stay stable.

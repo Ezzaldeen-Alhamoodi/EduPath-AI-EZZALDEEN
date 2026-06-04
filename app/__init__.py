@@ -2760,6 +2760,31 @@ def expand_goal_intelligence_terms_v520(text):
     return expanded
 
 
+
+GOAL_INTELLIGENCE_SYNONYMS_V522 = {
+    "ielts": ["IELTS", "آيلتس", "English", "الإنجليزية", "Reading", "قراءة", "Writing", "كتابة", "Listening", "استماع", "Speaking", "تحدث", "Vocabulary", "مفردات", "Grammar", "قواعد", "Mock Test", "اختبار تجريبي", "True False Not Given", "Matching Headings"],
+    "toefl": ["TOEFL", "توفل", "Reading", "قراءة", "Listening", "استماع", "Writing", "كتابة", "Speaking", "تحدث", "Academic Discussion", "Integrated Writing"],
+    "duolingo": ["Duolingo", "دولينجو", "Duolingo English Test", "Interactive Reading", "Interactive Listening", "Interactive Writing", "Interactive Speaking", "Read and Select", "Listen and Type"],
+    "python": ["Python", "بايثون", "Programming", "برمجة", "OOP", "Flask", "Backend", "API", "Database", "Authentication", "مشروع", "كود"],
+    "flask": ["Flask", "Python", "Backend", "Routes", "Templates", "Database", "Login", "Authentication", "API", "Deployment", "مشروع Flask", "تطبيق ويب"],
+    "scholarship": ["Scholarship", "منحة", "منح", "Documents", "مستندات", "CV", "سيرة ذاتية", "Motivation Letter", "خطاب الدافع", "Interview", "مقابلة", "Application", "تقديم", "University", "جامعة", "Admission", "قبول"],
+    "quran": ["قرآن", "القرآن", "حفظ", "مراجعة", "تثبيت", "تجويد", "تلاوة", "تسميع", "سورة", "جزء", "جزء عم", "النساء", "البقرة", "آل عمران"],
+    "mathematics": ["Mathematics", "رياضيات", "Algebra", "جبر", "Geometry", "هندسة", "Calculus", "تفاضل", "Statistics", "إحصاء", "Probability", "احتمالات"],
+    "csca": ["CSCA", "Mathematics", "Physics", "Chemistry", "رياضيات", "فيزياء", "كيمياء", "اختبار الصين"],
+}
+
+def expand_goal_intelligence_terms_v522(text):
+    lower = (text or "").lower()
+    expanded = set()
+    for key, values in GOAL_INTELLIGENCE_SYNONYMS_V522.items():
+        if key in lower or any(str(v).lower() in lower for v in values):
+            expanded.update(values)
+    if any(x in (text or "") for x in ["قرآن", "القرآن", "سورة", "جزء", "حفظ", "مراجعة"]):
+        expanded.update(GOAL_INTELLIGENCE_SYNONYMS_V522["quran"])
+    if any(x in (text or "") for x in ["منحة", "قبول", "مستندات", "خطاب الدافع", "تقديم"]):
+        expanded.update(GOAL_INTELLIGENCE_SYNONYMS_V522["scholarship"])
+    return expanded
+
 def generate_goal_keywords_from_form(form, goal_category="", goal_path="", current_state="", target_state="", commitment=""):
     raw = [
         form.get("category", ""),
@@ -2898,6 +2923,9 @@ def calculate_match_score(goal, task):
     expanded_goal_terms_v520 = expand_goal_intelligence_terms_v520(goal_text)
     expanded_task_terms_v520 = expand_goal_intelligence_terms_v520(task_text)
     combined_goal_terms_v520 = set(goal_keywords(goal)) | expanded_goal_terms_v520
+
+    expanded_goal_terms_v522 = expand_goal_intelligence_terms_v522(goal_text)
+    expanded_task_terms_v522 = expand_goal_intelligence_terms_v522(task_text)
 
     score = 0
     matched = []

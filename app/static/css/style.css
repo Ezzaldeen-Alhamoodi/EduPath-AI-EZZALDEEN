@@ -6267,3 +6267,150 @@ body.dark-mode .home-progress-ar-v513 small {
         gap: 6px !important;
     }
 }
+
+
+
+/* EduPath AI v5.2.2 Force Full Adaptive Arabic Goals */
+.smart-goals-layout-v4613,
+.smart-goal-form-v4613,
+.goal-card-v41 {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.smart-goals-layout-v4613 {
+    gap: 14px !important;
+}
+
+.smart-goal-create-card {
+    border-radius: 22px !important;
+    padding: 16px !important;
+}
+
+.smart-goal-form-v4613 {
+    display: grid !important;
+    gap: 10px !important;
+}
+
+.adaptive-goal-panel-v4614,
+.goal-form-bottom-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+}
+
+.goal-field,
+.goal-field-wide {
+    min-width: 0 !important;
+}
+
+.goal-field-wide {
+    grid-column: 1 / -1 !important;
+}
+
+.smart-goal-form-v4613 label {
+    font-size: 12.5px !important;
+    font-weight: 900 !important;
+}
+
+.smart-goal-form-v4613 input,
+.smart-goal-form-v4613 select,
+.smart-goal-form-v4613 textarea {
+    min-height: 40px !important;
+    border-radius: 13px !important;
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.smart-goal-form-v4613 select option {
+    direction: rtl !important;
+}
+
+.inline-custom-field,
+.edupath-visible-custom {
+    margin-top: 7px !important;
+    padding: 8px !important;
+    border-radius: 13px !important;
+    background: rgba(37,99,235,.055) !important;
+    border: 1px dashed rgba(37,99,235,.22) !important;
+}
+
+.inline-custom-field label,
+.edupath-visible-custom label {
+    color: #1d4ed8 !important;
+}
+
+.goal-card-v41 {
+    padding: 11px !important;
+    border-radius: 17px !important;
+    margin-bottom: 10px !important;
+}
+
+.goal-topline {
+    gap: 8px !important;
+    align-items: center !important;
+}
+
+.goal-topline strong {
+    font-size: 14px !important;
+}
+
+.goal-topline span {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+    border-radius: 999px !important;
+}
+
+.goal-current-target,
+.goal-path-line,
+.goal-meta-grid {
+    font-size: 12px !important;
+}
+
+.goal-meta-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+}
+
+.goal-meta-grid span {
+    border-radius: 10px !important;
+    padding: 6px 8px !important;
+    background: rgba(148,163,184,.075) !important;
+}
+
+@media (min-width: 981px) {
+    .smart-goals-layout-v4613 {
+        grid-template-columns: minmax(460px, .88fr) minmax(0, 1.12fr) !important;
+        align-items: start !important;
+    }
+}
+
+@media (max-width: 980px) {
+    .smart-goals-layout-v4613 {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .smart-goal-create-card {
+        padding: 11px !important;
+        border-radius: 18px !important;
+    }
+
+    .adaptive-goal-panel-v4614,
+    .goal-form-bottom-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    .smart-goal-form-v4613 input,
+    .smart-goal-form-v4613 select,
+    .smart-goal-form-v4613 textarea {
+        min-height: 38px !important;
+        font-size: 13px !important;
+    }
+
+    .goal-meta-grid {
+        grid-template-columns: 1fr !important;
+    }
+}

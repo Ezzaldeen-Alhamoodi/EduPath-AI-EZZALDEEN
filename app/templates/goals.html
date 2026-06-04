@@ -130,21 +130,21 @@
 
                 <div class="goal-path-line">
                     {% if goal.plan %}
-                        {{ goal.plan.get("Goal Category", "")|goals_ar }}{% if goal.plan.get("Goal Path") %} · {{ goal.plan.get("Goal Path")|goals_ar }}{% endif %}
+                        {{ goal.plan.get("تصنيف الهدف", "")|goals_ar }}{% if goal.plan.get("مسار الهدف") %} · {{ goal.plan.get("مسار الهدف")|goals_ar }}{% endif %}
                     {% endif %}
                 </div>
 
                 <div class="goal-current-target">
-                    <span>الحالة الحالية: {{ (goal.plan.get("Current State", goal.current_level) if goal.plan else goal.current_level)|goals_ar }}</span>
-                    <span>الحالة المستهدفة: {{ (goal.plan.get("Target State", "Not set") if goal.plan else "Not set")|goals_ar }}</span>
+                    <span>الحالة الحالية: {{ (goal.plan.get("الحالة الحالية", goal.current_level) if goal.plan else goal.current_level)|goals_ar }}</span>
+                    <span>الحالة المستهدفة: {{ (goal.plan.get("الحالة المستهدفة", "Not set") if goal.plan else "Not set")|goals_ar }}</span>
                 </div>
 
-                <div class="goal-progress-track">
-                    <div class="goal-progress-fill" style="width: {{ goal.goal_progress if goal.goal_progress is defined else 0 }}%;"></div>
+                <div class="goal-تقدم-track">
+                    <div class="goal-تقدم-fill" style="width: {{ goal.goal_تقدم if goal.goal_تقدم is defined else 0 }}%;"></div>
                 </div>
 
                 <div class="goal-meta-grid">
-                    <span>📊 {{ goal.goal_progress if goal.goal_progress is defined else 0 }}% تقدم</span>
+                    <span>📊 {{ goal.goal_تقدم if goal.goal_تقدم is defined else 0 }}% تقدم</span>
                     <span>🔗 {{ goal.goal_confidence.related_tasks if goal.goal_confidence is defined else 0 }} مهام مرتبطة</span>
                     <span>⏱️ {{ goal.goal_confidence.study_ساعات if goal.goal_confidence is defined else 0 }} ساعات</span>
                     <span>⏳ {{ goal.time_left if goal.time_left is defined else "لا يوجد موعد نهائي" }}</span>
