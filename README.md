@@ -1934,3 +1934,26 @@ Dashboard-only layout fix.
   - delete
   - task limit
 - No dashboard, goals, progress, or smart linking changes.
+
+
+## v5.4.1 Final Native Arabic Tasks
+
+### Scope
+- Final comprehensive native-Arabic update for Tasks before moving to Dashboard.
+- Covers:
+  - Tasks page
+  - Add task form
+  - Edit task form
+  - Saved task cards
+  - Task flash messages
+  - Other/custom fields
+  - Repeat options
+  - Task-related text shown on Dashboard
+  - Existing stored task values displayed in cards
+
+### Principles
+- No runtime translation layer for task UI.
+- User-facing task text is Arabic in source code.
+- Quran Memorization and Secondary School structures preserved.
+- Exams & Certificates official test/question content preserved where appropriate.
+- No dashboard layout, goals, progress, or smart linking logic changed.

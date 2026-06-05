@@ -1850,6 +1850,73 @@ def repeat_days_display_ar(repeat_type, repeat_days):
     return repeat_days_ar(repeat_days)
 
 
+
+TASK_NATIVE_AR_LABELS_V541 = {
+    "University": "المرحلة الجامعية",
+    "Languages": "اللغات",
+    "Programming & Technology": "البرمجة والتكنولوجيا",
+    "Artificial Intelligence": "الذكاء الاصطناعي",
+    "Mathematics": "الرياضيات",
+    "Scholarships": "المنح الدراسية",
+    "Daily Life": "الحياة اليومية",
+    "Projects": "المشاريع",
+    "Reading & Research": "القراءة والبحث",
+    "General": "عام",
+    "Other": "أخرى",
+    "Custom": "أخرى",
+    "Study": "التعلم",
+    "Learning": "التعلم",
+    "Do Task": "تنفيذ مهمة",
+    "Task": "مهمة",
+    "Review": "مراجعة",
+    "Planning": "التخطيط",
+    "Reminder": "تذكير",
+    "Health": "الصحة",
+    "Exercise": "الرياضة",
+    "Sleep": "النوم",
+    "Food": "التغذية",
+    "Water": "شرب الماء",
+    "Personal Routine": "الروتين الشخصي",
+    "Religious Routine": "الصلاة",
+    "Book Reading": "الكتب",
+    "Article Reading": "المقالات",
+    "Research Paper": "الأبحاث",
+    "Summary": "التلخيص",
+    "Critical Thinking": "التفكير النقدي",
+    "Take Notes": "تدوين ملاحظات",
+    "Lecture Study": "دراسة محاضرة",
+    "Assignment": "واجب",
+    "Project Work": "عمل على مشروع",
+    "Exam Review": "مراجعة اختبار",
+    "Solve Exercises": "حل تمارين",
+    "Review Terms": "مراجعة مصطلحات",
+    "Practice Problems": "حل مسائل تدريبية",
+    "Analyze Case": "تحليل حالة",
+    "Memorize Terms": "حفظ مصطلحات",
+    "done": "مكتملة",
+    "pending": "قيد التنفيذ",
+    "Completed": "مكتملة",
+    "Pending": "قيد التنفيذ",
+    "Incomplete": "غير مكتملة",
+    "Upcoming": "قادمة",
+    "Overdue": "متأخرة",
+    "once": "مرة واحدة / بدون تكرار",
+    "daily": "يوميًا",
+    "weekly": "أسبوعيًا",
+    "monthly": "شهريًا",
+    "selected_days": "أيام محددة",
+    "custom": "أخرى"
+}
+
+def native_task_label_v541(value):
+    if value is None:
+        return ""
+    text = str(value)
+    if text in TASK_EXAM_CONTENT_KEEP_V532:
+        return text
+    return TASK_NATIVE_AR_LABELS_V541.get(text) or task_ar(text)
+
+
 def render_clickable_sources(value):
     """Render source text safely: plain text stays plain, URLs become clickable links.
     Multiple sources can be separated by &.
@@ -1911,6 +1978,7 @@ def create_app():
     app.jinja_env.filters["repeat_days_display_ar"] = repeat_days_display_ar
     app.jinja_env.filters["task_exam_safe"] = task_ar_exam_safe
     app.jinja_env.filters["task_exam_raw_or_ar"] = task_exam_raw_or_ar
+    app.jinja_env.filters["native_task_label"] = native_task_label_v541
     app.jinja_env.filters["goals_ar"] = goals_ar
     app.jinja_env.filters["goal_time_ar"] = format_goal_time_left
     app.jinja_env.filters["goal_time_compact_ar"] = format_goal_time_left_compact
@@ -2846,7 +2914,7 @@ def create_app():
             )
 
             if not task.title:
-                flash("يرجى كتابة اسم المهمة.", "error")
+                flash("يرجى إدخال اسم المهمة.", "error")
                 return redirect(url_for("tasks"))
 
             db.session.add(task)
@@ -2900,7 +2968,7 @@ def create_app():
             )
             task.notes = request.form.get("notes", "").strip()
             db.session.commit()
-            flash("تم حفظ تعديلات المهمة بنجاح.", "success")
+            flash("تم تعديل المهمة بنجاح.", "success")
             return redirect(url_for("tasks"))
 
         return render_template("edit_task.html", task=task)
@@ -2929,7 +2997,7 @@ def create_app():
             "body": f"You completed: {task.title}.{related_msg} Keep your momentum going."
         }]
 
-        flash("تم إنجاز المهمة.", "success")
+        flash("تم إكمال المهمة.", "success")
         return redirect(url_for("tasks"))
 
     @app.route("/task/<int:task_id>/pending")
