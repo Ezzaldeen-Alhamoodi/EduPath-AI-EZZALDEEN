@@ -10,7 +10,7 @@
 
     <div class="conditional-field" id="customCategoryBox">
         <label>اكتب نوع المهمة</label>
-        <input name="custom_category" id="customCategoryInput" value="{{ task.custom_category if task else '' }}" placeholder="يرجى كتابة ما تريد">
+        <input name="custom_category" id="customCategoryInput" value="{{ task.custom_category if task else '' }}" placeholder="اكتب ما تريد">
     </div>
 
     <div id="taskDetailsArea" class="smart-details">
@@ -21,21 +21,21 @@
         <select name="topic" id="topicSelect" data-current="{{ task.topic if task else '' }}"></select>
         <div class="conditional-field" id="customTopicBox">
             <label>اكتب الفئة التي تريدها</label>
-            <input name="custom_topic" id="customTopicInput" value="{{ task.custom_topic if task else '' }}" placeholder="يرجى كتابة ما تريد">
+            <input name="custom_topic" id="customTopicInput" value="{{ task.custom_topic if task else '' }}" placeholder="اكتب ما تريد">
         </div>
 
         <label id="skillLabel">الفئة الفرعية</label>
         <select name="skill" id="skillSelect" data-current="{{ task.skill if task else '' }}"></select>
         <div class="conditional-field" id="customSkillBox">
             <label>اكتب الفئة الفرعية</label>
-            <input name="custom_skill" id="customSkillInput" value="{{ task.custom_skill if task else '' }}" placeholder="يرجى كتابة ما تريد">
+            <input name="custom_skill" id="customSkillInput" value="{{ task.custom_skill if task else '' }}" placeholder="اكتب ما تريد">
         </div>
 
         <label id="detailLabel">الموضوع التفصيلي</label>
         <select name="language" id="detailedTopicSelect" data-current="{{ task.language if task else '' }}"></select>
         <div class="conditional-field" id="customDetailedTopicBox">
             <label>اكتب الموضوع الذي تريده</label>
-            <input name="language_custom" id="customDetailedTopicInput" value="" placeholder="يرجى كتابة ما تريد">
+            <input name="language_custom" id="customDetailedTopicInput" value="" placeholder="اكتب ما تريد">
         </div>
 
         <label id="trainingLabel">نوع النشاط</label>
@@ -53,7 +53,7 @@
 
         <div class="conditional-field" id="customTrainingTypeBox">
             <label>اكتب نوع النشاط</label>
-            <input name="practice_type_custom" id="customTrainingTypeInput" value="" placeholder="يرجى كتابة ما تريد">
+            <input name="practice_type_custom" id="customTrainingTypeInput" value="" placeholder="اكتب ما تريد">
         </div>
 
         <label id="sourceLabel">المصدر أو الرابط</label>
