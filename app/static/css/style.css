@@ -6986,3 +6986,12 @@ body #trainingTypeSelect {
     direction: rtl !important;
     text-align: right !important;
 }
+
+
+
+/* EduPath AI v5.3.6 Hard Fix Arabic Task Labels */
+.smart-task-form label,
+.form label {
+    direction: rtl !important;
+    text-align: right !important;
+}

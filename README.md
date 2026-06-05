@@ -1874,3 +1874,20 @@ Dashboard-only layout fix.
   - حفظ المهمة
 - No adaptive task content was changed.
 - No exam content was changed.
+
+
+## v5.3.6 Hard Fix Arabic Task Labels
+
+### Fixed
+- Removed the old JavaScript behavior that was forcing task labels back to English.
+- Task labels now remain Arabic in all task types.
+- Placeholders now remain Arabic:
+  - task example
+  - source/link example
+  - notes example
+- Added a MutationObserver safety layer to reapply Arabic labels after any dynamic UI update.
+
+### Scope
+- Only task field labels and placeholders were fixed.
+- No adaptive task content was changed.
+- No exam content was changed.
