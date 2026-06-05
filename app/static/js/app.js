@@ -3832,3 +3832,109 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+
+/* EduPath AI v5.3.5 Universal Arabic Task Field Labels */
+const TASK_FIELD_LABELS_AR_V535 = {
+    taskNameLabel: "اسم المهمة",
+    topicLabel: "الفئة الرئيسية",
+    skillLabel: "الفئة الفرعية",
+    detailLabel: "الموضوع التفصيلي",
+    trainingLabel: "نوع النشاط",
+    sourceLabel: "المصدر أو الرابط",
+    difficultyLabel: "مستوى الصعوبة من ١ إلى ٥",
+    priorityLabel: "الأولوية من ١ إلى ٥",
+    expectedTimeLabel: "الوقت المتوقع (بالدقائق)",
+    startDateLabel: "تاريخ البدء",
+    endDateLabel: "تاريخ الانتهاء",
+    reminderLabel: "وقت التذكير",
+    repeatLabel: "التكرار",
+    repeatDaysLabel: "أيام التكرار",
+    notesLabel: "الملاحظات"
+};
+
+function forceAllTaskFieldLabelsArabicV535() {
+    Object.entries(TASK_FIELD_LABELS_AR_V535).forEach(([id, text]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+    });
+
+    const byFor = {
+        "title": "اسم المهمة",
+        "task_title": "اسم المهمة",
+        "category": "الفئة الرئيسية",
+        "topic": "الفئة الرئيسية",
+        "skill": "الفئة الفرعية",
+        "language": "الموضوع التفصيلي",
+        "practice_type": "نوع النشاط",
+        "source": "المصدر أو الرابط",
+        "difficulty": "مستوى الصعوبة",
+        "priority": "الأولوية",
+        "estimated_minutes": "الوقت المتوقع (بالدقائق)",
+        "start_date": "تاريخ البدء",
+        "due_date": "تاريخ الانتهاء",
+        "reminder_time": "وقت التذكير",
+        "repeat_type": "التكرار",
+        "repeat_days": "أيام التكرار",
+        "notes": "الملاحظات"
+    };
+
+    Object.entries(byFor).forEach(([forValue, text]) => {
+        document.querySelectorAll(`label[for="${forValue}"]`).forEach(label => {
+            label.textContent = text;
+        });
+    });
+
+    document.querySelectorAll("label, .form label, .smart-task-form label").forEach(label => {
+        const t = (label.textContent || "").trim().toLowerCase();
+        const map = {
+            "task name": "اسم المهمة",
+            "main field": "الفئة الرئيسية",
+            "sub field": "الفئة الفرعية",
+            "subfield": "الفئة الفرعية",
+            "detailed topic": "الموضوع التفصيلي",
+            "training type": "نوع النشاط",
+            "source / link": "المصدر أو الرابط",
+            "source or link": "المصدر أو الرابط",
+            "difficulty": "مستوى الصعوبة",
+            "difficulty 1-5": "مستوى الصعوبة من ١ إلى ٥",
+            "priority": "الأولوية",
+            "priority 1-5": "الأولوية من ١ إلى ٥",
+            "expected time in minutes": "الوقت المتوقع (بالدقائق)",
+            "start date": "تاريخ البدء",
+            "end date / deadline": "تاريخ الانتهاء",
+            "end date or deadline": "تاريخ الانتهاء",
+            "reminder time": "وقت التذكير",
+            "repeat": "التكرار",
+            "repeat days": "أيام التكرار",
+            "notes": "الملاحظات"
+        };
+        if (map[t]) label.textContent = map[t];
+    });
+
+    document.querySelectorAll("button, .button").forEach(btn => {
+        const t = (btn.textContent || "").trim().toLowerCase();
+        if (t === "save task") btn.textContent = "حفظ المهمة";
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    forceAllTaskFieldLabelsArabicV535();
+    setTimeout(forceAllTaskFieldLabelsArabicV535, 80);
+    setTimeout(forceAllTaskFieldLabelsArabicV535, 250);
+
+    ["categorySelect","topicSelect","skillSelect","detailedTopicSelect","trainingTypeSelect","repeatTypeSelect"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener("change", () => {
+            setTimeout(forceAllTaskFieldLabelsArabicV535, 0);
+            setTimeout(forceAllTaskFieldLabelsArabicV535, 80);
+        });
+    });
+
+    document.addEventListener("click", event => {
+        if (event.target.closest(".task-type-card")) {
+            setTimeout(forceAllTaskFieldLabelsArabicV535, 0);
+            setTimeout(forceAllTaskFieldLabelsArabicV535, 100);
+        }
+    });
+});
+
