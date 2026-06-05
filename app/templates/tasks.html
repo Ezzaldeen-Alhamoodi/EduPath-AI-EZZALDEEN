@@ -34,7 +34,7 @@
                     <span><b>الفئة الرئيسية:</b> {% if task.topic == "Other" and task.custom_topic %}{{ task.custom_topic }}{% else %}{{ (task.topic or "غير محدد")|task_ar }}{% endif %}</span>
                     <span><b>الفئة الفرعية:</b> {% if task.skill == "Other" and task.custom_skill %}{{ task.custom_skill }}{% else %}{{ (task.skill or "غير محدد")|task_ar }}{% endif %}</span>
                     <span><b>الموضوع التفصيلي:</b> {{ (task.language or "غير محدد")|task_ar }}</span>
-                    <span><b>نوع التدريب:</b> {{ (task.practice_type or "عام")|task_ar }}</span>
+                    <span><b>نوع النشاط:</b> {{ (task.practice_type or "عام")|task_ar }}</span>
                     <span><b>المصدر:</b> {{ task.source|clickable_sources }}</span>
                     <span>{{ task.estimated_minutes }} دقيقة · الأولوية {{ task.priority }} · الصعوبة {{ task.difficulty }}</span>
                     <span>من {{ task.start_date or "غير محدد" }} إلى {{ task.due_date or "غير محدد" }} · {{ task.repeat_type|task_ar }} · الأيام: {{ task.repeat_days|repeat_days_ar }}</span>

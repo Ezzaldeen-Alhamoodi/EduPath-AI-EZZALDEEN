@@ -6923,3 +6923,25 @@ body.dark-mode .home-progress-ar-v513 small {
         font-size: 12.5px !important;
     }
 }
+
+
+
+/* EduPath AI v5.3.0 Deep Native Arabic Tasks */
+.smart-task-form label,
+.smart-task-form input,
+.smart-task-form select,
+.smart-task-form textarea {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.task-type-card strong,
+.task-card span,
+.task-card strong {
+    line-height: 1.5 !important;
+}
+
+.smart-task-form .conditional-field label {
+    color: #1d4ed8 !important;
+    font-weight: 900 !important;
+}

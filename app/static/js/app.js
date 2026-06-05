@@ -2775,16 +2775,18 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/* EduPath AI v5.2.9 Native Arabic Tasks */
-const TASK_OFFICIAL_KEEP_V529 = new Set([
+/* EduPath AI v5.3.0 Deep Native Arabic Tasks */
+const TASK_OFFICIAL_KEEP_V530 = new Set([
     "IELTS","TOEFL","Duolingo English Test","Duolingo","HSK","CSCA","SAT","ACT","GRE","GMAT",
     "Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","Flask","Django","React","Node.js",
     "Git","GitHub","Git / GitHub","Docker","Linux","TensorFlow","PyTorch","Scikit-learn","Pandas","NumPy",
-    "True False Not Given","Matching Headings","Multiple Choice","Writing Task 1","Writing Task 2",
-    "Speaking Part 1","Speaking Part 2","Speaking Part 3"
+    "CNN","RNN","NLP","API","APIs","OOP",
+    "True False Not Given","Yes No Not Given","Matching Headings","Multiple Choice","Writing Task 1","Writing Task 2",
+    "Speaking Part 1","Speaking Part 2","Speaking Part 3","Map Labelling","Form Completion","Note Completion",
+    "Flow Chart Completion","Summary Completion","Sentence Completion","Table Completion"
 ]);
 
-const TASK_AR_V529 = {
+const TASK_AR_V530 = {
     "University": "المرحلة الجامعية",
     "Languages": "اللغات",
     "Programming & Technology": "البرمجة والتكنولوجيا",
@@ -2799,6 +2801,75 @@ const TASK_AR_V529 = {
     "Other": "أخرى",
     "Quran Memorization": "حفظ القرآن الكريم",
     "Secondary School": "المرحلة الثانوية",
+
+    "English": "الإنجليزية",
+    "Turkish": "التركية",
+    "Russian": "الروسية",
+    "Chinese": "الصينية",
+    "Indonesian": "الإندونيسية",
+    "Romanian": "الرومانية",
+    "Arabic": "العربية",
+    "French": "الفرنسية",
+    "German": "الألمانية",
+    "General English": "إنجليزية عامة",
+    "General Chinese": "صينية عامة",
+    "General Turkish": "تركية عامة",
+    "General Russian": "روسية عامة",
+    "General Language": "لغة عامة",
+    "Grammar": "القواعد",
+    "Vocabulary": "المفردات",
+    "Pronunciation": "النطق",
+    "Reading": "القراءة",
+    "Writing": "الكتابة",
+    "Listening": "الاستماع",
+    "Speaking": "التحدث",
+    "Academic English": "الإنجليزية الأكاديمية",
+    "Characters": "الحروف الصينية",
+    "Translation": "الترجمة",
+    "Daily Conversation": "محادثة يومية",
+    "Grammar Review": "مراجعة القواعد",
+    "Vocabulary Building": "إثراء المفردات",
+    "Pronunciation Practice": "ممارسة النطق",
+    "Grammar Practice": "حل تمارين القواعد",
+    "Vocabulary Review": "مراجعة المفردات",
+    "Dictation": "إملاء",
+    "Shadowing": "المحاكاة الصوتية",
+    "Practice": "تطبيق عملي",
+    "Timed Practice": "تدريب بوقت محدد",
+    "Review Mistakes": "مراجعة الأخطاء",
+    "Mock Test": "اختبار تجريبي",
+    "Reading Practice": "فهم المقروء",
+    "Speaking Practice": "ممارسة التحدث",
+    "Writing Practice": "تدريب الكتابة",
+    "Listening Practice": "فهم المسموع",
+    "Fluency Practice": "تحسين الطلاقة",
+    "Record Response": "تسجيل الإجابة",
+    "Photo Description": "وصف صورة",
+    "Sample Writing": "كتابة نموذجية",
+    "Accuracy Review": "مراجعة الدقة",
+    "Mistake Review": "مراجعة الأخطاء",
+    "Gap Filling": "ملء الفراغات",
+    "Diagram Matching": "مطابقة الرسوم",
+    "Chart Matching": "مطابقة المخططات",
+    "Short Answer Questions": "أسئلة إجابة قصيرة",
+    "Skimming": "قراءة سريعة",
+    "Scanning": "بحث سريع داخل النص",
+    "Draft Response": "كتابة مسودة",
+    "Timed Writing": "كتابة بوقت محدد",
+    "Task Analysis": "تحليل المهمة",
+    "Vocabulary Upgrade": "تقوية المفردات",
+    "Grammar Accuracy": "تحسين دقة القواعد",
+    "Feedback Review": "مراجعة الملاحظات",
+    "Rewrite Response": "إعادة كتابة الإجابة",
+    "Mock Interview": "مقابلة تجريبية",
+    "Everyday Conversation": "محادثة يومية",
+    "Everyday Monologue": "حديث يومي فردي",
+    "Educational Discussion": "نقاش تعليمي",
+    "Academic Lecture": "محاضرة أكاديمية",
+    "Academic Reading": "قراءة أكاديمية",
+    "General Training Reading": "قراءة عامة",
+    "Plan Labelling": "Plan Labelling",
+    "Diagram Labelling": "Diagram Labelling",
 
     "Computer Science": "علوم الحاسوب",
     "Information Technology": "تقنية المعلومات",
@@ -2823,7 +2894,6 @@ const TASK_AR_V529 = {
     "Education": "التربية",
     "English Language": "اللغة الإنجليزية",
     "Arabic Language": "اللغة العربية",
-    "Translation": "الترجمة",
     "Media": "الإعلام",
     "Political Science": "العلوم السياسية",
     "Psychology": "علم النفس",
@@ -2863,110 +2933,10 @@ const TASK_AR_V529 = {
     "Solve Exercises": "حل تمارين",
     "Prepare Report": "إعداد تقرير",
     "Review Terms": "مراجعة المصطلحات",
-    "Practice Problems": "تدريب على المسائل",
+    "Practice Problems": "حل مسائل تدريبية",
     "Analyze Case": "تحليل حالة",
     "Memorize Terms": "حفظ مصطلحات",
 
-    "English": "الإنجليزية",
-    "Turkish": "التركية",
-    "Russian": "الروسية",
-    "Chinese": "الصينية",
-    "Indonesian": "الإندونيسية",
-    "Romanian": "الرومانية",
-    "Arabic": "العربية",
-    "French": "الفرنسية",
-    "German": "الألمانية",
-    "General English": "إنجليزية عامة",
-    "General Chinese": "صينية عامة",
-    "General Turkish": "تركية عامة",
-    "General Russian": "روسية عامة",
-    "General Language": "لغة عامة",
-    "Grammar": "القواعد",
-    "Vocabulary": "المفردات",
-    "Pronunciation": "النطق",
-    "Reading": "القراءة",
-    "Writing": "الكتابة",
-    "Listening": "الاستماع",
-    "Speaking": "التحدث",
-    "Academic English": "الإنجليزية الأكاديمية",
-    "Characters": "الحروف الصينية",
-    "Daily Conversation": "محادثة يومية",
-    "Grammar Review": "مراجعة القواعد",
-    "Vocabulary Building": "بناء المفردات",
-    "Everyday Conversation": "محادثة يومية",
-    "Everyday Monologue": "حديث يومي فردي",
-    "Educational Discussion": "نقاش تعليمي",
-    "Academic Lecture": "محاضرة أكاديمية",
-    "Academic Reading": "قراءة أكاديمية",
-    "General Training Reading": "قراءة عامة",
-    "Task 1 Academic": "Writing Task 1",
-    "Task 2 Academic": "Writing Task 2",
-    "Task 1 General": "Writing Task 1",
-    "Task 2 General": "Writing Task 2",
-    "Part 1": "Speaking Part 1",
-    "Part 2": "Speaking Part 2",
-    "Part 3": "Speaking Part 3",
-    "Gap Filling": "ملء الفراغات",
-    "Table Completion": "Table Completion",
-    "Diagram Matching": "مطابقة الرسوم",
-    "Chart Matching": "مطابقة المخططات",
-    "Short Answer Questions": "أسئلة إجابة قصيرة",
-    "Skimming": "القراءة السريعة",
-    "Scanning": "البحث السريع",
-    "Draft Response": "كتابة مسودة",
-    "Timed Writing": "كتابة بوقت محدد",
-    "Task Analysis": "تحليل المهمة",
-    "Vocabulary Upgrade": "تقوية المفردات",
-    "Grammar Accuracy": "دقة القواعد",
-    "Feedback Review": "مراجعة الملاحظات",
-    "Rewrite Response": "إعادة كتابة الإجابة",
-    "Mock Interview": "مقابلة تجريبية",
-    "Fluency Practice": "تدريب الطلاقة",
-    "Record Response": "تسجيل الإجابة",
-    "Plan Labelling": "Plan Labelling",
-    "Map Labelling": "Map Labelling",
-    "Diagram Labelling": "Diagram Labelling",
-    "Form Completion": "Form Completion",
-    "Note Completion": "Note Completion",
-    "Flow Chart Completion": "Flow Chart Completion",
-    "Summary Completion": "Summary Completion",
-    "Sentence Completion": "Sentence Completion",
-    "Timed Practice": "تدريب بوقت محدد",
-    "Review Mistakes": "مراجعة الأخطاء",
-    "Vocabulary Review": "مراجعة المفردات",
-    "Grammar Practice": "تدريب القواعد",
-    "Pronunciation Practice": "تدريب النطق",
-    "Dictation": "إملاء",
-    "Shadowing": "تدريب الترديد",
-    "Mock Test": "اختبار تجريبي",
-    "Practice": "تدريب",
-    "Accuracy Review": "مراجعة الدقة",
-    "Mistake Review": "مراجعة الأخطاء",
-    "Dictation": "إملاء",
-    "Photo Description": "وصف صورة",
-    "Sample Writing": "عينة كتابة",
-    "Photo Speaking": "تحدث عن صورة",
-    "Fluency Practice": "تدريب الطلاقة",
-
-    "Syntax": "الصياغة",
-    "Variables": "المتغيرات",
-    "Data Types": "أنواع البيانات",
-    "Conditions": "الشروط",
-    "Loops": "الحلقات",
-    "Functions": "الدوال",
-    "Lists": "القوائم",
-    "Tuples": "الصفوف",
-    "Dictionaries": "القواميس",
-    "Sets": "المجموعات",
-    "Files": "الملفات",
-    "OOP": "البرمجة الكائنية",
-    "Modules": "الوحدات",
-    "Libraries": "المكتبات",
-    "Virtual Environment": "البيئة الافتراضية",
-    "APIs": "واجهات API",
-    "Data Analysis": "تحليل البيانات",
-    "Automation": "الأتمتة",
-    "Web Scraping": "استخراج البيانات من الويب",
     "Frontend Development": "تطوير الواجهة الأمامية",
     "Backend Development": "تطوير الخلفية",
     "Full Stack Development": "تطوير متكامل",
@@ -2982,13 +2952,30 @@ const TASK_AR_V529 = {
     "Concepts": "المفاهيم",
     "Debugging": "تصحيح الأخطاء",
     "Review": "مراجعة",
-    "Study Concept": "دراسة المفهوم",
+    "Syntax": "الصياغة",
+    "Variables": "المتغيرات",
+    "Data Types": "أنواع البيانات",
+    "Conditions": "الشروط",
+    "Loops": "الحلقات",
+    "Functions": "الدوال",
+    "Lists": "القوائم",
+    "Tuples": "الصفوف",
+    "Dictionaries": "القواميس",
+    "Sets": "المجموعات",
+    "Files": "الملفات",
+    "Modules": "الوحدات",
+    "Libraries": "المكتبات",
+    "Virtual Environment": "البيئة الافتراضية",
+    "Data Analysis": "تحليل البيانات",
+    "Automation": "الأتمتة",
+    "Web Scraping": "استخراج البيانات من الويب",
+    "Study Concept": "فهم المفهوم",
     "Write Code": "كتابة كود",
     "Build Mini Project": "بناء مشروع صغير",
     "Debug Code": "تصحيح الكود",
     "Read Documentation": "قراءة التوثيق",
     "Refactor Code": "تحسين الكود",
-    "Practice Syntax": "تدريب الصياغة",
+    "Practice Syntax": "تطبيق الصياغة البرمجية",
     "Build App": "بناء تطبيق",
     "Build Page": "بناء صفحة",
     "Design Layout": "تصميم الواجهة",
@@ -2998,24 +2985,20 @@ const TASK_AR_V529 = {
     "Make Responsive": "جعله متجاوبًا",
     "Deploy Website": "نشر الموقع",
     "Improve UI": "تحسين الواجهة",
-    "Practice Project": "تدريب بمشروع",
+    "Practice Project": "تطبيق بمشروع",
 
     "Artificial Intelligence": "الذكاء الاصطناعي",
     "Machine Learning": "تعلم الآلة",
     "Deep Learning": "التعلم العميق",
-    "NLP": "معالجة اللغة الطبيعية",
     "Computer Vision": "الرؤية الحاسوبية",
     "Reinforcement Learning": "التعلم المعزز",
     "AI Projects": "مشاريع ذكاء اصطناعي",
     "Data Cleaning": "تنظيف البيانات",
     "Feature Engineering": "هندسة الخصائص",
     "Models": "النماذج",
-    "Training": "التدريب",
-    "Evaluation": "التقييم",
+    "Training": "تدريب النموذج",
+    "Evaluation": "تقييم النموذج",
     "Neural Networks": "الشبكات العصبية",
-    "CNN": "CNN",
-    "RNN": "RNN",
-    "Transformers": "Transformers",
     "Study": "تعلم",
     "Experiment": "تجربة",
     "Evaluate Model": "تقييم النموذج",
@@ -3034,7 +3017,6 @@ const TASK_AR_V529 = {
     "Probability": "الاحتمالات",
     "Statistics": "الإحصاء",
     "Linear Algebra": "الجبر الخطي",
-    "Discrete Mathematics": "الرياضيات المتقطعة",
     "Equations": "المعادلات",
     "Functions": "الدوال",
     "Past Exams": "اختبارات سابقة",
@@ -3092,7 +3074,7 @@ const TASK_AR_V529 = {
     "Achievements": "الإنجازات",
     "Future Goals": "الأهداف المستقبلية",
     "University Fit": "التوافق مع الجامعة",
-    "Question Practice": "تدريب على الأسئلة",
+    "Question Practice": "التدرب على الأسئلة",
     "Answer Improvement": "تحسين الإجابات",
     "Feedback": "ملاحظات",
 
@@ -3107,17 +3089,17 @@ const TASK_AR_V529 = {
     "Cleaning": "تنظيف المنزل",
     "Shopping": "التسوق",
     "Time Management": "إدارة الوقت",
-    "Religious Routine": "العبادة اليومية",
+    "Religious Routine": "الصلاة",
     "Appointments": "المواعيد",
     "Daily Habit": "عادة يومية",
     "Weekly Routine": "روتين أسبوعي",
     "Reminder": "تذكير",
     "Personal Task": "مهمة شخصية",
     "Important Appointment": "موعد مهم",
-    "Self-care": "العناية بالنفس",
+    "Self-care": "العناية الشخصية",
     "Do Task": "تنفيذ مهمة",
     "Review Progress": "مراجعة التقدم",
-    "Repeat Habit": "تكرار العادة",
+    "Repeat Habit": "تثبيت العادة",
     "Check": "فحص",
     "Improve Routine": "تحسين الروتين",
 
@@ -3140,19 +3122,19 @@ const TASK_AR_V529 = {
     "Write Documentation": "كتابة التوثيق",
     "Brainstorm": "عصف ذهني",
 
-    "Book Reading": "قراءة كتاب",
-    "Article Reading": "قراءة مقال",
-    "Research Paper": "بحث علمي",
-    "Summary": "تلخيص",
-    "Notes": "ملاحظات",
-    "Literature Review": "مراجعة أدبيات",
-    "Critical Thinking": "تفكير نقدي",
+    "Book Reading": "الكتب",
+    "Article Reading": "المقالات",
+    "Research Paper": "الأبحاث",
+    "Summary": "التلخيص",
+    "Notes": "تدوين ملاحظات",
+    "Literature Review": "المراجعات",
+    "Critical Thinking": "التفكير النقدي",
     "Read": "قراءة",
     "Summarize": "تلخيص",
     "Analyze": "تحليل",
     "Take Notes": "تدوين ملاحظات",
     "Discuss": "مناقشة",
-    "Learning": "التعلم",
+    "Learning": "التعلم الذاتي",
     "Application": "تطبيق عملي",
     "General Topic": "موضوع عام",
     "Topic": "موضوع",
@@ -3164,17 +3146,105 @@ const TASK_AR_V529 = {
     "selected_days": "أيام محددة"
 };
 
-function taskLabelArV529(value) {
+function taskLabelArV530(value) {
     if (!value) return "";
-    if (TASK_OFFICIAL_KEEP_V529.has(value)) return value;
-    return TASK_AR_V529[value] || value;
+    if (TASK_OFFICIAL_KEEP_V530.has(value)) return value;
+    return TASK_AR_V530[value] || value;
 }
 
+function applyDeepNativeTaskConfigV530() {
+    if (typeof SMART_TASK_DATA === "undefined") return;
+
+    if (SMART_TASK_DATA["Languages"]) {
+        SMART_TASK_DATA["Languages"].training = [
+            "ممارسة التحدث","فهم المقروء","فهم المسموع","تدريب الكتابة","دراسة القواعد",
+            "حل تمارين القواعد","إثراء المفردات","تحسين النطق","ممارسة النطق",
+            "تصحيح النطق","المحاكاة الصوتية","إملاء","اختبار تجريبي","مراجعة الأخطاء","أخرى"
+        ];
+    }
+
+    if (SMART_TASK_DATA["Daily Life"]) {
+        SMART_TASK_DATA["Daily Life"].main = [
+            "الصحة","الرياضة","النوم","شرب الماء","التغذية","الروتين الشخصي",
+            "العائلة","إدارة الوقت","إدارة المال","الصلاة","التسوق","ترتيب المنزل",
+            "تنظيف المنزل","القراءة","الاسترخاء","أخرى"
+        ];
+        SMART_TASK_DATA["Daily Life"].sub = {
+            "الصحة": ["التغذية","شرب الماء","الفحوصات الطبية","الوقاية الصحية","العادات الصحية","العناية الصحية","أخرى"],
+            "الرياضة": ["المشي","تمارين منزلية","تمارين مقاومة","تمارين مرونة","رياضة خفيفة","أخرى"],
+            "النوم": ["تنظيم وقت النوم","تقليل السهر","روتين قبل النوم","الاستيقاظ المبكر","أخرى"],
+            "شرب الماء": ["كمية الماء اليومية","تذكير شرب الماء","تقليل المشروبات الغازية","متابعة العادة","أخرى"],
+            "التغذية": ["وجبة صحية","تقليل السكر","تنظيم الوجبات","تحضير طعام","متابعة الوزن","أخرى"],
+            "الروتين الشخصي": ["ترتيب اليوم","العناية الشخصية","النظافة الشخصية","العناية بالبشرة","العناية بالشعر","الراحة النفسية","أخرى"],
+            "العائلة": ["زيارة عائلية","مساعدة الأسرة","مكالمة عائلية","مسؤولية منزلية","أخرى"],
+            "إدارة الوقت": ["تخطيط اليوم","ترتيب الأولويات","تقليل التشتت","مراجعة الإنجاز","أخرى"],
+            "إدارة المال": ["تتبع المصروفات","ميزانية أسبوعية","ادخار","مراجعة النفقات","أخرى"],
+            "الصلاة": ["صلاة الفجر","الصلوات الخمس","النوافل","الأذكار بعد الصلاة","المحافظة على الوقت","أخرى"],
+            "التسوق": ["قائمة مشتريات","شراء احتياجات","مقارنة الأسعار","متابعة الميزانية","أخرى"],
+            "ترتيب المنزل": ["ترتيب الغرفة","ترتيب المكتب","ترتيب الملفات","تنظيم الملابس","أخرى"],
+            "تنظيف المنزل": ["تنظيف الغرفة","تنظيف المكتب","تنظيف المطبخ","تنظيف أسبوعي","أخرى"],
+            "القراءة": ["قراءة يومية","قراءة كتاب","قراءة مقال","تدوين فائدة","أخرى"],
+            "الاسترخاء": ["راحة قصيرة","تنفس عميق","مشي هادئ","وقت بلا هاتف","أخرى"],
+            "أخرى": ["عادة يومية","روتين أسبوعي","تذكير مهم","مهمة شخصية","أخرى"]
+        };
+        SMART_TASK_DATA["Daily Life"].detail = {
+            "التغذية": ["اختيار وجبة صحية","تقليل السكر","زيادة البروتين","تنظيم الوجبات","أخرى"],
+            "شرب الماء": ["كوب صباحي","زجاجة يومية","تذكير كل فترة","متابعة الكمية","أخرى"],
+            "الفحوصات الطبية": ["حجز موعد","متابعة نتيجة","تجهيز ملف طبي","أخرى"],
+            "الوقاية الصحية": ["نظافة شخصية","مشي خفيف","نوم كافٍ","تقليل التوتر","أخرى"],
+            "العناية الشخصية": ["نظافة شخصية","ترتيب المظهر","عناية يومية","أخرى"],
+            "النظافة الشخصية": ["غسل الأسنان","الاستحمام","تغيير الملابس","تنظيم الأدوات","أخرى"],
+            "العناية بالبشرة": ["غسل الوجه","ترطيب","حماية من الشمس","متابعة روتين","أخرى"],
+            "العناية بالشعر": ["غسل الشعر","ترتيب الشعر","روتين عناية","أخرى"],
+            "الراحة النفسية": ["وقت هادئ","كتابة مشاعر","تنفس عميق","تقليل التوتر","أخرى"],
+            "أخرى": ["موضوع عام","أخرى"]
+        };
+        SMART_TASK_DATA["Daily Life"].training = [
+            "تنفيذ المهمة","متابعة العادة","مراجعة التقدم","تثبيت العادة","تحسين الروتين",
+            "تجهيز مسبق","فحص سريع","تذكير يومي","مراجعة أسبوعية","أخرى"
+        ];
+    }
+
+    if (SMART_TASK_DATA["Reading & Research"]) {
+        SMART_TASK_DATA["Reading & Research"].main = [
+            "القراءة","البحث العلمي","الكتب","المقالات","الأبحاث","المراجعات",
+            "التلخيص","التفكير النقدي","التعلم الذاتي","أخرى"
+        ];
+        SMART_TASK_DATA["Reading & Research"].sub = {
+            "الكتب": ["علوم الحاسوب","الذكاء الاصطناعي","الرياضيات","الفيزياء","الكيمياء","الأحياء","الاقتصاد","إدارة الأعمال","التاريخ","الفلسفة","علم النفس","اللغة العربية","اللغة الإنجليزية","التنمية الذاتية","السير الذاتية","الروايات","الأدب","الدين","التفسير","الحديث","الفقه","العقيدة","أخرى"],
+            "القراءة": ["قراءة موجهة","قراءة تحليلية","قراءة مكثفة","قراءة سريعة","فهم المقروء","تدوين فوائد","أخرى"],
+            "البحث العلمي": ["اختيار موضوع","جمع مراجع","قراءة أوراق علمية","تحليل النتائج","توثيق المراجع","كتابة البحث","مراجعة البحث","أخرى"],
+            "المقالات": ["مقال تعليمي","مقال علمي","مقال رأي","تحليل مقال","تلخيص مقال","أخرى"],
+            "الأبحاث": ["الملخص","المقدمة","المنهجية","النتائج","المناقشة","المراجع","أخرى"],
+            "المراجعات": ["مراجعة كتاب","مراجعة مقال","مراجعة بحث","مقارنة مصادر","أخرى"],
+            "التلخيص": ["تلخيص فصل","تلخيص مقال","تلخيص بحث","استخراج أفكار","أخرى"],
+            "التفكير النقدي": ["تحليل حجة","تمييز الفكرة الرئيسية","تقييم دليل","مقارنة آراء","أخرى"],
+            "التعلم الذاتي": ["خطة تعلم","مصدر تعليمي","تطبيق عملي","مراجعة أسبوعية","أخرى"],
+            "أخرى": ["قراءة","تلخيص","تحليل","تدوين ملاحظات","أخرى"]
+        };
+        SMART_TASK_DATA["Reading & Research"].detail = {
+            "علوم الحاسوب": ["الخوارزميات","هياكل البيانات","قواعد البيانات","تطوير الويب","الأمن السيبراني","أخرى"],
+            "الذكاء الاصطناعي": ["تعلم الآلة","التعلم العميق","معالجة اللغة الطبيعية","الرؤية الحاسوبية","أخرى"],
+            "الرياضيات": ["الجبر","التفاضل والتكامل","الإحصاء","الاحتمالات","أخرى"],
+            "الدين": ["التفسير","الحديث","الفقه","العقيدة","السيرة","أخرى"],
+            "البحث العلمي": ["سؤال البحث","مراجعة الأدبيات","منهجية البحث","تحليل النتائج","توثيق المراجع","أخرى"],
+            "أخرى": ["موضوع عام","أخرى"]
+        };
+        SMART_TASK_DATA["Reading & Research"].training = [
+            "قراءة","تلخيص","استخراج أفكار","تحليل","مراجعة","مناقشة",
+            "تدوين ملاحظات","بناء خريطة ذهنية","مقارنة","تطبيق عملي",
+            "جمع مراجع","قراءة أوراق علمية","تحليل النتائج","توثيق المراجع","كتابة البحث","أخرى"
+        ];
+    }
+}
+
+applyDeepNativeTaskConfigV530();
+
 labelForUI = function(value) {
-    return taskLabelArV529(value);
+    return taskLabelArV530(value);
 };
 
-function forceTaskArabicLabelsV529() {
+function forceTaskArabicLabelsV530() {
     if (!document.getElementById("taskTypeCards")) return;
 
     const fixedLabels = {
@@ -3182,7 +3252,7 @@ function forceTaskArabicLabelsV529() {
         topicLabel: "الفئة الرئيسية",
         skillLabel: "الفئة الفرعية",
         detailLabel: "الموضوع التفصيلي",
-        trainingLabel: "نوع التدريب",
+        trainingLabel: "نوع النشاط",
         sourceLabel: "المصدر أو الرابط",
         difficultyLabel: "مستوى الصعوبة من ١ إلى ٥",
         priorityLabel: "الأولوية من ١ إلى ٥",
@@ -3204,7 +3274,7 @@ function forceTaskArabicLabelsV529() {
         ["customTopicBox", "اكتب الفئة التي تريدها"],
         ["customSkillBox", "اكتب الفئة الفرعية"],
         ["customDetailedTopicBox", "اكتب الموضوع الذي تريده"],
-        ["customTrainingTypeBox", "اكتب نوع التدريب"]
+        ["customTrainingTypeBox", "اكتب نوع النشاط"]
     ];
     customLabels.forEach(([boxId, text]) => {
         const box = document.getElementById(boxId);
@@ -3226,24 +3296,24 @@ function forceTaskArabicLabelsV529() {
     });
 
     document.querySelectorAll("#topicSelect option, #skillSelect option, #detailedTopicSelect option, #trainingTypeSelect option, #repeatTypeSelect option, #cscaDetailedTopicSelect option, #cscaTrainingTypeSelect option").forEach(option => {
-        option.textContent = taskLabelArV529(option.value || option.textContent);
+        option.textContent = taskLabelArV530(option.value || option.textContent);
     });
 
     document.querySelectorAll(".task-type-card strong").forEach(el => {
         const value = el.closest(".task-type-card")?.dataset?.type || el.textContent;
-        el.textContent = taskLabelArV529(value);
+        el.textContent = taskLabelArV530(value);
     });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(forceTaskArabicLabelsV529, 80);
+    setTimeout(forceTaskArabicLabelsV530, 80);
     ["categorySelect", "topicSelect", "skillSelect", "detailedTopicSelect", "trainingTypeSelect", "repeatTypeSelect"].forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.addEventListener("change", () => setTimeout(forceTaskArabicLabelsV529, 25));
+        if (el) el.addEventListener("change", () => setTimeout(forceTaskArabicLabelsV530, 30));
     });
     document.addEventListener("click", (event) => {
         if (event.target.closest(".task-type-card")) {
-            setTimeout(forceTaskArabicLabelsV529, 50);
+            setTimeout(forceTaskArabicLabelsV530, 60);
         }
     });
 });
