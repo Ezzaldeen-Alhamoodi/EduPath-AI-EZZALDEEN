@@ -62,5 +62,36 @@
 {% endblock %}
 
 {% block extra_scripts %}
-<script src="{{ url_for('static', filename='js/tasks_native_ar.js') }}?v=5.4.7"></script>
+<script src="{{ url_for('static', filename='js/tasks_native_ar.js') }}?v=5.4.8"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    function fixRepeatBoxes() {
+        const select = document.getElementById("repeatTypeSelect");
+        const daysBox = document.getElementById("repeatDaysBox");
+        const customBox = document.getElementById("repeatCustomBox");
+        if (!select) return;
+        const value = (select.value || "").trim();
+        if (daysBox) {
+            daysBox.hidden = value !== "أيام محددة";
+            daysBox.style.setProperty("display", value === "أيام محددة" ? "block" : "none", "important");
+            daysBox.setAttribute("aria-hidden", value === "أيام محددة" ? "false" : "true");
+        }
+        if (customBox) {
+            customBox.hidden = value !== "أخرى";
+            customBox.style.setProperty("display", value === "أخرى" ? "block" : "none", "important");
+            customBox.setAttribute("aria-hidden", value === "أخرى" ? "false" : "true");
+        }
+    }
+    const repeatSelect = document.getElementById("repeatTypeSelect");
+    if (repeatSelect) {
+        repeatSelect.addEventListener("change", fixRepeatBoxes);
+        repeatSelect.addEventListener("input", fixRepeatBoxes);
+        fixRepeatBoxes();
+        setTimeout(fixRepeatBoxes, 200);
+        setTimeout(fixRepeatBoxes, 800);
+    }
+});
+</script>
+
 {% endblock %}
