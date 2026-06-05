@@ -1830,3 +1830,22 @@ Dashboard-only layout fix.
 - IELTS, TOEFL, Duolingo, CSCA, SAT, ACT, GRE, GMAT, HSK, and HSKK structures remain in English.
 - CSCA exam content is restored to English inside Exams & Certificates.
 - Other task sections keep their Arabic-native behavior.
+
+
+## v5.3.4 Exam Labels Arabic Content English
+
+### Urgent correction
+- All task form labels remain Arabic in every task type.
+- In Exams & Certificates only, all internal exam content is English.
+- Exams & Certificates flow:
+  - Exam
+  - Main section / skill
+  - Detailed topic / question type
+  - Activity type
+- IELTS, TOEFL, Duolingo, HSK, CSCA, SAT, ACT, GRE, and GMAT content remains English.
+- CSCA restored with:
+  - Mathematics: Sets and Variables, Functions, Geometry and Algebra, Probability and Statistics.
+  - Physics: Mechanics, Electromagnetism, Thermodynamics, Optics, Modern Physics.
+  - Chemistry: Basic Chemical Calculations, Properties and Reactions of Matter, Chemical Theories and Laws, Chemical Experiments and Applications.
+  - English: Reading, Listening, Writing, Vocabulary, Grammar.
+- Other sections keep their previous behavior.
