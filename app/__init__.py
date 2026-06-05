@@ -1799,6 +1799,7 @@ def repeat_days_ar(value):
 
 
 TASK_EXAM_CONTENT_KEEP_V532 = {
+    "Exams & Certificates",
     "IELTS","TOEFL","Duolingo English Test","Duolingo","HSK","HSKK","CSCA","SAT","ACT","GRE","GMAT",
     "Full Official Test","Full Digital SAT","Full ACT","Full GRE","Full GMAT","Full HSK Test","Full HSKK Test","Full Test","Mock Test",
     "Listening","Reading","Writing","Speaking","Reading and Writing","Math","Mathematics","Science","English",
@@ -1827,6 +1828,16 @@ def task_ar_exam_safe(value):
     text = str(value)
     if text in TASK_EXAM_CONTENT_KEEP_V532:
         return text
+    return task_ar(text)
+
+
+
+def task_exam_raw_or_ar(category, value):
+    if value is None:
+        return ""
+    text = str(value)
+    if category == "Exams & Certificates":
+        return "Other" if text in ["Other", "أخرى"] else text
     return task_ar(text)
 
 
@@ -1889,6 +1900,7 @@ def create_app():
     app.jinja_env.filters["task_ar"] = task_ar
     app.jinja_env.filters["repeat_days_ar"] = repeat_days_ar
     app.jinja_env.filters["task_exam_safe"] = task_ar_exam_safe
+    app.jinja_env.filters["task_exam_raw_or_ar"] = task_exam_raw_or_ar
     app.jinja_env.filters["goals_ar"] = goals_ar
     app.jinja_env.filters["goal_time_ar"] = format_goal_time_left
     app.jinja_env.filters["goal_time_compact_ar"] = format_goal_time_left_compact
