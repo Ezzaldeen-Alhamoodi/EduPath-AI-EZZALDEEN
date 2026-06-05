@@ -1545,6 +1545,8 @@ TASK_AR_LABELS_V529 = {
 
 
 TASK_AR_LABELS_V529.update({
+    "custom": "أخرى",
+    "once": "مرة واحدة / بدون تكرار",
     "Pronunciation Practice": "ممارسة النطق",
     "Grammar Practice": "حل تمارين القواعد",
     "Vocabulary Building": "إثراء المفردات",
@@ -2844,12 +2846,12 @@ def create_app():
             )
 
             if not task.title:
-                flash("Task title is required.", "error")
+                flash("يرجى كتابة اسم المهمة.", "error")
                 return redirect(url_for("tasks"))
 
             db.session.add(task)
             db.session.commit()
-            flash("Task saved.", "success")
+            flash("تم حفظ المهمة بنجاح.", "success")
             return redirect(url_for("tasks"))
 
         all_tasks = StudyTask.query.filter_by(user_id=current_user.id).order_by(
@@ -2898,7 +2900,7 @@ def create_app():
             )
             task.notes = request.form.get("notes", "").strip()
             db.session.commit()
-            flash("Task changes saved.", "success")
+            flash("تم حفظ تعديلات المهمة بنجاح.", "success")
             return redirect(url_for("tasks"))
 
         return render_template("edit_task.html", task=task)
@@ -2927,7 +2929,7 @@ def create_app():
             "body": f"You completed: {task.title}.{related_msg} Keep your momentum going."
         }]
 
-        flash("Task marked as done.", "success")
+        flash("تم إنجاز المهمة.", "success")
         return redirect(url_for("tasks"))
 
     @app.route("/task/<int:task_id>/pending")
@@ -2936,7 +2938,7 @@ def create_app():
         task = StudyTask.query.filter_by(id=task_id, user_id=current_user.id).first_or_404()
         task.status = "pending"
         db.session.commit()
-        flash("Task returned to pending.", "success")
+        flash("تمت إعادة المهمة إلى قيد التنفيذ.", "success")
         return redirect(url_for("tasks"))
 
     @app.route("/task/<int:task_id>/delete")
@@ -2945,7 +2947,7 @@ def create_app():
         task = StudyTask.query.filter_by(id=task_id, user_id=current_user.id).first_or_404()
         db.session.delete(task)
         db.session.commit()
-        flash("Task deleted.", "success")
+        flash("تم حذف المهمة.", "success")
         return redirect(url_for("tasks"))
 
     @app.route("/languages")
