@@ -1,4 +1,4 @@
-const EDUPATH_BUILD_VERSION = "5.4.4-smart-task-data-ar-cache-bust";
+const EDUPATH_BUILD_VERSION = "5.4.5-purge-old-task-sources-ar";
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/static/js/service-worker.js")
         .catch(() => {});
@@ -270,29 +270,29 @@ const SMART_TASK_DATA = {
     icon: "خ",
     main: ["IELTS","TOEFL","Duolingo","HSK","CSCA","SAT","ACT","GRE","GMAT","أخرى"],
     sub: {
-      "IELTS": ["Mock Test","Listening","Reading","Writing","Speaking","Timed Practice","Other"],
-      "TOEFL": ["Mock Test","Reading","Listening","Speaking","Writing","Timed Practice","Other"],
-      "Duolingo": ["Mock Test","Reading","Listening","Writing","Speaking","Timed Practice","Other"],
-      "HSK": ["Mock Test","Listening","Reading","Writing","Vocabulary","Grammar","Timed Practice","Other"],
-      "CSCA": ["Mock Test","Mathematics","Physics","Chemistry","English","Timed Practice","Other"],
-      "SAT": ["Full Digital SAT","Mock Test","Reading and Writing","Math","Timed Practice","Other"],
-      "ACT": ["Full ACT","Mock Test","English","Mathematics","Reading","Science","Writing","Timed Practice","Other"],
-      "GRE": ["Full GRE","Mock Test","Analytical Writing","Verbal Reasoning","Quantitative Reasoning","Timed Practice","Other"],
-      "GMAT": ["Full GMAT","Mock Test","Quantitative Reasoning","Verbal Reasoning","Data Insights","Timed Practice","Other"],
-      "أخرى": ["Mock Test","Timed Practice","Practice","Other"]
+      "IELTS": ["Mock Test","Listening","Reading","Writing","Speaking","Timed Practice","أخرى"],
+      "TOEFL": ["Mock Test","Reading","Listening","Speaking","Writing","Timed Practice","أخرى"],
+      "Duolingo": ["Mock Test","Reading","Listening","Writing","Speaking","Timed Practice","أخرى"],
+      "HSK": ["Mock Test","Listening","Reading","Writing","Vocabulary","Grammar","Timed Practice","أخرى"],
+      "CSCA": ["Mock Test","Mathematics","Physics","Chemistry","English","Timed Practice","أخرى"],
+      "SAT": ["Full Digital SAT","Mock Test","Reading and Writing","Math","Timed Practice","أخرى"],
+      "ACT": ["Full ACT","Mock Test","English","Mathematics","Reading","Science","Writing","Timed Practice","أخرى"],
+      "GRE": ["Full GRE","Mock Test","Analytical Writing","Verbal Reasoning","Quantitative Reasoning","Timed Practice","أخرى"],
+      "GMAT": ["Full GMAT","Mock Test","Quantitative Reasoning","Verbal Reasoning","Data Insights","Timed Practice","أخرى"],
+      "أخرى": ["Mock Test","Timed Practice","Practice","أخرى"]
     },
     detail: {
-      "Listening": ["Multiple Choice","Matching","Plan Labelling","Map Labelling","Diagram Labelling","Form Completion","Note Completion","Table Completion","Flow Chart Completion","Summary Completion","Sentence Completion","Short Answer Questions","Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk","Listen and Type","Interactive Listening","Other"],
-      "Reading": ["Matching Headings","Matching Information","Matching Features","Matching Sentence Endings","True False Not Given","Yes No Not Given","Multiple Choice","Sentence Completion","Summary Completion","Note Completion","Table Completion","Flow Chart Completion","Diagram Labelling","Short Answer Questions","Read in Daily Life","Read an Academic Passage","Complete the Words","Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","Other"],
-      "Writing": ["Task 1","Task 2","Academic Graph","Table","Chart","Process Diagram","Map","Opinion Essay","Discussion Essay","Problem Solution Essay","Advantages Disadvantages Essay","Double Question Essay","Build a Sentence","Write an Email","Write for an Academic Discussion","Write About the Photo","Writing Sample","Interactive Writing","Other"],
-      "Speaking": ["Part 1","Part 2","Part 3","Speak About the Photo","Read, Then Speak","Speaking Sample","Interactive Speaking","Listen and Repeat","Take an Interview","Cue Card Practice","Other"],
+      "Listening": ["Multiple Choice","Matching","Plan Labelling","Map Labelling","Diagram Labelling","Form Completion","Note Completion","Table Completion","Flow Chart Completion","Summary Completion","Sentence Completion","Short Answer Questions","Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk","Listen and Type","Interactive Listening","أخرى"],
+      "Reading": ["Matching Headings","Matching Information","Matching Features","Matching Sentence Endings","True False Not Given","Yes No Not Given","Multiple Choice","Sentence Completion","Summary Completion","Note Completion","Table Completion","Flow Chart Completion","Diagram Labelling","Short Answer Questions","Read in Daily Life","Read an Academic Passage","Complete the Words","Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","أخرى"],
+      "Writing": ["Task 1","Task 2","Academic Graph","Table","Chart","Process Diagram","Map","Opinion Essay","Discussion Essay","Problem Solution Essay","Advantages Disadvantages Essay","Double Question Essay","Build a Sentence","Write an Email","Write for an Academic Discussion","Write About the Photo","Writing Sample","Interactive Writing","أخرى"],
+      "Speaking": ["Part 1","Part 2","Part 3","Speak About the Photo","Read, Then Speak","Speaking Sample","Interactive Speaking","Listen and Repeat","Take an Interview","Cue Card Practice","أخرى"],
       "Mathematics": ["Sets and Variables","Functions","Geometry and Algebra","Probability and Statistics"],
       "Physics": ["Mechanics","Electromagnetism","Thermodynamics","Optics","Modern Physics"],
       "Chemistry": ["Basic Chemical Calculations","Properties and Reactions of Matter","Chemical Theories and Laws","Chemical Experiments and Applications"],
       "English": ["Reading","Listening","Writing","Vocabulary","Grammar"],
-      "أخرى": ["Other"]
+      "أخرى": ["أخرى"]
     },
-    training: ["Practice","Timed Practice","Mock Test","Error Review","Weakness Training","Final Review","Other"]
+    training: ["Practice","Timed Practice","Mock Test","Error Review","Weakness Training","Final Review","أخرى"]
   },
 
   "الحياة اليومية": {
@@ -351,179 +351,19 @@ const SMART_TASK_DATA = {
 
 /* EduPath AI v4.6.6 Full Arabic UI */
 const EDUPATH_LABEL_AR = {
-    "Secondary School": "المرحلة الثانوية",
-    "University": "المرحلة الجامعية",
-    "Languages": "اللغات",
-    "Programming & Technology": "البرمجة والتكنولوجيا",
-    "Artificial Intelligence": "الذكاء الاصطناعي",
-    "Mathematics": "الرياضيات",
-    "Scholarships": "المنح الدراسية",
-    "Exams & Certificates": "الاختبارات والشهادات",
+    "حفظ القرآن الكريم": "حفظ القرآن الكريم",
+    "المرحلة الثانوية": "المرحلة الثانوية",
+    "المرحلة الجامعية": "المرحلة الجامعية",
+    "اللغات": "اللغات",
+    "البرمجة والتكنولوجيا": "البرمجة والتكنولوجيا",
+    "الذكاء الاصطناعي": "الذكاء الاصطناعي",
+    "الرياضيات": "الرياضيات",
+    "المنح الدراسية": "المنح الدراسية",
+    "الاختبارات والشهادات": "الاختبارات والشهادات",
     "الحياة اليومية": "الحياة اليومية",
-    "Daily Life": "الحياة اليومية",
-        "Projects": "المشاريع",
-    "Reading & Research": "القراءة والبحث",
-        "General": "عام",
+    "المشاريع": "المشاريع",
+    "القراءة والبحث": "القراءة والبحث",
     "عام": "عام",
-    "أخرى": "أخرى",
-    "Quran Memorization": "حفظ القرآن الكريم",
-
-    "Quran": "القرآن الكريم",
-    "Islamic Studies": "التربية الإسلامية",
-    "Arabic Language": "اللغة العربية",
-    "English Language": "اللغة الإنجليزية",
-    "Computer Science": "علوم الحاسوب",
-    "General Review": "مراجعة عامة",
-    "Exams": "اختبارات",
-    "Homework": "واجبات",
-
-    "English": "الإنجليزية",
-    "Turkish": "التركية",
-    "Russian": "الروسية",
-    "Chinese": "الصينية",
-    "Arabic": "العربية",
-    "French": "الفرنسية",
-    "German": "الألمانية",
-    "General English": "إنجليزية عامة",
-    "Grammar": "القواعد",
-    "Vocabulary": "المفردات",
-    "Pronunciation": "النطق",
-    "Reading": "القراءة",
-    "Writing": "الكتابة",
-    "Listening": "الاستماع",
-    "Speaking": "التحدث",
-    "Academic English": "الإنجليزية الأكاديمية",
-
-    "Programming": "البرمجة",
-    "Algorithms": "الخوارزميات",
-    "Data Structures": "هياكل البيانات",
-    "Databases": "قواعد البيانات",
-    "Operating Systems": "أنظمة التشغيل",
-    "Computer Networks": "شبكات الحاسوب",
-    "Software Engineering": "هندسة البرمجيات",
-    "Web Development": "تطوير الويب",
-    "Cybersecurity": "الأمن السيبراني",
-    "Discrete Mathematics": "الرياضيات المتقطعة",
-    "Computer Architecture": "معمارية الحاسوب",
-    "Graduation Project": "مشروع التخرج",
-
-    "Python": "بايثون",
-    "C": "سي",
-    "C++": "سي بلس بلس",
-    "Java": "جافا",
-    "JavaScript": "جافاسكريبت",
-    "HTML": "HTML",
-    "CSS": "CSS",
-    "SQL": "SQL",
-    "Flask": "Flask",
-    "React": "React",
-    "Git / GitHub": "Git / GitHub",
-    "Frontend Development": "تطوير الواجهة الأمامية",
-    "Backend Development": "تطوير الخلفية",
-    "Full Stack Development": "تطوير متكامل",
-    "Problem Solving": "حل المشكلات",
-    "Debugging": "تصحيح الأخطاء",
-    "Syntax": "الصياغة البرمجية",
-    "Variables": "المتغيرات",
-    "Data Types": "أنواع البيانات",
-    "Conditions": "الشروط",
-    "Loops": "الحلقات",
-    "Functions": "الدوال",
-    "Lists": "القوائم",
-    "Dictionaries": "القواميس",
-    "Files": "الملفات",
-    "OOP": "البرمجة الكائنية",
-    "Daily Life": "الحياة اليومية",
-        "Projects": "المشاريع",
-
-    "Study Concept": "دراسة المفهوم",
-    "Write Code": "كتابة كود",
-    "Solve Exercises": "حل تمارين",
-    "Build Mini Project": "بناء مشروع صغير",
-    "Debug Code": "تصحيح الكود",
-    "Read Documentation": "قراءة التوثيق",
-    "Review Mistakes": "مراجعة الأخطاء",
-    "Practice Syntax": "تدريب الصياغة",
-    "Build App": "بناء تطبيق",
-    "Practice": "تدريب",
-    "Timed Practice": "تدريب بوقت محدد",
-    "Mock Test": "اختبار تجريبي",
-    "Final Revision": "مراجعة نهائية",
-
-    "Scholarship Search": "البحث عن منحة",
-    "University Research": "بحث عن جامعة",
-    "Application Form": "نموذج التقديم",
-    "Documents": "المستندات",
-    "CV": "السيرة الذاتية",
-    "Motivation Letter": "خطاب الدافع",
-    "Personal Statement": "البيان الشخصي",
-    "Recommendation Letter": "خطاب التوصية",
-    "Interview": "المقابلة",
-    "Language Test": "اختبار اللغة",
-    "Portfolio": "الملف الشخصي",
-    "Email Communication": "التواصل بالبريد",
-    "Visa": "التأشيرة",
-    "Travel Preparation": "الاستعداد للسفر",
-    "Follow-up": "المتابعة",
-
-    "الصحة": "الصحة",
-    "الرياضة": "الرياضة",
-    "النوم": "النوم",
-    "التغذية": "الطعام",
-    "شرب الماء": "الماء",
-    "الروتين الشخصي": "الروتين الشخصي",
-    "العائلة": "العائلة",
-    "إدارة المال": "المال",
-    "تنظيف المنزل": "التنظيف",
-    "التسوق": "التسوق",
-    "إدارة الوقت": "إدارة الوقت",
-    "Reading": "القراءة",
-    "الصلاة": "الروتين الديني",
-    "Appointments": "المواعيد",
-
-    "IELTS": "IELTS",
-    "TOEFL": "TOEFL",
-    "Duolingo English Test": "Duolingo English Test",
-    "HSK": "HSK",
-    "SAT": "SAT",
-    "ACT": "ACT",
-    "GRE": "GRE",
-    "GMAT": "GMAT",
-    "CSCA": "CSCA",
-
-    "Mathematics": "الرياضيات",
-    "Physics": "الفيزياء",
-    "Chemistry": "الكيمياء",
-    "Sets and Inequalities": "المجموعات والمتباينات",
-    "Functions": "الدوال",
-    "Geometry and Algebra": "الهندسة والجبر",
-    "Probability and Statistics": "الاحتمالات والإحصاء",
-    "Mechanics": "الميكانيكا",
-    "Electromagnetism": "الكهرومغناطيسية",
-    "Thermodynamics": "الديناميكا الحرارية",
-    "Optics": "البصريات",
-    "Modern Physics": "الفيزياء الحديثة",
-    "Basic Chemical Concepts and Calculations": "المفاهيم والحسابات الكيميائية الأساسية",
-    "Properties and Reactions of Substances": "خصائص وتفاعلات المواد",
-    "Chemical Theories and Laws": "النظريات والقوانين الكيميائية",
-    "Chemical Experiments and Applications": "التجارب والتطبيقات الكيميائية",
-
-    "Study Theory": "دراسة نظرية",
-    "Concept Review": "مراجعة المفهوم",
-    "Solved Examples": "أمثلة محلولة",
-    "Practice Questions": "أسئلة تدريبية",
-    "Formula Review": "مراجعة القوانين",
-    "Flashcards": "بطاقات مراجعة",
-    "Weakness Training": "تدريب نقاط الضعف",
-    "Full Exam Simulation": "محاكاة اختبار كامل",
-
-    "حفظ جديد": "حفظ جديد",
-    "مراجعة": "مراجعة",
-    "تسميع": "تسميع",
-    "تجويد": "تجويد",
-    "تفسير مبسط": "تفسير مبسط",
-    "خطة حفظ": "خطة حفظ",
-    "اختبار حفظ": "اختبار حفظ",
     "أخرى": "أخرى"
 };
 
@@ -557,21 +397,8 @@ Object.assign(EDUPATH_LABEL_AR, {
 
 function labelForUI(value) {
     const oldToArabic = {
-        "Quran Memorization": "حفظ القرآن الكريم",
-        "Secondary School": "المرحلة الثانوية",
-        "University": "المرحلة الجامعية",
-        "Languages": "اللغات",
-        "Programming & Technology": "البرمجة والتكنولوجيا",
-        "Artificial Intelligence": "الذكاء الاصطناعي",
-        "Mathematics": "الرياضيات",
-        "Scholarships": "المنح الدراسية",
-        "Exams & Certificates": "الاختبارات والشهادات",
-        "Daily Life": "الحياة اليومية",
-        "Projects": "المشاريع",
-        "Reading & Research": "القراءة والبحث",
-        "General": "عام",
-        "Other": "أخرى",
-        "Custom": "أخرى"
+        "أخرى": "أخرى",
+        "أخرى": "أخرى"
     };
     return oldToArabic[value] || value;
 }
@@ -602,20 +429,7 @@ function fillSmartSelect(select, values, selectedValue) {
 
 function getSmartConfig(type) {
     const oldToArabic = {
-        "Quran Memorization": "حفظ القرآن الكريم",
-        "Secondary School": "المرحلة الثانوية",
-        "University": "المرحلة الجامعية",
-        "Languages": "اللغات",
-        "Programming & Technology": "البرمجة والتكنولوجيا",
-        "Artificial Intelligence": "الذكاء الاصطناعي",
-        "Mathematics": "الرياضيات",
-        "Scholarships": "المنح الدراسية",
-        "Exams & Certificates": "الاختبارات والشهادات",
-        "Daily Life": "الحياة اليومية",
-        "Projects": "المشاريع",
-        "Reading & Research": "القراءة والبحث",
-        "General": "عام",
-        "Other": "أخرى"
+        "أخرى": "أخرى"
     };
     const stableType = oldToArabic[type] || type || "عام";
     return SMART_TASK_DATA[stableType] || SMART_TASK_DATA["عام"];
@@ -632,7 +446,7 @@ function renderTaskTypeCards() {
     if (!grid || !categoryInput) return;
 
     grid.innerHTML = "";
-    const current = ({"General":"عام","Quran Memorization":"حفظ القرآن الكريم","Secondary School":"المرحلة الثانوية","Daily Life":"الحياة اليومية"}[categoryInput.value] || categoryInput.value || "عام");
+    const current = ({"Daily Life":"الحياة اليومية"}[categoryInput.value] || categoryInput.value || "عام");
 
     Object.entries(SMART_TASK_DATA).forEach(([type, config]) => {
         const button = document.createElement("button");
@@ -813,7 +627,7 @@ function updateSmartTaskFields() {
 
     if (!categoryInput || !topicSelect || !skillSelect || !detailSelect || !trainingSelect) return;
 
-    const type = ({"General":"عام","Quran Memorization":"حفظ القرآن الكريم","Secondary School":"المرحلة الثانوية","Daily Life":"الحياة اليومية"}[categoryInput.value] || categoryInput.value || "عام");
+    const type = ({"Daily Life":"الحياة اليومية"}[categoryInput.value] || categoryInput.value || "عام");
     const config = getSmartConfig(type);
 
     const currentTopic = topicSelect.dataset.current || "";
@@ -843,7 +657,7 @@ function updateSmartTaskFields() {
             trainingValues = getOfficialExamTraining(selectedTopic, selectedSkill);
         }
 
-        // Exams & Certificates section: exam is also selected as Main Field.
+        // قسم الاختبارات والشهادات: الاختبار يظهر في الفئة الرئيسية.
         if (!detailValues && selectedType === "Exams & Certificates" && ["IELTS","TOEFL","Duolingo English Test","HSK","CSCA"].includes(selectedTopic)) {
             detailValues = getOfficialExamDetails(selectedTopic, selectedSkill);
             trainingValues = getOfficialExamTraining(selectedTopic, selectedSkill);
@@ -1196,9 +1010,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const extra = {
         "taskform.choose_type": ["1. Choose Task Type", "١. اختر نوع المهمة"],
         "taskform.choose_desc": ["Only the fields related to your choice will appear. This keeps the task system simple and personal.", "ستظهر فقط الحقول المرتبطة باختيارك حتى يبقى النظام بسيطًا ومخصصًا لك."],
-        "taskform.other_type": ["Other Task Type", "نوع مهمة آخر"],
+        "taskform.other_type": ["نوع مهمة آخر", "نوع مهمة آخر"],
         "taskform.task_name": ["اسم المهمة", "اسم المهمة"],
-        "taskform.other_main": ["اكتب الفئة الرئيسية التي تريدها", "اكتب الفئة الرئيسية التي تريدها"],
+        "taskform.other_main": ["اكتب الفئة التي تريدها", "اكتب الفئة التي تريدها"],
         "taskform.other_sub": ["اكتب الفئة الفرعية التي تريدها", "اكتب الفئة الفرعية التي تريدها"],
         "taskform.other_detail": ["اكتب الموضوع التفصيلي الذي تريده", "اكتب الموضوع التفصيلي الذي تريده"],
         "taskform.csca_detail": ["موضوع CSCA التفصيلي", "موضوع CSCA التفصيلي"],
@@ -1237,49 +1051,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     applyEduPathLanguage(localStorage.getItem("edupath-language") || "ar");
 });
-
-
-
-/* v5.4.2 Native Arabic repeat labels */
-function translateRepeatOptionsSafely() {
-    const repeatSelect = document.getElementById("repeatTypeSelect");
-    if (!repeatSelect) return;
-
-    const labels = {
-        "once": "مرة واحدة / بدون تكرار",
-        "daily": "يوميًا",
-        "weekly": "أسبوعيًا",
-        "monthly": "شهريًا",
-        "selected_days": "أيام محددة",
-        "custom": "أخرى",
-        "مرة واحدة / بدون تكرار": "مرة واحدة / بدون تكرار",
-        "يوميًا": "يوميًا",
-        "أسبوعيًا": "أسبوعيًا",
-        "شهريًا": "شهريًا",
-        "أيام محددة": "أيام محددة",
-        "أخرى": "أخرى"
-    };
-
-    [...repeatSelect.options].forEach(option => {
-        const key = option.value || option.textContent;
-        option.textContent = labels[key] || labels[option.textContent] || option.textContent;
-    });
-}
-document.addEventListener("DOMContentLoaded", () => {
-    translateRepeatOptionsSafely();
-    const repeatSelect = document.getElementById("repeatTypeSelect");
-    if (repeatSelect) repeatSelect.addEventListener("change", translateRepeatOptionsSafely);
-});
-
-
-
-
-
-
-
-
-
-
 /* EduPath AI v4.6.10 Smart Goals Adaptive Fix */
 
 const SMART_GOAL_AR_LABELS_V520 = {
@@ -1287,10 +1058,8 @@ const SMART_GOAL_AR_LABELS_V520 = {
     "Language": "اللغات",
     "Exam / Certificate": "الاختبارات الدولية",
     "Programming & Technology": "البرمجة والتقنية",
-    "Artificial Intelligence": "الذكاء الاصطناعي",
     "Scholarship": "المنح الدراسية",
     "University": "الجامعة",
-    "Mathematics": "الرياضيات",
     "Project": "المشاريع",
     "الحياة اليومية": "الحياة اليومية",
     "Islamic Goals": "الأهداف الإسلامية",
@@ -1400,7 +1169,7 @@ const SMART_GOAL_AR_LABELS_V520 = {
 };
 
 function smartGoalLabelArV520(value) {
-    if (["أخرى", "أخرى", "خطة مخصصة", "خطة مخصصة", "تحديد يدوي", "Other / أخرى", "أخرى"].includes(value)) return "أخرى";
+    if (["أخرى", "أخرى", "خطة مخصصة", "خطة مخصصة", "تحديد يدوي", "أخرى", "أخرى"].includes(value)) return "أخرى";
     return SMART_GOAL_AR_LABELS_V520[value] || value;
 }
 
@@ -1825,9 +1594,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-/* EduPath AI v4.6.11 Robust Other/Custom Fields */
+/* EduPath AI v4.6.11 Robust Other/خانة أخرىs */
 function isOtherLikeEduPath(value) {
-    return ["أخرى", "أخرى", "أخرى", "خطة مخصصة", "خطة مخصصة", "تحديد يدوي", "Other / أخرى"].includes(value);
+    return ["أخرى", "أخرى", "أخرى", "خطة مخصصة", "خطة مخصصة", "تحديد يدوي", "أخرى"].includes(value);
 }
 
 function forceTaskCustomBoxes() {
@@ -1866,7 +1635,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-/* EduPath AI v4.6.12 Custom Fields + Adaptive Layout Fix */
+/* EduPath AI v4.6.12 خانة أخرىs + Adaptive Layout Fix */
 function eduPathIsCustomValue(value) {
     const normalized = (value || "").trim().toLowerCase();
     return ["other", "custom", "custom plan", "other / أخرى", "أخرى", "خطة مخصصة", "تحديد يدوي"].includes(normalized);
@@ -1937,7 +1706,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-/* EduPath AI v4.6.13 Final Goal Custom Field Controller */
+/* EduPath AI v4.6.13 Final Goal خانة أخرى Controller */
 function eduPathGoalCustomFinalV4613() {
     const mapping = [
         ["goalCategorySelect", "customCategoryBox"],
@@ -2222,10 +1991,8 @@ const GOAL_AR_V524 = {
     "Language": "اللغات",
     "Exam / Certificate": "الاختبارات الدولية",
     "Programming & Technology": "البرمجة والتقنية",
-    "Artificial Intelligence": "الذكاء الاصطناعي",
     "Scholarship": "المنح الدراسية",
     "University": "الجامعة",
-    "Mathematics": "الرياضيات",
     "Project": "المشاريع",
     "الحياة اليومية": "الحياة اليومية",
     "Islamic Goals": "الأهداف الإسلامية",
@@ -2659,7 +2426,7 @@ const GOAL_CONFIG_V524 = {
 };
 
 function goalV524Label(value) {
-    if (["أخرى","أخرى","خطة مخصصة","Other / أخرى","تحديد يدوي","خطة مخصصة","أخرى"].includes(value)) return "أخرى";
+    if (["أخرى","أخرى","خطة مخصصة","أخرى","تحديد يدوي","خطة مخصصة","أخرى"].includes(value)) return "أخرى";
     return GOAL_AR_V524[value] || value;
 }
 
@@ -2724,7 +2491,7 @@ function showGoalOtherBoxesV524() {
         const select = document.getElementById(selectId);
         const box = document.getElementById(boxId);
         if (!select || !box) return;
-        const visible = ["أخرى","أخرى","خطة مخصصة","Other / أخرى","تحديد يدوي","خطة مخصصة","أخرى"].includes(select.value);
+        const visible = ["أخرى","أخرى","خطة مخصصة","أخرى","تحديد يدوي","خطة مخصصة","أخرى"].includes(select.value);
         box.style.display = visible ? "block" : "none";
         const label = box.querySelector("label");
         const input = box.querySelector("input");
@@ -2830,23 +2597,9 @@ const TASK_OFFICIAL_KEEP_V530 = new Set([
 ]);
 
 const TASK_AR_V530 = {
-    "University": "المرحلة الجامعية",
-    "Languages": "اللغات",
-    "Programming & Technology": "البرمجة والتكنولوجيا",
-    "Artificial Intelligence": "الذكاء الاصطناعي",
-    "Mathematics": "الرياضيات",
-    "Scholarships": "المنح الدراسية",
-    "Exams & Certificates": "الاختبارات والشهادات",
     "الحياة اليومية": "الحياة اليومية",
-    "Daily Life": "الحياة اليومية",
-        "Projects": "المشاريع",
-    "Reading & Research": "القراءة والبحث",
-        "General": "عام",
     "عام": "عام",
     "أخرى": "أخرى",
-    "Quran Memorization": "حفظ القرآن الكريم",
-    "Secondary School": "المرحلة الثانوية",
-
     "English": "الإنجليزية",
     "Turkish": "التركية",
     "Russian": "الروسية",
@@ -3032,7 +2785,6 @@ const TASK_AR_V530 = {
     "Improve UI": "تحسين الواجهة",
     "Practice Project": "تطبيق بمشروع",
 
-    "Artificial Intelligence": "الذكاء الاصطناعي",
     "Machine Learning": "تعلم الآلة",
     "Deep Learning": "التعلم العميق",
     "Computer Vision": "الرؤية الحاسوبية",
@@ -3669,398 +3421,3 @@ updateTrainingOptions = function() {
 };
 
 applyDeepLanguageTaskConfigV531();
-
-
-/* EduPath AI v5.3.4 Exam Labels Arabic Content English */
-function examOptionEnglishOnlyV534() {
-    const categorySelect = document.getElementById("categorySelect");
-    if (!categorySelect || categorySelect.value !== "Exams & Certificates") return;
-
-    ["topicSelect", "skillSelect", "detailedTopicSelect", "trainingTypeSelect", "cscaDetailedTopicSelect", "cscaTrainingTypeSelect"].forEach(id => {
-        const select = document.getElementById(id);
-        if (!select) return;
-        Array.from(select.options).forEach(option => {
-            if (!option.value) return;
-            if (option.value === "Other") option.value = "Other";
-            option.textContent = option.value === "Other" ? "Other" : option.value;
-        });
-    });
-
-    const fixedLabels = {
-        taskNameLabel: "اسم المهمة",
-        topicLabel: "الفئة الرئيسية",
-        skillLabel: "الفئة الفرعية",
-        detailLabel: "الموضوع التفصيلي",
-        trainingLabel: "نوع النشاط",
-        sourceLabel: "المصدر أو الرابط",
-        difficultyLabel: "مستوى الصعوبة من ١ إلى ٥",
-        priorityLabel: "الأولوية من ١ إلى ٥",
-        expectedTimeLabel: "الوقت المتوقع (بالدقائق)",
-        startDateLabel: "تاريخ البدء",
-        endDateLabel: "تاريخ الانتهاء",
-        reminderLabel: "وقت التذكير",
-        repeatLabel: "التكرار",
-        repeatDaysLabel: "أيام التكرار",
-        notesLabel: "الملاحظات"
-    };
-    Object.entries(fixedLabels).forEach(([id, text]) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = text;
-    });
-
-    const customLabels = [
-        ["customTopicBox", "اكتب الاختبار"],
-        ["customSkillBox", "اكتب الفئة الفرعية"],
-        ["customDetailedTopicBox", "اكتب الموضوع التفصيلي"],
-        ["customTrainingTypeBox", "اكتب نوع النشاط"]
-    ];
-    customLabels.forEach(([boxId, labelText]) => {
-        const box = document.getElementById(boxId);
-        if (!box) return;
-        const label = box.querySelector("label");
-        const input = box.querySelector("input");
-        if (label) label.textContent = labelText;
-        if (input) input.placeholder = "Write what you want";
-    });
-}
-
-function forceExamCertificatesEnglishV534() {
-    if (typeof SMART_TASK_DATA === "undefined" || !SMART_TASK_DATA["Exams & Certificates"]) return;
-    const exams = SMART_TASK_DATA["Exams & Certificates"];
-
-    exams.main = ["IELTS","TOEFL","Duolingo","HSK","CSCA","SAT","ACT","GRE","GMAT","Other"];
-
-    exams.sub = {
-        "IELTS": ["Mock Test","Listening","Reading","Writing","Speaking","Timed Practice","Other"],
-        "TOEFL": ["Mock Test","Reading","Listening","Speaking","Writing","Timed Practice","Other"],
-        "Duolingo": ["Mock Test","Reading","Listening","Writing","Speaking","Timed Practice","Other"],
-        "Duolingo English Test": ["Mock Test","Reading","Listening","Writing","Speaking","Timed Practice","Other"],
-        "HSK": ["Mock Test","Listening","Reading","Writing","Vocabulary","Grammar","Timed Practice","Other"],
-        "CSCA": ["Mock Test","Mathematics","Physics","Chemistry","English","Timed Practice","Other"],
-        "SAT": ["Full Digital SAT","Mock Test","Reading and Writing","Math","Bluebook Practice","Score Review","Weak Skill Training","Timed Practice","Other"],
-        "ACT": ["Full ACT","Mock Test","English","Mathematics","Reading","Science","Writing","Score Review","Weak Skill Training","Timed Practice","Other"],
-        "GRE": ["Full GRE","Mock Test","Analytical Writing","Verbal Reasoning","Quantitative Reasoning","Score Review","Weak Skill Training","Timed Practice","Other"],
-        "GMAT": ["Full GMAT","Mock Test","Quantitative Reasoning","Verbal Reasoning","Data Insights","Score Review","Weak Skill Training","Timed Practice","Other"],
-        "Other": ["Mock Test","Timed Practice","Practice","Error Review","Other"]
-    };
-
-    exams.detail = {
-        "Mock Test": ["Full Test","Section Mock","Timed Mock","Score Review","Error Review","Other"],
-        "Timed Practice": ["Timed Drill","Mini Section","Speed Training","إدارة الوقت","Other"],
-
-        "Listening": ["Multiple Choice","Matching","Plan Labelling","Map Labelling","Diagram Labelling","Form Completion","Note Completion","Table Completion","Flow Chart Completion","Summary Completion","Sentence Completion","Short Answer Questions","Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk","Listen and Type","Interactive Listening","Other"],
-        "Reading": ["Matching Headings","Matching Information","Matching Features","Matching Sentence Endings","True False Not Given","Yes No Not Given","Multiple Choice","Sentence Completion","Summary Completion","Note Completion","Table Completion","Flow Chart Completion","Diagram Labelling","Short Answer Questions","Read in Daily Life","Read an Academic Passage","Complete the Words","Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","Other"],
-        "Writing": ["Task 1","Task 2","Academic Graph","Table","Chart","Process Diagram","Map","Opinion Essay","Discussion Essay","Problem Solution Essay","Advantages Disadvantages Essay","Double Question Essay","Build a Sentence","Write an Email","Write for an Academic Discussion","Write About the Photo","Writing Sample","Interactive Writing","Other"],
-        "Speaking": ["Part 1","Part 2","Part 3","Speak About the Photo","Read, Then Speak","Speaking Sample","Interactive Speaking","Listen and Repeat","Take an Interview","Cue Card Practice","Other"],
-
-        "Vocabulary": ["Vocabulary Review","Vocabulary Memorization","Context Practice","Other"],
-        "Grammar": ["Grammar Review","Sentence Building","Error Review","Other"],
-
-        "Mathematics": ["Sets and Variables","Functions","Geometry and Algebra","Probability and Statistics"],
-        "Physics": ["Mechanics","Electromagnetism","Thermodynamics","Optics","Modern Physics"],
-        "Chemistry": ["Basic Chemical Calculations","Properties and Reactions of Matter","Chemical Theories and Laws","Chemical Experiments and Applications"],
-        "English": ["Reading","Listening","Writing","Vocabulary","Grammar"],
-
-        "Reading and Writing": ["Information and Ideas","Craft and Structure","Expression of Ideas","Standard English Conventions","Mixed Reading and Writing Practice","Module 1 Practice","Module 2 Practice","Other"],
-        "Information and Ideas": ["Central Ideas and Details","Command of Evidence","Textual Evidence","Quantitative Evidence","Inferences","Information from Tables and Graphs","Other"],
-        "Craft and Structure": ["Words in Context","Text Structure and Purpose","Cross-Text Connections","Author's Purpose","Vocabulary in Context","Other"],
-        "Expression of Ideas": ["Transitions","Rhetorical Synthesis","Logical Flow","Sentence Placement","Effective Language Use","Other"],
-        "Standard English Conventions": ["Boundaries","Form, Structure, and Sense","Punctuation","Verb Form","Subject-Verb Agreement","Pronoun Clarity","Sentence Structure","Other"],
-        "Math": ["Algebra","Advanced Math","Problem-Solving and Data Analysis","Geometry and Trigonometry","Calculator Practice","Desmos Practice","Student-Produced Response","Module 1 Practice","Module 2 Practice","Other"],
-        "Algebra": ["Linear Equations","Linear Inequalities","Systems of Linear Equations","Linear Functions","Interpreting Linear Models","Other"],
-        "Advanced Math": ["Quadratic Equations","Exponential Functions","Polynomial Expressions","Rational Expressions","Nonlinear Functions","Function Graphs","Other"],
-        "Problem-Solving and Data Analysis": ["Ratios","Percentages","Rates","Proportions","Units","Probability","Statistics","Data Interpretation","Tables and Graphs","Other"],
-        "Geometry and Trigonometry": ["Area and Volume","Lines and Angles","Triangles","Circles","Right Triangle Trigonometry","Coordinate Geometry","Other"],
-
-        "Analytical Writing": ["Analyze an Issue","Essay Planning","Argument Development","Essay Structure","Other"],
-        "Verbal Reasoning": ["Reading Comprehension","Text Completion","Sentence Equivalence","Vocabulary","Other"],
-        "Reading Comprehension": ["Main Idea","Inference","Author's Purpose","Structure","Detail Questions","Function Questions","Critical Reasoning","Short Passage","Long Passage","Other"],
-        "Text Completion": ["One-Blank Text Completion","Two-Blank Text Completion","Three-Blank Text Completion","Context Clues","Sentence Logic","Other"],
-        "Sentence Equivalence": ["Synonym Pair","Vocabulary Meaning","Sentence Logic","Contrast and Support Clues","Other"],
-        "Quantitative Reasoning": ["Arithmetic","Algebra","Geometry","Data Analysis","Quantitative Comparison","Problem Solving","Numeric Entry","Data Interpretation","Other"],
-
-        "Data Insights": ["Data Sufficiency","Multi-Source Reasoning","Table Analysis","Graphics Interpretation","Two-Part Analysis","Other"],
-        "Data Sufficiency": ["Charts","Tables","Graphs","Data Comparison","Business Context","Quantitative Reasoning","Verbal Data Reasoning","Decision Making","Other"],
-        "Multi-Source Reasoning": ["Charts","Tables","Graphs","Business Context","Decision Making","Other"],
-        "Table Analysis": ["Charts","Tables","Graphs","Data Comparison","Business Context","Decision Making","Other"],
-        "Graphics Interpretation": ["Charts","Tables","Graphs","Data Comparison","Other"],
-        "Two-Part Analysis": ["Quantitative Reasoning","Verbal Data Reasoning","Decision Making","Other"],
-
-        "Full Digital SAT": ["Complete Digital SAT","Module 1 Practice","Module 2 Practice","Score Simulation","Answer Review","Other"],
-        "Full ACT": ["Complete ACT","English Section","Math Section","Reading Section","Science Section","Writing Section","Score Simulation","Other"],
-        "Full GRE": ["Complete GRE","Analytical Writing","Verbal Reasoning","Quantitative Reasoning","Score Simulation","Other"],
-        "Full GMAT": ["Complete GMAT","Quantitative Reasoning","Verbal Reasoning","Data Insights","Score Simulation","Other"],
-        "Other": ["تطبيق عام","Timed Practice","Error Review","Other"]
-    };
-
-    const standardActivities = ["Practice","Timed Practice","Mock Test","Other"];
-    const cscaScienceActivities = ["Theory Study","Concept Review","Solved Examples","Practice Questions","Timed Practice","Mock Test","Error Review","Formula Review","Flashcards","Weakness Training","Final Review","Full Exam Simulation","Other"];
-
-    exams.trainingByDetail = {
-        "Mathematics": cscaScienceActivities,
-        "Sets and Variables": cscaScienceActivities,
-        "Functions": cscaScienceActivities,
-        "Geometry and Algebra": cscaScienceActivities,
-        "Probability and Statistics": cscaScienceActivities,
-        "Physics": cscaScienceActivities,
-        "Mechanics": cscaScienceActivities,
-        "Electromagnetism": cscaScienceActivities,
-        "Thermodynamics": cscaScienceActivities,
-        "Optics": cscaScienceActivities,
-        "Modern Physics": cscaScienceActivities,
-        "Chemistry": cscaScienceActivities,
-        "Basic Chemical Calculations": cscaScienceActivities,
-        "Properties and Reactions of Matter": cscaScienceActivities,
-        "Chemical Theories and Laws": cscaScienceActivities,
-        "Chemical Experiments and Applications": cscaScienceActivities,
-        "English": ["Practice","Timed Practice","Mock Test","Error Review","Weakness Training","Final Review","Other"],
-
-        "Listening": standardActivities,
-        "Reading": standardActivities,
-        "Writing": standardActivities,
-        "Speaking": standardActivities,
-        "Mock Test": standardActivities,
-        "Timed Practice": standardActivities,
-
-        "Multiple Choice": ["Practice","Timed Practice","Mock Test","Question Review","Error Review","Other"],
-        "Matching Headings": ["Practice","Timed Practice","Mock Test","Strategy Training","Review Mistakes","Other"],
-        "True False Not Given": ["Practice","Timed Practice","Mock Test","Strategy Training","Review Mistakes","Other"],
-        "Yes No Not Given": ["Practice","Timed Practice","Mock Test","Strategy Training","Review Mistakes","Other"],
-        "Opinion Essay": ["Write Draft","Timed Writing","Mock Test","Feedback Review","Essay Improvement","Other"],
-        "Discussion Essay": ["Write Draft","Timed Writing","Mock Test","Feedback Review","Essay Improvement","Other"],
-        "Problem Solution Essay": ["Write Draft","Timed Writing","Mock Test","Feedback Review","Essay Improvement","Other"],
-        "Advantages Disadvantages Essay": ["Write Draft","Timed Writing","Mock Test","Feedback Review","Essay Improvement","Other"],
-        "Double Question Essay": ["Write Draft","Timed Writing","Mock Test","Feedback Review","Essay Improvement","Other"],
-        "Listen and Type": ["Practice","Timed Practice","Mock Test","Dictation","Listening Accuracy","Review Mistakes","Other"],
-        "Read and Select": ["Practice","Timed Practice","Mock Test","Vocabulary Training","Review Mistakes","Other"],
-        "Write About the Photo": ["Draft Writing","Timed Writing","Mock Test","Idea Generation","Feedback Review","Other"],
-        "Speak About the Photo": ["Recording Practice","Pronunciation Practice","Fluency Practice","Mock Response","Other"],
-        "Other": standardActivities
-    };
-
-    exams.training = standardActivities;
-}
-
-const previousUpdateTrainingOptionsV534 = typeof updateTrainingOptions === "function" ? updateTrainingOptions : null;
-updateTrainingOptions = function() {
-    if (selectedTaskType === "Exams & Certificates") {
-        const selectedDetail = detailedTopicSelect ? detailedTopicSelect.value : "";
-        const selectedSkill = skillSelect ? skillSelect.value : "";
-        const byDetail = SMART_TASK_DATA["Exams & Certificates"] && SMART_TASK_DATA["Exams & Certificates"].trainingByDetail;
-        if (byDetail && selectedDetail && byDetail[selectedDetail]) {
-            setOptions(trainingTypeSelect, byDetail[selectedDetail]);
-            setTimeout(examOptionEnglishOnlyV534, 0);
-            toggleOtherFields();
-            return;
-        }
-        if (byDetail && selectedSkill && byDetail[selectedSkill]) {
-            setOptions(trainingTypeSelect, byDetail[selectedSkill]);
-            setTimeout(examOptionEnglishOnlyV534, 0);
-            toggleOtherFields();
-            return;
-        }
-    }
-    if (previousUpdateTrainingOptionsV534) previousUpdateTrainingOptionsV534();
-    setTimeout(examOptionEnglishOnlyV534, 0);
-};
-
-forceExamCertificatesEnglishV534();
-
-document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(examOptionEnglishOnlyV534, 100);
-    ["categorySelect","topicSelect","skillSelect","detailedTopicSelect","trainingTypeSelect"].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener("change", () => setTimeout(examOptionEnglishOnlyV534, 40));
-    });
-    document.addEventListener("click", event => {
-        if (event.target.closest(".task-type-card")) setTimeout(examOptionEnglishOnlyV534, 80);
-    });
-});
-
-
-/* EduPath AI v5.4.0 Native Arabic Task Source Data */
-function applyNativeArabicTaskSourceV540() {
-    if (typeof SMART_TASK_DATA === "undefined") return;
-
-    // Interface category names stay displayed in Arabic through labelForUI, while internal keys remain stable.
-    // Visible adaptive data below is Arabic-native, except Exams & Certificates which intentionally stays English.
-
-    if (SMART_TASK_DATA["University"]) {
-        SMART_TASK_DATA["University"].main = [
-            "علوم الحاسوب","هندسة البرمجيات","الذكاء الاصطناعي","علم البيانات","الأمن السيبراني","تقنية المعلومات",
-            "هندسة الحاسوب","الهندسة","الطب","الصيدلة","طب الأسنان","التمريض","إدارة الأعمال","المحاسبة",
-            "التمويل","الاقتصاد","التسويق","الإدارة","القانون","الشريعة والقانون","الدراسات الإسلامية",
-            "التربية","اللغة الإنجليزية","اللغة العربية","الترجمة","الإعلام","العلوم السياسية","علم النفس",
-            "علم الاجتماع","الفيزياء","الكيمياء","الأحياء","الهندسة المعمارية","الزراعة","Other"
-        ];
-        SMART_TASK_DATA["University"].sub = {
-            "علوم الحاسوب": ["البرمجة","الخوارزميات","هياكل البيانات","قواعد البيانات","أنظمة التشغيل","شبكات الحاسوب","تطوير الويب","الذكاء الاصطناعي","الرياضيات المتقطعة","مشروع جامعي","Other"],
-            "هندسة البرمجيات": ["تحليل المتطلبات","تصميم النظام","اختبار البرمجيات","إدارة المشاريع","توثيق البرمجيات","Other"],
-            "الذكاء الاصطناعي": ["تعلم الآلة","التعلم العميق","معالجة اللغة الطبيعية","الرؤية الحاسوبية","مشروع عملي","Other"],
-            "علم البيانات": ["تنظيف البيانات","تحليل البيانات","تصور البيانات","النمذجة","الإحصاء","Other"],
-            "الأمن السيبراني": ["أساسيات الأمن","أمن الشبكات","أمن الويب","لينكس","التشفير","الثغرات","Other"],
-            "Other": ["محاضرة","واجب","بحث","مشروع","مراجعة اختبار","Other"]
-        };
-        SMART_TASK_DATA["University"].detail = {
-            "البرمجة": ["موضوع محاضرة","تطبيق عملي","سؤال واجب","ميزة في مشروع","مراجعة اختبار","Other"],
-            "الخوارزميات": ["بحث","ترتيب","استدعاء ذاتي","برمجة ديناميكية","رسوم بيانية","تحليل التعقيد","Other"],
-            "قواعد البيانات": ["تصميم الجداول","استعلامات","علاقات","تطبيع البيانات","مشروع قاعدة بيانات","Other"],
-            "Other": ["موضوع","فصل","محاضرة","Other"]
-        };
-        SMART_TASK_DATA["University"].training = ["دراسة محاضرة","حل واجب","تطبيق عملي","عمل على مشروع","مراجعة اختبار","بحث","عرض تقديمي","حل مشكلات","حل تمارين","إعداد تقرير","مراجعة مصطلحات","تحليل حالة","حفظ مصطلحات","Other"];
-    }
-
-    if (SMART_TASK_DATA["Languages"]) {
-        SMART_TASK_DATA["Languages"].main = ["الإنجليزية","الصينية","التركية","الروسية","الإندونيسية","الرومانية","العربية","الفرنسية","الألمانية","Other"];
-        const langFields = ["القراءة","الاستماع","التحدث","الكتابة","الاختبارات","القواعد","المفردات","النطق","اللغة الأكاديمية","Other"];
-        SMART_TASK_DATA["Languages"].sub = {
-            "الإنجليزية": langFields,
-            "الصينية": langFields,
-            "التركية": langFields,
-            "الروسية": langFields,
-            "الإندونيسية": langFields,
-            "الرومانية": langFields,
-            "العربية": langFields,
-            "الفرنسية": langFields,
-            "الألمانية": langFields,
-            "Other": langFields
-        };
-        SMART_TASK_DATA["Languages"].detail = {
-            "القراءة": ["فهم الفكرة العامة","استخراج التفاصيل","فهم الاستنتاجات","فهم المفردات من السياق","القراءة السريعة","القراءة التحليلية","القراءة الأكاديمية","قراءة المقالات","قراءة الأخبار","قراءة القصص","Other"],
-            "الاستماع": ["فهم الفكرة الرئيسية","فهم التفاصيل","فهم اللهجات","الاستماع الأكاديمي","الاستماع اليومي","المحاضرات","الأخبار","المحادثات","البودكاست","Other"],
-            "التحدث": ["المحادثات اليومية","العروض التقديمية","المناقشات","وصف الصور","التحدث الأكاديمي","مقابلات القبول","مقابلات العمل","Other"],
-            "الكتابة": ["الكتابة العامة","الكتابة الأكاديمية","كتابة المقالات","كتابة الرسائل","كتابة التقارير","كتابة الملاحظات","كتابة الحجج","Other"],
-            "الاختبارات": ["IELTS","TOEFL","Duolingo","HSK","CSCA","SAT","ACT","GRE","GMAT","Other"],
-            "القواعد": ["الأزمنة","بناء الجملة","أدوات الربط","الجمل الشرطية","المبني للمجهول","حروف الجر","الأخطاء الشائعة","تطبيق القواعد في الكتابة","Other"],
-            "المفردات": ["مفردات يومية","مفردات أكاديمية","مفردات الاختبارات","مرادفات ومتضادات","تعبيرات شائعة","مفردات حسب الموضوع","مراجعة المفردات","Other"],
-            "النطق": ["تصحيح مخارج الحروف","النبر والتنغيم","الطلاقة","المحاكاة الصوتية","تسجيل الصوت","تقليد المتحدث","Other"],
-            "اللغة الأكاديمية": ["المقالات الأكاديمية","الأبحاث","العروض التقديمية","المناقشات الأكاديمية","المفردات الأكاديمية","الاستماع الأكاديمي","الكتابة الأكاديمية","Other"],
-            "Other": ["موضوع مخصص","Other"]
-        };
-        SMART_TASK_DATA["Languages"].training = ["قراءة نص","حل أسئلة فهم","تلخيص النص","تحليل النص","استخراج الأفكار الرئيسية","استخراج المفردات","تدوين الملاحظات","مراجعة الأخطاء","الاستماع للمقطع","الإجابة عن الأسئلة","التحدث الحر","تسجيل صوتي","محاكاة مقابلة","كتابة مسودة","تصحيح الكتابة","إعادة الصياغة","تحسين الأسلوب","Other"];
-    }
-
-    if (SMART_TASK_DATA["Programming & Technology"]) {
-        SMART_TASK_DATA["Programming & Technology"].main = ["Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","Flask","Django","React","Node.js","Git / GitHub","تطوير الويب","تطوير الواجهة الأمامية","تطوير الخلفية","تطوير متكامل","قواعد البيانات","الخوارزميات","هياكل البيانات","حل المشكلات","تصحيح الأخطاء","هندسة البرمجيات","اختبار البرمجيات","أنظمة التشغيل","شبكات الحاسوب","الأمن السيبراني","الحوسبة السحابية","DevOps","APIs","الذكاء الاصطناعي","تعلم الآلة","علم البيانات","المشاريع","التوثيق","Other"];
-        SMART_TASK_DATA["Programming & Technology"].sub = {
-            "Python": ["الصياغة","المتغيرات","أنواع البيانات","الشروط","الحلقات","الدوال","القوائم","القواميس","الملفات","OOP","الوحدات","المكتبات","Flask","تحليل البيانات","الأتمتة","مشاريع","تصحيح الأخطاء","Other"],
-            "تطوير الويب": ["HTML","CSS","JavaScript","الواجهة الأمامية","الخلفية","تطوير متكامل","تصميم متجاوب","النماذج","تسجيل الدخول والصلاحيات","APIs","قواعد البيانات","النشر","الأداء","الأمان","Other"],
-            "الخوارزميات": ["البحث","الترتيب","الاستدعاء الذاتي","الخوارزميات الجشعة","البرمجة الديناميكية","خوارزميات الرسوم البيانية","الأشجار","تحليل التعقيد","Other"],
-            "الأمن السيبراني": ["أساسيات الأمن","أمن الشبكات","أمن الويب","أمن Linux","التشفير","أساسيات الاختبار الأخلاقي","الثغرات","المصادقة","OWASP","Other"],
-            "Other": ["مفاهيم","تطبيق","مشروع","تصحيح أخطاء","مراجعة","Other"]
-        };
-        SMART_TASK_DATA["Programming & Technology"].detail = {
-            "Python": ["الكائنات والفئات","الوراثة","التعامل مع الملفات","تطبيق على القوائم","تطبيق على القواميس","طلب API","مسار Flask","Other"],
-            "الخوارزميات": ["مسألة تدريبية","تحليل الحل","تحسين التعقيد","اختبار الحل","Other"],
-            "تطوير الويب": ["صفحة","نموذج","API","قاعدة بيانات","تصميم متجاوب","Other"],
-            "Other": ["موضوع","ميزة","خطأ","Other"]
-        };
-        SMART_TASK_DATA["Programming & Technology"].training = ["فهم المفهوم","كتابة كود","بناء مشروع صغير","تصحيح الكود","قراءة التوثيق","تحسين الكود","تطبيق الصياغة البرمجية","بناء تطبيق","بناء صفحة","تصميم الواجهة","إصلاح خطأ","ربط الخلفية","إنشاء نموذج","جعله متجاوباً","نشر الموقع","تحسين الواجهة","تطبيق بمشروع","Other"];
-    }
-
-    if (SMART_TASK_DATA["Artificial Intelligence"]) {
-        SMART_TASK_DATA["Artificial Intelligence"].main = ["تعلم الآلة","التعلم العميق","معالجة اللغة الطبيعية","الرؤية الحاسوبية","التعلم المعزز","علم البيانات","مشاريع ذكاء اصطناعي","Other"];
-        SMART_TASK_DATA["Artificial Intelligence"].sub = {
-            "تعلم الآلة": ["تنظيف البيانات","هندسة الخصائص","النماذج","تدريب النموذج","تقييم النموذج","Scikit-learn","Other"],
-            "التعلم العميق": ["الشبكات العصبية","CNN","RNN","Transformers","PyTorch","TensorFlow","Other"],
-            "مشاريع ذكاء اصطناعي": ["مجموعة بيانات","تنظيف البيانات","تدريب النموذج","تقييم النموذج","نشر المشروع","Other"],
-            "Other": ["مفاهيم","تطبيق","مشروع","بحث","Other"]
-        };
-        SMART_TASK_DATA["Artificial Intelligence"].detail = {"تعلم الآلة": ["تصنيف","انحدار","تجميع","مقارنة النماذج","الدقة","Other"], "Other": ["موضوع","Other"]};
-        SMART_TASK_DATA["Artificial Intelligence"].training = ["تعلم","تجربة","تقييم النموذج","بناء مشروع","قراءة بحث","تحليل البيانات","تنظيف البيانات","اختبار النموذج","Other"];
-    }
-
-    if (SMART_TASK_DATA["Mathematics"]) {
-        SMART_TASK_DATA["Mathematics"].main = ["الجبر","الهندسة","المثلثات","التفاضل والتكامل","الاحتمالات","الإحصاء","الجبر الخطي","الرياضيات المتقطعة","اختبارات سابقة","Other"];
-        SMART_TASK_DATA["Mathematics"].sub = {
-            "الجبر": ["المعادلات","المتباينات","الدوال","كثيرات الحدود","مسائل لفظية","Other"],
-            "التفاضل والتكامل": ["النهايات","المشتقات","التكامل","التطبيقات","Other"],
-            "الإحصاء": ["المتوسط","الوسيط","الانحراف المعياري","التمثيل البياني","Other"],
-            "Other": ["درس","تمارين","مراجعة","اختبار","Other"]
-        };
-        SMART_TASK_DATA["Mathematics"].detail = {"الجبر": ["مجموعة تمارين","قانون","سؤال سابق","موضوع صعب","Other"], "Other": ["موضوع","Other"]};
-        SMART_TASK_DATA["Mathematics"].training = ["دراسة الدرس","حل التمارين","مراجعة الأخطاء","تدريب بوقت محدد","التحضير للاختبار","حفظ القوانين","Other"];
-    }
-
-    if (SMART_TASK_DATA["Scholarships"]) {
-        SMART_TASK_DATA["Scholarships"].main = ["البحث عن منحة","بحث الجامعات","نموذج التقديم","المستندات","السيرة الذاتية","خطاب الدافع","البيان الشخصي","خطاب التوصية","المقابلة","اختبار اللغة","البورتفوليو","التواصل بالبريد","التأشيرة","الاستعداد للسفر","المتابعة","Other"];
-        SMART_TASK_DATA["Scholarships"].sub = {
-            "خطاب الدافع": ["مسودة","تعديل","تخصيص","مراجعة نهائية","Other"],
-            "المقابلة": ["التعريف بالنفس","لماذا التخصص","لماذا المنحة","الخطط المستقبلية","تدريب مقابلة","Other"],
-            "المستندات": ["جواز السفر","كشف الدرجات","شهادة التخرج","شهادة اللغة","الترجمة","التصديق","رفع المستندات","مراجعة المستندات","Other"],
-            "Other": ["بحث","تجهيز","كتابة","تعديل","رفع","تقديم","متابعة","Other"]
-        };
-        SMART_TASK_DATA["Scholarships"].detail = {"خطاب الدافع": ["الفقرة الافتتاحية","الإنجازات","الأهداف المستقبلية","التوافق مع الجامعة","Other"], "المقابلة": ["سؤال تدريبي","تحسين الإجابة","ملاحظات","Other"], "Other": ["موضوع","Other"]};
-        SMART_TASK_DATA["Scholarships"].training = ["بحث","تجهيز","كتابة","تعديل","رفع","تقديم","متابعة","تدريب مقابلة","فحص نهائي","Other"];
-    }
-
-    if (SMART_TASK_DATA["Daily Life"]) {
-        SMART_TASK_DATA["Daily Life"].main = ["الصحة","الرياضة","النوم","شرب الماء","التغذية","الروتين الشخصي","العائلة","إدارة الوقت","إدارة المال","الصلاة","التسوق","ترتيب المنزل","تنظيف المنزل","القراءة","الاسترخاء","Other"];
-        SMART_TASK_DATA["Daily Life"].sub = {
-            "الصحة": ["التغذية","شرب الماء","الفحوصات الطبية","الوقاية الصحية","العادات الصحية","العناية الصحية","Other"],
-            "الروتين الشخصي": ["ترتيب اليوم","العناية الشخصية","النظافة الشخصية","العناية بالبشرة","العناية بالشعر","الراحة النفسية","Other"],
-            "الصلاة": ["صلاة الفجر","الصلوات الخمس","النوافل","الأذكار بعد الصلاة","المحافظة على الوقت","Other"],
-            "Other": ["عادة يومية","روتين أسبوعي","تذكير مهم","مهمة شخصية","Other"]
-        };
-        SMART_TASK_DATA["Daily Life"].detail = {"Other": ["موضوع عام","Other"]};
-        SMART_TASK_DATA["Daily Life"].training = ["تنفيذ المهمة","متابعة العادة","مراجعة التقدم","تثبيت العادة","تحسين الروتين","تجهيز مسبق","فحص سريع","تذكير يومي","مراجعة أسبوعية","Other"];
-    }
-
-    if (SMART_TASK_DATA["Projects"]) {
-        SMART_TASK_DATA["Projects"].main = ["مشروع برمجي","مشروع ذكاء اصطناعي","مشروع ويب","تطبيق هاتف","مشروع بحثي","مشروع مدرسي","مشروع جامعي","بورتفوليو للمنح","مشروع شخصي","Other"];
-        SMART_TASK_DATA["Projects"].sub = {
-            "مشروع برمجي": ["الفكرة","التخطيط","التصميم","الواجهة الأمامية","الخلفية","قاعدة البيانات","الاختبار","تصحيح الأخطاء","النشر","التوثيق","العرض التقديمي","Other"],
-            "Other": ["الفكرة","التخطيط","البناء","الاختبار","التحسين","Other"]
-        };
-        SMART_TASK_DATA["Projects"].detail = {"مشروع برمجي": ["ميزة","خطأ","صفحة","API","جدول قاعدة بيانات","Other"], "Other": ["موضوع","Other"]};
-        SMART_TASK_DATA["Projects"].training = ["عصف ذهني","بناء","كتابة كود","اختبار","تحسين","نشر","كتابة التوثيق","مراجعة","Other"];
-    }
-
-    if (SMART_TASK_DATA["Reading & Research"]) {
-        SMART_TASK_DATA["Reading & Research"].main = ["القراءة","البحث العلمي","الكتب","المقالات","الأبحاث","المراجعات","التلخيص","التفكير النقدي","التعلم الذاتي","Other"];
-        SMART_TASK_DATA["Reading & Research"].sub = {
-            "الكتب": ["علوم الحاسوب","الذكاء الاصطناعي","الرياضيات","الفيزياء","الكيمياء","الأحياء","الاقتصاد","إدارة الأعمال","التاريخ","الفلسفة","علم النفس","اللغة العربية","اللغة الإنجليزية","التنمية الذاتية","السير الذاتية","الروايات","الأدب","الدين","التفسير","الحديث","الفقه","العقيدة","Other"],
-            "البحث العلمي": ["اختيار موضوع","جمع مراجع","قراءة أوراق علمية","تحليل النتائج","توثيق المراجع","كتابة البحث","مراجعة البحث","Other"],
-            "Other": ["قراءة","تلخيص","تحليل","تدوين ملاحظات","Other"]
-        };
-        SMART_TASK_DATA["Reading & Research"].detail = {"Other": ["موضوع عام","Other"]};
-        SMART_TASK_DATA["Reading & Research"].training = ["قراءة","تلخيص","استخراج أفكار","تحليل","مراجعة","مناقشة","تدوين ملاحظات","بناء خريطة ذهنية","مقارنة","تطبيق عملي","جمع مراجع","قراءة أوراق علمية","تحليل النتائج","توثيق المراجع","كتابة البحث","Other"];
-    }
-
-    if (SMART_TASK_DATA["General"]) {
-        SMART_TASK_DATA["General"].main = ["التعلم","التطبيق العملي","المراجعة","التخطيط","المتابعة","موضوع عام","Other"];
-        SMART_TASK_DATA["General"].sub = {"Other": ["موضوع","مهمة","مراجعة","تذكير","Other"]};
-        SMART_TASK_DATA["General"].detail = {"Other": ["موضوع عام","Other"]};
-        SMART_TASK_DATA["General"].training = ["تنفيذ مهمة","مراجعة","تخطيط","متابعة","تحسين","Other"];
-    }
-}
-
-// Native source data must be applied after all previous config layers.
-applyNativeArabicTaskSourceV540();
-
-// From now on, labels are source-first. No localStorage language switch is used for task options.
-labelForUI = function(value) {
-    const categoryLabels = {
-        "Quran Memorization": "حفظ القرآن الكريم",
-        "Secondary School": "المرحلة الثانوية",
-        "University": "المرحلة الجامعية",
-        "Languages": "اللغات",
-        "Programming & Technology": "البرمجة والتكنولوجيا",
-        "Artificial Intelligence": "الذكاء الاصطناعي",
-        "Mathematics": "الرياضيات",
-        "Scholarships": "المنح الدراسية",
-        "Exams & Certificates": "الاختبارات والشهادات",
-        "الحياة اليومية": "الحياة اليومية",
-        "Daily Life": "الحياة اليومية",
-        "Projects": "المشاريع",
-        "Reading & Research": "القراءة والبحث",
-        "General": "عام",
-        "عام": "عام",
-        "Other": "Other"
-    };
-    return categoryLabels[value] || value;
-};
-
-
-/* v5.4.2 Arabic generic custom phrase */
-const EDUPATH_GENERIC_CUSTOM_AR_V542 = "اكتب ما تريد";

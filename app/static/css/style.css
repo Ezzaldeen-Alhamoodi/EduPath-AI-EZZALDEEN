@@ -7019,3 +7019,8 @@ body #trainingTypeSelect {
 /* EduPath AI v5.4.3 Smart Task Data AR */
 .smart-task-form label,
 .form label { direction: rtl !important; text-align: right !important; }
+
+
+/* EduPath AI v5.4.5 Purge Old Task Sources AR */
+.smart-task-form label,
+.form label { direction: rtl !important; text-align: right !important; }

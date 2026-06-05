@@ -2027,3 +2027,20 @@ Dashboard-only layout fix.
 - Updated service worker cache name to `edupath-ai-v5-4-4`.
 - Added build marker: `EDUPATH_BUILD_VERSION = "5.4.4-smart-task-data-ar-cache-bust"`.
 - No new feature changes beyond ensuring v5.4.3 actually loads.
+
+
+## v5.4.5 Purge Old Task Sources AR
+
+### Root correction
+- Removed obsolete JavaScript override layers that were rewriting task data after the Arabic SMART_TASK_DATA.
+- Removed old exam/task override layer that reintroduced `Other`, `Custom`, and English task options.
+- Replaced the old UI translation dictionary with a minimal Arabic task-category map.
+- Kept official exam names and official exam question/task names where required.
+- Added cache busting `?v=5.4.5`.
+- Updated service worker cache name to `edupath-ai-v5-4-5`.
+
+### Scope
+- Smart Task Data source cleanup.
+- No goals refactor yet.
+- No dashboard redesign.
+- No database migration.

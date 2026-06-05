@@ -1,5 +1,5 @@
 \
-const CACHE_NAME = "edupath-ai-v5-4-4";
+const CACHE_NAME = "edupath-ai-v5-4-5";
 const ASSETS = [
     "/",
     "/static/css/style.css",
