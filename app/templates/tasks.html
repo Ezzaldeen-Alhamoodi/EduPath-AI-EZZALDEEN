@@ -37,7 +37,7 @@
                     <span><b>نوع النشاط:</b> {{ task.category|task_exam_raw_or_ar(task.practice_type or "عام") }}</span>
                     <span><b>المصدر:</b> {{ task.source|clickable_sources }}</span>
                     <span>{{ task.estimated_minutes }} دقيقة · الأولوية {{ task.priority }} · الصعوبة {{ task.difficulty }}</span>
-                    <span>من {{ task.start_date or "غير محدد" }} إلى {{ task.due_date or "غير محدد" }} · {{ task.repeat_type|task_exam_safe }} · الأيام: {{ task.repeat_days|repeat_days_ar }}</span>
+                    <span>من {{ task.start_date or "غير محدد" }} إلى {{ task.due_date or "غير محدد" }} · {{ task.repeat_type|task_exam_safe }} · {% if task.repeat_type == "custom" %}نمط التكرار: {{ task.repeat_days or "غير محدد" }}{% elif task.repeat_type == "selected_days" %}الأيام: {{ task.repeat_type|repeat_days_display_ar(task.repeat_days) }}{% else %}{{ task.repeat_type|task_exam_safe }}{% endif %}</span>
                     <span>وقت التذكير: {{ task.reminder_time|time_12h_ar }}</span>
                 </div>
 

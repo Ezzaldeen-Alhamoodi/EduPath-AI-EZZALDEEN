@@ -1876,3 +1876,32 @@ Dashboard-only layout fix.
   - حفظ المهمة
 - No adaptive content was changed.
 - Exam content behavior from v5.3.4 is preserved.
+
+
+## v5.3.9 Repeat Logic Only
+
+### Scope
+- This update only changes Tasks repeat logic.
+- No dashboard changes.
+- No goals changes.
+- No progress percentage changes.
+- No smart linking changes.
+
+### Repeat options
+- مرة واحدة / بدون تكرار
+- يوميًا
+- أسبوعيًا
+- شهريًا
+- أيام محددة
+- أخرى
+
+### Custom repeat
+- When "أخرى" is selected, a new Arabic field appears:
+  - اكتب نمط التكرار المطلوب
+- Examples shown:
+  - مرتين يوميًا
+  - كل 8 ساعات
+  - صباحًا ومساءً
+  - بعد كل صلاة
+  - قبل النوم
+- The custom repeat text is stored in the existing repeat_days field to avoid database migration.

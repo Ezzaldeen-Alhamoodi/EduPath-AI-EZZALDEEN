@@ -881,9 +881,17 @@ function updateSmartTaskFields() {
 
 function updateRepeatDaysVisibility() {
     const repeatSelect = document.getElementById("repeatTypeSelect");
-    const box = document.getElementById("repeatDaysBox");
-    if (!repeatSelect || !box) return;
-    box.style.display = repeatSelect.value === "selected_days" ? "block" : "none";
+    const daysBox = document.getElementById("repeatDaysBox");
+    const customBox = document.getElementById("repeatCustomBox");
+    if (!repeatSelect) return;
+
+    if (daysBox) {
+        daysBox.style.display = repeatSelect.value === "selected_days" ? "block" : "none";
+    }
+
+    if (customBox) {
+        customBox.style.display = repeatSelect.value === "custom" ? "block" : "none";
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {

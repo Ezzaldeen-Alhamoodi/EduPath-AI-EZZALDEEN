@@ -6982,3 +6982,20 @@ body #trainingTypeSelect {
 /* EduPath AI v5.3.8 Source Task Labels AR */
 .smart-task-form label,
 .form label { direction: rtl !important; text-align: right !important; }
+
+
+
+/* EduPath AI v5.3.9 Repeat Logic Only */
+.repeat-custom-box {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 14px;
+    background: rgba(37, 99, 235, 0.06);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+}
+
+.repeat-custom-box input {
+    width: 100%;
+    margin-top: 6px;
+}
