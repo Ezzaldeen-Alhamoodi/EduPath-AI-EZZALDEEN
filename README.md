@@ -1851,11 +1851,13 @@ Dashboard-only layout fix.
 - Other sections keep their previous behavior.
 
 
-## v5.3.5 Universal Arabic Task Field Labels
+## v5.3.8 Source Task Labels AR
 
-### Scope
-- Only task field labels were changed.
-- All task types now keep these labels in Arabic:
+### Root fix from stable v5.3.4
+- Based directly on the stable v5.3.4 version.
+- Replaced task field labels at the source level in templates and app.js.
+- Removed/avoided MutationObserver and heavy runtime label fixing.
+- The following are Arabic from the source:
   - اسم المهمة
   - الفئة الرئيسية
   - الفئة الفرعية
@@ -1872,22 +1874,5 @@ Dashboard-only layout fix.
   - أيام التكرار
   - الملاحظات
   - حفظ المهمة
-- No adaptive task content was changed.
-- No exam content was changed.
-
-
-## v5.3.6 Hard Fix Arabic Task Labels
-
-### Fixed
-- Removed the old JavaScript behavior that was forcing task labels back to English.
-- Task labels now remain Arabic in all task types.
-- Placeholders now remain Arabic:
-  - task example
-  - source/link example
-  - notes example
-- Added a MutationObserver safety layer to reapply Arabic labels after any dynamic UI update.
-
-### Scope
-- Only task field labels and placeholders were fixed.
-- No adaptive task content was changed.
-- No exam content was changed.
+- No adaptive content was changed.
+- Exam content behavior from v5.3.4 is preserved.
