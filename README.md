@@ -2014,3 +2014,16 @@ Dashboard-only layout fix.
 - Dashboard tasks refactor.
 - Repeating task engine refactor.
 - Goal linking refactor.
+
+
+## v5.4.4 Cache Bust Smart Task Data AR
+
+### Why
+- The v5.4.3 Smart Task Data update may not appear if the browser or service worker still serves old `app.js`.
+- This version forces the browser to load the new JavaScript and CSS files.
+
+### Changes
+- Added `?v=5.4.4` to `style.css` and `app.js` in `base.html`.
+- Updated service worker cache name to `edupath-ai-v5-4-4`.
+- Added build marker: `EDUPATH_BUILD_VERSION = "5.4.4-smart-task-data-ar-cache-bust"`.
+- No new feature changes beyond ensuring v5.4.3 actually loads.
