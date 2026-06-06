@@ -2198,3 +2198,31 @@ Dashboard-only layout fix.
 - CSCA has Writing only inside English.
 - Duolingo English Test uses its own tasks.
 - IELTS uses its own official sections and question types.
+
+
+## v5.5.2 Reading Research Native AR
+
+### Scope
+- Rebuilt the `القراءة والبحث` task category from the source in Arabic.
+- No translation layer.
+- No English source values for this category.
+- The structure is:
+  - الفئة الرئيسية
+  - الفئة الفرعية
+  - الموضوع التفصيلي
+  - نوع النشاط
+
+### Main fields
+- القراءة والمطالعة العامة
+- البحث العلمي والأكاديمي
+- التعلم الذاتي وتطوير المهارات
+- الأعمال والتطوير المهني
+- الدين والدراسات الشرعية
+- أخرى
+
+### Rules
+- Activity type now depends on the detailed topic through `trainingByDetail`.
+- The category does not use fixed repeated activities.
+- `أخرى` exists in every level.
+- `Custom` is not used.
+- `اكتب ما تريد` remains the Arabic custom input.
