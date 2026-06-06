@@ -2878,7 +2878,7 @@ const GOAL_CONFIG_V524 = {
     },
 
     "البرمجة والتكنولوجيا": {
-        categories: ["أساسيات البرمجة", "Python", "C", "C++", "Java", "JavaScript", "تطوير الويب", "Data Structures", "Algorithms", "Problem Solving", "Competitive Programming", "Machine Learning", "Deep Learning", "Data Science", "Computer Vision", "Natural Language Processing", "Reinforcement Learning", "Generative AI", "MLOps", "AI Projects", "SQL", "Database Fundamentals", "SQLite", "MySQL", "PostgreSQL", "MongoDB", "Database Design", "ORM", "Database Optimization", "Database Security", "Database Projects", "Software Engineering", "Git", "GitHub", "Debugging", "Testing", "Documentation", "Clean Code", "Refactoring", "Design Patterns", "System Design", "Deployment", "Open Source", "Portfolio Development", "Software Projects", "Revision", "TypeScript", "HTML", "CSS", "PHP", "Flask", "Django", "React", "Angular", "Vue", "Node.js", "Express.js", "Express", "Linux", "Docker", "API", "REST API", "GraphQL", "OOP", "Database", "Backend", "Frontend", "Full Stack", "DevOps", "Mobile Development", "Game Development", "Cybersecurity", "Cloud Computing", "Operating Systems", "Networking", "Version Control", "أخرى", "Kubernetes", "System Administration", "Infrastructure Projects"],
+        categories: ["أساسيات البرمجة", "Python", "C", "C++", "Java", "JavaScript", "تطوير الويب", "Data Structures", "Algorithms", "Problem Solving", "Competitive Programming", "Machine Learning", "Deep Learning", "Data Science", "Computer Vision", "Natural Language Processing", "Reinforcement Learning", "Generative AI", "MLOps", "AI Projects", "SQL", "Database Fundamentals", "SQLite", "MySQL", "PostgreSQL", "MongoDB", "Database Design", "ORM", "Database Optimization", "Database Security", "Database Projects", "Software Engineering", "Git", "GitHub", "Debugging", "Testing", "Documentation", "Clean Code", "Refactoring", "Design Patterns", "System Design", "Deployment", "Open Source", "Portfolio Development", "Software Projects", "Revision", "TypeScript", "HTML", "CSS", "PHP", "Flask", "Django", "React", "Angular", "Vue", "Node.js", "Express.js", "Express", "Linux", "Docker", "API", "REST API", "GraphQL", "OOP", "Database", "Backend", "Frontend", "Full Stack", "DevOps", "Mobile Development", "Game Development", "Cybersecurity", "Cloud Computing", "Operating Systems", "Networking", "Version Control", "Blockchain", "IoT", "Embedded Systems", "AR/VR", "Robotics", "Technical Portfolio", "Freelancing", "Startup Projects", "Emerging Technologies", "أخرى", "Kubernetes", "System Administration", "Infrastructure Projects"],
         paths: {
             "أساسيات البرمجة": ["أساسيات البرمجة","المتغيرات وأنواع البيانات","العمليات الحسابية والمنطقية","الشروط","الحلقات التكرارية","الدوال","المصفوفات والقوائم","حل المشكلات","التعامل مع الأخطاء","كتابة برامج بسيطة","مراجعة شاملة","أخرى"],
             "Python": ["Syntax Basics","Variables","Data Types","Operators","Conditions","Loops","Functions","Lists","Tuples","Dictionaries","Sets","Strings","File Handling","Exception Handling","Modules","OOP","Virtual Environment","Libraries","Flask","API","SQLite","Project Building","Debugging","Code Review","Revision","أخرى"],
@@ -2928,8 +2928,17 @@ const GOAL_CONFIG_V524 = {
             "Software Engineering": ["Software Development Life Cycle", "Requirements Analysis", "Software Design", "Implementation", "Testing", "Maintenance", "Agile", "Scrum", "Software Architecture", "Project Management", "Revision", "أخرى"],
             "Testing": ["Unit Testing", "Integration Testing", "Functional Testing", "Regression Testing", "Automation Testing", "Test Cases", "Quality Assurance", "Revision", "أخرى"],
             "Debugging": ["Finding Bugs", "Logic Errors", "Syntax Errors", "Runtime Errors", "Debugging Tools", "Logging", "Performance Debugging", "Revision", "أخرى"],
-            "Mobile Development": ["UI Basics","Navigation","API Integration","Local Storage","Project Building","أخرى"],
-            "Game Development": ["Game Logic","Physics","Graphics","Input Handling","Project Building","أخرى"],
+            "Mobile Development": ["Android Fundamentals", "Flutter", "React Native", "UI Design", "Navigation", "State Management", "Local Storage", "API Integration", "Firebase", "Performance Optimization", "Mobile Projects", "Revision", "أخرى"],
+            "Game Development": ["Game Programming Basics", "Unity", "Unreal Engine", "2D Games", "3D Games", "Game Physics", "Animation", "AI for Games", "Game UI", "Game Projects", "Revision", "أخرى"],
+            "Emerging Technologies": ["Quantum Computing Basics", "Edge Computing", "Digital Twins", "Autonomous Systems", "Smart Cities", "Green Computing", "Future Technologies", "Research Topics", "Revision", "أخرى"],
+            "Startup Projects": ["Idea Validation", "Market Research", "MVP", "Product Design", "Team Building", "Funding Basics", "Project Management", "Startup Growth", "Startup Projects", "Revision", "أخرى"],
+            "Freelancing": ["Freelancing Basics", "Client Communication", "Proposal Writing", "Project Pricing", "Time Management", "Freelance Platforms", "Portfolio Building", "Freelance Projects", "Revision", "أخرى"],
+            "Technical Portfolio": ["Portfolio Planning", "GitHub Portfolio", "Personal Website", "Project Documentation", "CV Integration", "LinkedIn Profile", "Technical Blog", "Portfolio Projects", "Revision", "أخرى"],
+            "Robotics": ["Robotics Basics", "Robot Programming", "Sensors", "Actuators", "Robot Control", "Autonomous Systems", "Robotics Projects", "Revision", "أخرى"],
+            "AR/VR": ["AR Fundamentals", "VR Fundamentals", "Unity AR", "Unity VR", "Interaction Design", "AR Projects", "VR Projects", "Revision", "أخرى"],
+            "Embedded Systems": ["Embedded Basics", "Microcontrollers", "ARM", "Real Time Systems", "Device Drivers", "Communication Protocols", "Embedded Projects", "Revision", "أخرى"],
+            "IoT": ["IoT Fundamentals", "Sensors", "Microcontrollers", "Arduino", "ESP32", "Raspberry Pi", "IoT Networking", "IoT Security", "IoT Projects", "Revision", "أخرى"],
+            "Blockchain": ["Blockchain Fundamentals", "Cryptography Basics", "Smart Contracts", "Ethereum", "Solidity", "Web3", "NFT Concepts", "DeFi Basics", "Blockchain Projects", "Revision", "أخرى"],
             "تطوير الويب": ["HTML","CSS","Responsive Design","Bootstrap","Tailwind CSS","JavaScript","DOM","Async JavaScript","API","JSON","Frontend","Backend","Full Stack","Flask","Django","React","Node.js","Express.js","Authentication","Session Management","REST API","Database Integration","SQLite","MySQL","PostgreSQL","Deployment","Debugging","Testing","Security Basics","Performance Optimization","Project Building","Revision","Portfolio Development","Open Source Contribution","أخرى"],
             "Documentation": ["README", "Code Documentation", "API Documentation", "Project Documentation", "Technical Writing", "Revision", "أخرى"],
             "Clean Code": ["Naming", "Formatting", "Functions", "Classes", "Code Organization", "SOLID Principles", "Best Practices", "Revision", "أخرى"],
@@ -3240,6 +3249,61 @@ const GOAL_CONFIG_V524 = {
                 current:["فكرة", "بدأت المشروع", "أنجزت جزءاً", "اقتربت من الإنجاز", "أخرى"],
                 target:["إكمال المشروع", "تحسين المشروع", "رفع المشروع", "بناء Portfolio", "نشر المشروع", "أخرى"],
                 commitment:["ساعة تطوير", "ميزة جديدة", "إصلاح مشكلة", "تحسين الأداء", "توثيق", "رفع تحديث", "أخرى"]
+            },
+            "Mobile Development": {
+                current:["لا أعرف تطوير التطبيقات", "أعرف الأساسيات", "أنشأت تطبيقاً بسيطاً", "أطور تطبيقات", "أخرى"],
+                target:["بناء تطبيق كامل", "ربط API", "نشر التطبيق", "تحسين الأداء", "بناء Portfolio", "أخرى"],
+                commitment:["درس", "تطبيق عملي", "ميزة جديدة", "مشروع", "اختبار التطبيق", "أخرى"]
+            },
+            "Game Development": {
+                current:["لا أعرف تطوير الألعاب", "أعرف المفاهيم الأساسية", "أنشأت لعبة بسيطة", "أطبق مشاريع ألعاب", "أخرى"],
+                target:["فهم Game Development", "بناء لعبة 2D", "بناء لعبة 3D", "تحسين تجربة اللعب", "بناء مشروع ألعاب", "أخرى"],
+                commitment:["درس", "تطبيق عملي", "ميزة جديدة", "اختبار اللعبة", "مشروع", "أخرى"]
+            },
+            "Blockchain": {
+                current:["لا أعرف Blockchain", "أعرف المفاهيم الأساسية", "أفهم Smart Contracts", "أطبق مشروعاً بسيطاً", "أخرى"],
+                target:["فهم Blockchain", "بناء Smart Contract", "تطبيق Web3", "بناء مشروع Blockchain", "أخرى"],
+                commitment:["درس", "تطبيق عملي", "كتابة عقد ذكي", "تحليل مشروع", "مراجعة", "أخرى"]
+            },
+            "IoT": {
+                current:["لا أعرف IoT", "أعرف المفاهيم الأساسية", "أتعامل مع Sensors", "أبني تجارب بسيطة", "أخرى"],
+                target:["فهم IoT", "بناء مشروع IoT", "ربط الأجهزة بالشبكة", "تحسين الأمان", "أخرى"],
+                commitment:["درس", "تطبيق عملي", "تجربة Sensor", "مشروع", "مراجعة", "أخرى"]
+            },
+            "Embedded Systems": {
+                current:["مبتدئ", "أعرف Microcontrollers", "أتعامل مع Hardware بسيط", "أطبق مشاريع", "أخرى"],
+                target:["فهم Embedded Systems", "برمجة Microcontrollers", "بناء مشروع عملي", "تحسين الأداء", "أخرى"],
+                commitment:["درس", "تطبيق عملي", "تجربة Hardware", "مشروع", "مراجعة", "أخرى"]
+            },
+            "AR/VR": {
+                current:["لا أعرف AR/VR", "أعرف المفاهيم الأساسية", "أطبق تجربة بسيطة", "أعمل على مشروع", "أخرى"],
+                target:["فهم AR/VR", "بناء تجربة تفاعلية", "تطوير مشروع AR", "تطوير مشروع VR", "أخرى"],
+                commitment:["درس", "تطبيق عملي", "تحسين التفاعل", "مشروع", "مراجعة", "أخرى"]
+            },
+            "Robotics": {
+                current:["لا أعرف Robotics", "أعرف المفاهيم الأساسية", "أبرمج روبوتاً بسيطاً", "أتعامل مع Sensors و Actuators", "أخرى"],
+                target:["فهم Robotics", "برمجة Robot", "بناء نظام Autonomous", "تنفيذ مشروع Robotics", "أخرى"],
+                commitment:["درس", "تطبيق عملي", "تجربة تحكم", "مشروع", "مراجعة", "أخرى"]
+            },
+            "Technical Portfolio": {
+                current:["لا أملك Portfolio", "بدأت Portfolio", "أضفت مشاريع", "Portfolio جيد", "أخرى"],
+                target:["Portfolio احترافي", "تحسين المشاريع", "رفع المشاريع", "تطوير الموقع الشخصي", "أخرى"],
+                commitment:["رفع مشروع", "تحسين مشروع", "كتابة توثيق", "تحديث GitHub", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Freelancing": {
+                current:["لا أعرف العمل الحر", "أعرف المفاهيم", "نفذت مشروعاً", "أعمل مع عملاء", "أخرى"],
+                target:["الحصول على أول عميل", "تنفيذ مشاريع", "زيادة الخبرة", "بناء سمعة قوية", "أخرى"],
+                commitment:["ساعة تعلم", "تحسين Portfolio", "التواصل مع العملاء", "تنفيذ مشروع", "أخرى"]
+            },
+            "Startup Projects": {
+                current:["فكرة فقط", "أدرس الفكرة", "بدأت التنفيذ", "لدي مشروع", "أخرى"],
+                target:["بناء MVP", "إطلاق المشروع", "تحسين المنتج", "توسيع المشروع", "أخرى"],
+                commitment:["تحسين المنتج", "ميزة جديدة", "اختبار المستخدمين", "تحليل السوق", "أخرى"]
+            },
+            "Emerging Technologies": {
+                current:["مبتدئ", "أعرف المفاهيم العامة", "أتابع التطورات", "أبحث في موضوع محدد", "أخرى"],
+                target:["فهم التقنية", "إعداد بحث", "تطبيق تجربة أولية", "بناء مشروع تجريبي", "أخرى"],
+                commitment:["قراءة بحث", "تلخيص فكرة", "تجربة عملية", "مراجعة أسبوعية", "أخرى"]
             },
             "أخرى": {
                 current:["مبتدئ","أعرف الأساسيات","أحتاج تدريباً عملياً","أعمل على مشروع","أخرى"],
