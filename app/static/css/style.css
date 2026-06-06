@@ -6967,3 +6967,13 @@ body #detailedTopicSelect,
 body #trainingTypeSelect {
     unicode-bidi: plaintext;
 }
+
+
+
+/* EduPath AI v5.3.4 Exam Labels Arabic Content English */
+body #topicSelect,
+body #skillSelect,
+body #detailedTopicSelect,
+body #trainingTypeSelect {
+    unicode-bidi: plaintext;
+}

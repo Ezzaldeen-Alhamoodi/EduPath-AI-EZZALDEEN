@@ -79,7 +79,7 @@
                 <input name="start_date" type="date" value="{{ task.start_date if task else '' }}">
             </div>
             <div>
-                <label id="endDateLabel">تاريخ الانتهاء أو الموعد النهائي</label>
+                <label id="endDateLabel">تاريخ الانتهاء</label>
                 <input name="due_date" type="date" value="{{ task.due_date if task else '' }}">
             </div>
         </div>
@@ -108,7 +108,7 @@
             </div>
         </div>
 
-        <label id="notesLabel">ملاحظات إضافية</label>
+        <label id="notesLabel">الملاحظات</label>
         <textarea id="notesInput" name="notes" rows="3" placeholder="اكتب أي ملاحظات أو خطة أو تعليمات شخصية">{{ task.notes if task else "" }}</textarea>
     </div>
 </div>
