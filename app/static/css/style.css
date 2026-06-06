@@ -7907,3 +7907,117 @@ small.hint {
         font-weight: 900 !important;
     }
 }
+
+/* EduPath AI v5.5.6 Goals desktop layout refinement
+   Desktop-only: keep mobile layout untouched. */
+@media (min-width: 1024px) {
+    .smart-goals-layout-v4613 {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 28px !important;
+        align-items: stretch !important;
+    }
+
+    .smart-goal-create-card,
+    .current-goals-card-v556 {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .smart-goal-create-card {
+        padding: 24px;
+    }
+
+    .smart-goal-form-v4613 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        align-items: start;
+    }
+
+    .smart-goal-form-v4613 > .goal-field-wide,
+    .smart-goal-form-v4613 > .adaptive-goal-panel-v4614,
+    .smart-goal-form-v4613 > .goal-form-bottom-grid,
+    .smart-goal-form-v4613 > button {
+        grid-column: 1 / -1;
+    }
+
+    .adaptive-goal-panel-v4614,
+    .goal-form-bottom-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .goal-field {
+        gap: 8px;
+    }
+
+    .smart-goal-form-v4613 label {
+        display: block;
+        line-height: 1.35;
+    }
+
+    .smart-goal-form-v4613 input,
+    .smart-goal-form-v4613 select {
+        min-height: 48px;
+    }
+
+    .smart-goal-form-v4613 textarea {
+        min-height: 118px;
+        resize: vertical;
+    }
+
+    .smart-goal-form-v4613 > button {
+        width: min(360px, 100%);
+        justify-self: start;
+        margin-top: 4px;
+    }
+
+    .current-goals-card-v556 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        padding: 24px;
+    }
+
+    .current-goals-card-v556 > h2,
+    .current-goals-card-v556 > .muted {
+        grid-column: 1 / -1;
+    }
+
+    .current-goals-card-v556 > h2 {
+        margin-bottom: 2px;
+    }
+
+    .current-goals-card-v556 .goal-card-v41 {
+        width: 100%;
+        min-width: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+    }
+
+    .detailed-goal-actions-v527 {
+        margin-top: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .detailed-goal-actions-v527 .small-button {
+        white-space: nowrap;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1239px) {
+    .current-goals-card-v556 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1500px) {
+    .current-goals-card-v556 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
