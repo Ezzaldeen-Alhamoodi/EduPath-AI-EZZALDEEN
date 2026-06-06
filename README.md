@@ -1849,3 +1849,28 @@ Dashboard-only layout fix.
   - Chemistry: Basic Chemical Calculations, Properties and Reactions of Matter, Chemical Theories and Laws, Chemical Experiments and Applications.
   - English: Reading, Listening, Writing, Vocabulary, Grammar.
 - Other sections keep their previous behavior.
+
+
+## v5.3.5 Universal Arabic Task Field Labels
+
+### Scope
+- Only task field labels were changed.
+- All task types now keep these labels in Arabic:
+  - اسم المهمة
+  - الفئة الرئيسية
+  - الفئة الفرعية
+  - الموضوع التفصيلي
+  - نوع النشاط
+  - المصدر أو الرابط
+  - مستوى الصعوبة
+  - الأولوية
+  - الوقت المتوقع (بالدقائق)
+  - تاريخ البدء
+  - تاريخ الانتهاء
+  - وقت التذكير
+  - التكرار
+  - أيام التكرار
+  - الملاحظات
+  - حفظ المهمة
+- No adaptive task content was changed.
+- No exam content was changed.

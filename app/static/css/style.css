@@ -6977,3 +6977,12 @@ body #detailedTopicSelect,
 body #trainingTypeSelect {
     unicode-bidi: plaintext;
 }
+
+
+
+/* EduPath AI v5.3.5 Universal Arabic Task Field Labels */
+.smart-task-form label,
+.form label {
+    direction: rtl !important;
+    text-align: right !important;
+}

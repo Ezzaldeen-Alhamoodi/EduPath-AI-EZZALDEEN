@@ -95,7 +95,7 @@
         </select>
 
         <div class="repeat-days-box" id="repeatDaysBox">
-            <label id="repeatDaysLabel">التكرار Days</label>
+            <label id="repeatDaysLabel">أيام التكرار</label>
             <small class="hint">اختر الأيام المناسبة لهذه المهمة. مفيد للروتين الدراسي أو اللغوي أو عطلة نهاية الأسبوع.</small>
             <div class="weekday-grid">
                 {% set selected_days = (task.repeat_days.split(",") if task and task.repeat_days else []) %}
