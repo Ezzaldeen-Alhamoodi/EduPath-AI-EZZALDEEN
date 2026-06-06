@@ -2135,3 +2135,29 @@ Dashboard-only layout fix.
   - GRE does not show IELTS-specific items.
   - Duolingo does not show IELTS Writing or Reading question types.
   - CSCA subjects stay isolated.
+
+
+## v5.5.0 Exam Precise Adaptive Fix
+
+### Purpose
+- Corrected the Exams & Certificates task category after v5.4.9.
+- Restored the practical adaptive flow requested by the user:
+  - Exam
+  - Main Section
+  - Task Type / Question Type
+  - Activity Type
+
+### Important behavior
+- Form labels remain Arabic.
+- Exam content remains English.
+- IELTS, TOEFL, Duolingo, and CSCA were rebuilt exactly around their own sections and question/task types.
+- SAT, ACT, GRE, GMAT, HSK, and HSKK remain in the same adaptive exam engine.
+- No mixing between exams:
+  - IELTS does not show GRE/GMAT/SAT items.
+  - GRE does not show IELTS items.
+  - Duolingo does not show IELTS Writing Task 2 or IELTS Reading question types.
+  - CSCA subjects stay isolated.
+
+### Scope
+- Tasks page only.
+- Exams & Certificates category only.
