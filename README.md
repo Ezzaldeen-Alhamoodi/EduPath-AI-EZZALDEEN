@@ -1982,3 +1982,35 @@ Dashboard-only layout fix.
 - No goals logic changes.
 - No progress logic changes.
 - No smart linking changes.
+
+
+## v5.4.3 Smart Task Data AR
+
+### Scope
+- First step of the Arabic-root refactor for Tasks.
+- Rebuilt SMART_TASK_DATA with Arabic keys and Arabic source values.
+- Task type keys are now Arabic in the frontend source:
+  - حفظ القرآن الكريم
+  - المرحلة الثانوية
+  - المرحلة الجامعية
+  - اللغات
+  - البرمجة والتكنولوجيا
+  - الذكاء الاصطناعي
+  - الرياضيات
+  - المنح الدراسية
+  - الاختبارات والشهادات
+  - الحياة اليومية
+  - المشاريع
+  - القراءة والبحث
+  - عام
+  - أخرى
+- Added temporary compatibility for older stored internal category values.
+- Backend normalizes task category to Arabic on save/edit.
+- Official exam names, official exam question types, and programming language names remain unchanged where required.
+
+### Not changed yet
+- Full task saving model refactor.
+- Full task editing model refactor.
+- Dashboard tasks refactor.
+- Repeating task engine refactor.
+- Goal linking refactor.

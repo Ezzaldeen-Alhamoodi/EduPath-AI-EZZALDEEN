@@ -1961,6 +1961,29 @@ def native_task_label_v541(value):
     return TASK_NATIVE_AR_LABELS_V542.get(text) or TASK_NATIVE_AR_LABELS_V541.get(text) or task_ar(text)
 
 
+
+TASK_CATEGORY_TO_AR_V543 = {
+    "Quran Memorization": "حفظ القرآن الكريم",
+    "Secondary School": "المرحلة الثانوية",
+    "University": "المرحلة الجامعية",
+    "Languages": "اللغات",
+    "Programming & Technology": "البرمجة والتكنولوجيا",
+    "Artificial Intelligence": "الذكاء الاصطناعي",
+    "Mathematics": "الرياضيات",
+    "Scholarships": "المنح الدراسية",
+    "Exams & Certificates": "الاختبارات والشهادات",
+    "Daily Life": "الحياة اليومية",
+    "Projects": "المشاريع",
+    "Reading & Research": "القراءة والبحث",
+    "General": "عام",
+    "Other": "أخرى"
+}
+
+def normalize_task_category_ar_v543(value):
+    text = (value or "").strip()
+    return TASK_CATEGORY_TO_AR_V543.get(text, text or "عام")
+
+
 def render_clickable_sources(value):
     """Render source text safely: plain text stays plain, URLs become clickable links.
     Multiple sources can be separated by &.
@@ -2839,7 +2862,7 @@ def create_app():
             goal = Goal(
                 user_id=current_user.id,
                 title=request.form.get("title", "").strip(),
-                category=request.form.get("category", "General").strip(),
+                category=normalize_task_category_ar_v543(request.form.get("category", "عام")),
                 current_level=current_state,
                 daily_minutes=0,
                 start_date=request.form.get("start_date", "").strip(),
