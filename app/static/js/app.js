@@ -1,3 +1,4 @@
+const EDUPATH_BUILD_VERSION = "5.4.4-smart-task-data-ar-cache-bust";
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/static/js/service-worker.js")
         .catch(() => {});
