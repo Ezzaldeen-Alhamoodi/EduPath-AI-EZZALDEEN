@@ -2775,18 +2775,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/* EduPath AI v5.3.0 Deep Native Arabic Tasks */
-const TASK_OFFICIAL_KEEP_V530 = new Set([
+/* EduPath AI v5.2.9 Native Arabic Tasks */
+const TASK_OFFICIAL_KEEP_V529 = new Set([
     "IELTS","TOEFL","Duolingo English Test","Duolingo","HSK","CSCA","SAT","ACT","GRE","GMAT",
     "Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","Flask","Django","React","Node.js",
     "Git","GitHub","Git / GitHub","Docker","Linux","TensorFlow","PyTorch","Scikit-learn","Pandas","NumPy",
-    "CNN","RNN","NLP","API","APIs","OOP",
-    "True False Not Given","Yes No Not Given","Matching Headings","Multiple Choice","Writing Task 1","Writing Task 2",
-    "Speaking Part 1","Speaking Part 2","Speaking Part 3","Map Labelling","Form Completion","Note Completion",
-    "Flow Chart Completion","Summary Completion","Sentence Completion","Table Completion"
+    "True False Not Given","Matching Headings","Multiple Choice","Writing Task 1","Writing Task 2",
+    "Speaking Part 1","Speaking Part 2","Speaking Part 3"
 ]);
 
-const TASK_AR_V530 = {
+const TASK_AR_V529 = {
     "University": "المرحلة الجامعية",
     "Languages": "اللغات",
     "Programming & Technology": "البرمجة والتكنولوجيا",
@@ -2801,75 +2799,6 @@ const TASK_AR_V530 = {
     "Other": "أخرى",
     "Quran Memorization": "حفظ القرآن الكريم",
     "Secondary School": "المرحلة الثانوية",
-
-    "English": "الإنجليزية",
-    "Turkish": "التركية",
-    "Russian": "الروسية",
-    "Chinese": "الصينية",
-    "Indonesian": "الإندونيسية",
-    "Romanian": "الرومانية",
-    "Arabic": "العربية",
-    "French": "الفرنسية",
-    "German": "الألمانية",
-    "General English": "إنجليزية عامة",
-    "General Chinese": "صينية عامة",
-    "General Turkish": "تركية عامة",
-    "General Russian": "روسية عامة",
-    "General Language": "لغة عامة",
-    "Grammar": "القواعد",
-    "Vocabulary": "المفردات",
-    "Pronunciation": "النطق",
-    "Reading": "القراءة",
-    "Writing": "الكتابة",
-    "Listening": "الاستماع",
-    "Speaking": "التحدث",
-    "Academic English": "الإنجليزية الأكاديمية",
-    "Characters": "الحروف الصينية",
-    "Translation": "الترجمة",
-    "Daily Conversation": "محادثة يومية",
-    "Grammar Review": "مراجعة القواعد",
-    "Vocabulary Building": "إثراء المفردات",
-    "Pronunciation Practice": "ممارسة النطق",
-    "Grammar Practice": "حل تمارين القواعد",
-    "Vocabulary Review": "مراجعة المفردات",
-    "Dictation": "إملاء",
-    "Shadowing": "المحاكاة الصوتية",
-    "Practice": "تطبيق عملي",
-    "Timed Practice": "تدريب بوقت محدد",
-    "Review Mistakes": "مراجعة الأخطاء",
-    "Mock Test": "اختبار تجريبي",
-    "Reading Practice": "فهم المقروء",
-    "Speaking Practice": "ممارسة التحدث",
-    "Writing Practice": "تدريب الكتابة",
-    "Listening Practice": "فهم المسموع",
-    "Fluency Practice": "تحسين الطلاقة",
-    "Record Response": "تسجيل الإجابة",
-    "Photo Description": "وصف صورة",
-    "Sample Writing": "كتابة نموذجية",
-    "Accuracy Review": "مراجعة الدقة",
-    "Mistake Review": "مراجعة الأخطاء",
-    "Gap Filling": "ملء الفراغات",
-    "Diagram Matching": "مطابقة الرسوم",
-    "Chart Matching": "مطابقة المخططات",
-    "Short Answer Questions": "أسئلة إجابة قصيرة",
-    "Skimming": "قراءة سريعة",
-    "Scanning": "بحث سريع داخل النص",
-    "Draft Response": "كتابة مسودة",
-    "Timed Writing": "كتابة بوقت محدد",
-    "Task Analysis": "تحليل المهمة",
-    "Vocabulary Upgrade": "تقوية المفردات",
-    "Grammar Accuracy": "تحسين دقة القواعد",
-    "Feedback Review": "مراجعة الملاحظات",
-    "Rewrite Response": "إعادة كتابة الإجابة",
-    "Mock Interview": "مقابلة تجريبية",
-    "Everyday Conversation": "محادثة يومية",
-    "Everyday Monologue": "حديث يومي فردي",
-    "Educational Discussion": "نقاش تعليمي",
-    "Academic Lecture": "محاضرة أكاديمية",
-    "Academic Reading": "قراءة أكاديمية",
-    "General Training Reading": "قراءة عامة",
-    "Plan Labelling": "Plan Labelling",
-    "Diagram Labelling": "Diagram Labelling",
 
     "Computer Science": "علوم الحاسوب",
     "Information Technology": "تقنية المعلومات",
@@ -2894,6 +2823,7 @@ const TASK_AR_V530 = {
     "Education": "التربية",
     "English Language": "اللغة الإنجليزية",
     "Arabic Language": "اللغة العربية",
+    "Translation": "الترجمة",
     "Media": "الإعلام",
     "Political Science": "العلوم السياسية",
     "Psychology": "علم النفس",
@@ -2933,10 +2863,110 @@ const TASK_AR_V530 = {
     "Solve Exercises": "حل تمارين",
     "Prepare Report": "إعداد تقرير",
     "Review Terms": "مراجعة المصطلحات",
-    "Practice Problems": "حل مسائل تدريبية",
+    "Practice Problems": "تدريب على المسائل",
     "Analyze Case": "تحليل حالة",
     "Memorize Terms": "حفظ مصطلحات",
 
+    "English": "الإنجليزية",
+    "Turkish": "التركية",
+    "Russian": "الروسية",
+    "Chinese": "الصينية",
+    "Indonesian": "الإندونيسية",
+    "Romanian": "الرومانية",
+    "Arabic": "العربية",
+    "French": "الفرنسية",
+    "German": "الألمانية",
+    "General English": "إنجليزية عامة",
+    "General Chinese": "صينية عامة",
+    "General Turkish": "تركية عامة",
+    "General Russian": "روسية عامة",
+    "General Language": "لغة عامة",
+    "Grammar": "القواعد",
+    "Vocabulary": "المفردات",
+    "Pronunciation": "النطق",
+    "Reading": "القراءة",
+    "Writing": "الكتابة",
+    "Listening": "الاستماع",
+    "Speaking": "التحدث",
+    "Academic English": "الإنجليزية الأكاديمية",
+    "Characters": "الحروف الصينية",
+    "Daily Conversation": "محادثة يومية",
+    "Grammar Review": "مراجعة القواعد",
+    "Vocabulary Building": "بناء المفردات",
+    "Everyday Conversation": "محادثة يومية",
+    "Everyday Monologue": "حديث يومي فردي",
+    "Educational Discussion": "نقاش تعليمي",
+    "Academic Lecture": "محاضرة أكاديمية",
+    "Academic Reading": "قراءة أكاديمية",
+    "General Training Reading": "قراءة عامة",
+    "Task 1 Academic": "Writing Task 1",
+    "Task 2 Academic": "Writing Task 2",
+    "Task 1 General": "Writing Task 1",
+    "Task 2 General": "Writing Task 2",
+    "Part 1": "Speaking Part 1",
+    "Part 2": "Speaking Part 2",
+    "Part 3": "Speaking Part 3",
+    "Gap Filling": "ملء الفراغات",
+    "Table Completion": "Table Completion",
+    "Diagram Matching": "مطابقة الرسوم",
+    "Chart Matching": "مطابقة المخططات",
+    "Short Answer Questions": "أسئلة إجابة قصيرة",
+    "Skimming": "القراءة السريعة",
+    "Scanning": "البحث السريع",
+    "Draft Response": "كتابة مسودة",
+    "Timed Writing": "كتابة بوقت محدد",
+    "Task Analysis": "تحليل المهمة",
+    "Vocabulary Upgrade": "تقوية المفردات",
+    "Grammar Accuracy": "دقة القواعد",
+    "Feedback Review": "مراجعة الملاحظات",
+    "Rewrite Response": "إعادة كتابة الإجابة",
+    "Mock Interview": "مقابلة تجريبية",
+    "Fluency Practice": "تدريب الطلاقة",
+    "Record Response": "تسجيل الإجابة",
+    "Plan Labelling": "Plan Labelling",
+    "Map Labelling": "Map Labelling",
+    "Diagram Labelling": "Diagram Labelling",
+    "Form Completion": "Form Completion",
+    "Note Completion": "Note Completion",
+    "Flow Chart Completion": "Flow Chart Completion",
+    "Summary Completion": "Summary Completion",
+    "Sentence Completion": "Sentence Completion",
+    "Timed Practice": "تدريب بوقت محدد",
+    "Review Mistakes": "مراجعة الأخطاء",
+    "Vocabulary Review": "مراجعة المفردات",
+    "Grammar Practice": "تدريب القواعد",
+    "Pronunciation Practice": "تدريب النطق",
+    "Dictation": "إملاء",
+    "Shadowing": "تدريب الترديد",
+    "Mock Test": "اختبار تجريبي",
+    "Practice": "تدريب",
+    "Accuracy Review": "مراجعة الدقة",
+    "Mistake Review": "مراجعة الأخطاء",
+    "Dictation": "إملاء",
+    "Photo Description": "وصف صورة",
+    "Sample Writing": "عينة كتابة",
+    "Photo Speaking": "تحدث عن صورة",
+    "Fluency Practice": "تدريب الطلاقة",
+
+    "Syntax": "الصياغة",
+    "Variables": "المتغيرات",
+    "Data Types": "أنواع البيانات",
+    "Conditions": "الشروط",
+    "Loops": "الحلقات",
+    "Functions": "الدوال",
+    "Lists": "القوائم",
+    "Tuples": "الصفوف",
+    "Dictionaries": "القواميس",
+    "Sets": "المجموعات",
+    "Files": "الملفات",
+    "OOP": "البرمجة الكائنية",
+    "Modules": "الوحدات",
+    "Libraries": "المكتبات",
+    "Virtual Environment": "البيئة الافتراضية",
+    "APIs": "واجهات API",
+    "Data Analysis": "تحليل البيانات",
+    "Automation": "الأتمتة",
+    "Web Scraping": "استخراج البيانات من الويب",
     "Frontend Development": "تطوير الواجهة الأمامية",
     "Backend Development": "تطوير الخلفية",
     "Full Stack Development": "تطوير متكامل",
@@ -2952,30 +2982,13 @@ const TASK_AR_V530 = {
     "Concepts": "المفاهيم",
     "Debugging": "تصحيح الأخطاء",
     "Review": "مراجعة",
-    "Syntax": "الصياغة",
-    "Variables": "المتغيرات",
-    "Data Types": "أنواع البيانات",
-    "Conditions": "الشروط",
-    "Loops": "الحلقات",
-    "Functions": "الدوال",
-    "Lists": "القوائم",
-    "Tuples": "الصفوف",
-    "Dictionaries": "القواميس",
-    "Sets": "المجموعات",
-    "Files": "الملفات",
-    "Modules": "الوحدات",
-    "Libraries": "المكتبات",
-    "Virtual Environment": "البيئة الافتراضية",
-    "Data Analysis": "تحليل البيانات",
-    "Automation": "الأتمتة",
-    "Web Scraping": "استخراج البيانات من الويب",
-    "Study Concept": "فهم المفهوم",
+    "Study Concept": "دراسة المفهوم",
     "Write Code": "كتابة كود",
     "Build Mini Project": "بناء مشروع صغير",
     "Debug Code": "تصحيح الكود",
     "Read Documentation": "قراءة التوثيق",
     "Refactor Code": "تحسين الكود",
-    "Practice Syntax": "تطبيق الصياغة البرمجية",
+    "Practice Syntax": "تدريب الصياغة",
     "Build App": "بناء تطبيق",
     "Build Page": "بناء صفحة",
     "Design Layout": "تصميم الواجهة",
@@ -2985,20 +2998,24 @@ const TASK_AR_V530 = {
     "Make Responsive": "جعله متجاوبًا",
     "Deploy Website": "نشر الموقع",
     "Improve UI": "تحسين الواجهة",
-    "Practice Project": "تطبيق بمشروع",
+    "Practice Project": "تدريب بمشروع",
 
     "Artificial Intelligence": "الذكاء الاصطناعي",
     "Machine Learning": "تعلم الآلة",
     "Deep Learning": "التعلم العميق",
+    "NLP": "معالجة اللغة الطبيعية",
     "Computer Vision": "الرؤية الحاسوبية",
     "Reinforcement Learning": "التعلم المعزز",
     "AI Projects": "مشاريع ذكاء اصطناعي",
     "Data Cleaning": "تنظيف البيانات",
     "Feature Engineering": "هندسة الخصائص",
     "Models": "النماذج",
-    "Training": "تدريب النموذج",
-    "Evaluation": "تقييم النموذج",
+    "Training": "التدريب",
+    "Evaluation": "التقييم",
     "Neural Networks": "الشبكات العصبية",
+    "CNN": "CNN",
+    "RNN": "RNN",
+    "Transformers": "Transformers",
     "Study": "تعلم",
     "Experiment": "تجربة",
     "Evaluate Model": "تقييم النموذج",
@@ -3017,6 +3034,7 @@ const TASK_AR_V530 = {
     "Probability": "الاحتمالات",
     "Statistics": "الإحصاء",
     "Linear Algebra": "الجبر الخطي",
+    "Discrete Mathematics": "الرياضيات المتقطعة",
     "Equations": "المعادلات",
     "Functions": "الدوال",
     "Past Exams": "اختبارات سابقة",
@@ -3074,7 +3092,7 @@ const TASK_AR_V530 = {
     "Achievements": "الإنجازات",
     "Future Goals": "الأهداف المستقبلية",
     "University Fit": "التوافق مع الجامعة",
-    "Question Practice": "التدرب على الأسئلة",
+    "Question Practice": "تدريب على الأسئلة",
     "Answer Improvement": "تحسين الإجابات",
     "Feedback": "ملاحظات",
 
@@ -3089,17 +3107,17 @@ const TASK_AR_V530 = {
     "Cleaning": "تنظيف المنزل",
     "Shopping": "التسوق",
     "Time Management": "إدارة الوقت",
-    "Religious Routine": "الصلاة",
+    "Religious Routine": "العبادة اليومية",
     "Appointments": "المواعيد",
     "Daily Habit": "عادة يومية",
     "Weekly Routine": "روتين أسبوعي",
     "Reminder": "تذكير",
     "Personal Task": "مهمة شخصية",
     "Important Appointment": "موعد مهم",
-    "Self-care": "العناية الشخصية",
+    "Self-care": "العناية بالنفس",
     "Do Task": "تنفيذ مهمة",
     "Review Progress": "مراجعة التقدم",
-    "Repeat Habit": "تثبيت العادة",
+    "Repeat Habit": "تكرار العادة",
     "Check": "فحص",
     "Improve Routine": "تحسين الروتين",
 
@@ -3122,19 +3140,19 @@ const TASK_AR_V530 = {
     "Write Documentation": "كتابة التوثيق",
     "Brainstorm": "عصف ذهني",
 
-    "Book Reading": "الكتب",
-    "Article Reading": "المقالات",
-    "Research Paper": "الأبحاث",
-    "Summary": "التلخيص",
-    "Notes": "تدوين ملاحظات",
-    "Literature Review": "المراجعات",
-    "Critical Thinking": "التفكير النقدي",
+    "Book Reading": "قراءة كتاب",
+    "Article Reading": "قراءة مقال",
+    "Research Paper": "بحث علمي",
+    "Summary": "تلخيص",
+    "Notes": "ملاحظات",
+    "Literature Review": "مراجعة أدبيات",
+    "Critical Thinking": "تفكير نقدي",
     "Read": "قراءة",
     "Summarize": "تلخيص",
     "Analyze": "تحليل",
     "Take Notes": "تدوين ملاحظات",
     "Discuss": "مناقشة",
-    "Learning": "التعلم الذاتي",
+    "Learning": "التعلم",
     "Application": "تطبيق عملي",
     "General Topic": "موضوع عام",
     "Topic": "موضوع",
@@ -3146,105 +3164,17 @@ const TASK_AR_V530 = {
     "selected_days": "أيام محددة"
 };
 
-function taskLabelArV530(value) {
+function taskLabelArV529(value) {
     if (!value) return "";
-    if (TASK_OFFICIAL_KEEP_V530.has(value)) return value;
-    return TASK_AR_V530[value] || value;
+    if (TASK_OFFICIAL_KEEP_V529.has(value)) return value;
+    return TASK_AR_V529[value] || value;
 }
-
-function applyDeepNativeTaskConfigV530() {
-    if (typeof SMART_TASK_DATA === "undefined") return;
-
-    if (SMART_TASK_DATA["Languages"]) {
-        SMART_TASK_DATA["Languages"].training = [
-            "ممارسة التحدث","فهم المقروء","فهم المسموع","تدريب الكتابة","دراسة القواعد",
-            "حل تمارين القواعد","إثراء المفردات","تحسين النطق","ممارسة النطق",
-            "تصحيح النطق","المحاكاة الصوتية","إملاء","اختبار تجريبي","مراجعة الأخطاء","أخرى"
-        ];
-    }
-
-    if (SMART_TASK_DATA["Daily Life"]) {
-        SMART_TASK_DATA["Daily Life"].main = [
-            "الصحة","الرياضة","النوم","شرب الماء","التغذية","الروتين الشخصي",
-            "العائلة","إدارة الوقت","إدارة المال","الصلاة","التسوق","ترتيب المنزل",
-            "تنظيف المنزل","القراءة","الاسترخاء","أخرى"
-        ];
-        SMART_TASK_DATA["Daily Life"].sub = {
-            "الصحة": ["التغذية","شرب الماء","الفحوصات الطبية","الوقاية الصحية","العادات الصحية","العناية الصحية","أخرى"],
-            "الرياضة": ["المشي","تمارين منزلية","تمارين مقاومة","تمارين مرونة","رياضة خفيفة","أخرى"],
-            "النوم": ["تنظيم وقت النوم","تقليل السهر","روتين قبل النوم","الاستيقاظ المبكر","أخرى"],
-            "شرب الماء": ["كمية الماء اليومية","تذكير شرب الماء","تقليل المشروبات الغازية","متابعة العادة","أخرى"],
-            "التغذية": ["وجبة صحية","تقليل السكر","تنظيم الوجبات","تحضير طعام","متابعة الوزن","أخرى"],
-            "الروتين الشخصي": ["ترتيب اليوم","العناية الشخصية","النظافة الشخصية","العناية بالبشرة","العناية بالشعر","الراحة النفسية","أخرى"],
-            "العائلة": ["زيارة عائلية","مساعدة الأسرة","مكالمة عائلية","مسؤولية منزلية","أخرى"],
-            "إدارة الوقت": ["تخطيط اليوم","ترتيب الأولويات","تقليل التشتت","مراجعة الإنجاز","أخرى"],
-            "إدارة المال": ["تتبع المصروفات","ميزانية أسبوعية","ادخار","مراجعة النفقات","أخرى"],
-            "الصلاة": ["صلاة الفجر","الصلوات الخمس","النوافل","الأذكار بعد الصلاة","المحافظة على الوقت","أخرى"],
-            "التسوق": ["قائمة مشتريات","شراء احتياجات","مقارنة الأسعار","متابعة الميزانية","أخرى"],
-            "ترتيب المنزل": ["ترتيب الغرفة","ترتيب المكتب","ترتيب الملفات","تنظيم الملابس","أخرى"],
-            "تنظيف المنزل": ["تنظيف الغرفة","تنظيف المكتب","تنظيف المطبخ","تنظيف أسبوعي","أخرى"],
-            "القراءة": ["قراءة يومية","قراءة كتاب","قراءة مقال","تدوين فائدة","أخرى"],
-            "الاسترخاء": ["راحة قصيرة","تنفس عميق","مشي هادئ","وقت بلا هاتف","أخرى"],
-            "أخرى": ["عادة يومية","روتين أسبوعي","تذكير مهم","مهمة شخصية","أخرى"]
-        };
-        SMART_TASK_DATA["Daily Life"].detail = {
-            "التغذية": ["اختيار وجبة صحية","تقليل السكر","زيادة البروتين","تنظيم الوجبات","أخرى"],
-            "شرب الماء": ["كوب صباحي","زجاجة يومية","تذكير كل فترة","متابعة الكمية","أخرى"],
-            "الفحوصات الطبية": ["حجز موعد","متابعة نتيجة","تجهيز ملف طبي","أخرى"],
-            "الوقاية الصحية": ["نظافة شخصية","مشي خفيف","نوم كافٍ","تقليل التوتر","أخرى"],
-            "العناية الشخصية": ["نظافة شخصية","ترتيب المظهر","عناية يومية","أخرى"],
-            "النظافة الشخصية": ["غسل الأسنان","الاستحمام","تغيير الملابس","تنظيم الأدوات","أخرى"],
-            "العناية بالبشرة": ["غسل الوجه","ترطيب","حماية من الشمس","متابعة روتين","أخرى"],
-            "العناية بالشعر": ["غسل الشعر","ترتيب الشعر","روتين عناية","أخرى"],
-            "الراحة النفسية": ["وقت هادئ","كتابة مشاعر","تنفس عميق","تقليل التوتر","أخرى"],
-            "أخرى": ["موضوع عام","أخرى"]
-        };
-        SMART_TASK_DATA["Daily Life"].training = [
-            "تنفيذ المهمة","متابعة العادة","مراجعة التقدم","تثبيت العادة","تحسين الروتين",
-            "تجهيز مسبق","فحص سريع","تذكير يومي","مراجعة أسبوعية","أخرى"
-        ];
-    }
-
-    if (SMART_TASK_DATA["Reading & Research"]) {
-        SMART_TASK_DATA["Reading & Research"].main = [
-            "القراءة","البحث العلمي","الكتب","المقالات","الأبحاث","المراجعات",
-            "التلخيص","التفكير النقدي","التعلم الذاتي","أخرى"
-        ];
-        SMART_TASK_DATA["Reading & Research"].sub = {
-            "الكتب": ["علوم الحاسوب","الذكاء الاصطناعي","الرياضيات","الفيزياء","الكيمياء","الأحياء","الاقتصاد","إدارة الأعمال","التاريخ","الفلسفة","علم النفس","اللغة العربية","اللغة الإنجليزية","التنمية الذاتية","السير الذاتية","الروايات","الأدب","الدين","التفسير","الحديث","الفقه","العقيدة","أخرى"],
-            "القراءة": ["قراءة موجهة","قراءة تحليلية","قراءة مكثفة","قراءة سريعة","فهم المقروء","تدوين فوائد","أخرى"],
-            "البحث العلمي": ["اختيار موضوع","جمع مراجع","قراءة أوراق علمية","تحليل النتائج","توثيق المراجع","كتابة البحث","مراجعة البحث","أخرى"],
-            "المقالات": ["مقال تعليمي","مقال علمي","مقال رأي","تحليل مقال","تلخيص مقال","أخرى"],
-            "الأبحاث": ["الملخص","المقدمة","المنهجية","النتائج","المناقشة","المراجع","أخرى"],
-            "المراجعات": ["مراجعة كتاب","مراجعة مقال","مراجعة بحث","مقارنة مصادر","أخرى"],
-            "التلخيص": ["تلخيص فصل","تلخيص مقال","تلخيص بحث","استخراج أفكار","أخرى"],
-            "التفكير النقدي": ["تحليل حجة","تمييز الفكرة الرئيسية","تقييم دليل","مقارنة آراء","أخرى"],
-            "التعلم الذاتي": ["خطة تعلم","مصدر تعليمي","تطبيق عملي","مراجعة أسبوعية","أخرى"],
-            "أخرى": ["قراءة","تلخيص","تحليل","تدوين ملاحظات","أخرى"]
-        };
-        SMART_TASK_DATA["Reading & Research"].detail = {
-            "علوم الحاسوب": ["الخوارزميات","هياكل البيانات","قواعد البيانات","تطوير الويب","الأمن السيبراني","أخرى"],
-            "الذكاء الاصطناعي": ["تعلم الآلة","التعلم العميق","معالجة اللغة الطبيعية","الرؤية الحاسوبية","أخرى"],
-            "الرياضيات": ["الجبر","التفاضل والتكامل","الإحصاء","الاحتمالات","أخرى"],
-            "الدين": ["التفسير","الحديث","الفقه","العقيدة","السيرة","أخرى"],
-            "البحث العلمي": ["سؤال البحث","مراجعة الأدبيات","منهجية البحث","تحليل النتائج","توثيق المراجع","أخرى"],
-            "أخرى": ["موضوع عام","أخرى"]
-        };
-        SMART_TASK_DATA["Reading & Research"].training = [
-            "قراءة","تلخيص","استخراج أفكار","تحليل","مراجعة","مناقشة",
-            "تدوين ملاحظات","بناء خريطة ذهنية","مقارنة","تطبيق عملي",
-            "جمع مراجع","قراءة أوراق علمية","تحليل النتائج","توثيق المراجع","كتابة البحث","أخرى"
-        ];
-    }
-}
-
-applyDeepNativeTaskConfigV530();
 
 labelForUI = function(value) {
-    return taskLabelArV530(value);
+    return taskLabelArV529(value);
 };
 
-function forceTaskArabicLabelsV530() {
+function forceTaskArabicLabelsV529() {
     if (!document.getElementById("taskTypeCards")) return;
 
     const fixedLabels = {
@@ -3252,7 +3182,7 @@ function forceTaskArabicLabelsV530() {
         topicLabel: "الفئة الرئيسية",
         skillLabel: "الفئة الفرعية",
         detailLabel: "الموضوع التفصيلي",
-        trainingLabel: "نوع النشاط",
+        trainingLabel: "نوع التدريب",
         sourceLabel: "المصدر أو الرابط",
         difficultyLabel: "مستوى الصعوبة من ١ إلى ٥",
         priorityLabel: "الأولوية من ١ إلى ٥",
@@ -3274,7 +3204,7 @@ function forceTaskArabicLabelsV530() {
         ["customTopicBox", "اكتب الفئة التي تريدها"],
         ["customSkillBox", "اكتب الفئة الفرعية"],
         ["customDetailedTopicBox", "اكتب الموضوع الذي تريده"],
-        ["customTrainingTypeBox", "اكتب نوع النشاط"]
+        ["customTrainingTypeBox", "اكتب نوع التدريب"]
     ];
     customLabels.forEach(([boxId, text]) => {
         const box = document.getElementById(boxId);
@@ -3296,647 +3226,24 @@ function forceTaskArabicLabelsV530() {
     });
 
     document.querySelectorAll("#topicSelect option, #skillSelect option, #detailedTopicSelect option, #trainingTypeSelect option, #repeatTypeSelect option, #cscaDetailedTopicSelect option, #cscaTrainingTypeSelect option").forEach(option => {
-        option.textContent = taskLabelArV530(option.value || option.textContent);
+        option.textContent = taskLabelArV529(option.value || option.textContent);
     });
 
     document.querySelectorAll(".task-type-card strong").forEach(el => {
         const value = el.closest(".task-type-card")?.dataset?.type || el.textContent;
-        el.textContent = taskLabelArV530(value);
+        el.textContent = taskLabelArV529(value);
     });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(forceTaskArabicLabelsV530, 80);
+    setTimeout(forceTaskArabicLabelsV529, 80);
     ["categorySelect", "topicSelect", "skillSelect", "detailedTopicSelect", "trainingTypeSelect", "repeatTypeSelect"].forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.addEventListener("change", () => setTimeout(forceTaskArabicLabelsV530, 30));
+        if (el) el.addEventListener("change", () => setTimeout(forceTaskArabicLabelsV529, 25));
     });
     document.addEventListener("click", (event) => {
         if (event.target.closest(".task-type-card")) {
-            setTimeout(forceTaskArabicLabelsV530, 60);
-        }
-    });
-});
-
-
-/* EduPath AI v5.3.1 Deep Language Tasks */
-function applyDeepLanguageTaskConfigV531() {
-    if (typeof SMART_TASK_DATA === "undefined" || !SMART_TASK_DATA["Languages"]) return;
-
-    SMART_TASK_DATA["Languages"].main = [
-        "English", "Chinese", "Turkish", "Russian", "Indonesian", "Romanian", "Arabic", "French", "German", "أخرى"
-    ];
-
-    const languageSubfieldsV531 = [
-        "القراءة",
-        "الاستماع",
-        "التحدث",
-        "الكتابة",
-        "الاختبارات",
-        "القواعد",
-        "المفردات",
-        "النطق",
-        "اللغة الأكاديمية",
-        "أخرى"
-    ];
-
-    SMART_TASK_DATA["Languages"].sub = {
-        "English": languageSubfieldsV531,
-        "Chinese": languageSubfieldsV531,
-        "Turkish": languageSubfieldsV531,
-        "Russian": languageSubfieldsV531,
-        "Indonesian": languageSubfieldsV531,
-        "Romanian": languageSubfieldsV531,
-        "Arabic": languageSubfieldsV531,
-        "French": languageSubfieldsV531,
-        "German": languageSubfieldsV531,
-        "أخرى": languageSubfieldsV531
-    };
-
-    SMART_TASK_DATA["Languages"].detail = {
-        "القراءة": [
-            "فهم الفكرة العامة",
-            "استخراج التفاصيل",
-            "فهم الاستنتاجات",
-            "فهم المفردات من السياق",
-            "القراءة السريعة",
-            "القراءة التحليلية",
-            "القراءة الأكاديمية",
-            "قراءة المقالات",
-            "قراءة الأخبار",
-            "قراءة القصص",
-            "أخرى"
-        ],
-        "الاستماع": [
-            "فهم الفكرة الرئيسية",
-            "فهم التفاصيل",
-            "فهم اللهجات",
-            "الاستماع الأكاديمي",
-            "الاستماع اليومي",
-            "المحاضرات",
-            "الأخبار",
-            "المحادثات",
-            "البودكاست",
-            "أخرى"
-        ],
-        "التحدث": [
-            "المحادثات اليومية",
-            "العروض التقديمية",
-            "المناقشات",
-            "وصف الصور",
-            "التحدث الأكاديمي",
-            "مقابلات القبول",
-            "مقابلات العمل",
-            "أخرى"
-        ],
-        "الكتابة": [
-            "الكتابة العامة",
-            "الكتابة الأكاديمية",
-            "كتابة المقالات",
-            "كتابة الرسائل",
-            "كتابة التقارير",
-            "كتابة الملاحظات",
-            "كتابة الحجج",
-            "أخرى"
-        ],
-        "الاختبارات": [
-            "IELTS",
-            "TOEFL",
-            "Duolingo",
-            "HSK",
-            "CSCA",
-            "SAT",
-            "ACT",
-            "GRE",
-            "GMAT",
-            "اختبار تجريبي",
-            "إدارة الوقت",
-            "مراجعة الأخطاء",
-            "أخرى"
-        ],
-        "القواعد": [
-            "الأزمنة",
-            "بناء الجملة",
-            "أدوات الربط",
-            "الجمل الشرطية",
-            "المبني للمجهول",
-            "حروف الجر",
-            "الأخطاء الشائعة",
-            "تطبيق القواعد في الكتابة",
-            "أخرى"
-        ],
-        "المفردات": [
-            "مفردات يومية",
-            "مفردات أكاديمية",
-            "مفردات الاختبارات",
-            "مرادفات ومتضادات",
-            "تعبيرات شائعة",
-            "مفردات حسب الموضوع",
-            "مراجعة المفردات",
-            "أخرى"
-        ],
-        "النطق": [
-            "تصحيح مخارج الحروف",
-            "النبر والتنغيم",
-            "الطلاقة",
-            "المحاكاة الصوتية",
-            "تسجيل الصوت",
-            "تقليد المتحدث",
-            "أخرى"
-        ],
-        "اللغة الأكاديمية": [
-            "المقالات الأكاديمية",
-            "الأبحاث",
-            "العروض التقديمية",
-            "المناقشات الأكاديمية",
-            "المفردات الأكاديمية",
-            "الاستماع الأكاديمي",
-            "الكتابة الأكاديمية",
-            "أخرى"
-        ],
-        "IELTS": [
-            "Listening",
-            "Reading",
-            "Writing Task 1",
-            "Writing Task 2",
-            "Speaking Part 1",
-            "Speaking Part 2",
-            "Speaking Part 3",
-            "True False Not Given",
-            "Matching Headings",
-            "Multiple Choice",
-            "Sentence Completion",
-            "Summary Completion",
-            "Map Labelling",
-            "Form Completion",
-            "Note Completion",
-            "Flow Chart Completion",
-            "أخرى"
-        ],
-        "TOEFL": [
-            "Reading",
-            "Listening",
-            "Speaking",
-            "Writing",
-            "Complete the Words",
-            "Read in Daily Life",
-            "Read an Academic Passage",
-            "Build a Sentence",
-            "Write an Email",
-            "Write for an Academic Discussion",
-            "Listen and Repeat",
-            "Take an Interview",
-            "Listen and Choose a Response",
-            "Listen to a Conversation",
-            "Listen to an Announcement",
-            "Listen to an Academic Talk",
-            "أخرى"
-        ],
-        "Duolingo": [
-            "Read and Select",
-            "Fill in the Blanks",
-            "Read and Complete",
-            "Interactive Reading",
-            "Listen and Type",
-            "Interactive Listening",
-            "Write About the Photo",
-            "Writing Sample",
-            "Interactive Writing",
-            "Speak About the Photo",
-            "Read Then Speak",
-            "Speaking Sample",
-            "Interactive Speaking",
-            "أخرى"
-        ],
-        "HSK": ["HSK 1", "HSK 2", "HSK 3", "HSK 4", "HSK 5", "HSK 6", "Characters", "Vocabulary", "Listening", "Reading", "Writing", "أخرى"],
-        "أخرى": ["موضوع مخصص", "أخرى"]
-    };
-
-    SMART_TASK_DATA["Languages"].trainingByDetail = {
-        "فهم الفكرة العامة": ["قراءة نص", "تحديد الفكرة الرئيسية", "تلخيص النص", "مراجعة الإجابة", "أخرى"],
-        "استخراج التفاصيل": ["قراءة نص", "حل أسئلة فهم", "تمييز المعلومات المهمة", "تسجيل الملاحظات", "أخرى"],
-        "فهم الاستنتاجات": ["تحليل النص", "استنتاج المعنى", "مقارنة الإجابات", "مراجعة الأخطاء", "أخرى"],
-        "فهم المفردات من السياق": ["استخراج المفردات", "تخمين المعنى من السياق", "كتابة جمل جديدة", "مراجعة المفردات", "أخرى"],
-        "القراءة السريعة": ["قراءة بوقت محدد", "تحديد الكلمات المفتاحية", "تدريب Skimming", "تدريب Scanning", "أخرى"],
-        "القراءة التحليلية": ["تحليل النص", "استخراج الأفكار الرئيسية", "تسجيل الملاحظات", "مناقشة النص", "أخرى"],
-        "القراءة الأكاديمية": ["قراءة نص أكاديمي", "تلخيص الفقرات", "تحليل المصطلحات", "حل أسئلة أكاديمية", "أخرى"],
-        "قراءة المقالات": ["قراءة مقال", "تلخيص المقال", "استخراج الأفكار", "مراجعة المفردات", "أخرى"],
-        "قراءة الأخبار": ["قراءة خبر", "تلخيص الخبر", "استخراج مفردات", "مناقشة الخبر", "أخرى"],
-        "قراءة القصص": ["قراءة قصة", "تلخيص الأحداث", "وصف الشخصيات", "استخراج مفردات", "أخرى"],
-
-        "فهم الفكرة الرئيسية": ["الاستماع للمقطع", "تحديد الفكرة الرئيسية", "تلخيص المحتوى", "إعادة الاستماع", "أخرى"],
-        "فهم التفاصيل": ["الاستماع للمقطع", "تدوين الملاحظات", "الإجابة عن الأسئلة", "تحليل الأخطاء", "أخرى"],
-        "فهم اللهجات": ["الاستماع لمتحدثين مختلفين", "تقليد النطق", "مقارنة اللهجات", "إعادة الاستماع", "أخرى"],
-        "الاستماع الأكاديمي": ["الاستماع لمحاضرة", "تدوين الملاحظات", "تلخيص المحاضرة", "مراجعة المصطلحات", "أخرى"],
-        "الاستماع اليومي": ["الاستماع لحوار يومي", "استخراج عبارات", "إعادة الاستماع", "تطبيق العبارات", "أخرى"],
-        "المحاضرات": ["الاستماع لمحاضرة", "تدوين الملاحظات", "تلخيص النقاط", "مراجعة المصطلحات", "أخرى"],
-        "الأخبار": ["الاستماع لخبر", "تلخيص الخبر", "استخراج مفردات", "مناقشة المحتوى", "أخرى"],
-        "المحادثات": ["الاستماع لمحادثة", "الإجابة عن الأسئلة", "تقليد العبارات", "إعادة الاستماع", "أخرى"],
-        "البودكاست": ["الاستماع لحلقة", "تدوين الفوائد", "تلخيص المحتوى", "مراجعة المفردات", "أخرى"],
-
-        "المحادثات اليومية": ["التحدث الحر", "محاكاة حوار", "تسجيل صوتي", "مراجعة النطق", "أخرى"],
-        "العروض التقديمية": ["تحضير عرض شفهي", "تسجيل العرض", "مراجعة الأداء", "تحسين الأسلوب", "أخرى"],
-        "المناقشات": ["مناقشة موضوع", "عرض رأي", "الرد على أسئلة", "تقييم الطلاقة", "أخرى"],
-        "وصف الصور": ["وصف صورة", "تسجيل الإجابة", "تصحيح الأخطاء", "إعادة المحاولة", "أخرى"],
-        "التحدث الأكاديمي": ["شرح فكرة أكاديمية", "الإجابة عن أسئلة", "استخدام مفردات أكاديمية", "تسجيل صوتي", "أخرى"],
-        "مقابلات القبول": ["محاكاة مقابلة", "الإجابة عن أسئلة", "مراجعة الإجابات", "تحسين الثقة", "أخرى"],
-        "مقابلات العمل": ["محاكاة مقابلة", "التعريف بالنفس", "الإجابة عن أسئلة", "تحسين الطلاقة", "أخرى"],
-
-        "الكتابة العامة": ["كتابة مسودة", "تصحيح الكتابة", "إعادة الصياغة", "مراجعة الكتابة", "أخرى"],
-        "الكتابة الأكاديمية": ["كتابة فقرة أكاديمية", "تحسين الترابط", "مراجعة الحجة", "تصحيح الأخطاء", "أخرى"],
-        "كتابة المقالات": ["كتابة مقال", "بناء مقدمة", "كتابة فقرات", "مراجعة الخاتمة", "أخرى"],
-        "كتابة الرسائل": ["كتابة رسالة", "تحسين الأسلوب", "مراجعة الصياغة", "تصحيح الأخطاء", "أخرى"],
-        "كتابة التقارير": ["كتابة تقرير", "تنظيم العناوين", "تلخيص النتائج", "مراجعة التقرير", "أخرى"],
-        "كتابة الملاحظات": ["كتابة ملاحظات", "تنظيم النقاط", "اختصار الأفكار", "مراجعة الملاحظات", "أخرى"],
-        "كتابة الحجج": ["كتابة حجة", "دعم الرأي بأمثلة", "مراجعة المنطق", "تحسين الترابط", "أخرى"],
-
-        "الأزمنة": ["دراسة القاعدة", "حل تمارين القواعد", "كتابة أمثلة", "مراجعة الأخطاء", "أخرى"],
-        "بناء الجملة": ["تحليل الجمل", "إعادة ترتيب الجمل", "كتابة جمل", "مراجعة الأخطاء", "أخرى"],
-        "أدوات الربط": ["دراسة أدوات الربط", "تطبيق في جمل", "تطبيق في كتابة", "مراجعة الأخطاء", "أخرى"],
-        "الجمل الشرطية": ["دراسة القاعدة", "حل تمارين", "كتابة أمثلة", "مراجعة الأخطاء", "أخرى"],
-        "المبني للمجهول": ["دراسة القاعدة", "تحويل الجمل", "كتابة أمثلة", "مراجعة الأخطاء", "أخرى"],
-        "حروف الجر": ["دراسة الاستخدام", "حل تمارين", "كتابة أمثلة", "مراجعة الأخطاء", "أخرى"],
-        "الأخطاء الشائعة": ["تحليل الأخطاء", "تصحيح الجمل", "كتابة أمثلة صحيحة", "مراجعة متكررة", "أخرى"],
-        "تطبيق القواعد في الكتابة": ["كتابة فقرة", "تحديد الأخطاء", "تصحيح الكتابة", "إعادة الصياغة", "أخرى"],
-
-        "مفردات يومية": ["حفظ مفردات", "كتابة جمل", "مراجعة المفردات", "استخدام المفردات في حديث", "أخرى"],
-        "مفردات أكاديمية": ["حفظ مفردات أكاديمية", "قراءة أمثلة", "كتابة جمل أكاديمية", "مراجعة دورية", "أخرى"],
-        "مفردات الاختبارات": ["حفظ كلمات اختبار", "حل تمارين مفردات", "مراجعة الأخطاء", "اختبار قصير", "أخرى"],
-        "مرادفات ومتضادات": ["جمع مرادفات", "كتابة أمثلة", "تدريب مطابقة", "مراجعة", "أخرى"],
-        "تعبيرات شائعة": ["حفظ تعبيرات", "تطبيق في محادثة", "كتابة أمثلة", "مراجعة", "أخرى"],
-        "مفردات حسب الموضوع": ["جمع مفردات", "تصنيف الكلمات", "كتابة جمل", "اختبار ذاتي", "أخرى"],
-        "مراجعة المفردات": ["مراجعة بطاقات", "اختبار قصير", "تطبيق في جمل", "تكرار متباعد", "أخرى"],
-
-        "تصحيح مخارج الحروف": ["تسجيل صوتي", "مقارنة النطق", "تكرار الكلمات", "تصحيح الأخطاء", "أخرى"],
-        "النبر والتنغيم": ["الاستماع للنموذج", "تقليد المتحدث", "تسجيل صوتي", "مراجعة الأداء", "أخرى"],
-        "الطلاقة": ["تحدث حر", "تسجيل دقيقة واحدة", "تقليل التوقف", "مراجعة الطلاقة", "أخرى"],
-        "المحاكاة الصوتية": ["الاستماع للنموذج", "تقليد المتحدث", "التحدث مع التسجيل", "إعادة المحاولة", "أخرى"],
-        "تسجيل الصوت": ["تسجيل إجابة", "الاستماع للتسجيل", "تحديد الأخطاء", "إعادة التسجيل", "أخرى"],
-        "تقليد المتحدث": ["الاستماع", "تكرار الجمل", "مجاراة النطق الأصلي", "مراجعة التسجيل", "أخرى"],
-
-        "المقالات الأكاديمية": ["قراءة مقال أكاديمي", "تلخيص المقال", "استخراج المصطلحات", "تحليل الحجة", "أخرى"],
-        "الأبحاث": ["قراءة بحث", "تلخيص المنهجية", "تحليل النتائج", "توثيق المراجع", "أخرى"],
-        "العروض التقديمية": ["تحضير عرض أكاديمي", "تدريب الإلقاء", "تسجيل العرض", "مراجعة الأداء", "أخرى"],
-        "المناقشات الأكاديمية": ["تحضير نقاط نقاش", "عرض رأي أكاديمي", "الرد على الأسئلة", "مراجعة اللغة", "أخرى"],
-        "المفردات الأكاديمية": ["جمع مفردات أكاديمية", "كتابة أمثلة", "مراجعة المفردات", "استخدامها في كتابة", "أخرى"],
-        "الاستماع الأكاديمي": ["الاستماع لمحاضرة", "تدوين الملاحظات", "تلخيص المحتوى", "مراجعة المصطلحات", "أخرى"],
-
-        "IELTS": ["اختبار تجريبي", "تدريب بوقت محدد", "مراجعة الأخطاء", "تحليل النتيجة", "أخرى"],
-        "TOEFL": ["اختبار تجريبي", "تدريب بوقت محدد", "مراجعة الأخطاء", "تحليل النتيجة", "أخرى"],
-        "Duolingo": ["اختبار تجريبي", "تدريب سريع", "مراجعة الأخطاء", "تحليل النتيجة", "أخرى"]
-    };
-
-    SMART_TASK_DATA["Languages"].training = [
-        "قراءة نص",
-        "حل أسئلة فهم",
-        "تلخيص النص",
-        "تحليل النص",
-        "استخراج الأفكار الرئيسية",
-        "استخراج المفردات",
-        "تسجيل الملاحظات",
-        "مراجعة الأخطاء",
-        "الاستماع للمقطع",
-        "تدوين الملاحظات",
-        "الإجابة عن الأسئلة",
-        "التحدث الحر",
-        "تسجيل صوتي",
-        "محاكاة مقابلة",
-        "كتابة مسودة",
-        "تصحيح الكتابة",
-        "إعادة الصياغة",
-        "تحسين الأسلوب",
-        "أخرى"
-    ];
-}
-
-const previousUpdateTrainingOptionsV531 = typeof updateTrainingOptions === "function" ? updateTrainingOptions : null;
-updateTrainingOptions = function() {
-    if (selectedTaskType === "Languages") {
-        const selectedDetail = detailedTopicSelect ? detailedTopicSelect.value : "";
-        const byDetail = SMART_TASK_DATA["Languages"] && SMART_TASK_DATA["Languages"].trainingByDetail;
-        if (selectedDetail && byDetail && byDetail[selectedDetail]) {
-            setOptions(trainingTypeSelect, byDetail[selectedDetail]);
-            toggleOtherFields();
-            return;
-        }
-    }
-    if (previousUpdateTrainingOptionsV531) previousUpdateTrainingOptionsV531();
-};
-
-applyDeepLanguageTaskConfigV531();
-
-
-/* EduPath AI v5.3.3 Exam Content English Only */
-function examOptionEnglishOnlyV533() {
-    const categorySelect = document.getElementById("categorySelect");
-    if (!categorySelect || categorySelect.value !== "Exams & Certificates") return;
-
-    const examSelects = [
-        "topicSelect",
-        "skillSelect",
-        "detailedTopicSelect",
-        "trainingTypeSelect",
-        "cscaDetailedTopicSelect",
-        "cscaTrainingTypeSelect"
-    ];
-
-    examSelects.forEach(id => {
-        const select = document.getElementById(id);
-        if (!select) return;
-        Array.from(select.options).forEach(option => {
-            if (!option.value) return;
-            if (option.value === "Other" || option.value === "Other") {
-                option.value = "Other";
-                option.textContent = "Other";
-            } else {
-                option.textContent = option.value;
-            }
-        });
-    });
-
-    const customLabels = [
-        ["customTopicBox", "اكتب الاختبار"],
-        ["customSkillBox", "اكتب القسم الرئيسي"],
-        ["customDetailedTopicBox", "اكتب نوع المهمة أو نوع السؤال"],
-        ["customTrainingTypeBox", "اكتب نوع النشاط"]
-    ];
-    customLabels.forEach(([boxId, labelText]) => {
-        const box = document.getElementById(boxId);
-        if (!box) return;
-        const label = box.querySelector("label");
-        const input = box.querySelector("input");
-        if (label) label.textContent = labelText;
-        if (input) input.placeholder = "Write what you want";
-    });
-}
-
-function forceExamCertificatesEnglishV533() {
-    if (typeof SMART_TASK_DATA === "undefined" || !SMART_TASK_DATA["Exams & Certificates"]) return;
-
-    const exams = SMART_TASK_DATA["Exams & Certificates"];
-
-    exams.main = [
-        "IELTS",
-        "TOEFL",
-        "Duolingo English Test",
-        "HSK",
-        "HSKK",
-        "CSCA",
-        "SAT",
-        "ACT",
-        "GRE",
-        "GMAT",
-        "Other"
-    ];
-
-    exams.sub = {
-        "IELTS": ["Full Official Test","Mock Test","Listening","Reading","Writing","Speaking","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
-        "TOEFL": ["Full Official Test","Mock Test","Reading","Listening","Speaking","Writing","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
-        "Duolingo English Test": ["Full Test","Mock Test","Reading","Listening","Writing","Speaking","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
-        "Duolingo": ["Full Test","Mock Test","Reading","Listening","Writing","Speaking","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
-        "CSCA": ["Full Official Test","Mock Test","Mathematics","Physics","Chemistry","Chinese Language","English Language","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
-        "SAT": ["Full Digital SAT","Mock Test","Reading and Writing","Math","Bluebook Practice","Score Review","Weak Skill Training","Section Practice","Timed Practice","Error Review","Other"],
-        "ACT": ["Full ACT","Mock Test","English","Mathematics","Reading","Science","Writing","Score Review","Weak Skill Training","Section Practice","Timed Practice","Error Review","Other"],
-        "GRE": ["Full GRE","Mock Test","Analytical Writing","Verbal Reasoning","Quantitative Reasoning","Score Review","Weak Skill Training","Section Practice","Timed Practice","Error Review","Other"],
-        "GMAT": ["Full GMAT","Mock Test","Quantitative Reasoning","Verbal Reasoning","Data Insights","Score Review","Weak Skill Training","Section Practice","Timed Practice","Error Review","Other"],
-        "HSK": ["Full HSK Test","Mock Test","HSK Level 1","HSK Level 2","HSK Level 3","HSK Level 4","HSK Level 5","HSK Level 6","Listening","Reading","Writing","Vocabulary","Grammar","Characters","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
-        "HSKK": ["Full HSKK Test","Mock Test","HSKK Primary","HSKK Intermediate","HSKK Advanced","Speaking Practice","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
-        "Other": ["Full Official Test","Mock Test","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"]
-    };
-
-    exams.detail = {
-        "Full Official Test": ["Complete Test","Official Timing","Score Simulation","Answer Review","Other"],
-        "Full Digital SAT": ["Complete Digital SAT","Module 1 Practice","Module 2 Practice","Score Simulation","Answer Review","Other"],
-        "Full ACT": ["Complete ACT","English Section","Math Section","Reading Section","Science Section","Writing Section","Score Simulation","Other"],
-        "Full GRE": ["Complete GRE","Analytical Writing","Verbal Reasoning","Quantitative Reasoning","Score Simulation","Other"],
-        "Full GMAT": ["Complete GMAT","Quantitative Reasoning","Verbal Reasoning","Data Insights","Score Simulation","Other"],
-        "Full HSK Test": ["Complete HSK Test","Listening Section","Reading Section","Writing Section","Score Simulation","Other"],
-        "Full HSKK Test": ["Complete HSKK Test","Speaking Practice","Recording Practice","Score Simulation","Other"],
-        "Full Test": ["Complete Test","Official Timing","Score Simulation","Answer Review","Other"],
-        "Mock Test": ["Full Mock Test","Section Mock","Timed Mock","Score Review","Weakness Analysis","Other"],
-        "Score Review": ["Score Analysis","Band Analysis","Weak Skill Identification","Progress Tracking","Error Pattern Review","Other"],
-        "Weak Skill Training": ["Weakness Analysis","Targeted Practice","Strategy Practice","Error Review","Progress Check","Other"],
-        "Section Practice": ["Single Section Practice","Mixed Section Practice","Timed Section","Error Review","Other"],
-        "Timed Practice": ["Timed Drill","Mini Section","Speed Training","Time Management","Other"],
-        "Error Review": ["Mistake Analysis","Error Log","Correction Practice","Strategy Review","Other"],
-
-        "Listening": ["Listening Section","Multiple Choice","Matching","Plan Labelling","Map Labelling","Diagram Labelling","Form Completion","Note Completion","Table Completion","Flow Chart Completion","Summary Completion","Sentence Completion","Short Answer Questions","Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk","Listen and Type","Interactive Listening","Dialogue Listening","Short Passage Listening","Other"],
-        "Reading": ["Reading Section","Matching Headings","Matching Information","Matching Features","Matching Sentence Endings","True False Not Given","Yes No Not Given","Multiple Choice","Sentence Completion","Summary Completion","Note Completion","Table Completion","Flow Chart Completion","Diagram Labelling","Short Answer Questions","Read in Daily Life","Read an Academic Passage","Complete the Words","Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","Reading Comprehension","Other"],
-        "Writing": ["Task 1","Task 2","Academic Graph","Table","Chart","Process Diagram","Map","Opinion Essay","Discussion Essay","Problem Solution Essay","Advantages Disadvantages Essay","Double Question Essay","Build a Sentence","Write an Email","Write for an Academic Discussion","Write About the Photo","Writing Sample","Interactive Writing","Argument Essay","Perspective Analysis","Idea Development","Organization","Language Use","Other"],
-        "Speaking": ["Part 1","Part 2","Part 3","Speak About the Photo","Read, Then Speak","Speaking Sample","Interactive Speaking","Listen and Repeat","Take an Interview","Cue Card Practice","Answer Questions","Describe Picture","Express Opinion","Other"],
-
-        "Reading and Writing": ["Information and Ideas","Craft and Structure","Expression of Ideas","Standard English Conventions","Mixed Reading and Writing Practice","Module 1 Practice","Module 2 Practice","Other"],
-        "Information and Ideas": ["Central Ideas and Details","Command of Evidence","Textual Evidence","Quantitative Evidence","Inferences","Information from Tables and Graphs","Other"],
-        "Craft and Structure": ["Words in Context","Text Structure and Purpose","Cross-Text Connections","Author's Purpose","Vocabulary in Context","Other"],
-        "Expression of Ideas": ["Transitions","Rhetorical Synthesis","Logical Flow","Sentence Placement","Effective Language Use","Other"],
-        "Standard English Conventions": ["Boundaries","Form, Structure, and Sense","Punctuation","Verb Form","Subject-Verb Agreement","Pronoun Clarity","Sentence Structure","Other"],
-
-        "Math": ["Algebra","Advanced Math","Problem-Solving and Data Analysis","Geometry and Trigonometry","Calculator Practice","Desmos Practice","Student-Produced Response","Module 1 Practice","Module 2 Practice","Other"],
-        "Algebra": ["Linear Equations","Linear Inequalities","Systems of Linear Equations","Linear Functions","Interpreting Linear Models","Quadratic Equations","Functions","Exponents","Polynomials","Systems","Other"],
-        "Advanced Math": ["Quadratic Equations","Exponential Functions","Polynomial Expressions","Rational Expressions","Nonlinear Functions","Function Graphs","Other"],
-        "Problem-Solving and Data Analysis": ["Ratios","Percentages","Rates","Proportions","Units","Probability","Statistics","Data Interpretation","Tables and Graphs","Other"],
-        "Geometry and Trigonometry": ["Area and Volume","Lines and Angles","Triangles","Circles","Right Triangle Trigonometry","Coordinate Geometry","Other"],
-
-        "English": ["Production of Writing","Knowledge of Language","Conventions of Standard English","Passage Editing","Other"],
-        "Production of Writing": ["Organization","Topic Development","Unity","Cohesion","Style","Tone","Word Choice","Other"],
-        "Knowledge of Language": ["Style","Tone","Word Choice","Effective Language Use","Other"],
-        "Conventions of Standard English": ["Sentence Structure","Punctuation","Grammar and Usage","Verb Tense","Subject-Verb Agreement","Pronouns","Modifiers","Other"],
-        "Passage Editing": ["Organization","Topic Development","Unity","Cohesion","Style","Tone","Word Choice","Sentence Structure","Punctuation","Grammar and Usage","Other"],
-        "Mathematics": ["Number and Quantity","Algebra","Functions","Geometry","Statistics and Probability","Modeling","Other"],
-        "Science": ["Data Representation","Research Summaries","Conflicting Viewpoints","Scientific Reasoning","Graph Interpretation","Experimental Design","Other"],
-        "Data Representation": ["Charts","Tables","Graphs","Data Interpretation","Other"],
-        "Research Summaries": ["Experiment Review","Research Design","Hypothesis","Results","Other"],
-        "Conflicting Viewpoints": ["Viewpoint Comparison","Evidence Review","Scientific Reasoning","Other"],
-
-        "Analytical Writing": ["Analyze an Issue","Essay Planning","Argument Development","Essay Structure","Other"],
-        "Verbal Reasoning": ["Reading Comprehension","Text Completion","Sentence Equivalence","Vocabulary","Critical Reasoning","Other"],
-        "Reading Comprehension": ["Main Idea","Inference","Author's Purpose","Structure","Detail Questions","Function Questions","Critical Reasoning","Short Passage","Long Passage","Other"],
-        "Text Completion": ["One-Blank Text Completion","Two-Blank Text Completion","Three-Blank Text Completion","Context Clues","Sentence Logic","Other"],
-        "Sentence Equivalence": ["Synonym Pair","Vocabulary Meaning","Sentence Logic","Contrast and Support Clues","Other"],
-        "Quantitative Reasoning": ["Arithmetic","Algebra","Geometry","Data Analysis","Quantitative Comparison","Problem Solving","Numeric Entry","Data Interpretation","Other"],
-        "Arithmetic": ["Integers","Fractions","Decimals","Ratios","Percentages","Exponents","Other"],
-
-        "Data Insights": ["Data Sufficiency","Multi-Source Reasoning","Table Analysis","Graphics Interpretation","Two-Part Analysis","Other"],
-        "Problem Solving": ["Percentages","Ratios","Rates","Work Problems","Linear Equations","Quadratic Equations","Inequalities","Exponents","Roots","Number Properties","Other"],
-        "Critical Reasoning": ["Main Idea","Inference","Strengthen Argument","Weaken Argument","Assumption","Evaluate Argument","Conclusion","Boldface","Argument Structure","Other"],
-        "Data Sufficiency": ["Charts","Tables","Graphs","Data Comparison","Business Context","Quantitative Reasoning","Verbal Data Reasoning","Decision Making","Other"],
-        "Multi-Source Reasoning": ["Charts","Tables","Graphs","Business Context","Decision Making","Other"],
-        "Table Analysis": ["Charts","Tables","Graphs","Data Comparison","Business Context","Decision Making","Other"],
-        "Graphics Interpretation": ["Charts","Tables","Graphs","Data Comparison","Other"],
-        "Two-Part Analysis": ["Quantitative Reasoning","Verbal Data Reasoning","Decision Making","Other"],
-
-        "HSK Level 1": ["Word Recognition","Sentence Understanding","Dialogue Listening","Character Recognition","Pinyin Review","Other"],
-        "HSK Level 2": ["Word Recognition","Sentence Understanding","Dialogue Listening","Fill in the Blank","Multiple Choice","Other"],
-        "HSK Level 3": ["Dialogue Listening","Short Passage Listening","Fill in the Blank","Multiple Choice","Sentence Ordering","Other"],
-        "HSK Level 4": ["Short Passage Listening","Reading Comprehension","Fill in the Blank","Sentence Ordering","Short Writing","Other"],
-        "HSK Level 5": ["Short Passage Listening","Reading Comprehension","Fill in the Blank","Short Writing","Essay Writing","Other"],
-        "HSK Level 6": ["Advanced Listening","Advanced Reading","Summary Writing","Essay Writing","Other"],
-        "Vocabulary": ["Vocabulary Review","Word Recognition","Vocabulary Memorization","Context Practice","Other"],
-        "Grammar": ["Grammar Review","Sentence Building","Error Review","Other"],
-        "Characters": ["Character Recognition","Character Writing","Pinyin Review","Stroke Order","Other"],
-        "HSKK Primary": ["Listen and Repeat","Answer Questions","Read Aloud","Other"],
-        "HSKK Intermediate": ["Listen and Repeat","Read Aloud","Answer Questions","Describe Picture","Other"],
-        "HSKK Advanced": ["Listen and Repeat","Read Aloud","Answer Questions","Express Opinion","Other"],
-        "Speaking Practice": ["Recording Practice","Pronunciation Review","Fluency Practice","Mock Speaking","Answer Review","Other"],
-
-        "CSCA": ["Mathematics","Physics","Chemistry","Chinese Language","English Language","Mock Test","Other"],
-        "Chinese Language": ["Vocabulary","Grammar","Characters","Reading","Listening","Writing","Other"],
-        "English Language": ["Reading","Listening","Speaking","Writing","Vocabulary","Grammar","Other"],
-        "Physics": ["Mechanics","Electricity","Waves","Thermodynamics","Modern Physics","Other"],
-        "Chemistry": ["Organic Chemistry","Inorganic Chemistry","Chemical Equations","Stoichiometry","Atomic Structure","Other"],
-        "Other": ["General Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"]
-    };
-
-    exams.trainingByDetail = {
-        "Listening Section": ["Practice","Timed Practice","Error Review","Mock Listening","Weakness Analysis","Strategy Training","Other"],
-        "Multiple Choice": ["Practice","Timed Practice","Question Review","Mistake Analysis","Strategy Practice","Other"],
-        "Matching": ["Practice","Timed Practice","Strategy Training","Error Review","Other"],
-        "Plan Labelling": ["Practice","Timed Practice","Map Strategy","Error Review","Other"],
-        "Map Labelling": ["Practice","Timed Practice","Map Strategy","Error Review","Other"],
-        "Diagram Labelling": ["Practice","Timed Practice","Visual Information Review","Error Review","Other"],
-        "Form Completion": ["Practice","Timed Practice","Spelling Review","Error Review","Other"],
-        "Note Completion": ["Practice","Timed Practice","Note Prediction","Error Review","Other"],
-        "Table Completion": ["Practice","Timed Practice","Data Matching","Error Review","Other"],
-        "Flow Chart Completion": ["Practice","Timed Practice","Process Tracking","Error Review","Other"],
-        "Summary Completion": ["Practice","Timed Practice","Keyword Strategy","Error Review","Other"],
-        "Sentence Completion": ["Practice","Timed Practice","Grammar Accuracy","Error Review","Other"],
-        "Short Answer Questions": ["Practice","Timed Practice","Answer Precision","Error Review","Other"],
-
-        "Matching Headings": ["Practice","Timed Practice","Review Mistakes","Strategy Training","Reading Speed Training","Other"],
-        "Matching Information": ["Practice","Timed Practice","Strategy Training","Evidence Review","Other"],
-        "Matching Features": ["Practice","Timed Practice","Evidence Review","Error Review","Other"],
-        "Matching Sentence Endings": ["Practice","Timed Practice","Sentence Logic Review","Error Review","Other"],
-        "True False Not Given": ["Practice","Timed Practice","Statement Analysis","Trap Review","Error Review","Other"],
-        "Yes No Not Given": ["Practice","Timed Practice","Author Opinion Analysis","Trap Review","Error Review","Other"],
-        "Vocabulary in Context": ["Vocabulary Analysis","Practice","Timed Practice","Review Mistakes","Other"],
-
-        "Task 1": ["Write Draft","Timed Writing","Feedback Review","Band Analysis","Idea Generation","Essay Improvement","Other"],
-        "Task 2": ["Write Draft","Timed Writing","Feedback Review","Band Analysis","Idea Generation","Essay Improvement","Other"],
-        "Academic Graph": ["Graph Analysis","Write Draft","Timed Writing","Band Analysis","Feedback Review","Other"],
-        "Table": ["Data Selection","Write Draft","Timed Writing","Band Analysis","Other"],
-        "Chart": ["Chart Analysis","Write Draft","Timed Writing","Feedback Review","Other"],
-        "Process Diagram": ["Process Description","Write Draft","Timed Writing","Feedback Review","Other"],
-        "Map": ["Map Description","Write Draft","Timed Writing","Feedback Review","Other"],
-        "Opinion Essay": ["Idea Generation","Write Draft","Timed Writing","Essay Improvement","Band Analysis","Other"],
-        "Discussion Essay": ["Idea Generation","Plan Arguments","Write Draft","Feedback Review","Other"],
-        "Problem Solution Essay": ["Problem Analysis","Solution Planning","Write Draft","Feedback Review","Other"],
-        "Advantages Disadvantages Essay": ["Idea Generation","Plan Arguments","Write Draft","Essay Improvement","Other"],
-        "Double Question Essay": ["Question Analysis","Plan Answer","Write Draft","Feedback Review","Other"],
-
-        "Part 1": ["Answer Practice","Mock Speaking","Fluency Training","Pronunciation Review","Vocabulary Expansion","Band Analysis","Other"],
-        "Part 2": ["Cue Card Practice","Recording Practice","Fluency Training","Vocabulary Expansion","Band Analysis","Other"],
-        "Part 3": ["Answer Practice","Argument Development","Mock Speaking","Band Analysis","Other"],
-
-        "Read in Daily Life": ["Practice","Timed Practice","Error Review","Speed Training","Other"],
-        "Read an Academic Passage": ["Practice","Timed Practice","Error Review","Speed Training","Other"],
-        "Complete the Words": ["Practice","Timed Practice","Vocabulary Training","Error Review","Other"],
-        "Listen and Choose a Response": ["Practice","Note Taking","Answer Questions","Review Mistakes","Other"],
-        "Listen to a Conversation": ["Practice","Note Taking","Answer Questions","Review Mistakes","Other"],
-        "Listen to an Announcement": ["Practice","Note Taking","Answer Questions","Review Mistakes","Other"],
-        "Listen to an Academic Talk": ["Practice","Note Taking","Answer Questions","Review Mistakes","Other"],
-        "Listen and Repeat": ["Recording Practice","Pronunciation Analysis","Fluency Training","Mock Speaking","Other"],
-        "Take an Interview": ["Recording Practice","Pronunciation Analysis","Fluency Training","Mock Speaking","Other"],
-        "Build a Sentence": ["Draft Writing","Timed Writing","Grammar Review","Feedback Review","Other"],
-        "Write an Email": ["Draft Writing","Timed Writing","Grammar Review","Feedback Review","Other"],
-        "Write for an Academic Discussion": ["Draft Writing","Timed Writing","Grammar Review","Feedback Review","Other"],
-
-        "Read and Select": ["Practice","Timed Practice","Vocabulary Training","Review Mistakes","Other"],
-        "Fill in the Blanks": ["Practice","Timed Practice","Vocabulary Training","Review Mistakes","Other"],
-        "Read and Complete": ["Practice","Timed Practice","Vocabulary Training","Review Mistakes","Other"],
-        "Interactive Reading": ["Practice","Timed Practice","Vocabulary Training","Review Mistakes","Other"],
-        "Listen and Type": ["Practice","Dictation","Listening Accuracy","Review Mistakes","Other"],
-        "Interactive Listening": ["Practice","Dictation","Listening Accuracy","Review Mistakes","Other"],
-        "Write About the Photo": ["Draft Writing","Timed Writing","Idea Generation","Feedback Review","Other"],
-        "Writing Sample": ["Draft Writing","Timed Writing","Idea Generation","Feedback Review","Other"],
-        "Interactive Writing": ["Draft Writing","Timed Writing","Idea Generation","Feedback Review","Other"],
-        "Speak About the Photo": ["Recording Practice","Pronunciation Practice","Fluency Practice","Mock Response","Other"],
-        "Read, Then Speak": ["Recording Practice","Pronunciation Practice","Fluency Practice","Mock Response","Other"],
-        "Speaking Sample": ["Recording Practice","Pronunciation Practice","Fluency Practice","Mock Response","Other"],
-        "Interactive Speaking": ["Recording Practice","Pronunciation Practice","Fluency Practice","Mock Response","Other"],
-
-        "Information and Ideas": ["Practice","Timed Practice","Question Review","Mistake Analysis","Strategy Practice","Mini Mock Section","Other"],
-        "Craft and Structure": ["Practice","Timed Practice","Vocabulary Review","Question Review","Strategy Practice","Other"],
-        "Expression of Ideas": ["Practice","Timed Practice","Grammar Review","Question Review","Strategy Practice","Other"],
-        "Standard English Conventions": ["Practice","Timed Practice","Grammar Review","Error Review","Mini Mock Section","Other"],
-        "Algebra": ["Solve Problems","Timed Practice","Formula Review","Desmos Practice","Error Review","Concept Review","Weak Skill Training","Other"],
-        "Advanced Math": ["Solve Problems","Timed Practice","Formula Review","Desmos Practice","Error Review","Concept Review","Other"],
-        "Problem-Solving and Data Analysis": ["Solve Problems","Timed Practice","Data Interpretation","Error Review","Concept Review","Other"],
-        "Geometry and Trigonometry": ["Solve Problems","Timed Practice","Formula Review","Error Review","Concept Review","Other"],
-
-        "Production of Writing": ["Passage Practice","Timed Practice","Editing Practice","Error Review","Strategy Practice","Other"],
-        "Knowledge of Language": ["Passage Practice","Timed Practice","Grammar Review","Error Review","Other"],
-        "Conventions of Standard English": ["Passage Practice","Timed Practice","Grammar Review","Editing Practice","Error Review","Other"],
-        "Passage Editing": ["Passage Practice","Timed Practice","Editing Practice","Error Review","Other"],
-        "Mathematics": ["Solve Problems","Timed Practice","Formula Review","Calculator Strategy","Error Review","Weak Skill Training","Mini Math Test","Other"],
-        "Reading": ["Passage Reading","Timed Passage","Answer Questions","Strategy Practice","Evidence Review","Speed Training","Weak Skill Training","Other"],
-        "Science": ["Graph Analysis","Passage Practice","Timed Practice","Data Interpretation","Experiment Review","Error Review","Weak Skill Training","Other"],
-        "Writing": ["Write Draft","Timed Essay","Outline Practice","Feedback Review","Essay Improvement","Other"],
-
-        "Analytical Writing": ["Write Draft","Timed Writing","Outline Practice","Feedback Review","Essay Improvement","Vocabulary Improvement","Other"],
-        "Reading Comprehension": ["Practice","Timed Practice","Vocabulary Review","Passage Review","Error Analysis","Strategy Practice","Mini Verbal Section","Other"],
-        "Text Completion": ["Practice","Timed Practice","Vocabulary Review","Error Analysis","Strategy Practice","Other"],
-        "Sentence Equivalence": ["Practice","Timed Practice","Vocabulary Review","Error Analysis","Strategy Practice","Other"],
-        "Quantitative Reasoning": ["Solve Problems","Timed Practice","Formula Review","Concept Review","Calculator Strategy","Error Review","Data Interpretation Practice","Weak Skill Training","Mini Quant Section","Other"],
-
-        "Problem Solving": ["Solve Problems","Timed Practice","Concept Review","Error Review","Strategy Practice","Mini Quant Section","Other"],
-        "Critical Reasoning": ["Passage Practice","Argument Analysis","Timed Practice","Error Review","Strategy Practice","Weak Skill Training","Mini Verbal Section","Other"],
-        "Data Sufficiency": ["Practice","Timed Practice","Data Analysis","Calculator Practice","Error Review","Strategy Practice","Weak Skill Training","Mini Data Insights Section","Other"],
-        "Multi-Source Reasoning": ["Practice","Timed Practice","Data Analysis","Error Review","Strategy Practice","Weak Skill Training","Other"],
-        "Table Analysis": ["Practice","Timed Practice","Data Analysis","Error Review","Strategy Practice","Weak Skill Training","Other"],
-        "Graphics Interpretation": ["Practice","Timed Practice","Data Analysis","Error Review","Strategy Practice","Weak Skill Training","Other"],
-        "Two-Part Analysis": ["Practice","Timed Practice","Data Analysis","Error Review","Strategy Practice","Weak Skill Training","Other"],
-
-        "Listening Practice": ["Practice","Timed Practice","Dictation","Mock Section","Error Review","Weak Skill Training","Other"],
-        "Reading Practice": ["Practice","Timed Practice","Mock Section","Error Review","Weak Skill Training","Other"],
-        "Writing Practice": ["Practice","Timed Practice","Character Writing","Grammar Review","Error Review","Other"],
-        "Vocabulary Review": ["Vocabulary Memorization","Practice","Timed Practice","Error Review","Other"],
-        "Grammar Review": ["Practice","Timed Practice","Error Review","Other"],
-        "Character Recognition": ["Practice","Character Writing","Timed Practice","Error Review","Other"],
-        "Pinyin Review": ["Practice","Dictation","Pronunciation Review","Other"],
-        "Sentence Building": ["Practice","Grammar Review","Error Review","Other"],
-        "Translation Practice": ["Practice","Error Review","Other"],
-        "Read Aloud": ["Recording Practice","Pronunciation Review","Fluency Practice","Answer Review","Other"],
-        "Answer Questions": ["Recording Practice","Pronunciation Review","Fluency Practice","Answer Review","Other"],
-        "Describe Picture": ["Recording Practice","Pronunciation Review","Fluency Practice","Answer Review","Other"],
-        "Express Opinion": ["Recording Practice","Pronunciation Review","Fluency Practice","Mock Speaking","Other"],
-
-        "Complete Test": ["Practice","Timed Practice","Score Review","Error Review","Weak Skill Training","Other"],
-        "Official Timing": ["Timed Practice","Time Management","Score Review","Other"],
-        "Score Simulation": ["Score Review","Weakness Analysis","Progress Tracking","Other"],
-        "Answer Review": ["Error Review","Mistake Analysis","Strategy Practice","Other"],
-        "Other": ["Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"]
-    };
-
-    exams.training = ["Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Strategy Practice","Other"];
-}
-
-const previousUpdateTrainingOptionsV533 = typeof updateTrainingOptions === "function" ? updateTrainingOptions : null;
-updateTrainingOptions = function() {
-    if (selectedTaskType === "Exams & Certificates") {
-        const selectedDetail = detailedTopicSelect ? detailedTopicSelect.value : "";
-        const byDetail = SMART_TASK_DATA["Exams & Certificates"] && SMART_TASK_DATA["Exams & Certificates"].trainingByDetail;
-        if (selectedDetail && byDetail && byDetail[selectedDetail]) {
-            setOptions(trainingTypeSelect, byDetail[selectedDetail]);
-            setTimeout(examOptionEnglishOnlyV533, 0);
-            toggleOtherFields();
-            return;
-        }
-    }
-    if (previousUpdateTrainingOptionsV533) previousUpdateTrainingOptionsV533();
-    setTimeout(examOptionEnglishOnlyV533, 0);
-};
-
-forceExamCertificatesEnglishV533();
-
-document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(examOptionEnglishOnlyV533, 100);
-    ["categorySelect", "topicSelect", "skillSelect", "detailedTopicSelect", "trainingTypeSelect"].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener("change", () => setTimeout(examOptionEnglishOnlyV533, 30));
-    });
-    document.addEventListener("click", event => {
-        if (event.target.closest(".task-type-card")) {
-            setTimeout(examOptionEnglishOnlyV533, 80);
+            setTimeout(forceTaskArabicLabelsV529, 50);
         }
     });
 });
