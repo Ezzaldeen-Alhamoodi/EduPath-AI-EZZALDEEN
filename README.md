@@ -1905,3 +1905,32 @@ Dashboard-only layout fix.
   - بعد كل صلاة
   - قبل النوم
 - The custom repeat text is stored in the existing repeat_days field to avoid database migration.
+
+
+## v5.4.0 Native Arabic Tasks Source
+
+### Scope
+- Tasks page only.
+- Converted visible adaptive task content to Arabic-native source data.
+- This is not a runtime translation layer.
+- The adaptive task options are Arabic in the task configuration itself for:
+  - المرحلة الجامعية
+  - اللغات
+  - البرمجة والتكنولوجيا
+  - الذكاء الاصطناعي
+  - الرياضيات
+  - المنح الدراسية
+  - الحياة اليومية
+  - المشاريع
+  - القراءة والبحث
+  - عام
+- Quran Memorization and Secondary School were preserved.
+- Exams & Certificates internal content remains English as required.
+- Task flash messages are now Arabic:
+  - save
+  - update
+  - complete
+  - pending
+  - delete
+  - task limit
+- No dashboard, goals, progress, or smart linking changes.
