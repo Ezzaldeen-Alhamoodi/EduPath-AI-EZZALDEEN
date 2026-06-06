@@ -2253,3 +2253,34 @@ Dashboard-only layout fix.
   - Large screens: up to 3 cards per row.
 - Reduced unnecessary padding, oversized icons, and excessive card height.
 - Unified button sizing, spacing, borders, and visual rhythm.
+
+
+## v5.5.4 Tasks Desktop Layout Polish
+
+### Scope
+- Desktop-focused design update for the Tasks page.
+- No function changes.
+- No form field changes.
+- No task data changes except task-type visual icons.
+- Mobile layout preserved.
+
+### Desktop layout
+- New order:
+  - Hero Section
+  - Task Types
+  - Add Task Form
+  - Current Tasks
+- Current tasks are now below the add-task form and use full page width.
+- Current tasks grid:
+  - Medium desktop: 2 cards per row.
+  - Large desktop: 3 cards per row.
+  - Very large screens: up to 4 cards per row.
+
+### Visual updates
+- Removed redundant inner heading:
+  - ١. اختر نوع المهمة
+  - explanatory text below it
+- Replaced letter-circle icons with modern emoji icons:
+  - 📖 🎓 🏫 🌍 💻 🤖 📐 🎯 📝 🏠 🚀 📚 ⚙️ ✨
+- Task-type cards now use a blue visual identity derived from the hero section.
+- Improved spacing, alignment, and desktop use of horizontal space.
