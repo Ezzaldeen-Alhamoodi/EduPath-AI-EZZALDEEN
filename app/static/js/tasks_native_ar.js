@@ -1,4 +1,4 @@
-window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.4.8-repeat-reading-research-fix";
+window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.4.9-smart-exam-data";
 window.EDUPATH_TASKS_AR_DATA = {
   "حفظ القرآن الكريم": {
     icon: "ق",
@@ -147,31 +147,10 @@ window.EDUPATH_TASKS_AR_DATA = {
 
   "الاختبارات والشهادات": {
     icon: "خ",
-    main: ["IELTS","TOEFL","Duolingo","HSK","CSCA","SAT","ACT","GRE","GMAT","أخرى"],
-    sub: {
-      "IELTS": ["Mock Test","Listening","Reading","Writing","Speaking","Timed Practice","أخرى"],
-      "TOEFL": ["Mock Test","Reading","Listening","Speaking","Writing","Timed Practice","أخرى"],
-      "Duolingo": ["Mock Test","Reading","Listening","Writing","Speaking","Timed Practice","أخرى"],
-      "HSK": ["Mock Test","Listening","Reading","Writing","Vocabulary","Grammar","Timed Practice","أخرى"],
-      "CSCA": ["Mock Test","Mathematics","Physics","Chemistry","English","Timed Practice","أخرى"],
-      "SAT": ["Full Digital SAT","Mock Test","Reading and Writing","Math","Timed Practice","أخرى"],
-      "ACT": ["Full ACT","Mock Test","English","Mathematics","Reading","Science","Writing","Timed Practice","أخرى"],
-      "GRE": ["Full GRE","Mock Test","Analytical Writing","Verbal Reasoning","Quantitative Reasoning","Timed Practice","أخرى"],
-      "GMAT": ["Full GMAT","Mock Test","Quantitative Reasoning","Verbal Reasoning","Data Insights","Timed Practice","أخرى"],
-      "أخرى": ["Mock Test","Timed Practice","Practice","أخرى"]
-    },
-    detail: {
-      "Listening": ["Multiple Choice","Matching","Plan Labelling","Map Labelling","Diagram Labelling","Form Completion","Note Completion","Table Completion","Flow Chart Completion","Summary Completion","Sentence Completion","Short Answer Questions","Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk","Listen and Type","Interactive Listening","أخرى"],
-      "Reading": ["Matching Headings","Matching Information","Matching Features","Matching Sentence Endings","True False Not Given","Yes No Not Given","Multiple Choice","Sentence Completion","Summary Completion","Note Completion","Table Completion","Flow Chart Completion","Diagram Labelling","Short Answer Questions","Read in  Life","Read an Academic Passage","Complete the Words","Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","أخرى"],
-      "Writing": ["Task 1","Task 2","Academic Graph","Table","Chart","Process Diagram","Map","Opinion Essay","Discussion Essay","Problem Solution Essay","Advantages Disadvantages Essay","Double Question Essay","Build a Sentence","Write an Email","Write for an Academic Discussion","Write About the Photo","Writing Sample","Interactive Writing","أخرى"],
-      "Speaking": ["Part 1","Part 2","Part 3","Speak About the Photo","Read, Then Speak","Speaking Sample","Interactive Speaking","Listen and Repeat","Take an Interview","Cue Card Practice","أخرى"],
-      "Mathematics": ["Sets and Variables","Functions","Geometry and Algebra","Probability and Statistics"],
-      "Physics": ["Mechanics","Electromagnetism","Thermodynamics","Optics","Modern Physics"],
-      "Chemistry": ["Basic Chemical Calculations","Properties and Reactions of Matter","Chemical Theories and Laws","Chemical Experiments and Applications"],
-      "English": ["Reading","Listening","Writing","Vocabulary","Grammar"],
-      "أخرى": ["أخرى"]
-    },
-    training: ["Practice","Timed Practice","Mock Test","Error Review","Weakness Training","Final Review","أخرى"]
+    main: ["IELTS","TOEFL","Duolingo","CSCA","SAT","ACT","GRE","GMAT","HSK","HSKK"],
+    sub: {"أخرى": ["Full Official Test","Mock Test","Section Practice","Weak Skill Training","Score Review"]},
+    detail: {"أخرى": ["Section Practice"]},
+    training: ["Practice","Timed Practice","Error Review","Weak Skill Training","Score Review"]
   },
 
   "الحياة اليومية": {
@@ -255,6 +234,394 @@ window.EDUPATH_TASKS_AR_DATA = {
 /* EduPath AI v5.4.6 Isolated Native Arabic Tasks Engine
    This file is the only frontend engine for the Tasks form.
    It intentionally ignores old task translation layers in app.js. */
+
+
+window.SMART_EXAM_DATA = {
+  "IELTS": {
+    sections: ["Full Official Test","Mock Test","Listening","Reading","Writing","Speaking"],
+    tasks: {
+      "Full Official Test": ["Academic Test","General Training Test"],
+      "Mock Test": ["Full Mock Test","Listening Mock","Reading Mock","Writing Mock","Speaking Mock"],
+      "Listening": ["Listening Section"],
+      "Reading": ["Reading Section"],
+      "Writing": ["Task 1","Task 2"],
+      "Speaking": ["Part 1","Part 2","Part 3"]
+    },
+    questions: {
+      "Academic Test": ["Full Test Simulation"],
+      "General Training Test": ["Full Test Simulation"],
+      "Full Mock Test": ["Full Test Simulation"],
+      "Listening Mock": ["Full Listening Test"],
+      "Reading Mock": ["Full Reading Test"],
+      "Writing Mock": ["Task 1 and Task 2"],
+      "Speaking Mock": ["Full Speaking Test"],
+      "Listening Section": ["Multiple Choice","Matching","Plan Labelling","Map Labelling","Diagram Labelling","Form Completion","Note Completion","Table Completion","Flow Chart Completion","Summary Completion","Sentence Completion","Short Answer Questions"],
+      "Reading Section": ["Matching Headings","Matching Information","Matching Features","Matching Sentence Endings","True False Not Given","Yes No Not Given","Multiple Choice","Sentence Completion","Summary Completion","Note Completion","Table Completion","Flow Chart Completion","Diagram Labelling","Short Answer Questions"],
+      "Task 1": ["Academic Graph","Table","Chart","Process Diagram","Map"],
+      "Task 2": ["Opinion Essay","Discussion Essay","Problem Solution Essay","Advantages Disadvantages Essay","Double Question Essay"],
+      "Part 1": ["Answer Practice"],
+      "Part 2": ["Cue Card Practice"],
+      "Part 3": ["Discussion Practice"]
+    },
+    activities: {
+      "Listening Section": ["Practice","Timed Practice","Error Review","Mock Listening","Weakness Analysis","Strategy Training"],
+      "Reading Section": ["Practice","Timed Practice","Review Mistakes","Strategy Training","Vocabulary Analysis","Reading Speed Training"],
+      "Task 1": ["Write Draft","Timed Writing","Feedback Review","Band Analysis","Idea Generation","Essay Improvement"],
+      "Task 2": ["Write Draft","Timed Writing","Feedback Review","Band Analysis","Idea Generation","Essay Improvement"],
+      "Part 1": ["Answer Practice","Mock Speaking","Fluency Training","Pronunciation Review","Vocabulary Expansion","Band Analysis"],
+      "Part 2": ["Answer Practice","Mock Speaking","Cue Card Practice","Fluency Training","Pronunciation Review","Vocabulary Expansion","Band Analysis"],
+      "Part 3": ["Answer Practice","Mock Speaking","Fluency Training","Pronunciation Review","Vocabulary Expansion","Band Analysis"],
+      "Full Official Test": ["Full Test Simulation","Timed Practice","Score Review","Weak Skill Training"],
+      "Mock Test": ["Mock Test","Timed Practice","Error Review","Score Review","Weak Skill Training"]
+    }
+  },
+
+  "TOEFL": {
+    sections: ["Full Official Test","Mock Test","Reading","Listening","Speaking","Writing"],
+    tasks: {
+      "Full Official Test": ["Full TOEFL Test"],
+      "Mock Test": ["Full Mock Test","Section Mock"],
+      "Reading": ["Read in Daily Life","Read an Academic Passage","Complete the Words"],
+      "Listening": ["Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk"],
+      "Speaking": ["Listen and Repeat","Take an Interview"],
+      "Writing": ["Build a Sentence","Write an Email","Write for an Academic Discussion"]
+    },
+    questions: {
+      "Read in Daily Life": ["Daily Text Questions"],
+      "Read an Academic Passage": ["Academic Passage Questions"],
+      "Complete the Words": ["Word Completion"],
+      "Listen and Choose a Response": ["Response Selection"],
+      "Listen to a Conversation": ["Conversation Questions"],
+      "Listen to an Announcement": ["Announcement Questions"],
+      "Listen to an Academic Talk": ["Academic Talk Questions"],
+      "Listen and Repeat": ["Repeat Sentence"],
+      "Take an Interview": ["Interview Response"],
+      "Build a Sentence": ["Sentence Building"],
+      "Write an Email": ["Email Writing"],
+      "Write for an Academic Discussion": ["Academic Discussion Response"],
+      "Full TOEFL Test": ["Full Test Simulation"],
+      "Full Mock Test": ["Full Test Simulation"],
+      "Section Mock": ["Section Practice"]
+    },
+    activities: {
+      "Reading": ["Practice","Timed Practice","Error Review","Speed Training"],
+      "Listening": ["Practice","Note Taking","Answer Questions","Review Mistakes"],
+      "Speaking": ["Recording Practice","Pronunciation Analysis","Fluency Training","Mock Speaking"],
+      "Writing": ["Draft Writing","Timed Writing","Grammar Review","Feedback Review"],
+      "Full Official Test": ["Full Test Simulation","Timed Practice","Score Review","Weak Skill Training"],
+      "Mock Test": ["Mock Test","Timed Practice","Error Review","Score Review","Weak Skill Training"]
+    }
+  },
+
+  "Duolingo": {
+    sections: ["Full Test","Mock Test","Reading","Listening","Writing","Speaking"],
+    tasks: {
+      "Full Test": ["Full DET Test"],
+      "Mock Test": ["Full Mock Test","Section Mock"],
+      "Reading": ["Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading"],
+      "Listening": ["Listen and Type","Interactive Listening"],
+      "Writing": ["Write About the Photo","Writing Sample","Interactive Writing"],
+      "Speaking": ["Speak About the Photo","Read, Then Speak","Speaking Sample","Interactive Speaking"]
+    },
+    questions: {
+      "Read and Select": ["Real Word Selection"],
+      "Fill in the Blanks": ["Missing Word"],
+      "Read and Complete": ["Text Completion"],
+      "Interactive Reading": ["Interactive Reading Set"],
+      "Listen and Type": ["Dictation"],
+      "Interactive Listening": ["Interactive Listening Set"],
+      "Write About the Photo": ["Photo Description"],
+      "Writing Sample": ["Writing Sample Response"],
+      "Interactive Writing": ["Interactive Writing Set"],
+      "Speak About the Photo": ["Photo Speaking"],
+      "Read, Then Speak": ["Read Then Speak Prompt"],
+      "Speaking Sample": ["Speaking Sample Response"],
+      "Interactive Speaking": ["Interactive Speaking Set"],
+      "Full DET Test": ["Full Test Simulation"],
+      "Full Mock Test": ["Full Test Simulation"],
+      "Section Mock": ["Section Practice"]
+    },
+    activities: {
+      "Reading": ["Practice","Timed Practice","Vocabulary Training","Review Mistakes"],
+      "Listening": ["Practice","Dictation","Listening Accuracy","Review Mistakes"],
+      "Writing": ["Draft Writing","Timed Writing","Idea Generation","Feedback Review"],
+      "Speaking": ["Recording Practice","Pronunciation Practice","Fluency Practice","Mock Response"],
+      "Full Test": ["Full Test Simulation","Timed Practice","Score Review","Weak Skill Training"],
+      "Mock Test": ["Mock Test","Timed Practice","Error Review","Score Review","Weak Skill Training"]
+    }
+  },
+
+  "CSCA": {
+    sections: ["Full Official Test","Mock Test","Mathematics","Physics","Chemistry","English"],
+    tasks: {
+      "Full Official Test": ["Full CSCA Test"],
+      "Mock Test": ["Full Mock Test","Subject Mock"],
+      "Mathematics": ["Sets and Variables","Functions","Geometry and Algebra","Probability and Statistics"],
+      "Physics": ["Mechanics","Electromagnetism","Thermodynamics","Optics","Modern Physics"],
+      "Chemistry": ["Basic Chemical Calculations","Properties and Reactions of Matter","Chemical Theories and Laws","Chemical Experiments and Applications"],
+      "English": ["Reading","Listening","Writing","Vocabulary","Grammar"]
+    },
+    questions: {
+      "Sets and Variables": ["Concept Questions","Practice Questions"],
+      "Functions": ["Concept Questions","Practice Questions"],
+      "Geometry and Algebra": ["Concept Questions","Practice Questions"],
+      "Probability and Statistics": ["Concept Questions","Practice Questions"],
+      "Mechanics": ["Concept Questions","Practice Questions"],
+      "Electromagnetism": ["Concept Questions","Practice Questions"],
+      "Thermodynamics": ["Concept Questions","Practice Questions"],
+      "Optics": ["Concept Questions","Practice Questions"],
+      "Modern Physics": ["Concept Questions","Practice Questions"],
+      "Basic Chemical Calculations": ["Concept Questions","Practice Questions"],
+      "Properties and Reactions of Matter": ["Concept Questions","Practice Questions"],
+      "Chemical Theories and Laws": ["Concept Questions","Practice Questions"],
+      "Chemical Experiments and Applications": ["Concept Questions","Practice Questions"],
+      "Reading": ["Reading Questions"],
+      "Listening": ["Listening Questions"],
+      "Writing": ["Writing Practice"],
+      "Vocabulary": ["Vocabulary Questions"],
+      "Grammar": ["Grammar Questions"],
+      "Full CSCA Test": ["Full Exam Simulation"],
+      "Full Mock Test": ["Full Exam Simulation"],
+      "Subject Mock": ["Subject Simulation"]
+    },
+    activities: {
+      "Mathematics": ["Theory Study","Concept Review","Solved Examples","Practice Questions","Timed Practice","Mock Test","Error Review","Formula Review","Flashcards","Weakness Training","Final Review","Full Exam Simulation"],
+      "Physics": ["Theory Study","Concept Review","Solved Examples","Practice Questions","Timed Practice","Mock Test","Error Review","Formula Review","Flashcards","Weakness Training","Final Review","Full Exam Simulation"],
+      "Chemistry": ["Theory Study","Concept Review","Solved Examples","Practice Questions","Timed Practice","Mock Test","Error Review","Formula Review","Flashcards","Weakness Training","Final Review","Full Exam Simulation"],
+      "English": ["Practice","Timed Practice","Mock Test","Error Review","Weakness Training","Final Review"],
+      "Full Official Test": ["Full Exam Simulation","Timed Practice","Score Review","Weak Skill Training"],
+      "Mock Test": ["Mock Test","Timed Practice","Error Review","Score Review","Weak Skill Training"]
+    }
+  },
+
+  "SAT": {
+    sections: ["Full Digital SAT","Mock Test","Reading and Writing","Math","Bluebook Practice","Score Review","Weak Skill Training"],
+    tasks: {
+      "Full Digital SAT": ["Full Digital Test"],
+      "Mock Test": ["Full Mock Test","Section Mock"],
+      "Reading and Writing": ["Information and Ideas","Craft and Structure","Expression of Ideas","Standard English Conventions","Mixed Reading and Writing Practice","Module 1 Practice","Module 2 Practice"],
+      "Math": ["Algebra","Advanced Math","Problem-Solving and Data Analysis","Geometry and Trigonometry","Calculator Practice","Desmos Practice","Student-Produced Response","Module 1 Practice","Module 2 Practice"],
+      "Bluebook Practice": ["Bluebook Test Practice"],
+      "Score Review": ["Score Report Review"],
+      "Weak Skill Training": ["Weak Skill Training"]
+    },
+    questions: {
+      "Information and Ideas": ["Central Ideas and Details","Command of Evidence","Textual Evidence","Quantitative Evidence","Inferences","Information from Tables and Graphs"],
+      "Craft and Structure": ["Words in Context","Text Structure and Purpose","Cross-Text Connections","Author's Purpose","Vocabulary in Context"],
+      "Expression of Ideas": ["Transitions","Rhetorical Synthesis","Logical Flow","Sentence Placement","Effective Language Use"],
+      "Standard English Conventions": ["Boundaries","Form, Structure, and Sense","Punctuation","Verb Form","Subject-Verb Agreement","Pronoun Clarity","Sentence Structure"],
+      "Algebra": ["Linear Equations","Linear Inequalities","Systems of Linear Equations","Linear Functions","Interpreting Linear Models"],
+      "Advanced Math": ["Quadratic Equations","Exponential Functions","Polynomial Expressions","Rational Expressions","Nonlinear Functions","Function Graphs"],
+      "Problem-Solving and Data Analysis": ["Ratios","Percentages","Rates","Proportions","Units","Probability","Statistics","Data Interpretation","Tables and Graphs"],
+      "Geometry and Trigonometry": ["Area and Volume","Lines and Angles","Triangles","Circles","Right Triangle Trigonometry","Coordinate Geometry"],
+      "Full Digital Test": ["Full Test Simulation"],
+      "Full Mock Test": ["Full Test Simulation"],
+      "Section Mock": ["Section Practice"],
+      "Bluebook Test Practice": ["Bluebook Practice Set"],
+      "Score Report Review": ["Score Analysis"],
+      "Weak Skill Training": ["Weak Area Practice"]
+    },
+    activities: {
+      "Reading and Writing": ["Practice","Timed Practice","Question Review","Mistake Analysis","Strategy Practice","Vocabulary Review","Grammar Review","Weak Skill Training","Mini Mock Section"],
+      "Math": ["Solve Problems","Timed Practice","Formula Review","Desmos Practice","SPR Practice","Error Review","Concept Review","Full Math Module","Weak Skill Training"],
+      "Full Digital SAT": ["Full Test Simulation","Timed Practice","Score Review","Weak Skill Training"],
+      "Mock Test": ["Mock Test","Timed Practice","Error Review","Score Review","Weak Skill Training"],
+      "Bluebook Practice": ["Bluebook Practice","Timed Practice","Review Mistakes"],
+      "Score Review": ["Score Review","Weak Skill Training"],
+      "Weak Skill Training": ["Weak Skill Training","Practice","Error Review"]
+    }
+  },
+
+  "ACT": {
+    sections: ["Full ACT","Mock Test","English","Mathematics","Reading","Science","Writing","Score Review","Weak Skill Training"],
+    tasks: {
+      "Full ACT": ["Full ACT Test"],
+      "Mock Test": ["Full Mock Test","Section Mock"],
+      "English": ["Production of Writing","Knowledge of Language","Conventions of Standard English","Passage Editing"],
+      "Mathematics": ["Number and Quantity","Algebra","Functions","Geometry","Statistics and Probability","Modeling"],
+      "Reading": ["Literary Narrative","Social Science","Humanities","Natural Science","Paired Passages","Main Idea","Detail Questions","Inference Questions","Vocabulary in Context"],
+      "Science": ["Data Representation","Research Summaries","Conflicting Viewpoints","Scientific Reasoning","Graph Interpretation","Experimental Design"],
+      "Writing": ["Argument Essay","Perspective Analysis","Idea Development","Organization","Language Use"],
+      "Score Review": ["Score Report Review"],
+      "Weak Skill Training": ["Weak Area Practice"]
+    },
+    questions: {
+      "Production of Writing": ["Organization","Topic Development","Unity","Cohesion"],
+      "Knowledge of Language": ["Style","Tone","Word Choice"],
+      "Conventions of Standard English": ["Sentence Structure","Punctuation","Grammar and Usage","Verb Tense","Subject-Verb Agreement","Pronouns","Modifiers"],
+      "Number and Quantity": ["Linear Equations","Quadratic Equations","Functions","Exponents","Polynomials","Systems"],
+      "Algebra": ["Linear Equations","Quadratic Equations","Systems"],
+      "Functions": ["Functions","Exponents","Polynomials"],
+      "Geometry": ["Coordinate Geometry","Plane Geometry","Trigonometry"],
+      "Statistics and Probability": ["Data Analysis","Probability"],
+      "Literary Narrative": ["Passage Questions"],
+      "Social Science": ["Passage Questions"],
+      "Humanities": ["Passage Questions"],
+      "Natural Science": ["Passage Questions"],
+      "Paired Passages": ["Paired Passage Questions"],
+      "Data Representation": ["Graph Questions"],
+      "Research Summaries": ["Experiment Questions"],
+      "Conflicting Viewpoints": ["Viewpoint Questions"],
+      "Argument Essay": ["Essay Prompt"],
+      "Full ACT Test": ["Full Test Simulation"],
+      "Full Mock Test": ["Full Test Simulation"],
+      "Section Mock": ["Section Practice"]
+    },
+    activities: {
+      "English": ["Passage Practice","Timed Practice","Grammar Review","Editing Practice","Error Review","Strategy Practice","Weak Skill Training"],
+      "Mathematics": ["Solve Problems","Timed Practice","Formula Review","Calculator Strategy","Error Review","Weak Skill Training","Mini Math Test"],
+      "Reading": ["Passage Reading","Timed Passage","Answer Questions","Strategy Practice","Evidence Review","Speed Training","Weak Skill Training"],
+      "Science": ["Graph Analysis","Passage Practice","Timed Practice","Data Interpretation","Experiment Review","Error Review","Weak Skill Training"],
+      "Writing": ["Write Draft","Timed Essay","Outline Practice","Feedback Review","Essay Improvement"],
+      "Full ACT": ["Full Test Simulation","Timed Practice","Score Review","Weak Skill Training"],
+      "Mock Test": ["Mock Test","Timed Practice","Error Review","Score Review","Weak Skill Training"]
+    }
+  },
+
+  "GRE": {
+    sections: ["Full GRE","Mock Test","Analytical Writing","Verbal Reasoning","Quantitative Reasoning","Score Review","Weak Skill Training"],
+    tasks: {
+      "Full GRE": ["Full GRE Test"],
+      "Mock Test": ["Full Mock Test","Section Mock"],
+      "Analytical Writing": ["Analyze an Issue","Essay Planning","Argument Development","Essay Structure"],
+      "Verbal Reasoning": ["Reading Comprehension","Text Completion","Sentence Equivalence","Vocabulary"],
+      "Quantitative Reasoning": ["Arithmetic","Algebra","Geometry","Data Analysis","Quantitative Comparison","Problem Solving","Numeric Entry","Data Interpretation"],
+      "Score Review": ["Score Report Review"],
+      "Weak Skill Training": ["Weak Area Practice"]
+    },
+    questions: {
+      "Analyze an Issue": ["Issue Essay"],
+      "Reading Comprehension": ["Main Idea","Inference","Author's Purpose","Structure","Detail Questions","Function Questions","Critical Reasoning","Short Passage","Long Passage"],
+      "Text Completion": ["One-Blank Text Completion","Two-Blank Text Completion","Three-Blank Text Completion","Context Clues","Sentence Logic"],
+      "Sentence Equivalence": ["Synonym Pair","Vocabulary Meaning","Sentence Logic","Contrast and Support Clues"],
+      "Arithmetic": ["Integers","Fractions","Decimals","Ratios","Percentages","Exponents"],
+      "Algebra": ["Linear Equations","Quadratic Equations","Inequalities","Functions"],
+      "Geometry": ["Coordinate Geometry","Triangles","Circles"],
+      "Data Analysis": ["Probability","Statistics","Charts and Tables"],
+      "Full GRE Test": ["Full Test Simulation"],
+      "Full Mock Test": ["Full Test Simulation"],
+      "Section Mock": ["Section Practice"]
+    },
+    activities: {
+      "Analytical Writing": ["Write Draft","Timed Writing","Outline Practice","Feedback Review","Essay Improvement","Vocabulary Improvement"],
+      "Verbal Reasoning": ["Practice","Timed Practice","Vocabulary Review","Passage Review","Error Analysis","Strategy Practice","Weak Skill Training","Mini Verbal Section"],
+      "Quantitative Reasoning": ["Solve Problems","Timed Practice","Formula Review","Concept Review","Calculator Strategy","Error Review","Data Interpretation Practice","Weak Skill Training","Mini Quant Section"],
+      "Full GRE": ["Full Test Simulation","Timed Practice","Score Review","Weak Skill Training"],
+      "Mock Test": ["Mock Test","Timed Practice","Error Review","Score Review","Weak Skill Training"]
+    }
+  },
+
+  "GMAT": {
+    sections: ["Full GMAT","Mock Test","Quantitative Reasoning","Verbal Reasoning","Data Insights","Score Review","Weak Skill Training"],
+    tasks: {
+      "Full GMAT": ["Full GMAT Test"],
+      "Mock Test": ["Full Mock Test","Section Mock"],
+      "Quantitative Reasoning": ["Problem Solving","Arithmetic","Algebra","Number Properties","Word Problems","Rates and Ratios"],
+      "Verbal Reasoning": ["Reading Comprehension","Critical Reasoning"],
+      "Data Insights": ["Data Sufficiency","Multi-Source Reasoning","Table Analysis","Graphics Interpretation","Two-Part Analysis"],
+      "Score Review": ["Score Report Review"],
+      "Weak Skill Training": ["Weak Area Practice"]
+    },
+    questions: {
+      "Problem Solving": ["Percentages","Ratios","Rates","Work Problems","Linear Equations","Quadratic Equations","Inequalities","Exponents","Roots","Number Properties"],
+      "Reading Comprehension": ["Main Idea","Inference"],
+      "Critical Reasoning": ["Strengthen Argument","Weaken Argument","Assumption","Evaluate Argument","Conclusion","Boldface","Argument Structure"],
+      "Data Sufficiency": ["Data Sufficiency Questions"],
+      "Multi-Source Reasoning": ["Multi-Source Reasoning Set"],
+      "Table Analysis": ["Table Analysis Questions"],
+      "Graphics Interpretation": ["Charts","Tables","Graphs"],
+      "Two-Part Analysis": ["Two-Part Analysis Questions"],
+      "Full GMAT Test": ["Full Test Simulation"],
+      "Full Mock Test": ["Full Test Simulation"],
+      "Section Mock": ["Section Practice"]
+    },
+    activities: {
+      "Quantitative Reasoning": ["Solve Problems","Timed Practice","Concept Review","Error Review","Strategy Practice","Weak Skill Training","Mini Quant Section"],
+      "Verbal Reasoning": ["Passage Practice","Argument Analysis","Timed Practice","Error Review","Strategy Practice","Weak Skill Training","Mini Verbal Section"],
+      "Data Insights": ["Practice","Timed Practice","Data Analysis","Calculator Practice","Error Review","Strategy Practice","Weak Skill Training","Mini Data Insights Section"],
+      "Full GMAT": ["Full Test Simulation","Timed Practice","Score Review","Weak Skill Training"],
+      "Mock Test": ["Mock Test","Timed Practice","Error Review","Score Review","Weak Skill Training"]
+    }
+  },
+
+  "HSK": {
+    sections: ["Full HSK Test","Mock Test","HSK Level 1","HSK Level 2","HSK Level 3","HSK Level 4","HSK Level 5","HSK Level 6","Listening","Reading","Writing","Vocabulary","Grammar","Characters"],
+    tasks: {
+      "Full HSK Test": ["Full HSK Test"],
+      "Mock Test": ["Full Mock Test","Section Mock"],
+      "HSK Level 1": ["Level 1 Practice"],
+      "HSK Level 2": ["Level 2 Practice"],
+      "HSK Level 3": ["Level 3 Practice"],
+      "HSK Level 4": ["Level 4 Practice"],
+      "HSK Level 5": ["Level 5 Practice"],
+      "HSK Level 6": ["Level 6 Practice"],
+      "Listening": ["Listening Practice"],
+      "Reading": ["Reading Practice"],
+      "Writing": ["Writing Practice"],
+      "Vocabulary": ["Vocabulary Review"],
+      "Grammar": ["Grammar Review"],
+      "Characters": ["Character Recognition","Pinyin Review","Sentence Building","Translation Practice"]
+    },
+    questions: {
+      "Listening Practice": ["Word Recognition","Sentence Understanding","Dialogue Listening","Short Passage Listening"],
+      "Reading Practice": ["Fill in the Blank","Multiple Choice","Sentence Ordering"],
+      "Writing Practice": ["Character Writing","Short Writing"],
+      "Vocabulary Review": ["Word Recognition"],
+      "Grammar Review": ["Sentence Ordering","Fill in the Blank"],
+      "Character Recognition": ["Character Writing"],
+      "Pinyin Review": ["Pinyin Practice"],
+      "Sentence Building": ["Sentence Ordering"],
+      "Translation Practice": ["Translation Practice"],
+      "Full HSK Test": ["Full Test Simulation"],
+      "Full Mock Test": ["Full Test Simulation"],
+      "Section Mock": ["Section Practice"]
+    },
+    activities: {
+      "Full HSK Test": ["Full Test Simulation","Timed Practice","Score Review","Weak Skill Training"],
+      "Mock Test": ["Mock Test","Timed Practice","Error Review","Score Review","Weak Skill Training"],
+      "Listening": ["Practice","Timed Practice","Dictation","Error Review","Weak Skill Training"],
+      "Reading": ["Practice","Timed Practice","Error Review","Weak Skill Training"],
+      "Writing": ["Practice","Timed Practice","Character Writing","Error Review","Weak Skill Training"],
+      "Vocabulary": ["Vocabulary Memorization","Practice","Timed Practice","Error Review"],
+      "Grammar": ["Grammar Review","Practice","Error Review"],
+      "Characters": ["Character Writing","Practice","Error Review"]
+    }
+  },
+
+  "HSKK": {
+    sections: ["Full HSKK Test","Mock Test","HSKK Primary","HSKK Intermediate","HSKK Advanced","Speaking Practice"],
+    tasks: {
+      "Full HSKK Test": ["Full HSKK Test"],
+      "Mock Test": ["Full Mock Test","Section Mock"],
+      "HSKK Primary": ["Primary Speaking Practice"],
+      "HSKK Intermediate": ["Intermediate Speaking Practice"],
+      "HSKK Advanced": ["Advanced Speaking Practice"],
+      "Speaking Practice": ["Listen and Repeat","Read Aloud","Answer Questions","Describe Picture","Express Opinion"]
+    },
+    questions: {
+      "Primary Speaking Practice": ["Listen and Repeat","Answer Questions"],
+      "Intermediate Speaking Practice": ["Listen and Repeat","Read Aloud","Answer Questions"],
+      "Advanced Speaking Practice": ["Read Aloud","Answer Questions","Express Opinion"],
+      "Listen and Repeat": ["Repeat Prompt"],
+      "Read Aloud": ["Read Aloud Prompt"],
+      "Answer Questions": ["Question Response"],
+      "Describe Picture": ["Picture Description"],
+      "Express Opinion": ["Opinion Response"],
+      "Full HSKK Test": ["Full Test Simulation"],
+      "Full Mock Test": ["Full Test Simulation"],
+      "Section Mock": ["Section Practice"]
+    },
+    activities: {
+      "Full HSKK Test": ["Full Test Simulation","Timed Practice","Score Review","Weak Skill Training"],
+      "Mock Test": ["Mock Test","Timed Practice","Error Review","Score Review","Weak Skill Training"],
+      "Speaking Practice": ["Recording Practice","Pronunciation Review","Fluency Practice","Mock Speaking","Answer Review","Weak Skill Training"],
+      "HSKK Primary": ["Recording Practice","Pronunciation Review","Fluency Practice","Mock Speaking","Answer Review","Weak Skill Training"],
+      "HSKK Intermediate": ["Recording Practice","Pronunciation Review","Fluency Practice","Mock Speaking","Answer Review","Weak Skill Training"],
+      "HSKK Advanced": ["Recording Practice","Pronunciation Review","Fluency Practice","Mock Speaking","Answer Review","Weak Skill Training"]
+    }
+  }
+};
+
 (function () {
     "use strict";
 
@@ -449,6 +816,83 @@ window.EDUPATH_TASKS_AR_DATA = {
         });
     }
 
+
+    function getExamData() {
+        return window.SMART_EXAM_DATA || {};
+    }
+
+    function isExamCategory() {
+        const categoryInput = qs("categorySelect");
+        return normalize(categoryInput && categoryInput.value) === "الاختبارات والشهادات";
+    }
+
+    function getExamActivities(exam, section, task, question) {
+        const data = getExamData()[exam];
+        if (!data) return ["Practice","Timed Practice","Error Review","Weak Skill Training"];
+        return (data.activities && (
+            data.activities[task] ||
+            data.activities[section] ||
+            data.activities[exam]
+        )) || ["Practice","Timed Practice","Error Review","Weak Skill Training"];
+    }
+
+    function updateExamFields(topic, skill, detail, training) {
+        const examData = getExamData();
+        const exams = Object.keys(examData);
+        fillSelect(topic, exams, topic.dataset.current || topic.value);
+
+        function refreshSections() {
+            const exam = normalize(topic.value);
+            const data = examData[exam];
+            const sections = (data && data.sections) || ["Mock Test"];
+            fillSelect(skill, sections, skill.dataset.current || skill.value);
+            refreshTasks();
+        }
+
+        function refreshTasks() {
+            const exam = normalize(topic.value);
+            const section = normalize(skill.value);
+            const data = examData[exam];
+            const tasks = (data && data.tasks && data.tasks[section]) || ["Section Practice"];
+            fillSelect(detail, tasks, detail.dataset.current || detail.value);
+            refreshActivities();
+        }
+
+        function refreshActivities() {
+            const exam = normalize(topic.value);
+            const section = normalize(skill.value);
+            const task = normalize(detail.value);
+            const values = getExamActivities(exam, section, task, "");
+            fillSelect(training, values, training.dataset.current || training.value);
+            toggleBoxes();
+        }
+
+        topic.onchange = () => {
+            topic.dataset.current = topic.value;
+            skill.dataset.current = "";
+            detail.dataset.current = "";
+            training.dataset.current = "";
+            refreshSections();
+        };
+        skill.onchange = () => {
+            skill.dataset.current = skill.value;
+            detail.dataset.current = "";
+            training.dataset.current = "";
+            refreshTasks();
+        };
+        detail.onchange = () => {
+            detail.dataset.current = detail.value;
+            training.dataset.current = "";
+            refreshActivities();
+        };
+        training.onchange = () => {
+            training.dataset.current = training.value;
+            toggleBoxes();
+        };
+
+        refreshSections();
+    }
+
     function updateFields() {
         const categoryInput = qs("categorySelect");
         const topic = qs("topicSelect");
@@ -456,10 +900,16 @@ window.EDUPATH_TASKS_AR_DATA = {
         const detail = qs("detailedTopicSelect");
         const training = qs("trainingTypeSelect");
         if (!categoryInput || !topic || !skill || !detail || !training) return;
+
         const type = normalize(categoryInput.value || "عام");
         categoryInput.value = type;
-        const config = getConfig(type);
 
+        if (type === "الاختبارات والشهادات") {
+            updateExamFields(topic, skill, detail, training);
+            return;
+        }
+
+        const config = getConfig(type);
         const oldTopic = normalize(topic.dataset.current || topic.value || "");
         fillSelect(topic, config.main || ["أخرى"], oldTopic);
 
