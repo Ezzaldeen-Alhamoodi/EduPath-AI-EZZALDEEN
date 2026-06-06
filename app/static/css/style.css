@@ -7028,3 +7028,16 @@ body #trainingTypeSelect {
 
 /* EduPath AI v5.4.6 Isolated Native Tasks Engine AR */
 .smart-task-form label,.form label{direction:rtl!important;text-align:right!important}
+
+
+
+/* EduPath AI v5.4.7 Repeat Fix + Natural Arabic */
+.repeat-days-box[aria-hidden="false"],
+.repeat-custom-box[aria-hidden="false"] {
+    display: block !important;
+}
+
+.repeat-days-box[aria-hidden="true"],
+.repeat-custom-box[aria-hidden="true"] {
+    display: none !important;
+}

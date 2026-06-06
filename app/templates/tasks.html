@@ -1,8 +1,6 @@
 \
 {% extends "base.html" %}
-{% block page_title %}المهام
-<script src="{{ url_for('static', filename='js/tasks_native_ar.js') }}?v=5.4.6"></script>
-{% endblock %}
+{% block page_title %}المهام{% endblock %}
 {% block content %}
 
 <section class="hero compact tasks-hero">
@@ -61,5 +59,8 @@
 </section>
 
 
-<script src="{{ url_for('static', filename='js/tasks_native_ar.js') }}?v=5.4.6"></script>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/tasks_native_ar.js') }}?v=5.4.7"></script>
 {% endblock %}

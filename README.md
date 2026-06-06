@@ -2061,3 +2061,20 @@ Dashboard-only layout fix.
 - تعديل المهمة.
 - التكرار في المهام.
 - لا يوجد تغيير في صفحة الأهداف أو الربط الذكي.
+
+
+## v5.4.7 Repeat Fix Natural Arabic
+
+### Fixed
+- Fixed the repeat dropdown behavior:
+  - "أيام محددة" now opens the weekday selector.
+  - "أخرى" now opens the custom repeat input.
+- Moved `tasks_native_ar.js` to load after `app.js` through `extra_scripts`, so the old app logic cannot override it afterward.
+- Removed weak literal Arabic phrases from task data and replaced them with clearer Arabic expressions.
+- Removed English repeat aliases from the frontend repeat engine.
+- Kept official exam/test terms only where they are actual official names.
+
+### Scope
+- Tasks page only.
+- No goals changes.
+- No dashboard redesign.

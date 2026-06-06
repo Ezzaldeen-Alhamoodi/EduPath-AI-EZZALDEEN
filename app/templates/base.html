@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#2563eb">
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=5.4.6?v=5.4.5">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=5.4.7">
 </head>
 <body>
 
@@ -82,7 +82,8 @@
 </div>
 {% endif %}
 
-    <script src="{{ url_for('static', filename='js/app.js') }}?v=5.4.6?v=5.4.5"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}?v=5.4.7"></script>
+    {% block extra_scripts %}{% endblock %}
 
     <nav class="mobile-bottom-nav compact-icon-nav-v474" aria-label="Mobile navigation">
         <a class="nav-home" href="{{ url_for('index') }}"><span>⌂</span><small>الرئيسية</small></a>

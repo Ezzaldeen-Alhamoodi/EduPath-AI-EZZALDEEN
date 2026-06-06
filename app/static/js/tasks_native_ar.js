@@ -1,3 +1,4 @@
+window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.4.7-repeat-fix-natural-ar";
 window.EDUPATH_TASKS_AR_DATA = {
   "حفظ القرآن الكريم": {
     icon: "ق",
@@ -17,7 +18,7 @@ window.EDUPATH_TASKS_AR_DATA = {
       "البقرة": ["الآيات 1-5","آية الكرسي","آخر آيتين","صفحة","ربع حزب","أخرى"],
       "أخرى": ["آيات محددة","صفحة محددة","سورة كاملة","أخرى"]
     },
-    training: ["حفظ","مراجعة","تسميع","تثبيت","قراءة بالتجويد","استماع للقارئ","تصحيح أخطاء","تدبر","أخرى"]
+    training: ["حفظ","مراجعة","تسميع","تثبيت","قراءة بالتجويد","استماع للقارئ","تصحيح الأخطاء","تدبر","أخرى"]
   },
 
   "المرحلة الثانوية": {
@@ -38,7 +39,7 @@ window.EDUPATH_TASKS_AR_DATA = {
       "أخرى": ["درس","وحدة","مراجعة","اختبار","أخرى"]
     },
     detail: {"أخرى": ["شرح درس","حل تمارين","مراجعة وحدة","اختبار قصير","أخرى"]},
-    training: ["دراسة الدرس","حل تمارين","تلخيص","مراجعة","حفظ","اختبار ذاتي","تصحيح أخطاء","تحضير للاختبار","أخرى"]
+    training: ["دراسة الدرس","حل تمارين","تلخيص","مراجعة","حفظ","اختبار ذاتي","تصحيح الأخطاء","تحضير للاختبار","أخرى"]
   },
 
   "المرحلة الجامعية": {
@@ -72,7 +73,7 @@ window.EDUPATH_TASKS_AR_DATA = {
       "أخرى": ["القراءة","الاستماع","التحدث","الكتابة","القواعد","المفردات","النطق","أخرى"]
     },
     detail: {
-      "القراءة": ["فهم الفكرة العامة","استخراج التفاصيل","فهم الاستنتاجات","فهم المفردات من السياق","القراءة السريعة","القراءة التحليلية","القراءة الأكاديمية","قراءة المقالات","قراءة الأخبار","قراءة القصص","أخرى"],
+      "القراءة": ["فهم الفكرة العامة","تحديد التفاصيل","فهم الاستنتاجات","فهم المفردات من السياق","القراءة السريعة","فهم النصوص","قراءة نصوص أكاديمية","قراءة مقالات","قراءة أخبار","قراءة قصص","أخرى"],
       "الاستماع": ["فهم الفكرة الرئيسية","فهم التفاصيل","فهم اللهجات","الاستماع الأكاديمي","الاستماع اليومي","المحاضرات","الأخبار","المحادثات","البودكاست","أخرى"],
       "التحدث": ["المحادثات اليومية","العروض التقديمية","المناقشات","وصف الصور","التحدث الأكاديمي","مقابلات القبول","مقابلات العمل","أخرى"],
       "الكتابة": ["الكتابة العامة","الكتابة الأكاديمية","كتابة المقالات","كتابة الرسائل","كتابة التقارير","كتابة الملاحظات","كتابة الحجج","أخرى"],
@@ -83,35 +84,35 @@ window.EDUPATH_TASKS_AR_DATA = {
       "اللغة الأكاديمية": ["المقالات الأكاديمية","الأبحاث","العروض التقديمية","المناقشات الأكاديمية","المفردات الأكاديمية","الاستماع الأكاديمي","الكتابة الأكاديمية","أخرى"],
       "أخرى": ["موضوع مخصص","أخرى"]
     },
-    training: ["قراءة نص","حل أسئلة فهم","تلخيص النص","تحليل النص","استخراج الأفكار الرئيسية","استخراج المفردات","تدوين الملاحظات","مراجعة الأخطاء","الاستماع للمقطع","الإجابة عن الأسئلة","التحدث الحر","تسجيل صوتي","محاكاة مقابلة","كتابة مسودة","تصحيح الكتابة","إعادة الصياغة","تحسين الأسلوب","أخرى"]
+    training: ["قراءة نص","الإجابة عن أسئلة النص","تلخيص النص","مناقشة النص","كتابة الأفكار الرئيسية","كتابة الكلمات الجديدة","تدوين الملاحظات","تصحيح الأخطاء","الاستماع للمقطع","الإجابة عن الأسئلة","التحدث الحر","تسجيل صوتي","محاكاة مقابلة","كتابة مسودة","تصحيح الكتابة","إعادة الصياغة","تحسين الأسلوب","أخرى"]
   },
 
   "البرمجة والتكنولوجيا": {
     icon: "ب",
-    main: ["Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","Flask","Django","React","Node.js","Git / GitHub","تطوير الويب","تطوير الواجهة الأمامية","تطوير الخلفية","تطوير متكامل","قواعد البيانات","الخوارزميات","هياكل البيانات","حل المشكلات","تصحيح الأخطاء","هندسة البرمجيات","اختبار البرمجيات","أنظمة التشغيل","شبكات الحاسوب","الأمن السيبراني","الحوسبة السحابية","DevOps","APIs","الذكاء الاصطناعي","تعلم الآلة","علم البيانات","المشاريع","التوثيق","أخرى"],
+    main: ["Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","Flask","Django","React","Node.js","Git / GitHub","تطوير الويب","تطوير الواجهة الأمامية","تطوير الخلفية","تطوير الواجهة والخلفية","قواعد البيانات","الخوارزميات","هياكل البيانات","حل المشكلات","تصحيح الأخطاء","هندسة البرمجيات","اختبار البرمجيات","أنظمة التشغيل","شبكات الحاسوب","الأمن السيبراني","الحوسبة السحابية","DevOps","APIs","الذكاء الاصطناعي","تعلم الآلة","علم البيانات","المشاريع","التوثيق","أخرى"],
     sub: {
       "Python": ["الصياغة","المتغيرات","أنواع البيانات","الشروط","الحلقات","الدوال","القوائم","القواميس","الملفات","OOP","الوحدات","المكتبات","Flask","تحليل البيانات","الأتمتة","مشاريع","تصحيح الأخطاء","أخرى"],
-      "تطوير الويب": ["HTML","CSS","JavaScript","الواجهة الأمامية","الخلفية","تطوير متكامل","تصميم متجاوب","النماذج","تسجيل الدخول والصلاحيات","APIs","قواعد البيانات","النشر","الأداء","الأمان","أخرى"],
+      "تطوير الويب": ["HTML","CSS","JavaScript","الواجهة الأمامية","الخلفية","تطوير الواجهة والخلفية","تصميم متجاوب","النماذج","تسجيل الدخول والصلاحيات","APIs","قواعد البيانات","النشر","الأداء","الأمان","أخرى"],
       "الخوارزميات": ["البحث","الترتيب","الاستدعاء الذاتي","الخوارزميات الجشعة","البرمجة الديناميكية","خوارزميات الرسوم البيانية","الأشجار","تحليل التعقيد","أخرى"],
       "الأمن السيبراني": ["أساسيات الأمن","أمن الشبكات","أمن الويب","Linux","التشفير","أساسيات الاختبار الأخلاقي","الثغرات","المصادقة","OWASP","أخرى"],
-      "أخرى": ["مفاهيم","تطبيق","مشروع","تصحيح أخطاء","مراجعة","أخرى"]
+      "أخرى": ["مفاهيم","تطبيق","مشروع","تصحيح الأخطاء","مراجعة","أخرى"]
     },
     detail: {
       "Python": ["الكائنات والفئات","الوراثة","التعامل مع الملفات","تطبيق على القوائم","تطبيق على القواميس","طلب API","مسار Flask","أخرى"],
-      "الخوارزميات": ["مسألة تدريبية","تحليل الحل","تحسين التعقيد","اختبار الحل","أخرى"],
+      "الخوارزميات": ["مسألة ممارسةية","تحليل الحل","تحسين التعقيد","اختبار الحل","أخرى"],
       "تطوير الويب": ["صفحة","نموذج","API","قاعدة بيانات","تصميم متجاوب","أخرى"],
       "أخرى": ["موضوع","ميزة","خطأ","أخرى"]
     },
-    training: ["فهم المفهوم","كتابة كود","بناء مشروع صغير","تصحيح الكود","قراءة التوثيق","تحسين الكود","تطبيق الصياغة البرمجية","بناء تطبيق","بناء صفحة","تصميم الواجهة","إصلاح خطأ","ربط الخلفية","إنشاء نموذج","جعله متجاوباً","نشر الموقع","تحسين الواجهة","تطبيق بمشروع","أخرى"]
+    training: ["فهم المفهوم","كتابة كود","بناء مشروع صغير","تصحيح الكود","قراءة التوثيق","تحسين الكود","التدرب على كتابة الكود","بناء تطبيق","بناء صفحة","تصميم الواجهة","إصلاح خطأ","ربط الخلفية","إنشاء نموذج","تحسين العرض على الهاتف","نشر الموقع","تنسيق الواجهة","تطبيق بمشروع","أخرى"]
   },
 
   "الذكاء الاصطناعي": {
     icon: "ذ",
     main: ["تعلم الآلة","التعلم العميق","معالجة اللغة الطبيعية","الرؤية الحاسوبية","التعلم المعزز","علم البيانات","مشاريع ذكاء اصطناعي","أخرى"],
     sub: {
-      "تعلم الآلة": ["تنظيف البيانات","هندسة الخصائص","النماذج","تدريب النموذج","تقييم النموذج","Scikit-learn","أخرى"],
+      "تعلم الآلة": ["تنظيف البيانات","هندسة الخصائص","النماذج","ممارسة النموذج","تقييم النموذج","Scikit-learn","أخرى"],
       "التعلم العميق": ["الشبكات العصبية","CNN","RNN","Transformers","PyTorch","TensorFlow","أخرى"],
-      "مشاريع ذكاء اصطناعي": ["مجموعة بيانات","تنظيف البيانات","تدريب النموذج","تقييم النموذج","نشر المشروع","أخرى"],
+      "مشاريع ذكاء اصطناعي": ["مجموعة بيانات","تنظيف البيانات","ممارسة النموذج","تقييم النموذج","نشر المشروع","أخرى"],
       "أخرى": ["مفاهيم","تطبيق","مشروع","بحث","أخرى"]
     },
     detail: {"تعلم الآلة": ["تصنيف","انحدار","تجميع","مقارنة النماذج","الدقة","أخرى"], "أخرى": ["موضوع","أخرى"]},
@@ -128,7 +129,7 @@ window.EDUPATH_TASKS_AR_DATA = {
       "أخرى": ["درس","تمارين","مراجعة","اختبار","أخرى"]
     },
     detail: {"الجبر": ["مجموعة تمارين","قانون","سؤال سابق","موضوع صعب","أخرى"], "أخرى": ["موضوع","أخرى"]},
-    training: ["دراسة الدرس","حل التمارين","مراجعة الأخطاء","تدريب بوقت محدد","التحضير للاختبار","حفظ القوانين","أخرى"]
+    training: ["دراسة الدرس","حل التمارين","تصحيح الأخطاء","حل بوقت محدد","التحضير للاختبار","حفظ القوانين","أخرى"]
   },
 
   "المنح الدراسية": {
@@ -136,12 +137,12 @@ window.EDUPATH_TASKS_AR_DATA = {
     main: ["البحث عن منحة","بحث الجامعات","نموذج التقديم","المستندات","السيرة الذاتية","خطاب الدافع","البيان الشخصي","خطاب التوصية","المقابلة","اختبار اللغة","البورتفوليو","التواصل بالبريد","التأشيرة","الاستعداد للسفر","المتابعة","أخرى"],
     sub: {
       "خطاب الدافع": ["مسودة","تعديل","تخصيص","مراجعة نهائية","أخرى"],
-      "المقابلة": ["التعريف بالنفس","لماذا التخصص","لماذا المنحة","الخطط المستقبلية","تدريب مقابلة","أخرى"],
+      "المقابلة": ["التعريف بالنفس","لماذا التخصص","لماذا المنحة","الخطط المستقبلية","تجربة مقابلة","أخرى"],
       "المستندات": ["جواز السفر","كشف الدرجات","شهادة التخرج","شهادة اللغة","الترجمة","التصديق","رفع المستندات","مراجعة المستندات","أخرى"],
       "أخرى": ["بحث","تجهيز","كتابة","تعديل","رفع","تقديم","متابعة","أخرى"]
     },
-    detail: {"خطاب الدافع": ["الفقرة الافتتاحية","الإنجازات","الأهداف المستقبلية","التوافق مع الجامعة","أخرى"], "المقابلة": ["سؤال تدريبي","تحسين الإجابة","ملاحظات","أخرى"], "أخرى": ["موضوع","أخرى"]},
-    training: ["بحث","تجهيز","كتابة","تعديل","رفع","تقديم","متابعة","تدريب مقابلة","فحص نهائي","أخرى"]
+    detail: {"خطاب الدافع": ["الفقرة الافتتاحية","الإنجازات","الأهداف المستقبلية","التوافق مع الجامعة","أخرى"], "المقابلة": ["سؤال ممارسةي","تحسين الإجابة","ملاحظات","أخرى"], "أخرى": ["موضوع","أخرى"]},
+    training: ["بحث","تجهيز","كتابة","تعديل","رفع","تقديم","متابعة","تجربة مقابلة","فحص نهائي","أخرى"]
   },
 
   "الاختبارات والشهادات": {
@@ -161,7 +162,7 @@ window.EDUPATH_TASKS_AR_DATA = {
     },
     detail: {
       "Listening": ["Multiple Choice","Matching","Plan Labelling","Map Labelling","Diagram Labelling","Form Completion","Note Completion","Table Completion","Flow Chart Completion","Summary Completion","Sentence Completion","Short Answer Questions","Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk","Listen and Type","Interactive Listening","أخرى"],
-      "Reading": ["Matching Headings","Matching Information","Matching Features","Matching Sentence Endings","True False Not Given","Yes No Not Given","Multiple Choice","Sentence Completion","Summary Completion","Note Completion","Table Completion","Flow Chart Completion","Diagram Labelling","Short Answer Questions","Read in Daily Life","Read an Academic Passage","Complete the Words","Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","أخرى"],
+      "Reading": ["Matching Headings","Matching Information","Matching Features","Matching Sentence Endings","True False Not Given","Yes No Not Given","Multiple Choice","Sentence Completion","Summary Completion","Note Completion","Table Completion","Flow Chart Completion","Diagram Labelling","Short Answer Questions","Read in  Life","Read an Academic Passage","Complete the Words","Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","أخرى"],
       "Writing": ["Task 1","Task 2","Academic Graph","Table","Chart","Process Diagram","Map","Opinion Essay","Discussion Essay","Problem Solution Essay","Advantages Disadvantages Essay","Double Question Essay","Build a Sentence","Write an Email","Write for an Academic Discussion","Write About the Photo","Writing Sample","Interactive Writing","أخرى"],
       "Speaking": ["Part 1","Part 2","Part 3","Speak About the Photo","Read, Then Speak","Speaking Sample","Interactive Speaking","Listen and Repeat","Take an Interview","Cue Card Practice","أخرى"],
       "Mathematics": ["Sets and Variables","Functions","Geometry and Algebra","Probability and Statistics"],
@@ -306,7 +307,7 @@ window.EDUPATH_TASKS_AR_DATA = {
         return config.training || ["تنفيذ مهمة", "أخرى"];
     }
 
-    function toggleCustomBoxes() {
+    function toggleBoxes() {
         const category = qs("categorySelect");
         const topic = qs("topicSelect");
         const skill = qs("skillSelect");
@@ -341,18 +342,32 @@ window.EDUPATH_TASKS_AR_DATA = {
         setLabel("repeatLabel", "التكرار");
         setLabel("repeatDaysLabel", "أيام التكرار");
         setLabel("notesLabel", "ملاحظات إضافية");
-        setLabel("repeatCustomLabel", "اكتب نمط التكرار الذي تريده");
+        setLabel("repeatLabel", "اكتب نمط التكرار الذي تريده");
         setPlaceholder("taskTitleInput", "مثال: مراجعة حفظ سورة النساء");
         setPlaceholder("sourceInput", "كتاب، موقع إلكتروني، فيديو تعليمي، ملف، أو أي مصدر آخر");
         setPlaceholder("notesInput", "اكتب أي ملاحظات أو خطة أو تعليمات شخصية");
-        setPlaceholder("repeatCustomInput", "اكتب ما تريد");
+        setPlaceholder("repeatInput", "اكتب ما تريد");
         ["customCategoryInput", "customTopicInput", "customSkillInput", "customDetailedTopicInput", "customTrainingTypeInput"].forEach(id => setPlaceholder(id, "اكتب ما تريد"));
+    }
+
+    const REPEAT_LABELS_AR = {
+        "مرة واحدة / بدون تكرار": "مرة واحدة / بدون تكرار",
+        "يوميًا": "يوميًا",
+        "أسبوعيًا": "أسبوعيًا",
+        "شهريًا": "شهريًا",
+        "أيام محددة": "أيام محددة",
+        "أخرى": "أخرى"
+    };
+
+    function repeatToArabic(value) {
+        const text = normalize(value);
+        return REPEAT_LABELS_AR[text] || text || "يوميًا";
     }
 
     function rebuildRepeatSelect() {
         const select = qs("repeatTypeSelect");
         if (!select) return;
-        const current = normalize(select.dataset.current || select.value || "يوميًا");
+        const current = repeatToArabic(select.dataset.current || select.value || "يوميًا");
         const options = ["مرة واحدة / بدون تكرار", "يوميًا", "أسبوعيًا", "شهريًا", "أيام محددة", "أخرى"];
         select.innerHTML = "";
         options.forEach(value => {
@@ -362,16 +377,24 @@ window.EDUPATH_TASKS_AR_DATA = {
             if (current === value) option.selected = true;
             select.appendChild(option);
         });
-        if (!select.value) select.value = "يوميًا";
+        select.value = options.includes(current) ? current : "يوميًا";
+        select.dataset.current = select.value;
+    }
+
+    function showBox(el, shouldShow) {
+        if (!el) return;
+        el.hidden = !shouldShow;
+        el.style.setProperty("display", shouldShow ? "block" : "none", "important");
+        el.setAttribute("aria-hidden", shouldShow ? "false" : "true");
     }
 
     function updateRepeatVisibility() {
         const select = qs("repeatTypeSelect");
         const daysBox = qs("repeatDaysBox");
-        const customBox = qs("repeatCustomBox");
-        const value = normalize(select && select.value);
-        if (daysBox) daysBox.style.display = value === "أيام محددة" ? "block" : "none";
-        if (customBox) customBox.style.display = value === "أخرى" ? "block" : "none";
+        const customBox = qs("repeatBox");
+        const value = repeatToArabic(select && select.value);
+        showBox(daysBox, value === "أيام محددة");
+        showBox(customBox, value === "أخرى");
     }
 
     function renderTaskTypes() {
@@ -432,13 +455,13 @@ window.EDUPATH_TASKS_AR_DATA = {
         function refreshTraining() {
             const trainingValues = getTrainingValues(config, topic.value, skill.value, detail.value);
             fillSelect(training, trainingValues, training.dataset.current || training.value);
-            toggleCustomBoxes();
+            toggleBoxes();
         }
 
         topic.onchange = () => { topic.dataset.current = topic.value; skill.dataset.current = ""; detail.dataset.current = ""; training.dataset.current = ""; refreshSub(); };
         skill.onchange = () => { skill.dataset.current = skill.value; detail.dataset.current = ""; training.dataset.current = ""; refreshDetail(); };
         detail.onchange = () => { detail.dataset.current = detail.value; training.dataset.current = ""; refreshTraining(); };
-        training.onchange = () => { training.dataset.current = training.value; toggleCustomBoxes(); };
+        training.onchange = () => { training.dataset.current = training.value; toggleBoxes(); };
 
         refreshSub();
     }
@@ -451,13 +474,25 @@ window.EDUPATH_TASKS_AR_DATA = {
         updateFields();
         updateRepeatVisibility();
         const repeat = qs("repeatTypeSelect");
-        if (repeat) repeat.onchange = updateRepeatVisibility;
-        setTimeout(() => {
-            applyNativeLabels();
-            renderTaskTypes();
-            updateFields();
-            updateRepeatVisibility();
-        }, 120);
+        if (repeat) {
+            repeat.addEventListener("change", () => {
+                repeat.dataset.current = repeat.value;
+                updateRepeatVisibility();
+            });
+            repeat.onchange = () => {
+                repeat.dataset.current = repeat.value;
+                updateRepeatVisibility();
+            };
+        }
+        [80, 250, 700].forEach(delay => {
+            setTimeout(() => {
+                applyNativeLabels();
+                rebuildRepeatSelect();
+                renderTaskTypes();
+                updateFields();
+                updateRepeatVisibility();
+            }, delay);
+        });
     }
 
     document.addEventListener("DOMContentLoaded", initNativeTasks);

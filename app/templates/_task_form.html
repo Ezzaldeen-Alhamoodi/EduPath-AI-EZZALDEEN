@@ -88,7 +88,7 @@
         <input name="reminder_time" type="time" value="{{ task.reminder_time if task else '' }}">
 
         <label id="repeatLabel">التكرار</label>
-        <select name="repeat_type" id="repeatTypeSelect" data-current="{{ task.repeat_type if task else 'يوميًا' }}">
+        <select name="repeat_type" id="repeatTypeSelect" data-current="{{ task.repeat_type|native_task_label if task else 'يوميًا' }}">
             {% for value in ["مرة واحدة / بدون تكرار", "يوميًا", "أسبوعيًا", "شهريًا", "أيام محددة", "أخرى"] %}
                 <option value="{{ value }}" {% if task and task.repeat_type == value %}selected{% endif %}>{{ value }}</option>
             {% endfor %}
