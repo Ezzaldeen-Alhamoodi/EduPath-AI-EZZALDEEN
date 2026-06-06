@@ -6979,19 +6979,6 @@ body #trainingTypeSelect {
 }
 
 
-
-/* EduPath AI v5.3.5 Universal Arabic Task Field Labels */
+/* EduPath AI v5.3.8 Source Task Labels AR */
 .smart-task-form label,
-.form label {
-    direction: rtl !important;
-    text-align: right !important;
-}
-
-
-
-/* EduPath AI v5.3.6 Hard Fix Arabic Task Labels */
-.smart-task-form label,
-.form label {
-    direction: rtl !important;
-    text-align: right !important;
-}
+.form label { direction: rtl !important; text-align: right !important; }
