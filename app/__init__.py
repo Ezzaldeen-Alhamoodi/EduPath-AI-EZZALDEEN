@@ -1908,13 +1908,57 @@ TASK_NATIVE_AR_LABELS_V541 = {
     "custom": "أخرى"
 }
 
+
+TASK_NATIVE_AR_LABELS_V542 = {
+    "Daily Life": "الحياة اليومية",
+    "Do Task": "تنفيذ مهمة",
+    "Review Progress": "مراجعة التقدم",
+    "Repeat Habit": "تثبيت العادة",
+    "Daily Habit": "عادة يومية",
+    "Weekly Routine": "روتين أسبوعي",
+    "Self-care": "العناية الشخصية",
+    "Water": "شرب الماء",
+    "Food": "التغذية",
+    "Health": "الصحة",
+    "Exercise": "الرياضة",
+    "Sleep": "النوم",
+    "Personal Routine": "الروتين الشخصي",
+    "Religious Routine": "الصلاة",
+    "Cleaning": "تنظيف المنزل",
+    "Shopping": "التسوق",
+    "Time Management": "إدارة الوقت",
+    "Family": "العائلة",
+    "Finance": "إدارة المال",
+    "Book Reading": "الكتب",
+    "Article Reading": "المقالات",
+    "Research Paper": "الأبحاث",
+    "Summary": "التلخيص",
+    "Critical Thinking": "التفكير النقدي",
+    "Take Notes": "تدوين ملاحظات",
+    "Read": "قراءة",
+    "Summarize": "تلخيص",
+    "Analyze": "تحليل",
+    "Discuss": "مناقشة",
+    "Application": "تطبيق عملي",
+    "General Topic": "موضوع عام",
+    "General Practice": "تطبيق عام",
+    "General": "عام",
+    "Other": "أخرى",
+    "Custom": "أخرى",
+    "مرة واحدة / بدون تكرار": "مرة واحدة / بدون تكرار",
+    "Daily": "يوميًا",
+    "Weekly": "أسبوعيًا",
+    "Monthly": "شهريًا",
+    "أيام محددة": "أيام محددة"
+}
+
 def native_task_label_v541(value):
     if value is None:
         return ""
     text = str(value)
     if text in TASK_EXAM_CONTENT_KEEP_V532:
         return text
-    return TASK_NATIVE_AR_LABELS_V541.get(text) or task_ar(text)
+    return TASK_NATIVE_AR_LABELS_V542.get(text) or TASK_NATIVE_AR_LABELS_V541.get(text) or task_ar(text)
 
 
 def render_clickable_sources(value):

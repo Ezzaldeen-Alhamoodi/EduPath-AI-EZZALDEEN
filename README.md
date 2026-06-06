@@ -1957,3 +1957,28 @@ Dashboard-only layout fix.
 - Quran Memorization and Secondary School structures preserved.
 - Exams & Certificates official test/question content preserved where appropriate.
 - No dashboard layout, goals, progress, or smart linking logic changed.
+
+
+## v5.4.2 Tasks Arabic Source Root
+
+### Root correction
+- Arabic is now the default source behavior for Tasks.
+- Removed the old English-default behavior from task dynamic option logic.
+- Reworked repeat options so they no longer return to English:
+  - مرة واحدة / بدون تكرار
+  - يوميًا
+  - أسبوعيًا
+  - شهريًا
+  - أيام محددة
+  - أخرى
+- Custom/Other fields in the Tasks page are Arabic in all task types.
+- Existing old English task values are displayed through Arabic-native labels.
+- User-facing task messages are Arabic.
+- Task-related Dashboard labels are Arabic.
+- Official exam names, official question types, and programming/technology names remain unchanged where required.
+
+### Scope
+- Tasks page and task outputs only.
+- No goals logic changes.
+- No progress logic changes.
+- No smart linking changes.
