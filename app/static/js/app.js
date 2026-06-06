@@ -1114,7 +1114,17 @@ const SMART_GOAL_AR_LABELS_V520 = {
     "Git / GitHub": "Git / GitHub",
     "Algorithms": "Algorithms",
     "Data Structures": "Data Structures",
-    "Databases": "قواعد البيانات",
+    "Databases": "Database Fundamentals",
+    "Database Fundamentals": "Database Fundamentals",
+    "SQLite": "SQLite",
+    "MySQL": "MySQL",
+    "PostgreSQL": "PostgreSQL",
+    "MongoDB": "MongoDB",
+    "Database Design": "Database Design",
+    "ORM": "ORM",
+    "Database Optimization": "Database Optimization",
+    "Database Security": "Database Security",
+    "Database Projects": "Database Projects",
     "Cybersecurity": "الأمن السيبراني",
     "Information Technology": "تقنية المعلومات",
     "Web Development": "Web Development",
@@ -2868,7 +2878,7 @@ const GOAL_CONFIG_V524 = {
     },
 
     "البرمجة والتكنولوجيا": {
-        categories: ["أساسيات البرمجة","Python","C","C++","Java","JavaScript","تطوير الويب","Data Structures","Algorithms","Problem Solving","Competitive Programming","Machine Learning","Deep Learning","Data Science","Computer Vision","Natural Language Processing","Reinforcement Learning","Generative AI","MLOps","AI Projects","Revision","TypeScript","HTML","CSS","SQL","PHP","Flask","Django","React","Angular","Vue","Node.js","Express.js","Express","Git","GitHub","Linux","Docker","API","REST API","GraphQL","OOP","Database","Backend","Frontend","Full Stack","DevOps","Software Engineering","Testing","Debugging","Mobile Development","Game Development","Cybersecurity","Cloud Computing","Operating Systems","Networking","System Design","Open Source","Version Control","أخرى"],
+        categories: ["أساسيات البرمجة", "Python", "C", "C++", "Java", "JavaScript", "تطوير الويب", "Data Structures", "Algorithms", "Problem Solving", "Competitive Programming", "Machine Learning", "Deep Learning", "Data Science", "Computer Vision", "Natural Language Processing", "Reinforcement Learning", "Generative AI", "MLOps", "AI Projects", "SQL", "Database Fundamentals", "SQLite", "MySQL", "PostgreSQL", "MongoDB", "Database Design", "ORM", "Database Optimization", "Database Security", "Database Projects", "Revision", "TypeScript", "HTML", "CSS", "PHP", "Flask", "Django", "React", "Angular", "Vue", "Node.js", "Express.js", "Express", "Git", "GitHub", "Linux", "Docker", "API", "REST API", "GraphQL", "OOP", "Database", "Backend", "Frontend", "Full Stack", "DevOps", "Software Engineering", "Testing", "Debugging", "Mobile Development", "Game Development", "Cybersecurity", "Cloud Computing", "Operating Systems", "Networking", "System Design", "Open Source", "Version Control", "أخرى"],
         paths: {
             "أساسيات البرمجة": ["أساسيات البرمجة","المتغيرات وأنواع البيانات","العمليات الحسابية والمنطقية","الشروط","الحلقات التكرارية","الدوال","المصفوفات والقوائم","حل المشكلات","التعامل مع الأخطاء","كتابة برامج بسيطة","مراجعة شاملة","أخرى"],
             "Python": ["Syntax Basics","Variables","Data Types","Operators","Conditions","Loops","Functions","Lists","Tuples","Dictionaries","Sets","Strings","File Handling","Exception Handling","Modules","OOP","Virtual Environment","Libraries","Flask","API","SQLite","Project Building","Debugging","Code Review","Revision","أخرى"],
@@ -2879,7 +2889,17 @@ const GOAL_CONFIG_V524 = {
             "TypeScript": ["Syntax Basics","Types","Interfaces","Generics","Modules","Project Building","Debugging","Revision","أخرى"],
             "HTML": ["Structure","Forms","Semantic HTML","Tables","Media","Accessibility","Revision","أخرى"],
             "CSS": ["Selectors","Box Model","Flexbox","Grid","Responsive Design","Animations","Revision","أخرى"],
-            "SQL": ["Queries","Tables","Joins","Relationships","Aggregation","SQLite","Database Design","Revision","أخرى"],
+            "SQL": ["SQL Basics", "SELECT", "WHERE", "ORDER BY", "GROUP BY", "HAVING", "JOIN", "Subqueries", "Aggregate Functions", "Views", "Indexes", "Stored Procedures", "Transactions", "Advanced SQL", "SQL Projects", "Revision", "أخرى"],
+            "Database Fundamentals": ["Database Concepts", "Tables", "Rows", "Columns", "Primary Key", "Foreign Key", "Relationships", "Normalization", "Constraints", "Transactions", "Database Modeling", "Revision", "أخرى"],
+            "SQLite": ["SQLite Basics", "CRUD Operations", "SQLite with Python", "SQLite with Flask", "Database Projects", "Revision", "أخرى"],
+            "MySQL": ["Installation", "CRUD", "Joins", "Indexes", "Stored Procedures", "Optimization", "Backup", "Security", "Projects", "Revision", "أخرى"],
+            "PostgreSQL": ["Installation", "CRUD", "Advanced Queries", "Indexes", "JSON Support", "Performance", "Projects", "Revision", "أخرى"],
+            "MongoDB": ["NoSQL Basics", "Collections", "Documents", "CRUD", "Aggregation", "Indexes", "MongoDB with Python", "MongoDB Projects", "Revision", "أخرى"],
+            "Database Design": ["Entity Relationship Diagram", "Normalization", "Schema Design", "Relationship Design", "Optimization", "Database Architecture", "Projects", "Revision", "أخرى"],
+            "ORM": ["ORM Basics", "SQLAlchemy", "Models", "Relationships", "CRUD", "Migration", "Flask Integration", "Projects", "Revision", "أخرى"],
+            "Database Optimization": ["Indexes", "Query Optimization", "Caching", "Performance Analysis", "Scaling", "Monitoring", "Projects", "Revision", "أخرى"],
+            "Database Security": ["Authentication", "Authorization", "SQL Injection Prevention", "Encryption", "Backup", "Recovery", "Security Best Practices", "Projects", "Revision", "أخرى"],
+            "Database Projects": ["Student Management System", "Library System", "Inventory System", "E-commerce Database", "Blog Database", "Portfolio Project", "Capstone Project", "Revision", "أخرى"],
             "PHP": ["Syntax Basics","Forms","Sessions","Database","Project Building","Debugging","Revision","أخرى"],
             "Flask": ["Routing","Templates","Forms","Authentication","Database","API","Deployment","Project Building","Debugging","Revision","أخرى"],
             "Django": ["Models","Views","Templates","Forms","Authentication","Admin Panel","REST API","Deployment","Project Building","أخرى"],
@@ -2900,7 +2920,7 @@ const GOAL_CONFIG_V524 = {
             "Algorithms": ["Searching","Binary Search","Sorting","Recursion","Divide and Conquer","Greedy Algorithms","Dynamic Programming","Backtracking","Two Pointers","Sliding Window","Prefix Sum","Bit Manipulation","Graph Algorithms","Shortest Path","Minimum Spanning Tree","Topological Sort","String Algorithms","Mathematical Algorithms","Computational Geometry","Revision","أخرى"],
             "Problem Solving": ["Problem Analysis","Pattern Recognition","Brute Force","Optimization","Implementation","Simulation","Ad Hoc Problems","Constructive Problems","Mathematical Problems","Logic Problems","Debugging Solutions","Revision","أخرى"],
             "OOP": ["Classes","Objects","Inheritance","Polymorphism","Encapsulation","Abstraction","Revision","أخرى"],
-            "Database": ["Tables","Relationships","Queries","Indexes","Normalization","SQLite","MySQL","PostgreSQL","Revision","أخرى"],
+            "Database": ["Database Concepts", "Tables", "Rows", "Columns", "Primary Key", "Foreign Key", "Relationships", "Normalization", "Constraints", "Transactions", "Database Modeling", "SQLite", "MySQL", "PostgreSQL", "Revision", "أخرى"],
             "Backend": ["Server Logic","Routing","Database","Authentication","API","Security","Deployment","Project Building","أخرى"],
             "Frontend": ["HTML","CSS","JavaScript","Responsive Design","DOM","UI Components","API Integration","Project Building","أخرى"],
             "Full Stack": ["Frontend","Backend","Database","Authentication","API","Deployment","Full Project","أخرى"],
@@ -3060,6 +3080,66 @@ const GOAL_CONFIG_V524 = {
                 current:["لم أبدأ","أشارك أحياناً","أشارك باستمرار","أحل مسائل متوسطة","أحل مسائل متقدمة","أخرى"],
                 target:["زيادة التصنيف","تحسين سرعة الحل","حل مسائل أصعب","تحسين الأداء","الاستعداد للمسابقات","تحقيق تصنيف مستهدف","أخرى"],
                 commitment:["مسألة يومية","ثلاث مسائل يومياً","مسابقة أسبوعية","Virtual Contest","Upsolving","تحليل الأخطاء","مراجعة أسبوعية","أخرى"]
+            },
+            "SQL": {
+                current:["لا أعرف SQL", "أعرف الأساسيات", "أكتب استعلامات بسيطة", "أتعامل مع JOIN", "أكتب استعلامات متقدمة", "أخرى"],
+                target:["فهم SQL", "كتابة استعلامات احترافية", "تحليل البيانات", "إدارة قواعد البيانات", "تطبيق مشاريع", "أخرى"],
+                commitment:["درس يومي", "كتابة استعلامات", "حل تحديات", "مشروع عملي", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Database Fundamentals": {
+                current:["لا أعرف المفهوم", "أعرف الأساسيات", "أفهم العلاقات", "أصمم قواعد بيانات", "أخرى"],
+                target:["فهم قواعد البيانات", "تصميم قاعدة بيانات", "بناء مشروع", "تحسين التصميم", "أخرى"],
+                commitment:["درس", "رسم مخطط", "تطبيق عملي", "مشروع", "مراجعة", "أخرى"]
+            },
+            "SQLite": {
+                current:["مبتدئ", "أعرف الأساسيات", "أستخدمها مع Python", "أستخدمها مع Flask", "أخرى"],
+                target:["بناء تطبيق", "ربط مشروع", "إدارة البيانات", "إكمال مشروع", "أخرى"],
+                commitment:["تطبيق", "ربط قاعدة بيانات", "مشروع", "مراجعة", "أخرى"]
+            },
+            "MySQL": {
+                current:["مبتدئ", "أعرف الأساسيات", "أستخدم CRUD", "أتعامل مع Joins", "أخرى"],
+                target:["إدارة قاعدة بيانات", "كتابة استعلامات عملية", "تحسين الأداء", "تأمين البيانات", "بناء مشروع", "أخرى"],
+                commitment:["درس عملي", "كتابة استعلامات", "تطبيق على مشروع", "مراجعة أسبوعية", "أخرى"]
+            },
+            "PostgreSQL": {
+                current:["مبتدئ", "أعرف الأساسيات", "أستخدم CRUD", "أكتب استعلامات متقدمة", "أخرى"],
+                target:["إدارة PostgreSQL", "استخدام Advanced Queries", "تحسين الأداء", "بناء مشروع", "أخرى"],
+                commitment:["درس عملي", "تطبيق استعلامات", "تحسين مشروع", "مراجعة أسبوعية", "أخرى"]
+            },
+            "MongoDB": {
+                current:["لا أعرف NoSQL", "أعرف الأساسيات", "أستخدم CRUD", "أبني مشاريع", "أخرى"],
+                target:["فهم MongoDB", "بناء مشروع", "تحسين الأداء", "إدارة البيانات", "أخرى"],
+                commitment:["درس", "تطبيق", "مشروع", "حل تحديات", "مراجعة", "أخرى"]
+            },
+            "Database Design": {
+                current:["مبتدئ", "أعرف المفاهيم", "أصمم قواعد بيانات", "أخرى"],
+                target:["تصميم احترافي", "تحسين الأداء", "بناء مشروع", "أخرى"],
+                commitment:["رسم مخطط", "تصميم قاعدة بيانات", "مشروع", "تحسين التصميم", "أخرى"]
+            },
+            "ORM": {
+                current:["لا أعرف ORM", "أعرف الأساسيات", "أستخدم SQLAlchemy", "أطبق مشاريع", "أخرى"],
+                target:["ربط التطبيقات", "إدارة البيانات", "بناء مشروع", "أخرى"],
+                commitment:["درس", "تطبيق", "ربط مشروع", "تحسين الكود", "أخرى"]
+            },
+            "Database Optimization": {
+                current:["مبتدئ", "أعرف Indexes", "أحلل أداء الاستعلامات", "أحسن قواعد بيانات", "أخرى"],
+                target:["تحسين الاستعلامات", "رفع الأداء", "تحليل المشكلات", "تطبيق تحسينات عملية", "أخرى"],
+                commitment:["تحليل Query", "إضافة Index", "مراجعة الأداء", "تطبيق تحسين", "أخرى"]
+            },
+            "Database Security": {
+                current:["مبتدئ", "أعرف أساسيات الحماية", "أفهم SQL Injection", "أطبق نسخاً احتياطياً", "أخرى"],
+                target:["تأمين قاعدة البيانات", "منع SQL Injection", "إدارة الصلاحيات", "حماية البيانات", "أخرى"],
+                commitment:["مراجعة صلاحيات", "تطبيق حماية", "اختبار أمني", "نسخ احتياطي", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Database Projects": {
+                current:["فكرة", "بدأت المشروع", "أنجزت جزءاً", "اقتربت من الإنجاز", "أخرى"],
+                target:["إكمال المشروع", "تحسين المشروع", "ربطه بتطبيق", "رفع المشروع", "بناء Portfolio", "أخرى"],
+                commitment:["ساعة تطوير", "ميزة جديدة", "تحسين قاعدة البيانات", "توثيق المشروع", "إصلاح الأخطاء", "أخرى"]
+            },
+            "Database": {
+                current:["لا أعرف المفهوم", "أعرف الأساسيات", "أفهم العلاقات", "أستخدم SQL", "أصمم قواعد بيانات", "أخرى"],
+                target:["فهم قواعد البيانات", "تصميم قاعدة بيانات", "ربطها بتطبيق", "تحسين الأداء", "بناء مشروع", "أخرى"],
+                commitment:["درس يومي", "رسم مخطط", "كتابة استعلامات", "تطبيق عملي", "مراجعة أسبوعية", "أخرى"]
             },
             "Machine Learning": {
                 current:["لا أعرف المفهوم","أعرف الأساسيات","أطبق أمثلة بسيطة","أبني نماذج أولية","أطبق مشاريع","أخرى"],
@@ -3432,7 +3512,17 @@ const TASK_AR_V530 = {
     "Programming": "البرمجة",
     "Algorithms": "Algorithms",
     "Data Structures": "Data Structures",
-    "Databases": "قواعد البيانات",
+    "Databases": "Database Fundamentals",
+    "Database Fundamentals": "Database Fundamentals",
+    "SQLite": "SQLite",
+    "MySQL": "MySQL",
+    "PostgreSQL": "PostgreSQL",
+    "MongoDB": "MongoDB",
+    "Database Design": "Database Design",
+    "ORM": "ORM",
+    "Database Optimization": "Database Optimization",
+    "Database Security": "Database Security",
+    "Database Projects": "Database Projects",
     "Operating Systems": "أنظمة التشغيل",
     "Computer Networks": "شبكات الحاسوب",
     "Web Development": "Web Development",
