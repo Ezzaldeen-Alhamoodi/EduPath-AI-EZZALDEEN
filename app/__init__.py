@@ -444,18 +444,19 @@ EduPath AI EZZALDEEN
 
 
 def send_task_completion_email(user, task):
-    body = f"""
-تم إكمال مهمة في EduPath AI EZZALDEEN:
+    body = f"""Congratulations {user.name},
+
+You completed a task in EduPath AI EZZALDEEN:
 
 {task_display_line(task)}
 
-هذا تقدم حقيقي. واصل إنجاز الخطوة التالية بهدوء وثبات.
+This is real progress. Keep your momentum and continue with the next small step.
 
-كل مهمة مكتملة تقرّبك أكثر من أهدافك.
+Every completed task makes your goals closer.
 
 EduPath AI EZZALDEEN
 """
-    return send_email_message("أحسنت! تم إكمال المهمة", [user.email], body)
+    return send_email_message("Great work! Task completed", [user.email], body)
 
 
 def task_due_for_email_reminder(task, now_dt):
@@ -474,16 +475,16 @@ def task_due_for_email_reminder(task, now_dt):
     if task.due_date and task.due_date < today_value:
         return False
 
-    if repeat_type_matches_v546(task.repeat_type, "مرة واحدة / بدون تكرار") and task.due_date and task.due_date != today_value:
+    if task.repeat_type == "once" and task.due_date and task.due_date != today_value:
         return False
 
-    if repeat_type_matches_v546(task.repeat_type, "أيام محددة"):
+    if task.repeat_type == "selected_days":
         # Python Monday=0 ... Sunday=6, same as the frontend values.
         days = [d for d in (task.repeat_days or "").split(",") if d != ""]
         if str(now_dt.weekday()) not in days:
             return False
 
-    if repeat_type_matches_v546(task.repeat_type, "أسبوعيًا") and task.due_date:
+    if task.repeat_type == "weekly" and task.due_date:
         try:
             due_weekday = datetime.strptime(task.due_date, "%Y-%m-%d").weekday()
             if now_dt.weekday() != due_weekday:
@@ -1252,7 +1253,7 @@ TASK_AR_LABELS_V529 = {
     "Artificial Intelligence": "الذكاء الاصطناعي",
     "Mathematics": "الرياضيات",
     "Scholarships": "المنح الدراسية",
-    "Exams & Certificates": "الاختبارات الدولية",
+    "Exams & Certificates": "الاختبارات والشهادات",
     "Daily Life": "الحياة اليومية",
     "Projects": "المشاريع",
     "Reading & Research": "القراءة والبحث",
@@ -1544,8 +1545,6 @@ TASK_AR_LABELS_V529 = {
 
 
 TASK_AR_LABELS_V529.update({
-    "custom": "أخرى",
-    "once": "مرة واحدة / بدون تكرار",
     "Pronunciation Practice": "ممارسة النطق",
     "Grammar Practice": "حل تمارين القواعد",
     "Vocabulary Building": "إثراء المفردات",
@@ -1842,172 +1841,6 @@ def task_exam_raw_or_ar(category, value):
     return task_ar(text)
 
 
-
-def repeat_days_display_ar(repeat_type, repeat_days):
-    if normalize_repeat_type_ar_v546(repeat_type) == "أخرى":
-        return repeat_days or "غير محدد"
-    return repeat_days_ar(repeat_days)
-
-
-
-TASK_NATIVE_AR_LABELS_V541 = {
-    "University": "المرحلة الجامعية",
-    "Languages": "اللغات",
-    "Programming & Technology": "البرمجة والتكنولوجيا",
-    "Artificial Intelligence": "الذكاء الاصطناعي",
-    "Mathematics": "الرياضيات",
-    "Scholarships": "المنح الدراسية",
-    "Daily Life": "الحياة اليومية",
-    "Projects": "المشاريع",
-    "Reading & Research": "القراءة والبحث",
-    "General": "عام",
-    "Other": "أخرى",
-    "Custom": "أخرى",
-    "Study": "التعلم",
-    "Learning": "التعلم",
-    "Do Task": "تنفيذ مهمة",
-    "Task": "مهمة",
-    "Review": "مراجعة",
-    "Planning": "التخطيط",
-    "Reminder": "تذكير",
-    "Health": "الصحة",
-    "Exercise": "الرياضة",
-    "Sleep": "النوم",
-    "Food": "التغذية",
-    "Water": "شرب الماء",
-    "Personal Routine": "الروتين الشخصي",
-    "Religious Routine": "الصلاة",
-    "Book Reading": "الكتب",
-    "Article Reading": "المقالات",
-    "Research Paper": "الأبحاث",
-    "Summary": "التلخيص",
-    "Critical Thinking": "التفكير النقدي",
-    "Take Notes": "تدوين ملاحظات",
-    "Lecture Study": "دراسة محاضرة",
-    "Assignment": "واجب",
-    "Project Work": "عمل على مشروع",
-    "Exam Review": "مراجعة اختبار",
-    "Solve Exercises": "حل تمارين",
-    "Review Terms": "مراجعة مصطلحات",
-    "Practice Problems": "حل مسائل تدريبية",
-    "Analyze Case": "تحليل حالة",
-    "Memorize Terms": "حفظ مصطلحات",
-    "done": "مكتملة",
-    "pending": "قيد التنفيذ",
-    "Completed": "مكتملة",
-    "Pending": "قيد التنفيذ",
-    "Incomplete": "غير مكتملة",
-    "Upcoming": "قادمة",
-    "Overdue": "متأخرة",
-    "once": "مرة واحدة / بدون تكرار",
-    "daily": "يوميًا",
-    "weekly": "أسبوعيًا",
-    "monthly": "شهريًا",
-    "selected_days": "أيام محددة",
-    "custom": "أخرى"
-}
-
-
-TASK_NATIVE_AR_LABELS_V542 = {
-    "Daily Life": "الحياة اليومية",
-    "Do Task": "تنفيذ مهمة",
-    "Review Progress": "مراجعة التقدم",
-    "Repeat Habit": "تثبيت العادة",
-    "Daily Habit": "عادة يومية",
-    "Weekly Routine": "روتين أسبوعي",
-    "Self-care": "العناية الشخصية",
-    "Water": "شرب الماء",
-    "Food": "التغذية",
-    "Health": "الصحة",
-    "Exercise": "الرياضة",
-    "Sleep": "النوم",
-    "Personal Routine": "الروتين الشخصي",
-    "Religious Routine": "الصلاة",
-    "Cleaning": "تنظيف المنزل",
-    "Shopping": "التسوق",
-    "Time Management": "إدارة الوقت",
-    "Family": "العائلة",
-    "Finance": "إدارة المال",
-    "Book Reading": "الكتب",
-    "Article Reading": "المقالات",
-    "Research Paper": "الأبحاث",
-    "Summary": "التلخيص",
-    "Critical Thinking": "التفكير النقدي",
-    "Take Notes": "تدوين ملاحظات",
-    "Read": "قراءة",
-    "Summarize": "تلخيص",
-    "Analyze": "تحليل",
-    "Discuss": "مناقشة",
-    "Application": "تطبيق عملي",
-    "General Topic": "موضوع عام",
-    "General Practice": "تطبيق عام",
-    "General": "عام",
-    "Other": "أخرى",
-    "Custom": "أخرى",
-    "مرة واحدة / بدون تكرار": "مرة واحدة / بدون تكرار",
-    "Daily": "يوميًا",
-    "Weekly": "أسبوعيًا",
-    "Monthly": "شهريًا",
-    "أيام محددة": "أيام محددة"
-}
-
-def native_task_label_v541(value):
-    if value is None:
-        return ""
-    text = str(value)
-    if text in TASK_EXAM_CONTENT_KEEP_V532:
-        return text
-    return TASK_NATIVE_AR_LABELS_V542.get(text) or TASK_NATIVE_AR_LABELS_V541.get(text) or task_ar(text)
-
-
-
-TASK_CATEGORY_TO_AR_V543 = {
-    "Quran Memorization": "حفظ القرآن الكريم",
-    "Secondary School": "المرحلة الثانوية",
-    "University": "المرحلة الجامعية",
-    "Languages": "اللغات",
-    "Programming & Technology": "البرمجة والتكنولوجيا",
-    "Artificial Intelligence": "الذكاء الاصطناعي",
-    "Mathematics": "الرياضيات",
-    "Scholarships": "المنح الدراسية",
-    "Exams & Certificates": "الاختبارات الدولية",
-    "Daily Life": "الحياة اليومية",
-    "Projects": "المشاريع",
-    "Reading & Research": "القراءة والبحث",
-    "General": "عام",
-    "Other": "أخرى"
-}
-
-def normalize_task_category_ar_v543(value):
-    text = (value or "").strip()
-    return TASK_CATEGORY_TO_AR_V543.get(text, text or "عام")
-
-
-
-TASK_REPEAT_TO_AR_V546 = {
-    "once": "مرة واحدة / بدون تكرار",
-    "daily": "يوميًا",
-    "weekly": "أسبوعيًا",
-    "monthly": "شهريًا",
-    "selected_days": "أيام محددة",
-    "custom": "أخرى",
-    "No Repeat / Once": "مرة واحدة / بدون تكرار",
-    "No Repeat": "مرة واحدة / بدون تكرار",
-    "Daily": "يوميًا",
-    "Weekly": "أسبوعيًا",
-    "Monthly": "شهريًا",
-    "Custom Days": "أيام محددة",
-    "Other": "أخرى",
-    "Custom": "أخرى"
-}
-
-def normalize_repeat_type_ar_v546(value):
-    text = (value or "").strip()
-    return TASK_REPEAT_TO_AR_V546.get(text, text or "يوميًا")
-
-def repeat_type_matches_v546(value, *names):
-    return normalize_repeat_type_ar_v546(value) in names
-
 def render_clickable_sources(value):
     """Render source text safely: plain text stays plain, URLs become clickable links.
     Multiple sources can be separated by &.
@@ -2066,10 +1899,8 @@ def create_app():
     app.jinja_env.filters["clickable_sources"] = render_clickable_sources
     app.jinja_env.filters["task_ar"] = task_ar
     app.jinja_env.filters["repeat_days_ar"] = repeat_days_ar
-    app.jinja_env.filters["repeat_days_display_ar"] = repeat_days_display_ar
     app.jinja_env.filters["task_exam_safe"] = task_ar_exam_safe
     app.jinja_env.filters["task_exam_raw_or_ar"] = task_exam_raw_or_ar
-    app.jinja_env.filters["native_task_label"] = native_task_label_v541
     app.jinja_env.filters["goals_ar"] = goals_ar
     app.jinja_env.filters["goal_time_ar"] = format_goal_time_left
     app.jinja_env.filters["goal_time_compact_ar"] = format_goal_time_left_compact
@@ -2886,7 +2717,7 @@ def create_app():
             goal = Goal(
                 user_id=current_user.id,
                 title=request.form.get("title", "").strip(),
-                category=normalize_task_category_ar_v543(request.form.get("category", "عام")),
+                category=request.form.get("category", "General").strip(),
                 current_level=current_state,
                 daily_minutes=0,
                 start_date=request.form.get("start_date", "").strip(),
@@ -2995,22 +2826,18 @@ def create_app():
                 start_date=request.form.get("start_date", "").strip(),
                 due_date=request.form.get("due_date", "").strip(),
                 reminder_time="",
-                repeat_type=normalize_repeat_type_ar_v546(request.form.get("repeat_type", "يوميًا")),
-                repeat_days=(
-                    request.form.get("repeat_custom", "").strip()
-                    if normalize_repeat_type_ar_v546(request.form.get("repeat_type", "")) == "أخرى"
-                    else ",".join(request.form.getlist("repeat_days"))
-                ),
+                repeat_type=request.form.get("repeat_type", "daily").strip(),
+                repeat_days=",".join(request.form.getlist("repeat_days")),
                 notes=request.form.get("notes", "").strip(),
             )
 
             if not task.title:
-                flash("يرجى إدخال اسم المهمة.", "error")
+                flash("Task title is required.", "error")
                 return redirect(url_for("tasks"))
 
             db.session.add(task)
             db.session.commit()
-            flash("تم حفظ المهمة بنجاح.", "success")
+            flash("Task saved.", "success")
             return redirect(url_for("tasks"))
 
         all_tasks = StudyTask.query.filter_by(user_id=current_user.id).order_by(
@@ -3051,15 +2878,11 @@ def create_app():
             task.start_date = request.form.get("start_date", "").strip()
             task.due_date = request.form.get("due_date", "").strip()
             task.reminder_time = request.form.get("reminder_time", "").strip()
-            task.repeat_type = normalize_repeat_type_ar_v546(request.form.get("repeat_type", "يوميًا"))
-            task.repeat_days = (
-                request.form.get("repeat_custom", "").strip()
-                if normalize_repeat_type_ar_v546(task.repeat_type) == "أخرى"
-                else ",".join(request.form.getlist("repeat_days"))
-            )
+            task.repeat_type = request.form.get("repeat_type", "daily").strip()
+            task.repeat_days = ",".join(request.form.getlist("repeat_days"))
             task.notes = request.form.get("notes", "").strip()
             db.session.commit()
-            flash("تم تعديل المهمة بنجاح.", "success")
+            flash("Task changes saved.", "success")
             return redirect(url_for("tasks"))
 
         return render_template("edit_task.html", task=task)
@@ -3082,13 +2905,13 @@ def create_app():
 
         related_msg = ""
         if linked_goals:
-            related_msg = " الهدف المرتبط: " + linked_goals[0][0].title
+            related_msg = " Related goal: " + linked_goals[0][0].title
         session["toast_notifications"] = [{
-            "title": "أحسنت!",
-            "body": f"تم إكمال المهمة: {task.title}. واصل تقدمك."
+            "title": "Great work!",
+            "body": f"You completed: {task.title}.{related_msg} Keep your momentum going."
         }]
 
-        flash("تم إكمال المهمة.", "success")
+        flash("Task marked as done.", "success")
         return redirect(url_for("tasks"))
 
     @app.route("/task/<int:task_id>/pending")
@@ -3097,7 +2920,7 @@ def create_app():
         task = StudyTask.query.filter_by(id=task_id, user_id=current_user.id).first_or_404()
         task.status = "pending"
         db.session.commit()
-        flash("تمت إعادة المهمة إلى قيد التنفيذ.", "success")
+        flash("Task returned to pending.", "success")
         return redirect(url_for("tasks"))
 
     @app.route("/task/<int:task_id>/delete")
@@ -3106,7 +2929,7 @@ def create_app():
         task = StudyTask.query.filter_by(id=task_id, user_id=current_user.id).first_or_404()
         db.session.delete(task)
         db.session.commit()
-        flash("تم حذف المهمة.", "success")
+        flash("Task deleted.", "success")
         return redirect(url_for("tasks"))
 
     @app.route("/languages")

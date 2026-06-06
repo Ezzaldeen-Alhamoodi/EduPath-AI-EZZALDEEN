@@ -1832,455 +1832,58 @@ Dashboard-only layout fix.
 - Other task sections keep their Arabic-native behavior.
 
 
-## v5.3.4 Exam Labels Arabic Content English
+## v5.3.4 Exam Labels AR Content EN + Desktop Task Form
 
-### Urgent correction
-- All task form labels remain Arabic in every task type.
-- In Exams & Certificates only, all internal exam content is English.
-- Exams & Certificates flow:
-  - Exam
-  - Main section / skill
-  - Detailed topic / question type
-  - Activity type
-- IELTS, TOEFL, Duolingo, HSK, CSCA, SAT, ACT, GRE, and GMAT content remains English.
-- CSCA restored with:
-  - Mathematics: Sets and Variables, Functions, Geometry and Algebra, Probability and Statistics.
-  - Physics: Mechanics, Electromagnetism, Thermodynamics, Optics, Modern Physics.
-  - Chemistry: Basic Chemical Calculations, Properties and Reactions of Matter, Chemical Theories and Laws, Chemical Experiments and Applications.
-  - English: Reading, Listening, Writing, Vocabulary, Grammar.
-- Other sections keep their previous behavior.
-
-
-## v5.3.8 Source Task Labels AR
-
-### Root fix from stable v5.3.4
-- Based directly on the stable v5.3.4 version.
-- Replaced task field labels at the source level in templates and app.js.
-- Removed/avoided MutationObserver and heavy runtime label fixing.
-- The following are Arabic from the source:
-  - اسم المهمة
-  - الفئة الرئيسية
-  - الفئة الفرعية
-  - الموضوع التفصيلي
-  - نوع النشاط
-  - المصدر أو الرابط
-  - مستوى الصعوبة
-  - الأولوية
-  - الوقت المتوقع (بالدقائق)
-  - تاريخ البدء
-  - تاريخ الانتهاء
-  - وقت التذكير
-  - التكرار
-  - أيام التكرار
-  - الملاحظات
-  - حفظ المهمة
-- No adaptive content was changed.
-- Exam content behavior from v5.3.4 is preserved.
-
-
-## v5.3.9 Repeat Logic Only
-
-### Scope
-- This update only changes Tasks repeat logic.
-- No dashboard changes.
-- No goals changes.
-- No progress percentage changes.
-- No smart linking changes.
-
-### Repeat options
-- مرة واحدة / بدون تكرار
-- يوميًا
-- أسبوعيًا
-- شهريًا
-- أيام محددة
-- أخرى
-
-### Custom repeat
-- When "أخرى" is selected, a new Arabic field appears:
-  - اكتب نمط التكرار المطلوب
-- Examples shown:
-  - مرتين يوميًا
-  - كل 8 ساعات
-  - صباحًا ومساءً
-  - بعد كل صلاة
-  - قبل النوم
-- The custom repeat text is stored in the existing repeat_days field to avoid database migration.
-
-
-## v5.4.0 Native Arabic Tasks Source
-
-### Scope
-- Tasks page only.
-- Converted visible adaptive task content to Arabic-native source data.
-- This is not a runtime translation layer.
-- The adaptive task options are Arabic in the task configuration itself for:
-  - المرحلة الجامعية
-  - اللغات
-  - البرمجة والتكنولوجيا
-  - الذكاء الاصطناعي
-  - الرياضيات
-  - المنح الدراسية
-  - الحياة اليومية
-  - المشاريع
-  - القراءة والبحث
-  - عام
-- Quran Memorization and Secondary School were preserved.
-- Exams & Certificates internal content remains English as required.
-- Task flash messages are now Arabic:
-  - save
-  - update
-  - complete
-  - pending
-  - delete
-  - task limit
-- No dashboard, goals, progress, or smart linking changes.
-
-
-## v5.4.1 Final Native Arabic Tasks
-
-### Scope
-- Final comprehensive native-Arabic update for Tasks before moving to Dashboard.
-- Covers:
-  - Tasks page
-  - Add task form
-  - Edit task form
-  - Saved task cards
-  - Task flash messages
-  - Other/custom fields
-  - Repeat options
-  - Task-related text shown on Dashboard
-  - Existing stored task values displayed in cards
-
-### Principles
-- No runtime translation layer for task UI.
-- User-facing task text is Arabic in source code.
-- Quran Memorization and Secondary School structures preserved.
-- Exams & Certificates official test/question content preserved where appropriate.
-- No dashboard layout, goals, progress, or smart linking logic changed.
-
-
-## v5.4.2 Tasks Arabic Source Root
-
-### Root correction
-- Arabic is now the default source behavior for Tasks.
-- Removed the old English-default behavior from task dynamic option logic.
-- Reworked repeat options so they no longer return to English:
-  - مرة واحدة / بدون تكرار
-  - يوميًا
-  - أسبوعيًا
-  - شهريًا
-  - أيام محددة
-  - أخرى
-- Custom/Other fields in the Tasks page are Arabic in all task types.
-- Existing old English task values are displayed through Arabic-native labels.
-- User-facing task messages are Arabic.
-- Task-related Dashboard labels are Arabic.
-- Official exam names, official question types, and programming/technology names remain unchanged where required.
-
-### Scope
-- Tasks page and task outputs only.
-- No goals logic changes.
-- No progress logic changes.
-- No smart linking changes.
-
-
-## v5.4.3 Smart Task Data AR
-
-### Scope
-- First step of the Arabic-root refactor for Tasks.
-- Rebuilt SMART_TASK_DATA with Arabic keys and Arabic source values.
-- Task type keys are now Arabic in the frontend source:
-  - حفظ القرآن الكريم
-  - المرحلة الثانوية
-  - المرحلة الجامعية
-  - اللغات
-  - البرمجة والتكنولوجيا
-  - الذكاء الاصطناعي
-  - الرياضيات
-  - المنح الدراسية
-  - الاختبارات والشهادات
-  - الحياة اليومية
-  - المشاريع
-  - القراءة والبحث
-  - عام
-  - أخرى
-- Added temporary compatibility for older stored internal category values.
-- Backend normalizes task category to Arabic on save/edit.
-- Official exam names, official exam question types, and programming language names remain unchanged where required.
-
-### Not changed yet
-- Full task saving model refactor.
-- Full task editing model refactor.
-- Dashboard tasks refactor.
-- Repeating task engine refactor.
-- Goal linking refactor.
-
-
-## v5.4.4 Cache Bust Smart Task Data AR
-
-### Why
-- The v5.4.3 Smart Task Data update may not appear if the browser or service worker still serves old `app.js`.
-- This version forces the browser to load the new JavaScript and CSS files.
-
-### Changes
-- Added `?v=5.4.4` to `style.css` and `app.js` in `base.html`.
-- Updated service worker cache name to `edupath-ai-v5-4-4`.
-- Added build marker: `EDUPATH_BUILD_VERSION = "5.4.4-smart-task-data-ar-cache-bust"`.
-- No new feature changes beyond ensuring v5.4.3 actually loads.
-
-
-## v5.4.5 Purge Old Task Sources AR
-
-### Root correction
-- Removed obsolete JavaScript override layers that were rewriting task data after the Arabic SMART_TASK_DATA.
-- Removed old exam/task override layer that reintroduced `Other`, `Custom`, and English task options.
-- Replaced the old UI translation dictionary with a minimal Arabic task-category map.
-- Kept official exam names and official exam question/task names where required.
-- Added cache busting `?v=5.4.5`.
-- Updated service worker cache name to `edupath-ai-v5-4-5`.
-
-### Scope
-- Smart Task Data source cleanup.
-- No goals refactor yet.
-- No dashboard redesign.
-- No database migration.
-
-
-## v5.4.6 Isolated Native Tasks Engine AR
-
-### القرار
-- عزل صفحة المهام عن محرك app.js القديم.
-- إضافة ملف مستقل: `app/static/js/tasks_native_ar.js`.
-- هذا الملف يبني بطاقات نوع المهمة والقوائم التكيفية من مصدر عربي مستقل.
-- لا يعتمد على `translateDynamicOptions` أو `labelForUI` أو أي طبقة ترجمة قديمة.
-- خيارات التكرار أصبحت عربية في الواجهة وقيم الحفظ.
-- تم تحديث الباك إند لقبول التكرار العربي والقيم القديمة مؤقتًا.
-
-### النطاق
-- صفحة المهام.
-- تعديل المهمة.
-- التكرار في المهام.
-- لا يوجد تغيير في صفحة الأهداف أو الربط الذكي.
-
-
-## v5.4.7 Repeat Fix Natural Arabic
-
-### Fixed
-- Fixed the repeat dropdown behavior:
-  - "أيام محددة" now opens the weekday selector.
-  - "أخرى" now opens the custom repeat input.
-- Moved `tasks_native_ar.js` to load after `app.js` through `extra_scripts`, so the old app logic cannot override it afterward.
-- Removed weak literal Arabic phrases from task data and replaced them with clearer Arabic expressions.
-- Removed English repeat aliases from the frontend repeat engine.
-- Kept official exam/test terms only where they are actual official names.
-
-### Scope
-- Tasks page only.
-- No goals changes.
-- No dashboard redesign.
-
-
-## v5.4.8 Repeat + Reading Research Fix
-
-### Fixed
-- Fixed repeat controls in all task sections:
-  - "أيام محددة" now opens weekday selection.
-  - "أخرى" now opens the custom repeat input.
-- Added a small page-level fail-safe so repeat boxes still work even if old JavaScript interferes.
-- Rebuilt "القراءة والبحث" with simpler, clearer Arabic wording:
-  - قراءة كتاب
-  - قراءة مقال
-  - قراءة بحث
-  - تلخيص
-  - تدوين ملاحظات
-  - مراجعة ما قرأت
-  - بحث علمي
-  - تفكير ناقد
-  - تعلم ذاتي
-
-### Scope
-- Tasks page only.
-- No goals changes.
-- No dashboard redesign.
-
-
-## v5.4.9 Smart Exam Data
-
-### Added
-- Added independent `SMART_EXAM_DATA` for the Exams & Certificates task category.
-- Exams are now isolated from the general task data.
-- Exam flow is now:
-  - Exam
-  - Main Section
-  - Task Type / Question Group
-  - Activity Type
-
-### Exams covered
-- IELTS
-- TOEFL
-- Duolingo English Test
-- CSCA
-- SAT
-- ACT
-- GRE
-- GMAT
-- HSK
-- HSKK
-
-### Rules
-- Form labels remain Arabic.
-- Exam names, official sections, official question types, and official activities remain English.
-- No mixing between exams:
-  - IELTS does not show GRE/GMAT/SAT-specific items.
-  - GRE does not show IELTS-specific items.
-  - Duolingo does not show IELTS Writing or Reading question types.
-  - CSCA subjects stay isolated.
-
-
-## v5.5.0 Exam Precise Adaptive Fix
-
-### Purpose
-- Corrected the Exams & Certificates task category after v5.4.9.
-- Restored the practical adaptive flow requested by the user:
-  - Exam
-  - Main Section
-  - Task Type / Question Type
-  - Activity Type
-
-### Important behavior
-- Form labels remain Arabic.
-- Exam content remains English.
-- IELTS, TOEFL, Duolingo, and CSCA were rebuilt exactly around their own sections and question/task types.
-- SAT, ACT, GRE, GMAT, HSK, and HSKK remain in the same adaptive exam engine.
-- No mixing between exams:
-  - IELTS does not show GRE/GMAT/SAT items.
-  - GRE does not show IELTS items.
-  - Duolingo does not show IELTS Writing Task 2 or IELTS Reading question types.
-  - CSCA subjects stay isolated.
-
-### Scope
-- Tasks page only.
-- Exams & Certificates category only.
-
-
-## v5.5.1 International Exams Exact
-
-### Scope
-- Final detailed update for the Tasks category previously named:
-  - الاختبارات والشهادات
-- New category name:
-  - الاختبارات الدولية
-
-### Rules applied exactly from the provided specification
-- Form labels remain Arabic.
-- International exam content remains English.
-- The main category list is:
+### Exams & Certificates correction
+- Form labels remain Arabic in every task type.
+- Exams & Certificates internal content is English:
   - IELTS
   - TOEFL
-  - Duolingo English Test
+  - Duolingo
   - HSK
-  - HSKK
   - CSCA
   - SAT
   - ACT
   - GRE
   - GMAT
-  - Other
-- No fixed subcategory list for all exams.
-- Each exam has its own sections, details, and activities.
-- Other opens an Arabic custom input.
-- No Custom label is shown.
+- CSCA content is English:
+  - Mathematics
+  - Physics
+  - Chemistry
+  - English
+  - Sets and Variables
+  - Functions
+  - Geometry and Algebra
+  - Probability and Statistics
+  - Mechanics
+  - Electromagnetism
+  - Thermodynamics
+  - Optics
+  - Modern Physics
+  - Basic Chemical Calculations
+  - Properties and Reactions of Matter
+  - Chemical Theories and Laws
+  - Chemical Experiments and Applications
+- Other appears as Other inside Exams & Certificates.
 
-### Validation rules
-- SAT has no Listening.
-- GMAT has no Speaking.
-- CSCA has no Speaking.
-- CSCA has Writing only inside English.
-- Duolingo English Test uses its own tasks.
-- IELTS uses its own official sections and question types.
-
-
-## v5.5.2 Reading Research Native AR
-
-### Scope
-- Rebuilt the `القراءة والبحث` task category from the source in Arabic.
-- No translation layer.
-- No English source values for this category.
-- The structure is:
-  - الفئة الرئيسية
-  - الفئة الفرعية
-  - الموضوع التفصيلي
-  - نوع النشاط
-
-### Main fields
-- القراءة والمطالعة العامة
-- البحث العلمي والأكاديمي
-- التعلم الذاتي وتطوير المهارات
-- الأعمال والتطوير المهني
-- الدين والدراسات الشرعية
-- أخرى
-
-### Rules
-- Activity type now depends on the detailed topic through `trainingByDetail`.
-- The category does not use fixed repeated activities.
-- `أخرى` exists in every level.
-- `Custom` is not used.
-- `اكتب ما تريد` remains the Arabic custom input.
+### Desktop task form layout
+- Desktop-only structured two-column form grid.
+- Every label stays directly above its field.
+- Long fields span full width when possible.
+- Mobile layout is not changed.
 
 
-## v5.5.3 Tasks Responsive Design
+## v5.3.5 Desktop Task Form Grid
 
-### Scope
-- Design and layout only for the Tasks page.
-- No logic changes.
-- No feature changes.
-- No task data changes.
-- No form field changes.
-
-### Improvements
-- More compact Tasks hero.
-- Better use of screen width on desktop and large screens.
-- Task type grid:
-  - Mobile: 3 cards per row.
-  - Tablet: 4 cards per row.
-  - Desktop: 5–6 cards per row.
-- Form layout:
-  - Mobile: compact vertical layout.
-  - Tablet/Desktop: multi-column layout where appropriate.
-- Current task cards:
-  - Mobile: 1 card per row.
-  - Tablet: 2 cards per row.
-  - Large screens: up to 3 cards per row.
-- Reduced unnecessary padding, oversized icons, and excessive card height.
-- Unified button sizing, spacing, borders, and visual rhythm.
-
-
-## v5.5.4 Tasks Desktop Layout Polish
-
-### Scope
-- Desktop-focused design update for the Tasks page.
-- No function changes.
-- No form field changes.
-- No task data changes except task-type visual icons.
-- Mobile layout preserved.
-
-### Desktop layout
-- New order:
-  - Hero Section
-  - Task Types
-  - Add Task Form
-  - Current Tasks
-- Current tasks are now below the add-task form and use full page width.
-- Current tasks grid:
-  - Medium desktop: 2 cards per row.
-  - Large desktop: 3 cards per row.
-  - Very large screens: up to 4 cards per row.
-
-### Visual updates
-- Removed redundant inner heading:
-  - ١. اختر نوع المهمة
-  - explanatory text below it
-- Replaced letter-circle icons with modern emoji icons:
-  - 📖 🎓 🏫 🌍 💻 🤖 📐 🎯 📝 🏠 🚀 📚 ⚙️ ✨
-- Task-type cards now use a blue visual identity derived from the hero section.
-- Improved spacing, alignment, and desktop use of horizontal space.
+### Desktop only
+- Rebuilt the Create Task form layout for desktop/laptop only.
+- Added a structured two-column grid inside `@media (min-width: 981px)`.
+- Every label stays directly above its own field.
+- Inputs, selects, dates, time fields, and numeric fields now share consistent widths and heights.
+- Source and notes fields span the full form width.
+- Notes field uses full width.
+- Save button remains at the bottom with a clear centered width.
+- Custom/Other fields stay directly under their related dropdown.
+- No fields were removed.
+- No fields were added.
+- Mobile layout was not changed.

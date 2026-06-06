@@ -6970,818 +6970,263 @@ body #trainingTypeSelect {
 
 
 
-/* EduPath AI v5.3.4 Exam Labels Arabic Content English */
-body #topicSelect,
-body #skillSelect,
-body #detailedTopicSelect,
-body #trainingTypeSelect {
-    unicode-bidi: plaintext;
-}
-
-
-/* EduPath AI v5.3.8 Source Task Labels AR */
-.smart-task-form label,
-.form label { direction: rtl !important; text-align: right !important; }
-
-
-
-/* EduPath AI v5.3.9 Repeat Logic Only */
-.repeat-custom-box {
-    display: none;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 14px;
-    background: rgba(37, 99, 235, 0.06);
-    border: 1px solid rgba(37, 99, 235, 0.12);
-}
-
-.repeat-custom-box input {
-    width: 100%;
-    margin-top: 6px;
-}
-
-
-/* EduPath AI v5.4.0 Native Arabic Tasks Source */
-.smart-task-form label,
-.form label { direction: rtl !important; text-align: right !important; }
-
-
-/* EduPath AI v5.4.1 Final Native Arabic Tasks */
-.smart-task-form label,
-.form label { direction: rtl !important; text-align: right !important; }
-
-
-/* EduPath AI v5.4.2 Tasks Arabic Source Root */
-.smart-task-form label,
-.form label { direction: rtl !important; text-align: right !important; }
-
-
-/* EduPath AI v5.4.3 Smart Task Data AR */
-.smart-task-form label,
-.form label { direction: rtl !important; text-align: right !important; }
-
-
-/* EduPath AI v5.4.5 Purge Old Task Sources AR */
-.smart-task-form label,
-.form label { direction: rtl !important; text-align: right !important; }
-
-
-/* EduPath AI v5.4.6 Isolated Native Tasks Engine AR */
-.smart-task-form label,.form label{direction:rtl!important;text-align:right!important}
-
-
-
-/* EduPath AI v5.4.7 Repeat Fix + Natural Arabic */
-.repeat-days-box[aria-hidden="false"],
-.repeat-custom-box[aria-hidden="false"] {
-    display: block !important;
-}
-
-.repeat-days-box[aria-hidden="true"],
-.repeat-custom-box[aria-hidden="true"] {
-    display: none !important;
-}
-
-
-
-/* EduPath AI v5.4.8 Repeat + Reading Research Fix */
-.repeat-days-box[aria-hidden="false"],
-.repeat-custom-box[aria-hidden="false"] {
-    display: block !important;
-}
-
-.repeat-days-box[aria-hidden="true"],
-.repeat-custom-box[aria-hidden="true"] {
-    display: none !important;
-}
-
-
-/* EduPath AI v5.4.9 Smart Exam Data */
-
-
-/* EduPath AI v5.5.0 Exam Precise Adaptive Fix */
-
-
-/* EduPath AI v5.5.1 International Exams Exact */
-
-
-/* EduPath AI v5.5.2 Reading Research Native AR */
-
-
-/* EduPath AI v5.5.3 Tasks Responsive Design - design only */
-:root {
-    --tasks-radius-lg: 22px;
-    --tasks-radius-md: 16px;
-    --tasks-gap-xs: 6px;
-    --tasks-gap-sm: 10px;
-    --tasks-gap-md: 14px;
-    --tasks-gap-lg: 18px;
-}
-
-/* Compact hero for tasks page */
-.tasks-hero {
-    min-height: auto !important;
-    padding: 18px 20px !important;
-    border-radius: var(--tasks-radius-lg) !important;
-    gap: 14px !important;
-    align-items: center !important;
-    margin-bottom: 14px !important;
-}
-
-.tasks-hero .tag {
-    font-size: 12px !important;
-    padding: 5px 10px !important;
-}
-
-.tasks-hero h2 {
-    font-size: clamp(22px, 2.4vw, 34px) !important;
-    line-height: 1.25 !important;
-    margin: 8px 0 6px !important;
-}
-
-.tasks-hero p {
-    font-size: 14px !important;
-    line-height: 1.7 !important;
-    max-width: 900px !important;
-    margin: 0 !important;
-}
-
-.tasks-hero .button {
-    min-height: 40px !important;
-    padding: 9px 16px !important;
-    border-radius: 14px !important;
-    white-space: nowrap !important;
-}
-
-/* Tasks main layout: use available width without crushing content */
-.grid-2 {
-    gap: 14px !important;
-    align-items: start !important;
-}
-
-.card#addTaskCard,
-.tasks-list-card-v476 {
-    border-radius: var(--tasks-radius-lg) !important;
-    padding: 16px !important;
-    overflow: visible !important;
-}
-
-.card#addTaskCard > h2,
-.tasks-list-card-v476 > h2 {
-    font-size: 20px !important;
-    margin: 0 0 6px !important;
-}
-
-.card#addTaskCard > .muted,
-.tasks-list-card-v476 > .muted {
-    margin: 0 0 12px !important;
-    font-size: 13px !important;
-}
-
-/* Smart form compaction */
-.smart-task-form {
-    display: grid !important;
-    gap: 12px !important;
-}
-
-.smart-step {
-    padding: 12px !important;
-    border-radius: var(--tasks-radius-md) !important;
-    margin-bottom: 4px !important;
-}
-
-.smart-step h3 {
-    font-size: 16px !important;
-    margin: 0 0 4px !important;
-}
-
-.smart-step .muted,
-.smart-step p {
-    font-size: 12.5px !important;
-    line-height: 1.6 !important;
-    margin: 0 0 10px !important;
-}
-
-/* Task type cards: responsive density */
-.task-type-grid {
-    display: grid !important;
-    gap: 8px !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-}
-
-.task-type-card {
-    min-height: 72px !important;
-    padding: 9px 6px !important;
-    border-radius: 15px !important;
-    gap: 5px !important;
-    justify-content: center !important;
-}
-
-.task-type-card .task-type-icon,
-.task-type-card .icon,
-.task-type-card strong:first-child {
-    font-size: 18px !important;
-    line-height: 1 !important;
-}
-
-.task-type-card strong,
-.task-type-card span,
-.task-type-card p {
-    font-size: 11.5px !important;
-    line-height: 1.35 !important;
-    margin: 0 !important;
-}
-
-.task-type-card small {
-    font-size: 10.5px !important;
-    line-height: 1.35 !important;
-}
-
-/* Form fields: consistent compact language */
-.smart-details {
-    display: grid !important;
-    gap: 8px 12px !important;
-}
-
-.smart-details label,
-.form label {
-    font-size: 12.5px !important;
-    font-weight: 800 !important;
-    margin: 0 !important;
-}
-
-.form input,
-.form select,
-.form textarea,
-.smart-details input,
-.smart-details select,
-.smart-details textarea {
-    min-height: 38px !important;
-    padding: 8px 10px !important;
-    border-radius: 12px !important;
-    font-size: 13px !important;
-}
-
-.form textarea,
-.smart-details textarea {
-    min-height: 78px !important;
-}
-
-.form-row {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 10px !important;
-    margin: 0 !important;
-}
-
-.conditional-field,
-.csca-extra-box,
-.repeat-days-box,
-.repeat-custom-box {
-    padding: 10px !important;
-    border-radius: 14px !important;
-    margin: 0 !important;
-}
-
-.hint,
-small.hint {
-    font-size: 11.5px !important;
-    line-height: 1.55 !important;
-}
-
-.weekday-grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    gap: 7px !important;
-    margin-top: 8px !important;
-}
-
-.weekday-pill {
-    min-height: 34px !important;
-    padding: 6px 8px !important;
-    border-radius: 12px !important;
-    font-size: 12px !important;
-}
-
-/* Submit button consistency */
-.form button[type="submit"],
-.card#addTaskCard form > button[type="submit"] {
-    min-height: 42px !important;
-    border-radius: 14px !important;
-    padding: 10px 16px !important;
-    font-size: 14px !important;
-    margin-top: 6px !important;
-}
-
-/* Task cards board */
-.tasks-board-v476 {
-    display: grid !important;
-    gap: 10px !important;
-    grid-template-columns: 1fr !important;
-}
-
-.task-card {
-    border-radius: var(--tasks-radius-md) !important;
-    padding: 12px !important;
-    gap: 10px !important;
-    min-height: auto !important;
-}
-
-.task-card > div:first-child {
-    display: grid !important;
-    gap: 5px !important;
-}
-
-.task-card strong {
-    font-size: 15px !important;
-    line-height: 1.45 !important;
-}
-
-.task-card span {
-    font-size: 12.2px !important;
-    line-height: 1.55 !important;
-}
-
-.task-card .actions {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 6px !important;
-    margin-top: 4px !important;
-}
-
-.small-button,
-.task-card .small-button {
-    min-height: 32px !important;
-    padding: 6px 10px !important;
-    border-radius: 10px !important;
-    font-size: 12px !important;
-    line-height: 1.2 !important;
-}
-
-/* Tablet */
-@media (min-width: 700px) {
-    .task-type-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    }
-
-    .smart-details {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        align-items: end !important;
-    }
-
-    .smart-details > label {
-        align-self: end !important;
-    }
-
-    .smart-details > label,
-    .smart-details > input,
-    .smart-details > select,
-    .smart-details > textarea,
-    .smart-details > .conditional-field,
-    .smart-details > .csca-extra-box,
-    .smart-details > .repeat-days-box,
-    .smart-details > .repeat-custom-box {
-        grid-column: span 1 !important;
-    }
-
-    #taskNameLabel,
-    #taskTitleInput,
-    #sourceLabel,
-    #sourceInput,
-    #notesLabel,
-    #notesInput,
-    .csca-extra-box,
-    .repeat-days-box,
-    .repeat-custom-box {
-        grid-column: 1 / -1 !important;
-    }
-
-    .tasks-board-v476 {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-}
-
-/* Desktop and laptop */
+/* EduPath AI v5.3.4 Desktop Structured Task Form */
 @media (min-width: 981px) {
-    .tasks-hero {
-        padding: 20px 22px !important;
-        display: flex !important;
-        justify-content: space-between !important;
+    .smart-task-form {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(280px, 1fr)) !important;
+        gap: 14px 16px !important;
+        align-items: start !important;
+        direction: rtl !important;
     }
 
-    .grid-2 {
-        grid-template-columns: minmax(500px, 1.2fr) minmax(360px, .8fr) !important;
-        gap: 16px !important;
+    .smart-task-form > .form-row,
+    .smart-task-form > .form-group,
+    .smart-task-form > .conditional-field,
+    .smart-task-form > label,
+    .smart-task-form > div {
+        min-width: 0 !important;
     }
 
-    .task-type-grid {
-        grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-    }
-
-    .card#addTaskCard,
-    .tasks-list-card-v476 {
-        padding: 18px !important;
-    }
-
-    .tasks-board-v476 {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-}
-
-/* Wider screens: make better use of width */
-@media (min-width: 1280px) {
-    .grid-2 {
-        grid-template-columns: minmax(680px, 1.35fr) minmax(500px, 1fr) !important;
-    }
-
-    .task-type-grid {
-        grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
-    }
-
-    .tasks-board-v476 {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-
-    .smart-details {
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    }
-
-    #taskNameLabel,
-    #taskTitleInput {
-        grid-column: 1 / -1 !important;
-    }
-
-    #sourceLabel,
-    #sourceInput,
-    #notesLabel,
-    #notesInput,
-    .repeat-days-box,
-    .repeat-custom-box,
-    .csca-extra-box {
-        grid-column: 1 / -1 !important;
-    }
-}
-
-/* Very wide screens: current tasks can use 3 columns when space allows */
-@media (min-width: 1560px) {
-    .grid-2 {
-        grid-template-columns: minmax(760px, 1.25fr) minmax(680px, 1fr) !important;
-    }
-
-    .tasks-board-v476 {
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    }
-}
-
-/* Mobile refinement */
-@media (max-width: 699px) {
-    .tasks-hero {
-        padding: 14px !important;
-        border-radius: 18px !important;
-        margin-bottom: 10px !important;
-    }
-
-    .tasks-hero h2 {
-        font-size: 21px !important;
-    }
-
-    .tasks-hero p {
-        font-size: 12.5px !important;
-    }
-
-    .tasks-hero .button {
-        width: 100% !important;
-        min-height: 38px !important;
-    }
-
-    .grid-2 {
-        gap: 10px !important;
-    }
-
-    .card#addTaskCard,
-    .tasks-list-card-v476 {
-        padding: 12px !important;
-        border-radius: 18px !important;
-    }
-
-    .card#addTaskCard > h2,
-    .tasks-list-card-v476 > h2 {
-        font-size: 18px !important;
-    }
-
-    .smart-step {
-        padding: 10px !important;
-    }
-
-    .task-type-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-        gap: 7px !important;
-    }
-
-    .task-type-card {
-        min-height: 66px !important;
-        padding: 7px 4px !important;
-        border-radius: 13px !important;
-    }
-
-    .task-type-card .task-type-icon,
-    .task-type-card .icon,
-    .task-type-card strong:first-child {
-        font-size: 16px !important;
-    }
-
-    .task-type-card strong,
-    .task-type-card span,
-    .task-type-card p {
-        font-size: 10.7px !important;
-    }
-
-    .smart-details {
-        gap: 7px !important;
-    }
-
-    .form-row {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 8px !important;
-    }
-
-    .form input,
-    .form select,
-    .form textarea,
-    .smart-details input,
-    .smart-details select,
-    .smart-details textarea {
-        min-height: 36px !important;
-        padding: 7px 9px !important;
-        font-size: 12.5px !important;
-    }
-
-    .weekday-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    }
-
-    .task-card {
-        padding: 10px !important;
-    }
-
-    .task-card span {
-        font-size: 11.8px !important;
-    }
-
-    .small-button,
-    .task-card .small-button {
-        flex: 1 1 auto !important;
-        text-align: center !important;
-    }
-}
-
-/* Very small phones */
-@media (max-width: 390px) {
-    .task-type-grid {
-        gap: 6px !important;
-    }
-
-    .task-type-card {
-        min-height: 62px !important;
-    }
-
-    .task-type-card strong,
-    .task-type-card span,
-    .task-type-card p {
-        font-size: 10.2px !important;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr !important;
-    }
-
-    .weekday-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-}
-
-
-/* EduPath AI v5.5.4 Tasks Desktop Layout Polish - desktop-focused, design only */
-.tasks-page-stack-v554 {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
-    align-items: stretch !important;
-    width: 100% !important;
-}
-
-.tasks-page-stack-v554 > .card {
-    width: 100% !important;
-    max-width: none !important;
-}
-
-/* Remove unnecessary inner heading area in task type section */
-.smart-step {
-    padding: 12px !important;
-    margin: 0 !important;
-}
-
-/* Modern task type cards */
-.task-type-card {
-    position: relative !important;
-    overflow: hidden !important;
-    background:
-        linear-gradient(135deg, rgba(37, 99, 235, .10), rgba(56, 189, 248, .08)) !important;
-    border: 1px solid rgba(37, 99, 235, .14) !important;
-    box-shadow: 0 10px 24px rgba(15, 23, 42, .06) !important;
-    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease !important;
-}
-
-.task-type-card::before {
-    content: "" !important;
-    position: absolute !important;
-    inset: 0 !important;
-    background: radial-gradient(circle at top right, rgba(59, 130, 246, .16), transparent 45%) !important;
-    pointer-events: none !important;
-}
-
-.task-type-card:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 14px 30px rgba(37, 99, 235, .12) !important;
-    border-color: rgba(37, 99, 235, .25) !important;
-}
-
-.task-type-card.active {
-    background:
-        linear-gradient(135deg, rgba(29, 78, 216, .95), rgba(37, 99, 235, .90), rgba(56, 189, 248, .78)) !important;
-    border-color: rgba(255, 255, 255, .30) !important;
-    color: #fff !important;
-    box-shadow: 0 18px 36px rgba(37, 99, 235, .26) !important;
-}
-
-.task-type-card.active strong,
-.task-type-card.active span,
-.task-type-card.active .task-type-emoji {
-    color: #fff !important;
-}
-
-.task-type-emoji {
-    display: grid !important;
-    place-items: center !important;
-    width: 30px !important;
-    height: 30px !important;
-    margin: 0 auto 4px !important;
-    border-radius: 12px !important;
-    background: rgba(255, 255, 255, .72) !important;
-    box-shadow: inset 0 0 0 1px rgba(37, 99, 235, .10) !important;
-    font-size: 18px !important;
-    line-height: 1 !important;
-    position: relative !important;
-    z-index: 1 !important;
-}
-
-.task-type-card.active .task-type-emoji {
-    background: rgba(255, 255, 255, .18) !important;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25) !important;
-}
-
-/* Desktop layout: hero -> types -> form -> tasks */
-@media (min-width: 981px) {
-    .tasks-page-stack-v554 {
-        gap: 18px !important;
-    }
-
-    .tasks-page-stack-v554 #addTaskCard {
+    .smart-task-form label {
         display: block !important;
-        padding: 18px !important;
+        margin: 0 0 6px !important;
+        font-size: 13px !important;
+        font-weight: 900 !important;
+        line-height: 1.35 !important;
+        color: var(--text) !important;
+        text-align: right !important;
     }
 
-    .tasks-page-stack-v554 #addTaskCard > h2 {
-        font-size: 22px !important;
-        margin-bottom: 4px !important;
+    .smart-task-form input,
+    .smart-task-form select,
+    .smart-task-form textarea {
+        width: 100% !important;
+        min-height: 42px !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        text-align: right !important;
     }
 
-    .tasks-page-stack-v554 #addTaskCard > .muted {
-        font-size: 13.5px !important;
-        margin-bottom: 12px !important;
+    .smart-task-form textarea {
+        min-height: 92px !important;
+    }
+
+    .smart-task-form .task-type-selector,
+    .smart-task-form #taskTypeCards,
+    .smart-task-form .task-type-grid,
+    .smart-task-form .task-type-cards,
+    .smart-task-form .task-type-wrapper,
+    .smart-task-form .full-width,
+    .smart-task-form .wide,
+    .smart-task-form .notes-field,
+    .smart-task-form .repeat-days-field,
+    .smart-task-form .form-actions,
+    .smart-task-form .actions {
+        grid-column: 1 / -1 !important;
+    }
+
+    .smart-task-form [name="title"],
+    .smart-task-form #taskTitleInput,
+    .smart-task-form [name="source"],
+    .smart-task-form #sourceInput,
+    .smart-task-form [name="notes"],
+    .smart-task-form #notesInput {
+        grid-column: 1 / -1 !important;
+    }
+
+    .smart-task-form button[type="submit"] {
+        width: min(320px, 100%) !important;
+        justify-self: center !important;
+        margin-top: 4px !important;
+    }
+
+    .smart-task-form .conditional-field {
+        display: block;
+    }
+
+    .smart-task-form .conditional-field[style*="display: none"] {
+        display: none !important;
+    }
+}
+
+
+/* EduPath AI v5.3.5 Desktop Task Form Grid */
+@media (min-width: 981px) {
+    /*
+      Desktop only.
+      Do not affect mobile/tablet layouts.
+      Goal: structured form grid, not random stretching.
+    */
+
+    .smart-task-create-card,
+    .tasks-create-card,
+    .task-create-card,
+    .task-form-card {
+        max-width: 1180px !important;
+        width: 100% !important;
+        margin-inline: auto !important;
     }
 
     .smart-task-form {
         display: grid !important;
-        grid-template-columns: 1fr !important;
-        gap: 14px !important;
-    }
-
-    .task-type-grid {
-        grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
-        gap: 10px !important;
-    }
-
-    .task-type-card {
-        min-height: 86px !important;
-        padding: 11px 8px !important;
-        border-radius: 17px !important;
-    }
-
-    .task-type-card strong {
-        font-size: 12.5px !important;
-        line-height: 1.35 !important;
-        position: relative !important;
-        z-index: 1 !important;
-    }
-
-    .smart-details {
-        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-        gap: 9px 12px !important;
-        align-items: end !important;
-    }
-
-    #taskNameLabel,
-    #taskTitleInput {
-        grid-column: span 2 !important;
-    }
-
-    #sourceLabel,
-    #sourceInput {
-        grid-column: span 2 !important;
-    }
-
-    #notesLabel,
-    #notesInput {
-        grid-column: 1 / -1 !important;
-    }
-
-    .csca-extra-box,
-    .repeat-days-box,
-    .repeat-custom-box {
-        grid-column: 1 / -1 !important;
-    }
-
-    .form-row {
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        column-gap: 18px !important;
+        row-gap: 14px !important;
+        align-items: start !important;
+        direction: rtl !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
-    .tasks-list-card-v476 {
-        padding: 18px !important;
-    }
-
-    .tasks-list-card-v476 > h2 {
-        font-size: 22px !important;
-        margin-bottom: 12px !important;
-    }
-
-    .tasks-board-v476 {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 12px !important;
-    }
-
-    .task-card {
+    /*
+      Every direct field container becomes a clean vertical field:
+      label
+      input/select/textarea
+    */
+    .smart-task-form > div,
+    .smart-task-form > .form-row,
+    .smart-task-form > .form-group,
+    .smart-task-form > .conditional-field {
+        display: block !important;
         min-width: 0 !important;
-        padding: 13px !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .smart-task-form label,
+    .smart-task-form .field-label,
+    .smart-task-form span[data-i18n] {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 0 6px 0 !important;
+        padding: 0 !important;
+        font-size: 13px !important;
+        font-weight: 900 !important;
+        line-height: 1.35 !important;
+        color: var(--text) !important;
+        text-align: right !important;
+        white-space: normal !important;
+    }
+
+    .smart-task-form input,
+    .smart-task-form select,
+    .smart-task-form textarea {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 42px !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding-inline: 12px !important;
+        text-align: right !important;
+        direction: rtl !important;
+    }
+
+    .smart-task-form select {
+        height: 42px !important;
+    }
+
+    .smart-task-form textarea {
+        min-height: 96px !important;
+        resize: vertical !important;
+        padding-top: 10px !important;
+    }
+
+    /*
+      Full-width sections:
+      - task type cards
+      - source/link
+      - notes
+      - repeat days
+      - submit actions
+      - hidden/custom helper blocks when they need room
+    */
+    .smart-task-form .task-type-selector,
+    .smart-task-form .task-type-grid,
+    .smart-task-form .task-type-cards,
+    .smart-task-form #taskTypeCards,
+    .smart-task-form .repeat-days-field,
+    .smart-task-form .form-actions,
+    .smart-task-form .actions {
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+    }
+
+    .smart-task-form #sourceInput,
+    .smart-task-form [name="source"],
+    .smart-task-form #notesInput,
+    .smart-task-form [name="notes"] {
+        grid-column: 1 / -1 !important;
+    }
+
+    .smart-task-form #sourceInput,
+    .smart-task-form [name="source"] {
+        min-height: 42px !important;
+    }
+
+    .smart-task-form #notesInput,
+    .smart-task-form [name="notes"] {
+        min-height: 110px !important;
+    }
+
+    /*
+      Keep conditional "Other" fields visually attached to their field.
+      They should appear directly below the selected dropdown, not at the bottom.
+    */
+    .smart-task-form .conditional-field,
+    .smart-task-form [id^="custom"] {
+        margin-top: 7px !important;
+    }
+
+    .smart-task-form .conditional-field label,
+    .smart-task-form [id^="custom"] label {
+        color: #1d4ed8 !important;
+        font-weight: 900 !important;
+        font-size: 12.5px !important;
+    }
+
+    /*
+      Numeric/date/time fields stay consistent in height and width.
+    */
+    .smart-task-form input[type="number"],
+    .smart-task-form input[type="date"],
+    .smart-task-form input[type="time"] {
+        height: 42px !important;
+    }
+
+    /*
+      Submit button: clear, accessible, but not stretched randomly.
+    */
+    .smart-task-form button[type="submit"],
+    .smart-task-form .save-task-button {
+        width: min(320px, 100%) !important;
+        min-height: 44px !important;
+        justify-self: center !important;
+        margin: 8px auto 0 !important;
+        grid-column: 1 / -1 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /*
+      Prevent old layout rules from separating labels and fields.
+    */
+    .smart-task-form .inline-field,
+    .smart-task-form .field-inline,
+    .smart-task-form .form-inline {
+        display: block !important;
+    }
+
+    /*
+      Hidden fields remain hidden.
+    */
+    .smart-task-form [hidden],
+    .smart-task-form .hidden,
+    .smart-task-form .conditional-field[style*="display: none"],
+    .smart-task-form [style*="display: none"] {
+        display: none !important;
     }
 }
 
-@media (min-width: 1250px) {
-    .task-type-grid {
-        grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
-    }
-
-    .smart-details {
-        grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-    }
-
-    #taskNameLabel,
-    #taskTitleInput {
-        grid-column: span 2 !important;
-    }
-
-    #sourceLabel,
-    #sourceInput {
-        grid-column: span 2 !important;
-    }
-
-    .tasks-board-v476 {
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    }
-}
-
-@media (min-width: 1580px) {
-    .task-type-grid {
-        grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
-    }
-
-    .tasks-board-v476 {
-        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    }
-}
-
-/* Keep mobile stable; only refine icons without restructuring */
-@media (max-width: 980px) {
-    .tasks-page-stack-v554 {
-        display: grid !important;
-        gap: 10px !important;
-    }
-
-    .task-type-emoji {
-        width: 26px !important;
-        height: 26px !important;
-        border-radius: 10px !important;
-        font-size: 16px !important;
-        margin-bottom: 3px !important;
-    }
-}

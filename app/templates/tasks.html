@@ -12,7 +12,7 @@
     <button class="button light" type="button" onclick="document.getElementById('addTaskCard').scrollIntoView({behavior:'smooth'});">إضافة مهمة</button>
 </section>
 
-<section class="tasks-page-stack-v554">
+<section class="grid-2">
     <div class="card" id="addTaskCard">
         <h2>إضافة مهمة ذكية</h2>
         <p class="muted">ابدأ بنوع المهمة، ثم يتكيف النموذج تلقائيًا خطوة بخطوة.</p>
@@ -30,14 +30,14 @@
             <div class="task-card {{ task.status }}">
                 <div>
                     <strong>{{ task.title }}</strong>
-                    <span><b>نوع المهمة:</b> {% if task.category == "Other" and task.custom_category %}{{ task.custom_category }}{% else %}{{ task.category|native_task_label }}{% endif %}</span>
-                    <span><b>الفئة الرئيسية:</b> {% if task.topic == "Other" and task.custom_topic %}{{ task.custom_topic }}{% else %}{{ task.topic or "غير محدد"|native_task_label }}{% endif %}</span>
-                    <span><b>الفئة الفرعية:</b> {% if task.skill == "Other" and task.custom_skill %}{{ task.custom_skill }}{% else %}{{ task.skill or "غير محدد"|native_task_label }}{% endif %}</span>
-                    <span><b>الموضوع التفصيلي:</b> {{ task.language or "غير محدد"|native_task_label }}</span>
-                    <span><b>نوع النشاط:</b> {{ task.practice_type or "عام"|native_task_label }}</span>
+                    <span><b>نوع المهمة:</b> {% if task.category == "Other" and task.custom_category %}{{ task.custom_category }}{% else %}{{ task.category|task_exam_safe }}{% endif %}</span>
+                    <span><b>الفئة الرئيسية:</b> {% if task.topic == "Other" and task.custom_topic %}{{ task.custom_topic }}{% else %}{{ task.category|task_exam_raw_or_ar(task.topic or "غير محدد") }}{% endif %}</span>
+                    <span><b>الفئة الفرعية:</b> {% if task.skill == "Other" and task.custom_skill %}{{ task.custom_skill }}{% else %}{{ task.category|task_exam_raw_or_ar(task.skill or "غير محدد") }}{% endif %}</span>
+                    <span><b>الموضوع التفصيلي:</b> {{ task.category|task_exam_raw_or_ar(task.language or "غير محدد") }}</span>
+                    <span><b>نوع النشاط:</b> {{ task.category|task_exam_raw_or_ar(task.practice_type or "عام") }}</span>
                     <span><b>المصدر:</b> {{ task.source|clickable_sources }}</span>
                     <span>{{ task.estimated_minutes }} دقيقة · الأولوية {{ task.priority }} · الصعوبة {{ task.difficulty }}</span>
-                    <span>من {{ task.start_date or "غير محدد" }} إلى {{ task.due_date or "غير محدد" }} · {{ task.repeat_type|native_task_label }} · {% if task.repeat_type == "custom" %}نمط التكرار: {{ task.repeat_days or "غير محدد" }}{% elif task.repeat_type == "selected_days" %}الأيام: {{ task.repeat_type|repeat_days_display_ar(task.repeat_days) }}{% else %}{{ task.repeat_type|native_task_label }}{% endif %}</span>
+                    <span>من {{ task.start_date or "غير محدد" }} إلى {{ task.due_date or "غير محدد" }} · {{ task.repeat_type|task_exam_safe }} · الأيام: {{ task.repeat_days|repeat_days_ar }}</span>
                     <span>وقت التذكير: {{ task.reminder_time|time_12h_ar }}</span>
                 </div>
 
@@ -57,41 +57,5 @@
         </div>
     </div>
 </section>
-
-
-{% endblock %}
-
-{% block extra_scripts %}
-<script src="{{ url_for('static', filename='js/tasks_native_ar.js') }}?v=5.5.4"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    function fixRepeatBoxes() {
-        const select = document.getElementById("repeatTypeSelect");
-        const daysBox = document.getElementById("repeatDaysBox");
-        const customBox = document.getElementById("repeatCustomBox");
-        if (!select) return;
-        const value = (select.value || "").trim();
-        if (daysBox) {
-            daysBox.hidden = value !== "أيام محددة";
-            daysBox.style.setProperty("display", value === "أيام محددة" ? "block" : "none", "important");
-            daysBox.setAttribute("aria-hidden", value === "أيام محددة" ? "false" : "true");
-        }
-        if (customBox) {
-            customBox.hidden = value !== "أخرى";
-            customBox.style.setProperty("display", value === "أخرى" ? "block" : "none", "important");
-            customBox.setAttribute("aria-hidden", value === "أخرى" ? "false" : "true");
-        }
-    }
-    const repeatSelect = document.getElementById("repeatTypeSelect");
-    if (repeatSelect) {
-        repeatSelect.addEventListener("change", fixRepeatBoxes);
-        repeatSelect.addEventListener("input", fixRepeatBoxes);
-        fixRepeatBoxes();
-        setTimeout(fixRepeatBoxes, 200);
-        setTimeout(fixRepeatBoxes, 800);
-    }
-});
-</script>
 
 {% endblock %}
