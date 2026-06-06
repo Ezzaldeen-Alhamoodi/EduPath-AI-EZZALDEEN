@@ -335,7 +335,7 @@ const SMART_TASK_DATA = {
 
   "Reading & Research": {
     icon: "ق",
-    main: ["Book Reading","Article Reading","Research Paper","Summary","Notes","Literature Review","Critical Thinking","Other"],
+    main: ["Book Reading","Article Reading","Research Paper","Summary","الملاحظات","Literature Review","Critical Thinking","Other"],
     sub: {"Research Paper": ["Abstract","Introduction","Methodology","Results","Discussion","References","Other"], "Other": ["Read","Summarize","Analyze","Take Notes","Other"]},
     detail: {"Research Paper": ["Key Ideas","Methods","Limitations","Findings","Other"], "Other": ["Topic","Other"]},
     training: ["Read","Summarize","Analyze","Take Notes","Review","Discuss","Other"]
@@ -767,10 +767,10 @@ function updateCSCAExtraFields() {
 
         fillSmartSelect(cscaTraining, CSCA_TRAINING_TYPES, cscaTraining.value && CSCA_TRAINING_TYPES.includes(cscaTraining.value) ? cscaTraining.value : "Study Theory");
     } else {
-        if (topicLabel) topicLabel.textContent = "Main Field";
-        if (skillLabel) skillLabel.textContent = "Sub Field";
-        if (detailLabel) detailLabel.textContent = "Detailed Topic";
-        if (trainingLabel) trainingLabel.textContent = "Training Type";
+        if (topicLabel) topicLabel.textContent = "الفئة الرئيسية";
+        if (skillLabel) skillLabel.textContent = "الفئة الفرعية";
+        if (detailLabel) detailLabel.textContent = "الموضوع التفصيلي";
+        if (trainingLabel) trainingLabel.textContent = "نوع النشاط";
     }
 }
 
@@ -942,10 +942,10 @@ const EDUPATH_I18N = {
         "goals.goal_type": "Goal Type",
         "goals.current_level": "Current Level / Score",
         "goals.daily_minutes": "Daily Minutes",
-        "goals.start_date": "Start Date",
+        "goals.start_date": "تاريخ البدء",
         "goals.deadline": "Deadline / Exam Date / Target Date",
-        "goals.reminder": "Reminder Time",
-        "goals.notes": "Notes",
+        "goals.reminder": "وقت التذكير",
+        "goals.notes": "الملاحظات",
         "goals.save": "Save Smart Goal",
         "goals.current_goals": "Current Goals",
         "goals.how": "How Smart Progress Works",
@@ -1160,7 +1160,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "taskform.choose_type": ["1. Choose Task Type", "١. اختر نوع المهمة"],
         "taskform.choose_desc": ["Only the fields related to your choice will appear. This keeps the task system simple and personal.", "ستظهر فقط الحقول المرتبطة باختيارك حتى يبقى النظام بسيطًا ومخصصًا لك."],
         "taskform.other_type": ["Other Task Type", "نوع مهمة آخر"],
-        "taskform.task_name": ["Task Name", "اسم المهمة"],
+        "taskform.task_name": ["اسم المهمة", "اسم المهمة"],
         "taskform.other_main": ["Other Main Field", "مجال رئيسي آخر"],
         "taskform.other_sub": ["Other Sub Field", "مجال فرعي آخر"],
         "taskform.other_detail": ["Other Detailed Topic", "موضوع تفصيلي آخر"],
@@ -1168,17 +1168,17 @@ document.addEventListener("DOMContentLoaded", () => {
         "taskform.csca_training": ["CSCA Training Type", "نوع تدريب CSCA"],
         "taskform.csca_hint": ["CSCA structure: Exam → Language → Subject → Main Topic → Detailed Topic → Training Type", "هيكل CSCA: الاختبار ← لغة الاختبار ← المادة ← الموضوع الرئيسي ← الموضوع التفصيلي ← نوع التدريب"],
         "taskform.other_training": ["Other Training Type", "نوع تدريب آخر"],
-        "taskform.source": ["Source / Link", "المصدر / الرابط"],
-        "taskform.difficulty": ["Difficulty 1-5", "الصعوبة من ١ إلى ٥"],
-        "taskform.priority": ["Priority 1-5", "الأولوية من ١ إلى ٥"],
-        "taskform.expected": ["Expected Time in Minutes", "الوقت المتوقع بالدقائق"],
-        "taskform.start_date": ["Start Date", "تاريخ البداية"],
-        "taskform.end_date": ["End Date / Deadline", "تاريخ النهاية / الموعد النهائي"],
-        "taskform.reminder": ["Reminder Time", "وقت التذكير"],
-        "taskform.repeat": ["Repeat", "التكرار"],
-        "taskform.repeat_days": ["Repeat Days", "أيام التكرار"],
+        "taskform.source": ["المصدر أو الرابط", "المصدر / الرابط"],
+        "taskform.difficulty": ["مستوى الصعوبة من ١ إلى ٥", "الصعوبة من ١ إلى ٥"],
+        "taskform.priority": ["الأولوية من ١ إلى ٥", "الأولوية من ١ إلى ٥"],
+        "taskform.expected": ["الوقت المتوقع (بالدقائق)", "الوقت المتوقع بالدقائق"],
+        "taskform.start_date": ["تاريخ البدء", "تاريخ البداية"],
+        "taskform.end_date": ["تاريخ الانتهاء", "تاريخ النهاية / الموعد النهائي"],
+        "taskform.reminder": ["وقت التذكير", "وقت التذكير"],
+        "taskform.repeat": ["التكرار", "التكرار"],
+        "taskform.repeat_days": ["أيام التكرار", "أيام التكرار"],
         "taskform.repeat_hint": ["Choose any days that fit this task. Useful for intensive weekends, language routines, or study schedules.", "اختر الأيام المناسبة لهذه المهمة، مثل أيام الدراسة المكثفة أو روتين اللغة أو جدول الحفظ."],
-        "taskform.notes": ["Notes", "ملاحظات"],
+        "taskform.notes": ["الملاحظات", "ملاحظات"],
         "tasks.add_btn": ["Add Task", "إضافة مهمة"],
         "tasks.save": ["Save Task", "حفظ المهمة"],
         "tasks.done": ["Done", "تم"],
@@ -2016,10 +2016,10 @@ function applyArabicSpecialTaskLabelsV476() {
     const type = document.getElementById("categorySelect")?.value || "";
     const arabicMode = type === "Quran Memorization" || type === "Secondary School";
     const map = {
-        topicLabel: arabicMode ? "المجال الرئيسي" : "Main Field",
-        skillLabel: arabicMode ? "المجال الفرعي" : "Sub Field",
-        detailLabel: arabicMode ? "الموضوع التفصيلي" : "Detailed Topic",
-        trainingLabel: arabicMode ? "نوع التدريب" : "Training Type"
+        topicLabel: arabicMode ? "المجال الرئيسي" : "الفئة الرئيسية",
+        skillLabel: arabicMode ? "المجال الفرعي" : "الفئة الفرعية",
+        detailLabel: arabicMode ? "الموضوع التفصيلي" : "الموضوع التفصيلي",
+        trainingLabel: arabicMode ? "نوع التدريب" : "نوع النشاط"
     };
     Object.entries(map).forEach(([id, text]) => {
         const el = document.getElementById(id);
@@ -2076,28 +2076,28 @@ function applyArabicSpecialTaskLabelsV477() {
     document.body.classList.toggle("arabic-task-mode", arabicMode);
 
     if (!arabicMode) {
-        setTextV477("taskNameLabel", "Task Name");
-        setPlaceholderV477("taskTitleInput", "Example: Review Quran memorization / مثال: مراجعة حفظ القرآن");
-        setTextV477("topicLabel", "Main Field");
-        setTextV477("skillLabel", "Sub Field");
-        setTextV477("detailLabel", "Detailed Topic");
-        setTextV477("trainingLabel", "Training Type");
-        setTextV477("sourceLabel", "Source / Link");
-        setPlaceholderV477("sourceInput", "Book, website, YouTube, document link... / كتاب أو رابط أو مصدر");
-        setTextV477("difficultyLabel", "Difficulty 1-5");
-        setTextV477("priorityLabel", "Priority 1-5");
-        setTextV477("expectedTimeLabel", "Expected Time in Minutes");
-        setTextV477("startDateLabel", "Start Date");
-        setTextV477("endDateLabel", "End Date / Deadline");
-        setTextV477("reminderLabel", "Reminder Time");
-        setTextV477("repeatLabel", "Repeat");
-        setTextV477("repeatDaysLabel", "Repeat Days");
-        setTextV477("notesLabel", "Notes");
-        setPlaceholderV477("notesInput", "Any notes or plan... / اكتب أي ملاحظات أو خطة");
+        setTextV477("taskNameLabel", "اسم المهمة");
+        setPlaceholderV477("taskTitleInput", "مثال: مراجعة حفظ سورة النساء");
+        setTextV477("topicLabel", "الفئة الرئيسية");
+        setTextV477("skillLabel", "الفئة الفرعية");
+        setTextV477("detailLabel", "الموضوع التفصيلي");
+        setTextV477("trainingLabel", "نوع النشاط");
+        setTextV477("sourceLabel", "المصدر أو الرابط");
+        setPlaceholderV477("sourceInput", "كتاب، موقع إلكتروني، فيديو تعليمي، ملف، أو أي مصدر آخر");
+        setTextV477("difficultyLabel", "مستوى الصعوبة من ١ إلى ٥");
+        setTextV477("priorityLabel", "الأولوية من ١ إلى ٥");
+        setTextV477("expectedTimeLabel", "الوقت المتوقع (بالدقائق)");
+        setTextV477("startDateLabel", "تاريخ البدء");
+        setTextV477("endDateLabel", "تاريخ الانتهاء");
+        setTextV477("reminderLabel", "وقت التذكير");
+        setTextV477("repeatLabel", "التكرار");
+        setTextV477("repeatDaysLabel", "أيام التكرار");
+        setTextV477("notesLabel", "الملاحظات");
+        setPlaceholderV477("notesInput", "اكتب أي ملاحظات أو خطة أو تعليمات شخصية");
         return;
     }
 
-    setTextV477("taskNameLabel", type === "Quran Memorization" ? "اسم مهمة القرآن" : "اسم المهمة الدراسية");
+    setTextV477("taskNameLabel", "اسم المهمة");
     setPlaceholderV477("taskTitleInput", type === "Quran Memorization" ? "مثال: حفظ سورة النبأ أو مراجعة جزء عم" : "مثال: حل تمارين الجبر أو مراجعة درس الفيزياء");
     setTextV477("topicLabel", "المجال الرئيسي");
     setTextV477("skillLabel", "المجال الفرعي");
@@ -3126,7 +3126,7 @@ const TASK_AR_V530 = {
     "Article Reading": "المقالات",
     "Research Paper": "الأبحاث",
     "Summary": "التلخيص",
-    "Notes": "تدوين ملاحظات",
+    "الملاحظات": "تدوين ملاحظات",
     "Literature Review": "المراجعات",
     "Critical Thinking": "التفكير النقدي",
     "Read": "قراءة",
@@ -3936,5 +3936,84 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(forceAllTaskFieldLabelsArabicV535, 100);
         }
     });
+});
+
+
+/* EduPath AI v5.3.6 Hard Fix Arabic Task Labels */
+function hardFixArabicTaskLabelsV536() {
+    const labels = {
+        taskNameLabel: "اسم المهمة",
+        topicLabel: "الفئة الرئيسية",
+        skillLabel: "الفئة الفرعية",
+        detailLabel: "الموضوع التفصيلي",
+        trainingLabel: "نوع النشاط",
+        sourceLabel: "المصدر أو الرابط",
+        difficultyLabel: "مستوى الصعوبة من ١ إلى ٥",
+        priorityLabel: "الأولوية من ١ إلى ٥",
+        expectedTimeLabel: "الوقت المتوقع (بالدقائق)",
+        startDateLabel: "تاريخ البدء",
+        endDateLabel: "تاريخ الانتهاء",
+        reminderLabel: "وقت التذكير",
+        repeatLabel: "التكرار",
+        repeatDaysLabel: "أيام التكرار",
+        notesLabel: "الملاحظات"
+    };
+
+    Object.entries(labels).forEach(([id, text]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+    });
+
+    const title = document.getElementById("taskTitleInput");
+    if (title) title.placeholder = "مثال: مراجعة حفظ سورة النساء";
+
+    const source = document.getElementById("sourceInput");
+    if (source) source.placeholder = "كتاب، موقع إلكتروني، فيديو تعليمي، ملف، أو أي مصدر آخر";
+
+    const notes = document.getElementById("notesInput");
+    if (notes) notes.placeholder = "اكتب أي ملاحظات أو خطة أو تعليمات شخصية";
+
+    document.querySelectorAll("label").forEach(label => {
+        const t = (label.textContent || "").trim();
+        const exact = {
+            "Task Name": "اسم المهمة",
+            "Main Field": "الفئة الرئيسية",
+            "Sub Field": "الفئة الفرعية",
+            "Subfield": "الفئة الفرعية",
+            "Detailed Topic": "الموضوع التفصيلي",
+            "Training Type": "نوع النشاط",
+            "Source / Link": "المصدر أو الرابط",
+            "Source or Link": "المصدر أو الرابط",
+            "Difficulty 1-5": "مستوى الصعوبة من ١ إلى ٥",
+            "Difficulty": "مستوى الصعوبة",
+            "Priority 1-5": "الأولوية من ١ إلى ٥",
+            "Priority": "الأولوية",
+            "Expected Time in Minutes": "الوقت المتوقع (بالدقائق)",
+            "Start Date": "تاريخ البدء",
+            "End Date / Deadline": "تاريخ الانتهاء",
+            "End Date or Deadline": "تاريخ الانتهاء",
+            "Reminder Time": "وقت التذكير",
+            "Repeat Days": "أيام التكرار",
+            "Repeat": "التكرار",
+            "Notes": "الملاحظات"
+        };
+        if (exact[t]) label.textContent = exact[t];
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    hardFixArabicTaskLabelsV536();
+    setTimeout(hardFixArabicTaskLabelsV536, 100);
+    setTimeout(hardFixArabicTaskLabelsV536, 500);
+    setTimeout(hardFixArabicTaskLabelsV536, 1200);
+
+    const area = document.getElementById("taskDetailsArea") || document.body;
+    if (area && window.MutationObserver) {
+        const observer = new MutationObserver(() => hardFixArabicTaskLabelsV536());
+        observer.observe(area, { childList: true, subtree: true, characterData: true });
+    }
+
+    document.addEventListener("change", () => setTimeout(hardFixArabicTaskLabelsV536, 10));
+    document.addEventListener("click", () => setTimeout(hardFixArabicTaskLabelsV536, 10));
 });
 
