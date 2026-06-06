@@ -1988,14 +1988,22 @@ document.addEventListener("DOMContentLoaded", () => {
 /* EduPath AI v5.2.4 Urgent Goals Fix */
 const GOAL_AR_V524 = {
     "Education": "التعليم",
+    "التعليم": "التعليم",
     "Language": "اللغات",
+    "اللغات": "اللغات",
     "Exam / Certificate": "الاختبارات الدولية",
+    "الاختبارات الدولية": "الاختبارات الدولية",
     "Programming & Technology": "البرمجة والتقنية",
+    "البرمجة والتقنية": "البرمجة والتقنية",
     "Scholarship": "المنح الدراسية",
+    "المنح الدراسية": "المنح الدراسية",
     "University": "الجامعة",
+    "الجامعة": "الجامعة",
     "Project": "المشاريع",
+    "المشاريع": "المشاريع",
     "الحياة اليومية": "الحياة اليومية",
     "Islamic Goals": "الأهداف الإسلامية",
+    "الأهداف الإسلامية": "الأهداف الإسلامية",
     "عام": "عام",
     "أخرى": "أخرى",
     "أخرى": "أخرى",
@@ -2036,13 +2044,20 @@ const GOAL_AR_V524 = {
     "60 دقيقة يومياً": "60 دقيقة يومياً",
     "90 دقيقة يومياً": "90 دقيقة يومياً",
 
-    "English": "English",
-    "Chinese": "Chinese",
-    "Turkish": "Turkish",
-    "Russian": "Russian",
-    "Arabic": "Arabic",
-    "French": "French",
-    "German": "German",
+    "English": "الإنجليزية",
+    "الإنجليزية": "الإنجليزية",
+    "Chinese": "الصينية",
+    "الصينية": "الصينية",
+    "Turkish": "التركية",
+    "التركية": "التركية",
+    "Russian": "الروسية",
+    "الروسية": "الروسية",
+    "Arabic": "العربية",
+    "العربية": "العربية",
+    "French": "الفرنسية",
+    "الفرنسية": "الفرنسية",
+    "German": "الألمانية",
+    "الألمانية": "الألمانية",
 
     "IELTS": "IELTS",
     "TOEFL": "TOEFL",
@@ -2056,10 +2071,10 @@ const GOAL_AR_V524 = {
 
     "Full Official Test": "Full Official Test",
     "Mock Test": "Mock Test",
-    "Reading": "Reading",
-    "Listening": "Listening",
-    "Speaking": "Speaking",
-    "Writing": "Writing",
+    "Reading": "القراءة",
+    "Listening": "الاستماع",
+    "Speaking": "التحدث",
+    "Writing": "الكتابة",
     "Complete the Words": "Complete the Words",
     "Read in Daily Life": "Read in Daily Life",
     "Read an Academic Passage": "Read an Academic Passage",
@@ -2117,19 +2132,19 @@ const GOAL_AR_V524 = {
     "Node.js": "Node.js",
     "Git / GitHub": "Git / GitHub",
     "OOP": "OOP",
-    "Routes": "Routes",
-    "Templates": "Templates",
-    "Forms": "Forms",
-    "Authentication": "Authentication",
-    "Database": "Database",
-    "Deployment": "Deployment",
-    "API": "API",
+    "المسارات": "المسارات",
+    "القوالب": "القوالب",
+    "النماذج": "النماذج",
+    "تسجيل الدخول والصلاحيات": "تسجيل الدخول والصلاحيات",
+    "قاعدة البيانات": "قاعدة البيانات",
+    "النشر": "النشر",
+    "واجهة API": "واجهة API",
 
-    "Machine Learning": "Machine Learning",
-    "Deep Learning": "Deep Learning",
-    "NLP": "NLP",
-    "Computer Vision": "Computer Vision",
-    "Data Science": "Data Science",
+    "تعلم الآلة": "تعلم الآلة",
+    "التعلم العميق": "التعلم العميق",
+    "معالجة اللغة الطبيعية": "معالجة اللغة الطبيعية",
+    "الرؤية الحاسوبية": "الرؤية الحاسوبية",
+    "علم البيانات": "علم البيانات",
     "جمع البيانات": "جمع البيانات",
     "تنظيف البيانات": "تنظيف البيانات",
     "تحليل البيانات": "تحليل البيانات",
@@ -2279,7 +2294,7 @@ const GOAL_AR_V524 = {
 };
 
 const GOAL_CONFIG_V524 = {
-    "Education": {
+    "التعليم": {
         categories: ["الثانوية العامة","الجامعة","التعليم الذاتي","التعليم عن بعد","الدورات التدريبية","أخرى"],
         paths: {
             "الثانوية العامة": ["القرآن الكريم","التربية الإسلامية","اللغة العربية","اللغة الإنجليزية","الرياضيات","الفيزياء","الكيمياء","الأحياء","التاريخ","الجغرافيا","المجتمع","أخرى"],
@@ -2298,13 +2313,13 @@ const GOAL_CONFIG_V524 = {
         }
     },
 
-    "Exam / Certificate": {
+    "الاختبارات الدولية": {
         categories: ["IELTS","TOEFL","Duolingo","HSK","CSCA","SAT","ACT","GRE","GMAT","أخرى"],
         paths: {
             "IELTS": ["Full Official Test","Mock Test","Listening","Reading","Writing Task 1","Writing Task 2","Speaking Part 1","Speaking Part 2","Speaking Part 3","Vocabulary","Grammar","Matching Headings","True False Not Given","Multiple Choice","Sentence Completion","Summary Completion","Map Labelling","Form Completion","Note Completion","Flow Chart Completion","أخرى"],
             "TOEFL": ["Full Official Test","Mock Test","Reading","Listening","Speaking","Writing","Complete the Words","Read in Daily Life","Read an Academic Passage","Build a Sentence","Write an Email","Write for an Academic Discussion","Listen and Repeat","Take an Interview","Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk","Vocabulary Building","Grammar Practice","إدارة الوقت","أخرى"],
             "Duolingo": ["Full Official Test","Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","Listen and Type","Interactive Listening","Write About the Photo","Writing Sample","Interactive Writing","Speak About the Photo","Read Then Speak","Speaking Sample","Interactive Speaking","أخرى"],
-            "HSK": ["HSK 1","HSK 2","HSK 3","HSK 4","HSK 5","HSK 6","Vocabulary","Characters","Listening","Reading","Writing","Mock Test","أخرى"],
+            "HSK": ["HSK 1","HSK 2","HSK 3","HSK 4","HSK 5","HSK 6","Vocabulary","الحروف الصينية","Listening","Reading","Writing","Mock Test","أخرى"],
             "CSCA": ["Mathematics","Physics","Chemistry","Full Official Test","Algebra","Geometry","Calculus","Mechanics","Electricity","Organic Chemistry","Inorganic Chemistry","أخرى"],
             "SAT": ["Reading","Writing and Language","Math No Calculator","Math Calculator","Full Practice Test","Vocabulary","Grammar","أخرى"],
             "ACT": ["English","Math","Reading","Science","Writing","Full Practice Test","أخرى"],
@@ -2322,7 +2337,7 @@ const GOAL_CONFIG_V524 = {
         }
     },
 
-    "Scholarship": {
+    "المنح الدراسية": {
         categories: ["البحث عن منح","اختيار الجامعات","إعداد المستندات","السيرة الذاتية","رسالة الدافع","خطابات التوصية","المقابلات","اختبارات اللغة","إجراءات السفر","التأشيرة","المتابعة بعد التقديم","أخرى"],
         paths: {
             "إعداد المستندات": ["السيرة الذاتية","كشف الدرجات","جواز السفر","شهادة التخرج","شهادة اللغة","الترجمة","التصديق","رفع المستندات","مراجعة المستندات","أخرى"],
@@ -2335,11 +2350,11 @@ const GOAL_CONFIG_V524 = {
         }
     },
 
-    "University": {
+    "الجامعة": {
         categories: ["علوم الحاسوب","هندسة البرمجيات","الذكاء الاصطناعي","الأمن السيبراني","تقنية المعلومات","الطب","الصيدلة","التمريض","الهندسة المدنية","الهندسة المعمارية","الهندسة الكهربائية","الهندسة الميكانيكية","إدارة الأعمال","المحاسبة","الاقتصاد","القانون","الشريعة","اللغة العربية","اللغة الإنجليزية","التربية","الإعلام","العلوم السياسية","أخرى"],
         paths: {
             "علوم الحاسوب": ["الخوارزميات","هياكل البيانات","قواعد البيانات","الذكاء الاصطناعي","تطوير الويب","الأمن السيبراني","البرمجة الكائنية","المشاريع","أخرى"],
-            "الذكاء الاصطناعي": ["Machine Learning","Deep Learning","NLP","Computer Vision","Data Science","بناء مشروع عملي","أخرى"],
+            "الذكاء الاصطناعي": ["تعلم الآلة","التعلم العميق","معالجة اللغة الطبيعية","الرؤية الحاسوبية","علم البيانات","بناء مشروع عملي","أخرى"],
             "أخرى": ["المقررات الأساسية","المهارات العملية","مشروع التخرج","التدريب العملي","الاختبارات","الأبحاث","الواجبات","المراجعة","أخرى"]
         },
         states: {
@@ -2349,7 +2364,7 @@ const GOAL_CONFIG_V524 = {
         }
     },
 
-    "Mathematics": {
+    "الرياضيات": {
         categories: ["الجبر","الهندسة","التفاضل والتكامل","الإحصاء","الاحتمالات","المثلثات","الجبر الخطي","الرياضيات المتقطعة","أخرى"],
         paths: {
             "الجبر": ["المعادلات","المتباينات","الدوال","التحليل","التطبيقات","حل التمارين","الاختبارات","المراجعة","أخرى"],
@@ -2360,7 +2375,7 @@ const GOAL_CONFIG_V524 = {
         }
     },
 
-    "Daily Life": {
+    "الحياة اليومية": {
         categories: ["الصحة","الرياضة","النوم","شرب الماء","التغذية","الروتين الشخصي","العائلة","إدارة الوقت","إدارة المال","الصلاة","التسوق","ترتيب المنزل","تنظيف المنزل","القراءة","الاسترخاء","أخرى"],
         paths: {
             "شرب الماء": ["تذكير شرب الماء","تتبع الكمية اليومية","تحسين العادة","أخرى"],
@@ -2372,8 +2387,8 @@ const GOAL_CONFIG_V524 = {
         }
     },
 
-    "Artificial Intelligence": {
-        categories: ["Machine Learning","Deep Learning","NLP","Computer Vision","Data Science","أخرى"],
+    "الذكاء الاصطناعي": {
+        categories: ["تعلم الآلة","التعلم العميق","معالجة اللغة الطبيعية","الرؤية الحاسوبية","علم البيانات","أخرى"],
         paths: {
             "أخرى": ["جمع البيانات","تنظيف البيانات","تحليل البيانات","تدريب النموذج","تقييم النموذج","تحسين النموذج","اختبار النموذج","نشر المشروع","بناء مشروع عملي","أخرى"]
         },
@@ -2382,12 +2397,12 @@ const GOAL_CONFIG_V524 = {
         }
     },
 
-    "Language": {
-        categories: ["English","Chinese","Turkish","Russian","Arabic","German","French","أخرى"],
+    "اللغات": {
+        categories: ["الإنجليزية","الصينية","التركية","الروسية","العربية","الألمانية","الفرنسية","أخرى"],
         paths: {
-            "English": ["IELTS","TOEFL","Duolingo","General English","Academic English","Speaking","Writing","Reading","Listening","Vocabulary","Grammar","Pronunciation","أخرى"],
-            "Chinese": ["HSK","General Chinese","Speaking","Writing","Reading","Listening","Characters","Vocabulary","أخرى"],
-            "أخرى": ["لغة عامة","التحضير لاختبار","Speaking","Writing","Reading","Listening","أخرى"]
+            "الإنجليزية": ["IELTS","TOEFL","Duolingo","الإنجليزية العامة","الإنجليزية الأكاديمية","التحدث","الكتابة","القراءة","الاستماع","المفردات","القواعد","النطق","أخرى"],
+            "الصينية": ["HSK","الصينية العامة","التحدث","الكتابة","القراءة","الاستماع","الحروف الصينية","المفردات","أخرى"],
+            "أخرى": ["لغة عامة","التحضير لاختبار","التحدث","الكتابة","القراءة","الاستماع","أخرى"]
         },
         states: {
             "IELTS": {current:["لا أعرف مستواي","Band 4","Band 4.5","Band 5","Band 5.5","Band 6","Band 6.5","Band 7","Band 7.5","Band 8","أخرى"], target:["Band 5","Band 5.5","Band 6","Band 6.5","Band 7","Band 7.5","Band 8","Band 8.5","Band 9","أخرى"], commitment:["30 دقيقة يومياً","45 دقيقة يومياً","60 دقيقة يومياً","90 دقيقة يومياً","اختبار أسبوعي","اختباران أسبوعياً","أخرى"]},
@@ -2395,20 +2410,20 @@ const GOAL_CONFIG_V524 = {
         }
     },
 
-    "Programming & Technology": {
+    "البرمجة والتقنية": {
         categories: ["Python","C","C++","Java","JavaScript","HTML","CSS","SQL","Flask","React","Node.js","Git / GitHub","الخوارزميات","هياكل البيانات","قواعد البيانات","الأمن السيبراني","تطوير الويب","حل المشكلات","تصحيح الأخطاء","أخرى"],
         paths: {
-            "Python": ["Python للمبتدئين","OOP","Flask","الأتمتة","تحليل البيانات","Machine Learning","مشروع عملي","حل المشكلات","أخرى"],
-            "Flask": ["Routes","Templates","Forms","Authentication","Database","Deployment","Full Web App","API","Login System","أخرى"],
+            "Python": ["Python للمبتدئين","OOP","Flask","الأتمتة","تحليل البيانات","تعلم الآلة","مشروع عملي","حل المشكلات","أخرى"],
+            "Flask": ["المسارات","القوالب","النماذج","تسجيل الدخول والصلاحيات","قاعدة البيانات","النشر","تطبيق ويب متكامل","واجهة API","نظام تسجيل الدخول","أخرى"],
             "أخرى": ["تعلم الأساسيات","تطبيق عملي","مشروع أسبوعي","حل مسائل","توثيق","أخرى"]
         },
         states: {
-            "Python": {current:["مبتدئ","أعرف الأساسيات","متوسط","متقدم","أخرى"], target:["إتقان الأساسيات","بناء مشروع كامل","تعلم Flask","تحليل بيانات","Machine Learning","أخرى"], commitment:["30 دقيقة يومياً","ساعة يومياً","مشروع أسبوعي","حل مسائل يومية","أخرى"]},
+            "Python": {current:["مبتدئ","أعرف الأساسيات","متوسط","متقدم","أخرى"], target:["إتقان الأساسيات","بناء مشروع كامل","تعلم Flask","تحليل بيانات","تعلم الآلة","أخرى"], commitment:["30 دقيقة يومياً","ساعة يومياً","مشروع أسبوعي","حل مسائل يومية","أخرى"]},
             "أخرى": {current:["مبتدئ","أعرف الأساسيات","متوسط","متقدم","أخرى"], target:["بناء مشروع متكامل","الاستعداد للتدريب العملي","حل 100 مسألة","أخرى"], commitment:["30 دقيقة يومياً","ساعة يومياً","مشروع أسبوعي","حل مسائل يومية","أخرى"]}
         }
     },
 
-    "Islamic Goals": {
+    "الأهداف الإسلامية": {
         categories: ["القرآن الكريم","الحديث الشريف","العقيدة","الفقه","السيرة النبوية","الأذكار","طلب العلم الشرعي","الدعوة","العبادات","العربية للقرآن","أخرى"],
         paths: {
             "القرآن الكريم": ["حفظ القرآن","مراجعة القرآن","التجويد","التثبيت","التلاوة","التدبر","ختمة","حفظ سورة محددة","حفظ جزء محدد","أخرى"],
@@ -2420,10 +2435,30 @@ const GOAL_CONFIG_V524 = {
         }
     },
 
-    "Project": {categories:["مشروع برمجي","مشروع AI","مشروع ويب","تطبيق هاتف","مشروع بحثي","بورتفوليو للمنح","مشروع شخصي","أخرى"], paths:{"أخرى":["الفكرة","التخطيط","التصميم","البناء","الاختبار","النشر","التوثيق","العرض","أخرى"]}, states:{"أخرى":{current:["مجرد فكرة","مرحلة التخطيط","بدأت التنفيذ","أنجزت النصف","قارب على الانتهاء","أخرى"], target:["إكمال المشروع","نشر المشروع","جاهز للبورتفوليو","جاهز للعرض","أخرى"], commitment:["بناء يومي","محطة أسبوعية","اختبار أسبوعي","أخرى"]}}},
-    "General": {categories:["هدف شخصي","هدف دراسي","هدف مهاري","عادة","أخرى"], paths:{"أخرى":["خطة","تدريب","مراجعة","محطة تقدم","أخرى"]}, states:{"أخرى":{current:["لم أبدأ بعد","مبتدئ","قيد التقدم","أخرى"], target:["إكمال الهدف","تحسين المستوى","أخرى"], commitment:["خطوات يومية","مراجعة أسبوعية","محطات تقدم","أخرى"]}}},
+    "المشاريع": {categories:["مشروع برمجي","مشروع AI","مشروع ويب","تطبيق هاتف","مشروع بحثي","بورتفوليو للمنح","مشروع شخصي","أخرى"], paths:{"أخرى":["الفكرة","التخطيط","التصميم","البناء","الاختبار","النشر","التوثيق","العرض","أخرى"]}, states:{"أخرى":{current:["مجرد فكرة","مرحلة التخطيط","بدأت التنفيذ","أنجزت النصف","قارب على الانتهاء","أخرى"], target:["إكمال المشروع","نشر المشروع","جاهز للبورتفوليو","جاهز للعرض","أخرى"], commitment:["بناء يومي","محطة أسبوعية","اختبار أسبوعي","أخرى"]}}},
+    "عام": {categories:["هدف شخصي","هدف دراسي","هدف مهاري","عادة","أخرى"], paths:{"أخرى":["خطة","تدريب","مراجعة","محطة تقدم","أخرى"]}, states:{"أخرى":{current:["لم أبدأ بعد","مبتدئ","قيد التقدم","أخرى"], target:["إكمال الهدف","تحسين المستوى","أخرى"], commitment:["خطوات يومية","مراجعة أسبوعية","محطات تقدم","أخرى"]}}},
     "أخرى": {categories:["أخرى"], paths:{"أخرى":["أخرى"]}, states:{"أخرى":{current:["لم أبدأ بعد","أخرى"], target:["أخرى"], commitment:["أخرى"]}}}
 };
+
+const GOAL_TYPE_CANONICAL_V557 = {
+    "Education": "التعليم",
+    "Language": "اللغات",
+    "Exam / Certificate": "الاختبارات الدولية",
+    "Programming & Technology": "البرمجة والتقنية",
+    "Artificial Intelligence": "الذكاء الاصطناعي",
+    "Scholarship": "المنح الدراسية",
+    "University": "الجامعة",
+    "Mathematics": "الرياضيات",
+    "Project": "المشاريع",
+    "Daily Life": "الحياة اليومية",
+    "Islamic Goals": "الأهداف الإسلامية",
+    "General": "عام",
+    "Other": "أخرى"
+};
+
+function goalV524CanonicalType(value) {
+    return GOAL_TYPE_CANONICAL_V557[value] || value || "التعليم";
+}
 
 function goalV524Label(value) {
     if (["أخرى","أخرى","خطة مخصصة","أخرى","تحديد يدوي","خطة مخصصة","أخرى"].includes(value)) return "أخرى";
@@ -2517,7 +2552,8 @@ function refreshGoalsArabicV524(changedId) {
         type.dataset.v524Ready = "1";
     }
 
-    const data = GOAL_CONFIG_V524[type.value] || GOAL_CONFIG_V524["Education"];
+    const canonicalType = goalV524CanonicalType(type.value);
+    const data = GOAL_CONFIG_V524[canonicalType] || GOAL_CONFIG_V524["التعليم"];
 
     if (changedId === "goalTypeSelect" || !category.options.length) {
         fillGoalV524(category, data.categories || ["أخرى"]);
@@ -2548,16 +2584,16 @@ function refreshGoalsArabicV524(changedId) {
     });
 
     if (outcome && !outcome.value) {
-        if (type.value === "Education") outcome.placeholder = "مثال: رفع المعدل أو إتقان المنهج";
-        else if (type.value === "Scholarship") outcome.placeholder = "مثال: إرسال طلب منحة قوي ومكتمل";
-        else if (type.value === "University") outcome.placeholder = "مثال: إتقان المقرر أو بناء مشروع متكامل";
-        else if (type.value === "الحياة اليومية") outcome.placeholder = "مثال: بناء عادة ثابتة والاستمرار عليها";
+        if (goalV524CanonicalType(type.value) === "التعليم") outcome.placeholder = "مثال: رفع المعدل أو إتقان المنهج";
+        else if (goalV524CanonicalType(type.value) === "المنح الدراسية") outcome.placeholder = "مثال: إرسال طلب منحة قوي ومكتمل";
+        else if (goalV524CanonicalType(type.value) === "الجامعة") outcome.placeholder = "مثال: إتقان المقرر أو بناء مشروع متكامل";
+        else if (goalV524CanonicalType(type.value) === "الحياة اليومية") outcome.placeholder = "مثال: بناء عادة ثابتة والاستمرار عليها";
         else outcome.placeholder = "ماذا تريد أن يتحقق عند إنجاز هذا الهدف؟";
     }
 
-    if (keywords) keywords.value = [type.value, category.value, path.value, current.value, target.value, commitment.value].filter(Boolean).join(", ");
+    if (keywords) keywords.value = [goalV524CanonicalType(type.value), category.value, path.value, current.value, target.value, commitment.value].filter(Boolean).join(", ");
     if (milestones && !milestones.value && typeof generatedMilestonesForGoalV4611 === "function") {
-        milestones.value = generatedMilestonesForGoalV4611(type.value, category.value, path.value, target.value);
+        milestones.value = generatedMilestonesForGoalV4611(goalV524CanonicalType(type.value), category.value, path.value, target.value);
     }
 
     ["goalTypeSelect","goalCategorySelect","goalPathSelect","currentStateSelect","targetStateSelect","commitmentSelect"].forEach(id => {

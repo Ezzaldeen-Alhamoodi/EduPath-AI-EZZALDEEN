@@ -1173,25 +1173,25 @@ GOALS_AR_LABELS = {
     "Online Course": "دورة تعليمية",
     "Research": "بحث",
     "Presentation": "عرض تقديمي",
-    "English": "English",
-    "Chinese": "Chinese",
-    "Turkish": "Turkish",
-    "Russian": "Russian",
-    "Arabic": "Arabic",
-    "German": "German",
-    "French": "French",
+    "English": "الإنجليزية",
+    "Chinese": "الصينية",
+    "Turkish": "التركية",
+    "Russian": "الروسية",
+    "Arabic": "العربية",
+    "German": "الألمانية",
+    "French": "الفرنسية",
     "IELTS Academic": "IELTS Academic",
     "TOEFL": "TOEFL",
     "Duolingo English Test": "Duolingo",
-    "General English": "General English",
-    "Academic English": "Academic English",
-    "Speaking": "Speaking",
-    "Writing": "Writing",
-    "Reading": "Reading",
-    "Listening": "Listening",
-    "Vocabulary": "Vocabulary",
-    "Grammar": "Grammar",
-    "Pronunciation": "Pronunciation",
+    "General English": "الإنجليزية العامة",
+    "Academic English": "الإنجليزية الأكاديمية",
+    "Speaking": "التحدث",
+    "Writing": "الكتابة",
+    "Reading": "القراءة",
+    "Listening": "الاستماع",
+    "Vocabulary": "المفردات",
+    "Grammar": "القواعد",
+    "Pronunciation": "النطق",
     "Python": "Python",
     "Flask": "Flask",
     "JavaScript": "JavaScript",
@@ -1206,7 +1206,7 @@ GOALS_AR_LABELS = {
     "Not started": "لم أبدأ بعد",
     "In progress": "قيد التقدم",
     "Need review": "أحتاج إلى مراجعة",
-    "Custom": "مخصص",
+    "Custom": "أخرى",
     "Complete course": "إكمال الدورة",
     "High grade": "تحقيق درجة عالية",
     "Finish project": "إنهاء المشروع",
@@ -2882,7 +2882,7 @@ def create_app():
                 flash(limit_upgrade_message("goals"), "error")
                 return redirect(url_for("goals"))
 
-            current_state = _goal_form_value(request.form, "current_state", "custom_current_state") or request.form.get("current_level", "").strip() or "Not started"
+            current_state = _goal_form_value(request.form, "current_state", "custom_current_state") or request.form.get("current_level", "").strip() or "لم أبدأ بعد"
             goal = Goal(
                 user_id=current_user.id,
                 title=request.form.get("title", "").strip(),
@@ -2896,12 +2896,12 @@ def create_app():
             )
 
             if not goal.title:
-                flash("Goal title is required.", "error")
+                flash("يرجى إدخال عنوان الهدف.", "error")
                 return redirect(url_for("goals"))
 
             db.session.add(goal)
             db.session.commit()
-            flash("Smart goal saved. Create your own tasks, and EduPath AI will connect related completed tasks automatically.", "success")
+            flash("تم حفظ الهدف الذكي. أنشئ مهامك بنفسك، وسيقوم EduPath AI بربط المهام المكتملة بالأهداف المناسبة تلقائياً.", "success")
             return redirect(url_for("goals"))
 
         all_goals = Goal.query.filter_by(user_id=current_user.id).order_by(Goal.id.desc()).all()
@@ -2921,8 +2921,8 @@ def create_app():
 
         if request.method == "POST":
             goal.title = request.form.get("title", "").strip()
-            goal.category = request.form.get("category", goal.category or "General").strip()
-            current_state = _goal_form_value(request.form, "current_state", "custom_current_state") or goal.current_level or "Not started"
+            goal.category = normalize_task_category_ar_v543(request.form.get("category", goal.category or "عام"))
+            current_state = _goal_form_value(request.form, "current_state", "custom_current_state") or goal.current_level or "لم أبدأ بعد"
             goal.current_level = current_state
             goal.daily_minutes = 0
             goal.start_date = request.form.get("start_date", "").strip()
@@ -2952,7 +2952,7 @@ def create_app():
 
         db.session.delete(goal)
         db.session.commit()
-        flash("Goal deleted. Your tasks were kept safely.", "success")
+        flash("تم حذف الهدف. بقيت مهامك محفوظة بأمان.", "success")
         return redirect(url_for("goals"))
 
     @app.route("/tasks", methods=["GET", "POST"])

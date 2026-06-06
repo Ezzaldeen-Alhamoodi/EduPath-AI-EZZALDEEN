@@ -23,8 +23,8 @@
 
             <div class="goal-field goal-field-wide">
                 <label>نوع الهدف</label>
-                <select name="category" id="goalTypeSelect" data-saved="{{ goal.category or 'Education' }}">
-                    <option value="{{ goal.category or 'Education' }}">{{ goal.category or 'Education' }}</option>
+                <select name="category" id="goalTypeSelect" data-saved="{{ goal.category or 'التعليم' }}">
+                    <option value="{{ goal.category or 'التعليم' }}">{{ (goal.category or 'التعليم')|goals_ar }}</option>
                 </select>
             </div>
 
