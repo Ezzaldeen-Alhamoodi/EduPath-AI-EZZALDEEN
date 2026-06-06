@@ -2878,7 +2878,7 @@ const GOAL_CONFIG_V524 = {
     },
 
     "البرمجة والتكنولوجيا": {
-        categories: ["أساسيات البرمجة", "Python", "C", "C++", "Java", "JavaScript", "تطوير الويب", "Data Structures", "Algorithms", "Problem Solving", "Competitive Programming", "Machine Learning", "Deep Learning", "Data Science", "Computer Vision", "Natural Language Processing", "Reinforcement Learning", "Generative AI", "MLOps", "AI Projects", "SQL", "Database Fundamentals", "SQLite", "MySQL", "PostgreSQL", "MongoDB", "Database Design", "ORM", "Database Optimization", "Database Security", "Database Projects", "Software Engineering", "Git", "GitHub", "Debugging", "Testing", "Documentation", "Clean Code", "Refactoring", "Design Patterns", "System Design", "Deployment", "Open Source", "Portfolio Development", "Software Projects", "Revision", "TypeScript", "HTML", "CSS", "PHP", "Flask", "Django", "React", "Angular", "Vue", "Node.js", "Express.js", "Express", "Linux", "Docker", "API", "REST API", "GraphQL", "OOP", "Database", "Backend", "Frontend", "Full Stack", "DevOps", "Mobile Development", "Game Development", "Cybersecurity", "Cloud Computing", "Operating Systems", "Networking", "Version Control", "Blockchain", "IoT", "Embedded Systems", "AR/VR", "Robotics", "Technical Portfolio", "Freelancing", "Startup Projects", "Emerging Technologies", "أخرى", "Kubernetes", "System Administration", "Infrastructure Projects"],
+        categories: ["أساسيات البرمجة", "Python", "C", "C++", "Java", "JavaScript", "تطوير الويب", "Data Structures", "Algorithms", "Problem Solving", "Competitive Programming", "Machine Learning", "Deep Learning", "Data Science", "Computer Vision", "Natural Language Processing", "Reinforcement Learning", "Generative AI", "MLOps", "AI Projects", "SQL", "Database Fundamentals", "SQLite", "MySQL", "PostgreSQL", "MongoDB", "Database Design", "ORM", "Database Optimization", "Database Security", "Database Projects", "Software Engineering", "Git", "GitHub", "Debugging", "Testing", "Documentation", "Clean Code", "Refactoring", "Design Patterns", "System Design", "Deployment", "Open Source", "Portfolio Development", "Software Projects", "Revision", "TypeScript", "HTML", "CSS", "PHP", "Flask", "Django", "React", "Angular", "Vue", "Node.js", "Express.js", "Express", "Linux", "Docker", "API", "REST API", "GraphQL", "OOP", "Database", "Backend", "Frontend", "Full Stack", "DevOps", "Mobile Development", "Game Development", "Cybersecurity", "Cloud Computing", "Operating Systems", "Networking", "Version Control", "Blockchain", "IoT", "Embedded Systems", "AR/VR", "Robotics", "Technical Portfolio", "Freelancing", "Startup Projects", "Emerging Technologies", "Technical Roadmap", "Interview Preparation", "Technical Certifications", "Internship Preparation", "Research Projects", "Graduation Projects", "Open Source Career", "Remote Work", "Technical Leadership", "Tech Entrepreneurship", "Career Planning", "Continuous Learning", "أخرى", "Kubernetes", "System Administration", "Infrastructure Projects"],
         paths: {
             "أساسيات البرمجة": ["أساسيات البرمجة","المتغيرات وأنواع البيانات","العمليات الحسابية والمنطقية","الشروط","الحلقات التكرارية","الدوال","المصفوفات والقوائم","حل المشكلات","التعامل مع الأخطاء","كتابة برامج بسيطة","مراجعة شاملة","أخرى"],
             "Python": ["Syntax Basics","Variables","Data Types","Operators","Conditions","Loops","Functions","Lists","Tuples","Dictionaries","Sets","Strings","File Handling","Exception Handling","Modules","OOP","Virtual Environment","Libraries","Flask","API","SQLite","Project Building","Debugging","Code Review","Revision","أخرى"],
@@ -2967,6 +2967,19 @@ const GOAL_CONFIG_V524 = {
             "Kubernetes": ["Kubernetes Basics", "Pods", "Deployments", "Services", "Volumes", "ConfigMaps", "Secrets", "Scaling", "Monitoring", "Kubernetes Projects", "Revision", "أخرى"],
             "System Administration": ["User Management", "File Management", "Service Management", "Backup", "Monitoring", "Performance", "Security", "Automation", "Server Maintenance", "Revision", "أخرى"],
             "Infrastructure Projects": ["Linux Server", "Network Lab", "Cybersecurity Lab", "Docker Project", "Cloud Project", "DevOps Project", "Portfolio Project", "Capstone Project", "Revision", "أخرى"],
+            "Technical Roadmap": ["Computer Science Roadmap", "Backend Roadmap", "Frontend Roadmap", "Full Stack Roadmap", "AI Roadmap", "Data Science Roadmap", "Cybersecurity Roadmap", "Mobile Development Roadmap", "Game Development Roadmap", "Cloud Roadmap", "Revision", "أخرى"],
+            "Interview Preparation": ["Technical Interview", "Coding Interview", "Behavioral Interview", "System Design Interview", "Problem Solving Interview", "Mock Interview", "CV Review", "Revision", "أخرى"],
+            "Technical Certifications": ["Programming Certificates", "Cloud Certificates", "Cybersecurity Certificates", "AI Certificates", "Data Certificates", "Linux Certificates", "Networking Certificates", "Revision", "أخرى"],
+            "Internship Preparation": ["CV Building", "Portfolio", "Technical Skills", "Interview Practice", "Company Research", "Application Preparation", "Revision", "أخرى"],
+            "Research Projects": ["Research Basics", "Paper Reading", "Literature Review", "Research Methodology", "Experiment Design", "Paper Writing", "Publication Preparation", "Revision", "أخرى"],
+            "Graduation Projects": ["Idea Selection", "Planning", "Research", "Implementation", "Testing", "Documentation", "Presentation", "Revision", "أخرى"],
+            "Open Source Career": ["GitHub Growth", "Project Contribution", "Issue Solving", "Pull Requests", "Community Engagement", "Maintaining Projects", "Revision", "أخرى"],
+            "Remote Work": ["Remote Skills", "Communication", "Time Management", "Team Collaboration", "Freelance Platforms", "Remote Projects", "Revision", "أخرى"],
+            "Technical Leadership": ["Team Leadership", "Project Management", "Mentoring", "Communication", "Decision Making", "Technical Planning", "Revision", "أخرى"],
+            "Tech Entrepreneurship": ["Startup Planning", "MVP Development", "Market Validation", "Product Management", "Business Growth", "Funding Basics", "Revision", "أخرى"],
+            "Career Planning": ["Career Exploration", "Goal Setting", "Skill Gap Analysis", "Learning Plan", "Career Transition", "Long Term Planning", "Revision", "أخرى"],
+            "Continuous Learning": ["Reading Technical Books", "Watching Courses", "Following Technology News", "Building Side Projects", "Learning New Tools", "Skill Improvement", "Revision", "أخرى"],
+            "Revision": ["مراجعة شاملة", "مراجعة المفاهيم", "مراجعة المشاريع", "مراجعة أسبوعية", "مراجعة المسار", "أخرى"],
             "أخرى": ["تعلم الأساسيات","تطبيق عملي","بناء مشروع","حل مسائل","مراجعة الشيفرة البرمجية","إصلاح الأخطاء البرمجية","توثيق المشروع","مراجعة شاملة","أخرى"]
         },
         states: {
@@ -3304,6 +3317,71 @@ const GOAL_CONFIG_V524 = {
                 current:["مبتدئ", "أعرف المفاهيم العامة", "أتابع التطورات", "أبحث في موضوع محدد", "أخرى"],
                 target:["فهم التقنية", "إعداد بحث", "تطبيق تجربة أولية", "بناء مشروع تجريبي", "أخرى"],
                 commitment:["قراءة بحث", "تلخيص فكرة", "تجربة عملية", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Technical Roadmap": {
+                current:["لا أعرف الطريق", "أعرف الأساسيات", "لدي خطة مبدئية", "أسير بخطة واضحة", "أخرى"],
+                target:["بناء خطة واضحة", "إكمال Roadmap", "تحقيق الأهداف", "تطوير المسار", "أخرى"],
+                commitment:["مراجعة الخطة", "إنجاز مرحلة", "تعلم مهارة", "تحديث الخطة", "أخرى"]
+            },
+            "Interview Preparation": {
+                current:["لم أبدأ", "أعرف الأساسيات", "أتدرب أحياناً", "مستعد للمقابلات", "أخرى"],
+                target:["اجتياز المقابلات", "تحسين الأداء", "زيادة الثقة", "الحصول على فرصة", "أخرى"],
+                commitment:["حل أسئلة", "Mock Interview", "تحسين CV", "مراجعة", "أخرى"]
+            },
+            "Technical Certifications": {
+                current:["لم أحدد الشهادة", "أعرف المتطلبات", "بدأت التحضير", "أحل تدريبات", "أخرى"],
+                target:["اختيار الشهادة المناسبة", "إكمال التحضير", "اجتياز الشهادة", "تعزيز المسار المهني", "أخرى"],
+                commitment:["درس يومي", "حل أسئلة", "مراجعة المجالات", "اختبار تجريبي", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Internship Preparation": {
+                current:["لم أبدأ", "لدي CV مبدئي", "أملك مشاريع بسيطة", "أتدرب على المقابلات", "أخرى"],
+                target:["تجهيز CV قوي", "بناء Portfolio", "الاستعداد للمقابلات", "التقديم للتدريب", "الحصول على تدريب", "أخرى"],
+                commitment:["تحسين CV", "تطوير مشروع", "تدريب مقابلة", "بحث عن شركات", "تقديم طلب", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Research Projects": {
+                current:["لا أعرف البحث العلمي", "أعرف الأساسيات", "أقرأ الأوراق العلمية", "أعمل على مشروع", "أخرى"],
+                target:["إجراء بحث", "كتابة ورقة", "نشر بحث", "المشاركة في مؤتمر", "أخرى"],
+                commitment:["قراءة Paper", "تلخيص", "تحليل", "كتابة", "تطبيق عملي", "أخرى"]
+            },
+            "Graduation Projects": {
+                current:["لم أختر فكرة", "اخترت فكرة مبدئية", "بدأت التخطيط", "بدأت التنفيذ", "أخرى"],
+                target:["اختيار فكرة قوية", "تنفيذ المشروع", "اختبار المشروع", "توثيق المشروع", "عرض المشروع بنجاح", "أخرى"],
+                commitment:["تطوير جزء", "قراءة مرجع", "اختبار ميزة", "توثيق", "تحضير عرض", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Open Source Career": {
+                current:["لم أبدأ", "أتابع مشاريع", "أحل Issues بسيطة", "أرسلت Pull Requests", "أخرى"],
+                target:["المساهمة بانتظام", "تحسين GitHub", "بناء سمعة تقنية", "المشاركة في مشاريع مؤثرة", "أخرى"],
+                commitment:["قراءة كود", "حل Issue", "إرسال Pull Request", "مراجعة مشروع", "تواصل مجتمعي", "أخرى"]
+            },
+            "Remote Work": {
+                current:["لا أعرف العمل عن بعد", "أعرف المفاهيم", "أعمل أحياناً", "أعمل باستمرار", "أخرى"],
+                target:["الحصول على وظيفة", "زيادة الخبرة", "تحسين الدخل", "بناء مسيرة مهنية", "أخرى"],
+                commitment:["ساعة تعلم", "مشروع", "تطوير Portfolio", "التقديم للوظائف", "أخرى"]
+            },
+            "Technical Leadership": {
+                current:["لا أقود فرقاً", "أساعد زملاء", "أدير مهام صغيرة", "أقود مشروعاً", "أخرى"],
+                target:["قيادة فريق", "تحسين التواصل", "إدارة القرارات التقنية", "توجيه الآخرين", "أخرى"],
+                commitment:["تخطيط مهمة", "مراجعة فريق", "Mentoring", "تحسين تواصل", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Tech Entrepreneurship": {
+                current:["فكرة فقط", "أدرس السوق", "أبني MVP", "لدي منتج مبدئي", "أخرى"],
+                target:["اختبار الفكرة", "بناء MVP", "إطلاق المنتج", "نمو المشروع", "أخرى"],
+                commitment:["تحليل سوق", "تطوير ميزة", "مقابلة مستخدمين", "تحسين المنتج", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Career Planning": {
+                current:["لا أعرف المسار", "أبحث عن المجال", "اخترت التخصص", "أسير بخطة", "أخرى"],
+                target:["اختيار المسار", "بناء الخبرة", "الحصول على فرصة", "تحقيق الأهداف", "أخرى"],
+                commitment:["مراجعة الخطة", "تعلم مهارة", "تحسين Portfolio", "التقديم", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Continuous Learning": {
+                current:["أتعلم بشكل متقطع", "لدي مصادر متعددة", "أتعلم بانتظام", "أطبق ما أتعلمه", "أخرى"],
+                target:["الاستمرار في التعلم", "تحديث المهارات", "بناء مشاريع جانبية", "متابعة التقنيات الحديثة", "أخرى"],
+                commitment:["قراءة تقنية", "مشاهدة درس", "تطبيق أداة", "مشروع جانبي", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Revision": {
+                current:["أحتاج مراجعة شاملة", "نسيت بعض المفاهيم", "أراجع جزئياً", "مستواي جيد", "أخرى"],
+                target:["تثبيت المفاهيم", "سد الفجوات", "تحسين التطبيق العملي", "الاستعداد للمرحلة التالية", "أخرى"],
+                commitment:["مراجعة يومية", "حل تدريبات", "تلخيص مفاهيم", "اختبار ذاتي", "مراجعة أسبوعية", "أخرى"]
             },
             "أخرى": {
                 current:["مبتدئ","أعرف الأساسيات","أحتاج تدريباً عملياً","أعمل على مشروع","أخرى"],
