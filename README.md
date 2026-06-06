@@ -1780,3 +1780,29 @@ Dashboard-only layout fix.
 - Only the Languages section was deepened.
 - Quran Memorization and Secondary School remain unchanged.
 - Official test names and official question types remain unchanged.
+
+
+## v5.3.2 Deep Exam Certificates
+
+### Exams & Certificates section
+- Kept task form labels in Arabic.
+- Kept exam content in English inside Exams & Certificates.
+- Added deeper adaptive exam structure:
+  - exam
+  - main section
+  - task type
+  - question type / detailed topic
+  - activity type
+- Added detailed structures for:
+  - IELTS
+  - TOEFL 2026
+  - Duolingo English Test
+  - HSK / HSKK
+  - CSCA
+  - SAT
+  - ACT
+  - GRE
+  - GMAT
+- Activity type now changes based on the detailed question/task type.
+- CSCA exam content is restored to English inside Exams & Certificates.
+- Official test names, section names, question types, and training types remain in English.

@@ -6945,3 +6945,14 @@ body.dark-mode .home-progress-ar-v513 small {
     color: #1d4ed8 !important;
     font-weight: 900 !important;
 }
+
+
+
+/* EduPath AI v5.3.2 Deep Exam Certificates */
+.exam-content-english-v532,
+#topicSelect,
+#skillSelect,
+#detailedTopicSelect,
+#trainingTypeSelect {
+    unicode-bidi: plaintext;
+}
