@@ -7066,3 +7066,496 @@ body #trainingTypeSelect {
 
 
 /* EduPath AI v5.5.2 Reading Research Native AR */
+
+
+/* EduPath AI v5.5.3 Tasks Responsive Design - design only */
+:root {
+    --tasks-radius-lg: 22px;
+    --tasks-radius-md: 16px;
+    --tasks-gap-xs: 6px;
+    --tasks-gap-sm: 10px;
+    --tasks-gap-md: 14px;
+    --tasks-gap-lg: 18px;
+}
+
+/* Compact hero for tasks page */
+.tasks-hero {
+    min-height: auto !important;
+    padding: 18px 20px !important;
+    border-radius: var(--tasks-radius-lg) !important;
+    gap: 14px !important;
+    align-items: center !important;
+    margin-bottom: 14px !important;
+}
+
+.tasks-hero .tag {
+    font-size: 12px !important;
+    padding: 5px 10px !important;
+}
+
+.tasks-hero h2 {
+    font-size: clamp(22px, 2.4vw, 34px) !important;
+    line-height: 1.25 !important;
+    margin: 8px 0 6px !important;
+}
+
+.tasks-hero p {
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    max-width: 900px !important;
+    margin: 0 !important;
+}
+
+.tasks-hero .button {
+    min-height: 40px !important;
+    padding: 9px 16px !important;
+    border-radius: 14px !important;
+    white-space: nowrap !important;
+}
+
+/* Tasks main layout: use available width without crushing content */
+.grid-2 {
+    gap: 14px !important;
+    align-items: start !important;
+}
+
+.card#addTaskCard,
+.tasks-list-card-v476 {
+    border-radius: var(--tasks-radius-lg) !important;
+    padding: 16px !important;
+    overflow: visible !important;
+}
+
+.card#addTaskCard > h2,
+.tasks-list-card-v476 > h2 {
+    font-size: 20px !important;
+    margin: 0 0 6px !important;
+}
+
+.card#addTaskCard > .muted,
+.tasks-list-card-v476 > .muted {
+    margin: 0 0 12px !important;
+    font-size: 13px !important;
+}
+
+/* Smart form compaction */
+.smart-task-form {
+    display: grid !important;
+    gap: 12px !important;
+}
+
+.smart-step {
+    padding: 12px !important;
+    border-radius: var(--tasks-radius-md) !important;
+    margin-bottom: 4px !important;
+}
+
+.smart-step h3 {
+    font-size: 16px !important;
+    margin: 0 0 4px !important;
+}
+
+.smart-step .muted,
+.smart-step p {
+    font-size: 12.5px !important;
+    line-height: 1.6 !important;
+    margin: 0 0 10px !important;
+}
+
+/* Task type cards: responsive density */
+.task-type-grid {
+    display: grid !important;
+    gap: 8px !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.task-type-card {
+    min-height: 72px !important;
+    padding: 9px 6px !important;
+    border-radius: 15px !important;
+    gap: 5px !important;
+    justify-content: center !important;
+}
+
+.task-type-card .task-type-icon,
+.task-type-card .icon,
+.task-type-card strong:first-child {
+    font-size: 18px !important;
+    line-height: 1 !important;
+}
+
+.task-type-card strong,
+.task-type-card span,
+.task-type-card p {
+    font-size: 11.5px !important;
+    line-height: 1.35 !important;
+    margin: 0 !important;
+}
+
+.task-type-card small {
+    font-size: 10.5px !important;
+    line-height: 1.35 !important;
+}
+
+/* Form fields: consistent compact language */
+.smart-details {
+    display: grid !important;
+    gap: 8px 12px !important;
+}
+
+.smart-details label,
+.form label {
+    font-size: 12.5px !important;
+    font-weight: 800 !important;
+    margin: 0 !important;
+}
+
+.form input,
+.form select,
+.form textarea,
+.smart-details input,
+.smart-details select,
+.smart-details textarea {
+    min-height: 38px !important;
+    padding: 8px 10px !important;
+    border-radius: 12px !important;
+    font-size: 13px !important;
+}
+
+.form textarea,
+.smart-details textarea {
+    min-height: 78px !important;
+}
+
+.form-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    margin: 0 !important;
+}
+
+.conditional-field,
+.csca-extra-box,
+.repeat-days-box,
+.repeat-custom-box {
+    padding: 10px !important;
+    border-radius: 14px !important;
+    margin: 0 !important;
+}
+
+.hint,
+small.hint {
+    font-size: 11.5px !important;
+    line-height: 1.55 !important;
+}
+
+.weekday-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+    margin-top: 8px !important;
+}
+
+.weekday-pill {
+    min-height: 34px !important;
+    padding: 6px 8px !important;
+    border-radius: 12px !important;
+    font-size: 12px !important;
+}
+
+/* Submit button consistency */
+.form button[type="submit"],
+.card#addTaskCard form > button[type="submit"] {
+    min-height: 42px !important;
+    border-radius: 14px !important;
+    padding: 10px 16px !important;
+    font-size: 14px !important;
+    margin-top: 6px !important;
+}
+
+/* Task cards board */
+.tasks-board-v476 {
+    display: grid !important;
+    gap: 10px !important;
+    grid-template-columns: 1fr !important;
+}
+
+.task-card {
+    border-radius: var(--tasks-radius-md) !important;
+    padding: 12px !important;
+    gap: 10px !important;
+    min-height: auto !important;
+}
+
+.task-card > div:first-child {
+    display: grid !important;
+    gap: 5px !important;
+}
+
+.task-card strong {
+    font-size: 15px !important;
+    line-height: 1.45 !important;
+}
+
+.task-card span {
+    font-size: 12.2px !important;
+    line-height: 1.55 !important;
+}
+
+.task-card .actions {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    margin-top: 4px !important;
+}
+
+.small-button,
+.task-card .small-button {
+    min-height: 32px !important;
+    padding: 6px 10px !important;
+    border-radius: 10px !important;
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+}
+
+/* Tablet */
+@media (min-width: 700px) {
+    .task-type-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+
+    .smart-details {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        align-items: end !important;
+    }
+
+    .smart-details > label {
+        align-self: end !important;
+    }
+
+    .smart-details > label,
+    .smart-details > input,
+    .smart-details > select,
+    .smart-details > textarea,
+    .smart-details > .conditional-field,
+    .smart-details > .csca-extra-box,
+    .smart-details > .repeat-days-box,
+    .smart-details > .repeat-custom-box {
+        grid-column: span 1 !important;
+    }
+
+    #taskNameLabel,
+    #taskTitleInput,
+    #sourceLabel,
+    #sourceInput,
+    #notesLabel,
+    #notesInput,
+    .csca-extra-box,
+    .repeat-days-box,
+    .repeat-custom-box {
+        grid-column: 1 / -1 !important;
+    }
+
+    .tasks-board-v476 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+/* Desktop and laptop */
+@media (min-width: 981px) {
+    .tasks-hero {
+        padding: 20px 22px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+    }
+
+    .grid-2 {
+        grid-template-columns: minmax(500px, 1.2fr) minmax(360px, .8fr) !important;
+        gap: 16px !important;
+    }
+
+    .task-type-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    }
+
+    .card#addTaskCard,
+    .tasks-list-card-v476 {
+        padding: 18px !important;
+    }
+
+    .tasks-board-v476 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+/* Wider screens: make better use of width */
+@media (min-width: 1280px) {
+    .grid-2 {
+        grid-template-columns: minmax(680px, 1.35fr) minmax(500px, 1fr) !important;
+    }
+
+    .task-type-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    }
+
+    .tasks-board-v476 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .smart-details {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+
+    #taskNameLabel,
+    #taskTitleInput {
+        grid-column: 1 / -1 !important;
+    }
+
+    #sourceLabel,
+    #sourceInput,
+    #notesLabel,
+    #notesInput,
+    .repeat-days-box,
+    .repeat-custom-box,
+    .csca-extra-box {
+        grid-column: 1 / -1 !important;
+    }
+}
+
+/* Very wide screens: current tasks can use 3 columns when space allows */
+@media (min-width: 1560px) {
+    .grid-2 {
+        grid-template-columns: minmax(760px, 1.25fr) minmax(680px, 1fr) !important;
+    }
+
+    .tasks-board-v476 {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+}
+
+/* Mobile refinement */
+@media (max-width: 699px) {
+    .tasks-hero {
+        padding: 14px !important;
+        border-radius: 18px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .tasks-hero h2 {
+        font-size: 21px !important;
+    }
+
+    .tasks-hero p {
+        font-size: 12.5px !important;
+    }
+
+    .tasks-hero .button {
+        width: 100% !important;
+        min-height: 38px !important;
+    }
+
+    .grid-2 {
+        gap: 10px !important;
+    }
+
+    .card#addTaskCard,
+    .tasks-list-card-v476 {
+        padding: 12px !important;
+        border-radius: 18px !important;
+    }
+
+    .card#addTaskCard > h2,
+    .tasks-list-card-v476 > h2 {
+        font-size: 18px !important;
+    }
+
+    .smart-step {
+        padding: 10px !important;
+    }
+
+    .task-type-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 7px !important;
+    }
+
+    .task-type-card {
+        min-height: 66px !important;
+        padding: 7px 4px !important;
+        border-radius: 13px !important;
+    }
+
+    .task-type-card .task-type-icon,
+    .task-type-card .icon,
+    .task-type-card strong:first-child {
+        font-size: 16px !important;
+    }
+
+    .task-type-card strong,
+    .task-type-card span,
+    .task-type-card p {
+        font-size: 10.7px !important;
+    }
+
+    .smart-details {
+        gap: 7px !important;
+    }
+
+    .form-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+    }
+
+    .form input,
+    .form select,
+    .form textarea,
+    .smart-details input,
+    .smart-details select,
+    .smart-details textarea {
+        min-height: 36px !important;
+        padding: 7px 9px !important;
+        font-size: 12.5px !important;
+    }
+
+    .weekday-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+
+    .task-card {
+        padding: 10px !important;
+    }
+
+    .task-card span {
+        font-size: 11.8px !important;
+    }
+
+    .small-button,
+    .task-card .small-button {
+        flex: 1 1 auto !important;
+        text-align: center !important;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 390px) {
+    .task-type-grid {
+        gap: 6px !important;
+    }
+
+    .task-type-card {
+        min-height: 62px !important;
+    }
+
+    .task-type-card strong,
+    .task-type-card span,
+    .task-type-card p {
+        font-size: 10.2px !important;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr !important;
+    }
+
+    .weekday-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}

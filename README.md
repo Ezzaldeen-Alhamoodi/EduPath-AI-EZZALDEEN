@@ -2226,3 +2226,30 @@ Dashboard-only layout fix.
 - `أخرى` exists in every level.
 - `Custom` is not used.
 - `اكتب ما تريد` remains the Arabic custom input.
+
+
+## v5.5.3 Tasks Responsive Design
+
+### Scope
+- Design and layout only for the Tasks page.
+- No logic changes.
+- No feature changes.
+- No task data changes.
+- No form field changes.
+
+### Improvements
+- More compact Tasks hero.
+- Better use of screen width on desktop and large screens.
+- Task type grid:
+  - Mobile: 3 cards per row.
+  - Tablet: 4 cards per row.
+  - Desktop: 5–6 cards per row.
+- Form layout:
+  - Mobile: compact vertical layout.
+  - Tablet/Desktop: multi-column layout where appropriate.
+- Current task cards:
+  - Mobile: 1 card per row.
+  - Tablet: 2 cards per row.
+  - Large screens: up to 3 cards per row.
+- Reduced unnecessary padding, oversized icons, and excessive card height.
+- Unified button sizing, spacing, borders, and visual rhythm.
