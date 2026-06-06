@@ -2102,3 +2102,36 @@ Dashboard-only layout fix.
 - Tasks page only.
 - No goals changes.
 - No dashboard redesign.
+
+
+## v5.4.9 Smart Exam Data
+
+### Added
+- Added independent `SMART_EXAM_DATA` for the Exams & Certificates task category.
+- Exams are now isolated from the general task data.
+- Exam flow is now:
+  - Exam
+  - Main Section
+  - Task Type / Question Group
+  - Activity Type
+
+### Exams covered
+- IELTS
+- TOEFL
+- Duolingo English Test
+- CSCA
+- SAT
+- ACT
+- GRE
+- GMAT
+- HSK
+- HSKK
+
+### Rules
+- Form labels remain Arabic.
+- Exam names, official sections, official question types, and official activities remain English.
+- No mixing between exams:
+  - IELTS does not show GRE/GMAT/SAT-specific items.
+  - GRE does not show IELTS-specific items.
+  - Duolingo does not show IELTS Writing or Reading question types.
+  - CSCA subjects stay isolated.
