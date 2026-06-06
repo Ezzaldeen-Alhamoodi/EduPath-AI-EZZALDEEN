@@ -2878,7 +2878,7 @@ const GOAL_CONFIG_V524 = {
     },
 
     "البرمجة والتكنولوجيا": {
-        categories: ["أساسيات البرمجة", "Python", "C", "C++", "Java", "JavaScript", "تطوير الويب", "Data Structures", "Algorithms", "Problem Solving", "Competitive Programming", "Machine Learning", "Deep Learning", "Data Science", "Computer Vision", "Natural Language Processing", "Reinforcement Learning", "Generative AI", "MLOps", "AI Projects", "SQL", "Database Fundamentals", "SQLite", "MySQL", "PostgreSQL", "MongoDB", "Database Design", "ORM", "Database Optimization", "Database Security", "Database Projects", "Revision", "TypeScript", "HTML", "CSS", "PHP", "Flask", "Django", "React", "Angular", "Vue", "Node.js", "Express.js", "Express", "Git", "GitHub", "Linux", "Docker", "API", "REST API", "GraphQL", "OOP", "Database", "Backend", "Frontend", "Full Stack", "DevOps", "Software Engineering", "Testing", "Debugging", "Mobile Development", "Game Development", "Cybersecurity", "Cloud Computing", "Operating Systems", "Networking", "System Design", "Open Source", "Version Control", "أخرى"],
+        categories: ["أساسيات البرمجة", "Python", "C", "C++", "Java", "JavaScript", "تطوير الويب", "Data Structures", "Algorithms", "Problem Solving", "Competitive Programming", "Machine Learning", "Deep Learning", "Data Science", "Computer Vision", "Natural Language Processing", "Reinforcement Learning", "Generative AI", "MLOps", "AI Projects", "SQL", "Database Fundamentals", "SQLite", "MySQL", "PostgreSQL", "MongoDB", "Database Design", "ORM", "Database Optimization", "Database Security", "Database Projects", "Software Engineering", "Git", "GitHub", "Debugging", "Testing", "Documentation", "Clean Code", "Refactoring", "Design Patterns", "System Design", "Deployment", "Open Source", "Portfolio Development", "Software Projects", "Revision", "TypeScript", "HTML", "CSS", "PHP", "Flask", "Django", "React", "Angular", "Vue", "Node.js", "Express.js", "Express", "Linux", "Docker", "API", "REST API", "GraphQL", "OOP", "Database", "Backend", "Frontend", "Full Stack", "DevOps", "Mobile Development", "Game Development", "Cybersecurity", "Cloud Computing", "Operating Systems", "Networking", "Version Control", "أخرى"],
         paths: {
             "أساسيات البرمجة": ["أساسيات البرمجة","المتغيرات وأنواع البيانات","العمليات الحسابية والمنطقية","الشروط","الحلقات التكرارية","الدوال","المصفوفات والقوائم","حل المشكلات","التعامل مع الأخطاء","كتابة برامج بسيطة","مراجعة شاملة","أخرى"],
             "Python": ["Syntax Basics","Variables","Data Types","Operators","Conditions","Loops","Functions","Lists","Tuples","Dictionaries","Sets","Strings","File Handling","Exception Handling","Modules","OOP","Virtual Environment","Libraries","Flask","API","SQLite","Project Building","Debugging","Code Review","Revision","أخرى"],
@@ -2909,8 +2909,8 @@ const GOAL_CONFIG_V524 = {
             "Node.js": ["Modules","Express","Routing","Middleware","API","Database","Authentication","Deployment","Project Building","أخرى"],
             "Express": ["Routing","Middleware","REST API","Authentication","Database","Error Handling","Project Building","أخرى"],
             "Express.js": ["Routing","Middleware","REST API","Authentication","Database","Error Handling","Project Building","أخرى"],
-            "Git": ["Version Control","Commits","Branches","Merge","Pull Requests","Workflow","Revision","أخرى"],
-            "GitHub": ["Repositories","Commits","Branches","Pull Requests","Issues","GitHub Pages","Portfolio","أخرى"],
+            "Git": ["Git Basics", "Repository", "Clone", "Commit", "Branch", "Merge", "Rebase", "Pull", "Push", "Conflict Resolution", "Git Workflow", "Revision", "أخرى"],
+            "GitHub": ["Repositories", "README", "Issues", "Pull Requests", "Actions", "Projects", "GitHub Pages", "Open Source", "Portfolio", "Revision", "أخرى"],
             "Linux": ["Terminal Basics","Files","Permissions","Processes","Shell Commands","Server Basics","أخرى"],
             "Docker": ["Images","Containers","Dockerfile","Docker Compose","Deployment","Revision","أخرى"],
             "API": ["Requests","Responses","JSON","Authentication","Testing","Integration","أخرى"],
@@ -2925,17 +2925,24 @@ const GOAL_CONFIG_V524 = {
             "Frontend": ["HTML","CSS","JavaScript","Responsive Design","DOM","UI Components","API Integration","Project Building","أخرى"],
             "Full Stack": ["Frontend","Backend","Database","Authentication","API","Deployment","Full Project","أخرى"],
             "DevOps": ["Linux","Git","Docker","CI/CD","Deployment","Monitoring","أخرى"],
-            "Software Engineering": ["Requirements","Design","Architecture","Testing","Documentation","Maintenance","أخرى"],
-            "Testing": ["Unit Testing","Integration Testing","Manual Testing","Test Cases","Debugging","Revision","أخرى"],
-            "Debugging": ["قراءة الأخطاء","تتبع المشكلة","اختبار الحل","تحسين الكود","توثيق السبب","أخرى"],
+            "Software Engineering": ["Software Development Life Cycle", "Requirements Analysis", "Software Design", "Implementation", "Testing", "Maintenance", "Agile", "Scrum", "Software Architecture", "Project Management", "Revision", "أخرى"],
+            "Testing": ["Unit Testing", "Integration Testing", "Functional Testing", "Regression Testing", "Automation Testing", "Test Cases", "Quality Assurance", "Revision", "أخرى"],
+            "Debugging": ["Finding Bugs", "Logic Errors", "Syntax Errors", "Runtime Errors", "Debugging Tools", "Logging", "Performance Debugging", "Revision", "أخرى"],
             "Mobile Development": ["UI Basics","Navigation","API Integration","Local Storage","Project Building","أخرى"],
             "Game Development": ["Game Logic","Physics","Graphics","Input Handling","Project Building","أخرى"],
             "تطوير الويب": ["HTML","CSS","Responsive Design","Bootstrap","Tailwind CSS","JavaScript","DOM","Async JavaScript","API","JSON","Frontend","Backend","Full Stack","Flask","Django","React","Node.js","Express.js","Authentication","Session Management","REST API","Database Integration","SQLite","MySQL","PostgreSQL","Deployment","Debugging","Testing","Security Basics","Performance Optimization","Project Building","Revision","Portfolio Development","Open Source Contribution","أخرى"],
+            "Documentation": ["README", "Code Documentation", "API Documentation", "Project Documentation", "Technical Writing", "Revision", "أخرى"],
+            "Clean Code": ["Naming", "Formatting", "Functions", "Classes", "Code Organization", "SOLID Principles", "Best Practices", "Revision", "أخرى"],
+            "Refactoring": ["Code Refactoring", "Performance Improvement", "Code Simplification", "Removing Duplication", "Revision", "أخرى"],
+            "Design Patterns": ["Singleton", "Factory", "Observer", "Strategy", "MVC", "Dependency Injection", "Revision", "أخرى"],
+            "Deployment": ["Deployment Basics", "Render", "VPS", "Docker", "CI/CD", "Cloud Deployment", "Monitoring", "Revision", "أخرى"],
+            "Portfolio Development": ["Project Selection", "Portfolio Website", "GitHub Portfolio", "Project Documentation", "CV Integration", "Revision", "أخرى"],
+            "Software Projects": ["Planning", "Development", "Testing", "Deployment", "Maintenance", "Project Improvement", "Revision", "أخرى"],
             "Cybersecurity": ["Security Basics","Network Security","Web Security","Authentication","OWASP","Linux","Revision","أخرى"],
             "Cloud Computing": ["Cloud Basics","Deployment","Storage","Databases","Monitoring","Security","أخرى"],
             "Operating Systems": ["Processes","Memory","Files","Scheduling","Linux","Revision","أخرى"],
             "Networking": ["Network Basics","IP","DNS","HTTP","Ports","Protocols","Security","أخرى"],
-            "System Design": ["Requirements","Architecture","Scalability","Database Design","API Design","Caching","Revision","أخرى"],
+            "System Design": ["Scalability", "Load Balancing", "Caching", "Database Design", "API Design", "Microservices", "System Architecture", "Revision", "أخرى"],
             "Competitive Programming": ["Codeforces","AtCoder","LeetCode","CodeChef","TopCoder","ICPC Preparation","Contest Strategy","Virtual Contest","Upsolving","Time Management","Speed Coding","Revision","أخرى"],
             "Machine Learning": ["ML Fundamentals","Data Collection","Data Cleaning","Feature Engineering","Data Visualization","Supervised Learning","Unsupervised Learning","Regression","Classification","Clustering","Model Evaluation","Hyperparameter Tuning","Cross Validation","Ensemble Methods","Model Deployment","ML Projects","Revision","أخرى"],
             "Deep Learning": ["Neural Networks","Activation Functions","Forward Propagation","Backpropagation","Optimization","CNN","RNN","LSTM","GRU","Transformers","Transfer Learning","Fine Tuning","Model Training","Model Evaluation","DL Projects","Revision","أخرى"],
@@ -2946,7 +2953,7 @@ const GOAL_CONFIG_V524 = {
             "Generative AI": ["LLM Fundamentals","Prompt Engineering","Embeddings","Vector Databases","RAG","Fine Tuning","AI Agents","Function Calling","Generative AI Projects","Revision","أخرى"],
             "MLOps": ["Model Deployment","Docker","Model Monitoring","CI/CD","Model Versioning","Pipeline Building","Cloud Deployment","MLOps Projects","Revision","أخرى"],
             "AI Projects": ["Classification Project","Regression Project","NLP Project","Computer Vision Project","Generative AI Project","Healthcare AI","Education AI","Portfolio Project","Capstone Project","Revision","أخرى"],
-            "Open Source": ["GitHub","Issues","Pull Requests","Documentation","Code Review","Contribution","أخرى"],
+            "Open Source": ["Finding Projects", "Understanding Code", "Issues", "Pull Requests", "Code Review", "Community Contribution", "Revision", "أخرى"],
             "Version Control": ["Git","Commits","Branches","Merge","Conflict Resolution","Workflow","أخرى"],
             "أخرى": ["تعلم الأساسيات","تطبيق عملي","بناء مشروع","حل مسائل","مراجعة الشيفرة البرمجية","إصلاح الأخطاء البرمجية","توثيق المشروع","مراجعة شاملة","أخرى"]
         },
@@ -3042,9 +3049,9 @@ const GOAL_CONFIG_V524 = {
                 commitment:["ساعة تطوير","تطبيق عملي","بناء ميزة","إصلاح أخطاء","مراجعة أسبوعية","أخرى"]
             },
             "Portfolio Development": {
-                current:["لا أملك Portfolio","لدي مشاريع قليلة","أحتاج تحسين العرض","لدي Portfolio بسيط","أخرى"],
-                target:["بناء Portfolio قوي","عرض المشاريع بوضوح","تحسين GitHub","نشر المشاريع","أخرى"],
-                commitment:["تحسين مشروع","كتابة وصف مشروع","رفع تحديث","مراجعة أسبوعية","أخرى"]
+                current:["لا أملك Portfolio", "لدي مشاريع قليلة", "أحتاج تحسين العرض", "لدي Portfolio بسيط", "أخرى"],
+                target:["بناء Portfolio قوي", "عرض المشاريع بوضوح", "تحسين GitHub", "نشر المشاريع", "أخرى"],
+                commitment:["تحسين مشروع", "كتابة وصف مشروع", "رفع تحديث", "مراجعة أسبوعية", "أخرى"]
             },
             "Open Source Contribution": {
                 current:["لم أساهم من قبل","أعرف GitHub","أفهم Issues","قدمت مساهمة بسيطة","أخرى"],
@@ -3052,9 +3059,9 @@ const GOAL_CONFIG_V524 = {
                 commitment:["قراءة Issue","تحسين توثيق","إرسال Pull Request","مراجعة أسبوعية","أخرى"]
             },
             "Debugging": {
-                current:["أجد صعوبة في فهم الأخطاء","أفهم بعض رسائل الخطأ","أستطيع تتبع أخطاء بسيطة","أصلح أخطاء متوسطة","أخرى"],
-                target:["قراءة الأخطاء بثقة","إصلاح الأخطاء البرمجية","تحسين جودة الكود","تقليل الأخطاء المتكررة","أخرى"],
-                commitment:["تحليل خطأ يومياً","مراجعة الكود","تجربة حلول مختلفة","توثيق الأخطاء","أخرى"]
+                current:["أواجه صعوبة", "أحل أخطاء بسيطة", "أحل أخطاء متوسطة", "أحل أخطاء معقدة", "أخرى"],
+                target:["تحسين المهارة", "تقليل الأخطاء", "تحليل المشاكل", "إصلاح الأخطاء بسرعة", "أخرى"],
+                commitment:["حل Bug", "تحليل خطأ", "تطبيق عملي", "مراجعة الكود", "أخرى"]
             },
             "Code Review": {
                 current:["لا أراجع الكود","أراجع بشكل بسيط","أكتشف بعض الأخطاء","أحسن بنية الكود","أخرى"],
@@ -3190,7 +3197,67 @@ const GOAL_CONFIG_V524 = {
                 current:["مبتدئ","أعرف الأساسيات","أحتاج تدريباً عملياً","أعمل على مشروع","أخرى"],
                 target:["إتقان المهارة","بناء مشروع متكامل","الاستعداد للتدريب العملي","تحسين المستوى","أخرى"],
                 commitment:["30 دقيقة يومياً","ساعة يومياً","تطبيق عملي","مشروع أسبوعي","مراجعة أسبوعية","أخرى"]
-            }
+            },
+            "Software Engineering": {
+                current:["لا أعرف المفهوم", "أعرف الأساسيات", "أطبق المفاهيم", "أشارك في مشاريع", "أخرى"],
+                target:["فهم هندسة البرمجيات", "إدارة مشروع", "بناء تطبيق متكامل", "تحسين جودة البرمجيات", "أخرى"],
+                commitment:["درس يومي", "تطبيق عملي", "تحليل مشروع", "بناء مشروع", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Git": {
+                current:["لم أستخدم Git", "أعرف الأساسيات", "أستخدم Git يومياً", "أتعامل مع الفروع", "أخرى"],
+                target:["إتقان Git", "إدارة المشاريع", "حل التعارضات", "العمل الجماعي", "أخرى"],
+                commitment:["تطبيق عملي", "Commit يومي", "حل مشكلة", "مشروع", "مراجعة", "أخرى"]
+            },
+            "GitHub": {
+                current:["لم أستخدم GitHub", "أرفع مشاريع بسيطة", "أتعامل مع Repositories", "أستخدم Issues و Pull Requests", "أخرى"],
+                target:["تنظيم المشاريع على GitHub", "كتابة README احترافي", "استخدام Pull Requests", "بناء Portfolio على GitHub", "أخرى"],
+                commitment:["رفع تحديث", "تحسين README", "فتح Issue", "إرسال Pull Request", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Testing": {
+                current:["لا أعرف Testing", "أعرف الأساسيات", "أكتب اختبارات", "أطبق الاختبارات", "أخرى"],
+                target:["تحسين الجودة", "كتابة اختبارات", "اختبار المشاريع", "أخرى"],
+                commitment:["كتابة اختبار", "تحليل النتائج", "مشروع", "مراجعة", "أخرى"]
+            },
+            "Documentation": {
+                current:["نادراً أوثق", "أوثق أحياناً", "أوثق المشاريع", "أخرى"],
+                target:["تحسين التوثيق", "كتابة README احترافي", "توثيق مشروع كامل", "أخرى"],
+                commitment:["توثيق ميزة", "تحسين README", "كتابة شرح", "مشروع", "أخرى"]
+            },
+            "Clean Code": {
+                current:["أكتب كوداً غير منظم", "أحاول تنظيم الكود", "أطبق بعض الممارسات الجيدة", "أخرى"],
+                target:["كتابة كود واضح", "تحسين أسماء المتغيرات", "تنظيم الدوال والفئات", "اتباع Best Practices", "أخرى"],
+                commitment:["تحسين ملف كود", "مراجعة Naming", "إعادة تنظيم دالة", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Refactoring": {
+                current:["لا أمارس Refactoring", "أحسن أجزاء بسيطة", "أزيل بعض التكرار", "أخرى"],
+                target:["تبسيط الكود", "تحسين الأداء", "إزالة التكرار", "رفع قابلية الصيانة", "أخرى"],
+                commitment:["تحسين دالة", "إزالة تكرار", "إعادة تنظيم ملف", "مراجعة الكود", "أخرى"]
+            },
+            "Design Patterns": {
+                current:["لا أعرف Design Patterns", "أعرف بعض الأنماط", "أطبق نمطاً بسيطاً", "أخرى"],
+                target:["فهم الأنماط الأساسية", "اختيار النمط المناسب", "تطبيق Design Patterns في مشروع", "أخرى"],
+                commitment:["دراسة Pattern", "تطبيق مثال", "مراجعة كود", "مشروع صغير", "أخرى"]
+            },
+            "System Design": {
+                current:["مبتدئ", "أعرف بعض المفاهيم", "صممت نظاماً بسيطاً", "أخرى"],
+                target:["فهم Scalability", "تصميم نظام متكامل", "تحسين Architecture", "الاستعداد للمقابلات", "أخرى"],
+                commitment:["تحليل نظام", "رسم Architecture", "دراسة Case Study", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Deployment": {
+                current:["لم أنشر مشروعاً", "نشرت مشروعاً بسيطاً", "أنشر المشاريع", "أخرى"],
+                target:["نشر تطبيق", "إدارة الخادم", "تحسين الأداء", "نشر مشروع احترافي", "أخرى"],
+                commitment:["رفع تحديث", "نشر مشروع", "تحسين الأداء", "حل مشكلة", "أخرى"]
+            },
+            "Open Source": {
+                current:["لم أساهم من قبل", "أفهم GitHub", "أفهم Issues", "قدمت مساهمة بسيطة", "أخرى"],
+                target:["المساهمة في Open Source", "فهم Pull Requests", "تحسين مشروع مفتوح المصدر", "بناء سجل مساهمات", "أخرى"],
+                commitment:["قراءة Issue", "تحسين توثيق", "إرسال Pull Request", "مراجعة أسبوعية", "أخرى"]
+            },
+            "Software Projects": {
+                current:["فكرة", "بدأت المشروع", "أنجزت جزءاً", "اقتربت من الإنجاز", "أخرى"],
+                target:["إكمال المشروع", "تحسين المشروع", "رفع المشروع", "إضافة مميزات", "بناء Portfolio", "نشر المشروع", "أخرى"],
+                commitment:["ساعة تطوير", "ميزة جديدة", "إصلاح Bug", "توثيق", "اختبار", "رفع تحديث", "مراجعة أسبوعية", "أخرى"]
+            },
         }
     },
 
