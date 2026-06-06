@@ -1744,3 +1744,39 @@ Dashboard-only layout fix.
 - Did not modify Quran Memorization structure.
 - Did not modify Secondary School structure.
 - Preserved all task IDs and adaptive behavior.
+
+
+## v5.3.1 Deep Language Tasks
+
+### Languages section
+- Rebuilt the Languages task flow to be deeper and more adaptive.
+- Language section now follows:
+  - اللغة
+  - المجال الثانوي
+  - الموضوع التفصيلي
+  - نوع النشاط
+- Subfields now begin with:
+  - القراءة
+  - الاستماع
+  - التحدث
+  - الكتابة
+  - الاختبارات
+  - القواعد
+  - المفردات
+  - النطق
+  - اللغة الأكاديمية
+  - أخرى
+- Detailed topics now change by selected subfield.
+- Activity type now changes by selected detailed topic, not only by general language category.
+
+### Examples
+- القراءة → فهم الفكرة العامة → قراءة نص / تحديد الفكرة الرئيسية / تلخيص النص.
+- الاستماع → فهم التفاصيل → الاستماع للمقطع / تدوين الملاحظات / الإجابة عن الأسئلة.
+- التحدث → مقابلات القبول → محاكاة مقابلة / الإجابة عن أسئلة / مراجعة الإجابات.
+- الكتابة → كتابة المقالات → كتابة مقال / بناء مقدمة / مراجعة الخاتمة.
+- اللغة الأكاديمية → الأبحاث → قراءة بحث / تلخيص المنهجية / تحليل النتائج.
+
+### Safety
+- Only the Languages section was deepened.
+- Quran Memorization and Secondary School remain unchanged.
+- Official test names and official question types remain unchanged.
