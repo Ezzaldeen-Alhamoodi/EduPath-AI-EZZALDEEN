@@ -30,14 +30,14 @@
             <div class="task-card {{ task.status }}">
                 <div>
                     <strong>{{ task.title }}</strong>
-                    <span><b>نوع المهمة:</b> {% if task.category == "Other" and task.custom_category %}{{ task.custom_category }}{% else %}{{ task.category|task_exam_safe }}{% endif %}</span>
-                    <span><b>الفئة الرئيسية:</b> {% if task.topic == "Other" and task.custom_topic %}{{ task.custom_topic }}{% else %}{{ task.category|task_exam_raw_or_ar(task.topic or "غير محدد") }}{% endif %}</span>
-                    <span><b>الفئة الفرعية:</b> {% if task.skill == "Other" and task.custom_skill %}{{ task.custom_skill }}{% else %}{{ task.category|task_exam_raw_or_ar(task.skill or "غير محدد") }}{% endif %}</span>
-                    <span><b>الموضوع التفصيلي:</b> {{ task.category|task_exam_raw_or_ar(task.language or "غير محدد") }}</span>
-                    <span><b>نوع النشاط:</b> {{ task.category|task_exam_raw_or_ar(task.practice_type or "عام") }}</span>
+                    <span><b>نوع المهمة:</b> {% if task.category == "Other" and task.custom_category %}{{ task.custom_category }}{% else %}{{ task.category|task_ar }}{% endif %}</span>
+                    <span><b>الفئة الرئيسية:</b> {% if task.topic == "Other" and task.custom_topic %}{{ task.custom_topic }}{% else %}{{ (task.topic or "غير محدد")|task_ar }}{% endif %}</span>
+                    <span><b>الفئة الفرعية:</b> {% if task.skill == "Other" and task.custom_skill %}{{ task.custom_skill }}{% else %}{{ (task.skill or "غير محدد")|task_ar }}{% endif %}</span>
+                    <span><b>الموضوع التفصيلي:</b> {{ (task.language or "غير محدد")|task_ar }}</span>
+                    <span><b>نوع النشاط:</b> {{ (task.practice_type or "عام")|task_ar }}</span>
                     <span><b>المصدر:</b> {{ task.source|clickable_sources }}</span>
                     <span>{{ task.estimated_minutes }} دقيقة · الأولوية {{ task.priority }} · الصعوبة {{ task.difficulty }}</span>
-                    <span>من {{ task.start_date or "غير محدد" }} إلى {{ task.due_date or "غير محدد" }} · {{ task.repeat_type|task_exam_safe }} · الأيام: {{ task.repeat_days|repeat_days_ar }}</span>
+                    <span>من {{ task.start_date or "غير محدد" }} إلى {{ task.due_date or "غير محدد" }} · {{ task.repeat_type|task_ar }} · الأيام: {{ task.repeat_days|repeat_days_ar }}</span>
                     <span>وقت التذكير: {{ task.reminder_time|time_12h_ar }}</span>
                 </div>
 

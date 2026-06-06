@@ -6947,116 +6947,12 @@ body.dark-mode .home-progress-ar-v513 small {
 }
 
 
-
-/* EduPath AI v5.3.2 Deep Exam Certificates */
-.exam-content-english-v532,
-#topicSelect,
-#skillSelect,
-#detailedTopicSelect,
-#trainingTypeSelect {
-    unicode-bidi: plaintext;
-}
-
-
-
-/* EduPath AI v5.3.3 Exam Content English Only */
-body .task-card span,
-body #topicSelect,
-body #skillSelect,
-body #detailedTopicSelect,
-body #trainingTypeSelect {
-    unicode-bidi: plaintext;
-}
-
-
-
-/* EduPath AI v5.3.4 Desktop Structured Task Form */
-@media (min-width: 981px) {
-    .smart-task-form {
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(280px, 1fr)) !important;
-        gap: 14px 16px !important;
-        align-items: start !important;
-        direction: rtl !important;
-    }
-
-    .smart-task-form > .form-row,
-    .smart-task-form > .form-group,
-    .smart-task-form > .conditional-field,
-    .smart-task-form > label,
-    .smart-task-form > div {
-        min-width: 0 !important;
-    }
-
-    .smart-task-form label {
-        display: block !important;
-        margin: 0 0 6px !important;
-        font-size: 13px !important;
-        font-weight: 900 !important;
-        line-height: 1.35 !important;
-        color: var(--text) !important;
-        text-align: right !important;
-    }
-
-    .smart-task-form input,
-    .smart-task-form select,
-    .smart-task-form textarea {
-        width: 100% !important;
-        min-height: 42px !important;
-        box-sizing: border-box !important;
-        margin: 0 !important;
-        text-align: right !important;
-    }
-
-    .smart-task-form textarea {
-        min-height: 92px !important;
-    }
-
-    .smart-task-form .task-type-selector,
-    .smart-task-form #taskTypeCards,
-    .smart-task-form .task-type-grid,
-    .smart-task-form .task-type-cards,
-    .smart-task-form .task-type-wrapper,
-    .smart-task-form .full-width,
-    .smart-task-form .wide,
-    .smart-task-form .notes-field,
-    .smart-task-form .repeat-days-field,
-    .smart-task-form .form-actions,
-    .smart-task-form .actions {
-        grid-column: 1 / -1 !important;
-    }
-
-    .smart-task-form [name="title"],
-    .smart-task-form #taskTitleInput,
-    .smart-task-form [name="source"],
-    .smart-task-form #sourceInput,
-    .smart-task-form [name="notes"],
-    .smart-task-form #notesInput {
-        grid-column: 1 / -1 !important;
-    }
-
-    .smart-task-form button[type="submit"] {
-        width: min(320px, 100%) !important;
-        justify-self: center !important;
-        margin-top: 4px !important;
-    }
-
-    .smart-task-form .conditional-field {
-        display: block;
-    }
-
-    .smart-task-form .conditional-field[style*="display: none"] {
-        display: none !important;
-    }
-}
-
-
-/* EduPath AI v5.3.5 Desktop Task Form Grid */
+/* EduPath AI v5.3.6 Restore Native Tasks Desktop Grid */
 @media (min-width: 981px) {
     /*
-      Desktop only.
-      Do not affect mobile/tablet layouts.
-      Goal: structured form grid, not random stretching.
+      Desktop/laptop only.
+      This block fixes layout only.
+      It does not touch task data, task categories, JavaScript logic, mobile, or tablet.
     */
 
     .smart-task-create-card,
@@ -7070,20 +6966,14 @@ body #trainingTypeSelect {
 
     .smart-task-form {
         display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        grid-template-columns: repeat(2, minmax(280px, 1fr)) !important;
         column-gap: 18px !important;
         row-gap: 14px !important;
         align-items: start !important;
         direction: rtl !important;
         width: 100% !important;
-        max-width: 100% !important;
     }
 
-    /*
-      Every direct field container becomes a clean vertical field:
-      label
-      input/select/textarea
-    */
     .smart-task-form > div,
     .smart-task-form > .form-row,
     .smart-task-form > .form-group,
@@ -7123,29 +7013,23 @@ body #trainingTypeSelect {
         direction: rtl !important;
     }
 
-    .smart-task-form select {
+    .smart-task-form select,
+    .smart-task-form input[type="number"],
+    .smart-task-form input[type="date"],
+    .smart-task-form input[type="time"] {
         height: 42px !important;
     }
 
     .smart-task-form textarea {
-        min-height: 96px !important;
+        min-height: 110px !important;
         resize: vertical !important;
         padding-top: 10px !important;
     }
 
-    /*
-      Full-width sections:
-      - task type cards
-      - source/link
-      - notes
-      - repeat days
-      - submit actions
-      - hidden/custom helper blocks when they need room
-    */
+    .smart-task-form #taskTypeCards,
     .smart-task-form .task-type-selector,
     .smart-task-form .task-type-grid,
     .smart-task-form .task-type-cards,
-    .smart-task-form #taskTypeCards,
     .smart-task-form .repeat-days-field,
     .smart-task-form .form-actions,
     .smart-task-form .actions {
@@ -7160,20 +7044,6 @@ body #trainingTypeSelect {
         grid-column: 1 / -1 !important;
     }
 
-    .smart-task-form #sourceInput,
-    .smart-task-form [name="source"] {
-        min-height: 42px !important;
-    }
-
-    .smart-task-form #notesInput,
-    .smart-task-form [name="notes"] {
-        min-height: 110px !important;
-    }
-
-    /*
-      Keep conditional "Other" fields visually attached to their field.
-      They should appear directly below the selected dropdown, not at the bottom.
-    */
     .smart-task-form .conditional-field,
     .smart-task-form [id^="custom"] {
         margin-top: 7px !important;
@@ -7186,18 +7056,6 @@ body #trainingTypeSelect {
         font-size: 12.5px !important;
     }
 
-    /*
-      Numeric/date/time fields stay consistent in height and width.
-    */
-    .smart-task-form input[type="number"],
-    .smart-task-form input[type="date"],
-    .smart-task-form input[type="time"] {
-        height: 42px !important;
-    }
-
-    /*
-      Submit button: clear, accessible, but not stretched randomly.
-    */
     .smart-task-form button[type="submit"],
     .smart-task-form .save-task-button {
         width: min(320px, 100%) !important;
@@ -7210,18 +7068,12 @@ body #trainingTypeSelect {
         justify-content: center !important;
     }
 
-    /*
-      Prevent old layout rules from separating labels and fields.
-    */
     .smart-task-form .inline-field,
     .smart-task-form .field-inline,
     .smart-task-form .form-inline {
         display: block !important;
     }
 
-    /*
-      Hidden fields remain hidden.
-    */
     .smart-task-form [hidden],
     .smart-task-form .hidden,
     .smart-task-form .conditional-field[style*="display: none"],

@@ -1782,108 +1782,18 @@ Dashboard-only layout fix.
 - Official test names and official question types remain unchanged.
 
 
-## v5.3.2 Deep Exam Certificates
+## v5.3.6 Restore Native Tasks Desktop Grid
 
-### Exams & Certificates section
-- Kept task form labels in Arabic.
-- Kept exam content in English inside Exams & Certificates.
-- Added deeper adaptive exam structure:
-  - exam
-  - main section
-  - task type
-  - question type / detailed topic
-  - activity type
-- Added detailed structures for:
-  - IELTS
-  - TOEFL 2026
-  - Duolingo English Test
-  - HSK / HSKK
-  - CSCA
-  - SAT
-  - ACT
-  - GRE
-  - GMAT
-- Activity type now changes based on the detailed question/task type.
-- CSCA exam content is restored to English inside Exams & Certificates.
-- Official test names, section names, question types, and training types remain in English.
+### Important correction
+- Restored the Tasks page from the strong native Arabic task system base.
+- Removed the problematic effect of the previous build that brought the Tasks page back toward old translated wording.
+- This update does not rebuild or replace task data.
+- This update does not touch the adaptive JavaScript task structures.
 
-
-## v5.3.3 Exam Content English Only
-
-### Correction
-- Exams & Certificates task section content is now English-only.
-- Arabic remains only for the form field labels:
-  - اسم المهمة
-  - الفئة الرئيسية
-  - الفئة الفرعية
-  - الموضوع التفصيلي
-  - نوع النشاط
-  - المصدر أو الرابط
-  - مستوى الصعوبة
-  - الأولوية
-  - الوقت المتوقع
-  - تاريخ البدء
-  - تاريخ الانتهاء
-  - وقت التذكير
-  - التكرار
-  - ملاحظات إضافية
-- IELTS, TOEFL, Duolingo, CSCA, SAT, ACT, GRE, GMAT, HSK, and HSKK structures remain in English.
-- CSCA exam content is restored to English inside Exams & Certificates.
-- Other task sections keep their Arabic-native behavior.
-
-
-## v5.3.4 Exam Labels AR Content EN + Desktop Task Form
-
-### Exams & Certificates correction
-- Form labels remain Arabic in every task type.
-- Exams & Certificates internal content is English:
-  - IELTS
-  - TOEFL
-  - Duolingo
-  - HSK
-  - CSCA
-  - SAT
-  - ACT
-  - GRE
-  - GMAT
-- CSCA content is English:
-  - Mathematics
-  - Physics
-  - Chemistry
-  - English
-  - Sets and Variables
-  - Functions
-  - Geometry and Algebra
-  - Probability and Statistics
-  - Mechanics
-  - Electromagnetism
-  - Thermodynamics
-  - Optics
-  - Modern Physics
-  - Basic Chemical Calculations
-  - Properties and Reactions of Matter
-  - Chemical Theories and Laws
-  - Chemical Experiments and Applications
-- Other appears as Other inside Exams & Certificates.
-
-### Desktop task form layout
-- Desktop-only structured two-column form grid.
+### Desktop-only task form layout
+- Added a structured two-column desktop grid for Create Task form.
 - Every label stays directly above its field.
-- Long fields span full width when possible.
-- Mobile layout is not changed.
-
-
-## v5.3.5 Desktop Task Form Grid
-
-### Desktop only
-- Rebuilt the Create Task form layout for desktop/laptop only.
-- Added a structured two-column grid inside `@media (min-width: 981px)`.
-- Every label stays directly above its own field.
-- Inputs, selects, dates, time fields, and numeric fields now share consistent widths and heights.
-- Source and notes fields span the full form width.
-- Notes field uses full width.
-- Save button remains at the bottom with a clear centered width.
-- Custom/Other fields stay directly under their related dropdown.
-- No fields were removed.
-- No fields were added.
-- Mobile layout was not changed.
+- Inputs and dropdowns have consistent widths/heights.
+- Source and Notes span full width.
+- Save button stays at the bottom.
+- Mobile and tablet layouts are not modified.
