@@ -7041,3 +7041,16 @@ body #trainingTypeSelect {
 .repeat-custom-box[aria-hidden="true"] {
     display: none !important;
 }
+
+
+
+/* EduPath AI v5.4.8 Repeat + Reading Research Fix */
+.repeat-days-box[aria-hidden="false"],
+.repeat-custom-box[aria-hidden="false"] {
+    display: block !important;
+}
+
+.repeat-days-box[aria-hidden="true"],
+.repeat-custom-box[aria-hidden="true"] {
+    display: none !important;
+}

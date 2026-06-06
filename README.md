@@ -2078,3 +2078,27 @@ Dashboard-only layout fix.
 - Tasks page only.
 - No goals changes.
 - No dashboard redesign.
+
+
+## v5.4.8 Repeat + Reading Research Fix
+
+### Fixed
+- Fixed repeat controls in all task sections:
+  - "أيام محددة" now opens weekday selection.
+  - "أخرى" now opens the custom repeat input.
+- Added a small page-level fail-safe so repeat boxes still work even if old JavaScript interferes.
+- Rebuilt "القراءة والبحث" with simpler, clearer Arabic wording:
+  - قراءة كتاب
+  - قراءة مقال
+  - قراءة بحث
+  - تلخيص
+  - تدوين ملاحظات
+  - مراجعة ما قرأت
+  - بحث علمي
+  - تفكير ناقد
+  - تعلم ذاتي
+
+### Scope
+- Tasks page only.
+- No goals changes.
+- No dashboard redesign.
