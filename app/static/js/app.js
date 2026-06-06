@@ -1057,7 +1057,8 @@ const SMART_GOAL_AR_LABELS_V520 = {
     "Education": "التعليم",
     "Language": "اللغات",
     "Exam / Certificate": "الاختبارات الدولية",
-    "Programming & Technology": "البرمجة والتقنية",
+    "Programming & Technology": "البرمجة والتكنولوجيا",
+    "البرمجة والتقنية": "البرمجة والتكنولوجيا",
     "Scholarship": "المنح الدراسية",
     "University": "الجامعة",
     "Project": "المشاريع",
@@ -2015,7 +2016,8 @@ const GOAL_AR_V524 = {
     "اللغات": "اللغات",
     "Exam / Certificate": "الاختبارات الدولية",
     "الاختبارات الدولية": "الاختبارات الدولية",
-    "Programming & Technology": "البرمجة والتقنية",
+    "Programming & Technology": "البرمجة والتكنولوجيا",
+    "البرمجة والتقنية": "البرمجة والتكنولوجيا",
     "البرمجة والتقنية": "البرمجة والتقنية",
     "Scholarship": "المنح الدراسية",
     "المنح الدراسية": "المنح الدراسية",
@@ -2850,16 +2852,119 @@ const GOAL_CONFIG_V524 = {
         }
     },
 
-    "البرمجة والتقنية": {
-        categories: ["Python","C","C++","Java","JavaScript","HTML","CSS","SQL","Flask","React","Node.js","Git / GitHub","الخوارزميات","هياكل البيانات","قواعد البيانات","الأمن السيبراني","تطوير الويب","حل المشكلات","تصحيح الأخطاء","أخرى"],
+    "البرمجة والتكنولوجيا": {
+        categories: ["أساسيات البرمجة","Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","PHP","Flask","Django","React","Angular","Vue","Node.js","Express","Git","GitHub","Linux","Docker","API","REST API","GraphQL","Data Structures","Algorithms","OOP","Database","Backend","Frontend","Full Stack","DevOps","Software Engineering","Testing","Debugging","Mobile Development","Game Development","Web Development","Cybersecurity","Cloud Computing","Operating Systems","Networking","System Design","Competitive Programming","Open Source","Version Control","أخرى"],
         paths: {
-            "Python": ["Python للمبتدئين","OOP","Flask","الأتمتة","تحليل البيانات","تعلم الآلة","مشروع عملي","حل المشكلات","أخرى"],
-            "Flask": ["المسارات","القوالب","النماذج","تسجيل الدخول والصلاحيات","قاعدة البيانات","النشر","تطبيق ويب متكامل","واجهة API","نظام تسجيل الدخول","أخرى"],
-            "أخرى": ["تعلم الأساسيات","تطبيق عملي","مشروع أسبوعي","حل مسائل","توثيق","أخرى"]
+            "أساسيات البرمجة": ["أساسيات البرمجة","المتغيرات وأنواع البيانات","العمليات الحسابية والمنطقية","الشروط","الحلقات التكرارية","الدوال","المصفوفات والقوائم","حل المشكلات","التعامل مع الأخطاء","كتابة برامج بسيطة","مراجعة شاملة","أخرى"],
+            "Python": ["Syntax Basics","Variables","Data Types","Operators","Conditions","Loops","Functions","Lists","Tuples","Dictionaries","Sets","Strings","File Handling","Exception Handling","Modules","OOP","Virtual Environment","Libraries","Flask","API","SQLite","Project Building","Debugging","Code Review","Revision","أخرى"],
+            "C": ["Syntax Basics","Variables","Data Types","Operators","Conditions","Loops","Functions","Arrays","Pointers","Strings","Structures","Memory Management","File Handling","Debugging","Problem Solving","Revision","أخرى"],
+            "C++": ["Syntax Basics","OOP","Classes","Objects","Inheritance","Polymorphism","Templates","STL","Vectors","Maps","Algorithms","Problem Solving","Competitive Programming","Debugging","Project Building","Revision","أخرى"],
+            "Java": ["Syntax Basics","OOP","Classes","Objects","Inheritance","Interfaces","Collections","Exception Handling","File Handling","GUI","Database","Spring Basics","Project Building","Debugging","Revision","أخرى"],
+            "JavaScript": ["Syntax Basics","Variables","Functions","Arrays","Objects","DOM","Events","Async Programming","Promises","Fetch API","ES6","Modules","JSON","Debugging","Frontend Basics","Project Building","Revision","أخرى"],
+            "TypeScript": ["Syntax Basics","Types","Interfaces","Generics","Modules","Project Building","Debugging","Revision","أخرى"],
+            "HTML": ["Structure","Forms","Semantic HTML","Tables","Media","Accessibility","Revision","أخرى"],
+            "CSS": ["Selectors","Box Model","Flexbox","Grid","Responsive Design","Animations","Revision","أخرى"],
+            "SQL": ["Queries","Tables","Joins","Relationships","Aggregation","SQLite","Database Design","Revision","أخرى"],
+            "PHP": ["Syntax Basics","Forms","Sessions","Database","Project Building","Debugging","Revision","أخرى"],
+            "Flask": ["Routing","Templates","Forms","Authentication","Database","API","Deployment","Project Building","Debugging","Revision","أخرى"],
+            "Django": ["Models","Views","Templates","Forms","Authentication","Admin Panel","REST API","Deployment","Project Building","أخرى"],
+            "React": ["Components","Props","State","Hooks","Routing","API Integration","Project Building","Debugging","Revision","أخرى"],
+            "Angular": ["Components","Services","Routing","Forms","API Integration","Project Building","Revision","أخرى"],
+            "Vue": ["Components","Directives","State Management","Routing","API Integration","Project Building","Revision","أخرى"],
+            "Node.js": ["Modules","Express","Routing","Middleware","API","Database","Authentication","Deployment","Project Building","أخرى"],
+            "Express": ["Routing","Middleware","REST API","Authentication","Database","Error Handling","Project Building","أخرى"],
+            "Git": ["Version Control","Commits","Branches","Merge","Pull Requests","Workflow","Revision","أخرى"],
+            "GitHub": ["Repositories","Commits","Branches","Pull Requests","Issues","GitHub Pages","Portfolio","أخرى"],
+            "Linux": ["Terminal Basics","Files","Permissions","Processes","Shell Commands","Server Basics","أخرى"],
+            "Docker": ["Images","Containers","Dockerfile","Docker Compose","Deployment","Revision","أخرى"],
+            "API": ["Requests","Responses","JSON","Authentication","Testing","Integration","أخرى"],
+            "REST API": ["Endpoints","Methods","Status Codes","Authentication","Testing","Documentation","أخرى"],
+            "GraphQL": ["Queries","Mutations","Schema","Resolvers","API Integration","أخرى"],
+            "Data Structures": ["Arrays","Linked Lists","Stacks","Queues","Trees","Graphs","Hash Tables","Revision","أخرى"],
+            "Algorithms": ["Searching","Sorting","Recursion","Greedy Algorithms","Dynamic Programming","Graph Algorithms","Complexity Analysis","Revision","أخرى"],
+            "OOP": ["Classes","Objects","Inheritance","Polymorphism","Encapsulation","Abstraction","Revision","أخرى"],
+            "Database": ["Tables","Relationships","Queries","Indexes","Normalization","SQLite","MySQL","PostgreSQL","Revision","أخرى"],
+            "Backend": ["Server Logic","Routing","Database","Authentication","API","Security","Deployment","Project Building","أخرى"],
+            "Frontend": ["HTML","CSS","JavaScript","Responsive Design","DOM","UI Components","API Integration","Project Building","أخرى"],
+            "Full Stack": ["Frontend","Backend","Database","Authentication","API","Deployment","Full Project","أخرى"],
+            "DevOps": ["Linux","Git","Docker","CI/CD","Deployment","Monitoring","أخرى"],
+            "Software Engineering": ["Requirements","Design","Architecture","Testing","Documentation","Maintenance","أخرى"],
+            "Testing": ["Unit Testing","Integration Testing","Manual Testing","Test Cases","Debugging","Revision","أخرى"],
+            "Debugging": ["قراءة الأخطاء","تتبع المشكلة","اختبار الحل","تحسين الكود","توثيق السبب","أخرى"],
+            "Mobile Development": ["UI Basics","Navigation","API Integration","Local Storage","Project Building","أخرى"],
+            "Game Development": ["Game Logic","Physics","Graphics","Input Handling","Project Building","أخرى"],
+            "Web Development": ["HTML","CSS","JavaScript","Frontend","Backend","Database","API","Deployment","Project Building","أخرى"],
+            "Cybersecurity": ["Security Basics","Network Security","Web Security","Authentication","OWASP","Linux","Revision","أخرى"],
+            "Cloud Computing": ["Cloud Basics","Deployment","Storage","Databases","Monitoring","Security","أخرى"],
+            "Operating Systems": ["Processes","Memory","Files","Scheduling","Linux","Revision","أخرى"],
+            "Networking": ["Network Basics","IP","DNS","HTTP","Ports","Protocols","Security","أخرى"],
+            "System Design": ["Requirements","Architecture","Scalability","Database Design","API Design","Caching","Revision","أخرى"],
+            "Competitive Programming": ["Problem Solving","Algorithms","Data Structures","Time Complexity","Contests","Revision","أخرى"],
+            "Open Source": ["GitHub","Issues","Pull Requests","Documentation","Code Review","Contribution","أخرى"],
+            "Version Control": ["Git","Commits","Branches","Merge","Conflict Resolution","Workflow","أخرى"],
+            "أخرى": ["تعلم الأساسيات","تطبيق عملي","بناء مشروع","حل مسائل","مراجعة الشيفرة البرمجية","إصلاح الأخطاء البرمجية","توثيق المشروع","مراجعة شاملة","أخرى"]
         },
         states: {
-            "Python": {current:["مبتدئ","أعرف الأساسيات","متوسط","متقدم","أخرى"], target:["إتقان الأساسيات","بناء مشروع كامل","تعلم Flask","تحليل بيانات","تعلم الآلة","أخرى"], commitment:["30 دقيقة يومياً","ساعة يومياً","مشروع أسبوعي","حل مسائل يومية","أخرى"]},
-            "أخرى": {current:["مبتدئ","أعرف الأساسيات","متوسط","متقدم","أخرى"], target:["بناء مشروع متكامل","الاستعداد للتدريب العملي","حل 100 مسألة","أخرى"], commitment:["30 دقيقة يومياً","ساعة يومياً","مشروع أسبوعي","حل مسائل يومية","أخرى"]}
+            "أساسيات البرمجة": {
+                current:["لا أملك أي معرفة","أعرف المفاهيم الأساسية","أستطيع كتابة برامج بسيطة","أحل مسائل متوسطة","أطبق أكثر من مفهوم معاً","أخرى"],
+                target:["فهم أساسيات البرمجة","حل المشكلات الأساسية","كتابة برامج مستقلة","إتقان المفاهيم","الاستعداد للغة برمجة متقدمة","أخرى"],
+                commitment:["30 دقيقة يومياً","ساعة يومياً","حل مسألتين يومياً","ثلاث جلسات أسبوعياً","حل تحديات أسبوعية","برنامج مخصص","أخرى"]
+            },
+            "Python": {
+                current:["مبتدئ","أعرف الأساسيات","أكتب برامج بسيطة","أتعامل مع الملفات والمكتبات","أبني مشاريع صغيرة","أخرى"],
+                target:["إتقان Python","كتابة برامج مستقلة","بناء مشروع عملي","استخدام المكتبات بفعالية","الاستعداد لمسار متقدم","أخرى"],
+                commitment:["30 دقيقة تدريب عملي","ساعة تدريب عملي","حل مسائل يومية","تطبيق عملي يومي","مشروع أسبوعي","مراجعة الكود","أخرى"]
+            },
+            "Flask": {
+                current:["أعرف أساسيات Python","أعرف Routing","أنشأت تطبيقاً بسيطاً","أتعامل مع Templates","أستخدم قواعد البيانات","أخرى"],
+                target:["بناء تطبيق ويب","ربط قاعدة بيانات","إنشاء API","تطوير مشروع متكامل","نشر المشروع","أخرى"],
+                commitment:["ساعة تدريب عملي","بناء ميزة جديدة","حل مشكلة برمجية","تطوير مشروع","مراجعة الكود","أخرى"]
+            },
+            "Project Building": {
+                current:["لم أبدأ مشروعاً","أنشأت مشروعاً بسيطاً","أنجزت عدة مشاريع","أخرى"],
+                target:["إكمال مشروع","تحسين مشروع","رفع المشروع على GitHub","بناء Portfolio","نشر المشروع","أخرى"],
+                commitment:["30 دقيقة تطوير","ساعة تطوير","ميزة جديدة يومياً","إصلاح أخطاء","توثيق المشروع","أخرى"]
+            },
+            "C": {
+                current:["مبتدئ","أعرف الأساسيات","أحل مسائل بسيطة","أستخدم المؤشرات","أخرى"],
+                target:["إتقان الأساسيات","فهم المؤشرات","حل مسائل متقدمة","كتابة برامج متكاملة","أخرى"],
+                commitment:["حل مسألة","درس يومي","مراجعة الكود","برنامج عملي","اختبار أسبوعي","أخرى"]
+            },
+            "C++": {
+                current:["مبتدئ","أعرف الأساسيات","أعرف OOP","أستخدم STL","أخرى"],
+                target:["إتقان OOP","حل مسائل متقدمة","Competitive Programming","بناء مشاريع","أخرى"],
+                commitment:["حل مسائل","تدريب عملي","مراجعة STL","تحديات أسبوعية","مشروع تطبيقي","أخرى"]
+            },
+            "Java": {
+                current:["مبتدئ","أعرف الأساسيات","أعرف OOP","أطور برامج بسيطة","أخرى"],
+                target:["إتقان Java","تطوير تطبيقات","ربط قواعد البيانات","بناء مشاريع","أخرى"],
+                commitment:["درس يومي","برنامج عملي","حل مسائل","تطوير مشروع","مراجعة أسبوعية","أخرى"]
+            },
+            "JavaScript": {
+                current:["مبتدئ","أعرف الأساسيات","أتعامل مع DOM","أستخدم Async","أخرى"],
+                target:["إتقان JavaScript","تطوير واجهات تفاعلية","ربط API","بناء مشاريع","الاستعداد للأطر الحديثة","أخرى"],
+                commitment:["30 دقيقة تدريب","ساعة تدريب","حل تحديات","تطوير مشروع","مراجعة الكود","أخرى"]
+            },
+            "Debugging": {
+                current:["أجد صعوبة في فهم الأخطاء","أفهم بعض رسائل الخطأ","أستطيع تتبع أخطاء بسيطة","أصلح أخطاء متوسطة","أخرى"],
+                target:["قراءة الأخطاء بثقة","إصلاح الأخطاء البرمجية","تحسين جودة الكود","تقليل الأخطاء المتكررة","أخرى"],
+                commitment:["تحليل خطأ يومياً","مراجعة الكود","تجربة حلول مختلفة","توثيق الأخطاء","أخرى"]
+            },
+            "Code Review": {
+                current:["لا أراجع الكود","أراجع بشكل بسيط","أكتشف بعض الأخطاء","أحسن بنية الكود","أخرى"],
+                target:["مراجعة الشيفرة البرمجية بثقة","تحسين جودة الكود","اكتشاف الأخطاء مبكراً","اتباع أسلوب كتابة أفضل","أخرى"],
+                commitment:["مراجعة يومية","مراجعة مشروع","تحسين جزء من الكود","توثيق الملاحظات","أخرى"]
+            },
+            "Problem Solving": {
+                current:["أحتاج تأسيساً","أحل مسائل سهلة","أحل مسائل متوسطة","أحتاج تحسين التفكير الخوارزمي","أخرى"],
+                target:["تحسين حل المشكلات","حل مسائل متقدمة","فهم أنماط المسائل","الاستعداد للمسابقات أو المقابلات","أخرى"],
+                commitment:["حل مسألة يومياً","حل مسألتين يومياً","تحديات أسبوعية","مراجعة الحلول","أخرى"]
+            },
+            "أخرى": {
+                current:["مبتدئ","أعرف الأساسيات","أحتاج تدريباً عملياً","أعمل على مشروع","أخرى"],
+                target:["إتقان المهارة","بناء مشروع متكامل","الاستعداد للتدريب العملي","تحسين المستوى","أخرى"],
+                commitment:["30 دقيقة يومياً","ساعة يومياً","تطبيق عملي","مشروع أسبوعي","مراجعة أسبوعية","أخرى"]
+            }
         }
     },
 
@@ -2884,7 +2989,8 @@ const GOAL_TYPE_CANONICAL_V557 = {
     "Education": "التعليم",
     "Language": "اللغات",
     "Exam / Certificate": "الاختبارات الدولية",
-    "Programming & Technology": "البرمجة والتقنية",
+    "Programming & Technology": "البرمجة والتكنولوجيا",
+    "البرمجة والتقنية": "البرمجة والتكنولوجيا",
     "Artificial Intelligence": "الذكاء الاصطناعي",
     "Scholarship": "المنح الدراسية",
     "University": "الجامعة",
