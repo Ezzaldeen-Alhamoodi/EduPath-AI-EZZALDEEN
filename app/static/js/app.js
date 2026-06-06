@@ -2878,7 +2878,7 @@ const GOAL_CONFIG_V524 = {
     },
 
     "البرمجة والتكنولوجيا": {
-        categories: ["أساسيات البرمجة", "Python", "C", "C++", "Java", "JavaScript", "تطوير الويب", "Data Structures", "Algorithms", "Problem Solving", "Competitive Programming", "Machine Learning", "Deep Learning", "Data Science", "Computer Vision", "Natural Language Processing", "Reinforcement Learning", "Generative AI", "MLOps", "AI Projects", "SQL", "Database Fundamentals", "SQLite", "MySQL", "PostgreSQL", "MongoDB", "Database Design", "ORM", "Database Optimization", "Database Security", "Database Projects", "Software Engineering", "Git", "GitHub", "Debugging", "Testing", "Documentation", "Clean Code", "Refactoring", "Design Patterns", "System Design", "Deployment", "Open Source", "Portfolio Development", "Software Projects", "Revision", "TypeScript", "HTML", "CSS", "PHP", "Flask", "Django", "React", "Angular", "Vue", "Node.js", "Express.js", "Express", "Linux", "Docker", "API", "REST API", "GraphQL", "OOP", "Database", "Backend", "Frontend", "Full Stack", "DevOps", "Mobile Development", "Game Development", "Cybersecurity", "Cloud Computing", "Operating Systems", "Networking", "Version Control", "أخرى"],
+        categories: ["أساسيات البرمجة", "Python", "C", "C++", "Java", "JavaScript", "تطوير الويب", "Data Structures", "Algorithms", "Problem Solving", "Competitive Programming", "Machine Learning", "Deep Learning", "Data Science", "Computer Vision", "Natural Language Processing", "Reinforcement Learning", "Generative AI", "MLOps", "AI Projects", "SQL", "Database Fundamentals", "SQLite", "MySQL", "PostgreSQL", "MongoDB", "Database Design", "ORM", "Database Optimization", "Database Security", "Database Projects", "Software Engineering", "Git", "GitHub", "Debugging", "Testing", "Documentation", "Clean Code", "Refactoring", "Design Patterns", "System Design", "Deployment", "Open Source", "Portfolio Development", "Software Projects", "Revision", "TypeScript", "HTML", "CSS", "PHP", "Flask", "Django", "React", "Angular", "Vue", "Node.js", "Express.js", "Express", "Linux", "Docker", "API", "REST API", "GraphQL", "OOP", "Database", "Backend", "Frontend", "Full Stack", "DevOps", "Mobile Development", "Game Development", "Cybersecurity", "Cloud Computing", "Operating Systems", "Networking", "Version Control", "أخرى", "Kubernetes", "System Administration", "Infrastructure Projects"],
         paths: {
             "أساسيات البرمجة": ["أساسيات البرمجة","المتغيرات وأنواع البيانات","العمليات الحسابية والمنطقية","الشروط","الحلقات التكرارية","الدوال","المصفوفات والقوائم","حل المشكلات","التعامل مع الأخطاء","كتابة برامج بسيطة","مراجعة شاملة","أخرى"],
             "Python": ["Syntax Basics","Variables","Data Types","Operators","Conditions","Loops","Functions","Lists","Tuples","Dictionaries","Sets","Strings","File Handling","Exception Handling","Modules","OOP","Virtual Environment","Libraries","Flask","API","SQLite","Project Building","Debugging","Code Review","Revision","أخرى"],
@@ -2911,8 +2911,8 @@ const GOAL_CONFIG_V524 = {
             "Express.js": ["Routing","Middleware","REST API","Authentication","Database","Error Handling","Project Building","أخرى"],
             "Git": ["Git Basics", "Repository", "Clone", "Commit", "Branch", "Merge", "Rebase", "Pull", "Push", "Conflict Resolution", "Git Workflow", "Revision", "أخرى"],
             "GitHub": ["Repositories", "README", "Issues", "Pull Requests", "Actions", "Projects", "GitHub Pages", "Open Source", "Portfolio", "Revision", "أخرى"],
-            "Linux": ["Terminal Basics","Files","Permissions","Processes","Shell Commands","Server Basics","أخرى"],
-            "Docker": ["Images","Containers","Dockerfile","Docker Compose","Deployment","Revision","أخرى"],
+            "Linux": ["Linux Basics", "File System", "Terminal", "File Permissions", "Users and Groups", "Package Management", "Shell Scripting", "Process Management", "System Monitoring", "Cron Jobs", "Linux Networking", "Linux Security", "Server Management", "Linux Projects", "Revision", "أخرى"],
+            "Docker": ["Docker Basics", "Images", "Containers", "Volumes", "Networks", "Docker Compose", "Dockerfile", "Container Management", "Docker Projects", "Revision", "أخرى"],
             "API": ["Requests","Responses","JSON","Authentication","Testing","Integration","أخرى"],
             "REST API": ["Endpoints","Methods","Status Codes","Authentication","Testing","Documentation","أخرى"],
             "GraphQL": ["Queries","Mutations","Schema","Resolvers","API Integration","أخرى"],
@@ -2924,7 +2924,7 @@ const GOAL_CONFIG_V524 = {
             "Backend": ["Server Logic","Routing","Database","Authentication","API","Security","Deployment","Project Building","أخرى"],
             "Frontend": ["HTML","CSS","JavaScript","Responsive Design","DOM","UI Components","API Integration","Project Building","أخرى"],
             "Full Stack": ["Frontend","Backend","Database","Authentication","API","Deployment","Full Project","أخرى"],
-            "DevOps": ["Linux","Git","Docker","CI/CD","Deployment","Monitoring","أخرى"],
+            "DevOps": ["DevOps Fundamentals", "CI/CD", "Automation", "Infrastructure as Code", "Configuration Management", "Monitoring", "Logging", "DevOps Pipelines", "DevOps Projects", "Revision", "أخرى"],
             "Software Engineering": ["Software Development Life Cycle", "Requirements Analysis", "Software Design", "Implementation", "Testing", "Maintenance", "Agile", "Scrum", "Software Architecture", "Project Management", "Revision", "أخرى"],
             "Testing": ["Unit Testing", "Integration Testing", "Functional Testing", "Regression Testing", "Automation Testing", "Test Cases", "Quality Assurance", "Revision", "أخرى"],
             "Debugging": ["Finding Bugs", "Logic Errors", "Syntax Errors", "Runtime Errors", "Debugging Tools", "Logging", "Performance Debugging", "Revision", "أخرى"],
@@ -2938,10 +2938,10 @@ const GOAL_CONFIG_V524 = {
             "Deployment": ["Deployment Basics", "Render", "VPS", "Docker", "CI/CD", "Cloud Deployment", "Monitoring", "Revision", "أخرى"],
             "Portfolio Development": ["Project Selection", "Portfolio Website", "GitHub Portfolio", "Project Documentation", "CV Integration", "Revision", "أخرى"],
             "Software Projects": ["Planning", "Development", "Testing", "Deployment", "Maintenance", "Project Improvement", "Revision", "أخرى"],
-            "Cybersecurity": ["Security Basics","Network Security","Web Security","Authentication","OWASP","Linux","Revision","أخرى"],
-            "Cloud Computing": ["Cloud Basics","Deployment","Storage","Databases","Monitoring","Security","أخرى"],
+            "Cybersecurity": ["Cybersecurity Fundamentals", "Network Security", "Web Security", "Cryptography", "Authentication", "Authorization", "Security Best Practices", "Vulnerability Assessment", "Penetration Testing Basics", "Incident Response", "Digital Forensics", "Secure Coding", "Cybersecurity Projects", "Revision", "أخرى"],
+            "Cloud Computing": ["Cloud Fundamentals", "IaaS", "PaaS", "SaaS", "Virtual Machines", "Storage", "Networking", "Cloud Security", "AWS Basics", "Azure Basics", "Google Cloud Basics", "Cloud Deployment", "Cloud Projects", "Revision", "أخرى"],
             "Operating Systems": ["Processes","Memory","Files","Scheduling","Linux","Revision","أخرى"],
-            "Networking": ["Network Basics","IP","DNS","HTTP","Ports","Protocols","Security","أخرى"],
+            "Networking": ["Networking Basics", "OSI Model", "TCP/IP", "IP Addressing", "Subnetting", "DNS", "DHCP", "Routing", "Switching", "HTTP", "HTTPS", "FTP", "SSH", "Network Security", "Network Troubleshooting", "Revision", "أخرى"],
             "System Design": ["Scalability", "Load Balancing", "Caching", "Database Design", "API Design", "Microservices", "System Architecture", "Revision", "أخرى"],
             "Competitive Programming": ["Codeforces","AtCoder","LeetCode","CodeChef","TopCoder","ICPC Preparation","Contest Strategy","Virtual Contest","Upsolving","Time Management","Speed Coding","Revision","أخرى"],
             "Machine Learning": ["ML Fundamentals","Data Collection","Data Cleaning","Feature Engineering","Data Visualization","Supervised Learning","Unsupervised Learning","Regression","Classification","Clustering","Model Evaluation","Hyperparameter Tuning","Cross Validation","Ensemble Methods","Model Deployment","ML Projects","Revision","أخرى"],
@@ -2955,6 +2955,9 @@ const GOAL_CONFIG_V524 = {
             "AI Projects": ["Classification Project","Regression Project","NLP Project","Computer Vision Project","Generative AI Project","Healthcare AI","Education AI","Portfolio Project","Capstone Project","Revision","أخرى"],
             "Open Source": ["Finding Projects", "Understanding Code", "Issues", "Pull Requests", "Code Review", "Community Contribution", "Revision", "أخرى"],
             "Version Control": ["Git","Commits","Branches","Merge","Conflict Resolution","Workflow","أخرى"],
+            "Kubernetes": ["Kubernetes Basics", "Pods", "Deployments", "Services", "Volumes", "ConfigMaps", "Secrets", "Scaling", "Monitoring", "Kubernetes Projects", "Revision", "أخرى"],
+            "System Administration": ["User Management", "File Management", "Service Management", "Backup", "Monitoring", "Performance", "Security", "Automation", "Server Maintenance", "Revision", "أخرى"],
+            "Infrastructure Projects": ["Linux Server", "Network Lab", "Cybersecurity Lab", "Docker Project", "Cloud Project", "DevOps Project", "Portfolio Project", "Capstone Project", "Revision", "أخرى"],
             "أخرى": ["تعلم الأساسيات","تطبيق عملي","بناء مشروع","حل مسائل","مراجعة الشيفرة البرمجية","إصلاح الأخطاء البرمجية","توثيق المشروع","مراجعة شاملة","أخرى"]
         },
         states: {
@@ -3192,6 +3195,51 @@ const GOAL_CONFIG_V524 = {
                 current:["فكرة","بدأت المشروع","أنجزت جزءاً","اقتربت من الإنجاز","أخرى"],
                 target:["إكمال المشروع","تحسين المشروع","رفع المشروع","بناء Portfolio","نشر المشروع","أخرى"],
                 commitment:["ساعة تطوير","ميزة جديدة","تحليل النتائج","إصلاح الأخطاء","توثيق المشروع","رفع تحديث","أخرى"]
+            },
+            "Linux": {
+                current:["لا أعرف Linux", "أعرف الأوامر الأساسية", "أستخدم Terminal", "أدير النظام", "أدير الخوادم", "أخرى"],
+                target:["إتقان Linux", "إدارة الخوادم", "كتابة Scripts", "إدارة المشاريع", "إعداد بيئة احترافية", "أخرى"],
+                commitment:["درس يومي", "تطبيق عملي", "كتابة Script", "إدارة خادم", "مشروع", "مراجعة", "أخرى"]
+            },
+            "Networking": {
+                current:["لا أعرف الشبكات", "أعرف المفاهيم", "أفهم البروتوكولات", "أحل المشاكل", "أخرى"],
+                target:["فهم الشبكات", "إدارة الشبكات", "حل المشكلات", "تطبيق عملي", "أخرى"],
+                commitment:["درس", "تطبيق", "تحليل شبكة", "حل مشكلة", "مشروع", "أخرى"]
+            },
+            "Cybersecurity": {
+                current:["لا أعرف الأمن السيبراني", "أعرف الأساسيات", "أطبق المفاهيم", "أنفذ مشاريع", "أخرى"],
+                target:["فهم الأمن السيبراني", "تأمين الأنظمة", "تحليل الثغرات", "بناء مشروع", "أخرى"],
+                commitment:["درس", "تطبيق", "مختبر عملي", "تحليل ثغرة", "مشروع", "مراجعة", "أخرى"]
+            },
+            "Cloud Computing": {
+                current:["مبتدئ", "أعرف المفاهيم الأساسية", "استخدم خدمات بسيطة", "نشرت مشروعاً بسيطاً", "أخرى"],
+                target:["فهم Cloud Computing", "نشر تطبيق على Cloud", "إدارة الموارد", "تحسين الأمان والأداء", "بناء مشروع Cloud", "أخرى"],
+                commitment:["درس", "تطبيق عملي", "نشر تجربة", "تحسين إعدادات", "مشروع", "مراجعة", "أخرى"]
+            },
+            "Docker": {
+                current:["مبتدئ", "أعرف الأساسيات", "أبني Containers", "أستخدم Docker Compose", "أخرى"],
+                target:["إتقان Docker", "إدارة التطبيقات", "نشر المشاريع", "أخرى"],
+                commitment:["تطبيق عملي", "إنشاء Container", "بناء Image", "مشروع", "مراجعة", "أخرى"]
+            },
+            "Kubernetes": {
+                current:["مبتدئ", "أعرف المفاهيم الأساسية", "أتعامل مع Pods", "أدير Deployments بسيطة", "أخرى"],
+                target:["فهم Kubernetes", "إدارة Services و Deployments", "توسيع التطبيقات", "مراقبة النظام", "بناء مشروع Kubernetes", "أخرى"],
+                commitment:["درس", "تطبيق عملي", "إعداد Deployment", "تحسين Service", "مشروع", "مراجعة", "أخرى"]
+            },
+            "DevOps": {
+                current:["لا أعرف DevOps", "أعرف المفاهيم", "أطبق الأدوات", "أبني Pipelines", "أخرى"],
+                target:["فهم DevOps", "أتمتة العمليات", "بناء CI/CD", "إدارة المشاريع", "أخرى"],
+                commitment:["درس", "تطبيق", "Pipeline", "مشروع", "تحسين الأداء", "أخرى"]
+            },
+            "System Administration": {
+                current:["مبتدئ", "أدير ملفات ومستخدمين", "أدير خدمات بسيطة", "أتابع أداء النظام", "أخرى"],
+                target:["إدارة النظام بكفاءة", "تحسين الأداء", "تأمين الخادم", "أتمتة المهام", "صيانة الخوادم", "أخرى"],
+                commitment:["درس", "تطبيق عملي", "مهمة إدارة", "نسخ احتياطي", "مراجعة أمنية", "أخرى"]
+            },
+            "Infrastructure Projects": {
+                current:["فكرة", "بدأت المشروع", "أنجزت جزءاً", "اقتربت من الإنجاز", "أخرى"],
+                target:["إكمال المشروع", "تحسين المشروع", "رفع المشروع", "بناء Portfolio", "نشر المشروع", "أخرى"],
+                commitment:["ساعة تطوير", "ميزة جديدة", "إصلاح مشكلة", "تحسين الأداء", "توثيق", "رفع تحديث", "أخرى"]
             },
             "أخرى": {
                 current:["مبتدئ","أعرف الأساسيات","أحتاج تدريباً عملياً","أعمل على مشروع","أخرى"],
