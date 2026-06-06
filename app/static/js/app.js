@@ -213,7 +213,7 @@ const SMART_TASK_DATA = {
     main: ["Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","Flask","Django","React","Node.js","Git / GitHub","تطوير الويب","تطوير الواجهة الأمامية","تطوير الخلفية","تطوير متكامل","قواعد البيانات","الخوارزميات","هياكل البيانات","حل المشكلات","تصحيح الأخطاء","هندسة البرمجيات","اختبار البرمجيات","أنظمة التشغيل","شبكات الحاسوب","الأمن السيبراني","الحوسبة السحابية","DevOps","APIs","الذكاء الاصطناعي","تعلم الآلة","علم البيانات","المشاريع","التوثيق","أخرى"],
     sub: {
       "Python": ["الصياغة","المتغيرات","أنواع البيانات","الشروط","الحلقات","الدوال","القوائم","القواميس","الملفات","OOP","الوحدات","المكتبات","Flask","تحليل البيانات","الأتمتة","مشاريع","تصحيح الأخطاء","أخرى"],
-      "تطوير الويب": ["HTML","CSS","JavaScript","الواجهة الأمامية","الخلفية","تطوير متكامل","تصميم متجاوب","النماذج","تسجيل الدخول والصلاحيات","APIs","قواعد البيانات","النشر","الأداء","الأمان","أخرى"],
+      "تطوير الويب": ["HTML","CSS","Responsive Design","Bootstrap","Tailwind CSS","JavaScript","DOM","Async JavaScript","API","JSON","Frontend","Backend","Full Stack","Flask","Django","React","Node.js","Express.js","Authentication","Session Management","REST API","Database Integration","SQLite","MySQL","PostgreSQL","Deployment","Debugging","Testing","Security Basics","Performance Optimization","Project Building","Revision","Portfolio Development","Open Source Contribution","أخرى"],
       "الخوارزميات": ["البحث","الترتيب","الاستدعاء الذاتي","الخوارزميات الجشعة","البرمجة الديناميكية","خوارزميات الرسوم البيانية","الأشجار","تحليل التعقيد","أخرى"],
       "الأمن السيبراني": ["أساسيات الأمن","أمن الشبكات","أمن الويب","Linux","التشفير","أساسيات الاختبار الأخلاقي","الثغرات","المصادقة","OWASP","أخرى"],
       "أخرى": ["مفاهيم","تطبيق","مشروع","تصحيح أخطاء","مراجعة","أخرى"]
@@ -221,7 +221,7 @@ const SMART_TASK_DATA = {
     detail: {
       "Python": ["الكائنات والفئات","الوراثة","التعامل مع الملفات","تطبيق على القوائم","تطبيق على القواميس","طلب API","مسار Flask","أخرى"],
       "الخوارزميات": ["مسألة تدريبية","تحليل الحل","تحسين التعقيد","اختبار الحل","أخرى"],
-      "تطوير الويب": ["صفحة","نموذج","API","قاعدة بيانات","تصميم متجاوب","أخرى"],
+      "تطوير الويب": ["HTML","CSS","Responsive Design","Frontend","Backend","Full Stack","API","Database Integration","Deployment","Project Building","Portfolio Development","أخرى"],
       "أخرى": ["موضوع","ميزة","خطأ","أخرى"]
     },
     training: ["فهم المفهوم","كتابة كود","بناء مشروع صغير","تصحيح الكود","قراءة التوثيق","تحسين الكود","تطبيق الصياغة البرمجية","بناء تطبيق","بناء صفحة","تصميم الواجهة","إصلاح خطأ","ربط الخلفية","إنشاء نموذج","جعله متجاوباً","نشر الموقع","تحسين الواجهة","تطبيق بمشروع","أخرى"]
@@ -1303,14 +1303,14 @@ const SMART_GOALS_V4610 = {
     },
 
     "Programming & Technology": {
-        categories: ["Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","Flask","Django","React","Node.js","Git / GitHub","Algorithms","Data Structures","Databases","Cybersecurity","Information Technology","Computer Networks","Operating Systems","Software Engineering","Web Development","Projects","Problem Solving","Debugging","أخرى"],
+        categories: ["Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","Flask","Django","React","Node.js","Git / GitHub","Algorithms","Data Structures","Databases","Cybersecurity","Information Technology","Computer Networks","Operating Systems","Software Engineering","تطوير الويب","Projects","Problem Solving","Debugging","أخرى"],
         paths: {
             "Python": ["Beginner Python","Intermediate Python","Advanced Python","OOP","Flask","Automation","Data Analysis","Machine Learning","Projects","Problem Solving","أخرى"],
             "Flask": ["Routes","Templates","Forms","Authentication","Database","Deployment","Full Web App","API","Login System","أخرى"],
             "JavaScript": ["Basics","DOM","Events","Async JavaScript","Fetch API","Projects","أخرى"],
             "React": ["Components","Props","State","Hooks","Routing","API Integration","Project","أخرى"],
             "Algorithms": ["Searching","Sorting","Recursion","Greedy","Dynamic Programming","Graphs","Trees","Complexity","أخرى"],
-            "Web Development": ["Frontend","Backend","Full Stack","Responsive Design","Authentication","APIs","Databases","Deployment","أخرى"],
+            "تطوير الويب": ["HTML","CSS","Responsive Design","Bootstrap","Tailwind CSS","JavaScript","DOM","Async JavaScript","API","JSON","Frontend","Backend","Full Stack","Flask","Django","React","Node.js","Express.js","Authentication","Session Management","REST API","Database Integration","SQLite","MySQL","PostgreSQL","Deployment","Debugging","Testing","Security Basics","Performance Optimization","Project Building","Revision","Portfolio Development","Open Source Contribution","أخرى"],
             "أخرى": ["Beginner Track","Project Track","Problem Solving","Documentation","أخرى"]
         },
         states: {
@@ -1323,6 +1323,21 @@ const SMART_GOALS_V4610 = {
                 current: ["مبتدئ","أعرف Routes","أعرف Templates","أعرف قواعد البيانات","أخرى"],
                 target: ["بناء تطبيق Flask كامل","نظام تسجيل دخول","نشر التطبيق","بناء API","أخرى"],
                 commitment: ["30 دقيقة يومياً","ساعة يومياً","مشروع أسبوعي","تطوير ميزة يومياً","أخرى"]
+            },
+            "تطوير الويب": {
+                current: ["مبتدئ","أعرف HTML/CSS","أستخدم JavaScript","أفهم Frontend و Backend","أبني مشاريع ويب","أخرى"],
+                target: ["بناء موقع كامل","بناء تطبيق ويب","تحسين الواجهة والخلفية","نشر المشروع","تطوير Portfolio","أخرى"],
+                commitment: ["ساعة تطوير","تطبيق عملي","بناء ميزة","إصلاح أخطاء","مراجعة أسبوعية","أخرى"]
+            },
+            "HTML": {
+                current: ["لا أعرف HTML","أعرف أساسيات HTML","أستطيع إنشاء صفحة بسيطة","أستخدم النماذج والجداول","أبني صفحات متكاملة","أخرى"],
+                target: ["فهم HTML","إنشاء صفحات احترافية","كتابة هيكل صحيح","تحسين الوصولية","بناء مشروع كامل","أخرى"],
+                commitment: ["30 دقيقة يومياً","إنشاء صفحة","إعادة بناء تصميم","تطبيق عملي","مشروع صغير","أخرى"]
+            },
+            "CSS": {
+                current: ["لا أعرف CSS","أعرف التنسيق الأساسي","أستخدم Flexbox","أستخدم Grid","أصمم صفحات كاملة","أخرى"],
+                target: ["تصميم احترافي","Responsive Design","إتقان Flexbox","إتقان Grid","تحسين تجربة المستخدم","أخرى"],
+                commitment: ["تصميم عنصر","إعادة تصميم صفحة","تطبيق عملي","ساعة يومياً","مشروع تصميم","أخرى"]
             },
             "أخرى": {
                 current: ["مبتدئ","أعرف الأساسيات","متوسط","متقدم","أخرى"],
@@ -2853,7 +2868,7 @@ const GOAL_CONFIG_V524 = {
     },
 
     "البرمجة والتكنولوجيا": {
-        categories: ["أساسيات البرمجة","Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","PHP","Flask","Django","React","Angular","Vue","Node.js","Express","Git","GitHub","Linux","Docker","API","REST API","GraphQL","Data Structures","Algorithms","OOP","Database","Backend","Frontend","Full Stack","DevOps","Software Engineering","Testing","Debugging","Mobile Development","Game Development","Web Development","Cybersecurity","Cloud Computing","Operating Systems","Networking","System Design","Competitive Programming","Open Source","Version Control","أخرى"],
+        categories: ["أساسيات البرمجة","Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","PHP","Flask","Django","React","Angular","Vue","Node.js","Express.js","Express","Git","GitHub","Linux","Docker","API","REST API","GraphQL","Data Structures","Algorithms","OOP","Database","Backend","Frontend","Full Stack","DevOps","Software Engineering","Testing","Debugging","Mobile Development","Game Development","تطوير الويب","Cybersecurity","Cloud Computing","Operating Systems","Networking","System Design","Competitive Programming","Open Source","Version Control","أخرى"],
         paths: {
             "أساسيات البرمجة": ["أساسيات البرمجة","المتغيرات وأنواع البيانات","العمليات الحسابية والمنطقية","الشروط","الحلقات التكرارية","الدوال","المصفوفات والقوائم","حل المشكلات","التعامل مع الأخطاء","كتابة برامج بسيطة","مراجعة شاملة","أخرى"],
             "Python": ["Syntax Basics","Variables","Data Types","Operators","Conditions","Loops","Functions","Lists","Tuples","Dictionaries","Sets","Strings","File Handling","Exception Handling","Modules","OOP","Virtual Environment","Libraries","Flask","API","SQLite","Project Building","Debugging","Code Review","Revision","أخرى"],
@@ -2873,6 +2888,7 @@ const GOAL_CONFIG_V524 = {
             "Vue": ["Components","Directives","State Management","Routing","API Integration","Project Building","Revision","أخرى"],
             "Node.js": ["Modules","Express","Routing","Middleware","API","Database","Authentication","Deployment","Project Building","أخرى"],
             "Express": ["Routing","Middleware","REST API","Authentication","Database","Error Handling","Project Building","أخرى"],
+            "Express.js": ["Routing","Middleware","REST API","Authentication","Database","Error Handling","Project Building","أخرى"],
             "Git": ["Version Control","Commits","Branches","Merge","Pull Requests","Workflow","Revision","أخرى"],
             "GitHub": ["Repositories","Commits","Branches","Pull Requests","Issues","GitHub Pages","Portfolio","أخرى"],
             "Linux": ["Terminal Basics","Files","Permissions","Processes","Shell Commands","Server Basics","أخرى"],
@@ -2893,7 +2909,7 @@ const GOAL_CONFIG_V524 = {
             "Debugging": ["قراءة الأخطاء","تتبع المشكلة","اختبار الحل","تحسين الكود","توثيق السبب","أخرى"],
             "Mobile Development": ["UI Basics","Navigation","API Integration","Local Storage","Project Building","أخرى"],
             "Game Development": ["Game Logic","Physics","Graphics","Input Handling","Project Building","أخرى"],
-            "Web Development": ["HTML","CSS","JavaScript","Frontend","Backend","Database","API","Deployment","Project Building","أخرى"],
+            "تطوير الويب": ["HTML","CSS","Responsive Design","Bootstrap","Tailwind CSS","JavaScript","DOM","Async JavaScript","API","JSON","Frontend","Backend","Full Stack","Flask","Django","React","Node.js","Express.js","Authentication","Session Management","REST API","Database Integration","SQLite","MySQL","PostgreSQL","Deployment","Debugging","Testing","Security Basics","Performance Optimization","Project Building","Revision","Portfolio Development","Open Source Contribution","أخرى"],
             "Cybersecurity": ["Security Basics","Network Security","Web Security","Authentication","OWASP","Linux","Revision","أخرى"],
             "Cloud Computing": ["Cloud Basics","Deployment","Storage","Databases","Monitoring","Security","أخرى"],
             "Operating Systems": ["Processes","Memory","Files","Scheduling","Linux","Revision","أخرى"],
@@ -2916,14 +2932,14 @@ const GOAL_CONFIG_V524 = {
                 commitment:["30 دقيقة تدريب عملي","ساعة تدريب عملي","حل مسائل يومية","تطبيق عملي يومي","مشروع أسبوعي","مراجعة الكود","أخرى"]
             },
             "Flask": {
-                current:["أعرف أساسيات Python","أعرف Routing","أنشأت تطبيقاً بسيطاً","أتعامل مع Templates","أستخدم قواعد البيانات","أخرى"],
-                target:["بناء تطبيق ويب","ربط قاعدة بيانات","إنشاء API","تطوير مشروع متكامل","نشر المشروع","أخرى"],
-                commitment:["ساعة تدريب عملي","بناء ميزة جديدة","حل مشكلة برمجية","تطوير مشروع","مراجعة الكود","أخرى"]
+                current:["أعرف Python","أنشأت تطبيقاً","أتعامل مع Routes","أستخدم Templates","أستخدم قواعد البيانات","أخرى"],
+                target:["بناء موقع كامل","إنشاء API","ربط قاعدة بيانات","تسجيل المستخدمين","رفع المشروع","أخرى"],
+                commitment:["ميزة جديدة","ساعة تطوير","حل Bug","مراجعة الكود","تطوير المشروع","أخرى"]
             },
             "Project Building": {
-                current:["لم أبدأ مشروعاً","أنشأت مشروعاً بسيطاً","أنجزت عدة مشاريع","أخرى"],
-                target:["إكمال مشروع","تحسين مشروع","رفع المشروع على GitHub","بناء Portfolio","نشر المشروع","أخرى"],
-                commitment:["30 دقيقة تطوير","ساعة تطوير","ميزة جديدة يومياً","إصلاح أخطاء","توثيق المشروع","أخرى"]
+                current:["فكرة فقط","بدأت المشروع","طورت أجزاء","اقتربت من الإنجاز","أخرى"],
+                target:["إكمال المشروع","رفع المشروع","تحسين المشروع","إضافة مميزات","بناء Portfolio","نشر المشروع","المساهمة في Open Source","أخرى"],
+                commitment:["30 دقيقة تطوير","ساعة تطوير","ميزة جديدة","إصلاح Bug","تحسين الأداء","كتابة توثيق","رفع تحديث","مراجعة أسبوعية","أخرى"]
             },
             "C": {
                 current:["مبتدئ","أعرف الأساسيات","أحل مسائل بسيطة","أستخدم المؤشرات","أخرى"],
@@ -2941,9 +2957,69 @@ const GOAL_CONFIG_V524 = {
                 commitment:["درس يومي","برنامج عملي","حل مسائل","تطوير مشروع","مراجعة أسبوعية","أخرى"]
             },
             "JavaScript": {
-                current:["مبتدئ","أعرف الأساسيات","أتعامل مع DOM","أستخدم Async","أخرى"],
-                target:["إتقان JavaScript","تطوير واجهات تفاعلية","ربط API","بناء مشاريع","الاستعداد للأطر الحديثة","أخرى"],
-                commitment:["30 دقيقة تدريب","ساعة تدريب","حل تحديات","تطوير مشروع","مراجعة الكود","أخرى"]
+                current:["أعرف الأساسيات","أستخدم DOM","أتعامل مع Events","أستخدم Async","أخرى"],
+                target:["إتقان JavaScript","إنشاء تطبيقات تفاعلية","ربط API","بناء مشاريع","أخرى"],
+                commitment:["حل تحديات","ساعة تدريب","بناء ميزة","إصلاح أخطاء","أخرى"]
+            },
+            "HTML": {
+                current:["لا أعرف HTML","أعرف أساسيات HTML","أستطيع إنشاء صفحة بسيطة","أستخدم النماذج والجداول","أبني صفحات متكاملة","أخرى"],
+                target:["فهم HTML","إنشاء صفحات احترافية","كتابة هيكل صحيح","تحسين الوصولية","بناء مشروع كامل","أخرى"],
+                commitment:["30 دقيقة يومياً","إنشاء صفحة","إعادة بناء تصميم","تطبيق عملي","مشروع صغير","أخرى"]
+            },
+            "CSS": {
+                current:["لا أعرف CSS","أعرف التنسيق الأساسي","أستخدم Flexbox","أستخدم Grid","أصمم صفحات كاملة","أخرى"],
+                target:["تصميم احترافي","Responsive Design","إتقان Flexbox","إتقان Grid","تحسين تجربة المستخدم","أخرى"],
+                commitment:["تصميم عنصر","إعادة تصميم صفحة","تطبيق عملي","ساعة يومياً","مشروع تصميم","أخرى"]
+            },
+            "Responsive Design": {
+                current:["مبتدئ","أعرف Media Queries","أصمم للهواتف","أصمم لجميع الأجهزة","أخرى"],
+                target:["تصميم متجاوب كامل","تحسين تجربة الهاتف","تحسين الكمبيوتر","تحسين الأجهزة اللوحية","أخرى"],
+                commitment:["تصميم يومي","تجربة أجهزة","إعادة تصميم","تحسين واجهة","أخرى"]
+            },
+            "API": {
+                current:["لا أعرف API","أعرف المفهوم","أرسل Requests","أتعامل مع JSON","أبني API","أخرى"],
+                target:["استخدام API","بناء REST API","ربط التطبيقات","توثيق API","أخرى"],
+                commitment:["طلب API","تجربة Endpoint","ربط مشروع","بناء خدمة","أخرى"]
+            },
+            "Django": {
+                current:["مبتدئ","أعرف Models","أتعامل مع Views","أستخدم Admin Panel","أخرى"],
+                target:["بناء مشروع","إدارة المستخدمين","ربط قاعدة بيانات","رفع المشروع","أخرى"],
+                commitment:["درس عملي","تطوير ميزة","مشروع","إصلاح أخطاء","أخرى"]
+            },
+            "React": {
+                current:["أعرف الأساسيات","أستخدم Components","أتعامل مع State","أستخدم Hooks","أخرى"],
+                target:["بناء واجهات حديثة","إدارة الحالة","ربط API","بناء مشروع","أخرى"],
+                commitment:["مكون جديد","تطوير واجهة","حل تحديات","مشروع","أخرى"]
+            },
+            "Backend": {
+                current:["مبتدئ","أعرف المفاهيم","أبني API","أتعامل مع قواعد البيانات","أخرى"],
+                target:["بناء Backend كامل","إدارة المستخدمين","تحسين الأداء","رفع المشروع","أخرى"],
+                commitment:["ميزة جديدة","بناء API","إصلاح Bug","تحسين الأداء","أخرى"]
+            },
+            "Frontend": {
+                current:["مبتدئ","أعرف HTML/CSS","أستخدم JavaScript","أستخدم Framework","أخرى"],
+                target:["بناء واجهات احترافية","تحسين UX","تحسين UI","إكمال مشروع","أخرى"],
+                commitment:["تصميم واجهة","تطوير عنصر","تحسين تجربة","مشروع","أخرى"]
+            },
+            "Full Stack": {
+                current:["أعرف Frontend","أعرف Backend","أربط الطرفين","أنشأت مشروعاً","أخرى"],
+                target:["بناء تطبيق كامل","إدارة المشروع","رفع التطبيق","تحسين الأداء","إنشاء Portfolio","أخرى"],
+                commitment:["ساعة تطوير","ميزة جديدة","إصلاح أخطاء","اختبار النظام","توثيق المشروع","تطوير مشروع كامل","أخرى"]
+            },
+            "تطوير الويب": {
+                current:["مبتدئ","أعرف HTML/CSS","أستخدم JavaScript","أفهم Frontend و Backend","أبني مشاريع ويب","أخرى"],
+                target:["بناء موقع كامل","بناء تطبيق ويب","تحسين الواجهة والخلفية","نشر المشروع","تطوير Portfolio","أخرى"],
+                commitment:["ساعة تطوير","تطبيق عملي","بناء ميزة","إصلاح أخطاء","مراجعة أسبوعية","أخرى"]
+            },
+            "Portfolio Development": {
+                current:["لا أملك Portfolio","لدي مشاريع قليلة","أحتاج تحسين العرض","لدي Portfolio بسيط","أخرى"],
+                target:["بناء Portfolio قوي","عرض المشاريع بوضوح","تحسين GitHub","نشر المشاريع","أخرى"],
+                commitment:["تحسين مشروع","كتابة وصف مشروع","رفع تحديث","مراجعة أسبوعية","أخرى"]
+            },
+            "Open Source Contribution": {
+                current:["لم أساهم من قبل","أعرف GitHub","أفهم Issues","قدمت مساهمة بسيطة","أخرى"],
+                target:["المساهمة في Open Source","فهم Pull Requests","تحسين مشروع مفتوح المصدر","بناء سجل مساهمات","أخرى"],
+                commitment:["قراءة Issue","تحسين توثيق","إرسال Pull Request","مراجعة أسبوعية","أخرى"]
             },
             "Debugging": {
                 current:["أجد صعوبة في فهم الأخطاء","أفهم بعض رسائل الخطأ","أستطيع تتبع أخطاء بسيطة","أصلح أخطاء متوسطة","أخرى"],
