@@ -2044,3 +2044,20 @@ Dashboard-only layout fix.
 - No goals refactor yet.
 - No dashboard redesign.
 - No database migration.
+
+
+## v5.4.6 Isolated Native Tasks Engine AR
+
+### القرار
+- عزل صفحة المهام عن محرك app.js القديم.
+- إضافة ملف مستقل: `app/static/js/tasks_native_ar.js`.
+- هذا الملف يبني بطاقات نوع المهمة والقوائم التكيفية من مصدر عربي مستقل.
+- لا يعتمد على `translateDynamicOptions` أو `labelForUI` أو أي طبقة ترجمة قديمة.
+- خيارات التكرار أصبحت عربية في الواجهة وقيم الحفظ.
+- تم تحديث الباك إند لقبول التكرار العربي والقيم القديمة مؤقتًا.
+
+### النطاق
+- صفحة المهام.
+- تعديل المهمة.
+- التكرار في المهام.
+- لا يوجد تغيير في صفحة الأهداف أو الربط الذكي.

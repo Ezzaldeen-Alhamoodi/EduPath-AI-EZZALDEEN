@@ -444,19 +444,18 @@ EduPath AI EZZALDEEN
 
 
 def send_task_completion_email(user, task):
-    body = f"""Congratulations {user.name},
-
-You completed a task in EduPath AI EZZALDEEN:
+    body = f"""
+تم إكمال مهمة في EduPath AI EZZALDEEN:
 
 {task_display_line(task)}
 
-This is real progress. Keep your momentum and continue with the next small step.
+هذا تقدم حقيقي. واصل إنجاز الخطوة التالية بهدوء وثبات.
 
-Every completed task makes your goals closer.
+كل مهمة مكتملة تقرّبك أكثر من أهدافك.
 
 EduPath AI EZZALDEEN
 """
-    return send_email_message("Great work! Task completed", [user.email], body)
+    return send_email_message("أحسنت! تم إكمال المهمة", [user.email], body)
 
 
 def task_due_for_email_reminder(task, now_dt):
@@ -475,16 +474,16 @@ def task_due_for_email_reminder(task, now_dt):
     if task.due_date and task.due_date < today_value:
         return False
 
-    if task.repeat_type == "once" and task.due_date and task.due_date != today_value:
+    if repeat_type_matches_v546(task.repeat_type, "مرة واحدة / بدون تكرار") and task.due_date and task.due_date != today_value:
         return False
 
-    if task.repeat_type == "selected_days":
+    if repeat_type_matches_v546(task.repeat_type, "أيام محددة"):
         # Python Monday=0 ... Sunday=6, same as the frontend values.
         days = [d for d in (task.repeat_days or "").split(",") if d != ""]
         if str(now_dt.weekday()) not in days:
             return False
 
-    if task.repeat_type == "weekly" and task.due_date:
+    if repeat_type_matches_v546(task.repeat_type, "أسبوعيًا") and task.due_date:
         try:
             due_weekday = datetime.strptime(task.due_date, "%Y-%m-%d").weekday()
             if now_dt.weekday() != due_weekday:
@@ -1845,7 +1844,7 @@ def task_exam_raw_or_ar(category, value):
 
 
 def repeat_days_display_ar(repeat_type, repeat_days):
-    if repeat_type == "custom":
+    if normalize_repeat_type_ar_v546(repeat_type) == "أخرى":
         return repeat_days or "غير محدد"
     return repeat_days_ar(repeat_days)
 
@@ -1983,6 +1982,31 @@ def normalize_task_category_ar_v543(value):
     text = (value or "").strip()
     return TASK_CATEGORY_TO_AR_V543.get(text, text or "عام")
 
+
+
+TASK_REPEAT_TO_AR_V546 = {
+    "once": "مرة واحدة / بدون تكرار",
+    "daily": "يوميًا",
+    "weekly": "أسبوعيًا",
+    "monthly": "شهريًا",
+    "selected_days": "أيام محددة",
+    "custom": "أخرى",
+    "No Repeat / Once": "مرة واحدة / بدون تكرار",
+    "No Repeat": "مرة واحدة / بدون تكرار",
+    "Daily": "يوميًا",
+    "Weekly": "أسبوعيًا",
+    "Monthly": "شهريًا",
+    "Custom Days": "أيام محددة",
+    "Other": "أخرى",
+    "Custom": "أخرى"
+}
+
+def normalize_repeat_type_ar_v546(value):
+    text = (value or "").strip()
+    return TASK_REPEAT_TO_AR_V546.get(text, text or "يوميًا")
+
+def repeat_type_matches_v546(value, *names):
+    return normalize_repeat_type_ar_v546(value) in names
 
 def render_clickable_sources(value):
     """Render source text safely: plain text stays plain, URLs become clickable links.
@@ -2971,10 +2995,10 @@ def create_app():
                 start_date=request.form.get("start_date", "").strip(),
                 due_date=request.form.get("due_date", "").strip(),
                 reminder_time="",
-                repeat_type=request.form.get("repeat_type", "daily").strip(),
+                repeat_type=normalize_repeat_type_ar_v546(request.form.get("repeat_type", "يوميًا")),
                 repeat_days=(
                     request.form.get("repeat_custom", "").strip()
-                    if request.form.get("repeat_type", "").strip() == "custom"
+                    if normalize_repeat_type_ar_v546(request.form.get("repeat_type", "")) == "أخرى"
                     else ",".join(request.form.getlist("repeat_days"))
                 ),
                 notes=request.form.get("notes", "").strip(),
@@ -3027,10 +3051,10 @@ def create_app():
             task.start_date = request.form.get("start_date", "").strip()
             task.due_date = request.form.get("due_date", "").strip()
             task.reminder_time = request.form.get("reminder_time", "").strip()
-            task.repeat_type = request.form.get("repeat_type", "daily").strip()
+            task.repeat_type = normalize_repeat_type_ar_v546(request.form.get("repeat_type", "يوميًا"))
             task.repeat_days = (
                 request.form.get("repeat_custom", "").strip()
-                if task.repeat_type == "custom"
+                if normalize_repeat_type_ar_v546(task.repeat_type) == "أخرى"
                 else ",".join(request.form.getlist("repeat_days"))
             )
             task.notes = request.form.get("notes", "").strip()
@@ -3058,10 +3082,10 @@ def create_app():
 
         related_msg = ""
         if linked_goals:
-            related_msg = " Related goal: " + linked_goals[0][0].title
+            related_msg = " الهدف المرتبط: " + linked_goals[0][0].title
         session["toast_notifications"] = [{
-            "title": "Great work!",
-            "body": f"You completed: {task.title}.{related_msg} Keep your momentum going."
+            "title": "أحسنت!",
+            "body": f"تم إكمال المهمة: {task.title}. واصل تقدمك."
         }]
 
         flash("تم إكمال المهمة.", "success")
