@@ -6956,3 +6956,14 @@ body.dark-mode .home-progress-ar-v513 small {
 #trainingTypeSelect {
     unicode-bidi: plaintext;
 }
+
+
+
+/* EduPath AI v5.3.3 Exam Content English Only */
+body .task-card span,
+body #topicSelect,
+body #skillSelect,
+body #detailedTopicSelect,
+body #trainingTypeSelect {
+    unicode-bidi: plaintext;
+}

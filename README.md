@@ -1806,3 +1806,27 @@ Dashboard-only layout fix.
 - Activity type now changes based on the detailed question/task type.
 - CSCA exam content is restored to English inside Exams & Certificates.
 - Official test names, section names, question types, and training types remain in English.
+
+
+## v5.3.3 Exam Content English Only
+
+### Correction
+- Exams & Certificates task section content is now English-only.
+- Arabic remains only for the form field labels:
+  - اسم المهمة
+  - الفئة الرئيسية
+  - الفئة الفرعية
+  - الموضوع التفصيلي
+  - نوع النشاط
+  - المصدر أو الرابط
+  - مستوى الصعوبة
+  - الأولوية
+  - الوقت المتوقع
+  - تاريخ البدء
+  - تاريخ الانتهاء
+  - وقت التذكير
+  - التكرار
+  - ملاحظات إضافية
+- IELTS, TOEFL, Duolingo, CSCA, SAT, ACT, GRE, GMAT, HSK, and HSKK structures remain in English.
+- CSCA exam content is restored to English inside Exams & Certificates.
+- Other task sections keep their Arabic-native behavior.

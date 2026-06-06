@@ -3626,8 +3626,51 @@ updateTrainingOptions = function() {
 applyDeepLanguageTaskConfigV531();
 
 
-/* EduPath AI v5.3.2 Deep Exam Certificates */
-function applyDeepExamCertificatesConfigV532() {
+/* EduPath AI v5.3.3 Exam Content English Only */
+function examOptionEnglishOnlyV533() {
+    const categorySelect = document.getElementById("categorySelect");
+    if (!categorySelect || categorySelect.value !== "Exams & Certificates") return;
+
+    const examSelects = [
+        "topicSelect",
+        "skillSelect",
+        "detailedTopicSelect",
+        "trainingTypeSelect",
+        "cscaDetailedTopicSelect",
+        "cscaTrainingTypeSelect"
+    ];
+
+    examSelects.forEach(id => {
+        const select = document.getElementById(id);
+        if (!select) return;
+        Array.from(select.options).forEach(option => {
+            if (!option.value) return;
+            if (option.value === "Other" || option.value === "Other") {
+                option.value = "Other";
+                option.textContent = "Other";
+            } else {
+                option.textContent = option.value;
+            }
+        });
+    });
+
+    const customLabels = [
+        ["customTopicBox", "اكتب الاختبار"],
+        ["customSkillBox", "اكتب القسم الرئيسي"],
+        ["customDetailedTopicBox", "اكتب نوع المهمة أو نوع السؤال"],
+        ["customTrainingTypeBox", "اكتب نوع النشاط"]
+    ];
+    customLabels.forEach(([boxId, labelText]) => {
+        const box = document.getElementById(boxId);
+        if (!box) return;
+        const label = box.querySelector("label");
+        const input = box.querySelector("input");
+        if (label) label.textContent = labelText;
+        if (input) input.placeholder = "Write what you want";
+    });
+}
+
+function forceExamCertificatesEnglishV533() {
     if (typeof SMART_TASK_DATA === "undefined" || !SMART_TASK_DATA["Exams & Certificates"]) return;
 
     const exams = SMART_TASK_DATA["Exams & Certificates"];
@@ -3651,13 +3694,13 @@ function applyDeepExamCertificatesConfigV532() {
         "TOEFL": ["Full Official Test","Mock Test","Reading","Listening","Speaking","Writing","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
         "Duolingo English Test": ["Full Test","Mock Test","Reading","Listening","Writing","Speaking","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
         "Duolingo": ["Full Test","Mock Test","Reading","Listening","Writing","Speaking","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
-        "HSK": ["Full HSK Test","Mock Test","HSK Level 1","HSK Level 2","HSK Level 3","HSK Level 4","HSK Level 5","HSK Level 6","Listening","Reading","Writing","Vocabulary","Grammar","Characters","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
-        "HSKK": ["Full HSKK Test","Mock Test","HSKK Primary","HSKK Intermediate","HSKK Advanced","Speaking Practice","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
         "CSCA": ["Full Official Test","Mock Test","Mathematics","Physics","Chemistry","Chinese Language","English Language","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
         "SAT": ["Full Digital SAT","Mock Test","Reading and Writing","Math","Bluebook Practice","Score Review","Weak Skill Training","Section Practice","Timed Practice","Error Review","Other"],
         "ACT": ["Full ACT","Mock Test","English","Mathematics","Reading","Science","Writing","Score Review","Weak Skill Training","Section Practice","Timed Practice","Error Review","Other"],
         "GRE": ["Full GRE","Mock Test","Analytical Writing","Verbal Reasoning","Quantitative Reasoning","Score Review","Weak Skill Training","Section Practice","Timed Practice","Error Review","Other"],
         "GMAT": ["Full GMAT","Mock Test","Quantitative Reasoning","Verbal Reasoning","Data Insights","Score Review","Weak Skill Training","Section Practice","Timed Practice","Error Review","Other"],
+        "HSK": ["Full HSK Test","Mock Test","HSK Level 1","HSK Level 2","HSK Level 3","HSK Level 4","HSK Level 5","HSK Level 6","Listening","Reading","Writing","Vocabulary","Grammar","Characters","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
+        "HSKK": ["Full HSKK Test","Mock Test","HSKK Primary","HSKK Intermediate","HSKK Advanced","Speaking Practice","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"],
         "Other": ["Full Official Test","Mock Test","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"]
     };
 
@@ -3669,6 +3712,7 @@ function applyDeepExamCertificatesConfigV532() {
         "Full GMAT": ["Complete GMAT","Quantitative Reasoning","Verbal Reasoning","Data Insights","Score Simulation","Other"],
         "Full HSK Test": ["Complete HSK Test","Listening Section","Reading Section","Writing Section","Score Simulation","Other"],
         "Full HSKK Test": ["Complete HSKK Test","Speaking Practice","Recording Practice","Score Simulation","Other"],
+        "Full Test": ["Complete Test","Official Timing","Score Simulation","Answer Review","Other"],
         "Mock Test": ["Full Mock Test","Section Mock","Timed Mock","Score Review","Weakness Analysis","Other"],
         "Score Review": ["Score Analysis","Band Analysis","Weak Skill Identification","Progress Tracking","Error Pattern Review","Other"],
         "Weak Skill Training": ["Weakness Analysis","Targeted Practice","Strategy Practice","Error Review","Progress Check","Other"],
@@ -3678,7 +3722,7 @@ function applyDeepExamCertificatesConfigV532() {
 
         "Listening": ["Listening Section","Multiple Choice","Matching","Plan Labelling","Map Labelling","Diagram Labelling","Form Completion","Note Completion","Table Completion","Flow Chart Completion","Summary Completion","Sentence Completion","Short Answer Questions","Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk","Listen and Type","Interactive Listening","Dialogue Listening","Short Passage Listening","Other"],
         "Reading": ["Reading Section","Matching Headings","Matching Information","Matching Features","Matching Sentence Endings","True False Not Given","Yes No Not Given","Multiple Choice","Sentence Completion","Summary Completion","Note Completion","Table Completion","Flow Chart Completion","Diagram Labelling","Short Answer Questions","Read in Daily Life","Read an Academic Passage","Complete the Words","Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","Reading Comprehension","Other"],
-        "Writing": ["Task 1","Task 2","Academic Graph","Table","Chart","Process Diagram","Map","Opinion Essay","Discussion Essay","Problem Solution Essay","Advantages Disadvantages Essay","Double Question Essay","Build a Sentence","Write an Email","Write for an Academic Discussion","Write About the Photo","Writing Sample","Interactive Writing","Argument Essay","Perspective Analysis","Other"],
+        "Writing": ["Task 1","Task 2","Academic Graph","Table","Chart","Process Diagram","Map","Opinion Essay","Discussion Essay","Problem Solution Essay","Advantages Disadvantages Essay","Double Question Essay","Build a Sentence","Write an Email","Write for an Academic Discussion","Write About the Photo","Writing Sample","Interactive Writing","Argument Essay","Perspective Analysis","Idea Development","Organization","Language Use","Other"],
         "Speaking": ["Part 1","Part 2","Part 3","Speak About the Photo","Read, Then Speak","Speaking Sample","Interactive Speaking","Listen and Repeat","Take an Interview","Cue Card Practice","Answer Questions","Describe Picture","Express Opinion","Other"],
 
         "Reading and Writing": ["Information and Ideas","Craft and Structure","Expression of Ideas","Standard English Conventions","Mixed Reading and Writing Practice","Module 1 Practice","Module 2 Practice","Other"],
@@ -3688,7 +3732,7 @@ function applyDeepExamCertificatesConfigV532() {
         "Standard English Conventions": ["Boundaries","Form, Structure, and Sense","Punctuation","Verb Form","Subject-Verb Agreement","Pronoun Clarity","Sentence Structure","Other"],
 
         "Math": ["Algebra","Advanced Math","Problem-Solving and Data Analysis","Geometry and Trigonometry","Calculator Practice","Desmos Practice","Student-Produced Response","Module 1 Practice","Module 2 Practice","Other"],
-        "Algebra": ["Linear Equations","Linear Inequalities","Systems of Linear Equations","Linear Functions","Interpreting Linear Models","Linear Equations","Quadratic Equations","Functions","Exponents","Polynomials","Systems","Other"],
+        "Algebra": ["Linear Equations","Linear Inequalities","Systems of Linear Equations","Linear Functions","Interpreting Linear Models","Quadratic Equations","Functions","Exponents","Polynomials","Systems","Other"],
         "Advanced Math": ["Quadratic Equations","Exponential Functions","Polynomial Expressions","Rational Expressions","Nonlinear Functions","Function Graphs","Other"],
         "Problem-Solving and Data Analysis": ["Ratios","Percentages","Rates","Proportions","Units","Probability","Statistics","Data Interpretation","Tables and Graphs","Other"],
         "Geometry and Trigonometry": ["Area and Volume","Lines and Angles","Triangles","Circles","Right Triangle Trigonometry","Coordinate Geometry","Other"],
@@ -3697,6 +3741,7 @@ function applyDeepExamCertificatesConfigV532() {
         "Production of Writing": ["Organization","Topic Development","Unity","Cohesion","Style","Tone","Word Choice","Other"],
         "Knowledge of Language": ["Style","Tone","Word Choice","Effective Language Use","Other"],
         "Conventions of Standard English": ["Sentence Structure","Punctuation","Grammar and Usage","Verb Tense","Subject-Verb Agreement","Pronouns","Modifiers","Other"],
+        "Passage Editing": ["Organization","Topic Development","Unity","Cohesion","Style","Tone","Word Choice","Sentence Structure","Punctuation","Grammar and Usage","Other"],
         "Mathematics": ["Number and Quantity","Algebra","Functions","Geometry","Statistics and Probability","Modeling","Other"],
         "Science": ["Data Representation","Research Summaries","Conflicting Viewpoints","Scientific Reasoning","Graph Interpretation","Experimental Design","Other"],
         "Data Representation": ["Charts","Tables","Graphs","Data Interpretation","Other"],
@@ -3716,8 +3761,8 @@ function applyDeepExamCertificatesConfigV532() {
         "Critical Reasoning": ["Main Idea","Inference","Strengthen Argument","Weaken Argument","Assumption","Evaluate Argument","Conclusion","Boldface","Argument Structure","Other"],
         "Data Sufficiency": ["Charts","Tables","Graphs","Data Comparison","Business Context","Quantitative Reasoning","Verbal Data Reasoning","Decision Making","Other"],
         "Multi-Source Reasoning": ["Charts","Tables","Graphs","Business Context","Decision Making","Other"],
-        "Table Analysis": ["Tables","Data Comparison","Business Context","Decision Making","Other"],
-        "Graphics Interpretation": ["Charts","Graphs","Data Comparison","Other"],
+        "Table Analysis": ["Charts","Tables","Graphs","Data Comparison","Business Context","Decision Making","Other"],
+        "Graphics Interpretation": ["Charts","Tables","Graphs","Data Comparison","Other"],
         "Two-Part Analysis": ["Quantitative Reasoning","Verbal Data Reasoning","Decision Making","Other"],
 
         "HSK Level 1": ["Word Recognition","Sentence Understanding","Dialogue Listening","Character Recognition","Pinyin Review","Other"],
@@ -3734,12 +3779,11 @@ function applyDeepExamCertificatesConfigV532() {
         "HSKK Advanced": ["Listen and Repeat","Read Aloud","Answer Questions","Express Opinion","Other"],
         "Speaking Practice": ["Recording Practice","Pronunciation Review","Fluency Practice","Mock Speaking","Answer Review","Other"],
 
+        "CSCA": ["Mathematics","Physics","Chemistry","Chinese Language","English Language","Mock Test","Other"],
         "Chinese Language": ["Vocabulary","Grammar","Characters","Reading","Listening","Writing","Other"],
         "English Language": ["Reading","Listening","Speaking","Writing","Vocabulary","Grammar","Other"],
         "Physics": ["Mechanics","Electricity","Waves","Thermodynamics","Modern Physics","Other"],
         "Chemistry": ["Organic Chemistry","Inorganic Chemistry","Chemical Equations","Stoichiometry","Atomic Structure","Other"],
-        "CSCA": ["Mathematics","Physics","Chemistry","Chinese Language","English Language","Mock Test","Other"],
-
         "Other": ["General Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Other"]
     };
 
@@ -3814,70 +3858,33 @@ function applyDeepExamCertificatesConfigV532() {
         "Craft and Structure": ["Practice","Timed Practice","Vocabulary Review","Question Review","Strategy Practice","Other"],
         "Expression of Ideas": ["Practice","Timed Practice","Grammar Review","Question Review","Strategy Practice","Other"],
         "Standard English Conventions": ["Practice","Timed Practice","Grammar Review","Error Review","Mini Mock Section","Other"],
-        "Central Ideas and Details": ["Practice","Timed Practice","Question Review","Mistake Analysis","Other"],
-        "Command of Evidence": ["Practice","Timed Practice","Evidence Review","Strategy Practice","Other"],
-        "Textual Evidence": ["Practice","Timed Practice","Evidence Review","Strategy Practice","Other"],
-        "Quantitative Evidence": ["Practice","Timed Practice","Table Analysis","Graph Review","Other"],
-        "Inferences": ["Practice","Timed Practice","Inference Strategy","Question Review","Other"],
-        "Information from Tables and Graphs": ["Practice","Timed Practice","Data Review","Error Review","Other"],
-        "Words in Context": ["Practice","Vocabulary Review","Timed Practice","Mistake Analysis","Other"],
-        "Text Structure and Purpose": ["Practice","Timed Practice","Structure Review","Question Review","Other"],
-        "Cross-Text Connections": ["Practice","Timed Practice","Comparison Practice","Question Review","Other"],
-        "Author's Purpose": ["Practice","Timed Practice","Purpose Analysis","Other"],
-        "Transitions": ["Practice","Grammar Review","Timed Practice","Error Review","Other"],
-        "Rhetorical Synthesis": ["Practice","Strategy Practice","Timed Practice","Error Review","Other"],
-        "Logical Flow": ["Practice","Question Review","Strategy Practice","Other"],
-        "Sentence Placement": ["Practice","Question Review","Strategy Practice","Other"],
-        "Effective Language Use": ["Practice","Question Review","Grammar Review","Other"],
-        "Boundaries": ["Practice","Grammar Review","Timed Practice","Error Review","Other"],
-        "Form, Structure, and Sense": ["Practice","Grammar Review","Timed Practice","Error Review","Other"],
-        "Punctuation": ["Practice","Grammar Review","Error Review","Other"],
-        "Verb Form": ["Practice","Grammar Review","Error Review","Other"],
-        "Subject-Verb Agreement": ["Practice","Grammar Review","Error Review","Other"],
-        "Pronoun Clarity": ["Practice","Grammar Review","Error Review","Other"],
-        "Sentence Structure": ["Practice","Grammar Review","Error Review","Other"],
-
         "Algebra": ["Solve Problems","Timed Practice","Formula Review","Desmos Practice","Error Review","Concept Review","Weak Skill Training","Other"],
         "Advanced Math": ["Solve Problems","Timed Practice","Formula Review","Desmos Practice","Error Review","Concept Review","Other"],
         "Problem-Solving and Data Analysis": ["Solve Problems","Timed Practice","Data Interpretation","Error Review","Concept Review","Other"],
         "Geometry and Trigonometry": ["Solve Problems","Timed Practice","Formula Review","Error Review","Concept Review","Other"],
-        "Calculator Practice": ["Calculator Strategy","Timed Practice","Error Review","Other"],
-        "Desmos Practice": ["Desmos Practice","Graph Review","Timed Practice","Other"],
-        "Student-Produced Response": ["SPR Practice","Timed Practice","Error Review","Other"],
 
         "Production of Writing": ["Passage Practice","Timed Practice","Editing Practice","Error Review","Strategy Practice","Other"],
         "Knowledge of Language": ["Passage Practice","Timed Practice","Grammar Review","Error Review","Other"],
         "Conventions of Standard English": ["Passage Practice","Timed Practice","Grammar Review","Editing Practice","Error Review","Other"],
         "Passage Editing": ["Passage Practice","Timed Practice","Editing Practice","Error Review","Other"],
-        "Number and Quantity": ["Solve Problems","Timed Practice","Formula Review","Calculator Strategy","Error Review","Other"],
-        "Functions": ["Solve Problems","Timed Practice","Formula Review","Error Review","Other"],
-        "Statistics and Probability": ["Solve Problems","Timed Practice","Data Analysis","Error Review","Other"],
-        "Modeling": ["Solve Problems","Timed Practice","Model Review","Error Review","Other"],
-        "Literary Narrative": ["Passage Reading","Timed Passage","Answer Questions","Strategy Practice","Evidence Review","Speed Training","Other"],
-        "Social Science": ["Passage Reading","Timed Passage","Answer Questions","Strategy Practice","Other"],
-        "Humanities": ["Passage Reading","Timed Passage","Answer Questions","Strategy Practice","Other"],
-        "Natural Science": ["Passage Reading","Timed Passage","Answer Questions","Strategy Practice","Other"],
-        "Paired Passages": ["Passage Reading","Timed Passage","Comparison Practice","Evidence Review","Other"],
-        "Data Representation": ["Graph Analysis","Passage Practice","Timed Practice","Data Interpretation","Error Review","Other"],
-        "Research Summaries": ["Passage Practice","Experiment Review","Timed Practice","Error Review","Other"],
-        "Conflicting Viewpoints": ["Passage Practice","Viewpoint Comparison","Timed Practice","Error Review","Other"],
-        "Argument Essay": ["Write Draft","Timed Essay","Outline Practice","Feedback Review","Essay Improvement","Other"],
+        "Mathematics": ["Solve Problems","Timed Practice","Formula Review","Calculator Strategy","Error Review","Weak Skill Training","Mini Math Test","Other"],
+        "Reading": ["Passage Reading","Timed Passage","Answer Questions","Strategy Practice","Evidence Review","Speed Training","Weak Skill Training","Other"],
+        "Science": ["Graph Analysis","Passage Practice","Timed Practice","Data Interpretation","Experiment Review","Error Review","Weak Skill Training","Other"],
+        "Writing": ["Write Draft","Timed Essay","Outline Practice","Feedback Review","Essay Improvement","Other"],
 
-        "Analyze an Issue": ["Write Draft","Timed Writing","Outline Practice","Feedback Review","Essay Improvement","Vocabulary Improvement","Other"],
+        "Analytical Writing": ["Write Draft","Timed Writing","Outline Practice","Feedback Review","Essay Improvement","Vocabulary Improvement","Other"],
         "Reading Comprehension": ["Practice","Timed Practice","Vocabulary Review","Passage Review","Error Analysis","Strategy Practice","Mini Verbal Section","Other"],
         "Text Completion": ["Practice","Timed Practice","Vocabulary Review","Error Analysis","Strategy Practice","Other"],
         "Sentence Equivalence": ["Practice","Timed Practice","Vocabulary Review","Error Analysis","Strategy Practice","Other"],
-        "Quantitative Comparison": ["Solve Problems","Timed Practice","Formula Review","Concept Review","Calculator Strategy","Error Review","Other"],
-        "Numeric Entry": ["Solve Problems","Timed Practice","Formula Review","Error Review","Other"],
-        "Data Interpretation": ["Data Interpretation Practice","Timed Practice","Error Review","Other"],
+        "Quantitative Reasoning": ["Solve Problems","Timed Practice","Formula Review","Concept Review","Calculator Strategy","Error Review","Data Interpretation Practice","Weak Skill Training","Mini Quant Section","Other"],
 
         "Problem Solving": ["Solve Problems","Timed Practice","Concept Review","Error Review","Strategy Practice","Mini Quant Section","Other"],
-        "Data Sufficiency": ["Practice","Timed Practice","Data Analysis","Calculator Practice","Error Review","Strategy Practice","Mini Data Insights Section","Other"],
-        "Multi-Source Reasoning": ["Practice","Timed Practice","Data Analysis","Error Review","Strategy Practice","Other"],
-        "Table Analysis": ["Practice","Timed Practice","Data Analysis","Error Review","Strategy Practice","Other"],
-        "Graphics Interpretation": ["Practice","Timed Practice","Data Analysis","Error Review","Strategy Practice","Other"],
-        "Two-Part Analysis": ["Practice","Timed Practice","Data Analysis","Error Review","Strategy Practice","Other"],
-        "Critical Reasoning": ["Argument Analysis","Timed Practice","Error Review","Strategy Practice","Mini Verbal Section","Other"],
+        "Critical Reasoning": ["Passage Practice","Argument Analysis","Timed Practice","Error Review","Strategy Practice","Weak Skill Training","Mini Verbal Section","Other"],
+        "Data Sufficiency": ["Practice","Timed Practice","Data Analysis","Calculator Practice","Error Review","Strategy Practice","Weak Skill Training","Mini Data Insights Section","Other"],
+        "Multi-Source Reasoning": ["Practice","Timed Practice","Data Analysis","Error Review","Strategy Practice","Weak Skill Training","Other"],
+        "Table Analysis": ["Practice","Timed Practice","Data Analysis","Error Review","Strategy Practice","Weak Skill Training","Other"],
+        "Graphics Interpretation": ["Practice","Timed Practice","Data Analysis","Error Review","Strategy Practice","Weak Skill Training","Other"],
+        "Two-Part Analysis": ["Practice","Timed Practice","Data Analysis","Error Review","Strategy Practice","Weak Skill Training","Other"],
 
         "Listening Practice": ["Practice","Timed Practice","Dictation","Mock Section","Error Review","Weak Skill Training","Other"],
         "Reading Practice": ["Practice","Timed Practice","Mock Section","Error Review","Weak Skill Training","Other"],
@@ -3903,19 +3910,34 @@ function applyDeepExamCertificatesConfigV532() {
     exams.training = ["Practice","Timed Practice","Error Review","Weak Skill Training","Score Review","Strategy Practice","Other"];
 }
 
-const previousUpdateTrainingOptionsV532 = typeof updateTrainingOptions === "function" ? updateTrainingOptions : null;
+const previousUpdateTrainingOptionsV533 = typeof updateTrainingOptions === "function" ? updateTrainingOptions : null;
 updateTrainingOptions = function() {
     if (selectedTaskType === "Exams & Certificates") {
         const selectedDetail = detailedTopicSelect ? detailedTopicSelect.value : "";
         const byDetail = SMART_TASK_DATA["Exams & Certificates"] && SMART_TASK_DATA["Exams & Certificates"].trainingByDetail;
         if (selectedDetail && byDetail && byDetail[selectedDetail]) {
             setOptions(trainingTypeSelect, byDetail[selectedDetail]);
+            setTimeout(examOptionEnglishOnlyV533, 0);
             toggleOtherFields();
             return;
         }
     }
-    if (previousUpdateTrainingOptionsV532) previousUpdateTrainingOptionsV532();
+    if (previousUpdateTrainingOptionsV533) previousUpdateTrainingOptionsV533();
+    setTimeout(examOptionEnglishOnlyV533, 0);
 };
 
-applyDeepExamCertificatesConfigV532();
+forceExamCertificatesEnglishV533();
+
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(examOptionEnglishOnlyV533, 100);
+    ["categorySelect", "topicSelect", "skillSelect", "detailedTopicSelect", "trainingTypeSelect"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener("change", () => setTimeout(examOptionEnglishOnlyV533, 30));
+    });
+    document.addEventListener("click", event => {
+        if (event.target.closest(".task-type-card")) {
+            setTimeout(examOptionEnglishOnlyV533, 80);
+        }
+    });
+});
 
