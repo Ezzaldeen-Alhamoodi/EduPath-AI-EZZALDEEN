@@ -7785,3 +7785,125 @@ small.hint {
         margin-bottom: 3px !important;
     }
 }
+
+/* EduPath AI v5.5.5 Tasks Desktop Form Structure - desktop-only design polish */
+.task-field {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+}
+
+.task-field label {
+    margin: 0 !important;
+}
+
+.task-field input,
+.task-field select,
+.task-field textarea {
+    width: 100% !important;
+}
+
+.csca-extra-box {
+    display: none;
+}
+
+.csca-extra-box .task-field {
+    margin-bottom: 10px;
+}
+
+.csca-extra-box .task-field:last-of-type {
+    margin-bottom: 0;
+}
+
+@media (min-width: 981px) {
+    .smart-details {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 14px 18px !important;
+        align-items: start !important;
+    }
+
+    .smart-details > .task-field,
+    .smart-details > .conditional-field.task-field,
+    .smart-details > .csca-extra-box,
+    .smart-details > .repeat-days-box,
+    .smart-details > .repeat-custom-box {
+        grid-column: span 1 !important;
+        align-self: stretch !important;
+    }
+
+    .smart-details > .field-wide,
+    .smart-details > .notes-field,
+    .smart-details > .csca-extra-box,
+    .smart-details > .repeat-days-box,
+    .smart-details > .repeat-custom-box {
+        grid-column: 1 / -1 !important;
+    }
+
+    .smart-details > .conditional-field:not([style*="display: block"]):not([style*="display:block"]) {
+        display: none !important;
+    }
+
+    .smart-details label,
+    .smart-details .task-field label,
+    .smart-details .repeat-days-box > label,
+    .smart-details .repeat-custom-box > label {
+        display: block !important;
+        min-height: 18px !important;
+        font-size: 13px !important;
+        font-weight: 900 !important;
+        line-height: 1.35 !important;
+        color: var(--text) !important;
+        text-align: right !important;
+        margin: 0 !important;
+    }
+
+    .smart-details input,
+    .smart-details select {
+        height: 44px !important;
+        min-height: 44px !important;
+        padding: 9px 12px !important;
+        border-radius: 13px !important;
+        font-size: 14px !important;
+        line-height: 1.35 !important;
+    }
+
+    .smart-details textarea {
+        min-height: 112px !important;
+        padding: 11px 12px !important;
+        border-radius: 14px !important;
+        font-size: 14px !important;
+        line-height: 1.7 !important;
+        resize: vertical !important;
+    }
+
+    .smart-details .hint {
+        margin-top: 2px !important;
+        margin-bottom: 0 !important;
+        font-size: 12px !important;
+        line-height: 1.6 !important;
+    }
+
+    .smart-details .repeat-days-box,
+    .smart-details .repeat-custom-box,
+    .smart-details .csca-extra-box {
+        padding: 14px !important;
+        border-radius: 16px !important;
+    }
+
+    .smart-details .weekday-grid {
+        grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        margin-top: 10px !important;
+    }
+
+    .card#addTaskCard form > button[type="submit"] {
+        width: min(280px, 100%) !important;
+        min-height: 46px !important;
+        margin-top: 16px !important;
+        justify-self: start !important;
+        border-radius: 14px !important;
+        font-size: 15px !important;
+        font-weight: 900 !important;
+    }
+}

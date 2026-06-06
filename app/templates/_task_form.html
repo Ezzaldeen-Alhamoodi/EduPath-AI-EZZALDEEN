@@ -1,7 +1,6 @@
-\
 <div class="smart-task-form">
     <div class="smart-step">
-<div class="task-type-grid" id="taskTypeCards"></div>
+        <div class="task-type-grid" id="taskTypeCards"></div>
     </div>
 
     <input type="hidden" name="category" id="categorySelect" value="{{ task.category if task else 'عام' }}">
@@ -12,87 +11,110 @@
     </div>
 
     <div id="taskDetailsArea" class="smart-details">
-        <label id="taskNameLabel">اسم المهمة</label>
-        <input id="taskTitleInput" name="title" value="{{ task.title if task else '' }}" placeholder="مثال: مراجعة حفظ سورة النساء" required>
+        <div class="task-field">
+            <label id="taskNameLabel">اسم المهمة</label>
+            <input id="taskTitleInput" name="title" value="{{ task.title if task else '' }}" placeholder="مثال: مراجعة حفظ سورة النساء" required>
+        </div>
 
-        <label id="topicLabel">الفئة الرئيسية</label>
-        <select name="topic" id="topicSelect" data-current="{{ task.topic if task else '' }}"></select>
-        <div class="conditional-field" id="customTopicBox">
+        <div class="task-field">
+            <label id="topicLabel">الفئة الرئيسية</label>
+            <select name="topic" id="topicSelect" data-current="{{ task.topic if task else '' }}"></select>
+        </div>
+
+        <div class="conditional-field task-field field-wide" id="customTopicBox">
             <label>اكتب الفئة التي تريدها</label>
             <input name="custom_topic" id="customTopicInput" value="{{ task.custom_topic if task else '' }}" placeholder="اكتب ما تريد">
         </div>
 
-        <label id="skillLabel">الفئة الفرعية</label>
-        <select name="skill" id="skillSelect" data-current="{{ task.skill if task else '' }}"></select>
-        <div class="conditional-field" id="customSkillBox">
+        <div class="task-field">
+            <label id="skillLabel">الفئة الفرعية</label>
+            <select name="skill" id="skillSelect" data-current="{{ task.skill if task else '' }}"></select>
+        </div>
+
+        <div class="conditional-field task-field field-wide" id="customSkillBox">
             <label>اكتب الفئة الفرعية</label>
             <input name="custom_skill" id="customSkillInput" value="{{ task.custom_skill if task else '' }}" placeholder="اكتب ما تريد">
         </div>
 
-        <label id="detailLabel">الموضوع التفصيلي</label>
-        <select name="language" id="detailedTopicSelect" data-current="{{ task.language if task else '' }}"></select>
-        <div class="conditional-field" id="customDetailedTopicBox">
+        <div class="task-field">
+            <label id="detailLabel">الموضوع التفصيلي</label>
+            <select name="language" id="detailedTopicSelect" data-current="{{ task.language if task else '' }}"></select>
+        </div>
+
+        <div class="conditional-field task-field field-wide" id="customDetailedTopicBox">
             <label>اكتب الموضوع الذي تريده</label>
             <input name="language_custom" id="customDetailedTopicInput" value="" placeholder="اكتب ما تريد">
         </div>
 
-        <label id="trainingLabel">نوع النشاط</label>
-        <select name="practice_type" id="trainingTypeSelect" data-current="{{ task.practice_type if task else '' }}"></select>
+        <div class="task-field">
+            <label id="trainingLabel">نوع النشاط</label>
+            <select name="practice_type" id="trainingTypeSelect" data-current="{{ task.practice_type if task else '' }}"></select>
+        </div>
 
-        <div class="csca-extra-box" id="cscaExtraBox">
-            <label>الموضوع التفصيلي في CSCA</label>
-            <select name="csca_detailed_topic" id="cscaDetailedTopicSelect"></select>
+        <div class="csca-extra-box field-wide" id="cscaExtraBox">
+            <div class="task-field">
+                <label>الموضوع التفصيلي في CSCA</label>
+                <select name="csca_detailed_topic" id="cscaDetailedTopicSelect"></select>
+            </div>
 
-            <label>نوع النشاط في CSCA</label>
-            <select name="csca_training_type" id="cscaTrainingTypeSelect"></select>
+            <div class="task-field">
+                <label>نوع النشاط في CSCA</label>
+                <select name="csca_training_type" id="cscaTrainingTypeSelect"></select>
+            </div>
 
             <small class="hint">هيكل CSCA: الاختبار ← اللغة ← المادة ← الموضوع الرئيسي ← الموضوع التفصيلي ← نوع النشاط</small>
         </div>
 
-        <div class="conditional-field" id="customTrainingTypeBox">
+        <div class="conditional-field task-field field-wide" id="customTrainingTypeBox">
             <label>اكتب نوع النشاط</label>
             <input name="practice_type_custom" id="customTrainingTypeInput" value="" placeholder="اكتب ما تريد">
         </div>
 
-        <label id="sourceLabel">المصدر أو الرابط</label>
-        <input id="sourceInput" name="source" value="{{ task.source if task else '' }}" placeholder="كتاب، موقع إلكتروني، فيديو تعليمي، ملف، أو أي مصدر آخر">
-
-        <div class="form-row">
-            <div>
-                <label id="difficultyLabel">مستوى الصعوبة من 1 إلى 5</label>
-                <input name="difficulty" type="number" min="1" max="5" value="{{ task.difficulty if task else 1 }}">
-            </div>
-            <div>
-                <label id="priorityLabel">الأولوية من 1 إلى 5</label>
-                <input name="priority" type="number" min="1" max="5" value="{{ task.priority if task else 3 }}">
-            </div>
+        <div class="task-field">
+            <label id="sourceLabel">المصدر أو الرابط</label>
+            <input id="sourceInput" name="source" value="{{ task.source if task else '' }}" placeholder="كتاب، موقع إلكتروني، فيديو تعليمي، ملف، أو أي مصدر آخر">
         </div>
 
-        <label id="expectedTimeLabel">الوقت المتوقع بالدقائق</label>
-        <input id="estimatedMinutesInput" name="estimated_minutes" type="number" min="5" value="{{ task.estimated_minutes if task else 30 }}">
-
-        <div class="form-row">
-            <div>
-                <label id="startDateLabel">تاريخ البدء</label>
-                <input name="start_date" type="date" value="{{ task.start_date if task else '' }}">
-            </div>
-            <div>
-                <label id="endDateLabel">تاريخ الانتهاء أو الموعد النهائي</label>
-                <input name="due_date" type="date" value="{{ task.due_date if task else '' }}">
-            </div>
+        <div class="task-field">
+            <label id="difficultyLabel">مستوى الصعوبة من 1 إلى 5</label>
+            <input name="difficulty" type="number" min="1" max="5" value="{{ task.difficulty if task else 1 }}">
         </div>
 
-        <label id="reminderLabel">وقت التذكير</label>
-        <input name="reminder_time" type="time" value="{{ task.reminder_time if task else '' }}">
+        <div class="task-field">
+            <label id="priorityLabel">الأولوية من 1 إلى 5</label>
+            <input name="priority" type="number" min="1" max="5" value="{{ task.priority if task else 3 }}">
+        </div>
 
-        <label id="repeatLabel">التكرار</label>
-        <select name="repeat_type" id="repeatTypeSelect" data-current="{{ task.repeat_type|native_task_label if task else 'يوميًا' }}">
-            {% for value in ["مرة واحدة / بدون تكرار", "يوميًا", "أسبوعيًا", "شهريًا", "أيام محددة", "أخرى"] %}
-                <option value="{{ value }}" {% if task and task.repeat_type == value %}selected{% endif %}>{{ value }}</option>
-            {% endfor %}
-        </select>
+        <div class="task-field">
+            <label id="expectedTimeLabel">الوقت المتوقع بالدقائق</label>
+            <input id="estimatedMinutesInput" name="estimated_minutes" type="number" min="5" value="{{ task.estimated_minutes if task else 30 }}">
+        </div>
 
-        <div class="repeat-days-box" id="repeatDaysBox">
+        <div class="task-field">
+            <label id="startDateLabel">تاريخ البدء</label>
+            <input name="start_date" type="date" value="{{ task.start_date if task else '' }}">
+        </div>
+
+        <div class="task-field">
+            <label id="endDateLabel">تاريخ الانتهاء أو الموعد النهائي</label>
+            <input name="due_date" type="date" value="{{ task.due_date if task else '' }}">
+        </div>
+
+        <div class="task-field">
+            <label id="reminderLabel">وقت التذكير</label>
+            <input name="reminder_time" type="time" value="{{ task.reminder_time if task else '' }}">
+        </div>
+
+        <div class="task-field">
+            <label id="repeatLabel">التكرار</label>
+            <select name="repeat_type" id="repeatTypeSelect" data-current="{{ task.repeat_type|native_task_label if task else 'يوميًا' }}">
+                {% for value in ["مرة واحدة / بدون تكرار", "يوميًا", "أسبوعيًا", "شهريًا", "أيام محددة", "أخرى"] %}
+                    <option value="{{ value }}" {% if task and task.repeat_type == value %}selected{% endif %}>{{ value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="repeat-days-box field-wide" id="repeatDaysBox">
             <label id="repeatDaysLabel">أيام التكرار</label>
             <small class="hint">اختر الأيام المناسبة لهذه المهمة. مفيد للروتين الدراسي أو اللغوي أو عطلة نهاية الأسبوع.</small>
             <div class="weekday-grid">
@@ -106,13 +128,15 @@
             </div>
         </div>
 
-        <div class="repeat-custom-box" id="repeatCustomBox">
+        <div class="repeat-custom-box field-wide" id="repeatCustomBox">
             <label id="repeatCustomLabel">اكتب نمط التكرار الذي تريده</label>
             <small class="hint">مثال: مرتين يوميًا، كل 8 ساعات، صباحًا ومساءً، بعد كل صلاة، قبل النوم.</small>
             <input name="repeat_custom" id="repeatCustomInput" value="{% if task and task.repeat_type in ['custom', 'أخرى'] %}{{ task.repeat_days }}{% endif %}" placeholder="حدد طريقة التكرار الخاصة بك">
         </div>
 
-        <label id="notesLabel">ملاحظات إضافية</label>
-        <textarea id="notesInput" name="notes" rows="3" placeholder="اكتب أي ملاحظات أو خطة أو تعليمات شخصية">{{ task.notes if task else "" }}</textarea>
+        <div class="task-field field-wide notes-field">
+            <label id="notesLabel">ملاحظات إضافية</label>
+            <textarea id="notesInput" name="notes" rows="3" placeholder="اكتب أي ملاحظات أو خطة أو تعليمات شخصية">{{ task.notes if task else "" }}</textarea>
+        </div>
     </div>
 </div>
