@@ -1684,3 +1684,63 @@ Dashboard-only layout fix.
 - Preserved all adaptive logic.
 - Did not modify Quran Memorization or Secondary School structures.
 - Official exam names, programming languages, and global technical names remain unchanged.
+
+
+## v5.3.0 Deep Native Arabic Tasks
+
+### Native Arabic language quality
+- Improved literal translations into natural Arabic wording.
+- Replaced weak expressions such as:
+  - تدريب القواعد → حل تمارين القواعد / دراسة القواعد
+  - تدريب النطق → ممارسة النطق / تحسين النطق
+  - Shadowing → المحاكاة الصوتية
+  - Reading Practice → فهم المقروء / قراءة تحليلية
+- Preserved official exam names, programming languages, and global technical terms.
+
+### Daily Life
+- Rebuilt Daily Life as a more adaptive Arabic structure:
+  - الصحة
+  - الرياضة
+  - النوم
+  - شرب الماء
+  - التغذية
+  - الروتين الشخصي
+  - العائلة
+  - إدارة الوقت
+  - إدارة المال
+  - الصلاة
+  - التسوق
+  - ترتيب المنزل
+  - تنظيف المنزل
+  - القراءة
+  - الاسترخاء
+- Added adaptive subfields and detailed topics for health, water, sleep, prayer, personal routine, and more.
+
+### Reading & Research
+- Rebuilt Reading & Research into a richer Arabic section:
+  - القراءة
+  - البحث العلمي
+  - الكتب
+  - المقالات
+  - الأبحاث
+  - المراجعات
+  - التلخيص
+  - التفكير النقدي
+  - التعلم الذاتي
+- Added book fields such as CS, AI, math, philosophy, psychology, religion, tafsir, hadith, fiqh, aqeedah, literature, and more.
+- Added meaningful activities:
+  - قراءة
+  - تلخيص
+  - استخراج أفكار
+  - تحليل
+  - مراجعة
+  - مناقشة
+  - تدوين ملاحظات
+  - بناء خريطة ذهنية
+  - مقارنة
+  - تطبيق عملي
+
+### Safety
+- Did not modify Quran Memorization structure.
+- Did not modify Secondary School structure.
+- Preserved all task IDs and adaptive behavior.

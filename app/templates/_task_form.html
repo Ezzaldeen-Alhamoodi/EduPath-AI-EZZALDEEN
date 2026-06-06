@@ -38,21 +38,21 @@
             <input name="language_custom" id="customDetailedTopicInput" value="" placeholder="يرجى كتابة ما تريد">
         </div>
 
-        <label id="trainingLabel">نوع التدريب</label>
+        <label id="trainingLabel">نوع النشاط</label>
         <select name="practice_type" id="trainingTypeSelect" data-current="{{ task.practice_type if task else '' }}"></select>
 
         <div class="csca-extra-box" id="cscaExtraBox">
             <label>الموضوع التفصيلي في CSCA</label>
             <select name="csca_detailed_topic" id="cscaDetailedTopicSelect"></select>
 
-            <label>نوع التدريب في CSCA</label>
+            <label>نوع النشاط في CSCA</label>
             <select name="csca_training_type" id="cscaTrainingTypeSelect"></select>
 
-            <small class="hint">هيكل CSCA: الاختبار ← اللغة ← المادة ← الموضوع الرئيسي ← الموضوع التفصيلي ← نوع التدريب</small>
+            <small class="hint">هيكل CSCA: الاختبار ← اللغة ← المادة ← الموضوع الرئيسي ← الموضوع التفصيلي ← نوع النشاط</small>
         </div>
 
         <div class="conditional-field" id="customTrainingTypeBox">
-            <label>اكتب نوع التدريب</label>
+            <label>اكتب نوع النشاط</label>
             <input name="practice_type_custom" id="customTrainingTypeInput" value="" placeholder="يرجى كتابة ما تريد">
         </div>
 
