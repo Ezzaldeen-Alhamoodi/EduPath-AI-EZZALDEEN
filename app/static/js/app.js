@@ -1173,6 +1173,27 @@ function smartGoalLabelArV520(value) {
     return SMART_GOAL_AR_LABELS_V520[value] || value;
 }
 
+function smartGoalCanonicalTypeV558(value) {
+    const map = {
+        "التعليم": "Education",
+        "اللغات": "Language",
+        "الاختبارات الدولية": "Exam / Certificate",
+        "البرمجة والتقنية": "Programming & Technology",
+        "الذكاء الاصطناعي": "Artificial Intelligence",
+        "المنح الدراسية": "Scholarship",
+        "الجامعة": "University",
+        "الرياضيات": "Mathematics",
+        "المشاريع": "Project",
+        "الحياة اليومية": "Daily Life",
+        "الأهداف الإسلامية": "Islamic Goals",
+        "عام": "General",
+        "أخرى": "أخرى",
+        "Other": "أخرى",
+        "Daily Life": "Daily Life"
+    };
+    return map[value] || value || "Education";
+}
+
 
 const SMART_GOALS_V4610 = {
     "Education": {
@@ -1509,7 +1530,8 @@ function updateSmartGoalsV4610(changedId = "") {
 
     if (!type || !category || !path || !current || !target || !commitment) return;
 
-    const data = SMART_GOALS_V4610[type.value] || SMART_GOALS_V4610["عام"];
+    const typeKeyV558 = smartGoalCanonicalTypeV558(type.value);
+    const data = SMART_GOALS_V4610[typeKeyV558] || SMART_GOALS_V4610["General"] || SMART_GOALS_V4610["أخرى"];
 
     if (changedId === "goalTypeSelect" || !category.options.length) {
         fillGoalSelectV4610(category, data.categories || ["أخرى"]);
@@ -1550,19 +1572,19 @@ function updateSmartGoalsV4610(changedId = "") {
         commitment: document.getElementById("commitmentLabel")
     };
 
-    labels.cat.textContent = "تصنيف الهدف";
-    labels.path.textContent = "مسار الهدف";
-    labels.current.textContent = "الحالة الحالية";
-    labels.target.textContent = "الحالة المستهدفة";
-    labels.outcome.textContent = "النتيجة المستهدفة";
+    if (labels.cat) labels.cat.textContent = "تصنيف الهدف";
+    if (labels.path) labels.path.textContent = "مسار الهدف";
+    if (labels.current) labels.current.textContent = "الحالة الحالية";
+    if (labels.target) labels.target.textContent = "الحالة المستهدفة";
+    if (labels.outcome) labels.outcome.textContent = "النتيجة المستهدفة";
     if (labels.milestones) labels.milestones.textContent = "محطات التقدم";
-    labels.commitment.textContent = "الالتزام اليومي أو الأسبوعي";
+    if (labels.commitment) labels.commitment.textContent = "الالتزام اليومي أو الأسبوعي";
     if (outcome && !outcome.value) {
-        if (type.value === "Islamic Goals") {
+        if (typeKeyV558 === "Islamic Goals") {
             outcome.placeholder = "مثال: إتمام حفظ جزء عم وتثبيته";
-        } else if (type.value === "Scholarship") {
+        } else if (typeKeyV558 === "Scholarship") {
             outcome.placeholder = "مثال: الحصول على منحة أو تقديم طلب قوي ومكتمل";
-        } else if (type.value === "Programming & Technology") {
+        } else if (typeKeyV558 === "Programming & Technology") {
             outcome.placeholder = "مثال: بناء مشروع متكامل ونشره";
         } else {
             outcome.placeholder = "ماذا تريد أن يتحقق عند إنجاز هذا الهدف؟";
@@ -1573,11 +1595,11 @@ function updateSmartGoalsV4610(changedId = "") {
     const shouldRefreshSuggestions = ["goalTypeSelect", "goalCategorySelect", "goalPathSelect", "targetStateSelect"].includes(changedId);
 
     if (milestones && (shouldRefreshSuggestions || !milestones.value)) {
-        milestones.value = generatedMilestonesForGoalV4611(type.value, category.value, path.value, target.value);
+        milestones.value = generatedMilestonesForGoalV4611(typeKeyV558, category.value, path.value, target.value);
     }
 
     if (keywords) {
-        keywords.value = [type.value, category.value, path.value, current.value, target.value, commitment.value, milestones ? milestones.value : ""].filter(Boolean).join(", ");
+        keywords.value = [typeKeyV558, category.value, path.value, current.value, target.value, commitment.value, milestones ? milestones.value : ""].filter(Boolean).join(", ");
     }
 
     toggleGoalCustomFieldsV4610();
