@@ -7004,3 +7004,8 @@ body #trainingTypeSelect {
 /* EduPath AI v5.4.0 Native Arabic Tasks Source */
 .smart-task-form label,
 .form label { direction: rtl !important; text-align: right !important; }
+
+
+/* EduPath AI v5.4.1 Final Native Arabic Tasks */
+.smart-task-form label,
+.form label { direction: rtl !important; text-align: right !important; }

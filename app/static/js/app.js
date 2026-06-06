@@ -942,7 +942,7 @@ const EDUPATH_I18N = {
         "dashboard.active_goals": "Active Goals",
         "dashboard.active_desc": "Keep your long-term targets visible. Your tasks are the daily steps.",
         "dashboard.insights": "Learning Insights",
-        "dashboard.recent_tasks": "Recent Tasks",
+        "dashboard.recent_tasks": "المهام الحديثة",
         "goals.title": "Smart Goals & Progress Intelligence",
         "goals.desc": "Create goals that connect naturally with your tasks: exams, languages, programming, scholarships, university, and daily improvement.",
         "goals.create": "Create Smart Goal",
@@ -959,10 +959,10 @@ const EDUPATH_I18N = {
         "goals.how": "How Smart Progress Works",
         "tasks.title": "Smart Adaptive Task System",
         "tasks.desc": "Create tasks that feel personal: study, university, languages, programming, scholarships, life routines, projects, exams, and more.",
-        "tasks.add": "Add Smart Task",
-        "tasks.add_desc": "Start with Task Type, then the form adapts automatically step by step.",
-        "tasks.your": "Your Tasks",
-        "tasks.empty": "No tasks yet. Create your first smart task.",
+        "tasks.add": "إضافة مهمة ذكية",
+        "tasks.add_desc": "ابدأ بنوع المهمة، ثم يتكيف النموذج تلقائياً خطوة بخطوة.",
+        "tasks.your": "مهامك",
+        "tasks.empty": "لا توجد مهام بعد. أنشئ أول مهمة ذكية.",
         "coach.tag": "AI Coach Hub",
         "coach.title": "Choose the AI coach you need today.",
         "coach.desc": "One organized place for English, scholarship preparation, and programming support.",
@@ -1169,13 +1169,13 @@ document.addEventListener("DOMContentLoaded", () => {
         "taskform.choose_desc": ["Only the fields related to your choice will appear. This keeps the task system simple and personal.", "ستظهر فقط الحقول المرتبطة باختيارك حتى يبقى النظام بسيطًا ومخصصًا لك."],
         "taskform.other_type": ["Other Task Type", "نوع مهمة آخر"],
         "taskform.task_name": ["اسم المهمة", "اسم المهمة"],
-        "taskform.other_main": ["Other Main Field", "مجال رئيسي آخر"],
-        "taskform.other_sub": ["Other Sub Field", "مجال فرعي آخر"],
-        "taskform.other_detail": ["Other Detailed Topic", "موضوع تفصيلي آخر"],
-        "taskform.csca_detail": ["CSCA Detailed Topic", "موضوع CSCA التفصيلي"],
-        "taskform.csca_training": ["CSCA Training Type", "نوع تدريب CSCA"],
-        "taskform.csca_hint": ["CSCA structure: Exam → Language → Subject → Main Topic → Detailed Topic → Training Type", "هيكل CSCA: الاختبار ← لغة الاختبار ← المادة ← الموضوع الرئيسي ← الموضوع التفصيلي ← نوع التدريب"],
-        "taskform.other_training": ["Other Training Type", "نوع تدريب آخر"],
+        "taskform.other_main": ["اكتب الفئة الرئيسية التي تريدها", "اكتب الفئة الرئيسية التي تريدها"],
+        "taskform.other_sub": ["اكتب الفئة الفرعية التي تريدها", "اكتب الفئة الفرعية التي تريدها"],
+        "taskform.other_detail": ["اكتب الموضوع التفصيلي الذي تريده", "اكتب الموضوع التفصيلي الذي تريده"],
+        "taskform.csca_detail": ["موضوع CSCA التفصيلي", "موضوع CSCA التفصيلي"],
+        "taskform.csca_training": ["نوع نشاط CSCA", "نوع نشاط CSCA"],
+        "taskform.csca_hint": ["هيكل CSCA: الاختبار ← لغة الاختبار ← المادة ← الموضوع الرئيسي ← الموضوع التفصيلي ← نوع النشاط", "هيكل CSCA: الاختبار ← لغة الاختبار ← المادة ← الموضوع الرئيسي ← الموضوع التفصيلي ← نوع النشاط"],
+        "taskform.other_training": ["اكتب نوع النشاط الذي تريده", "اكتب نوع النشاط الذي تريده"],
         "taskform.source": ["المصدر أو الرابط", "المصدر / الرابط"],
         "taskform.difficulty": ["مستوى الصعوبة من ١ إلى ٥", "الصعوبة من ١ إلى ٥"],
         "taskform.priority": ["الأولوية من ١ إلى ٥", "الأولوية من ١ إلى ٥"],
@@ -1187,17 +1187,17 @@ document.addEventListener("DOMContentLoaded", () => {
         "taskform.repeat_days": ["أيام التكرار", "أيام التكرار"],
         "taskform.repeat_hint": ["Choose any days that fit this task. Useful for intensive weekends, language routines, or study schedules.", "اختر الأيام المناسبة لهذه المهمة، مثل أيام الدراسة المكثفة أو روتين اللغة أو جدول الحفظ."],
         "taskform.notes": ["الملاحظات", "ملاحظات"],
-        "tasks.add_btn": ["Add Task", "إضافة مهمة"],
+        "tasks.add_btn": ["إضافة مهمة", "إضافة مهمة"],
         "tasks.save": ["حفظ المهمة", "حفظ المهمة"],
-        "tasks.done": ["Done", "تم"],
-        "tasks.pending": ["Pending", "قيد الانتظار"],
-        "tasks.edit": ["Edit", "تعديل"],
-        "tasks.delete": ["Delete", "حذف"],
-        "tasklabels.type": ["Task Type:", "نوع المهمة:"],
-        "tasklabels.main": ["Main Field:", "المجال الرئيسي:"],
-        "tasklabels.sub": ["Sub Field:", "المجال الفرعي:"],
-        "tasklabels.detail": ["Detailed Topic:", "الموضوع التفصيلي:"],
-        "tasklabels.training": ["Training Type:", "نوع التدريب:"],
+        "tasks.done": ["مكتملة", "مكتملة"],
+        "tasks.pending": ["قيد التنفيذ", "قيد التنفيذ"],
+        "tasks.edit": ["تعديل", "تعديل"],
+        "tasks.delete": ["حذف", "حذف"],
+        "tasklabels.type": ["نوع المهمة:", "نوع المهمة:"],
+        "tasklabels.main": ["الفئة الرئيسية:", "الفئة الرئيسية:"],
+        "tasklabels.sub": ["الفئة الفرعية:", "الفئة الفرعية:"],
+        "tasklabels.detail": ["الموضوع التفصيلي:", "الموضوع التفصيلي:"],
+        "tasklabels.training": ["نوع النشاط:", "نوع النشاط:"],
         "tasklabels.source": ["Source:", "المصدر:"]
     };
 
@@ -1261,7 +1261,7 @@ const SMART_GOAL_AR_LABELS_V520 = {
     "Islamic Goals": "الأهداف الإسلامية",
     "General": "عام",
     "Other": "أخرى",
-    "Custom": "أخرى",
+    "أخرى": "أخرى",
     "School Study": "الدراسة المدرسية",
     "University Study": "الدراسة الجامعية",
     "Online Course": "دورة تعليمية",
@@ -1361,11 +1361,11 @@ const SMART_GOAL_AR_LABELS_V520 = {
     "طلب العلم الشرعي": "طلب العلم الشرعي",
     "العبادات": "العبادات",
     "أخرى": "أخرى",
-    "Custom Plan": "أخرى"
+    "خطة مخصصة": "أخرى"
 };
 
 function smartGoalLabelArV520(value) {
-    if (["Other", "Custom", "Custom Plan", "خطة مخصصة", "تحديد يدوي", "Other / أخرى", "أخرى"].includes(value)) return "أخرى";
+    if (["Other", "أخرى", "خطة مخصصة", "خطة مخصصة", "تحديد يدوي", "Other / أخرى", "أخرى"].includes(value)) return "أخرى";
     return SMART_GOAL_AR_LABELS_V520[value] || value;
 }
 
@@ -1792,7 +1792,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* EduPath AI v4.6.11 Robust Other/Custom Fields */
 function isOtherLikeEduPath(value) {
-    return ["Other", "أخرى", "Custom", "Custom Plan", "خطة مخصصة", "تحديد يدوي", "Other / أخرى"].includes(value);
+    return ["Other", "أخرى", "أخرى", "خطة مخصصة", "خطة مخصصة", "تحديد يدوي", "Other / أخرى"].includes(value);
 }
 
 function forceTaskCustomBoxes() {
@@ -2196,8 +2196,8 @@ const GOAL_AR_V524 = {
     "Islamic Goals": "الأهداف الإسلامية",
     "General": "عام",
     "Other": "أخرى",
-    "Custom": "أخرى",
-    "Custom Plan": "أخرى",
+    "أخرى": "أخرى",
+    "خطة مخصصة": "أخرى",
 
     "الثانوية العامة": "الثانوية العامة",
     "الجامعة": "الجامعة",
@@ -2624,7 +2624,7 @@ const GOAL_CONFIG_V524 = {
 };
 
 function goalV524Label(value) {
-    if (["Other","Custom","Custom Plan","Other / أخرى","تحديد يدوي","خطة مخصصة","أخرى"].includes(value)) return "أخرى";
+    if (["Other","أخرى","خطة مخصصة","Other / أخرى","تحديد يدوي","خطة مخصصة","أخرى"].includes(value)) return "أخرى";
     return GOAL_AR_V524[value] || value;
 }
 
@@ -2689,7 +2689,7 @@ function showGoalOtherBoxesV524() {
         const select = document.getElementById(selectId);
         const box = document.getElementById(boxId);
         if (!select || !box) return;
-        const visible = ["Other","Custom","Custom Plan","Other / أخرى","تحديد يدوي","خطة مخصصة","أخرى"].includes(select.value);
+        const visible = ["Other","أخرى","خطة مخصصة","Other / أخرى","تحديد يدوي","خطة مخصصة","أخرى"].includes(select.value);
         box.style.display = visible ? "block" : "none";
         const label = box.querySelector("label");
         const input = box.querySelector("input");
