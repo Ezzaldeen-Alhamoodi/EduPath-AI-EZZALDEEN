@@ -89,7 +89,7 @@
 
         <label id="repeatLabel">التكرار</label>
         <select name="repeat_type" id="repeatTypeSelect">
-            {% for value, label in [("once", "بدون تكرار / مرة واحدة"), ("daily", "يوميًا"), ("weekly", "أسبوعيًا"), ("monthly", "شهريًا"), ("selected_days", "أيام محددة")] %}
+            {% for value, label in [("once", "مرة واحدة / بدون تكرار"), ("daily", "يوميًا"), ("weekly", "أسبوعيًا"), ("monthly", "شهريًا"), ("selected_days", "أيام محددة"), ("custom", "أخرى")] %}
                 <option value="{{ value }}" {% if task and task.repeat_type == value %}selected{% endif %}>{{ label }}</option>
             {% endfor %}
         </select>
@@ -106,6 +106,12 @@
                     </label>
                 {% endfor %}
             </div>
+        </div>
+
+        <div class="repeat-custom-box" id="repeatCustomBox">
+            <label id="repeatCustomLabel">اكتب نمط التكرار المطلوب</label>
+            <small class="hint">مثال: مرتين يوميًا، كل 8 ساعات، صباحًا ومساءً، بعد كل صلاة، قبل النوم.</small>
+            <input name="repeat_custom" id="repeatCustomInput" value="{% if task and task.repeat_type == 'custom' %}{{ task.repeat_days }}{% endif %}" placeholder="حدد طريقة التكرار الخاصة بك">
         </div>
 
         <label id="notesLabel">الملاحظات</label>

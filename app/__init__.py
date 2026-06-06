@@ -1841,6 +1841,13 @@ def task_exam_raw_or_ar(category, value):
     return task_ar(text)
 
 
+
+def repeat_days_display_ar(repeat_type, repeat_days):
+    if repeat_type == "custom":
+        return repeat_days or "غير محدد"
+    return repeat_days_ar(repeat_days)
+
+
 def render_clickable_sources(value):
     """Render source text safely: plain text stays plain, URLs become clickable links.
     Multiple sources can be separated by &.
@@ -1899,6 +1906,7 @@ def create_app():
     app.jinja_env.filters["clickable_sources"] = render_clickable_sources
     app.jinja_env.filters["task_ar"] = task_ar
     app.jinja_env.filters["repeat_days_ar"] = repeat_days_ar
+    app.jinja_env.filters["repeat_days_display_ar"] = repeat_days_display_ar
     app.jinja_env.filters["task_exam_safe"] = task_ar_exam_safe
     app.jinja_env.filters["task_exam_raw_or_ar"] = task_exam_raw_or_ar
     app.jinja_env.filters["goals_ar"] = goals_ar
@@ -2827,7 +2835,11 @@ def create_app():
                 due_date=request.form.get("due_date", "").strip(),
                 reminder_time="",
                 repeat_type=request.form.get("repeat_type", "daily").strip(),
-                repeat_days=",".join(request.form.getlist("repeat_days")),
+                repeat_days=(
+                    request.form.get("repeat_custom", "").strip()
+                    if request.form.get("repeat_type", "").strip() == "custom"
+                    else ",".join(request.form.getlist("repeat_days"))
+                ),
                 notes=request.form.get("notes", "").strip(),
             )
 
@@ -2879,7 +2891,11 @@ def create_app():
             task.due_date = request.form.get("due_date", "").strip()
             task.reminder_time = request.form.get("reminder_time", "").strip()
             task.repeat_type = request.form.get("repeat_type", "daily").strip()
-            task.repeat_days = ",".join(request.form.getlist("repeat_days"))
+            task.repeat_days = (
+                request.form.get("repeat_custom", "").strip()
+                if task.repeat_type == "custom"
+                else ",".join(request.form.getlist("repeat_days"))
+            )
             task.notes = request.form.get("notes", "").strip()
             db.session.commit()
             flash("Task changes saved.", "success")
