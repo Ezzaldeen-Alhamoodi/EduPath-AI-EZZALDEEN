@@ -2868,7 +2868,7 @@ const GOAL_CONFIG_V524 = {
     },
 
     "البرمجة والتكنولوجيا": {
-        categories: ["أساسيات البرمجة","Python","C","C++","Java","JavaScript","TypeScript","HTML","CSS","SQL","PHP","Flask","Django","React","Angular","Vue","Node.js","Express.js","Express","Git","GitHub","Linux","Docker","API","REST API","GraphQL","Data Structures","Algorithms","OOP","Database","Backend","Frontend","Full Stack","DevOps","Software Engineering","Testing","Debugging","Mobile Development","Game Development","تطوير الويب","Cybersecurity","Cloud Computing","Operating Systems","Networking","System Design","Competitive Programming","Open Source","Version Control","أخرى"],
+        categories: ["أساسيات البرمجة","Python","C","C++","Java","JavaScript","تطوير الويب","Data Structures","Algorithms","Problem Solving","Competitive Programming","TypeScript","HTML","CSS","SQL","PHP","Flask","Django","React","Angular","Vue","Node.js","Express.js","Express","Git","GitHub","Linux","Docker","API","REST API","GraphQL","OOP","Database","Backend","Frontend","Full Stack","DevOps","Software Engineering","Testing","Debugging","Mobile Development","Game Development","Cybersecurity","Cloud Computing","Operating Systems","Networking","System Design","Open Source","Version Control","أخرى"],
         paths: {
             "أساسيات البرمجة": ["أساسيات البرمجة","المتغيرات وأنواع البيانات","العمليات الحسابية والمنطقية","الشروط","الحلقات التكرارية","الدوال","المصفوفات والقوائم","حل المشكلات","التعامل مع الأخطاء","كتابة برامج بسيطة","مراجعة شاملة","أخرى"],
             "Python": ["Syntax Basics","Variables","Data Types","Operators","Conditions","Loops","Functions","Lists","Tuples","Dictionaries","Sets","Strings","File Handling","Exception Handling","Modules","OOP","Virtual Environment","Libraries","Flask","API","SQLite","Project Building","Debugging","Code Review","Revision","أخرى"],
@@ -2896,8 +2896,9 @@ const GOAL_CONFIG_V524 = {
             "API": ["Requests","Responses","JSON","Authentication","Testing","Integration","أخرى"],
             "REST API": ["Endpoints","Methods","Status Codes","Authentication","Testing","Documentation","أخرى"],
             "GraphQL": ["Queries","Mutations","Schema","Resolvers","API Integration","أخرى"],
-            "Data Structures": ["Arrays","Linked Lists","Stacks","Queues","Trees","Graphs","Hash Tables","Revision","أخرى"],
-            "Algorithms": ["Searching","Sorting","Recursion","Greedy Algorithms","Dynamic Programming","Graph Algorithms","Complexity Analysis","Revision","أخرى"],
+            "Data Structures": ["Arrays","Strings","Linked Lists","Stacks","Queues","Hash Tables","Trees","Binary Trees","Binary Search Trees","Heaps","Priority Queues","Graphs","Tries","Sets","Maps","Disjoint Set Union","Segment Tree","Fenwick Tree","Sparse Table","Revision","أخرى"],
+            "Algorithms": ["Searching","Binary Search","Sorting","Recursion","Divide and Conquer","Greedy Algorithms","Dynamic Programming","Backtracking","Two Pointers","Sliding Window","Prefix Sum","Bit Manipulation","Graph Algorithms","Shortest Path","Minimum Spanning Tree","Topological Sort","String Algorithms","Mathematical Algorithms","Computational Geometry","Revision","أخرى"],
+            "Problem Solving": ["Problem Analysis","Pattern Recognition","Brute Force","Optimization","Implementation","Simulation","Ad Hoc Problems","Constructive Problems","Mathematical Problems","Logic Problems","Debugging Solutions","Revision","أخرى"],
             "OOP": ["Classes","Objects","Inheritance","Polymorphism","Encapsulation","Abstraction","Revision","أخرى"],
             "Database": ["Tables","Relationships","Queries","Indexes","Normalization","SQLite","MySQL","PostgreSQL","Revision","أخرى"],
             "Backend": ["Server Logic","Routing","Database","Authentication","API","Security","Deployment","Project Building","أخرى"],
@@ -2915,7 +2916,7 @@ const GOAL_CONFIG_V524 = {
             "Operating Systems": ["Processes","Memory","Files","Scheduling","Linux","Revision","أخرى"],
             "Networking": ["Network Basics","IP","DNS","HTTP","Ports","Protocols","Security","أخرى"],
             "System Design": ["Requirements","Architecture","Scalability","Database Design","API Design","Caching","Revision","أخرى"],
-            "Competitive Programming": ["Problem Solving","Algorithms","Data Structures","Time Complexity","Contests","Revision","أخرى"],
+            "Competitive Programming": ["Codeforces","AtCoder","LeetCode","CodeChef","TopCoder","ICPC Preparation","Contest Strategy","Virtual Contest","Upsolving","Time Management","Speed Coding","Revision","أخرى"],
             "Open Source": ["GitHub","Issues","Pull Requests","Documentation","Code Review","Contribution","أخرى"],
             "Version Control": ["Git","Commits","Branches","Merge","Conflict Resolution","Workflow","أخرى"],
             "أخرى": ["تعلم الأساسيات","تطبيق عملي","بناء مشروع","حل مسائل","مراجعة الشيفرة البرمجية","إصلاح الأخطاء البرمجية","توثيق المشروع","مراجعة شاملة","أخرى"]
@@ -3031,10 +3032,25 @@ const GOAL_CONFIG_V524 = {
                 target:["مراجعة الشيفرة البرمجية بثقة","تحسين جودة الكود","اكتشاف الأخطاء مبكراً","اتباع أسلوب كتابة أفضل","أخرى"],
                 commitment:["مراجعة يومية","مراجعة مشروع","تحسين جزء من الكود","توثيق الملاحظات","أخرى"]
             },
+            "Data Structures": {
+                current:["لا أعرف المفهوم","أعرف الأساسيات","أفهم طريقة العمل","أستطيع حل مسائل بسيطة","أحل مسائل متوسطة","أحل مسائل متقدمة","أخرى"],
+                target:["فهم البنية","تطبيقها عملياً","حل مسائل سهلة","حل مسائل متوسطة","حل مسائل متقدمة","اختيار البنية المناسبة","استخدامها في المشاريع","الاستعداد للمقابلات","أخرى"],
+                commitment:["حل مسألة يومياً","حل ثلاث مسائل","مراجعة المفهوم","رسم المخططات","تطبيق عملي","مراجعة أسبوعية","برنامج خاص","أخرى"]
+            },
+            "Algorithms": {
+                current:["لا أعرف المفهوم","أعرف الأساسيات","أطبق الخوارزميات البسيطة","أحل مسائل متوسطة","أحل مسائل متقدمة","أخرى"],
+                target:["فهم الخوارزميات","تحليل التعقيد","اختيار الحل المناسب","حل مسائل متقدمة","تحسين الأداء","الاستعداد للمقابلات","Competitive Programming","أخرى"],
+                commitment:["حل مسألة","حل تحديات","تحليل الحلول","مراجعة المفهوم","ساعة تدريب","اختبار أسبوعي","أخرى"]
+            },
             "Problem Solving": {
-                current:["أحتاج تأسيساً","أحل مسائل سهلة","أحل مسائل متوسطة","أحتاج تحسين التفكير الخوارزمي","أخرى"],
-                target:["تحسين حل المشكلات","حل مسائل متقدمة","فهم أنماط المسائل","الاستعداد للمسابقات أو المقابلات","أخرى"],
-                commitment:["حل مسألة يومياً","حل مسألتين يومياً","تحديات أسبوعية","مراجعة الحلول","أخرى"]
+                current:["أواجه صعوبة","أحل مسائل سهلة","أحل مسائل متوسطة","أحل مسائل متنوعة","أخرى"],
+                target:["تحسين التفكير","زيادة سرعة الحل","تحسين جودة الحل","تقليل الأخطاء","حل مسائل صعبة","أخرى"],
+                commitment:["مسألة يومية","ثلاث مسائل","مسابقة أسبوعية","تحليل الحلول","تصحيح الأخطاء","مراجعة أسبوعية","أخرى"]
+            },
+            "Competitive Programming": {
+                current:["لم أبدأ","أشارك أحياناً","أشارك باستمرار","أحل مسائل متوسطة","أحل مسائل متقدمة","أخرى"],
+                target:["زيادة التصنيف","تحسين سرعة الحل","حل مسائل أصعب","تحسين الأداء","الاستعداد للمسابقات","تحقيق تصنيف مستهدف","أخرى"],
+                commitment:["مسألة يومية","ثلاث مسائل يومياً","مسابقة أسبوعية","Virtual Contest","Upsolving","تحليل الأخطاء","مراجعة أسبوعية","أخرى"]
             },
             "أخرى": {
                 current:["مبتدئ","أعرف الأساسيات","أحتاج تدريباً عملياً","أعمل على مشروع","أخرى"],
