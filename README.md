@@ -1782,18 +1782,51 @@ Dashboard-only layout fix.
 - Official test names and official question types remain unchanged.
 
 
-## v5.3.6 Restore Native Tasks Desktop Grid
+## v5.3.2 Deep Exam Certificates
 
-### Important correction
-- Restored the Tasks page from the strong native Arabic task system base.
-- Removed the problematic effect of the previous build that brought the Tasks page back toward old translated wording.
-- This update does not rebuild or replace task data.
-- This update does not touch the adaptive JavaScript task structures.
+### Exams & Certificates section
+- Kept task form labels in Arabic.
+- Kept exam content in English inside Exams & Certificates.
+- Added deeper adaptive exam structure:
+  - exam
+  - main section
+  - task type
+  - question type / detailed topic
+  - activity type
+- Added detailed structures for:
+  - IELTS
+  - TOEFL 2026
+  - Duolingo English Test
+  - HSK / HSKK
+  - CSCA
+  - SAT
+  - ACT
+  - GRE
+  - GMAT
+- Activity type now changes based on the detailed question/task type.
+- CSCA exam content is restored to English inside Exams & Certificates.
+- Official test names, section names, question types, and training types remain in English.
 
-### Desktop-only task form layout
-- Added a structured two-column desktop grid for Create Task form.
-- Every label stays directly above its field.
-- Inputs and dropdowns have consistent widths/heights.
-- Source and Notes span full width.
-- Save button stays at the bottom.
-- Mobile and tablet layouts are not modified.
+
+## v5.3.3 Exam Content English Only
+
+### Correction
+- Exams & Certificates task section content is now English-only.
+- Arabic remains only for the form field labels:
+  - اسم المهمة
+  - الفئة الرئيسية
+  - الفئة الفرعية
+  - الموضوع التفصيلي
+  - نوع النشاط
+  - المصدر أو الرابط
+  - مستوى الصعوبة
+  - الأولوية
+  - الوقت المتوقع
+  - تاريخ البدء
+  - تاريخ الانتهاء
+  - وقت التذكير
+  - التكرار
+  - ملاحظات إضافية
+- IELTS, TOEFL, Duolingo, CSCA, SAT, ACT, GRE, GMAT, HSK, and HSKK structures remain in English.
+- CSCA exam content is restored to English inside Exams & Certificates.
+- Other task sections keep their Arabic-native behavior.

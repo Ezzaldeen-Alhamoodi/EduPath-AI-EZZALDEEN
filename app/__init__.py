@@ -1797,6 +1797,50 @@ def repeat_days_ar(value):
     return "، ".join(labels.get(p, p) for p in parts)
 
 
+
+TASK_EXAM_CONTENT_KEEP_V532 = {
+    "Exams & Certificates",
+    "IELTS","TOEFL","Duolingo English Test","Duolingo","HSK","HSKK","CSCA","SAT","ACT","GRE","GMAT",
+    "Full Official Test","Full Digital SAT","Full ACT","Full GRE","Full GMAT","Full HSK Test","Full HSKK Test","Full Test","Mock Test",
+    "Listening","Reading","Writing","Speaking","Reading and Writing","Math","Mathematics","Science","English",
+    "Analytical Writing","Verbal Reasoning","Quantitative Reasoning","Data Insights",
+    "Listening Section","Reading Section","Writing Section","Speaking Practice","Section Practice","Timed Practice","Error Review","Weak Skill Training","Score Review",
+    "Multiple Choice","Matching","Plan Labelling","Map Labelling","Diagram Labelling","Form Completion","Note Completion","Table Completion","Flow Chart Completion","Summary Completion","Sentence Completion","Short Answer Questions",
+    "Matching Headings","Matching Information","Matching Features","Matching Sentence Endings","True False Not Given","Yes No Not Given",
+    "Task 1","Task 2","Academic Graph","Chart","Process Diagram","Map","Opinion Essay","Discussion Essay","Problem Solution Essay","Advantages Disadvantages Essay","Double Question Essay",
+    "Part 1","Part 2","Part 3","Cue Card Practice",
+    "Read in Daily Life","Read an Academic Passage","Complete the Words","Listen and Choose a Response","Listen to a Conversation","Listen to an Announcement","Listen to an Academic Talk",
+    "Listen and Repeat","Take an Interview","Build a Sentence","Write an Email","Write for an Academic Discussion",
+    "Read and Select","Fill in the Blanks","Read and Complete","Interactive Reading","Listen and Type","Interactive Listening","Write About the Photo","Writing Sample","Interactive Writing","Speak About the Photo","Read, Then Speak","Speaking Sample","Interactive Speaking",
+    "Information and Ideas","Craft and Structure","Expression of Ideas","Standard English Conventions","Bluebook Practice","Central Ideas and Details","Command of Evidence","Textual Evidence","Quantitative Evidence","Inferences","Information from Tables and Graphs","Words in Context","Text Structure and Purpose","Cross-Text Connections","Author's Purpose","Vocabulary in Context","Transitions","Rhetorical Synthesis","Logical Flow","Sentence Placement","Effective Language Use","Boundaries","Form, Structure, and Sense","Punctuation","Verb Form","Subject-Verb Agreement","Pronoun Clarity","Sentence Structure",
+    "Algebra","Advanced Math","Problem-Solving and Data Analysis","Geometry and Trigonometry","Calculator Practice","Desmos Practice","Student-Produced Response","Linear Equations","Linear Inequalities","Systems of Linear Equations","Linear Functions","Interpreting Linear Models","Quadratic Equations","Exponential Functions","Polynomial Expressions","Rational Expressions","Nonlinear Functions","Function Graphs","Ratios","Percentages","Rates","Proportions","Units","Probability","Statistics","Data Interpretation","Tables and Graphs","Area and Volume","Lines and Angles","Triangles","Circles","Right Triangle Trigonometry","Coordinate Geometry",
+    "Production of Writing","Knowledge of Language","Conventions of Standard English","Passage Editing","Organization","Topic Development","Unity","Cohesion","Style","Tone","Word Choice","Grammar and Usage","Verb Tense","Pronouns","Modifiers",
+    "Number and Quantity","Functions","Statistics and Probability","Modeling","Literary Narrative","Social Science","Humanities","Natural Science","Paired Passages","Main Idea","Detail Questions","Inference Questions","Data Representation","Research Summaries","Conflicting Viewpoints","Scientific Reasoning","Graph Interpretation","Experimental Design","Perspective Analysis","Idea Development","Language Use",
+    "Analyze an Issue","Essay Planning","Argument Development","Essay Structure","Reading Comprehension","Text Completion","Sentence Equivalence","Vocabulary","One-Blank Text Completion","Two-Blank Text Completion","Three-Blank Text Completion","Context Clues","Sentence Logic","Synonym Pair","Vocabulary Meaning","Contrast and Support Clues","Arithmetic","Data Analysis","Quantitative Comparison","Problem Solving","Numeric Entry","Integers","Fractions","Decimals","Exponents","Inequalities","Coordinate Geometry","Charts and Tables",
+    "Problem Solving","Number Properties","Word Problems","Rates and Ratios","Critical Reasoning","Strengthen Argument","Weaken Argument","Assumption","Evaluate Argument","Conclusion","Boldface","Argument Structure","Data Sufficiency","Multi-Source Reasoning","Table Analysis","Graphics Interpretation","Two-Part Analysis","Charts","Tables","Graphs","Data Comparison","Business Context","Verbal Data Reasoning","Decision Making",
+    "HSK Level 1","HSK Level 2","HSK Level 3","HSK Level 4","HSK Level 5","HSK Level 6","HSKK Primary","HSKK Intermediate","HSKK Advanced","Vocabulary","Grammar","Characters","Listening Practice","Reading Practice","Writing Practice","Vocabulary Review","Grammar Review","Character Recognition","Pinyin Review","Sentence Building","Translation Practice","Word Recognition","Sentence Understanding","Dialogue Listening","Short Passage Listening","Fill in the Blank","Character Writing","Sentence Ordering","Short Writing","Read Aloud","Answer Questions","Describe Picture","Express Opinion",
+    "Practice","Question Review","Mistake Analysis","Strategy Practice","Vocabulary Review","Grammar Review","Mini Mock Section","Solve Problems","Formula Review","SPR Practice","Concept Review","Full Math Module","Passage Practice","Editing Practice","Calculator Strategy","Mini Math Test","Passage Reading","Timed Passage","Answer Questions","Evidence Review","Speed Training","Graph Analysis","Experiment Review","Write Draft","Timed Essay","Outline Practice","Feedback Review","Essay Improvement","Draft Writing","Timed Writing","Grammar Review","Recording Practice","Pronunciation Analysis","Fluency Training","Mock Speaking","Dictation","Listening Accuracy","Vocabulary Training","Idea Generation","Mock Response","Weakness Analysis","Strategy Training","Mock Listening","Vocabulary Analysis","Reading Speed Training","Band Analysis","Pronunciation Review","Vocabulary Expansion","Note Taking","Data Analysis","Calculator Practice","Mini Data Insights Section","Mini Quant Section","Mini Verbal Section","Mock Section","Vocabulary Memorization","Character Writing","Answer Review"
+}
+
+def task_ar_exam_safe(value):
+    if value is None:
+        return ""
+    text = str(value)
+    if text in TASK_EXAM_CONTENT_KEEP_V532:
+        return text
+    return task_ar(text)
+
+
+
+def task_exam_raw_or_ar(category, value):
+    if value is None:
+        return ""
+    text = str(value)
+    if category == "Exams & Certificates":
+        return "Other" if text in ["Other", "أخرى"] else text
+    return task_ar(text)
+
+
 def render_clickable_sources(value):
     """Render source text safely: plain text stays plain, URLs become clickable links.
     Multiple sources can be separated by &.
@@ -1855,6 +1899,8 @@ def create_app():
     app.jinja_env.filters["clickable_sources"] = render_clickable_sources
     app.jinja_env.filters["task_ar"] = task_ar
     app.jinja_env.filters["repeat_days_ar"] = repeat_days_ar
+    app.jinja_env.filters["task_exam_safe"] = task_ar_exam_safe
+    app.jinja_env.filters["task_exam_raw_or_ar"] = task_exam_raw_or_ar
     app.jinja_env.filters["goals_ar"] = goals_ar
     app.jinja_env.filters["goal_time_ar"] = format_goal_time_left
     app.jinja_env.filters["goal_time_compact_ar"] = format_goal_time_left_compact
