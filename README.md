@@ -2161,3 +2161,40 @@ Dashboard-only layout fix.
 ### Scope
 - Tasks page only.
 - Exams & Certificates category only.
+
+
+## v5.5.1 International Exams Exact
+
+### Scope
+- Final detailed update for the Tasks category previously named:
+  - الاختبارات والشهادات
+- New category name:
+  - الاختبارات الدولية
+
+### Rules applied exactly from the provided specification
+- Form labels remain Arabic.
+- International exam content remains English.
+- The main category list is:
+  - IELTS
+  - TOEFL
+  - Duolingo English Test
+  - HSK
+  - HSKK
+  - CSCA
+  - SAT
+  - ACT
+  - GRE
+  - GMAT
+  - Other
+- No fixed subcategory list for all exams.
+- Each exam has its own sections, details, and activities.
+- Other opens an Arabic custom input.
+- No Custom label is shown.
+
+### Validation rules
+- SAT has no Listening.
+- GMAT has no Speaking.
+- CSCA has no Speaking.
+- CSCA has Writing only inside English.
+- Duolingo English Test uses its own tasks.
+- IELTS uses its own official sections and question types.
