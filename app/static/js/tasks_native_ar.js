@@ -1,4 +1,4 @@
-window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.75-algebra-parts-1-2-3-merged";
+window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.76-tasks-math-geometry-part1";
 window.EDUPATH_TASKS_AR_DATA = {
   "حفظ القرآن الكريم": {
     icon: "📖",
@@ -1736,3 +1736,98 @@ window.SMART_EXAM_DATA = {
     }
 })();
 // === End EduPath AI v5.5.75-MERGED-FIX: Tasks Math Algebra Parts 1 + 2 + 3 Ordered ===
+
+// === EduPath AI v5.5.76: Tasks Math Geometry Part 1 - Plane Geometry Basics ===
+(function () {
+    const targetData = window.EDUPATH_TASKS_AR_DATA || {};
+    const mathTasks = targetData["الرياضيات"] || { icon: "📐", main: [], sub: {}, detail: {}, training: [] };
+    targetData["الرياضيات"] = mathTasks;
+    mathTasks.icon = mathTasks.icon || "📐";
+    mathTasks.main = Array.isArray(mathTasks.main) ? mathTasks.main : [];
+    mathTasks.sub = mathTasks.sub || {};
+    mathTasks.detail = mathTasks.detail || {};
+    mathTasks.training = Array.isArray(mathTasks.training) ? mathTasks.training : [];
+
+    const endWithOther = (items) => {
+        const unique = [];
+        (items || []).forEach((item) => {
+            if (item && item !== "أخرى" && !unique.includes(item)) unique.push(item);
+        });
+        unique.push("أخرى");
+        return unique;
+    };
+
+    const mergeLists = (oldItems, newItems) => endWithOther([...(oldItems || []), ...(newItems || [])]);
+
+    const mainCategory = "الهندسة";
+    const currentMainWithoutGeometry = mathTasks.main.filter((item) => item !== mainCategory && item !== "أخرى");
+    const finalMain = [];
+    const addMain = (item) => {
+        if (item && !finalMain.includes(item)) finalMain.push(item);
+    };
+
+    // الحفاظ على الترتيب التعليمي الأساسي دون حذف أي فئة موجودة.
+    addMain("الحساب الأساسي");
+    addMain("الجبر");
+    addMain(mainCategory);
+    currentMainWithoutGeometry.forEach(addMain);
+    mathTasks.main = endWithOther(finalMain);
+
+    const geometrySubcategories = [
+        "المفاهيم الهندسية",
+        "النقاط والمستقيمات",
+        "الزوايا",
+        "المثلثات",
+        "الأشكال الرباعية",
+        "المضلعات",
+        "الدائرة",
+        "المحيط",
+        "المساحة",
+        "التطبيقات الهندسية",
+        "المراجعة الشاملة",
+        "اختبار قصير",
+        "أخرى"
+    ];
+
+    mathTasks.sub[mainCategory] = endWithOther(geometrySubcategories);
+
+    const geometryDetails = {
+        "المفاهيم الهندسية": ["مفهوم الهندسة", "النقطة", "المستقيم", "الشعاع", "القطعة المستقيمة", "المستوى", "أخرى"],
+        "النقاط والمستقيمات": ["العلاقات بين المستقيمات", "المستقيمات المتوازية", "المستقيمات المتعامدة", "تقاطع المستقيمات", "حل مسائل", "أخرى"],
+        "الزوايا": ["مفهوم الزاوية", "أنواع الزوايا", "قياس الزوايا", "العلاقات بين الزوايا", "حل مسائل", "أخرى"],
+        "المثلثات": ["أنواع المثلثات", "عناصر المثلث", "زوايا المثلث", "محيط المثلث", "مساحة المثلث", "حل مسائل", "أخرى"],
+        "الأشكال الرباعية": ["المربع", "المستطيل", "المعين", "متوازي الأضلاع", "شبه المنحرف", "حل مسائل", "أخرى"],
+        "المضلعات": ["أنواع المضلعات", "عدد الأضلاع", "الزوايا الداخلية", "الزوايا الخارجية", "حل مسائل", "أخرى"],
+        "الدائرة": ["مفهوم الدائرة", "مركز الدائرة", "نصف القطر", "القطر", "الوتر", "محيط الدائرة", "مساحة الدائرة", "حل مسائل", "أخرى"],
+        "المحيط": ["حساب المحيط", "محيط المثلث", "محيط الأشكال الرباعية", "محيط الدائرة", "حل مسائل", "أخرى"],
+        "المساحة": ["مساحة المثلث", "مساحة المستطيل", "مساحة المربع", "مساحة متوازي الأضلاع", "مساحة شبه المنحرف", "مساحة الدائرة", "حل مسائل", "أخرى"],
+        "التطبيقات الهندسية": ["مسائل حياتية", "تطبيقات معمارية", "تطبيقات علمية", "حل مسائل متنوعة", "أخرى"],
+        "المراجعة الشاملة": ["مراجعة الأشكال", "مراجعة الزوايا", "مراجعة المحيط", "مراجعة المساحة", "حل مسائل متنوعة", "تدريب شامل", "أخرى"],
+        "اختبار قصير": ["اختبار الزوايا", "اختبار المثلثات", "اختبار الدائرة", "اختبار شامل", "أخرى"],
+        "أخرى": ["موضوع مخصص", "أخرى"]
+    };
+
+    Object.entries(geometryDetails).forEach(([subcategory, values]) => {
+        mathTasks.detail[subcategory] = mergeLists(mathTasks.detail[subcategory], values);
+    });
+
+    mathTasks.training = mergeLists(mathTasks.training, [
+        "دراسة الدرس",
+        "حل تمارين",
+        "حل مسائل",
+        "رسم شكل هندسي",
+        "تحليل شكل",
+        "مراجعة القوانين",
+        "تحليل الأخطاء",
+        "اختبار قصير",
+        "تدريب يومي",
+        "مراجعة شاملة",
+        "تطبيق عملي",
+        "أخرى"
+    ]);
+
+    if (typeof window !== "undefined") {
+        window.EDUPATH_TASKS_GEOMETRY_PART1_APPLIED = true;
+    }
+})();
+// === End EduPath AI v5.5.76: Tasks Math Geometry Part 1 ===
