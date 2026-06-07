@@ -1503,3 +1503,100 @@ window.SMART_EXAM_DATA = {
     document.addEventListener("DOMContentLoaded", initNativeTasks);
     window.EDUPATH_NATIVE_TASKS_INIT = initNativeTasks;
 })();
+
+// === EduPath AI v5.5.75-REAL-FIX: Tasks Math Algebra Part 3 - Polynomials Factoring Powers Roots ===
+(function eduPathTasksMathAlgebraPart3RealFix() {
+    const targetData = (typeof SMART_TASK_DATA !== "undefined")
+        ? SMART_TASK_DATA
+        : (typeof window !== "undefined" ? (window.EDUPATH_TASKS_AR_DATA || null) : null);
+    if (!targetData) return;
+
+    const mathTasks = targetData["الرياضيات"] || { icon: "📐", main: [], sub: {}, detail: {}, training: [] };
+    targetData["الرياضيات"] = mathTasks;
+    mathTasks.icon = mathTasks.icon || "📐";
+    mathTasks.main = Array.isArray(mathTasks.main) ? mathTasks.main : [];
+    mathTasks.sub = mathTasks.sub || {};
+    mathTasks.detail = mathTasks.detail || {};
+
+    const endWithOther = (items) => {
+        const unique = [];
+        (items || []).forEach((item) => {
+            if (item && item !== "أخرى" && !unique.includes(item)) unique.push(item);
+        });
+        unique.push("أخرى");
+        return unique;
+    };
+
+    const mergeBeforeOther = (base, additions) => {
+        const result = [];
+        (base || []).forEach((item) => {
+            if (item && item !== "أخرى" && !result.includes(item)) result.push(item);
+        });
+        (additions || []).forEach((item) => {
+            if (item && item !== "أخرى" && !result.includes(item)) result.push(item);
+        });
+        result.push("أخرى");
+        return result;
+    };
+
+    const mainCategory = "الجبر";
+    mathTasks.main = endWithOther([
+        ...mathTasks.main.filter((item) => item !== mainCategory),
+        mainCategory
+    ]);
+
+    const algebraPart3Subcategories = [
+        "كثيرات الحدود",
+        "العمليات على كثيرات الحدود",
+        "التحليل الجبري",
+        "الأسس",
+        "الجذور",
+        "التعبيرات الجذرية",
+        "التعويض الجبري",
+        "التطبيقات الجبرية",
+        "المراجعة الشاملة",
+        "اختبار قصير",
+        "أخرى"
+    ];
+
+    mathTasks.sub[mainCategory] = mergeBeforeOther(mathTasks.sub[mainCategory] || [], algebraPart3Subcategories);
+
+    const algebraPart3Details = {
+        "كثيرات الحدود": ["مفهوم كثيرة الحدود", "درجة كثيرة الحدود", "تمييز الحدود", "كتابة كثيرات الحدود", "ترتيب كثيرات الحدود", "أخرى"],
+        "العمليات على كثيرات الحدود": ["جمع كثيرات الحدود", "طرح كثيرات الحدود", "ضرب كثيرات الحدود", "تبسيط النتائج", "حل مسائل", "أخرى"],
+        "التحليل الجبري": ["العامل المشترك", "تحليل الفرق بين مربعين", "تحليل ثلاثي الحدود", "اختيار طريقة التحليل", "حل مسائل", "أخرى"],
+        "الأسس": ["خواص الأسس", "ضرب الأسس", "قسمة الأسس", "رفع قوة لقوة", "تبسيط التعبيرات", "أخرى"],
+        "الجذور": ["الجذر التربيعي", "الجذر التكعيبي", "تبسيط الجذور", "العمليات على الجذور", "حل مسائل", "أخرى"],
+        "التعبيرات الجذرية": ["تبسيط التعبيرات", "جمع التعبيرات", "طرح التعبيرات", "ضرب التعبيرات", "تطبيقات", "أخرى"],
+        "التعويض الجبري": ["التعويض المباشر", "حساب قيمة التعبير", "تبسيط قبل التعويض", "حل مسائل", "أخرى"],
+        "التطبيقات الجبرية": ["مسائل حياتية", "تطبيقات علمية", "تطبيقات هندسية", "تطبيقات مالية", "حل مسائل متنوعة", "أخرى"],
+        "المراجعة الشاملة": ["مراجعة كثيرات الحدود", "مراجعة التحليل", "مراجعة الأسس والجذور", "حل مسائل متنوعة", "تدريب شامل", "أخرى"],
+        "اختبار قصير": ["اختبار كثيرات الحدود", "اختبار التحليل", "اختبار الأسس والجذور", "اختبار شامل", "أخرى"],
+        "أخرى": ["موضوع مخصص", "أخرى"]
+    };
+
+    Object.entries(algebraPart3Details).forEach(([subcategory, details]) => {
+        mathTasks.detail[subcategory] = endWithOther(details);
+    });
+
+    mathTasks.training = mergeBeforeOther(mathTasks.training || [], [
+        "دراسة الدرس",
+        "حل تمارين",
+        "حل مسائل",
+        "تبسيط تعبيرات",
+        "تحليل جبري",
+        "مراجعة القواعد",
+        "تحليل الأخطاء",
+        "اختبار قصير",
+        "تدريب يومي",
+        "مراجعة شاملة",
+        "تطبيق عملي",
+        "أخرى"
+    ]);
+
+    if (typeof window !== "undefined") {
+        window.EDUPATH_TASKS_ALGEBRA_PART3_APPLIED = true;
+    }
+})();
+// === End EduPath AI v5.5.75-REAL-FIX: Tasks Math Algebra Part 3 ===
+
