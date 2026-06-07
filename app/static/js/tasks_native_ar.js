@@ -1,4 +1,4 @@
-window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.73-algebra-part1";
+window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.74-algebra-part2";
 window.EDUPATH_TASKS_AR_DATA = {
   "حفظ القرآن الكريم": {
     icon: "📖",
@@ -932,6 +932,99 @@ window.SMART_EXAM_DATA = {
     ]);
 })();
 // === End EduPath AI v5.5.73: Tasks Math Algebra Part 1 - Algebraic Expressions and Basic Equations ===
+
+
+
+// === EduPath AI v5.5.74: Tasks Math Algebra Part 2 - Functions Inequalities Systems ===
+(function eduPathTasksMathAlgebraPart2() {
+    const targetData = window.EDUPATH_TASKS_AR_DATA || (typeof SMART_TASK_DATA !== "undefined" ? SMART_TASK_DATA : null);
+    if (!targetData) return;
+
+    const mathTasks = targetData["الرياضيات"] || { icon: "📐", main: [], sub: {}, detail: {}, training: [] };
+    targetData["الرياضيات"] = mathTasks;
+    mathTasks.icon = mathTasks.icon || "📐";
+    mathTasks.main = Array.isArray(mathTasks.main) ? mathTasks.main : [];
+    mathTasks.sub = mathTasks.sub || {};
+    mathTasks.detail = mathTasks.detail || {};
+
+    const endWithOther = (items) => {
+        const unique = [];
+        (items || []).forEach((item) => {
+            if (item && item !== "أخرى" && !unique.includes(item)) unique.push(item);
+        });
+        unique.push("أخرى");
+        return unique;
+    };
+
+    const mergeBeforeOther = (base, additions) => {
+        const unique = [];
+        (base || []).forEach((item) => {
+            if (item && item !== "أخرى" && !unique.includes(item)) unique.push(item);
+        });
+        (additions || []).forEach((item) => {
+            if (item && item !== "أخرى" && !unique.includes(item)) unique.push(item);
+        });
+        unique.push("أخرى");
+        return unique;
+    };
+
+    const mainCategory = "الجبر";
+    // سياسة الاستبدال الذكي: إن كان الجبر موجوداً يبقى، وإن لم يكن موجوداً يضاف دون تكرار.
+    mathTasks.main = endWithOther([...mathTasks.main.filter((item) => item !== mainCategory), mainCategory]);
+
+    const part2Subcategories = [
+        "الدوال",
+        "تمثيل الدوال",
+        "الدوال الخطية",
+        "المتباينات",
+        "حل المتباينات",
+        "أنظمة المعادلات",
+        "حل الأنظمة",
+        "التمثيل البياني",
+        "المسائل التطبيقية",
+        "المراجعة الشاملة",
+        "اختبار قصير",
+        "أخرى"
+    ];
+
+    mathTasks.sub[mainCategory] = mergeBeforeOther(mathTasks.sub[mainCategory] || [], part2Subcategories);
+
+    const details = {
+        "الدوال": ["مفهوم الدالة", "المجال", "المدى", "تمييز الدالة", "تقييم الدالة", "أخرى"],
+        "تمثيل الدوال": ["الجداول", "المخططات", "التمثيل البياني", "قراءة التمثيل", "تحليل التمثيل", "أخرى"],
+        "الدوال الخطية": ["مفهوم الدالة الخطية", "الميل", "المقطع", "كتابة معادلة مستقيم", "تحليل الدوال الخطية", "حل مسائل", "أخرى"],
+        "المتباينات": ["مفهوم المتباينة", "مقارنة القيم", "تمثيل المتباينات", "حل متباينات بسيطة", "حل مسائل", "أخرى"],
+        "حل المتباينات": ["متباينة بخطوة واحدة", "متباينة بعدة خطوات", "تمثيل الحل", "التحقق من الحل", "مسائل تطبيقية", "أخرى"],
+        "أنظمة المعادلات": ["مفهوم النظام", "تحديد الحل", "أنواع الأنظمة", "تحليل الأنظمة", "أخرى"],
+        "حل الأنظمة": ["طريقة التعويض", "طريقة الحذف", "التمثيل البياني", "التحقق من الحل", "حل مسائل", "أخرى"],
+        "التمثيل البياني": ["تمثيل النقاط", "تمثيل المستقيمات", "قراءة الرسوم", "تحليل النتائج", "حل مسائل", "أخرى"],
+        "المسائل التطبيقية": ["مسائل حياتية", "تطبيقات هندسية", "تطبيقات اقتصادية", "تطبيقات علمية", "حل مسائل متنوعة", "أخرى"],
+        "المراجعة الشاملة": ["مراجعة الدوال", "مراجعة المتباينات", "مراجعة الأنظمة", "حل مسائل متنوعة", "تدريب شامل", "أخرى"],
+        "اختبار قصير": ["اختبار الدوال", "اختبار المتباينات", "اختبار الأنظمة", "اختبار شامل", "أخرى"],
+        "أخرى": ["موضوع مخصص", "أخرى"]
+    };
+
+    Object.entries(details).forEach(([key, values]) => {
+        mathTasks.detail[key] = endWithOther(values);
+    });
+
+    mathTasks.training = mergeBeforeOther(mathTasks.training || [], [
+        "دراسة الدرس",
+        "حل تمارين",
+        "حل مسائل",
+        "رسم بياني",
+        "تحليل الرسوم",
+        "حل مسائل لفظية",
+        "مراجعة القواعد",
+        "تحليل الأخطاء",
+        "اختبار قصير",
+        "تدريب يومي",
+        "مراجعة شاملة",
+        "تطبيق عملي",
+        "أخرى"
+    ]);
+})();
+// === End EduPath AI v5.5.74: Tasks Math Algebra Part 2 - Functions Inequalities Systems ===
 
 
 (function () {
