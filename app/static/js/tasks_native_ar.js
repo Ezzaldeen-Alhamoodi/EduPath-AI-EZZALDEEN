@@ -1,4 +1,4 @@
-window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.78-tasks-math-geometry-part3";
+window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.78-tasks-math-geometry-part3-verified";
 window.EDUPATH_TASKS_AR_DATA = {
   "حفظ القرآن الكريم": {
     icon: "📖",
