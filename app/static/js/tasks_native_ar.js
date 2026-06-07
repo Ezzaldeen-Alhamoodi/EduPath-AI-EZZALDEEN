@@ -1,4 +1,4 @@
-window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.70-fix3-basic-arithmetic-part1";
+window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.72-basic-arithmetic-part2";
 window.EDUPATH_TASKS_AR_DATA = {
   "حفظ القرآن الكريم": {
     icon: "📖",
@@ -745,6 +745,100 @@ window.SMART_EXAM_DATA = {
     ]);
 })();
 // === End EduPath AI v5.5.70-FIX3: Tasks Math Basic Arithmetic Part 1 - Real Native Tasks Data Patch ===
+
+
+
+// === EduPath AI v5.5.72: Tasks Math Basic Arithmetic Part 2 - Fractions Decimals Ratios Daily Applications ===
+(function eduPathTasksMathBasicArithmeticPart2() {
+    const targetData = window.EDUPATH_TASKS_AR_DATA || (typeof SMART_TASK_DATA !== "undefined" ? SMART_TASK_DATA : null);
+    if (!targetData) return;
+
+    const mathTasks = targetData["الرياضيات"] || { icon: "📐", main: [], sub: {}, detail: {}, training: [] };
+    targetData["الرياضيات"] = mathTasks;
+    mathTasks.icon = mathTasks.icon || "📐";
+    mathTasks.sub = mathTasks.sub || {};
+    mathTasks.detail = mathTasks.detail || {};
+
+    const endWithOther = (items) => {
+        const unique = [];
+        (items || []).forEach((item) => {
+            if (item && item !== "أخرى" && !unique.includes(item)) unique.push(item);
+        });
+        unique.push("أخرى");
+        return unique;
+    };
+
+    const mergeBeforeOther = (base, additions) => {
+        const withoutOther = [];
+        (base || []).forEach((item) => {
+            if (item && item !== "أخرى" && !withoutOther.includes(item)) withoutOther.push(item);
+        });
+        (additions || []).forEach((item) => {
+            if (item && item !== "أخرى" && !withoutOther.includes(item)) withoutOther.push(item);
+        });
+        withoutOther.push("أخرى");
+        return withoutOther;
+    };
+
+    const mainCategory = "الحساب الأساسي";
+    const existingMain = Array.isArray(mathTasks.main) ? mathTasks.main : [];
+    // يظهر الحساب الأساسي كأول خيار في الفئة الرئيسية، مع دعم تسمية قديمة إن وجدت دون عرضها كتكرار.
+    mathTasks.main = endWithOther([mainCategory, ...existingMain.filter((item) => item !== mainCategory && item !== "أساسيات الحساب")]);
+
+    const part2Subcategories = [
+        "الكسور",
+        "الأعداد العشرية",
+        "النسب",
+        "التناسب",
+        "النسبة المئوية",
+        "القياس",
+        "تحويل الوحدات",
+        "المتوسط الحسابي",
+        "التطبيقات الحياتية",
+        "المراجعة الشاملة",
+        "اختبار قصير",
+        "أخرى"
+    ];
+
+    mathTasks.sub[mainCategory] = mergeBeforeOther(mathTasks.sub[mainCategory] || [], part2Subcategories);
+    // Alias للقيم القديمة أو المحفوظة، لا يضيف خياراً مكرراً في القائمة الرئيسية.
+    mathTasks.sub["أساسيات الحساب"] = mathTasks.sub[mainCategory];
+
+    const details = {
+        "الكسور": ["مفهوم الكسر", "تبسيط الكسور", "مقارنة الكسور", "جمع الكسور", "طرح الكسور", "ضرب الكسور", "قسمة الكسور", "الكسور المتكافئة", "تحويل الكسر", "مسائل الكسور", "أخرى"],
+        "الأعداد العشرية": ["قراءة الأعداد العشرية", "كتابة الأعداد العشرية", "مقارنة الأعداد العشرية", "جمع الأعداد العشرية", "طرح الأعداد العشرية", "ضرب الأعداد العشرية", "قسمة الأعداد العشرية", "تقريب الأعداد العشرية", "مسائل تطبيقية", "أخرى"],
+        "النسب": ["مفهوم النسبة", "تبسيط النسبة", "مقارنة النسب", "كتابة النسب", "حل مسائل النسب", "أخرى"],
+        "التناسب": ["مفهوم التناسب", "إيجاد المجهول", "التناسب المباشر", "التناسب العكسي", "حل مسائل التناسب", "أخرى"],
+        "النسبة المئوية": ["مفهوم النسبة المئوية", "تحويل النسبة المئوية", "إيجاد نسبة عدد", "إيجاد العدد الكلي", "الزيادة المئوية", "النقصان المئوي", "الخصومات", "الأرباح", "الخسائر", "مسائل حياتية", "أخرى"],
+        "القياس": ["قياس الطول", "قياس الكتلة", "قياس الزمن", "قياس السعة", "قياس المساحة", "قياس الحجم", "حل مسائل القياس", "أخرى"],
+        "تحويل الوحدات": ["تحويل الأطوال", "تحويل الكتل", "تحويل الزمن", "تحويل السعات", "تحويل المساحات", "تحويل الأحجام", "حل مسائل التحويل", "أخرى"],
+        "المتوسط الحسابي": ["حساب المتوسط", "تفسير المتوسط", "حل مسائل المتوسط", "تطبيقات عملية", "أخرى"],
+        "التطبيقات الحياتية": ["التسوق", "الميزانية", "الوقت", "المسافات", "السرعة", "الاستهلاك", "المواقف اليومية", "حل مسائل متنوعة", "أخرى"],
+        "المراجعة الشاملة": ["مراجعة الكسور", "مراجعة الأعداد العشرية", "مراجعة النسب", "مراجعة النسبة المئوية", "مراجعة القياس", "تدريب شامل", "أخرى"],
+        "اختبار قصير": ["اختبار الكسور", "اختبار الأعداد العشرية", "اختبار النسب", "اختبار النسبة المئوية", "اختبار شامل", "أخرى"],
+        "أخرى": ["موضوع مخصص", "أخرى"]
+    };
+
+    Object.entries(details).forEach(([key, values]) => {
+        mathTasks.detail[key] = endWithOther(values);
+    });
+
+    mathTasks.training = mergeBeforeOther(mathTasks.training || [], [
+        "دراسة الدرس",
+        "حل تمارين",
+        "حل مسائل",
+        "تدريب ذهني",
+        "حل مسائل حياتية",
+        "مراجعة القواعد",
+        "تحليل الأخطاء",
+        "اختبار قصير",
+        "تدريب يومي",
+        "مراجعة شاملة",
+        "تطبيق عملي",
+        "أخرى"
+    ]);
+})();
+// === End EduPath AI v5.5.72: Tasks Math Basic Arithmetic Part 2 - Fractions Decimals Ratios Daily Applications ===
 
 (function () {
     "use strict";
