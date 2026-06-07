@@ -1,4 +1,4 @@
-window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.75-real-verified";
+window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.75-algebra-parts-1-2-3-merged";
 window.EDUPATH_TASKS_AR_DATA = {
   "حفظ القرآن الكريم": {
     icon: "📖",
@@ -1601,9 +1601,63 @@ window.SMART_EXAM_DATA = {
 // === End EduPath AI v5.5.75-REAL-FIX: Tasks Math Algebra Part 3 ===
 
 
-// === EduPath AI v5.5.75 REAL VERIFIED: Tasks Math Algebra Part 3 ===
-(function eduPathApplyTasksMathAlgebraPart3Verified() {
-    const algebraPart3Subcategories = [
+
+// === EduPath AI v5.5.75-MERGED-FIX: Tasks Math Algebra Parts 1 + 2 + 3 Ordered ===
+(function eduPathTasksMathAlgebraMergedParts123() {
+    const targetData = (typeof window !== "undefined" && window.EDUPATH_TASKS_AR_DATA)
+        ? window.EDUPATH_TASKS_AR_DATA
+        : (typeof SMART_TASK_DATA !== "undefined" ? SMART_TASK_DATA : null);
+    if (!targetData) return;
+
+    const mathTasks = targetData["الرياضيات"] || { icon: "📐", main: [], sub: {}, detail: {}, training: [] };
+    targetData["الرياضيات"] = mathTasks;
+    mathTasks.icon = mathTasks.icon || "📐";
+    mathTasks.main = Array.isArray(mathTasks.main) ? mathTasks.main : [];
+    mathTasks.sub = mathTasks.sub || {};
+    mathTasks.detail = mathTasks.detail || {};
+    mathTasks.training = Array.isArray(mathTasks.training) ? mathTasks.training : [];
+
+    const endWithOther = (items) => {
+        const unique = [];
+        (items || []).forEach((item) => {
+            if (item && item !== "أخرى" && !unique.includes(item)) unique.push(item);
+        });
+        unique.push("أخرى");
+        return unique;
+    };
+
+    const mainCategory = "الجبر";
+    // إضافة/تثبيت الجبر دون حذف أي فئة أخرى، مع إبقاء "أخرى" في النهاية.
+    mathTasks.main = endWithOther([...(mathTasks.main || []).filter((item) => item !== mainCategory), mainCategory]);
+
+    // ترتيب الأجزاء: الجزء الأول ثم الجزء الثاني ثم الجزء الثالث.
+    mathTasks.sub[mainCategory] = endWithOther([
+        // الجزء الأول: العبارات الجبرية والمعادلات الأساسية
+        "العبارات الجبرية",
+        "الحدود الجبرية",
+        "تبسيط العبارات",
+        "العمليات على العبارات",
+        "المعادلات الخطية",
+        "حل المعادلات",
+        "المعادلات متعددة الخطوات",
+        "المعادلات اللفظية",
+        "التحقق من الحل",
+        "التطبيقات الجبرية",
+        "المراجعة الشاملة",
+        "اختبار قصير",
+
+        // الجزء الثاني: الدوال والمتباينات وأنظمة المعادلات
+        "الدوال",
+        "تمثيل الدوال",
+        "الدوال الخطية",
+        "المتباينات",
+        "حل المتباينات",
+        "أنظمة المعادلات",
+        "حل الأنظمة",
+        "التمثيل البياني",
+        "المسائل التطبيقية",
+
+        // الجزء الثالث: كثيرات الحدود والتحليل الجبري والأسس والجذور
         "كثيرات الحدود",
         "العمليات على كثيرات الحدود",
         "التحليل الجبري",
@@ -1611,13 +1665,33 @@ window.SMART_EXAM_DATA = {
         "الجذور",
         "التعبيرات الجذرية",
         "التعويض الجبري",
-        "التطبيقات الجبرية",
-        "المراجعة الشاملة",
-        "اختبار قصير",
         "أخرى"
-    ];
+    ]);
 
-    const algebraPart3Details = {
+    const details = {
+        // تفاصيل الجزء الأول
+        "العبارات الجبرية": ["مفهوم العبارة الجبرية", "المتغيرات", "الثوابت", "كتابة العبارات", "ترجمة العبارات", "أخرى"],
+        "الحدود الجبرية": ["الحد الجبري", "المعامل", "درجة الحد", "تمييز الحدود", "أخرى"],
+        "تبسيط العبارات": ["جمع الحدود المتشابهة", "طرح الحدود المتشابهة", "تبسيط التعبيرات", "تحليل الأخطاء", "أخرى"],
+        "العمليات على العبارات": ["الجمع", "الطرح", "الضرب", "القسمة", "تبسيط النتائج", "أخرى"],
+        "المعادلات الخطية": ["مفهوم المعادلة", "إيجاد المجهول", "حل معادلة بسيطة", "حل معادلات متنوعة", "أخرى"],
+        "حل المعادلات": ["خطوة واحدة", "خطوتان", "عدة خطوات", "استخدام الأقواس", "أخرى"],
+        "المعادلات متعددة الخطوات": ["تبسيط قبل الحل", "نقل الحدود", "حل المعادلات", "التحقق", "أخرى"],
+        "المعادلات اللفظية": ["فهم المسألة", "ترجمة المسألة", "تكوين المعادلة", "حل المسألة", "التحقق من الإجابة", "أخرى"],
+        "التحقق من الحل": ["التعويض", "تحليل الحل", "اكتشاف الأخطاء", "التحقق النهائي", "أخرى"],
+
+        // تفاصيل الجزء الثاني
+        "الدوال": ["مفهوم الدالة", "المجال", "المدى", "تمييز الدالة", "تقييم الدالة", "أخرى"],
+        "تمثيل الدوال": ["الجداول", "المخططات", "التمثيل البياني", "قراءة التمثيل", "تحليل التمثيل", "أخرى"],
+        "الدوال الخطية": ["مفهوم الدالة الخطية", "الميل", "المقطع", "كتابة معادلة مستقيم", "تحليل الدوال الخطية", "حل مسائل", "أخرى"],
+        "المتباينات": ["مفهوم المتباينة", "مقارنة القيم", "تمثيل المتباينات", "حل متباينات بسيطة", "حل مسائل", "أخرى"],
+        "حل المتباينات": ["متباينة بخطوة واحدة", "متباينة بعدة خطوات", "تمثيل الحل", "التحقق من الحل", "مسائل تطبيقية", "أخرى"],
+        "أنظمة المعادلات": ["مفهوم النظام", "تحديد الحل", "أنواع الأنظمة", "تحليل الأنظمة", "أخرى"],
+        "حل الأنظمة": ["طريقة التعويض", "طريقة الحذف", "التمثيل البياني", "التحقق من الحل", "حل مسائل", "أخرى"],
+        "التمثيل البياني": ["تمثيل النقاط", "تمثيل المستقيمات", "قراءة الرسوم", "تحليل النتائج", "حل مسائل", "أخرى"],
+        "المسائل التطبيقية": ["مسائل حياتية", "تطبيقات هندسية", "تطبيقات اقتصادية", "تطبيقات علمية", "حل مسائل متنوعة", "أخرى"],
+
+        // تفاصيل الجزء الثالث
         "كثيرات الحدود": ["مفهوم كثيرة الحدود", "درجة كثيرة الحدود", "تمييز الحدود", "كتابة كثيرات الحدود", "ترتيب كثيرات الحدود", "أخرى"],
         "العمليات على كثيرات الحدود": ["جمع كثيرات الحدود", "طرح كثيرات الحدود", "ضرب كثيرات الحدود", "تبسيط النتائج", "حل مسائل", "أخرى"],
         "التحليل الجبري": ["العامل المشترك", "تحليل الفرق بين مربعين", "تحليل ثلاثي الحدود", "اختيار طريقة التحليل", "حل مسائل", "أخرى"],
@@ -1625,16 +1699,27 @@ window.SMART_EXAM_DATA = {
         "الجذور": ["الجذر التربيعي", "الجذر التكعيبي", "تبسيط الجذور", "العمليات على الجذور", "حل مسائل", "أخرى"],
         "التعبيرات الجذرية": ["تبسيط التعبيرات", "جمع التعبيرات", "طرح التعبيرات", "ضرب التعبيرات", "تطبيقات", "أخرى"],
         "التعويض الجبري": ["التعويض المباشر", "حساب قيمة التعبير", "تبسيط قبل التعويض", "حل مسائل", "أخرى"],
-        "التطبيقات الجبرية": ["مسائل حياتية", "تطبيقات علمية", "تطبيقات هندسية", "تطبيقات مالية", "حل مسائل متنوعة", "أخرى"],
-        "المراجعة الشاملة": ["مراجعة كثيرات الحدود", "مراجعة التحليل", "مراجعة الأسس والجذور", "حل مسائل متنوعة", "تدريب شامل", "أخرى"],
-        "اختبار قصير": ["اختبار كثيرات الحدود", "اختبار التحليل", "اختبار الأسس والجذور", "اختبار شامل", "أخرى"],
+
+        // عناوين مشتركة تم دمجها حتى لا يضيع أي جزء سابق
+        "التطبيقات الجبرية": ["مسائل حياتية", "تطبيقات هندسية", "تطبيقات مالية", "تطبيقات علمية", "تطبيقات اقتصادية", "حل مسائل متنوعة", "أخرى"],
+        "المراجعة الشاملة": ["مراجعة العبارات", "مراجعة المعادلات", "مراجعة الدوال", "مراجعة المتباينات", "مراجعة الأنظمة", "مراجعة كثيرات الحدود", "مراجعة التحليل", "مراجعة الأسس والجذور", "حل مسائل متنوعة", "تدريب شامل", "أخرى"],
+        "اختبار قصير": ["اختبار العبارات", "اختبار المعادلات", "اختبار التطبيقات", "اختبار الدوال", "اختبار المتباينات", "اختبار الأنظمة", "اختبار كثيرات الحدود", "اختبار التحليل", "اختبار الأسس والجذور", "اختبار شامل", "أخرى"],
         "أخرى": ["موضوع مخصص", "أخرى"]
     };
 
-    const algebraPart3Activities = [
+    Object.entries(details).forEach(([subcategory, values]) => {
+        mathTasks.detail[subcategory] = endWithOther(values);
+    });
+
+    mathTasks.training = endWithOther([
+        ...(mathTasks.training || []),
         "دراسة الدرس",
         "حل تمارين",
         "حل مسائل",
+        "حل مسائل لفظية",
+        "تبسيط عبارات",
+        "رسم بياني",
+        "تحليل الرسوم",
         "تبسيط تعبيرات",
         "تحليل جبري",
         "مراجعة القواعد",
@@ -1644,47 +1729,10 @@ window.SMART_EXAM_DATA = {
         "مراجعة شاملة",
         "تطبيق عملي",
         "أخرى"
-    ];
+    ]);
 
-    const ensureOtherLast = (items) => {
-        const clean = [];
-        (items || []).forEach((item) => {
-            if (item && item !== "أخرى" && !clean.includes(item)) clean.push(item);
-        });
-        clean.push("أخرى");
-        return clean;
-    };
-
-    const applyToData = (data) => {
-        if (!data) return false;
-        const mathTasks = data["الرياضيات"] || { icon: "📐", main: [], sub: {}, detail: {}, training: [] };
-        data["الرياضيات"] = mathTasks;
-        mathTasks.icon = mathTasks.icon || "📐";
-        mathTasks.main = ensureOtherLast([...(Array.isArray(mathTasks.main) ? mathTasks.main.filter((item) => item !== "الجبر") : []), "الجبر"]);
-        mathTasks.sub = mathTasks.sub || {};
-        mathTasks.detail = mathTasks.detail || {};
-        mathTasks.training = ensureOtherLast(algebraPart3Activities);
-
-        // سياسة الاستبدال الذكي: في هذا الجزء تظهر فئات الجزء الثالث فقط داخل الجبر.
-        mathTasks.sub["الجبر"] = ensureOtherLast(algebraPart3Subcategories);
-
-        Object.entries(algebraPart3Details).forEach(([subcategory, details]) => {
-            mathTasks.detail[subcategory] = ensureOtherLast(details);
-        });
-
-        return true;
-    };
-
-    try {
-        if (typeof SMART_TASK_DATA !== "undefined") applyToData(SMART_TASK_DATA);
-        if (typeof window !== "undefined") {
-            if (window.EDUPATH_TASKS_AR_DATA) applyToData(window.EDUPATH_TASKS_AR_DATA);
-            window.EDUPATH_TASKS_ALGEBRA_PART3_APPLIED = true;
-            window.EDUPATH_TASKS_ALGEBRA_PART3_VERSION = "5.5.75-real-verified";
-        }
-    } catch (error) {
-        console.error("EduPath Algebra Part 3 update failed:", error);
+    if (typeof window !== "undefined") {
+        window.EDUPATH_TASKS_ALGEBRA_PARTS_1_2_3_MERGED = true;
     }
 })();
-// === End EduPath AI v5.5.75 REAL VERIFIED ===
-
+// === End EduPath AI v5.5.75-MERGED-FIX: Tasks Math Algebra Parts 1 + 2 + 3 Ordered ===
