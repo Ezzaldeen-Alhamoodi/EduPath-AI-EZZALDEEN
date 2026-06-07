@@ -1,9 +1,10 @@
-\
-const CACHE_NAME = "edupath-ai-v5-5-4";
+
+const CACHE_NAME = "edupath-ai-v5-5-75-real-verified";
 const ASSETS = [
     "/",
     "/static/css/style.css",
     "/static/js/app.js",
+    "/static/js/tasks_native_ar.js",
     "/static/manifest.json"
 ];
 

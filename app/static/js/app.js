@@ -11840,3 +11840,91 @@ applyDeepLanguageTaskConfigV531();
 })();
 // === End EduPath AI v5.5.75-REAL-FIX: Tasks Math Algebra Part 3 ===
 
+
+// === EduPath AI v5.5.75 REAL VERIFIED: Tasks Math Algebra Part 3 ===
+(function eduPathApplyTasksMathAlgebraPart3Verified() {
+    const algebraPart3Subcategories = [
+        "كثيرات الحدود",
+        "العمليات على كثيرات الحدود",
+        "التحليل الجبري",
+        "الأسس",
+        "الجذور",
+        "التعبيرات الجذرية",
+        "التعويض الجبري",
+        "التطبيقات الجبرية",
+        "المراجعة الشاملة",
+        "اختبار قصير",
+        "أخرى"
+    ];
+
+    const algebraPart3Details = {
+        "كثيرات الحدود": ["مفهوم كثيرة الحدود", "درجة كثيرة الحدود", "تمييز الحدود", "كتابة كثيرات الحدود", "ترتيب كثيرات الحدود", "أخرى"],
+        "العمليات على كثيرات الحدود": ["جمع كثيرات الحدود", "طرح كثيرات الحدود", "ضرب كثيرات الحدود", "تبسيط النتائج", "حل مسائل", "أخرى"],
+        "التحليل الجبري": ["العامل المشترك", "تحليل الفرق بين مربعين", "تحليل ثلاثي الحدود", "اختيار طريقة التحليل", "حل مسائل", "أخرى"],
+        "الأسس": ["خواص الأسس", "ضرب الأسس", "قسمة الأسس", "رفع قوة لقوة", "تبسيط التعبيرات", "أخرى"],
+        "الجذور": ["الجذر التربيعي", "الجذر التكعيبي", "تبسيط الجذور", "العمليات على الجذور", "حل مسائل", "أخرى"],
+        "التعبيرات الجذرية": ["تبسيط التعبيرات", "جمع التعبيرات", "طرح التعبيرات", "ضرب التعبيرات", "تطبيقات", "أخرى"],
+        "التعويض الجبري": ["التعويض المباشر", "حساب قيمة التعبير", "تبسيط قبل التعويض", "حل مسائل", "أخرى"],
+        "التطبيقات الجبرية": ["مسائل حياتية", "تطبيقات علمية", "تطبيقات هندسية", "تطبيقات مالية", "حل مسائل متنوعة", "أخرى"],
+        "المراجعة الشاملة": ["مراجعة كثيرات الحدود", "مراجعة التحليل", "مراجعة الأسس والجذور", "حل مسائل متنوعة", "تدريب شامل", "أخرى"],
+        "اختبار قصير": ["اختبار كثيرات الحدود", "اختبار التحليل", "اختبار الأسس والجذور", "اختبار شامل", "أخرى"],
+        "أخرى": ["موضوع مخصص", "أخرى"]
+    };
+
+    const algebraPart3Activities = [
+        "دراسة الدرس",
+        "حل تمارين",
+        "حل مسائل",
+        "تبسيط تعبيرات",
+        "تحليل جبري",
+        "مراجعة القواعد",
+        "تحليل الأخطاء",
+        "اختبار قصير",
+        "تدريب يومي",
+        "مراجعة شاملة",
+        "تطبيق عملي",
+        "أخرى"
+    ];
+
+    const ensureOtherLast = (items) => {
+        const clean = [];
+        (items || []).forEach((item) => {
+            if (item && item !== "أخرى" && !clean.includes(item)) clean.push(item);
+        });
+        clean.push("أخرى");
+        return clean;
+    };
+
+    const applyToData = (data) => {
+        if (!data) return false;
+        const mathTasks = data["الرياضيات"] || { icon: "📐", main: [], sub: {}, detail: {}, training: [] };
+        data["الرياضيات"] = mathTasks;
+        mathTasks.icon = mathTasks.icon || "📐";
+        mathTasks.main = ensureOtherLast([...(Array.isArray(mathTasks.main) ? mathTasks.main.filter((item) => item !== "الجبر") : []), "الجبر"]);
+        mathTasks.sub = mathTasks.sub || {};
+        mathTasks.detail = mathTasks.detail || {};
+        mathTasks.training = ensureOtherLast(algebraPart3Activities);
+
+        // سياسة الاستبدال الذكي: في هذا الجزء تظهر فئات الجزء الثالث فقط داخل الجبر.
+        mathTasks.sub["الجبر"] = ensureOtherLast(algebraPart3Subcategories);
+
+        Object.entries(algebraPart3Details).forEach(([subcategory, details]) => {
+            mathTasks.detail[subcategory] = ensureOtherLast(details);
+        });
+
+        return true;
+    };
+
+    try {
+        if (typeof SMART_TASK_DATA !== "undefined") applyToData(SMART_TASK_DATA);
+        if (typeof window !== "undefined") {
+            if (window.EDUPATH_TASKS_AR_DATA) applyToData(window.EDUPATH_TASKS_AR_DATA);
+            window.EDUPATH_TASKS_ALGEBRA_PART3_APPLIED = true;
+            window.EDUPATH_TASKS_ALGEBRA_PART3_VERSION = "5.5.75-real-verified";
+        }
+    } catch (error) {
+        console.error("EduPath Algebra Part 3 update failed:", error);
+    }
+})();
+// === End EduPath AI v5.5.75 REAL VERIFIED ===
+
