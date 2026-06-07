@@ -11518,3 +11518,62 @@ applyDeepLanguageTaskConfigV531();
     });
 })();
 
+
+
+// === EduPath AI v5.5.68: Mathematics Goal Categories Sequential Ordering and Duplicate Cleanup ===
+(function organizeMathGoalCategoriesV5568() {
+    if (typeof GOAL_CONFIG_V524 === "undefined") return;
+    const math = GOAL_CONFIG_V524["الرياضيات"];
+    if (!math || !Array.isArray(math.categories)) return;
+
+    const removedCategories = new Set([
+        "الإحداثيات",
+        "الدوال",
+        "النهايات",
+        "الرياضيات المنفصلة",
+        "المصفوفات",
+        "المتجهات",
+        "الرياضيات التطبيقية",
+        "الرياضيات الجامعية",
+        "رياضيات علوم الحاسوب",
+        "Algebra"
+    ]);
+
+    const sequentialOrder = [
+        "الحساب الأساسي",
+        "الجبر",
+        "الهندسة",
+        "حساب المثلثات",
+        "ما قبل التفاضل",
+        "المتتاليات",
+        "التفاضل",
+        "التكامل",
+        "المعادلات التفاضلية",
+        "الإحصاء",
+        "الاحتمالات",
+        "المنطق الرياضي",
+        "نظرية الأعداد",
+        "الرياضيات المتقطعة",
+        "الجبر الخطي",
+        "الرياضيات المالية",
+        "الرياضيات الهندسية",
+        "رياضيات البرمجة",
+        "رياضيات الذكاء الاصطناعي",
+        "رياضيات علوم البيانات",
+        "رياضيات الأمن السيبراني",
+        "الاستعداد للاختبارات",
+        "المراجعة"
+    ];
+
+    const existingUnique = Array.from(new Set(
+        math.categories.filter(category => category && !removedCategories.has(category) && category !== "أخرى")
+    ));
+
+    const ordered = sequentialOrder.filter(category =>
+        existingUnique.includes(category) || (math.paths && math.paths[category])
+    );
+
+    const remaining = existingUnique.filter(category => !ordered.includes(category));
+    math.categories = [...ordered, ...remaining, "أخرى"];
+})();
+// === End EduPath AI v5.5.68: Mathematics Goal Categories Sequential Ordering and Duplicate Cleanup ===
