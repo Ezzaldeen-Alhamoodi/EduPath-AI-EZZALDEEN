@@ -1,4 +1,4 @@
-window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.72-basic-arithmetic-part2";
+window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.73-algebra-part1";
 window.EDUPATH_TASKS_AR_DATA = {
   "حفظ القرآن الكريم": {
     icon: "📖",
@@ -839,6 +839,100 @@ window.SMART_EXAM_DATA = {
     ]);
 })();
 // === End EduPath AI v5.5.72: Tasks Math Basic Arithmetic Part 2 - Fractions Decimals Ratios Daily Applications ===
+
+
+// === EduPath AI v5.5.73: Tasks Math Algebra Part 1 - Algebraic Expressions and Basic Equations ===
+(function eduPathTasksMathAlgebraPart1() {
+    const targetData = window.EDUPATH_TASKS_AR_DATA || (typeof SMART_TASK_DATA !== "undefined" ? SMART_TASK_DATA : null);
+    if (!targetData) return;
+
+    const mathTasks = targetData["الرياضيات"] || { icon: "📐", main: [], sub: {}, detail: {}, training: [] };
+    targetData["الرياضيات"] = mathTasks;
+    mathTasks.icon = mathTasks.icon || "📐";
+    mathTasks.main = Array.isArray(mathTasks.main) ? mathTasks.main : [];
+    mathTasks.sub = mathTasks.sub || {};
+    mathTasks.detail = mathTasks.detail || {};
+
+    const endWithOther = (items) => {
+        const unique = [];
+        (items || []).forEach((item) => {
+            if (item && item !== "أخرى" && !unique.includes(item)) unique.push(item);
+        });
+        unique.push("أخرى");
+        return unique;
+    };
+
+    const mergeBeforeOther = (base, additions) => {
+        const unique = [];
+        (base || []).forEach((item) => {
+            if (item && item !== "أخرى" && !unique.includes(item)) unique.push(item);
+        });
+        (additions || []).forEach((item) => {
+            if (item && item !== "أخرى" && !unique.includes(item)) unique.push(item);
+        });
+        unique.push("أخرى");
+        return unique;
+    };
+
+    const mainCategory = "الجبر";
+    // سياسة الاستبدال الذكي: إن كان الجبر موجوداً نستخدمه، وإن لم يكن موجوداً نضيفه دون تكرار.
+    mathTasks.main = endWithOther([...mathTasks.main.filter((item) => item !== mainCategory), mainCategory]);
+
+    const subcategories = [
+        "العبارات الجبرية",
+        "الحدود الجبرية",
+        "تبسيط العبارات",
+        "العمليات على العبارات",
+        "المعادلات الخطية",
+        "حل المعادلات",
+        "المعادلات متعددة الخطوات",
+        "المعادلات اللفظية",
+        "التحقق من الحل",
+        "التطبيقات الجبرية",
+        "المراجعة الشاملة",
+        "اختبار قصير",
+        "أخرى"
+    ];
+
+    mathTasks.sub[mainCategory] = endWithOther(subcategories);
+
+    const details = {
+        "العبارات الجبرية": ["مفهوم العبارة الجبرية", "المتغيرات", "الثوابت", "كتابة العبارات", "ترجمة العبارات", "أخرى"],
+        "الحدود الجبرية": ["الحد الجبري", "المعامل", "درجة الحد", "تمييز الحدود", "أخرى"],
+        "تبسيط العبارات": ["جمع الحدود المتشابهة", "طرح الحدود المتشابهة", "تبسيط التعبيرات", "تحليل الأخطاء", "أخرى"],
+        "العمليات على العبارات": ["الجمع", "الطرح", "الضرب", "القسمة", "تبسيط النتائج", "أخرى"],
+        "المعادلات الخطية": ["مفهوم المعادلة", "إيجاد المجهول", "حل معادلة بسيطة", "حل معادلات متنوعة", "أخرى"],
+        "حل المعادلات": ["خطوة واحدة", "خطوتان", "عدة خطوات", "استخدام الأقواس", "أخرى"],
+        "المعادلات متعددة الخطوات": ["تبسيط قبل الحل", "نقل الحدود", "حل المعادلات", "التحقق", "أخرى"],
+        "المعادلات اللفظية": ["فهم المسألة", "ترجمة المسألة", "تكوين المعادلة", "حل المسألة", "التحقق من الإجابة", "أخرى"],
+        "التحقق من الحل": ["التعويض", "تحليل الحل", "اكتشاف الأخطاء", "التحقق النهائي", "أخرى"],
+        "التطبيقات الجبرية": ["مسائل حياتية", "تطبيقات هندسية", "تطبيقات مالية", "تطبيقات علمية", "حل مسائل متنوعة", "أخرى"],
+        "المراجعة الشاملة": ["مراجعة العبارات", "مراجعة المعادلات", "حل مسائل متنوعة", "تدريب شامل", "أخرى"],
+        "اختبار قصير": ["اختبار العبارات", "اختبار المعادلات", "اختبار التطبيقات", "اختبار شامل", "أخرى"],
+        "أخرى": ["موضوع مخصص", "أخرى"]
+    };
+
+    Object.entries(details).forEach(([key, values]) => {
+        mathTasks.detail[key] = endWithOther(values);
+    });
+
+    mathTasks.training = mergeBeforeOther(mathTasks.training || [], [
+        "دراسة الدرس",
+        "حل تمارين",
+        "حل مسائل",
+        "حل مسائل لفظية",
+        "تبسيط عبارات",
+        "مراجعة القواعد",
+        "تحليل الأخطاء",
+        "اختبار قصير",
+        "تدريب يومي",
+        "مراجعة شاملة",
+        "تطبيق عملي",
+        "أخرى"
+    ]);
+})();
+// === End EduPath AI v5.5.73: Tasks Math Algebra Part 1 - Algebraic Expressions and Basic Equations ===
+
 
 (function () {
     "use strict";
