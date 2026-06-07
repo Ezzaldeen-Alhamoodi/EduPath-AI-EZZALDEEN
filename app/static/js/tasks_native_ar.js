@@ -1,4 +1,4 @@
-window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.4-tasks-desktop-layout";
+window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.70-fix3-basic-arithmetic-part1";
 window.EDUPATH_TASKS_AR_DATA = {
   "حفظ القرآن الكريم": {
     icon: "📖",
@@ -660,6 +660,91 @@ window.SMART_EXAM_DATA = {
     activities: {"Other": ["Other"]}
   }
 };
+
+
+// === EduPath AI v5.5.70-FIX3: Tasks Math Basic Arithmetic Part 1 - Real Native Tasks Data Patch ===
+(function eduPathTasksMathBasicArithmeticPart1Fix3() {
+    const targetData = window.EDUPATH_TASKS_AR_DATA || (typeof SMART_TASK_DATA !== "undefined" ? SMART_TASK_DATA : null);
+    if (!targetData) return;
+
+    const mathTasks = targetData["الرياضيات"] || { icon: "📐", main: [], sub: {}, detail: {}, training: [] };
+    targetData["الرياضيات"] = mathTasks;
+    mathTasks.icon = mathTasks.icon || "📐";
+    mathTasks.sub = mathTasks.sub || {};
+    mathTasks.detail = mathTasks.detail || {};
+
+    const endWithOther = (items) => {
+        const unique = [];
+        (items || []).forEach((item) => {
+            if (item && item !== "أخرى" && !unique.includes(item)) unique.push(item);
+        });
+        unique.push("أخرى");
+        return unique;
+    };
+
+    const mainCategory = "الحساب الأساسي";
+    const existingMain = Array.isArray(mathTasks.main) ? mathTasks.main : [];
+    mathTasks.main = endWithOther([mainCategory, ...existingMain.filter((item) => item !== mainCategory && item !== "أساسيات الحساب")]);
+
+    const subcategories = [
+        "الأعداد الطبيعية",
+        "الأعداد الصحيحة",
+        "القيمة المكانية",
+        "مقارنة الأعداد",
+        "ترتيب الأعداد",
+        "الجمع",
+        "الطرح",
+        "الضرب",
+        "القسمة",
+        "ترتيب العمليات",
+        "التقدير والتقريب",
+        "المسائل اللفظية الأساسية",
+        "المراجعة الشاملة",
+        "اختبار قصير",
+        "أخرى"
+    ];
+
+    mathTasks.sub[mainCategory] = endWithOther(subcategories);
+    // Alias for any older saved value or wording variation; not displayed in main list.
+    mathTasks.sub["أساسيات الحساب"] = mathTasks.sub[mainCategory];
+
+    const details = {
+        "الأعداد الطبيعية": ["قراءة الأعداد", "كتابة الأعداد", "تمثيل الأعداد", "تمييز الأعداد", "أخرى"],
+        "الأعداد الصحيحة": ["الأعداد الموجبة", "الأعداد السالبة", "الصفر", "تمثيل الأعداد على خط الأعداد", "مقارنة الأعداد الصحيحة", "أخرى"],
+        "القيمة المكانية": ["الآحاد", "العشرات", "المئات", "الألوف", "تحليل العدد", "كتابة العدد بالصورة الموسعة", "أخرى"],
+        "مقارنة الأعداد": ["أكبر من", "أصغر من", "يساوي", "المقارنة بين عددين", "المقارنة بين عدة أعداد", "أخرى"],
+        "ترتيب الأعداد": ["ترتيب تصاعدي", "ترتيب تنازلي", "إكمال النمط العددي", "ترتيب أعداد متعددة", "أخرى"],
+        "الجمع": ["جمع عددين", "جمع عدة أعداد", "الجمع مع الحمل", "الجمع الذهني", "التحقق من الجمع", "أخرى"],
+        "الطرح": ["طرح عددين", "الطرح مع الاستلاف", "الطرح الذهني", "التحقق من الطرح", "مسائل الطرح", "أخرى"],
+        "الضرب": ["مفهوم الضرب", "جدول الضرب", "ضرب عددين", "الضرب في 10 و100 و1000", "الضرب الذهني", "مسائل الضرب", "أخرى"],
+        "القسمة": ["مفهوم القسمة", "القسمة بدون باق", "القسمة مع باق", "القسمة المطولة", "القسمة الذهنية", "مسائل القسمة", "أخرى"],
+        "ترتيب العمليات": ["الأقواس", "الضرب والقسمة", "الجمع والطرح", "حل تعبير حسابي", "أخطاء ترتيب العمليات", "أخرى"],
+        "التقدير والتقريب": ["التقريب لأقرب عشرة", "التقريب لأقرب مئة", "التقريب لأقرب ألف", "تقدير الناتج", "التحقق من معقولية الإجابة", "أخرى"],
+        "المسائل اللفظية الأساسية": ["فهم نص المسألة", "تحديد العملية المناسبة", "كتابة المعطيات", "حل المسألة", "التحقق من الإجابة", "أخرى"],
+        "المراجعة الشاملة": ["مراجعة العمليات الأساسية", "مراجعة الأخطاء", "تدريب شامل", "حل مسائل متنوعة", "أخرى"],
+        "اختبار قصير": ["اختبار في الجمع والطرح", "اختبار في الضرب والقسمة", "اختبار في ترتيب العمليات", "اختبار شامل قصير", "أخرى"],
+        "أخرى": ["موضوع مخصص", "أخرى"]
+    };
+
+    Object.entries(details).forEach(([key, values]) => {
+        mathTasks.detail[key] = endWithOther(values);
+    });
+
+    mathTasks.training = endWithOther([
+        "دراسة الدرس",
+        "حل تمارين",
+        "حل مسائل",
+        "تدريب ذهني",
+        "مراجعة القوانين",
+        "مراجعة جدول الضرب",
+        "تحليل الأخطاء",
+        "اختبار قصير",
+        "تدريب يومي",
+        "مراجعة شاملة",
+        ...(Array.isArray(mathTasks.training) ? mathTasks.training : [])
+    ]);
+})();
+// === End EduPath AI v5.5.70-FIX3: Tasks Math Basic Arithmetic Part 1 - Real Native Tasks Data Patch ===
 
 (function () {
     "use strict";
