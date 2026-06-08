@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+{% block page_title %}إدارة المصادر التعليمية{% endblock %}
+{% block content %}
+
+<section class="hero compact resources-hero-v4616 resources-hero-actions-v472 admin-resources-hero-v5587">
+    <div>
+        <span class="tag">لوحة تحكم المشرف</span>
+        <h2>إضافة وإدارة المصادر التعليمية</h2>
+        <p>من هنا يمكنك إضافة مصدر جديد أو تعديل مصدر موجود أو حذفه. المصادر التي تضيفها ستظهر في صفحة المصادر بنفس تصميم البطاقات الحالية.</p>
+    </div>
+    <a class="button light" href="{{ url_for('admin_dashboard') }}">↩ العودة إلى لوحة الإدارة</a>
+</section>
+
+<section class="card admin-resource-form-card-v5587">
+    <h2>إضافة مصدر جديد</h2>
+    <p class="muted">اكتب بيانات المصدر بدقة. اسم الموقع أو التطبيق الرسمي يبقى كما هو إذا كان اسمه الأصلي بالإنجليزية.</p>
+
+    <form method="POST" action="{{ url_for('admin_resources') }}" class="admin-resource-form-v5587">
+        <div class="field-wide">
+            <label>عنوان المصدر</label>
+            <input name="name" placeholder="مثال: Harvard CS50 / ترتيل / Khan Academy" required>
+        </div>
+
+        <div class="field-wide">
+            <label>رابط المصدر</label>
+            <input name="url" type="url" placeholder="https://example.com" required>
+        </div>
+
+        <div>
+            <label>الفئة</label>
+            <input name="category" list="resourceCategoryList" placeholder="مثال: الرياضيات / البرمجة والتكنولوجيا / Islamic Learning">
+        </div>
+
+        <div>
+            <label>الفئة الفرعية</label>
+            <input name="subcategory" placeholder="مثال: التفاضل / Python / IELTS Practice">
+        </div>
+
+        <div>
+            <label>المهارة أو الموضوع</label>
+            <input name="skill" placeholder="مثال: Reading، Writing، Algebra، Python">
+        </div>
+
+        <div>
+            <label>الاختبار</label>
+            <input name="exam" list="resourceExamList" placeholder="مثال: IELTS / TOEFL / CSCA">
+        </div>
+
+        <div>
+            <label>المستوى</label>
+            <input name="level" list="resourceLevelList" placeholder="مثال: مبتدئ / متوسط / متقدم">
+        </div>
+
+        <div>
+            <label>نوع المصدر</label>
+            <input name="resource_type" list="resourceTypeList" placeholder="مثال: دورة / موقع / تطبيق / كتاب">
+        </div>
+
+        <div>
+            <label>لغة المصدر</label>
+            <input name="language" list="resourceLanguageList" placeholder="مثال: العربية / الإنجليزية / الصينية">
+        </div>
+
+        <div>
+            <label>الوسوم</label>
+            <input name="tags" placeholder="افصل الوسوم بفاصلة، مثال: IELTS، Reading، مجاني">
+        </div>
+
+        <div class="field-wide">
+            <label>وصف المصدر</label>
+            <textarea name="description" rows="3" placeholder="اكتب وصفاً عربياً واضحاً يشرح فائدة المصدر ولمن يناسب."></textarea>
+        </div>
+
+        <label class="checkbox-row">
+            <input type="checkbox" name="is_official">
+            <span>مصدر رسمي</span>
+        </label>
+
+        <label class="checkbox-row">
+            <input type="checkbox" name="is_free" checked>
+            <span>مصدر مجاني</span>
+        </label>
+
+        <div class="field-wide form-actions-v5587">
+            <button type="submit">حفظ المصدر الجديد</button>
+        </div>
+    </form>
+
+    <datalist id="resourceCategoryList">
+        {% for cat in categories %}
+            <option value="{{ cat }}">{{ cat|resource_ar }}</option>
+        {% endfor %}
+    </datalist>
+    <datalist id="resourceExamList">
+        {% for exam in exams %}
+            <option value="{{ exam }}">
+        {% endfor %}
+    </datalist>
+    <datalist id="resourceTypeList">
+        {% for type in types %}
+            <option value="{{ type }}">{{ type|resource_ar }}</option>
+        {% endfor %}
+    </datalist>
+    <datalist id="resourceLevelList">
+        {% for level in levels %}
+            <option value="{{ level }}">{{ level|resource_ar }}</option>
+        {% endfor %}
+    </datalist>
+    <datalist id="resourceLanguageList">
+        {% for language in languages %}
+            <option value="{{ language }}">{{ language|resource_ar }}</option>
+        {% endfor %}
+    </datalist>
+</section>
+
+<section class="card resources-filter-card">
+    <h2>البحث في المصادر الحالية</h2>
+    <form method="GET" class="resources-filter-grid">
+        <div class="filter-wide">
+            <label>بحث</label>
+            <input name="q" value="{{ selected.q }}" placeholder="ابحث باسم المصدر أو الوصف أو المهارة">
+        </div>
+
+        <div>
+            <label>الفئة</label>
+            <select name="category">
+                <option value="">جميع الفئات</option>
+                {% for cat in categories %}
+                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat|resource_ar }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label>الاختبار</label>
+            <select name="exam">
+                <option value="">جميع الاختبارات</option>
+                {% for exam in exams %}
+                    <option value="{{ exam }}" {% if selected.exam == exam %}selected{% endif %}>{{ exam }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="filter-actions">
+            <button type="submit">تصفية المصادر</button>
+            <a class="small-button ghost" href="{{ url_for('admin_resources') }}">إعادة ضبط</a>
+        </div>
+    </form>
+</section>
+
+<section class="resources-summary-row">
+    <div class="mini-stat-card">
+        <strong>{{ resources|length }}</strong>
+        <span>مصدر معروض</span>
+    </div>
+    <div class="mini-stat-card">
+        <strong>{{ categories|length }}</strong>
+        <span>فئة</span>
+    </div>
+    <div class="mini-stat-card">
+        <strong>{{ exams|length }}</strong>
+        <span>اختبار</span>
+    </div>
+</section>
+
+<section class="resources-grid admin-resources-grid-v5587">
+    {% for resource in resources %}
+        <article class="resource-card admin-resource-card-v5587">
+            <div class="resource-card-head">
+                <div>
+                    <h3>{{ resource.name }}</h3>
+                    <p>{{ resource.category|resource_ar }}{% if resource.subcategory %} · {{ resource.subcategory|resource_ar }}{% endif %}</p>
+                </div>
+                <div class="resource-badges">
+                    {% if resource.is_official %}<span class="badge official">رسمي</span>{% endif %}
+                    {% if resource.is_free %}<span class="badge free">مجاني</span>{% endif %}
+                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type|resource_ar }}</span>{% endif %}
+                    {% if resource.level %}<span class="badge">{{ resource.level|resource_ar }}</span>{% endif %}
+                </div>
+            </div>
+
+            <p class="resource-desc">{{ resource|resource_description_ar }}</p>
+
+            <div class="resource-meta">
+                {% if resource.exam %}<span>الاختبار: {{ resource.exam }}</span>{% endif %}
+                {% if resource.skill %}<span>المهارة: {{ resource.skill|resource_phrase_ar }}</span>{% endif %}
+                {% if resource.language %}<span>لغة المصدر: {{ resource.language|resource_ar }}</span>{% endif %}
+            </div>
+
+            <form method="POST" action="{{ url_for('admin_update_resource', resource_id=resource.id) }}" class="admin-resource-edit-form-v5587">
+                <div class="field-wide">
+                    <label>عنوان المصدر</label>
+                    <input name="name" value="{{ resource.name }}" required>
+                </div>
+                <div class="field-wide">
+                    <label>رابط المصدر</label>
+                    <input name="url" type="url" value="{{ resource.url }}" required>
+                </div>
+                <div>
+                    <label>الفئة</label>
+                    <input name="category" value="{{ resource.category }}" list="resourceCategoryList">
+                </div>
+                <div>
+                    <label>الفئة الفرعية</label>
+                    <input name="subcategory" value="{{ resource.subcategory or '' }}">
+                </div>
+                <div>
+                    <label>المهارة أو الموضوع</label>
+                    <input name="skill" value="{{ resource.skill or '' }}">
+                </div>
+                <div>
+                    <label>الاختبار</label>
+                    <input name="exam" value="{{ resource.exam or '' }}" list="resourceExamList">
+                </div>
+                <div>
+                    <label>المستوى</label>
+                    <input name="level" value="{{ resource.level or '' }}" list="resourceLevelList">
+                </div>
+                <div>
+                    <label>نوع المصدر</label>
+                    <input name="resource_type" value="{{ resource.resource_type or '' }}" list="resourceTypeList">
+                </div>
+                <div>
+                    <label>لغة المصدر</label>
+                    <input name="language" value="{{ resource.language or '' }}" list="resourceLanguageList">
+                </div>
+                <div>
+                    <label>الوسوم</label>
+                    <input name="tags" value="{{ (resource.tags or [])|join('، ') }}">
+                </div>
+                <div class="field-wide">
+                    <label>وصف المصدر</label>
+                    <textarea name="description" rows="3">{{ resource.description or '' }}</textarea>
+                </div>
+
+                <label class="checkbox-row">
+                    <input type="checkbox" name="is_official" {% if resource.is_official %}checked{% endif %}>
+                    <span>مصدر رسمي</span>
+                </label>
+
+                <label class="checkbox-row">
+                    <input type="checkbox" name="is_free" {% if resource.is_free %}checked{% endif %}>
+                    <span>مصدر مجاني</span>
+                </label>
+
+                <div class="field-wide resource-actions-v472">
+                    <button type="submit" class="small-button">حفظ التعديلات</button>
+                    <a class="button resource-open" href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">فتح المصدر ↗</a>
+                </div>
+            </form>
+
+            <form method="POST" action="{{ url_for('admin_delete_resource', resource_id=resource.id) }}" onsubmit="return confirm('هل تريد حذف هذا المصدر؟ سيُزال أيضاً من قوائم المستخدمين المحفوظة.')" class="delete-saved-resource-v472">
+                <button type="submit" class="small-button danger">حذف المصدر</button>
+            </form>
+        </article>
+    {% else %}
+        <div class="card">
+            <p class="muted">لا توجد مصادر مطابقة للبحث الحالي.</p>
+        </div>
+    {% endfor %}
+</section>
+
+{% endblock %}

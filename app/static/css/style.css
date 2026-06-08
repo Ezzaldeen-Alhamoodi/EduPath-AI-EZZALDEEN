@@ -8086,3 +8086,70 @@ small.hint {
 .global-code-item-v480 span {
     unicode-bidi: plaintext;
 }
+
+
+
+/* EduPath AI v5.5.87 Admin Manage Resources */
+.admin-resource-entry-v5587 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    direction: rtl;
+}
+
+.admin-resource-form-v5587,
+.admin-resource-edit-form-v5587 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 14px;
+    direction: rtl;
+    text-align: right;
+}
+
+.admin-resource-form-v5587 label,
+.admin-resource-edit-form-v5587 label {
+    font-weight: 800;
+}
+
+.admin-resource-form-v5587 input,
+.admin-resource-form-v5587 textarea,
+.admin-resource-edit-form-v5587 input,
+.admin-resource-edit-form-v5587 textarea {
+    width: 100%;
+    box-sizing: border-box;
+    direction: rtl;
+    text-align: right;
+}
+
+.admin-resource-form-v5587 .field-wide,
+.admin-resource-edit-form-v5587 .field-wide,
+.form-actions-v5587 {
+    grid-column: 1 / -1;
+}
+
+.admin-resource-card-v5587 .resource-card-head,
+.admin-resource-card-v5587 .resource-meta,
+.admin-resource-card-v5587 .resource-desc {
+    direction: rtl;
+    text-align: right;
+}
+
+.admin-resources-hero-v5587,
+.admin-resource-form-card-v5587,
+.admin-resources-grid-v5587 {
+    direction: rtl;
+    text-align: right;
+}
+
+@media (max-width: 780px) {
+    .admin-resource-entry-v5587 {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-resource-form-v5587,
+    .admin-resource-edit-form-v5587 {
+        grid-template-columns: 1fr;
+    }
+}

@@ -2913,6 +2913,127 @@ def create_app():
         )
 
 
+
+    @app.route("/admin/resources", methods=["GET", "POST"])
+    @login_required
+    @admin_required
+    def admin_resources():
+        seed_learning_resources()
+
+        if request.method == "POST":
+            name = request.form.get("name", "").strip()
+            url = request.form.get("url", "").strip()
+
+            if not name or not url:
+                flash("يرجى إدخال اسم المصدر والرابط.", "error")
+                return redirect(url_for("admin_resources"))
+
+            tags_text = request.form.get("tags", "").strip()
+            tags = [tag.strip() for tag in re.split(r"[,،\n]+", tags_text) if tag.strip()]
+
+            resource = LearningResource(
+                name=name,
+                category=request.form.get("category", "").strip() or "General Learning",
+                subcategory=request.form.get("subcategory", "").strip(),
+                skill=request.form.get("skill", "").strip(),
+                exam=request.form.get("exam", "").strip(),
+                level=request.form.get("level", "").strip(),
+                resource_type=request.form.get("resource_type", "").strip() or "Website",
+                url=url,
+                description=request.form.get("description", "").strip(),
+                tags_json=json.dumps(tags, ensure_ascii=False),
+                is_official=request.form.get("is_official") == "on",
+                is_free=request.form.get("is_free") == "on",
+                language=request.form.get("language", "").strip(),
+            )
+            db.session.add(resource)
+            db.session.commit()
+            flash("تمت إضافة المصدر بنجاح، وسيظهر بنفس تصميم المصادر الحالية.", "success")
+            return redirect(url_for("admin_resources"))
+
+        q = request.args.get("q", "").strip()
+        category = request.args.get("category", "").strip()
+        exam = request.args.get("exam", "").strip()
+
+        query = LearningResource.query
+        if q:
+            like = f"%{q}%"
+            query = query.filter(
+                db.or_(
+                    LearningResource.name.ilike(like),
+                    LearningResource.description.ilike(like),
+                    LearningResource.skill.ilike(like),
+                    LearningResource.subcategory.ilike(like),
+                )
+            )
+        if category:
+            query = query.filter(LearningResource.category == category)
+        if exam:
+            query = query.filter(LearningResource.exam == exam)
+
+        resources = query.order_by(LearningResource.id.desc()).limit(250).all()
+        categories = sorted({r.category for r in LearningResource.query.with_entities(LearningResource.category).distinct() if r.category})
+        exams = sorted({r.exam for r in LearningResource.query.with_entities(LearningResource.exam).distinct() if r.exam})
+        types = sorted({r.resource_type for r in LearningResource.query.with_entities(LearningResource.resource_type).distinct() if r.resource_type})
+        levels = sorted({r.level for r in LearningResource.query.with_entities(LearningResource.level).distinct() if r.level})
+        languages = sorted({r.language for r in LearningResource.query.with_entities(LearningResource.language).distinct() if r.language})
+
+        return render_template(
+            "admin_resources.html",
+            resources=resources,
+            categories=categories,
+            exams=exams,
+            types=types,
+            levels=levels,
+            languages=languages,
+            selected={"q": q, "category": category, "exam": exam},
+        )
+
+    @app.route("/admin/resources/<int:resource_id>/update", methods=["POST"])
+    @login_required
+    @admin_required
+    def admin_update_resource(resource_id):
+        resource = LearningResource.query.get_or_404(resource_id)
+
+        name = request.form.get("name", "").strip()
+        url = request.form.get("url", "").strip()
+        if not name or not url:
+            flash("لا يمكن حفظ المصدر بدون اسم ورابط.", "error")
+            return redirect(url_for("admin_resources"))
+
+        tags_text = request.form.get("tags", "").strip()
+        tags = [tag.strip() for tag in re.split(r"[,،\n]+", tags_text) if tag.strip()]
+
+        resource.name = name
+        resource.category = request.form.get("category", "").strip() or "General Learning"
+        resource.subcategory = request.form.get("subcategory", "").strip()
+        resource.skill = request.form.get("skill", "").strip()
+        resource.exam = request.form.get("exam", "").strip()
+        resource.level = request.form.get("level", "").strip()
+        resource.resource_type = request.form.get("resource_type", "").strip() or "Website"
+        resource.url = url
+        resource.description = request.form.get("description", "").strip()
+        resource.tags_json = json.dumps(tags, ensure_ascii=False)
+        resource.is_official = request.form.get("is_official") == "on"
+        resource.is_free = request.form.get("is_free") == "on"
+        resource.language = request.form.get("language", "").strip()
+
+        db.session.commit()
+        flash("تم تحديث المصدر بنجاح.", "success")
+        return redirect(url_for("admin_resources"))
+
+    @app.route("/admin/resources/<int:resource_id>/delete", methods=["POST"])
+    @login_required
+    @admin_required
+    def admin_delete_resource(resource_id):
+        resource = LearningResource.query.get_or_404(resource_id)
+        SavedResource.query.filter_by(resource_id=resource.id).delete()
+        db.session.delete(resource)
+        db.session.commit()
+        flash("تم حذف المصدر من مكتبة المصادر.", "success")
+        return redirect(url_for("admin_resources"))
+
+
     @app.route("/admin/send-message", methods=["POST"])
     @login_required
     @admin_required
