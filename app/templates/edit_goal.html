@@ -24,10 +24,7 @@
             <div class="goal-field goal-field-wide">
                 <label>نوع الهدف</label>
                 <select name="category" id="goalTypeSelect" data-saved="{{ goal.category or 'التعليم' }}">
-                    {% set current_goal_type = goal.category or 'التعليم' %}
-                    {% for option in ['التعليم','اللغات','الاختبارات الدولية','البرمجة والتقنية','الذكاء الاصطناعي','المنح الدراسية','الجامعة','الرياضيات','المشاريع','الحياة اليومية','الأهداف الإسلامية','عام','البرمجة والتكنولوجيا','أخرى'] %}
-                        <option value="{{ option }}" {% if option == current_goal_type %}selected{% endif %}>{{ option|goals_ar }}</option>
-                    {% endfor %}
+                    <option value="{{ goal.category or 'التعليم' }}">{{ (goal.category or 'التعليم')|goals_ar }}</option>
                 </select>
             </div>
 
