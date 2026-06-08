@@ -3505,27 +3505,23 @@ def create_app():
                 logger.exception("Today task progress calculation failed for task %s", getattr(task, "id", None))
                 return False
 
-        goals = Goal.query.filter_by(user_id=current_user.id).order_by(Goal.id.desc()).limit(6).all()
-        for goal in goals:
+        all_goals = Goal.query.filter_by(user_id=current_user.id).order_by(Goal.id.desc()).all()
+        active_goals = []
+        completed_goals = []
+        for goal in all_goals:
             goal.time_left = calculate_goal_time_left(goal.deadline)
             goal.goal_progress = calculate_goal_progress(goal)
-
-        all_goals_for_completed = Goal.query.filter_by(user_id=current_user.id).order_by(Goal.id.desc()).all()
-        completed_goals = []
-        visible_goal_ids = {goal.id for goal in goals}
-        for goal in all_goals_for_completed:
-            if goal.id in visible_goal_ids:
-                progress_value = goal.goal_progress if hasattr(goal, "goal_progress") else calculate_goal_progress(goal)
-            else:
-                progress_value = calculate_goal_progress(goal)
-                goal.goal_progress = progress_value
-                goal.time_left = calculate_goal_time_left(goal.deadline)
-            if progress_value >= 100:
+            if goal.goal_progress >= 100:
                 completed_goals.append(goal)
+            else:
+                active_goals.append(goal)
+
+        goals = active_goals[:6]
         completed_goals = completed_goals[:6]
 
-        tasks = StudyTask.query.filter_by(user_id=current_user.id).order_by(StudyTask.id.desc()).limit(10).all()
-        completed_task_items = StudyTask.query.filter_by(user_id=current_user.id, status="done").order_by(StudyTask.id.desc()).limit(10).all()
+        recent_task_candidates = StudyTask.query.filter_by(user_id=current_user.id).order_by(StudyTask.id.desc()).all()
+        tasks = [task for task in recent_task_candidates if task.status != "done"][:10]
+        completed_task_items = [task for task in recent_task_candidates if task.status == "done"][:10]
         mistakes = MistakeLog.query.filter_by(user_id=current_user.id).order_by(MistakeLog.id.desc()).limit(6).all()
 
         total_tasks = StudyTask.query.filter_by(user_id=current_user.id).count()
@@ -3535,7 +3531,12 @@ def create_app():
 
         today_tasks = [task for task in StudyTask.query.filter_by(user_id=current_user.id).all() if task_scheduled_for_today(task)]
         today_completed_tasks = [task for task in today_tasks if task.status == "done"]
-        progress = int((len(today_completed_tasks) / len(today_tasks)) * 100) if today_tasks else 0
+        if today_tasks and len(today_completed_tasks) == len(today_tasks):
+            progress = 100
+        elif today_tasks:
+            progress = round((len(today_completed_tasks) / len(today_tasks)) * 100)
+        else:
+            progress = 0
 
         weak_skills = detect_weaknesses()
         admin_messages = []

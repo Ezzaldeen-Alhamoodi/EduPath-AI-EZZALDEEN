@@ -791,7 +791,7 @@ textarea { line-height: 1.7; }
         min-width: 0 !important;
         width: 100%;
         min-height: 42px;
-        font-size: 13px !important;
+        font-size: 15px !important;
         padding: 9px 10px !important;
     }
 
@@ -3728,7 +3728,7 @@ body.dark-mode .saved-resource-edit-v472 {
 .compact-icon-nav-v474 a,
 .compact-icon-nav-v474 button {
     min-width: 0 !important;
-    min-height: 46px !important;
+    min-height: 48px !important;
     padding: 4px 3px !important;
     border-radius: 15px !important;
     display: grid !important;
@@ -3788,7 +3788,7 @@ body.dark-mode .compact-icon-nav-v474 button {
 
     .main-nav a,
     .sidebar nav a {
-        font-size: 13.5px !important;
+        font-size: 15px !important;
         padding: 8px 10px !important;
         min-height: 34px !important;
     }
@@ -4656,17 +4656,17 @@ body.dark-mode .compact-user-panel-v481 .mini-link {
     }
 
     .desktop-icon-nav-v483 a {
-        min-height: 46px !important;
+        min-height: 48px !important;
         padding: 8px 10px !important;
         border-radius: 16px !important;
         display: grid !important;
-        grid-template-columns: 32px 1fr !important;
+        grid-template-columns: 34px 1fr !important;
         gap: 10px !important;
         align-items: center !important;
         background: rgba(255,255,255,.72) !important;
         border: 1px solid rgba(148,163,184,.16) !important;
         box-shadow: 0 8px 18px rgba(15,23,42,.04) !important;
-        font-size: 13.5px !important;
+        font-size: 15px !important;
         font-weight: 950 !important;
     }
 
@@ -4677,14 +4677,14 @@ body.dark-mode .compact-user-panel-v481 .mini-link {
     }
 
     .desktop-icon-nav-v483 i {
-        width: 31px !important;
-        height: 31px !important;
+        width: 33px !important;
+        height: 33px !important;
         border-radius: 12px !important;
         display: grid !important;
         place-items: center !important;
         color: #fff !important;
         font-style: normal !important;
-        font-size: 13px !important;
+        font-size: 15px !important;
         font-weight: 950 !important;
         line-height: 1 !important;
     }
