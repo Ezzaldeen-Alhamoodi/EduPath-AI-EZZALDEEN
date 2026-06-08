@@ -21,7 +21,7 @@
         <div class="home-progress-ar-v513">
             <div class="progress-circle">{{ progress }}%</div>
             <strong>تقدم المهام</strong>
-            <small>نسبة إنجاز المهام المكتملة من إجمالي مهامك.</small>
+            <small>نسبة إنجاز مهام اليوم من المهام المجدولة لهذا اليوم.</small>
         </div>
     </section>
 
@@ -90,7 +90,7 @@
                             <span class="dashboard-goal-state-v527">
                                 {{ goal|dashboard_goal_current|goals_ar }}
                                 {% if goal|dashboard_goal_has_target %}
-                                    <b>→</b>
+                                    <b>←</b>
                                     {{ goal|dashboard_goal_target|goals_ar }}
                                 {% endif %}
                             </span>
@@ -108,6 +108,41 @@
                     <p class="muted">لا توجد أهداف بعد. أنشئ أول هدف كبير لك.</p>
                 {% endfor %}
             </div>
+
+            {% if completed_goals %}
+                <div class="section-title-row compact-title-ar-v513">
+                    <div>
+                        <h2>الأهداف المكتملة</h2>
+                        <p class="muted">الأهداف التي وصلت إلى إنجاز كامل.</p>
+                    </div>
+                </div>
+
+                <div class="goal-board compact-goals-ar-v513 dashboard-goals-summary-v527">
+                    {% for goal in completed_goals %}
+                        <div class="goal-tile dashboard-goal-tile-v527">
+                            <div class="goal-content dashboard-goal-content-v527">
+                                <strong>{{ goal.title }}</strong>
+
+                                <span class="dashboard-goal-state-v527">
+                                    {{ goal|dashboard_goal_current|goals_ar }}
+                                    {% if goal|dashboard_goal_has_target %}
+                                        <b>←</b>
+                                        {{ goal|dashboard_goal_target|goals_ar }}
+                                    {% endif %}
+                                </span>
+
+                                <div class="goal-progress-line dashboard-goal-progress-v527">
+                                    <div class="goal-progress-fill" style="width: {{ goal.goal_progress or 0 }}%"></div>
+                                </div>
+
+                                <span class="progress-label dashboard-goal-percent-v527">📊 {{ goal.goal_progress or 0 }}٪ تقدم</span>
+
+                                <span class="countdown dashboard-goal-time-v527">✅ هدف مكتمل</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
 
         <div class="card home-card-ar-v513">
@@ -123,6 +158,19 @@
             {% else %}
                 <p class="muted">لا توجد مهام بعد.</p>
             {% endfor %}
+
+            {% if completed_task_items %}
+                <h2>المهام المكتملة</h2>
+                {% for task in completed_task_items %}
+                    <div class="task-mini compact-task-mini-ar-v513">
+                        <div>
+                            <strong>{{ task.title }}</strong>
+                            <span>{{ task.category|dashboard_ar }} · {{ task.skill|dashboard_ar }} · {{ task.estimated_minutes }} دقيقة · {{ task.status|dashboard_ar }}</span>
+                        </div>
+                        <span class="badge">{{ task.reminder_time|time_12h_ar }}</span>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
     </section>
 

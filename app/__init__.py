@@ -3445,18 +3445,97 @@ def create_app():
     @app.route("/")
     @login_required
     def index():
+        today_value = str(date.today())
+
+        def task_scheduled_for_today(task):
+            """Return True when the task belongs to today's plan without changing stored task data."""
+            try:
+                start = (task.start_date or "").strip()
+                due = (task.due_date or "").strip()
+                repeat = (task.repeat_type or "").strip()
+                repeat_days = (task.repeat_days or "").strip()
+
+                if start and start > today_value:
+                    return False
+                if due and due < today_value:
+                    return False
+
+                repeat_lower = repeat.lower()
+                one_time_values = {
+                    "مرة واحدة / بدون تكرار",
+                    "مرة واحدة",
+                    "بدون تكرار",
+                    "once",
+                    "one_time",
+                    "none",
+                }
+
+                if repeat in one_time_values or repeat_lower in one_time_values:
+                    return (start == today_value) or (due == today_value) or (not start and not due)
+
+                if repeat in {"يوميًا", "يومي", "daily"} or repeat_lower == "daily":
+                    return True
+
+                if repeat in {"أيام محددة", "selected_days"} or repeat_lower == "selected_days":
+                    today_weekday = str(date.today().weekday())
+                    selected_days = {day.strip() for day in repeat_days.split(",") if day.strip()}
+                    return today_weekday in selected_days
+
+                if repeat in {"أسبوعيًا", "أسبوعي", "weekly"} or repeat_lower == "weekly":
+                    if start:
+                        try:
+                            return datetime.strptime(start, "%Y-%m-%d").date().weekday() == date.today().weekday()
+                        except ValueError:
+                            return True
+                    return True
+
+                if repeat in {"شهريًا", "شهري", "monthly"} or repeat_lower == "monthly":
+                    if start:
+                        try:
+                            return datetime.strptime(start, "%Y-%m-%d").date().day == date.today().day
+                        except ValueError:
+                            return True
+                    return True
+
+                if repeat in {"أخرى", "custom"} or repeat_lower == "custom":
+                    return (not start or start <= today_value) and (not due or due >= today_value)
+
+                return (not start or start <= today_value) and (not due or due >= today_value)
+            except Exception:
+                logger.exception("Today task progress calculation failed for task %s", getattr(task, "id", None))
+                return False
+
         goals = Goal.query.filter_by(user_id=current_user.id).order_by(Goal.id.desc()).limit(6).all()
         for goal in goals:
             goal.time_left = calculate_goal_time_left(goal.deadline)
             goal.goal_progress = calculate_goal_progress(goal)
+
+        all_goals_for_completed = Goal.query.filter_by(user_id=current_user.id).order_by(Goal.id.desc()).all()
+        completed_goals = []
+        visible_goal_ids = {goal.id for goal in goals}
+        for goal in all_goals_for_completed:
+            if goal.id in visible_goal_ids:
+                progress_value = goal.goal_progress if hasattr(goal, "goal_progress") else calculate_goal_progress(goal)
+            else:
+                progress_value = calculate_goal_progress(goal)
+                goal.goal_progress = progress_value
+                goal.time_left = calculate_goal_time_left(goal.deadline)
+            if progress_value >= 100:
+                completed_goals.append(goal)
+        completed_goals = completed_goals[:6]
+
         tasks = StudyTask.query.filter_by(user_id=current_user.id).order_by(StudyTask.id.desc()).limit(10).all()
+        completed_task_items = StudyTask.query.filter_by(user_id=current_user.id, status="done").order_by(StudyTask.id.desc()).limit(10).all()
         mistakes = MistakeLog.query.filter_by(user_id=current_user.id).order_by(MistakeLog.id.desc()).limit(6).all()
 
         total_tasks = StudyTask.query.filter_by(user_id=current_user.id).count()
         completed_tasks = StudyTask.query.filter_by(user_id=current_user.id, status="done").count()
         pending_tasks = StudyTask.query.filter_by(user_id=current_user.id, status="pending").count()
         total_goals = Goal.query.filter_by(user_id=current_user.id).count()
-        progress = int((completed_tasks / total_tasks) * 100) if total_tasks else 0
+
+        today_tasks = [task for task in StudyTask.query.filter_by(user_id=current_user.id).all() if task_scheduled_for_today(task)]
+        today_completed_tasks = [task for task in today_tasks if task.status == "done"]
+        progress = int((len(today_completed_tasks) / len(today_tasks)) * 100) if today_tasks else 0
 
         weak_skills = detect_weaknesses()
         admin_messages = []
@@ -3465,7 +3544,9 @@ def create_app():
         return render_template(
             "index.html",
             goals=goals,
+            completed_goals=completed_goals,
             tasks=tasks,
+            completed_task_items=completed_task_items,
             mistakes=mistakes,
             total_tasks=total_tasks,
             completed_tasks=completed_tasks,
