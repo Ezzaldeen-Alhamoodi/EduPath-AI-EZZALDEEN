@@ -1,30 +1,29 @@
-\
 {% extends "base.html" %}
-{% block page_title %}Login{% endblock %}
+{% block page_title %}تسجيل الدخول{% endblock %}
 {% block content %}
 
 <section class="auth-shell">
     <div class="auth-card">
         <div class="auth-brand">🧠 EduPath AI EZZALDEEN</div>
-        <h2>Welcome back</h2>
-        <p class="muted">Log in to access your private goals, tasks, scholarship plans, and AI coaching.</p>
+        <h2>مرحباً بعودتك</h2>
+        <p class="muted">سجّل الدخول للوصول إلى أهدافك ومهامك وخططك التعليمية ومدرب الذكاء الاصطناعي.</p>
 
         <form method="POST" class="form">
-            <label>Email</label>
-            <input type="text" name="email" inputmode="email" autocomplete="email" placeholder="yourname@example.com" required>
+            <label>البريد الإلكتروني</label>
+            <input type="text" name="email" inputmode="email" autocomplete="email" placeholder="example@email.com" required>
 
-            <label>Password</label>
-            <input type="password" name="password" placeholder="Your password" required>
+            <label>كلمة المرور</label>
+            <input type="password" name="password" placeholder="اكتب كلمة المرور" required>
 
-            <button type="submit">🔐 Login</button>
+            <button type="submit">🔐 تسجيل الدخول</button>
         </form>
 
-        <p class="auth-link"><a href="{{ url_for('forgot_password') }}">Forgot password?</a></p>
-        <p class="auth-link"><a href="{{ url_for('resend_verification_public') }}">Resend verification email</a></p>
+        <p class="auth-link"><a href="{{ url_for('forgot_password') }}">نسيت كلمة المرور؟</a></p>
+        <p class="auth-link"><a href="{{ url_for('resend_verification_public') }}">إعادة إرسال رسالة التحقق</a></p>
 
         <p class="auth-link">
-            New to EduPath AI?
-            <a href="{{ url_for('register') }}">Create account</a>
+            ليس لديك حساب؟
+            <a href="{{ url_for('register') }}">إنشاء حساب جديد</a>
         </p>
     </div>
 </section>

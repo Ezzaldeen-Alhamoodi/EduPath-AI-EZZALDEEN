@@ -1,19 +1,18 @@
-\
 {% extends "base.html" %}
-{% block page_title %}Verify Email{% endblock %}
+{% block page_title %}تأكيد البريد الإلكتروني{% endblock %}
 {% block content %}
 
 <section class="auth-shell">
     <div class="auth-card">
         <div class="auth-brand">🧠 EduPath AI EZZALDEEN</div>
-        <h2>Verify your email</h2>
-        <p class="muted">Your account is active, but email verification helps secure public deployment.</p>
+        <h2>تأكيد البريد الإلكتروني</h2>
+        <p class="muted">حسابك موجود، وتأكيد البريد الإلكتروني يساعد على حماية الحساب عند النشر العام.</p>
 
         <form method="POST" class="form">
-            <button type="submit">📩 Resend verification email</button>
+            <button type="submit">📩 إعادة إرسال رسالة التحقق</button>
         </form>
 
-        <p class="auth-link"><a href="{{ url_for('profile') }}">Back to profile</a></p>
+        <p class="auth-link"><a href="{{ url_for('profile') }}">العودة إلى الملف الشخصي</a></p>
     </div>
 </section>
 

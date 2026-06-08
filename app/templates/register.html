@@ -1,55 +1,54 @@
-\
 {% extends "base.html" %}
-{% block page_title %}Create Account{% endblock %}
+{% block page_title %}إنشاء حساب{% endblock %}
 {% block content %}
 
 <section class="auth-shell">
     <div class="auth-card wide">
         <div class="auth-brand">🧠 EduPath AI EZZALDEEN</div>
-        <h2>Create your private account</h2>
-        <p class="muted">Each student gets private goals, tasks, profile, and progress. No one can see another user's data.</p>
+        <h2>إنشاء حسابك الخاص</h2>
+        <p class="muted">كل مستخدم يحصل على أهدافه ومهامه وملفه الشخصي وتقدمه بشكل خاص. لا يستطيع أي مستخدم رؤية بيانات مستخدم آخر.</p>
 
         <form method="POST" class="form">
-            <label>Full name</label>
-            <input name="name" placeholder="Your name" required>
+            <label>الاسم الكامل</label>
+            <input name="name" placeholder="اكتب اسمك الكامل" required>
 
-            <label>Email</label>
-            <input type="text" name="email" inputmode="email" autocomplete="email" placeholder="yourname@example.com" required>
+            <label>البريد الإلكتروني</label>
+            <input type="text" name="email" inputmode="email" autocomplete="email" placeholder="example@email.com" required>
 
             <div class="form-row">
                 <div>
-                    <label>Password</label>
-                    <input type="password" name="password" minlength="6" required>
+                    <label>كلمة المرور</label>
+                    <input type="password" name="password" minlength="6" placeholder="ستة أحرف على الأقل" required>
                 </div>
                 <div>
-                    <label>Confirm password</label>
-                    <input type="password" name="confirm_password" minlength="6" required>
+                    <label>تأكيد كلمة المرور</label>
+                    <input type="password" name="confirm_password" minlength="6" placeholder="أعد كتابة كلمة المرور" required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div>
-                    <label>Country optional</label>
-                    <input name="country" placeholder="Example: Yemen">
+                    <label>الدولة اختياري</label>
+                    <input name="country" placeholder="مثال: اليمن">
                 </div>
                 <div>
-                    <label>Major optional</label>
-                    <input name="major" placeholder="Example: Computer Science">
+                    <label>التخصص اختياري</label>
+                    <input name="major" placeholder="مثال: علوم الحاسوب">
                 </div>
             </div>
 
-            <label>Target degree optional</label>
-            <input name="target_degree" placeholder="Example: Bachelor">
+            <label>الدرجة المستهدفة اختياري</label>
+            <input name="target_degree" placeholder="مثال: بكالوريوس">
 
-            <label>Languages optional</label>
-            <input name="languages" placeholder="Example: English, Chinese, Russian">
+            <label>اللغات اختياري</label>
+            <input name="languages" placeholder="مثال: الإنجليزية، الصينية، الروسية">
 
-            <button type="submit">✨ Create Account</button>
+            <button type="submit">✨ إنشاء الحساب</button>
         </form>
 
         <p class="auth-link">
-            Already have an account?
-            <a href="{{ url_for('login') }}">Login</a>
+            لديك حساب بالفعل؟
+            <a href="{{ url_for('login') }}">تسجيل الدخول</a>
         </p>
     </div>
 </section>

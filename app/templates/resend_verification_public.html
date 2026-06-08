@@ -1,21 +1,20 @@
-\
 {% extends "base.html" %}
-{% block page_title %}Resend Verification{% endblock %}
+{% block page_title %}إعادة إرسال التحقق{% endblock %}
 {% block content %}
 
 <section class="auth-shell">
     <div class="auth-card">
         <div class="auth-brand">🧠 EduPath AI EZZALDEEN</div>
-        <h2>Resend verification email</h2>
-        <p class="muted">Enter your email. If an unverified account exists, we will send a verification link.</p>
+        <h2>إعادة إرسال رسالة التحقق</h2>
+        <p class="muted">أدخل بريدك الإلكتروني. إذا كان هناك حساب غير مؤكد بهذا البريد، فسيتم إرسال رابط التحقق.</p>
 
         <form method="POST" class="form">
-            <label>Email</label>
-            <input type="text" name="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="yourname@example.com" required>
-            <button type="submit">📩 Resend verification link</button>
+            <label>البريد الإلكتروني</label>
+            <input type="text" name="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="example@email.com" required>
+            <button type="submit">📩 إعادة إرسال رابط التحقق</button>
         </form>
 
-        <p class="auth-link"><a href="{{ url_for('login') }}">Back to login</a></p>
+        <p class="auth-link"><a href="{{ url_for('login') }}">العودة إلى تسجيل الدخول</a></p>
     </div>
 </section>
 

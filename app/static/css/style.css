@@ -8196,3 +8196,31 @@ small.hint {
     font-size: 12px;
     line-height: 1.6;
 }
+
+
+
+/* EduPath AI v5.5.92 Native Arabic Auth */
+.auth-shell,
+.auth-card,
+.auth-card .form,
+.auth-card .auth-link {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.auth-card input {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.auth-card input[type="email"],
+.auth-card input[inputmode="email"],
+.auth-card input[name="email"] {
+    direction: ltr !important;
+    text-align: left !important;
+}
+
+.auth-card .auth-brand {
+    direction: ltr;
+    text-align: center;
+}

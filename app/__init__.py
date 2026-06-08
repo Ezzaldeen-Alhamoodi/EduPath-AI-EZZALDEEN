@@ -313,50 +313,52 @@ def current_app_mail_is_configured():
 def send_verification_email(user):
     token = generate_token(user.email, "verify-email")
     link = url_for("verify_email", token=token, _external=True)
-    body = f"""Hello {user.name},
+    body = f"""مرحباً {user.name}،
 
-Welcome to EduPath AI EZZALDEEN.
+أهلاً بك في EduPath AI EZZALDEEN.
 
-Please verify your email by opening this link:
+يرجى تأكيد بريدك الإلكتروني من خلال فتح الرابط التالي:
 {link}
 
-This link is valid for 24 hours.
+هذا الرابط صالح لمدة 24 ساعة.
 
-If you did not create this account, ignore this email.
+إذا لم تقم بإنشاء هذا الحساب، يمكنك تجاهل هذه الرسالة.
+
+EduPath AI EZZALDEEN
 """
-    return send_email_message("Verify your EduPath AI email", [user.email], body)
+    return send_email_message("تأكيد بريدك الإلكتروني في EduPath AI", [user.email], body)
 
 def send_password_reset_email(user):
     token = generate_token(user.email, "reset-password")
     link = url_for("reset_password", token=token, _external=True)
-    body = f"""Hello {user.name},
+    body = f"""مرحباً {user.name}،
 
-You requested a password reset for EduPath AI EZZALDEEN.
+لقد طلبت إعادة تعيين كلمة المرور لحسابك في EduPath AI EZZALDEEN.
 
-Reset your password using this link:
+يمكنك تعيين كلمة مرور جديدة من خلال الرابط التالي:
 {link}
 
-This link is valid for 1 hour.
+هذا الرابط صالح لمدة ساعة واحدة.
 
-If you did not request this, ignore this email.
-"""
-    return send_email_message("Reset your EduPath AI password", [user.email], body)
-
-
-def send_welcome_email(user):
-    body = f"""Hello {user.name},
-
-Welcome to EduPath AI EZZALDEEN.
-
-Your account is ready. You can now organize your goals, tasks, learning plan, and AI coaching.
-
-Keep going step by step. Small daily progress becomes a big achievement.
+إذا لم تطلب إعادة تعيين كلمة المرور، يمكنك تجاهل هذه الرسالة.
 
 EduPath AI EZZALDEEN
 """
-    return send_email_message("Welcome to EduPath AI EZZALDEEN", [user.email], body)
+    return send_email_message("إعادة تعيين كلمة مرور EduPath AI", [user.email], body)
 
 
+def send_welcome_email(user):
+    body = f"""مرحباً {user.name}،
+
+أهلاً بك في EduPath AI EZZALDEEN.
+
+تم تجهيز حسابك بنجاح. يمكنك الآن تنظيم أهدافك ومهامك وخطتك التعليمية والاستفادة من مدرب الذكاء الاصطناعي.
+
+واصل التقدم خطوة بخطوة. الإنجاز اليومي الصغير يتحول مع الوقت إلى نتيجة كبيرة.
+
+EduPath AI EZZALDEEN
+"""
+    return send_email_message("أهلاً بك في EduPath AI EZZALDEEN", [user.email], body)
 
 
 
@@ -2583,15 +2585,15 @@ def create_app():
                 return redirect(url_for("register"))
 
             if not is_valid_email(email):
-                flash("Please enter a valid email address.", "error")
+                flash("يرجى إدخال بريد إلكتروني صحيح.", "error")
                 return redirect(url_for("register"))
 
             if password != confirm_password:
-                flash("Passwords do not match.", "error")
+                flash("كلمتا المرور غير متطابقتين.", "error")
                 return redirect(url_for("register"))
 
             if len(password) < 6:
-                flash("Password must be at least 6 characters.", "error")
+                flash("يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.", "error")
                 return redirect(url_for("register"))
 
             existing_user = User.query.filter_by(email=email).first()
@@ -2625,7 +2627,7 @@ def create_app():
             send_welcome_email(user) if os.environ.get("SEND_WELCOME_EMAIL", "false").lower() == "true" else False
             session.permanent = True
             login_user(user, remember=True, duration=timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30"))))
-            flash("Account created successfully. Welcome to EduPath AI EZZALDEEN.", "success")
+            flash("تم إنشاء الحساب بنجاح. أهلاً بك في EduPath AI EZZALDEEN.", "success")
             return redirect(url_for("index"))
 
         return render_template("register.html")
@@ -2642,14 +2644,14 @@ def create_app():
             user = User.query.filter_by(email=email).first()
             if not user or not check_password_hash(user.password_hash, password):
                 logger.info("Login failed for email=%s user_exists=%s", email, bool(user))
-                flash("Invalid email or password.", "error")
+                flash("البريد الإلكتروني أو كلمة المرور غير صحيحة.", "error")
                 return redirect(url_for("login"))
 
             if app.config.get("REQUIRE_EMAIL_VERIFICATION", False) and not user.email_verified:
                 if os.environ.get("SEND_AUTH_EMAILS", "false").lower() == "true" and send_verification_email(user):
-                    flash("Please verify your email before logging in. A verification link has been sent.", "error")
+                    flash("يرجى تأكيد بريدك الإلكتروني قبل تسجيل الدخول. تم إرسال رابط التحقق.", "error")
                 else:
-                    flash("Your email is not verified, and the verification email could not be sent now. Please contact the admin.", "error")
+                    flash("لم يتم تأكيد بريدك الإلكتروني، وتعذر إرسال رسالة التحقق حالياً. يرجى التواصل مع المشرف.", "error")
                 return redirect(url_for("login"))
 
             if email in app.config["ADMIN_EMAILS"] and not user.is_admin:
@@ -2658,7 +2660,7 @@ def create_app():
 
             session.permanent = True
             login_user(user, remember=True, duration=timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30"))))
-            flash("Welcome back.", "success")
+            flash("مرحباً بعودتك.", "success")
             return redirect(url_for("index"))
 
         return render_template("login.html")
@@ -2672,31 +2674,31 @@ def create_app():
             flash("Verification link expired. Please request a new one.", "error")
             return redirect(url_for("resend_verification"))
         except BadSignature:
-            flash("Invalid verification link.", "error")
+            flash("رابط التحقق غير صالح.", "error")
             return redirect(url_for("login"))
 
         user = User.query.filter_by(email=email).first()
         if not user:
-            flash("Account not found.", "error")
+            flash("لم يتم العثور على الحساب.", "error")
             return redirect(url_for("register"))
 
         user.email_verified = True
         db.session.commit()
-        flash("Email verified successfully.", "success")
+        flash("تم تأكيد البريد الإلكتروني بنجاح.", "success")
         return redirect(url_for("index" if current_user.is_authenticated else "login"))
 
     @app.route("/resend-verification", methods=["GET", "POST"])
     @login_required
     def resend_verification():
         if current_user.email_verified:
-            flash("Your email is already verified.", "success")
+            flash("بريدك الإلكتروني مؤكد بالفعل.", "success")
             return redirect(url_for("profile"))
 
         if request.method == "POST":
             send_verification_email(current_user)
             current_user.verification_sent_at = datetime.utcnow()
             db.session.commit()
-            flash("Verification email sent. Check your inbox or app logs if SMTP is not configured.", "success")
+            flash("تم إرسال رسالة التحقق. يرجى فحص صندوق البريد.", "success")
             return redirect(url_for("profile"))
 
         return render_template("resend_verification.html")
@@ -2714,7 +2716,7 @@ def create_app():
             if user and not user.email_verified:
                 send_verification_email(user)
 
-            flash("If this email has an unverified account, a verification link has been sent.", "success")
+            flash("إذا كان هذا البريد مرتبطاً بحساب غير مؤكد، فسيتم إرسال رابط التحقق إليه.", "success")
             return redirect(url_for("login"))
 
         return render_template("resend_verification_public.html")
@@ -2730,7 +2732,7 @@ def create_app():
             user = User.query.filter_by(email=email).first()
             if user and os.environ.get("SEND_AUTH_EMAILS", "false").lower() == "true":
                 send_password_reset_email(user)
-            flash("If this email exists and email sending is enabled, a password reset link has been sent.", "success")
+            flash("إذا كان هذا البريد موجوداً وكان إرسال البريد مفعلاً، فسيتم إرسال رابط إعادة تعيين كلمة المرور إليه.", "success")
             return redirect(url_for("login"))
 
         return render_template("forgot_password.html")
@@ -2740,10 +2742,10 @@ def create_app():
         try:
             email = verify_token(token, "reset-password", max_age=3600)
         except SignatureExpired:
-            flash("Password reset link expired.", "error")
+            flash("انتهت صلاحية رابط إعادة تعيين كلمة المرور.", "error")
             return redirect(url_for("forgot_password"))
         except BadSignature:
-            flash("Invalid password reset link.", "error")
+            flash("رابط إعادة تعيين كلمة المرور غير صالح.", "error")
             return redirect(url_for("forgot_password"))
 
         user = User.query.filter_by(email=email).first_or_404()
@@ -2753,16 +2755,16 @@ def create_app():
             confirm_password = request.form.get("confirm_password", "")
 
             if len(password) < 6:
-                flash("Password must be at least 6 characters.", "error")
+                flash("يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.", "error")
                 return redirect(url_for("reset_password", token=token))
 
             if password != confirm_password:
-                flash("Passwords do not match.", "error")
+                flash("كلمتا المرور غير متطابقتين.", "error")
                 return redirect(url_for("reset_password", token=token))
 
             user.password_hash = generate_password_hash(password)
             db.session.commit()
-            flash("Password updated successfully. Please log in.", "success")
+            flash("تم تحديث كلمة المرور بنجاح. يرجى تسجيل الدخول.", "success")
             return redirect(url_for("login"))
 
         return render_template("reset_password.html", token=token)
@@ -2772,7 +2774,7 @@ def create_app():
     @login_required
     def logout():
         logout_user()
-        flash("You have been logged out.", "success")
+        flash("تم تسجيل الخروج بنجاح.", "success")
         return redirect(url_for("login"))
 
     @app.route("/profile", methods=["GET", "POST"])
