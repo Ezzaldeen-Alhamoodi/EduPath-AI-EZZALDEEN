@@ -35,7 +35,7 @@
 
     <form method="POST" action="{{ url_for('admin_send_message') }}" class="form admin-message-form">
         <label>اختر المستخدم</label>
-        <select name="user_id" required class="admin-user-select-v5590">
+        <select name="user_id" required class="admin-user-select-v5590" data-preserve-option-labels="true">
             <option value="all">جميع المستخدمين</option>
             {% for user in users %}
                 <option value="{{ user.id }}">{{ (user.name or "مستخدم بدون اسم") }} — {{ user.email }}</option>

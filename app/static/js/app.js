@@ -405,6 +405,10 @@ function labelForUI(value) {
 
 function translateDynamicOptions() {
     document.querySelectorAll("select option").forEach(option => {
+        const parentSelect = option.closest("select");
+        if (parentSelect && parentSelect.dataset.preserveOptionLabels === "true") {
+            return;
+        }
         option.textContent = labelForUI(option.value || option.textContent);
     });
 
