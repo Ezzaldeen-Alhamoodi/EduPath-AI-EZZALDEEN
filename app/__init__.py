@@ -361,24 +361,24 @@ EduPath AI EZZALDEEN
 
 def create_admin_message(user, admin, message_type, custom_message=""):
     presets = {
-        "completed": "Congratulations! You are making real progress. Completing tasks means you are building discipline step by step.",
-        "not_completed": "Do not worry if you did not complete everything today. Start again with one small task. Progress is built by returning, not by being perfect.",
-        "partial": "You completed part of your work, and that matters. Now try to finish one more task and keep your momentum.",
-        "encouragement": "Keep going. Your goals are closer when you continue with small daily steps.",
-        "custom": custom_message or "Keep going. EduPath AI believes in your progress."
+        "completed": "أحسنت! أنت تحقق تقدماً حقيقياً. إنجاز المهام يعني أنك تبني الانضباط خطوة بعد خطوة.",
+        "not_completed": "لا تقلق إذا لم تُكمل كل شيء اليوم. ابدأ من جديد بمهمة صغيرة واحدة؛ التقدم يُبنى بالعودة والاستمرار، وليس بالكمال.",
+        "partial": "لقد أنجزت جزءاً من عملك، وهذا مهم. حاول الآن إكمال مهمة أخرى وحافظ على زخمك.",
+        "encouragement": "واصل التقدم. أهدافك تصبح أقرب عندما تستمر بخطوات يومية صغيرة.",
+        "custom": custom_message or "واصل التقدم. EduPath AI يؤمن بقدرتك على التطور."
     }
     title_map = {
-        "completed": "Great progress!",
-        "not_completed": "A gentle reminder",
-        "partial": "Keep your momentum",
-        "encouragement": "You can do this",
-        "custom": "EduPath AI Message"
+        "completed": "تقدم رائع!",
+        "not_completed": "تذكير لطيف",
+        "partial": "حافظ على زخمك",
+        "encouragement": "يمكنك فعل ذلك",
+        "custom": "رسالة من EduPath AI"
     }
     message = AdminMessage(
         user_id=user.id,
         admin_id=admin.id if admin and getattr(admin, "is_authenticated", False) else None,
         message_type=message_type,
-        title=title_map.get(message_type, "EduPath AI Message"),
+        title=title_map.get(message_type, "رسالة من EduPath AI"),
         body=(custom_message if message_type == "custom" and custom_message else presets.get(message_type, presets["encouragement"])),
     )
     db.session.add(message)
@@ -388,28 +388,29 @@ def create_admin_message(user, admin, message_type, custom_message=""):
 
 def send_admin_motivation_email(user, message_type, custom_message=""):
     presets = {
-        "completed": "Congratulations! You are making real progress. Completing tasks means you are building discipline step by step.",
-        "not_completed": "Do not worry if you did not complete everything today. Start again with one small task. Progress is built by returning, not by being perfect.",
-        "partial": "You completed part of your work, and that matters. Now try to finish one more task and keep your momentum.",
-        "encouragement": "Keep going. Your goals are closer when you continue with small daily steps.",
-        "custom": custom_message or "Keep going. EduPath AI believes in your progress."
+        "completed": "أحسنت! أنت تحقق تقدماً حقيقياً. إنجاز المهام يعني أنك تبني الانضباط خطوة بعد خطوة.",
+        "not_completed": "لا تقلق إذا لم تُكمل كل شيء اليوم. ابدأ من جديد بمهمة صغيرة واحدة؛ التقدم يُبنى بالعودة والاستمرار، وليس بالكمال.",
+        "partial": "لقد أنجزت جزءاً من عملك، وهذا مهم. حاول الآن إكمال مهمة أخرى وحافظ على زخمك.",
+        "encouragement": "واصل التقدم. أهدافك تصبح أقرب عندما تستمر بخطوات يومية صغيرة.",
+        "custom": custom_message or "واصل التقدم. EduPath AI يؤمن بقدرتك على التطور."
     }
     subject_map = {
-        "completed": "Great progress from EduPath AI",
-        "not_completed": "A gentle reminder from EduPath AI",
-        "partial": "Keep your momentum going",
-        "encouragement": "You can do this",
-        "custom": "EduPath AI Message"
+        "completed": "تقدم رائع من EduPath AI",
+        "not_completed": "تذكير لطيف من EduPath AI",
+        "partial": "حافظ على زخمك",
+        "encouragement": "يمكنك فعل ذلك",
+        "custom": "رسالة من EduPath AI"
     }
-    body = f"""Hello {user.name},
+    body = f"""مرحباً {user.name}،
 
 {presets.get(message_type, presets["encouragement"])}
 
-Your learning journey is important. Continue step by step.
+رحلتك التعليمية مهمة. واصل السير خطوة بخطوة، ولا تنتظر الكمال حتى تبدأ.
 
 EduPath AI EZZALDEEN
 """
-    return send_email_message(subject_map.get(message_type, "Message from EduPath AI"), [user.email], body)
+    return send_email_message(subject_map.get(message_type, "رسالة من EduPath AI"), [user.email], body)
+
 
 def task_display_line(task):
     parts = [
@@ -703,21 +704,238 @@ def record_ai_usage(user, tool_name="general"):
 
 
 
+
+RESOURCE_AR_LABELS_V5584 = {
+    "English Skills": "مهارات اللغة الإنجليزية",
+    "English Exams": "اختبارات اللغة الإنجليزية",
+    "Chinese & HSK": "الصينية و HSK",
+    "CSCA": "CSCA",
+    "SAT": "SAT",
+    "ACT": "ACT",
+    "GRE": "GRE",
+    "GMAT": "GMAT",
+    "Mathematics": "الرياضيات",
+    "Programming & Technology": "البرمجة والتكنولوجيا",
+    "AI & Data Science": "الذكاء الاصطناعي وعلم البيانات",
+    "Scholarships": "المنح الدراسية",
+    "Islamic Learning": "التعلم الإسلامي",
+    "General Learning": "التعلم العام",
+    "Typing & Keyboard": "الكتابة على لوحة المفاتيح",
+    "Keyboard Typing": "الكتابة على لوحة المفاتيح",
+
+    "Arithmetic": "الحساب",
+    "Pre-Algebra": "ما قبل الجبر",
+    "Algebra": "الجبر",
+    "Advanced Algebra": "الجبر المتقدم",
+    "Geometry": "الهندسة",
+    "Trigonometry": "المثلثات",
+    "Precalculus": "ما قبل التفاضل والتكامل",
+    "Calculus": "التفاضل والتكامل",
+    "Statistics": "الإحصاء",
+    "Foundations": "الأساسيات",
+    "Algebra & Geometry": "الجبر والهندسة",
+    "Physics": "الفيزياء",
+    "Chemistry": "الكيمياء",
+    "English": "الإنجليزية",
+    "Chinese": "الصينية",
+    "Quran": "القرآن الكريم",
+    "Islamic Studies": "الدراسات الإسلامية",
+
+    "Official": "رسمي",
+    "Practice": "تدريب",
+    "Course": "دورة",
+    "Website": "موقع",
+    "App": "تطبيق",
+    "Book": "كتاب",
+    "Documentation": "توثيق",
+    "Tool": "أداة",
+    "Search Tool": "أداة بحث",
+    "Official Portal": "بوابة رسمية",
+    "Official Search": "بحث رسمي",
+    "Guide": "دليل",
+    "Simulation": "محاكاة",
+    "Audio": "صوتيات",
+    "Library": "مكتبة",
+    "Video Lessons": "دروس فيديو",
+    "Notes": "ملاحظات",
+    "Dictionary": "قاموس",
+
+    "Beginner": "مبتدئ",
+    "Intermediate": "متوسط",
+    "Advanced": "متقدم",
+    "Beginner → Intermediate": "من مبتدئ إلى متوسط",
+    "Intermediate → Advanced": "من متوسط إلى متقدم",
+    "All Levels": "كل المستويات",
+    "English": "الإنجليزية",
+    "Arabic": "العربية",
+    "Arabic/English": "العربية والإنجليزية",
+
+    "Not Started": "لم يبدأ",
+    "In Progress": "قيد الاستخدام",
+    "Completed": "مكتمل",
+}
+
+RESOURCE_DESCRIPTION_OVERRIDES_V5584 = {
+    "Khan Academy Arithmetic": "دروس وتمارين تأسيسية في الحساب، مناسبة لبناء قاعدة قوية في الأعداد والعمليات الأساسية.",
+    "Khan Academy Pre-Algebra": "مسار مجاني لتقوية أساسيات ما قبل الجبر، مفيد للمدرسة واختبارات الرياضيات.",
+    "Khan Academy Algebra 1": "دورة قوية ومجانية في الجبر، تتضمن شرحاً وتمارين على المعادلات والدوال.",
+    "Khan Academy Algebra 2": "دروس وتمارين في الجبر المتقدم والدوال، مناسبة للانتقال إلى مستويات أعلى.",
+    "Khan Academy Geometry": "مصدر منظم لتعلم الهندسة والأشكال والبراهين والتمارين التطبيقية.",
+    "Khan Academy Trigonometry": "دروس في المثلثات والدائرة المثلثية، مفيدة لاختبارات الرياضيات المتقدمة.",
+    "Khan Academy Precalculus": "مسار يغطي الدوال والمتتاليات وموضوعات تمهيدية قبل التفاضل والتكامل.",
+    "Khan Academy Calculus": "شرح وتمارين في النهايات والمشتقات والتكامل، مناسب للمراجعة والتعلم الذاتي.",
+    "Khan Academy Statistics": "دورة في الإحصاء والاحتمالات مع أمثلة وتمارين واضحة.",
+    "Math Is Fun": "شروحات مبسطة وسهلة في موضوعات رياضية كثيرة، مناسبة للمراجعة السريعة.",
+    "Purplemath": "شرح واضح لموضوعات الجبر مع أمثلة مرتبة تساعد على فهم الخطوات.",
+    "Paul's Online Math Notes": "ملاحظات ودروس رياضيات قوية للمرحلة الجامعية، خصوصاً التفاضل والتكامل.",
+    "GeoGebra": "أداة تفاعلية لرسم الدوال والهندسة وفهم العلاقات الرياضية بصرياً.",
+    "Brilliant": "منصة تفاعلية لتعلم الرياضيات والتفكير المنطقي وحل المشكلات.",
+    "BBC Learning English": "مصدر مجاني ومنظم لتحسين الاستماع والمفردات والقواعد واللغة اليومية.",
+    "Breaking News English": "دروس قراءة واستماع مبنية على أخبار حقيقية بمستويات متعددة.",
+    "ReadTheory": "تدريبات قراءة متدرجة تساعد على تحسين فهم المقروء.",
+    "IELTS Liz": "دروس ونصائح عملية للتحضير لأقسام IELTS المختلفة.",
+    "IELTS Advantage": "مصدر مفيد لفهم استراتيجيات IELTS وتحسين الكتابة والتحدث.",
+    "British Council IELTS Practice": "مصدر رسمي للتدرب على IELTS وفهم شكل الاختبار.",
+    "TOEFL TestReady": "منصة رسمية من ETS للتدرب على TOEFL ومتابعة مستوى الاستعداد.",
+    "TST Prep TOEFL": "دروس وتدريبات تساعد على التحضير العملي لاختبار TOEFL.",
+    "TOEFL Resources": "مصدر متخصص في TOEFL، خصوصاً الكتابة والتحدث والاستراتيجيات.",
+    "Duolingo English Test Official Practice": "تدريب رسمي على Duolingo English Test وفهم أنواع الأسئلة.",
+    "Duolingo English Test Readiness Guide": "دليل رسمي يساعدك على فهم الاختبار والاستعداد له.",
+    "Arno DET Practice": "تدريبات عملية لاختبار Duolingo English Test.",
+    "Teacher Luke DET": "شروحات ونصائح للتحضير لاختبار Duolingo English Test.",
+    "College Board SAT": "المصدر الرسمي لاختبار SAT ويحتوي على معلومات وتدريبات مهمة.",
+    "Bluebook SAT App": "التطبيق الرسمي للتدرب على اختبار SAT الرقمي.",
+    "Khan Academy SAT": "تدريب مجاني ومنظم لاختبار SAT بالتعاون مع College Board.",
+    "SAT Suite Question Bank": "بنك أسئلة رسمي للتدرب على مهارات SAT المختلفة.",
+    "ACT Official": "المصدر الرسمي لاختبار ACT ومعلوماته وتدريباته.",
+    "ETS GRE Official": "المصدر الرسمي لاختبار GRE من ETS.",
+    "GregMat": "منصة مشهورة للتحضير لاختبار GRE بطريقة منظمة.",
+    "GMAT Official": "المصدر الرسمي لاختبار GMAT ومعلوماته التدريبية.",
+    "GMAT Club": "مجتمع ومكتبة تدريبية كبيرة للتحضير لاختبار GMAT.",
+    "HSK Official Test Info": "معلومات رسمية عن اختبار HSK ومستوياته.",
+    "HelloChinese": "تطبيق مفيد لتعلم الصينية من البداية بطريقة تفاعلية.",
+    "Mandarin Bean": "مصدر لتدريبات القراءة والاستماع في اللغة الصينية.",
+    "Chinese Grammar Wiki": "مرجع واضح لقواعد اللغة الصينية حسب المستوى.",
+    "Du Chinese": "تطبيق قراءة صينية متدرج مع نصوص مناسبة للمستويات المختلفة.",
+    "OpenStax Physics": "كتاب مجاني ومنظم في الفيزياء، مناسب للمراجعة والدراسة العميقة.",
+    "OpenStax Chemistry": "كتاب مجاني في الكيمياء مع شرح وتمارين منظمة.",
+    "PhET Simulations": "محاكاة تفاعلية لفهم مفاهيم الفيزياء والكيمياء والرياضيات.",
+    "Python for Everybody": "دورة مشهورة ومناسبة للمبتدئين لتعلم Python من الأساس.",
+    "Automate the Boring Stuff": "مصدر عملي لتعلم Python من خلال الأتمتة والمشاريع الصغيرة.",
+    "Python Docs": "التوثيق الرسمي للغة Python.",
+    "Real Python": "مقالات ودروس عملية لتطوير مهارات Python.",
+    "Kaggle Learn": "دروس قصيرة وعملية في البرمجة والبيانات والذكاء الاصطناعي.",
+    "Flask Documentation": "التوثيق الرسمي لإطار Flask.",
+    "CS50x": "دورة Harvard CS50 الشهيرة لتعلم علوم الحاسوب من الصفر.",
+    "ScholarshipPortal": "منصة للبحث عن المنح الدراسية حول العالم.",
+    "Studyportals": "منصة للبحث عن البرامج الجامعية وفرص الدراسة.",
+    "Europass CV": "أداة رسمية لإنشاء سيرة ذاتية بصيغة أوروبية منظمة.",
+    "Study in China CSC": "بوابة ومعلومات عن الدراسة والمنح في الصين.",
+    "Türkiye Scholarships": "الموقع الرسمي لمنح تركيا.",
+    "DAAD Scholarship Database": "قاعدة بيانات رسمية للمنح الألمانية.",
+    "Quran.com": "موقع لقراءة القرآن الكريم والاستماع إليه مع ترجمات وتفاسير.",
+    "Ayah by Quran.com": "تطبيق ومصدر منظم لتلاوة القرآن ومتابعة الآيات.",
+    "Quranicaudio": "مكتبة صوتية واسعة لتلاوات القرآن الكريم.",
+    "Tarteel AI": "تطبيق يساعد على حفظ القرآن ومراجعته بالاعتماد على التعرف الصوتي.",
+    "Tanzil Quran": "نص قرآني دقيق ومستخدم في كثير من التطبيقات والمشاريع.",
+    "IslamHouse": "مكتبة إسلامية كبيرة بعدة لغات تشمل العقيدة والفقه والسيرة وغيرها.",
+    "TypingClub": "منصة تدريب على الكتابة بالكيبورد من البداية بطريقة متدرجة.",
+    "Typing.com": "تدريب مجاني على سرعة الكتابة ودقتها.",
+    "Ratatype": "موقع لتدريب سرعة الكتابة وقياس الأداء.",
+    "Keybr": "أداة ذكية لتحسين الكتابة دون النظر إلى لوحة المفاتيح.",
+    "Monkeytype": "اختبار سريع ومرن لقياس سرعة الكتابة وتحسينها.",
+    "TypeRacer": "تدريب ممتع على سرعة الكتابة من خلال سباق نصوص."
+}
+
+
+# EduPath AI v5.5.85 expanded Arabic resource display
+RESOURCE_AR_LABELS_V5584.update({'ACT Practice': 'تدريب ACT', 'ACT Strategy': 'استراتيجيات ACT', 'AI Fundamentals': 'أساسيات الذكاء الاصطناعي', 'Algebra & Geometry': 'الجبر والهندسة', 'Algebra & Trigonometry': 'الجبر والمثلثات', 'Algorithms': 'الخوارزميات', 'CV': 'السيرة الذاتية', 'Characters': 'الحروف الصينية', 'Chinese Basics': 'أساسيات الصينية', 'Chinese Scholarship': 'منح الصين', 'Competitive Programming': 'البرمجة التنافسية', 'Computer Science': 'علوم الحاسوب', 'DET Guide': 'دليل Duolingo English Test', 'DET Official Guide': 'الدليل الرسمي لاختبار Duolingo English Test', 'DET Practice': 'تدريب Duolingo English Test', 'DET Strategy': 'استراتيجيات Duolingo English Test', 'Data Analysis': 'تحليل البيانات', 'Data Science': 'علم البيانات', 'Databases': 'قواعد البيانات', 'Deep Learning': 'التعلم العميق', 'Flask': 'Flask', 'Full Stack Web': 'تطوير ويب متكامل', 'Functions': 'الدوال', 'GMAT Practice': 'تدريب GMAT', 'GMAT Quant': 'القسم الكمي في GMAT', 'GMAT Strategy': 'استراتيجيات GMAT', 'GRE Practice': 'تدريب GRE', 'GRE Strategy': 'استراتيجيات GRE', 'General English': 'الإنجليزية العامة', 'Government Scholarship': 'منحة حكومية', 'Grammar': 'القواعد', 'HSK Course': 'دورات HSK', 'HSK Vocabulary': 'مفردات HSK', 'Hadith': 'الحديث الشريف', 'Hadith Verification': 'التحقق من الحديث', 'IELTS Mock Tests': 'اختبارات IELTS تجريبية', 'IELTS Official': 'مصادر IELTS الرسمية', 'IELTS Practice': 'تدريب IELTS', 'IELTS Strategy': 'استراتيجيات IELTS', 'IELTS Writing': 'كتابة IELTS', 'Islamic Library': 'مكتبة إسلامية', 'JavaScript': 'JavaScript', 'Linear Algebra': 'الجبر الخطي', 'Listening': 'الاستماع', 'Machine Learning': 'تعلم الآلة', 'Motivation Letter': 'خطاب الدافع', 'Official ACT': 'مصادر ACT الرسمية', 'Official CSCA': 'مصادر CSCA الرسمية', 'Official DET': 'مصادر Duolingo الرسمية', 'Official GMAT': 'مصادر GMAT الرسمية', 'Official GRE': 'مصادر GRE الرسمية', 'Official IELTS': 'مصادر IELTS الرسمية', 'Official Practice': 'تدريب رسمي', 'Official Questions': 'أسئلة رسمية', 'Official SAT': 'مصادر SAT الرسمية', 'Official TOEFL': 'مصادر TOEFL الرسمية', 'Olympiad Math': 'رياضيات الأولمبياد', 'Olympiad Mathematics': 'رياضيات الأولمبياد', 'Personal Statement': 'البيان الشخصي', 'Programming Typing': 'الكتابة البرمجية', 'Pronunciation': 'النطق', 'Python Documentation': 'توثيق Python', 'Quran Memorization': 'حفظ القرآن الكريم', 'Quran Recitation': 'تلاوة القرآن الكريم', 'Quran Text': 'نص القرآن الكريم', 'Quran Understanding': 'فهم القرآن الكريم', 'SAT Math': 'رياضيات SAT', 'SAT Practice': 'تدريب SAT', 'SAT Reading/Writing': 'قراءة وكتابة SAT', 'SAT Strategy': 'استراتيجيات SAT', 'SQL': 'SQL', 'Scholarship Search': 'البحث عن منح', 'School Math': 'رياضيات مدرسية', 'Science Simulations': 'محاكاة علمية', 'Speaking': 'التحدث', 'Speaking & Writing': 'التحدث والكتابة', 'TOEFL Official Practice': 'تدريب TOEFL الرسمي', 'TOEFL Practice': 'تدريب TOEFL', 'TOEFL Strategy': 'استراتيجيات TOEFL', 'TOEFL Writing/Speaking': 'كتابة وتحدث TOEFL', 'Tafsir': 'التفسير', 'Tajweed': 'التجويد', 'Tools': 'أدوات', 'Touch Typing': 'الكتابة دون النظر إلى لوحة المفاتيح', 'Typing Accuracy': 'دقة الكتابة', 'Typing Speed': 'سرعة الكتابة', 'Typing Test': 'اختبار سرعة الكتابة', 'University Research': 'بحث الجامعات', 'Vocabulary': 'المفردات', 'Web Development': 'تطوير الويب', 'Writing': 'الكتابة', 'Documentation': 'التوثيق', 'Official App': 'تطبيق رسمي', 'Official Question Bank': 'بنك أسئلة رسمي', 'Mock Test': 'اختبار تجريبي', 'Community': 'مجتمع تعليمي', 'Admission Exam': 'اختبار قبول', 'Beginner → Advanced': 'من مبتدئ إلى متقدم', 'HSK 1 → HSK 6': 'من HSK 1 إلى HSK 6', 'Chinese/English': 'الصينية والإنجليزية', 'English/Arabic': 'الإنجليزية والعربية', 'English/Chinese': 'الإنجليزية والصينية', 'All Skills': 'كل المهارات', 'All Math Topics': 'كل موضوعات الرياضيات', 'Math': 'الرياضيات', 'Math Computation': 'الحساب الرياضي', 'Reading Comprehension': 'فهم المقروء', 'Essay Writing': 'كتابة المقالات', 'Extensive Reading': 'القراءة الموسعة', 'CV Preparation': 'إعداد السيرة الذاتية', 'Application, Documents': 'التقديم والمستندات', 'Application, Embassy, Documents': 'التقديم والسفارة والمستندات', 'Application, Essays, Interview': 'التقديم والمقالات والمقابلة', 'Application, Interview, Documents': 'التقديم والمقابلة والمستندات', 'Application, Korea': 'التقديم إلى كوريا', 'Application, Hungary': 'التقديم إلى هنغاريا', 'Leadership, Application, Essays': 'القيادة والتقديم والمقالات', 'Master Programs, Application': 'برامج الماجستير والتقديم', 'Programming, Algorithms, C, Python': 'البرمجة والخوارزميات و C و Python', 'Problem Solving, Algorithms': 'حل المشكلات والخوارزميات', 'Algorithms, Data Structures': 'الخوارزميات وهياكل البيانات', 'PostgreSQL, SQL': 'PostgreSQL و SQL', 'HTML, CSS, JavaScript, Projects': 'HTML و CSS و JavaScript والمشاريع', 'HTML, CSS, JavaScript, Git, Backend': 'HTML و CSS و JavaScript و Git والخلفية', 'HTML, CSS, JavaScript, SQL': 'HTML و CSS و JavaScript و SQL', 'HTML, CSS, JavaScript, Web APIs': 'HTML و CSS و JavaScript وواجهات الويب', 'Python Basics': 'أساسيات Python', 'Python, Automation': 'Python والأتمتة', 'Python, Flask, Projects': 'Python و Flask والمشاريع', 'Python, Pandas, Machine Learning': 'Python و Pandas وتعلم الآلة', 'Pandas, Data Analysis': 'Pandas وتحليل البيانات', 'ML Concepts': 'مفاهيم تعلم الآلة', 'AI Concepts': 'مفاهيم الذكاء الاصطناعي', 'Deep Learning, Projects': 'التعلم العميق والمشاريع', 'Reading, Listening, Writing, Speaking': 'القراءة والاستماع والكتابة والتحدث', 'Grammar, Vocabulary, Listening, Speaking': 'القواعد والمفردات والاستماع والتحدث', 'Listening, Vocabulary, Pronunciation': 'الاستماع والمفردات والنطق', 'Pronunciation, Speaking': 'النطق والتحدث', 'Pronunciation, Accent': 'النطق واللهجة', 'Pronunciation, Listening': 'النطق والاستماع', 'Listening, Speaking': 'الاستماع والتحدث', 'Listening, Speaking Ideas': 'الاستماع وأفكار التحدث', 'Reading, Academic Topics': 'قراءة موضوعات أكاديمية', 'Reading, Academic Vocabulary': 'القراءة والمفردات الأكاديمية', 'Reading, Vocabulary': 'القراءة والمفردات', 'Reading, Listening': 'القراءة والاستماع', 'Reading, Writing': 'القراءة والكتابة', 'Listening, Reading, Vocabulary': 'الاستماع والقراءة والمفردات', 'Listening, Ideas, Vocabulary': 'الاستماع والأفكار والمفردات', 'Writing and grammar': 'الكتابة والقواعد', 'Academic Writing, Grammar': 'الكتابة الأكاديمية والقواعد', 'Mathematics, Physics, Chemistry': 'الرياضيات والفيزياء والكيمياء', 'Physics, Chemistry': 'الفيزياء والكيمياء', 'Mechanics, Electricity, Thermodynamics, Optics': 'الميكانيكا والكهرباء والديناميكا الحرارية والبصريات', 'Mechanics, Electricity, Waves': 'الميكانيكا والكهرباء والموجات', 'Mechanics, Waves, Electricity': 'الميكانيكا والموجات والكهرباء', 'Mechanics, AP Physics Concepts': 'الميكانيكا ومفاهيم الفيزياء', 'Basic Chemistry, Mole, Reactions': 'أساسيات الكيمياء والمول والتفاعلات', 'Chemical Concepts, Equilibrium, Reactions': 'المفاهيم الكيميائية والاتزان والتفاعلات', 'Chemical Concepts, Reactions, Equilibrium': 'المفاهيم الكيميائية والتفاعلات والاتزان', 'Chemistry Concepts': 'مفاهيم الكيمياء', 'Characters, Stroke Order': 'الحروف الصينية وترتيب كتابتها', 'Chinese Grammar': 'قواعد الصينية', 'Chinese Reading, Vocabulary': 'قراءة ومفردات صينية', 'Chinese Test': 'اختبار صيني', 'Chinese Vocabulary': 'مفردات صينية', 'Dictionary, HSK, Characters': 'قاموس و HSK وحروف صينية', 'HSK Vocabulary, Grammar': 'مفردات وقواعد HSK', 'Recitation, Reading, Translation': 'التلاوة والقراءة والترجمة', 'Memorization, Recitation': 'الحفظ والتلاوة', 'Memorization, Recitation Correction': 'الحفظ وتصحيح التلاوة', 'Listening, Recitation, Memorization': 'الاستماع والتلاوة والحفظ', 'Hadith Reading': 'قراءة الحديث', 'Hadith, Islamic Research': 'الحديث والبحث الإسلامي', 'Aqeedah, Fiqh, Seerah': 'العقيدة والفقه والسيرة', 'Fiqh, Hadith, Tafsir, Arabic': 'الفقه والحديث والتفسير والعربية', 'Arabic, Tafsir, Quran': 'العربية والتفسير والقرآن', '10-Finger Typing, Accuracy': 'الكتابة بعشرة أصابع والدقة', 'Code Typing, Programming': 'كتابة الكود والبرمجة', 'Typing Speed, Accuracy': 'سرعة الكتابة ودقتها', 'Quant': 'القسم الكمي', 'Quant, Verbal': 'القسم الكمي واللفظي', 'Quant, Verbal, Writing': 'القسم الكمي واللفظي والكتابة', 'Quant, Verbal, Data Insights': 'القسم الكمي واللفظي وتحليل البيانات', 'Full Digital SAT': 'اختبار SAT الرقمي الكامل', 'SAT Math, Reading, Writing': 'رياضيات وقراءة وكتابة SAT', 'Algebra, Equations, Functions': 'الجبر والمعادلات والدوال', 'Pre-Algebra, Equations': 'ما قبل الجبر والمعادلات', 'Arithmetic, Numbers, Fractions': 'الحساب والأعداد والكسور', 'Advanced Algebra, Functions': 'الجبر المتقدم والدوال', 'Geometry, Proofs, Shapes': 'الهندسة والبراهين والأشكال', 'Trigonometry, Unit Circle': 'المثلثات والدائرة المثلثية', 'Functions, Trigonometry, Sequences': 'الدوال والمثلثات والمتتاليات', 'Limits, Derivatives, Integrals': 'النهايات والمشتقات والتكامل', 'Statistics, Probability': 'الإحصاء والاحتمالات', 'Linear Algebra, Matrices': 'الجبر الخطي والمصفوفات', 'Algebra, Geometry, Calculus, Statistics': 'الجبر والهندسة والتفاضل والتكامل والإحصاء', 'Algebra, Geometry, SAT Math': 'الجبر والهندسة ورياضيات SAT', 'Proofs, Geometry, Problem Solving': 'البراهين والهندسة وحل المشكلات', 'Graphing, Functions': 'رسم الدوال', 'Geometry, Graphing, Visualization': 'الهندسة والرسم والتمثيل البصري', 'Algebra, Calculus, Step-by-step': 'الجبر والتفاضل والتكامل خطوة بخطوة', 'Algebra, Calculus, Functions': 'الجبر والتفاضل والتكامل والدوال', 'Math, Logic, Computer Science': 'الرياضيات والمنطق وعلوم الحاسوب', 'Math, Programming, Logic': 'الرياضيات والبرمجة والمنطق'})
+RESOURCE_DESCRIPTION_OVERRIDES_V5584.update({'ACT practice tests and question sets.': 'اختبارات تدريبية وأسئلة متنوعة لاختبار ACT.', 'ACT preparation guides and tips.': 'إرشادات ونصائح للتحضير لاختبار ACT.', 'ACT strategy and study resources.': 'مصادر واستراتيجيات لتنظيم دراسة ACT.', 'AI Quran memorization and recitation support app.': 'تطبيق يساعد في حفظ القرآن ومراجعة التلاوة باستخدام الذكاء الاصطناعي.', 'AI pronunciation app useful for speaking practice.': 'تطبيق مفيد لتحسين النطق والتدرب على التحدث.', 'Adaptive reading comprehension practice useful before IELTS/TOEFL reading.': 'تدريبات فهم مقروء متدرجة ومفيدة قبل التحضير لقراءة IELTS أو TOEFL.', 'Adaptive typing practice focused on weak letters.': 'تدريب ذكي على الكتابة يركز على الحروف التي تضعف فيها.', 'Advanced algebra and functions practice.': 'تدريب على الجبر المتقدم والدوال.', 'Advanced math problem solving and community.': 'مجتمع ومصدر لحل مسائل رياضية متقدمة.', 'Arabic hadith and Islamic research database.': 'قاعدة بيانات عربية للحديث والبحث الإسلامي.', 'Beautiful Quran app useful for reading, listening, and memorization.': 'تطبيق قرآن جميل ومفيد للقراءة والاستماع والحفظ.', 'Beginner-friendly AI course explaining key concepts without heavy math.': 'دورة مناسبة للمبتدئين تشرح مفاهيم الذكاء الاصطناعي دون رياضيات ثقيلة.', 'Beginner-friendly Chinese learning app for pronunciation, characters, and vocabulary.': 'تطبيق مناسب للمبتدئين لتعلم النطق والحروف والمفردات الصينية.', 'Beginner-friendly Python course by Dr. Chuck.': 'دورة Python مناسبة للمبتدئين من Dr. Chuck.', 'Beginner-friendly tutorials and examples for web technologies.': 'دروس وأمثلة سهلة لتعلم تقنيات الويب.', 'British Council listening practice by level.': 'تدريبات استماع من British Council مرتبة حسب المستوى.', 'Calculus lessons and practice.': 'دروس وتمارين في التفاضل والتكامل.', 'Cambridge exam preparation resources and practice support.': 'مصادر من Cambridge للتحضير للاختبارات والتدريب عليها.', 'Cambridge tool to practice speaking and receive feedback.': 'أداة من Cambridge للتدرب على التحدث والحصول على ملاحظات.', 'Challenging mathematical programming problems.': 'مسائل برمجة رياضية صعبة لتنمية التفكير.', 'Chinese character worksheets, stroke order, and vocabulary tools.': 'أوراق عمل للحروف الصينية وترتيب كتابتها وأدوات للمفردات.', 'Chinese dictionary, HSK tools, stroke order, and learning resources.': 'قاموس صيني وأدوات HSK وترتيب كتابة الحروف ومصادر تعلم.', 'Chinese graded reading app useful for HSK and reading growth.': 'تطبيق قراءة صينية متدرجة مفيد لاختبار HSK وتطوير القراءة.', 'Chinese lessons for beginners and intermediate learners.': 'دروس صينية للمبتدئين والمتوسطين.', 'Chinese news-based graded reading platform.': 'منصة قراءة صينية متدرجة مبنية على الأخبار.', 'Chinese reading practice by HSK level with vocabulary support.': 'تدريب قراءة صينية حسب مستوى HSK مع دعم للمفردات.', 'Clear Chinese grammar explanations by level.': 'شرح واضح لقواعد الصينية حسب المستوى.', 'Clear IELTS tips, model answers, and strategies for all skills.': 'نصائح ونماذج إجابات واستراتيجيات واضحة لكل مهارات IELTS.', 'Clear algebra explanations and examples.': 'شروحات وأمثلة واضحة في الجبر.', 'Clear chemistry videos for beginners.': 'فيديوهات كيمياء واضحة للمبتدئين.', 'Clear full-length math lectures for algebra and calculus.': 'محاضرات رياضيات كاملة وواضحة في الجبر والتفاضل والتكامل.', 'Clear grammar explanations and exercises for English learners.': 'شرح وتمارين واضحة لقواعد الإنجليزية.', 'Clear physics tutorials and practice.': 'شروحات وتدريبات واضحة في الفيزياء.', 'Clear statistics and ML math explanations.': 'شرح واضح للإحصاء ورياضيات تعلم الآلة.', 'Coding problem practice for algorithms and data structures.': 'تدريب على مسائل البرمجة والخوارزميات وهياكل البيانات.', 'Community questions and answers for math topics.': 'أسئلة وأجوبة مجتمعية في موضوعات الرياضيات.', 'Competitive programming contests and practice.': 'مسابقات وتدريبات في البرمجة التنافسية.', 'Competitive programming platform for algorithmic problem solving.': 'منصة برمجة تنافسية لحل مسائل الخوارزميات.', 'Computational knowledge engine for math checking and exploration.': 'محرك معرفي حسابي لفحص الحلول واستكشاف الرياضيات.', 'Daily news lessons with multiple levels, reading, listening, vocabulary, and exercises.': 'دروس أخبار يومية بمستويات متعددة للقراءة والاستماع والمفردات والتمارين.', 'Detailed chemistry explanations for high school and early university.': 'شرح كيمياء مفصل للثانوية وبدايات الجامعة.', 'Duolingo English Test practice platform and preparation guidance.': 'منصة تدريب وإرشاد للتحضير لاختبار Duolingo English Test.', 'Duolingo English Test tips and sample answers.': 'نصائح ونماذج إجابات لاختبار Duolingo English Test.', 'Educational articles and resources for science, geography, and academic reading.': 'مقالات ومصادر تعليمية للعلوم والجغرافيا والقراءة الأكاديمية.', 'Excellent academic writing and grammar reference.': 'مرجع ممتاز للكتابة الأكاديمية والقواعد.', 'Explore international study programs and universities.': 'منصة لاستكشاف البرامج الدراسية والجامعات حول العالم.', 'Fast-paced chemistry overview videos.': 'فيديوهات سريعة لمراجعة مفاهيم الكيمياء.', 'Flashcard tool for vocabulary and exam terms.': 'أداة بطاقات للمفردات ومصطلحات الاختبارات.', 'Free CV builder useful for scholarship applications.': 'أداة مجانية لإنشاء سيرة ذاتية مناسبة للتقديم على المنح.', 'Free English lessons for speaking, pronunciation, writing, and grammar.': 'دروس إنجليزية مجانية للتحدث والنطق والكتابة والقواعد.', 'Free IELTS practice materials from the British Council.': 'مواد تدريب مجانية لاختبار IELTS من British Council.', 'Free Python book focused on practical automation.': 'كتاب Python مجاني يركز على الأتمتة العملية.', 'Free algebra and trigonometry textbook.': 'كتاب مجاني في الجبر والمثلثات.', 'Free books for extensive reading and vocabulary growth.': 'كتب مجانية للقراءة الموسعة وتنمية المفردات.', 'Free calculus textbook volume 1.': 'كتاب مجاني في التفاضل والتكامل، الجزء الأول.', 'Free calculus textbook volume 2.': 'كتاب مجاني في التفاضل والتكامل، الجزء الثاني.', 'Free chemistry foundations useful for CSCA chemistry preparation.': 'أساسيات كيمياء مجانية مفيدة للتحضير لكيمياء CSCA.', 'Free chemistry textbook covering chemical concepts, calculations, and reactions.': 'كتاب كيمياء مجاني يغطي المفاهيم والحسابات والتفاعلات.', 'Free interactive coding curriculum and projects.': 'منهج تفاعلي مجاني للبرمجة مع مشاريع.', 'Free interactive math textbooks and practice.': 'كتب رياضيات تفاعلية مجانية مع تدريبات.', 'Free physics foundations useful for CSCA physics preparation.': 'أساسيات فيزياء مجانية مفيدة للتحضير لفيزياء CSCA.', 'Free physics textbook covering mechanics, electricity, waves, and optics.': 'كتاب فيزياء مجاني يغطي الميكانيكا والكهرباء والموجات والبصريات.', 'Free prealgebra textbook.': 'كتاب مجاني في ما قبل الجبر.', 'Free reading passages and comprehension questions, useful for academic reading practice.': 'نصوص قراءة مجانية وأسئلة فهم مفيدة للقراءة الأكاديمية.', 'Free statistics textbook and resources.': 'كتاب ومصادر مجانية في الإحصاء.', 'Free typing lessons, tests, and practice.': 'دروس واختبارات وتدريبات مجانية على الكتابة.', 'GMAT forum, questions, explanations, and study resources.': 'منتدى وأسئلة وشروحات ومصادر لدراسة GMAT.', 'GMAT guides, practice advice, and study planning.': 'أدلة ونصائح تدريب وخطط دراسة لاختبار GMAT.', 'GMAT preparation resources and strategies.': 'مصادر واستراتيجيات للتحضير لاختبار GMAT.', 'GMAT quant-focused preparation platform.': 'منصة تركز على القسم الكمي في GMAT.', 'GRE articles, study schedules, and practice advice.': 'مقالات وخطط دراسة ونصائح تدريب لاختبار GRE.', 'GRE preparation resources and strategy articles.': 'مصادر واستراتيجيات للتحضير لاختبار GRE.', 'GRE questions, explanations, and prep community.': 'أسئلة وشروحات ومجتمع تحضير لاختبار GRE.', 'Geometry lessons and exercises.': 'دروس وتمارين في الهندسة.', "Google's free introduction to machine learning concepts and practice.": 'مقدمة مجانية من Google لمفاهيم تعلم الآلة والتدريب عليها.', 'HSK courses and Chinese learning content.': 'دورات HSK ومحتوى لتعلم الصينية.', 'HSK vocabulary lists and practice tools.': 'قوائم مفردات HSK وأدوات تدريب.', 'Hadith collections in searchable format.': 'مجموعات حديثية قابلة للبحث.', "Harvard's free introduction to computer science and programming.": 'مقدمة Harvard المجانية في علوم الحاسوب والبرمجة.', 'Hear words pronounced by native speakers in many languages.': 'استمع إلى نطق الكلمات من متحدثين أصليين بلغات كثيرة.', 'High-quality Python tutorials and project guides.': 'دروس Python عالية الجودة وأدلة مشاريع.', 'High-quality articles useful for advanced reading and vocabulary.': 'مقالات عالية الجودة مفيدة للقراءة المتقدمة والمفردات.', 'High-quality web development documentation from MDN.': 'توثيق عالي الجودة لتطوير الويب من MDN.', 'IELTS lessons, practice, model answers, and tips.': 'دروس وتدريبات ونماذج إجابات ونصائح لاختبار IELTS.', 'IELTS practice tests, especially reading and listening.': 'اختبارات تدريب IELTS، خصوصاً القراءة والاستماع.', 'IELTS preparation course from British Council partners.': 'دورة تحضير IELTS من شركاء British Council.', 'IELTS strategies, writing help, and band score improvement guidance.': 'استراتيجيات IELTS ومساعدة في الكتابة وإرشادات لتحسين الدرجة.', 'IELTS video lessons and test strategies.': 'دروس فيديو واستراتيجيات لاختبار IELTS.', 'IELTS writing and exam advice from an experienced teacher.': 'نصائح كتابة واختبار IELTS من معلمة خبيرة.', 'Interactive SQL lessons and exercises.': 'دروس وتمارين SQL تفاعلية.', 'Interactive SQL tutorial and exercises.': 'شرح وتمارين SQL تفاعلية.', 'Interactive math visualization and geometry tools.': 'أدوات تفاعلية لتمثيل الرياضيات والهندسة بصرياً.', 'Interactive math, science, and CS learning platform.': 'منصة تفاعلية لتعلم الرياضيات والعلوم وعلوم الحاسوب.', 'Interactive simulations for physics and chemistry concepts.': 'محاكاة تفاعلية لمفاهيم الفيزياء والكيمياء.', 'Large Arabic Islamic library for advanced study.': 'مكتبة إسلامية عربية كبيرة للدراسة المتقدمة.', 'Large Islamic content library in many languages.': 'مكتبة إسلامية كبيرة بعدة لغات.', 'Large collection of Quran recitations useful for memorization and revision.': 'مجموعة كبيرة من تلاوات القرآن مفيدة للحفظ والمراجعة.', 'Large free English learning website covering many skills.': 'موقع مجاني كبير لتعلم الإنجليزية يغطي مهارات كثيرة.', 'Large library of real listening conversations with transcripts and quizzes.': 'مكتبة كبيرة لمحادثات استماع حقيقية مع نصوص واختبارات.', 'Learner dictionary with simple definitions and examples.': 'قاموس للمتعلمين بتعريفات وأمثلة بسيطة.', 'Learner-focused dictionary with examples and pronunciation.': 'قاموس مخصص للمتعلمين مع أمثلة ونطق.', 'Listening practice with quizzes and real-life situations.': 'تدريب استماع مع اختبارات ومواقف من الحياة اليومية.', 'MIT Linear Algebra course by Gilbert Strang.': 'دورة الجبر الخطي من MIT للدكتور Gilbert Strang.', 'MIT OpenCourseWare calculus course.': 'دورة التفاضل والتكامل من MIT OpenCourseWare.', 'Math lessons for algebra, geometry, and SAT math.': 'دروس رياضيات للجبر والهندسة ورياضيات SAT.', 'Mathematical proofs, puzzles, and problem-solving resources.': 'براهين وألغاز ومصادر لحل المشكلات الرياضية.', 'Minimal modern typing test with many modes.': 'اختبار كتابة بسيط وحديث بعدة أوضاع.', 'Modern JavaScript tutorial from basics to advanced topics.': 'دليل JavaScript حديث من الأساسيات إلى الموضوعات المتقدمة.', 'News stories written in three levels for English learners.': 'قصص إخبارية بثلاثة مستويات لمتعلمي الإنجليزية.', 'Online graphing calculator for functions and visualization.': 'آلة رسم بياني على الإنترنت للدوال والتمثيل البصري.', 'Physics videos and practice explanations.': 'فيديوهات فيزياء وشروحات تدريبية.', 'Popular GRE study platform with strategy and practice.': 'منصة مشهورة لدراسة GRE مع استراتيجيات وتدريبات.', 'Practical deep learning course focused on building useful models.': 'دورة عملية في التعلم العميق تركز على بناء نماذج مفيدة.', 'Practical motivation letter writing guide.': 'دليل عملي لكتابة خطاب الدافع.', 'Practice programming, SQL, and algorithms.': 'تدريب على البرمجة و SQL والخوارزميات.', 'Pre-algebra foundations for school, SAT, and CSCA preparation.': 'أساسيات ما قبل الجبر للمدرسة و SAT و CSCA.', 'Precalculus course covering functions and advanced topics.': 'دورة ما قبل التفاضل والتكامل تغطي الدوال وموضوعات متقدمة.', 'Pronunciation and American English speaking lessons.': 'دروس نطق وتحدث بالإنجليزية الأمريكية.', 'Quick typing speed tests in many languages.': 'اختبارات سريعة لسرعة الكتابة بعدة لغات.', 'Quran Arabic and understanding resources.': 'مصادر لفهم العربية القرآنية ومعاني القرآن.', 'Quran reading, recitations, translations, and study support.': 'قراءة القرآن وتلاواته وترجماته ومصادر دراسته.', 'Quran recitation and tajweed learning platform.': 'منصة لتعلم تلاوة القرآن والتجويد.', 'Quran tafsir resources in Arabic and other languages.': 'مصادر تفسير القرآن بالعربية ولغات أخرى.', 'Reading passages and comprehension sets for different levels.': 'نصوص قراءة وأسئلة فهم لمستويات مختلفة.', 'Reliable Quran text and translations.': 'نص قرآني موثوق وترجمات.', 'Reliable definitions, examples, pronunciation, and vocabulary support.': 'تعريفات وأمثلة ونطق ودعم موثوق للمفردات.', 'SAT guides, strategies, and study advice.': 'أدلة واستراتيجيات ونصائح دراسة لاختبار SAT.', 'SAT math practice and explanations.': 'تدريبات وشروحات في رياضيات SAT.', 'SAT reading and writing resources by Erica Meltzer.': 'مصادر قراءة وكتابة SAT من Erica Meltzer.', 'SQL tutorial for analytics and data work.': 'دليل SQL للتحليل والعمل على البيانات.', 'Search engine for scholarships around the world.': 'محرك بحث للمنح الدراسية حول العالم.', 'Search words and hear real pronunciation examples from videos.': 'ابحث عن الكلمات واستمع إلى أمثلة نطق حقيقية من الفيديوهات.', 'Short educational videos with ideas and vocabulary practice.': 'فيديوهات تعليمية قصيرة للأفكار والمفردات.', 'Short practical courses for Python, SQL, pandas, ML, and data visualization.': 'دورات عملية قصيرة في Python و SQL و pandas وتعلم الآلة وتمثيل البيانات.', 'Short weekly listening episodes with vocabulary.': 'حلقات استماع أسبوعية قصيرة مع مفردات.', 'Simple IELTS explanations, vocabulary, and practice guidance.': 'شروحات IELTS بسيطة ومفردات وإرشادات تدريب.', 'Simplified encyclopedia articles useful for reading practice.': 'مقالات موسوعية مبسطة مفيدة لتدريب القراءة.', 'Slow English news and learning programs for listening and vocabulary.': 'أخبار وبرامج إنجليزية بطيئة للاستماع والمفردات.', 'Speaking practice activities and useful spoken English.': 'أنشطة تدريب على التحدث وعبارات إنجليزية مفيدة.', 'Statistics and probability course.': 'دورة في الإحصاء والاحتمالات.', 'Step-by-step math solver for checking work.': 'أداة حل رياضيات خطوة بخطوة لفحص العمل.', 'Strong free algebra course with practice exercises.': 'دورة جبر مجانية قوية مع تمارين.', 'Strong free math practice useful for CSCA mathematics foundations.': 'تدريب رياضيات مجاني قوي مفيد لأساسيات CSCA.', 'Strong math notes and examples for algebra and calculus foundations.': 'ملاحظات وأمثلة قوية في أساسيات الجبر والتفاضل والتكامل.', 'Structured algorithmic problem set for competitive programming.': 'مجموعة مسائل خوارزمية منظمة للبرمجة التنافسية.', 'Structured free lessons for listening, vocabulary, pronunciation, and everyday English.': 'دروس مجانية منظمة للاستماع والمفردات والنطق والإنجليزية اليومية.', 'Structured touch typing lessons for beginners.': 'دروس منظمة للمبتدئين في الكتابة دون النظر إلى لوحة المفاتيح.', 'TOEFL lessons and practice platform.': 'منصة دروس وتدريب لاختبار TOEFL.', 'TOEFL lessons, templates, and strategies.': 'دروس وقوالب واستراتيجيات لاختبار TOEFL.', 'TOEFL preparation articles and practice guidance.': 'مقالات وإرشادات تدريب للتحضير لاختبار TOEFL.', 'TOEFL strategies and preparation lessons.': 'استراتيجيات ودروس تحضير لاختبار TOEFL.', 'TOEFL strategy articles, study plans, and practice advice.': 'مقالات استراتيجيات وخطط دراسة ونصائح تدريب لاختبار TOEFL.', 'TOEFL writing and speaking templates and sample answers.': 'قوالب ونماذج إجابات لكتابة وتحدث TOEFL.', 'Talks useful for listening practice, ideas, and presentation language.': 'محاضرات مفيدة للاستماع والأفكار ولغة العروض التقديمية.', 'Trigonometry lessons useful for CSCA and SAT math.': 'دروس مثلثات مفيدة لرياضيات CSCA و SAT.', 'Typing practice for code in multiple programming languages.': 'تدريب على كتابة الكود بعدة لغات برمجة.', 'Typing practice using real code snippets for programmers.': 'تدريب كتابة باستخدام مقاطع كود حقيقية للمبرمجين.', 'Typing races to improve speed and consistency.': 'سباقات كتابة لتحسين السرعة والثبات.', 'Typing racing game for speed practice.': 'لعبة سباق كتابة لتدريب السرعة.', 'Typing tests and progress tracking.': 'اختبارات كتابة وتتبع للتقدم.', 'Typing tutor and speed tests.': 'مدرب كتابة واختبارات سرعة.', 'Visual linear algebra series.': 'سلسلة بصرية في الجبر الخطي.', 'Vocabulary learning and quizzes.': 'تعلم مفردات مع اختبارات قصيرة.', 'Vocabulary retention system for Chinese learners.': 'نظام تثبيت مفردات لمتعلمي الصينية.', 'Writing and grammar explanations with examples.': 'شروحات كتابة وقواعد مع أمثلة.', 'Writing practice by level with examples and tasks.': 'تدريب كتابة حسب المستوى مع أمثلة ومهام.'})
+
+def resource_ar(value):
+    if value is None:
+        return ""
+    text = str(value)
+    return RESOURCE_AR_LABELS_V5584.get(text, text)
+
+
+def resource_phrase_ar(value):
+    if value is None:
+        return ""
+    text = str(value)
+    if "," in text:
+        return "، ".join(resource_ar(part.strip()) for part in text.split(",") if part.strip())
+    return resource_ar(text)
+
+def resource_status_ar(value):
+    return resource_ar(value or "Not Started")
+
+def resource_description_ar(resource):
+    if not resource:
+        return ""
+    if resource.name in RESOURCE_DESCRIPTION_OVERRIDES_V5584:
+        return RESOURCE_DESCRIPTION_OVERRIDES_V5584[resource.name]
+    desc = resource.description or ""
+    if desc in RESOURCE_DESCRIPTION_OVERRIDES_V5584:
+        return RESOURCE_DESCRIPTION_OVERRIDES_V5584[desc]
+
+    # Natural fallback based on available fields, so old English DB rows do not leak English descriptions.
+    category = resource_ar(getattr(resource, "category", ""))
+    subcategory = resource_ar(getattr(resource, "subcategory", ""))
+    skill = resource_ar(getattr(resource, "skill", ""))
+    exam = getattr(resource, "exam", "") or ""
+    level = resource_ar(getattr(resource, "level", ""))
+    rtype = resource_ar(getattr(resource, "resource_type", ""))
+
+    parts = []
+    if category:
+        parts.append(f"مصدر تعليمي في {category}")
+    elif rtype:
+        parts.append(f"مصدر تعليمي من نوع {rtype}")
+    else:
+        parts.append("مصدر تعليمي يساعدك على التعلم والمراجعة")
+
+    details = []
+    if subcategory:
+        details.append(subcategory)
+    if skill:
+        details.append(skill)
+    if exam:
+        details.append(exam)
+    if details:
+        parts.append("يركز على " + "، ".join(details[:3]))
+    if level:
+        parts.append(f"مناسب لمستوى {level}")
+    return "، ".join(parts) + "."
+
+
+def resource_tags_ar(tags):
+    result = []
+    for tag in tags or []:
+        text = str(tag)
+        if "," in text:
+            result.extend([resource_ar(part.strip()) for part in text.split(",") if part.strip()])
+        else:
+            result.append(resource_ar(text))
+    return result
+
+
 RESOURCE_CATEGORY_OPTIONS = [
-    "English Skills",
-    "English Exams",
-    "Chinese & HSK",
+    "مهارات اللغة الإنجليزية",
+    "اختبارات اللغة الإنجليزية",
+    "الصينية و HSK",
     "CSCA",
     "SAT",
     "ACT",
     "GRE",
     "GMAT",
-    "Mathematics",
-    "Programming & Technology",
-    "AI & Data Science",
-    "Scholarships",
-    "Islamic Learning",
-    "General Learning",
+    "الرياضيات",
+    "البرمجة والتكنولوجيا",
+    "الذكاء الاصطناعي وعلم البيانات",
+    "المنح الدراسية",
+    "التعلم الإسلامي",
+    "التعلم العام",
+    "الكتابة على لوحة المفاتيح",
 ]
 
 RESOURCE_EXAM_OPTIONS = [
@@ -733,26 +951,27 @@ RESOURCE_EXAM_OPTIONS = [
 ]
 
 RESOURCE_TYPE_OPTIONS = [
-    "Official",
-    "Practice",
-    "Course",
-    "Website",
-    "App",
-    "Book",
-    "Documentation",
-    "Tool",
-    "Search Tool",
-    "Official Portal",
-    "Official Search",
-    "Guide",
-    "Simulation",
-    "Audio",
-    "Library",
-    "Video Lessons",
-    "Notes",
-    "Dictionary",
+    "رسمي",
+    "تدريب",
+    "دورة",
+    "موقع",
+    "تطبيق",
+    "كتاب",
+    "توثيق",
+    "أداة",
+    "أداة بحث",
+    "بوابة رسمية",
+    "بحث رسمي",
+    "دليل",
+    "محاكاة",
+    "صوتيات",
+    "مكتبة",
+    "دروس فيديو",
+    "ملاحظات",
+    "قاموس",
+    "مجتمع تعليمي",
+    "اختبار تجريبي",
 ]
-
 
 def default_learning_resources():
     return [
@@ -2078,6 +2297,11 @@ def create_app():
     app.jinja_env.filters["dashboard_goal_target"] = dashboard_goal_target_state
     app.jinja_env.filters["dashboard_goal_current"] = dashboard_goal_current_state
     app.jinja_env.filters["dashboard_ar"] = dashboard_ar
+    app.jinja_env.filters["resource_ar"] = resource_ar
+    app.jinja_env.filters["resource_phrase_ar"] = resource_phrase_ar
+    app.jinja_env.filters["resource_status_ar"] = resource_status_ar
+    app.jinja_env.filters["resource_description_ar"] = resource_description_ar
+    app.jinja_env.filters["resource_tags_ar"] = resource_tags_ar
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
     app.permanent_session_lifetime = timedelta(days=int(os.environ.get("REMEMBER_LOGIN_DAYS", "30")))
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
@@ -2560,7 +2784,7 @@ def create_app():
         item.status = request.form.get("status", item.status).strip() or "Not Started"
         item.notes = request.form.get("notes", "").strip()
         db.session.commit()
-        flash("Resource notes updated.", "success")
+        flash("تم تحديث ملاحظات المصدر.", "success")
         return redirect(url_for("my_resources"))
 
     @app.route("/my-resources/<int:saved_id>/delete", methods=["POST"])
@@ -2569,7 +2793,7 @@ def create_app():
         item = SavedResource.query.filter_by(id=saved_id, user_id=current_user.id).first_or_404()
         db.session.delete(item)
         db.session.commit()
-        flash("Saved resource deleted.", "success")
+        flash("تم حذف المصدر من مصادرك.", "success")
         return redirect(url_for("my_resources"))
 
     @app.route("/my-resources/<int:saved_id>/open")
@@ -2705,9 +2929,9 @@ def create_app():
             email_sent = send_admin_motivation_email(user, message_type, custom_message)
 
         if email_sent:
-            flash("In-app message created and email sent successfully.", "success")
+            flash("تم إنشاء الرسالة داخل التطبيق وإرسال البريد الإلكتروني بنجاح.", "success")
         else:
-            flash("In-app message created successfully. Email sending is disabled or unavailable.", "success")
+            flash("تم إنشاء الرسالة داخل التطبيق بنجاح. إرسال البريد الإلكتروني غير مفعّل أو غير متاح حالياً.", "success")
 
         return redirect(url_for("admin_dashboard"))
 
@@ -2738,7 +2962,7 @@ def create_app():
             ))
 
         db.session.commit()
-        flash(f"{quantity} subscription codes generated.", "success")
+        flash(f"تم إنشاء {quantity} رمز اشتراك بنجاح.", "success")
         return redirect(url_for("admin_dashboard"))
 
     @app.route("/admin/subscription-codes/<int:code_id>/cancel", methods=["POST"])
@@ -2747,11 +2971,11 @@ def create_app():
     def admin_cancel_subscription_code(code_id):
         code = SubscriptionCode.query.get_or_404(code_id)
         if code.is_used:
-            flash("Used codes cannot be cancelled.", "error")
+            flash("لا يمكن إلغاء رمز تم استخدامه بالفعل.", "error")
         else:
             code.is_cancelled = True
             db.session.commit()
-            flash("Subscription code cancelled.", "success")
+            flash("تم إلغاء رمز الاشتراك.", "success")
         return redirect(url_for("admin_dashboard"))
 
 
@@ -2782,7 +3006,7 @@ def create_app():
         ensure_user_subscription_codes(user, minimum=3)
         user.name = request.form.get("name", user.name).strip() or user.name
         db.session.commit()
-        flash("User updated.", "success")
+        flash("تم تحديث إعدادات المستخدم.", "success")
         return redirect(url_for("admin_dashboard"))
 
     @app.route("/admin/user/<int:user_id>/delete", methods=["POST"])
@@ -2791,7 +3015,7 @@ def create_app():
     def admin_delete_user(user_id):
         user = User.query.get_or_404(user_id)
         if user.id == current_user.id:
-            flash("You cannot delete your own admin account.", "error")
+            flash("لا يمكنك حذف حساب المشرف الخاص بك.", "error")
             return redirect(url_for("admin_dashboard"))
 
         Goal.query.filter_by(user_id=user.id).delete()
@@ -2801,7 +3025,7 @@ def create_app():
         AIUsage.query.filter_by(user_id=user.id).delete()
         db.session.delete(user)
         db.session.commit()
-        flash("User and related data deleted.", "success")
+        flash("تم حذف المستخدم وجميع بياناته المرتبطة.", "success")
         return redirect(url_for("admin_dashboard"))
 
 
@@ -2830,7 +3054,7 @@ def create_app():
                 if unread:
                     db.session.commit()
             except Exception:
-                logger.exception("Failed to load toast notifications")
+                logger.exception("تعذر تحميل إشعارات المشرف")
         return {"toast_notifications": toast_notifications}
 
 

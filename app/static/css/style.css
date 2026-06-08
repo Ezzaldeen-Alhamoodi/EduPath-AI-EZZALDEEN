@@ -8021,3 +8021,68 @@ small.hint {
         grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 }
+
+
+
+/* EduPath AI v5.5.84 Native Arabic Resources */
+.resources-filter-card label,
+.resource-card,
+.resource-card p,
+.resource-meta,
+.resource-tags,
+.learning-path-card,
+.my-resources-filter-v472,
+.saved-resource-edit-v472 {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.resource-card h3,
+.resource-card .resource-open,
+.resource-card a[href^="http"],
+.learning-step strong {
+    unicode-bidi: plaintext;
+}
+
+.resource-badges {
+    justify-content: flex-start;
+}
+
+.resources-filter-grid input,
+.resources-filter-grid select,
+.saved-resource-edit-v472 textarea,
+.saved-resource-edit-v472 select {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+
+
+/* EduPath AI v5.5.86 Native Arabic Admin */
+.admin-hero,
+.admin-message-card,
+.subscription-pool-card-v480,
+.admin-users-card-v478,
+.admin-user-card,
+.admin-user-form,
+.admin-message-form,
+.generate-global-codes-v480,
+.global-code-list-v480 {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.admin-user-card input,
+.admin-user-card select,
+.admin-message-form textarea,
+.generate-global-codes-v480 input,
+.generate-global-codes-v480 select {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.global-code-item-v480 code,
+.admin-user-summary span,
+.global-code-item-v480 span {
+    unicode-bidi: plaintext;
+}

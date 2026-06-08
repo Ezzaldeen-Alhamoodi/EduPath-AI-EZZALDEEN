@@ -1,57 +1,56 @@
-\
 {% extends "base.html" %}
-{% block page_title %}My Resources{% endblock %}
+{% block page_title %}مصادري{% endblock %}
 {% block content %}
 
 <section class="hero compact resources-hero-v4616 resources-hero-actions-v472">
     <div>
         <span class="tag">EduPath AI</span>
-        <h2>⭐ My Resources</h2>
-        <p>Your personal learning library. Save your daily resources, track status, write notes, and open them quickly.</p>
+        <h2>⭐ مصادري</h2>
+        <p>مكتبتك التعليمية الشخصية. احفظ المصادر التي تستخدمها، تابع حالتها، اكتب ملاحظاتك، وافتحها بسرعة عند الحاجة.</p>
     </div>
-    <a class="button light" href="{{ url_for('resources') }}">＋ Browse Resources</a>
+    <a class="button light" href="{{ url_for('resources') }}">＋ تصفح المصادر</a>
 </section>
 
 <section class="resources-summary-row">
     <div class="mini-stat-card">
         <strong>{{ saved_items|length }}</strong>
-        <span>Saved Resources</span>
+        <span>مصادر محفوظة</span>
     </div>
     <div class="mini-stat-card">
         <strong>{{ categories|length }}</strong>
-        <span>Categories</span>
+        <span>فئات</span>
     </div>
     <div class="mini-stat-card">
         <strong>0</strong>
-        <span>AI Credits Used</span>
+        <span>استخدام الذكاء الاصطناعي</span>
     </div>
 </section>
 
 <section class="card resources-filter-card">
     <form method="GET" class="resources-filter-grid my-resources-filter-v472">
         <div>
-            <label>Category</label>
+            <label>الفئة</label>
             <select name="category">
-                <option value="">All Categories</option>
+                <option value="">جميع الفئات</option>
                 {% for cat in categories %}
-                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat }}</option>
+                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat|resource_ar }}</option>
                 {% endfor %}
             </select>
         </div>
 
         <div>
-            <label>Status</label>
+            <label>الحالة</label>
             <select name="status">
-                <option value="">All Statuses</option>
+                <option value="">جميع الحالات</option>
                 {% for status in statuses %}
-                    <option value="{{ status }}" {% if selected.status == status %}selected{% endif %}>{{ status }}</option>
+                    <option value="{{ status }}" {% if selected.status == status %}selected{% endif %}>{{ status|resource_status_ar }}</option>
                 {% endfor %}
             </select>
         </div>
 
         <div class="filter-actions">
-            <button type="submit">Filter</button>
-            <a class="small-button ghost" href="{{ url_for('my_resources') }}">Reset</a>
+            <button type="submit">تطبيق الفلتر</button>
+            <a class="small-button ghost" href="{{ url_for('my_resources') }}">إعادة ضبط</a>
         </div>
     </form>
 </section>
@@ -63,50 +62,50 @@
             <div class="resource-card-head">
                 <div>
                     <h3>{{ resource.name }}</h3>
-                    <p>{{ resource.category }}{% if resource.subcategory %} · {{ resource.subcategory }}{% endif %}</p>
+                    <p>{{ resource.category|resource_ar }}{% if resource.subcategory %} · {{ resource.subcategory|resource_ar }}{% endif %}</p>
                 </div>
                 <div class="resource-badges">
-                    <span class="badge saved-status">{{ item.status }}</span>
-                    {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
-                    {% if resource.is_free %}<span class="badge free">Free</span>{% endif %}
-                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
+                    <span class="badge saved-status">{{ item.status|resource_status_ar }}</span>
+                    {% if resource.is_official %}<span class="badge official">رسمي</span>{% endif %}
+                    {% if resource.is_free %}<span class="badge free">مجاني</span>{% endif %}
+                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type|resource_ar }}</span>{% endif %}
                 </div>
             </div>
 
-            <p class="resource-desc">{{ resource.description }}</p>
+            <p class="resource-desc">{{ resource|resource_description_ar }}</p>
 
             <div class="resource-meta">
-                {% if resource.exam %}<span>Exam: {{ resource.exam }}</span>{% endif %}
-                {% if resource.skill %}<span>Skill: {{ resource.skill }}</span>{% endif %}
-                {% if resource.level %}<span>Level: {{ resource.level }}</span>{% endif %}
-                {% if item.last_opened %}<span>Last opened: {{ item.last_opened.strftime("%Y-%m-%d") }}</span>{% endif %}
+                {% if resource.exam %}<span>الاختبار: {{ resource.exam }}</span>{% endif %}
+                {% if resource.skill %}<span>المهارة: {{ resource.skill|resource_phrase_ar }}</span>{% endif %}
+                {% if resource.level %}<span>المستوى: {{ resource.level|resource_ar }}</span>{% endif %}
+                {% if item.last_opened %}<span>آخر فتح: {{ item.last_opened.strftime("%Y-%m-%d") }}</span>{% endif %}
             </div>
 
             <form method="POST" action="{{ url_for('update_saved_resource', saved_id=item.id) }}" class="saved-resource-edit-v472">
-                <label>Status</label>
+                <label>الحالة</label>
                 <select name="status">
                     {% for status in statuses %}
-                        <option value="{{ status }}" {% if item.status == status %}selected{% endif %}>{{ status }}</option>
+                        <option value="{{ status }}" {% if item.status == status %}selected{% endif %}>{{ status|resource_status_ar }}</option>
                     {% endfor %}
                 </select>
 
-                <label>My Notes</label>
-                <textarea name="notes" rows="3" placeholder="Example: Current speed 42 WPM, target 70 WPM...">{{ item.notes or "" }}</textarea>
+                <label>ملاحظاتي</label>
+                <textarea name="notes" rows="3" placeholder="مثال: أستخدم هذا المصدر يومياً، وصلت إلى الدرس الخامس، أريد مراجعة قسم القراءة...">{{ item.notes or "" }}</textarea>
 
                 <div class="resource-actions-v472">
-                    <button type="submit" class="small-button">Save Notes</button>
-                    <a class="button resource-open" href="{{ url_for('open_saved_resource', saved_id=item.id) }}" target="_blank" rel="noopener noreferrer">Open ↗</a>
+                    <button type="submit" class="small-button">حفظ الملاحظات</button>
+                    <a class="button resource-open" href="{{ url_for('open_saved_resource', saved_id=item.id) }}" target="_blank" rel="noopener noreferrer">فتح ↗</a>
                 </div>
             </form>
 
             <form method="POST" action="{{ url_for('delete_saved_resource', saved_id=item.id) }}" class="delete-saved-resource-v472">
-                <button type="submit" class="small-button danger">Remove from My Resources</button>
+                <button type="submit" class="small-button danger">إزالة من مصادري</button>
             </form>
         </article>
     {% else %}
         <div class="card">
-            <p class="muted">No saved resources yet. Go to Resources and press Save on the sources you use daily.</p>
-            <a class="button" href="{{ url_for('resources') }}">Browse Resources</a>
+            <p class="muted">لا توجد مصادر محفوظة بعد. انتقل إلى صفحة المصادر واضغط حفظ على المصادر التي تستخدمها كثيراً.</p>
+            <a class="button" href="{{ url_for('resources') }}">تصفح المصادر</a>
         </div>
     {% endfor %}
 </section>

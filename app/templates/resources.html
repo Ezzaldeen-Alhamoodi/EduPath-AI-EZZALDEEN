@@ -1,44 +1,43 @@
-\
 {% extends "base.html" %}
-{% block page_title %}Smart Resources{% endblock %}
+{% block page_title %}المصادر التعليمية{% endblock %}
 {% block content %}
 
 <section class="hero compact resources-hero-v4616 resources-hero-actions-v472">
     <div>
         <span class="tag">EduPath AI</span>
-        <h2>Smart Resources Engine</h2>
-        <p>Find the right learning resources for your goals, tasks, exams, skills, and daily study plan. Resources are updated automatically when this page opens.</p>
+        <h2>محرك المصادر التعليمية</h2>
+        <p>ابحث عن المصادر المناسبة لأهدافك ومهامك واختباراتك ومهاراتك وخطتك اليومية. أسماء المصادر الرسمية تبقى كما هي، أما شرح الصفحة وأدواتها فهي عربية بالكامل.</p>
     </div>
-    <a class="button light" href="{{ url_for('my_resources') }}">⭐ My Resources</a>
+    <a class="button light" href="{{ url_for('my_resources') }}">⭐ مصادري</a>
 </section>
 
 <section class="resource-category-strip">
     {% for cat in categories %}
-        <a href="{{ url_for('resources', category=cat) }}" class="{% if selected.category == cat %}active{% endif %}">{{ cat }}</a>
+        <a href="{{ url_for('resources', category=cat) }}" class="{% if selected.category == cat %}active{% endif %}">{{ cat|resource_ar }}</a>
     {% endfor %}
 </section>
 
 <section class="card resources-filter-card">
     <form method="GET" class="resources-filter-grid">
         <div class="filter-wide">
-            <label>Search Resources</label>
-            <input name="q" value="{{ selected.q }}" placeholder="IELTS Reading, Python Flask, CSCA Physics, Quran memorization...">
+            <label>ابحث في المصادر</label>
+            <input name="q" value="{{ selected.q }}" placeholder="مثال: IELTS Reading، Python Flask، CSCA Physics، حفظ القرآن، رياضيات...">
         </div>
 
         <div>
-            <label>Category</label>
+            <label>الفئة</label>
             <select name="category">
-                <option value="">All Categories / جميع الفئات</option>
+                <option value="">جميع الفئات</option>
                 {% for cat in categories %}
-                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat }}</option>
+                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat|resource_ar }}</option>
                 {% endfor %}
             </select>
         </div>
 
         <div>
-            <label>Exam</label>
+            <label>الاختبار</label>
             <select name="exam">
-                <option value="">All Exams / جميع الاختبارات</option>
+                <option value="">جميع الاختبارات</option>
                 {% for exam in exams %}
                     <option value="{{ exam }}" {% if selected.exam == exam %}selected{% endif %}>{{ exam }}</option>
                 {% endfor %}
@@ -46,55 +45,54 @@
         </div>
 
         <div>
-            <label>Skill / Topic</label>
-            <input name="skill" value="{{ selected.skill }}" placeholder="Reading, Writing, Algebra, Python, Quran...">
+            <label>المهارة أو الموضوع</label>
+            <input name="skill" value="{{ selected.skill }}" placeholder="مثال: Reading، Writing، Python، القرآن، الجبر، التفاضل...">
         </div>
 
         <div>
-            <label>Level</label>
+            <label>المستوى</label>
             <select name="level">
-                <option value="">All Levels</option>
-                <option value="Beginner" {% if selected.level == "Beginner" %}selected{% endif %}>Beginner</option>
-                <option value="Intermediate" {% if selected.level == "Intermediate" %}selected{% endif %}>Intermediate</option>
-                <option value="Advanced" {% if selected.level == "Advanced" %}selected{% endif %}>Advanced</option>
+                <option value="">جميع المستويات</option>
+                <option value="Beginner" {% if selected.level == "Beginner" %}selected{% endif %}>مبتدئ</option>
+                <option value="Intermediate" {% if selected.level == "Intermediate" %}selected{% endif %}>متوسط</option>
+                <option value="Advanced" {% if selected.level == "Advanced" %}selected{% endif %}>متقدم</option>
             </select>
         </div>
 
         <div>
-            <label>Type</label>
+            <label>نوع المصدر</label>
             <select name="type">
-                <option value="">All Types / جميع الأنواع</option>
+                <option value="">جميع الأنواع</option>
                 {% for type in types %}
-                    <option value="{{ type }}" {% if selected.type == type %}selected{% endif %}>{{ type }}</option>
+                    <option value="{{ type }}" {% if selected.type == type %}selected{% endif %}>{{ type|resource_ar }}</option>
                 {% endfor %}
             </select>
         </div>
 
         <label class="resource-check">
             <input type="checkbox" name="official" value="1" {% if selected.official == "1" %}checked{% endif %}>
-            Official Only
+            المصادر الرسمية فقط
         </label>
 
         <label class="resource-check">
             <input type="checkbox" name="free" value="1" {% if selected.free == "1" %}checked{% endif %}>
-            Free Only
+            المصادر المجانية فقط
         </label>
 
         <div class="filter-actions">
-            <button type="submit">🔎 Find Resources</button>
-            <a class="small-button ghost" href="{{ url_for('resources') }}">Reset</a>
+            <button type="submit">🔎 البحث عن المصادر</button>
+            <a class="small-button ghost" href="{{ url_for('resources') }}">إعادة ضبط</a>
         </div>
     </form>
 </section>
-
 
 {% if learning_path %}
 <section class="card learning-path-card">
     <div class="learning-path-head">
         <div>
-            <span class="tag">Recommended Path</span>
-            <h2>⭐ Start Here</h2>
-            <p class="muted">A simple suggested order so you do not get lost among many resources.</p>
+            <span class="tag">مسار مقترح</span>
+            <h2>⭐ ابدأ من هنا</h2>
+            <p class="muted">ترتيب بسيط يساعدك على البدء بالمصادر المناسبة دون تشتت.</p>
         </div>
     </div>
 
@@ -104,25 +102,25 @@
                 <span class="step-number">{{ loop.index }}</span>
                 <div>
                     <strong>{{ resource.name }}</strong>
-                    <p>{{ resource.description }}</p>
+                    <p>{{ resource|resource_description_ar }}</p>
                     <div class="resource-badges">
-                        {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
-                        {% if resource.is_free %}<span class="badge free">Free</span>{% endif %}
-                        {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
-                    {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">Beginner Friendly</span>{% endif %}
-                    {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">Advanced</span>{% endif %}
+                        {% if resource.is_official %}<span class="badge official">رسمي</span>{% endif %}
+                        {% if resource.is_free %}<span class="badge free">مجاني</span>{% endif %}
+                        {% if resource.resource_type %}<span class="badge">{{ resource.resource_type|resource_ar }}</span>{% endif %}
+                        {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">مناسب للمبتدئين</span>{% endif %}
+                        {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">متقدم</span>{% endif %}
                     </div>
                     <div class="resource-actions-v472 compact">
                         {% if resource.id in saved_resource_ids %}
                             <form method="POST" action="{{ url_for('unsave_resource', resource_id=resource.id) }}">
-                                <button type="submit" class="small-button warning">★ Saved</button>
+                                <button type="submit" class="small-button warning">★ محفوظ</button>
                             </form>
                         {% else %}
                             <form method="POST" action="{{ url_for('save_resource', resource_id=resource.id) }}">
-                                <button type="submit" class="small-button">☆ Save</button>
+                                <button type="submit" class="small-button">☆ حفظ</button>
                             </form>
                         {% endif %}
-                        <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">Open ↗</a>
+                        <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">فتح المصدر ↗</a>
                     </div>
                 </div>
             </div>
@@ -134,15 +132,15 @@
 <section class="resources-summary-row">
     <div class="mini-stat-card">
         <strong>{{ resources|length }}</strong>
-        <span>Matching Resources / المصادر المطابقة</span>
+        <span>مصادر مطابقة</span>
     </div>
     <div class="mini-stat-card">
         <strong>{{ categories|length }}</strong>
-        <span>Smart Categories / الفئات الذكية</span>
+        <span>فئات ذكية</span>
     </div>
     <div class="mini-stat-card">
-        <strong>Free</strong>
-        <span>Free-first learning resources</span>
+        <strong>مجاني</strong>
+        <span>الأولوية للمصادر المجانية</span>
     </div>
 </section>
 
@@ -152,29 +150,29 @@
             <div class="resource-card-head">
                 <div>
                     <h3>{{ resource.name }}</h3>
-                    <p>{{ resource.category }}{% if resource.subcategory %} · {{ resource.subcategory }}{% endif %}</p>
+                    <p>{{ resource.category|resource_ar }}{% if resource.subcategory %} · {{ resource.subcategory|resource_ar }}{% endif %}</p>
                 </div>
                 <div class="resource-badges">
-                    {% if resource.is_official %}<span class="badge official">Official</span>{% endif %}
-                    {% if resource.is_free %}<span class="badge free">Free</span>{% endif %}
-                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
-                    {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">Beginner Friendly</span>{% endif %}
-                    {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">Advanced</span>{% endif %}
+                    {% if resource.is_official %}<span class="badge official">رسمي</span>{% endif %}
+                    {% if resource.is_free %}<span class="badge free">مجاني</span>{% endif %}
+                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type|resource_ar }}</span>{% endif %}
+                    {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">مناسب للمبتدئين</span>{% endif %}
+                    {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">متقدم</span>{% endif %}
                 </div>
             </div>
 
-            <p class="resource-desc">{{ resource.description }}</p>
+            <p class="resource-desc">{{ resource|resource_description_ar }}</p>
 
             <div class="resource-meta">
-                {% if resource.exam %}<span>Exam: {{ resource.exam }}</span>{% endif %}
-                {% if resource.skill %}<span>Skill: {{ resource.skill }}</span>{% endif %}
-                {% if resource.level %}<span>Level: {{ resource.level }}</span>{% endif %}
-                {% if resource.language %}<span>Language: {{ resource.language }}</span>{% endif %}
+                {% if resource.exam %}<span>الاختبار: {{ resource.exam }}</span>{% endif %}
+                {% if resource.skill %}<span>المهارة: {{ resource.skill|resource_phrase_ar }}</span>{% endif %}
+                {% if resource.level %}<span>المستوى: {{ resource.level|resource_ar }}</span>{% endif %}
+                {% if resource.language %}<span>لغة المصدر: {{ resource.language|resource_ar }}</span>{% endif %}
             </div>
 
             {% if resource.tags %}
                 <div class="resource-tags">
-                    {% for tag in resource.tags[:8] %}
+                    {% for tag in (resource.tags|resource_tags_ar)[:8] %}
                         <span>{{ tag }}</span>
                     {% endfor %}
                 </div>
@@ -183,19 +181,19 @@
             <div class="resource-actions-v472">
                 {% if resource.id in saved_resource_ids %}
                     <form method="POST" action="{{ url_for('unsave_resource', resource_id=resource.id) }}">
-                        <button type="submit" class="small-button warning">★ Saved</button>
+                        <button type="submit" class="small-button warning">★ محفوظ</button>
                     </form>
                 {% else %}
                     <form method="POST" action="{{ url_for('save_resource', resource_id=resource.id) }}">
-                        <button type="submit" class="small-button">☆ Save</button>
+                        <button type="submit" class="small-button">☆ حفظ</button>
                     </form>
                 {% endif %}
-                <a class="button resource-open" href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">Open Resource ↗</a>
+                <a class="button resource-open" href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">فتح المصدر ↗</a>
             </div>
         </article>
     {% else %}
         <div class="card">
-            <p class="muted">No resources found. Try a broader search or remove some filters.</p>
+            <p class="muted">لم يتم العثور على مصادر مناسبة. جرّب بحثاً أوسع أو أزل بعض الفلاتر.</p>
         </div>
     {% endfor %}
 </section>

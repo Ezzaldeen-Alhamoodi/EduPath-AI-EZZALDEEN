@@ -1,121 +1,116 @@
-\
 {% extends "base.html" %}
-{% block page_title %}Admin Control Center{% endblock %}
+{% block page_title %}لوحة تحكم المشرف{% endblock %}
 {% block content %}
 
 <section class="hero compact admin-hero">
     <div>
-        <span class="tag">Admin Control Center</span>
-        <h2>Application Control & Student Progress</h2>
-        <p>Manage users, AI access, daily limits, progress tracking, and motivational messages.</p>
+        <span class="tag">لوحة تحكم المشرف</span>
+        <h2>إدارة التطبيق ومتابعة تقدم المستخدمين</h2>
+        <p>تحكم في المستخدمين، حدود الاستخدام، تفعيل الذكاء الاصطناعي، رموز الاشتراك، التقدم، ورسائل التحفيز داخل التطبيق.</p>
     </div>
-    <a class="button light" href="{{ url_for('profile') }}">◉ My Profile</a>
+    <a class="button light" href="{{ url_for('profile') }}">◉ ملفي الشخصي</a>
 </section>
 
 <section class="stats-grid">
-    <div class="stat-card blue"><span>◉</span><h3>Users</h3><p>{{ total_users }}</p></div>
-    <div class="stat-card purple"><span>◎</span><h3>Goals</h3><p>{{ total_goals }}</p></div>
-    <div class="stat-card green"><span>✓</span><h3>Completed Tasks</h3><p>{{ completed_tasks }}</p></div>
-    <div class="stat-card orange"><span>◷</span><h3>Pending Tasks</h3><p>{{ pending_tasks }}</p></div>
-    <div class="stat-card purple"><span>✦</span><h3>AI Uses Today</h3><p>{{ ai_today }}</p></div>
+    <div class="stat-card blue"><span>◉</span><h3>المستخدمون</h3><p>{{ total_users }}</p></div>
+    <div class="stat-card purple"><span>◎</span><h3>الأهداف</h3><p>{{ total_goals }}</p></div>
+    <div class="stat-card green"><span>✓</span><h3>المهام المكتملة</h3><p>{{ completed_tasks }}</p></div>
+    <div class="stat-card orange"><span>◷</span><h3>المهام قيد التنفيذ</h3><p>{{ pending_tasks }}</p></div>
+    <div class="stat-card purple"><span>✦</span><h3>استخدام الذكاء اليوم</h3><p>{{ ai_today }}</p></div>
 </section>
 
 <section class="card admin-message-card">
-    <h2>Send EduPath AI Motivation</h2>
-    <p class="muted">Send an EduPath AI in-app notification to a selected user. It appears briefly like a phone notification.</p>
+    <h2>إرسال رسالة تحفيزية من EduPath AI</h2>
+    <p class="muted">أرسل إشعاراً داخل التطبيق إلى مستخدم محدد. ستظهر الرسالة للمستخدم كتنبيه قصير داخل التطبيق.</p>
 
     <form method="POST" action="{{ url_for('admin_send_message') }}" class="form admin-message-form">
-        <label>Select User</label>
+        <label>اختر المستخدم</label>
         <select name="user_id" required>
             {% for user in users %}
                 <option value="{{ user.id }}">{{ user.name }} — {{ user.email }}</option>
             {% endfor %}
         </select>
 
-        <label>Message Type</label>
+        <label>نوع الرسالة</label>
         <select name="message_type" id="adminMessageType">
-            <option value="completed">Congratulations for completing tasks</option>
-            <option value="partial">Encourage after partial completion</option>
-            <option value="not_completed">Gentle reminder for incomplete tasks</option>
-            <option value="encouragement">General encouragement</option>
-            <option value="custom">Other / Custom message</option>
+            <option value="completed">تهنئة على إنجاز المهام</option>
+            <option value="partial">تشجيع بعد إنجاز جزء من المهام</option>
+            <option value="not_completed">تذكير لطيف عند عدم إكمال المهام</option>
+            <option value="encouragement">تشجيع عام</option>
+            <option value="custom">رسالة مخصصة</option>
         </select>
 
-        <label>Custom Message</label>
-        <textarea name="custom_message" rows="4" placeholder="Write your own message if you choose Other / Custom..."></textarea>
+        <label>نص الرسالة المخصصة</label>
+        <textarea name="custom_message" rows="4" placeholder="اكتب رسالتك هنا إذا اخترت رسالة مخصصة..."></textarea>
 
-        <button type="submit">Send Message</button>
+        <button type="submit">إرسال الرسالة</button>
     </form>
 </section>
 
-
-
-
 <section class="card subscription-pool-card-v480">
-    <h2>Global Subscription Code Pool</h2>
-    <p class="muted">Generate codes once, send any available code to any paid user. The code becomes linked to the user only after activation.</p>
+    <h2>مجموعة رموز الاشتراك العامة</h2>
+    <p class="muted">أنشئ رموز اشتراك مرة واحدة، ثم أرسل أي رمز متاح لأي مستخدم مدفوع. يتم ربط الرمز بالمستخدم فقط بعد تفعيله.</p>
 
     <div class="admin-progress-grid code-pool-stats-v480">
-        <div><strong>{{ available_codes }}</strong><span>Available</span></div>
-        <div><strong>{{ used_codes }}</strong><span>Used</span></div>
-        <div><strong>{{ cancelled_codes }}</strong><span>Cancelled</span></div>
-        <div><strong>{{ expired_subscriptions }}</strong><span>Expired</span></div>
+        <div><strong>{{ available_codes }}</strong><span>متاحة</span></div>
+        <div><strong>{{ used_codes }}</strong><span>مستخدمة</span></div>
+        <div><strong>{{ cancelled_codes }}</strong><span>ملغاة</span></div>
+        <div><strong>{{ expired_subscriptions }}</strong><span>منتهية</span></div>
     </div>
 
     <form method="POST" action="{{ url_for('admin_generate_global_subscription_codes') }}" class="generate-global-codes-v480">
-        <label>Quantity
+        <label>العدد
             <select name="quantity">
-                <option value="10">Generate 10 Codes</option>
-                <option value="50">Generate 50 Codes</option>
-                <option value="100">Generate 100 Codes</option>
-                <option value="200">Generate 200 Codes</option>
+                <option value="10">إنشاء 10 رموز</option>
+                <option value="50">إنشاء 50 رمزاً</option>
+                <option value="100">إنشاء 100 رمز</option>
+                <option value="200">إنشاء 200 رمز</option>
             </select>
         </label>
 
-        <label>Duration
+        <label>مدة الاشتراك
             <select name="duration_days">
-                <option value="30">30 days</option>
-                <option value="90">90 days</option>
-                <option value="180">180 days</option>
-                <option value="365">365 days</option>
-                <option value="3650">Lifetime-like / 10 years</option>
+                <option value="30">30 يوماً</option>
+                <option value="90">90 يوماً</option>
+                <option value="180">180 يوماً</option>
+                <option value="365">365 يوماً</option>
+                <option value="3650">اشتراك طويل جداً / 10 سنوات</option>
             </select>
         </label>
 
-        <label>Note
-            <input name="note" placeholder="Optional note, e.g. June subscriptions">
+        <label>ملاحظة
+            <input name="note" placeholder="ملاحظة اختيارية، مثال: اشتراكات شهر يونيو">
         </label>
 
-        <button type="submit">Generate Codes</button>
+        <button type="submit">إنشاء الرموز</button>
     </form>
 
     <div class="global-code-list-v480">
         {% for code in recent_codes %}
             <div class="global-code-item-v480 {% if code.is_used %}used{% elif code.is_cancelled %}cancelled{% else %}available{% endif %}">
                 <code>{{ code.code }}</code>
-                <span>{{ code.duration_days }} days</span>
+                <span>{{ code.duration_days }} يوم</span>
                 {% if code.is_used %}
-                    <span>Used by: {{ code.used_by_user.email if code.used_by_user else "unknown" }}</span>
-                    {% if code.expires_at %}<span>Expires: {{ code.expires_at.strftime("%Y-%m-%d") }}</span>{% endif %}
+                    <span>استخدمه: {{ code.used_by_user.email if code.used_by_user else "مستخدم غير معروف" }}</span>
+                    {% if code.expires_at %}<span>ينتهي في: {{ code.expires_at.strftime("%Y-%m-%d") }}</span>{% endif %}
                 {% elif code.is_cancelled %}
-                    <span>Cancelled</span>
+                    <span>ملغى</span>
                 {% else %}
-                    <span>Available</span>
+                    <span>متاح</span>
                     <form method="POST" action="{{ url_for('admin_cancel_subscription_code', code_id=code.id) }}">
-                        <button type="submit" class="small-button danger">Cancel</button>
+                        <button type="submit" class="small-button danger">إلغاء الرمز</button>
                     </form>
                 {% endif %}
             </div>
         {% else %}
-            <p class="muted">No subscription codes yet. Generate your first code batch.</p>
+            <p class="muted">لا توجد رموز اشتراك بعد. أنشئ أول مجموعة رموز.</p>
         {% endfor %}
     </div>
 </section>
 
-
 <section class="card admin-users-card-v478">
-    <h2>Users, Limits & Progress</h2>
-    <p class="muted">Admins are unlimited. Regular users can be limited for tasks, goals, and AI Coach. Global subscription codes are managed in the code pool above.</p>
+    <h2>المستخدمون والحدود والتقدم</h2>
+    <p class="muted">المشرفون بلا حدود استخدام. يمكن تحديد حدود المستخدمين العاديين للمهام والأهداف ومدرب الذكاء الاصطناعي. رموز الاشتراك العامة تدار من القسم أعلاه.</p>
 
     <div class="admin-users final-admin-users">
         {% for item in user_stats %}
@@ -128,74 +123,74 @@
                     </div>
                     <div class="admin-badges compact-admin-badges-v478">
                         {% if item.is_unlimited %}
-                            <span class="admin-badge unlimited">Unlimited Admin</span>
+                            <span class="admin-badge unlimited">مشرف بلا حدود</span>
                         {% elif item.paid_active %}
-                            <span class="admin-badge paid">Paid Active</span>
+                            <span class="admin-badge paid">اشتراك مدفوع نشط</span>
                         {% else %}
-                            <span class="admin-badge">Free Plan</span>
+                            <span class="admin-badge">الخطة المجانية</span>
                         {% endif %}
-                        <span class="admin-badge">{{ "AI On" if user.ai_enabled else "AI Off" }}</span>
+                        <span class="admin-badge">{{ "الذكاء مفعّل" if user.ai_enabled else "الذكاء معطّل" }}</span>
                         {% if item.paid_active %}
-                            <span class="admin-badge paid">Days left: {{ item.paid_days_left }}</span>
+                            <span class="admin-badge paid">الأيام المتبقية: {{ item.paid_days_left }}</span>
                         {% endif %}
-                        
                     </div>
                 </div>
 
                 <div class="admin-progress-grid compact-progress-v478">
-                    <div><strong>{{ item.goals_count }}</strong><span>Goals / {{ item.goal_limit if item.goal_limit is not none else "∞" }}</span></div>
-                    <div><strong>{{ item.tasks_count }}</strong><span>Tasks / {{ item.task_limit if item.task_limit is not none else "∞" }}</span></div>
-                    <div><strong>{{ item.done_count }}</strong><span>Done</span></div>
-                    <div><strong>{{ item.pending_count }}</strong><span>Pending</span></div>
-                    <div><strong>{{ item.progress }}%</strong><span>Progress</span></div>
-                    <div><strong>{{ item.ai_limit if item.ai_limit is not none else "∞" }}</strong><span>AI limit/day</span></div>
+                    <div><strong>{{ item.goals_count }}</strong><span>الأهداف / {{ item.goal_limit if item.goal_limit is not none else "∞" }}</span></div>
+                    <div><strong>{{ item.tasks_count }}</strong><span>المهام / {{ item.task_limit if item.task_limit is not none else "∞" }}</span></div>
+                    <div><strong>{{ item.done_count }}</strong><span>مكتملة</span></div>
+                    <div><strong>{{ item.pending_count }}</strong><span>قيد التنفيذ</span></div>
+                    <div><strong>{{ item.progress }}%</strong><span>التقدم</span></div>
+                    <div><strong>{{ item.ai_limit if item.ai_limit is not none else "∞" }}</strong><span>حد الذكاء يومياً</span></div>
                 </div>
 
                 <div class="admin-ai-grid">
-                    <div><strong>{{ item.english_used }}</strong><span>English Coach today</span></div>
-                    <div><strong>{{ item.scholarship_used }}</strong><span>Scholarship Coach today</span></div>
-                    <div><strong>{{ item.code_used }}</strong><span>Code Coach today</span></div>
-                    <div><strong>{{ item.general_used }}</strong><span>General AI today</span></div>
+                    <div><strong>{{ item.english_used }}</strong><span>مدرب الإنجليزية اليوم</span></div>
+                    <div><strong>{{ item.scholarship_used }}</strong><span>مدرب المنح اليوم</span></div>
+                    <div><strong>{{ item.code_used }}</strong><span>مدرب البرمجة اليوم</span></div>
+                    <div><strong>{{ item.general_used }}</strong><span>الذكاء العام اليوم</span></div>
                 </div>
+
                 <form method="POST" action="{{ url_for('admin_update_user', user_id=user.id) }}" class="admin-user-form">
-                    <label>Name</label>
+                    <label>الاسم</label>
                     <input name="name" value="{{ user.name }}">
 
                     <label class="checkbox-row">
                         <input type="checkbox" name="ai_enabled" {% if user.ai_enabled %}checked{% endif %}>
-                        <span>Allow AI Coach</span>
+                        <span>السماح باستخدام مدرب الذكاء الاصطناعي</span>
                     </label>
 
                     <div class="admin-limit-grid-v478">
-                        <label>Free Tasks<input type="number" name="task_limit" min="0" value="{{ user.task_limit }}"></label>
-                        <label>Free Goals<input type="number" name="goal_limit" min="0" value="{{ user.goal_limit }}"></label>
-                        <label>Free AI/day<input type="number" name="ai_daily_limit" min="0" value="{{ user.ai_daily_limit }}"></label>
-                        <label>Paid Tasks<input type="number" name="paid_task_limit" min="0" value="{{ user.paid_task_limit }}"></label>
-                        <label>Paid Goals<input type="number" name="paid_goal_limit" min="0" value="{{ user.paid_goal_limit }}"></label>
-                        <label>Paid AI/day<input type="number" name="paid_ai_daily_limit" min="0" value="{{ user.paid_ai_daily_limit }}"></label>
+                        <label>مهام الخطة المجانية<input type="number" name="task_limit" min="0" value="{{ user.task_limit }}"></label>
+                        <label>أهداف الخطة المجانية<input type="number" name="goal_limit" min="0" value="{{ user.goal_limit }}"></label>
+                        <label>استخدام الذكاء يومياً في الخطة المجانية<input type="number" name="ai_daily_limit" min="0" value="{{ user.ai_daily_limit }}"></label>
+                        <label>مهام الخطة المدفوعة<input type="number" name="paid_task_limit" min="0" value="{{ user.paid_task_limit }}"></label>
+                        <label>أهداف الخطة المدفوعة<input type="number" name="paid_goal_limit" min="0" value="{{ user.paid_goal_limit }}"></label>
+                        <label>استخدام الذكاء يومياً في الخطة المدفوعة<input type="number" name="paid_ai_daily_limit" min="0" value="{{ user.paid_ai_daily_limit }}"></label>
                     </div>
 
                     <label class="checkbox-row">
                         <input type="checkbox" name="paid_active" {% if user.paid_active %}checked{% endif %}>
-                        <span>Paid version active</span>
+                        <span>تفعيل النسخة المدفوعة</span>
                     </label>
 
                     <label class="checkbox-row">
                         <input type="checkbox" name="is_admin" {% if user.is_admin %}checked{% endif %} {% if user.id == current_user.id %}disabled{% endif %}>
-                        <span>Admin / Unlimited access</span>
+                        <span>مشرف / وصول بلا حدود</span>
                     </label>
 
-                    <button type="submit">Save User Control</button>
+                    <button type="submit">حفظ إعدادات المستخدم</button>
                 </form>
 
                 {% if user.id != current_user.id %}
-                    <form method="POST" action="{{ url_for('admin_delete_user', user_id=user.id) }}" onsubmit="return confirm('Delete this user and all related data?')" class="admin-delete-form">
-                        <button type="submit" class="danger">Delete User</button>
+                    <form method="POST" action="{{ url_for('admin_delete_user', user_id=user.id) }}" onsubmit="return confirm('هل تريد حذف هذا المستخدم وجميع بياناته المرتبطة؟')" class="admin-delete-form">
+                        <button type="submit" class="danger">حذف المستخدم</button>
                     </form>
                 {% endif %}
             </div>
         {% else %}
-            <p class="muted">No users found.</p>
+            <p class="muted">لا يوجد مستخدمون حالياً.</p>
         {% endfor %}
     </div>
 </section>
