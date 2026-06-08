@@ -1,4 +1,4 @@
-window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.114-tasks-programming-technology-part1";
+window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.115-tasks-programming-technology-part2";
 window.EDUPATH_TASKS_AR_DATA = {
   "حفظ القرآن الكريم": {
     icon: "📖",
@@ -52794,3 +52794,7705 @@ window.SMART_EXAM_DATA = {
     window.EDUPATH_TASKS_PROGRAMMING_TECHNOLOGY_PART1_V55114 = true;
 })();
 // === End EduPath AI v5.5.114: Tasks Programming and Technology Part 1 ===
+
+
+// === EduPath AI v5.5.115: Tasks Programming and Technology Part 2 ===
+(function () {
+    const root = window.EDUPATH_TASKS_AR_DATA = window.EDUPATH_TASKS_AR_DATA || {};
+    root["البرمجة والتكنولوجيا"] = root["البرمجة والتكنولوجيا"] || { icon: "💻", main: [], sub: {}, detail: {}, training: [], trainingByDetail: {} };
+    const programmingTasks = root["البرمجة والتكنولوجيا"];
+    programmingTasks.icon = "💻";
+    programmingTasks.main = programmingTasks.main || [];
+    programmingTasks.sub = programmingTasks.sub || {};
+    programmingTasks.detail = programmingTasks.detail || {};
+    programmingTasks.training = programmingTasks.training || [];
+    programmingTasks.trainingByDetail = programmingTasks.trainingByDetail || {};
+
+    const ensureOtherLast = (list) => {
+        const seen = new Set();
+        const clean = [];
+        (list || []).forEach((item) => {
+            if (item === undefined || item === null) return;
+            const value = String(item).trim();
+            if (!value || value === "أخرى" || seen.has(value)) return;
+            seen.add(value);
+            clean.push(value);
+        });
+        clean.push("أخرى");
+        return clean;
+    };
+
+    const mergeLists = (...lists) => ensureOtherLast([].concat(...lists));
+
+    const part2Main = [
+    "Web Development Basics",
+    "Frontend Development",
+    "Backend Development",
+    "Full Stack Development",
+    "HTML Basics",
+    "HTML Forms",
+    "HTML Semantic Elements",
+    "CSS Basics",
+    "CSS Layout",
+    "Flexbox",
+    "CSS Grid",
+    "Responsive Design",
+    "CSS Animations Basics",
+    "JavaScript for Web",
+    "DOM Manipulation",
+    "Events in JavaScript",
+    "Forms with JavaScript",
+    "Fetch API",
+    "JSON",
+    "Browser Storage",
+    "React Basics",
+    "React Components",
+    "Props and State",
+    "React Events",
+    "React Forms",
+    "React Hooks Basics",
+    "React Router Basics",
+    "Frontend Project Structure",
+    "UI Components",
+    "Accessibility Basics",
+    "Web Performance Basics",
+    "Backend Basics",
+    "HTTP Basics",
+    "Request and Response",
+    "REST API",
+    "API Endpoints",
+    "JSON APIs",
+    "Flask Basics",
+    "Flask Routes",
+    "Flask Templates",
+    "Flask Forms",
+    "Flask APIs",
+    "Django Basics",
+    "Django Models",
+    "Django Views",
+    "Django Templates",
+    "Django Forms",
+    "Node.js Basics",
+    "Express.js Basics",
+    "Middleware",
+    "Server-side Validation",
+    "Authentication Basics",
+    "Authorization Basics",
+    "Sessions and Cookies",
+    "Password Handling Basics",
+    "Databases Basics",
+    "SQL Basics",
+    "SQLite",
+    "PostgreSQL Basics",
+    "MySQL Basics",
+    "Database Tables",
+    "Primary Key and Foreign Key",
+    "Database Relationships",
+    "CRUD Operations",
+    "Joins Basics",
+    "Database Design Basics",
+    "ORM Basics",
+    "SQLAlchemy Basics",
+    "Django ORM Basics",
+    "API and Database Integration",
+    "Git Basics",
+    "GitHub Basics",
+    "Branches",
+    "Commits",
+    "Pull Requests",
+    "Merge Conflicts",
+    "README Files",
+    "Project Documentation",
+    "Software Engineering Basics",
+    "Requirements Basics",
+    "User Stories",
+    "System Design Basics",
+    "Project Structure",
+    "Clean Architecture Basics",
+    "Refactoring Basics",
+    "اختبار البرامج وجودة الكود",
+    "Unit Testing",
+    "Integration Testing",
+    "Functional Testing",
+    "Frontend Testing Basics",
+    "Backend Testing Basics",
+    "Code Quality",
+    "Error Handling in Applications",
+    "Logging Basics",
+    "Deployment Basics",
+    "Environment Variables",
+    "Full Stack Project Planning",
+    "Full Stack Project Implementation",
+    "تحليل أخطاء تطوير التطبيقات",
+    "المراجعة الشاملة",
+    "اختبار قصير",
+    "اختبار تجريبي",
+    "أخرى"
+];
+    const part2Details = {
+    "Web Development Basics": [
+        "مفهوم Web Development",
+        "الفرق بين موقع وتطبيق ويب",
+        "Frontend",
+        "Backend",
+        "Full Stack",
+        "طريقة عمل المتصفح والخادم",
+        "دورة طلب صفحة ويب",
+        "أخرى"
+    ],
+    "Frontend Development": [
+        "مفهوم Frontend",
+        "ما يراه المستخدم",
+        "HTML كبنية",
+        "CSS كتنسيق",
+        "JavaScript كتفاعل",
+        "مسؤوليات مطور الواجهة",
+        "أخرى"
+    ],
+    "Backend Development": [
+        "مفهوم Backend",
+        "الخادم Server",
+        "المنطق الخلفي",
+        "التعامل مع قواعد البيانات",
+        "إرسال واستقبال البيانات",
+        "حماية العمليات",
+        "أخرى"
+    ],
+    "Full Stack Development": [
+        "مفهوم Full Stack",
+        "ربط Frontend وBackend",
+        "تدفق البيانات بين الواجهة والخادم",
+        "ربط التطبيق بقاعدة بيانات",
+        "بناء ميزة كاملة",
+        "اختبار الميزة كاملة",
+        "أخرى"
+    ],
+    "HTML Basics": [
+        "مفهوم HTML",
+        "بنية صفحة HTML",
+        "العناوين",
+        "الفقرات",
+        "الروابط",
+        "الصور",
+        "القوائم",
+        "أخرى"
+    ],
+    "HTML Forms": [
+        "مفهوم Form",
+        "حقول الإدخال",
+        "الأزرار",
+        "Labels",
+        "أنواع input",
+        "إرسال النموذج",
+        "التحقق الأساسي من الحقول",
+        "أخرى"
+    ],
+    "HTML Semantic Elements": [
+        "مفهوم Semantic HTML",
+        "header",
+        "nav",
+        "main",
+        "section",
+        "article",
+        "footer",
+        "أهمية الدلالة في الصفحة",
+        "أخرى"
+    ],
+    "CSS Basics": [
+        "مفهوم CSS",
+        "Selectors",
+        "Properties",
+        "Colors",
+        "Fonts",
+        "Spacing",
+        "Box Model",
+        "أخرى"
+    ],
+    "CSS Layout": [
+        "مفهوم Layout",
+        "Display",
+        "Position",
+        "Margin",
+        "Padding",
+        "Width and Height",
+        "ترتيب العناصر",
+        "أخرى"
+    ],
+    "Flexbox": [
+        "مفهوم Flexbox",
+        "flex-direction",
+        "justify-content",
+        "align-items",
+        "gap",
+        "flex-wrap",
+        "استخدام Flexbox في البطاقات والقوائم",
+        "أخرى"
+    ],
+    "CSS Grid": [
+        "مفهوم CSS Grid",
+        "Rows and Columns",
+        "grid-template-columns",
+        "grid-template-rows",
+        "gap",
+        "تخطيط الصفحات",
+        "أخرى"
+    ],
+    "Responsive Design": [
+        "مفهوم Responsive Design",
+        "تصميم الهاتف",
+        "تصميم الكمبيوتر",
+        "Media Queries",
+        "النسب المرنة",
+        "تغير التخطيط حسب الشاشة",
+        "أخرى"
+    ],
+    "CSS Animations Basics": [
+        "مفهوم Animation",
+        "Transition",
+        "Transform",
+        "Hover Effects",
+        "Keyframes",
+        "استخدام الحركة دون إزعاج",
+        "أخرى"
+    ],
+    "JavaScript for Web": [
+        "دور JavaScript في الويب",
+        "ربط JavaScript بصفحة HTML",
+        "تغيير المحتوى",
+        "التفاعل مع المستخدم",
+        "قراءة القيم من الصفحة",
+        "تحديث الواجهة",
+        "أخرى"
+    ],
+    "DOM Manipulation": [
+        "مفهوم DOM",
+        "اختيار عنصر",
+        "تغيير النص",
+        "تغيير Style",
+        "إضافة عنصر",
+        "حذف عنصر",
+        "تحديث قائمة عناصر",
+        "أخرى"
+    ],
+    "Events in JavaScript": [
+        "مفهوم Event",
+        "click",
+        "submit",
+        "input",
+        "change",
+        "Event Listener",
+        "منع السلوك الافتراضي",
+        "أخرى"
+    ],
+    "Forms with JavaScript": [
+        "قراءة بيانات Form",
+        "التحقق من الإدخال",
+        "عرض رسالة خطأ",
+        "منع إرسال خاطئ",
+        "تنظيف الحقول",
+        "تحسين تجربة النموذج",
+        "أخرى"
+    ],
+    "Fetch API": [
+        "مفهوم Fetch API",
+        "إرسال Request",
+        "استقبال Response",
+        "التعامل مع JSON",
+        "أخطاء الاتصال",
+        "عرض البيانات في الصفحة",
+        "أخرى"
+    ],
+    "JSON": [
+        "مفهوم JSON",
+        "Key وValue",
+        "Objects",
+        "Arrays",
+        "استخدام JSON في APIs",
+        "تحويل JSON إلى بيانات قابلة للعرض",
+        "أخرى"
+    ],
+    "Browser Storage": [
+        "مفهوم Browser Storage",
+        "localStorage",
+        "sessionStorage",
+        "حفظ بيانات بسيطة",
+        "قراءة بيانات محفوظة",
+        "حذف بيانات محفوظة",
+        "أخطاء التخزين في المتصفح",
+        "أخرى"
+    ],
+    "React Basics": [
+        "مفهوم React",
+        "SPA كمفهوم",
+        "Component-based UI",
+        "JSX",
+        "تشغيل مشروع React",
+        "بنية مشروع React",
+        "أخرى"
+    ],
+    "React Components": [
+        "مفهوم Component",
+        "تقسيم الواجهة",
+        "Component قابل لإعادة الاستخدام",
+        "Component أب وابن",
+        "تنظيم Components",
+        "أخطاء Components",
+        "أخرى"
+    ],
+    "Props and State": [
+        "مفهوم Props",
+        "مفهوم State",
+        "الفرق بين Props وState",
+        "تمرير البيانات",
+        "تحديث State",
+        "إعادة عرض الواجهة",
+        "أخرى"
+    ],
+    "React Events": [
+        "الأحداث في React",
+        "onClick",
+        "onChange",
+        "onSubmit",
+        "تمرير دالة للحدث",
+        "تحديث State عند الحدث",
+        "أخرى"
+    ],
+    "React Forms": [
+        "Controlled Components",
+        "قراءة قيمة input",
+        "تحديث State من Form",
+        "التحقق من الإدخال",
+        "إرسال النموذج",
+        "عرض رسائل خطأ",
+        "أخرى"
+    ],
+    "React Hooks Basics": [
+        "مفهوم Hook",
+        "useState",
+        "useEffect",
+        "متى نستخدم useEffect",
+        "Dependency Array",
+        "أخطاء Hooks الشائعة",
+        "أخرى"
+    ],
+    "React Router Basics": [
+        "مفهوم Routing",
+        "صفحات داخل تطبيق React",
+        "Route",
+        "Link",
+        "Navigate",
+        "تنظيم المسارات",
+        "أخرى"
+    ],
+    "Frontend Project Structure": [
+        "تنظيم ملفات الواجهة",
+        "مجلد Components",
+        "مجلد Pages",
+        "مجلد Assets",
+        "مجلد Styles",
+        "فصل المنطق عن العرض",
+        "أخرى"
+    ],
+    "UI Components": [
+        "Button Component",
+        "Card Component",
+        "Navbar",
+        "Modal",
+        "Form Component",
+        "Reusable Components",
+        "أخرى"
+    ],
+    "Accessibility Basics": [
+        "مفهوم Accessibility",
+        "استخدام Labels",
+        "النص البديل للصور",
+        "ترتيب العناوين",
+        "تباين الألوان",
+        "دعم لوحة المفاتيح",
+        "أخرى"
+    ],
+    "Web Performance Basics": [
+        "مفهوم أداء الويب",
+        "سرعة تحميل الصفحة",
+        "حجم الصور",
+        "تقليل الملفات غير الضرورية",
+        "تقليل إعادة الرسم",
+        "تجربة المستخدم والأداء",
+        "أخرى"
+    ],
+    "Backend Basics": [
+        "مفهوم Backend",
+        "Server",
+        "Route",
+        "Controller كمفهوم",
+        "Business Logic",
+        "Database Connection",
+        "API Response",
+        "أخرى"
+    ],
+    "HTTP Basics": [
+        "مفهوم HTTP",
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "Status Codes",
+        "Headers",
+        "أخرى"
+    ],
+    "Request and Response": [
+        "مفهوم Request",
+        "مفهوم Response",
+        "Body",
+        "Query Parameters",
+        "Path Parameters",
+        "Headers",
+        "Response Format",
+        "أخرى"
+    ],
+    "REST API": [
+        "مفهوم REST API",
+        "Resources",
+        "Endpoints",
+        "HTTP Methods",
+        "JSON Response",
+        "CRUD عبر API",
+        "تنظيم API",
+        "أخرى"
+    ],
+    "API Endpoints": [
+        "مفهوم Endpoint",
+        "مسار Endpoint",
+        "Endpoint للقراءة",
+        "Endpoint للإضافة",
+        "Endpoint للتعديل",
+        "Endpoint للحذف",
+        "أخرى"
+    ],
+    "JSON APIs": [
+        "إرجاع JSON",
+        "استقبال JSON",
+        "تنسيق Response",
+        "رسائل النجاح",
+        "رسائل الخطأ",
+        "توحيد شكل API",
+        "أخرى"
+    ],
+    "Flask Basics": [
+        "مفهوم Flask",
+        "إنشاء تطبيق Flask",
+        "Route",
+        "View Function",
+        "تشغيل الخادم المحلي",
+        "بنية مشروع Flask",
+        "أخرى"
+    ],
+    "Flask Routes": [
+        "مفهوم Route في Flask",
+        "Route ثابت",
+        "Route بمتغير",
+        "GET وPOST",
+        "تنظيم Routes",
+        "أخطاء المسارات",
+        "أخرى"
+    ],
+    "Flask Templates": [
+        "مفهوم Template",
+        "Jinja",
+        "تمرير بيانات للصفحة",
+        "عرض قائمة بيانات",
+        "الشروط داخل Template",
+        "الحلقات داخل Template",
+        "أخرى"
+    ],
+    "Flask Forms": [
+        "استقبال بيانات Form",
+        "Request Form",
+        "التحقق من الإدخال",
+        "عرض رسائل للمستخدم",
+        "إعادة توجيه بعد الإرسال",
+        "أخطاء Forms",
+        "أخرى"
+    ],
+    "Flask APIs": [
+        "إنشاء API في Flask",
+        "إرجاع JSON",
+        "استقبال JSON",
+        "Status Codes",
+        "API للقراءة والإضافة",
+        "اختبار API",
+        "أخرى"
+    ],
+    "Django Basics": [
+        "مفهوم Django",
+        "Project وApp",
+        "إعداد مشروع Django",
+        "تشغيل الخادم",
+        "بنية Django",
+        "متى نستخدم Django",
+        "أخرى"
+    ],
+    "Django Models": [
+        "مفهوم Model",
+        "تمثيل جدول Database",
+        "Fields",
+        "Migrations",
+        "Admin Panel",
+        "العلاقة بين Model وDatabase",
+        "أخرى"
+    ],
+    "Django Views": [
+        "مفهوم View",
+        "Function-based View",
+        "استقبال Request",
+        "إرجاع Response",
+        "تمرير بيانات إلى Template",
+        "تنظيم Views",
+        "أخرى"
+    ],
+    "Django Templates": [
+        "مفهوم Django Template",
+        "Template Tags",
+        "عرض بيانات",
+        "الحلقات",
+        "الشروط",
+        "ربط Template بـ View",
+        "أخرى"
+    ],
+    "Django Forms": [
+        "مفهوم Django Form",
+        "ModelForm",
+        "التحقق من البيانات",
+        "عرض أخطاء الإدخال",
+        "حفظ البيانات",
+        "أمان Forms",
+        "أخرى"
+    ],
+    "Node.js Basics": [
+        "مفهوم Node.js",
+        "تشغيل JavaScript خارج المتصفح",
+        "npm",
+        "package.json",
+        "إنشاء خادم بسيط",
+        "استخدام Node في Backend",
+        "أخرى"
+    ],
+    "Express.js Basics": [
+        "مفهوم Express.js",
+        "إنشاء Server",
+        "Routes",
+        "Middleware",
+        "إرجاع JSON",
+        "استقبال Request",
+        "أخرى"
+    ],
+    "Middleware": [
+        "مفهوم Middleware",
+        "تنفيذ كود قبل Route",
+        "التحقق من Request",
+        "تسجيل الطلبات",
+        "معالجة الأخطاء",
+        "ترتيب Middleware",
+        "أخرى"
+    ],
+    "Server-side Validation": [
+        "مفهوم Validation",
+        "التحقق من الحقول",
+        "منع البيانات الخاطئة",
+        "رسائل الخطأ",
+        "التحقق في Backend",
+        "الفرق بين Frontend وBackend Validation",
+        "أخرى"
+    ],
+    "Authentication Basics": [
+        "مفهوم Authentication",
+        "تسجيل الدخول",
+        "إنشاء حساب",
+        "التحقق من هوية المستخدم",
+        "الجلسة Session",
+        "Token كمفهوم",
+        "أخطاء تسجيل الدخول",
+        "أخرى"
+    ],
+    "Authorization Basics": [
+        "مفهوم Authorization",
+        "الصلاحيات",
+        "الأدوار Roles",
+        "مستخدم عادي",
+        "مدير",
+        "منع الوصول غير المصرح",
+        "أخرى"
+    ],
+    "Sessions and Cookies": [
+        "مفهوم Session",
+        "مفهوم Cookie",
+        "حفظ حالة المستخدم",
+        "تسجيل الدخول المستمر",
+        "حذف الجلسة",
+        "مخاطر الاستخدام الخاطئ",
+        "أخرى"
+    ],
+    "Password Handling Basics": [
+        "عدم حفظ كلمة المرور كنص صريح",
+        "Hashing كمفهوم دفاعي",
+        "Salt كمفهوم",
+        "التحقق من كلمة المرور",
+        "إعادة تعيين كلمة المرور كمفهوم",
+        "قواعد السلامة الأساسية",
+        "أخرى"
+    ],
+    "Databases Basics": [
+        "مفهوم Database",
+        "جدول Table",
+        "صف Row",
+        "عمود Column",
+        "سجل Record",
+        "استخدام قاعدة البيانات في التطبيق",
+        "أخرى"
+    ],
+    "SQL Basics": [
+        "مفهوم SQL",
+        "SELECT",
+        "INSERT",
+        "UPDATE",
+        "DELETE",
+        "WHERE",
+        "ORDER BY",
+        "أخرى"
+    ],
+    "SQLite": [
+        "مفهوم SQLite",
+        "قاعدة بيانات محلية",
+        "ملف قاعدة البيانات",
+        "إنشاء جدول",
+        "إضافة بيانات",
+        "استخدامها في التطبيقات الصغيرة",
+        "أخرى"
+    ],
+    "PostgreSQL Basics": [
+        "مفهوم PostgreSQL",
+        "قاعدة بيانات قوية",
+        "الجداول",
+        "الأنواع",
+        "العلاقات",
+        "استخدامها في التطبيقات الحقيقية",
+        "أخرى"
+    ],
+    "MySQL Basics": [
+        "مفهوم MySQL",
+        "استخدام MySQL في الويب",
+        "الجداول",
+        "الاستعلامات",
+        "العلاقات",
+        "إدارة بيانات تطبيق",
+        "أخرى"
+    ],
+    "Database Tables": [
+        "تصميم جدول",
+        "اسم الجدول",
+        "الأعمدة",
+        "أنواع الأعمدة",
+        "القيود Constraints",
+        "تنظيم البيانات",
+        "أخرى"
+    ],
+    "Primary Key and Foreign Key": [
+        "مفهوم Primary Key",
+        "مفهوم Foreign Key",
+        "تمييز السجلات",
+        "ربط الجداول",
+        "سلامة العلاقات",
+        "أخطاء المفاتيح",
+        "أخرى"
+    ],
+    "Database Relationships": [
+        "One-to-One",
+        "One-to-Many",
+        "Many-to-Many",
+        "جدول وسيط",
+        "اختيار العلاقة المناسبة",
+        "أخطاء العلاقات",
+        "أخرى"
+    ],
+    "CRUD Operations": [
+        "Create",
+        "Read",
+        "Update",
+        "Delete",
+        "CRUD في الواجهة",
+        "CRUD في Backend",
+        "CRUD في Database",
+        "أخرى"
+    ],
+    "Joins Basics": [
+        "مفهوم Join",
+        "INNER JOIN",
+        "LEFT JOIN كمفهوم",
+        "ربط جدولين",
+        "جلب بيانات مترابطة",
+        "أخطاء Joins",
+        "أخرى"
+    ],
+    "Database Design Basics": [
+        "فهم متطلبات البيانات",
+        "تحديد الجداول",
+        "تحديد الأعمدة",
+        "تحديد العلاقات",
+        "تجنب التكرار",
+        "قابلية التوسع",
+        "أخرى"
+    ],
+    "ORM Basics": [
+        "مفهوم ORM",
+        "تحويل الجداول إلى Objects",
+        "التعامل مع Database بالكود",
+        "Models",
+        "Queries عبر ORM",
+        "مزايا وقيود ORM",
+        "أخرى"
+    ],
+    "SQLAlchemy Basics": [
+        "مفهوم SQLAlchemy",
+        "Models",
+        "Session",
+        "Query",
+        "Add and Commit",
+        "Relationships",
+        "أخرى"
+    ],
+    "Django ORM Basics": [
+        "مفهوم Django ORM",
+        "Models",
+        "QuerySet",
+        "Create",
+        "Filter",
+        "Update",
+        "Delete",
+        "أخرى"
+    ],
+    "API and Database Integration": [
+        "ربط API بقاعدة بيانات",
+        "قراءة بيانات من Database",
+        "إضافة بيانات عبر API",
+        "تعديل بيانات عبر API",
+        "حذف بيانات عبر API",
+        "معالجة أخطاء Database",
+        "أخرى"
+    ],
+    "Git Basics": [
+        "مفهوم Git",
+        "تتبع التغييرات",
+        "Repository",
+        "git init",
+        "git status",
+        "git add",
+        "git commit",
+        "أخرى"
+    ],
+    "GitHub Basics": [
+        "مفهوم GitHub",
+        "رفع مشروع",
+        "Remote Repository",
+        "git push",
+        "git pull",
+        "README",
+        "مشاركة المشروع",
+        "أخرى"
+    ],
+    "Branches": [
+        "مفهوم Branch",
+        "إنشاء Branch",
+        "التبديل بين Branches",
+        "تطوير ميزة منفصلة",
+        "دمج Branch",
+        "أخطاء Branches",
+        "أخرى"
+    ],
+    "Commits": [
+        "مفهوم Commit",
+        "رسالة Commit واضحة",
+        "Commit صغير ومنظم",
+        "مراجعة التغييرات قبل Commit",
+        "تاريخ التعديلات",
+        "أخطاء Commit",
+        "أخرى"
+    ],
+    "Pull Requests": [
+        "مفهوم Pull Request",
+        "مراجعة التغييرات",
+        "وصف التعديل",
+        "تعليقات المراجعة",
+        "قبول التغييرات",
+        "دمج Pull Request",
+        "أخرى"
+    ],
+    "Merge Conflicts": [
+        "مفهوم Merge Conflict",
+        "سبب التعارض",
+        "قراءة التعارض",
+        "اختيار التعديل الصحيح",
+        "حل التعارض",
+        "اختبار بعد الدمج",
+        "أخرى"
+    ],
+    "README Files": [
+        "مفهوم README",
+        "وصف المشروع",
+        "طريقة التشغيل",
+        "المتطلبات",
+        "صور أو أمثلة",
+        "ميزات المشروع",
+        "رخصة المشروع كمفهوم",
+        "أخرى"
+    ],
+    "Project Documentation": [
+        "مفهوم توثيق المشروع",
+        "توثيق الإعداد",
+        "توثيق API",
+        "توثيق قاعدة البيانات",
+        "توثيق الأخطاء المعروفة",
+        "توثيق طريقة الاستخدام",
+        "أخرى"
+    ],
+    "Software Engineering Basics": [
+        "مفهوم Software Engineering",
+        "تحليل المتطلبات",
+        "تصميم الحل",
+        "تنفيذ الحل",
+        "اختبار الحل",
+        "صيانة التطبيق",
+        "إدارة التغيير",
+        "أخرى"
+    ],
+    "Requirements Basics": [
+        "مفهوم Requirements",
+        "المتطلبات الوظيفية",
+        "المتطلبات غير الوظيفية",
+        "تحديد ما يريده المستخدم",
+        "توضيح القيود",
+        "أخطاء جمع المتطلبات",
+        "أخرى"
+    ],
+    "User Stories": [
+        "مفهوم User Story",
+        "بصيغة كمستخدم أريد",
+        "تحديد الهدف",
+        "تحديد الفائدة",
+        "Acceptance Criteria",
+        "تقسيم الميزات",
+        "أخرى"
+    ],
+    "System Design Basics": [
+        "مفهوم System Design",
+        "مكونات النظام",
+        "تدفق البيانات",
+        "الواجهة",
+        "الخادم",
+        "قاعدة البيانات",
+        "التكامل بين الأجزاء",
+        "أخرى"
+    ],
+    "Project Structure": [
+        "تنظيم ملفات المشروع",
+        "مجلد Frontend",
+        "مجلد Backend",
+        "مجلد Static",
+        "مجلد Templates",
+        "مجلد Tests",
+        "ملفات الإعداد",
+        "أخرى"
+    ],
+    "Clean Architecture Basics": [
+        "مفهوم Clean Architecture",
+        "فصل المسؤوليات",
+        "منطق التطبيق",
+        "طبقة البيانات",
+        "طبقة العرض",
+        "تقليل التداخل",
+        "أخرى"
+    ],
+    "Refactoring Basics": [
+        "مفهوم Refactoring",
+        "تحسين الكود دون تغيير السلوك",
+        "تقليل التكرار",
+        "تقسيم دوال طويلة",
+        "تحسين الأسماء",
+        "تبسيط المنطق",
+        "أخرى"
+    ],
+    "اختبار البرامج وجودة الكود": [
+        "مفهوم اختبار البرامج",
+        "لماذا نختبر البرامج",
+        "جودة الكود",
+        "منع كسر الميزات القديمة",
+        "اختبار الوظائف",
+        "اختبار الأخطاء",
+        "أخرى"
+    ],
+    "Unit Testing": [
+        "مفهوم Unit Testing",
+        "اختبار دالة واحدة",
+        "اختبار مدخلات ومخرجات",
+        "حالات صحيحة",
+        "حالات خاطئة",
+        "تكرار الاختبار بعد التعديل",
+        "أخرى"
+    ],
+    "Integration Testing": [
+        "مفهوم Integration Testing",
+        "اختبار أكثر من جزء معاً",
+        "اختبار API مع Database",
+        "اختبار Frontend مع Backend",
+        "اختبار تدفق كامل",
+        "أخطاء التكامل",
+        "أخرى"
+    ],
+    "Functional Testing": [
+        "مفهوم Functional Testing",
+        "اختبار ميزة من منظور المستخدم",
+        "اختبار تسجيل الدخول",
+        "اختبار الحفظ",
+        "اختبار التعديل",
+        "اختبار الحذف",
+        "توقع النتيجة الصحيحة",
+        "أخرى"
+    ],
+    "Frontend Testing Basics": [
+        "اختبار الواجهة",
+        "اختبار الأزرار",
+        "اختبار Forms",
+        "اختبار Responsive Design",
+        "اختبار الرسائل للمستخدم",
+        "اختبار الأخطاء البصرية",
+        "أخرى"
+    ],
+    "Backend Testing Basics": [
+        "اختبار Routes",
+        "اختبار API",
+        "اختبار Validation",
+        "اختبار صلاحيات",
+        "اختبار Database Operations",
+        "اختبار رسائل الخطأ",
+        "أخرى"
+    ],
+    "Code Quality": [
+        "وضوح الكود",
+        "أسماء مفهومة",
+        "تقليل التكرار",
+        "تقسيم الملفات",
+        "تقسيم الدوال",
+        "سهولة الصيانة",
+        "أخرى"
+    ],
+    "Error Handling in Applications": [
+        "التعامل مع أخطاء المستخدم",
+        "أخطاء الاتصال",
+        "أخطاء قاعدة البيانات",
+        "رسائل خطأ واضحة",
+        "عدم إظهار تفاصيل حساسة",
+        "تجربة المستخدم عند الخطأ",
+        "أخرى"
+    ],
+    "Logging Basics": [
+        "مفهوم Logging",
+        "تسجيل الأحداث",
+        "تسجيل الأخطاء",
+        "مستويات السجلات",
+        "فائدة السجلات في التصحيح",
+        "تجنب تسجيل بيانات حساسة",
+        "أخرى"
+    ],
+    "Deployment Basics": [
+        "مفهوم Deployment",
+        "تشغيل التطبيق للمستخدمين",
+        "بيئة التطوير",
+        "بيئة الإنتاج",
+        "إعدادات التشغيل",
+        "أخطاء النشر الشائعة",
+        "أخرى"
+    ],
+    "Environment Variables": [
+        "مفهوم Environment Variables",
+        "إخفاء الإعدادات الحساسة",
+        "مفاتيح التطبيق",
+        "إعدادات قاعدة البيانات",
+        "الفرق بين إعدادات التطوير والإنتاج",
+        "أخطاء المتغيرات البيئية",
+        "أخرى"
+    ],
+    "Full Stack Project Planning": [
+        "اختيار فكرة مشروع",
+        "تحديد المستخدمين",
+        "تحديد الميزات",
+        "تصميم الواجهة",
+        "تصميم Backend",
+        "تصميم Database",
+        "خطة التنفيذ",
+        "أخرى"
+    ],
+    "Full Stack Project Implementation": [
+        "بناء الواجهة",
+        "بناء Backend",
+        "إنشاء Database",
+        "ربط API",
+        "إضافة Authentication",
+        "اختبار الميزات",
+        "توثيق المشروع",
+        "أخرى"
+    ],
+    "تحليل أخطاء تطوير التطبيقات": [
+        "أخطاء HTML وCSS",
+        "أخطاء JavaScript في الواجهة",
+        "أخطاء React",
+        "أخطاء API",
+        "أخطاء Backend",
+        "أخطاء Database",
+        "أخطاء Git",
+        "أخطاء Deployment",
+        "أخرى"
+    ],
+    "المراجعة الشاملة": [
+        "مراجعة Web Development",
+        "مراجعة HTML وCSS",
+        "مراجعة JavaScript للويب",
+        "مراجعة React",
+        "مراجعة Backend",
+        "مراجعة APIs",
+        "مراجعة Databases وSQL",
+        "مراجعة Flask وDjango",
+        "مراجعة Node.js وExpress",
+        "مراجعة Git وGitHub",
+        "مراجعة Testing وجودة الكود",
+        "مراجعة Full Stack Projects",
+        "تدريب شامل",
+        "أخرى"
+    ],
+    "اختبار قصير": [
+        "اختبار HTML وCSS",
+        "اختبار JavaScript للويب",
+        "اختبار React",
+        "اختبار Backend",
+        "اختبار API",
+        "اختبار SQL وDatabases",
+        "اختبار Git وGitHub",
+        "اختبار Testing",
+        "اختبار شامل قصير",
+        "أخرى"
+    ],
+    "اختبار تجريبي": [
+        "اختبار متوسط",
+        "اختبار متقدم",
+        "محاكاة اختبار Web Development",
+        "محاكاة اختبار Full Stack",
+        "اختبار شامل في الجزء الثاني",
+        "تحليل نتيجة الاختبار",
+        "خطة علاج الأخطاء",
+        "أخرى"
+    ],
+    "أخرى": [
+        "موضوع مخصص",
+        "أخرى"
+    ]
+};
+    const part2Activities = {
+    "Web Development Basics": [
+        "دراسة مفهوم Web Development",
+        "رسم دورة عمل الويب",
+        "مقارنة Frontend وBackend",
+        "تحليل مثال تطبيق ويب",
+        "تلخيص المفاهيم",
+        "اختبار تمهيدي",
+        "أخرى"
+    ],
+    "مفهوم Web Development": [
+        "دراسة مفهوم Web Development",
+        "رسم دورة عمل الويب",
+        "مقارنة Frontend وBackend",
+        "تحليل مثال تطبيق ويب",
+        "تلخيص المفاهيم",
+        "اختبار تمهيدي",
+        "أخرى"
+    ],
+    "الفرق بين موقع وتطبيق ويب": [
+        "دراسة مفهوم Web Development",
+        "رسم دورة عمل الويب",
+        "مقارنة Frontend وBackend",
+        "تحليل مثال تطبيق ويب",
+        "تلخيص المفاهيم",
+        "اختبار تمهيدي",
+        "أخرى"
+    ],
+    "Frontend": [
+        "دراسة مفهوم Web Development",
+        "رسم دورة عمل الويب",
+        "مقارنة Frontend وBackend",
+        "تحليل مثال تطبيق ويب",
+        "تلخيص المفاهيم",
+        "اختبار تمهيدي",
+        "أخرى"
+    ],
+    "Backend": [
+        "دراسة مفهوم Web Development",
+        "رسم دورة عمل الويب",
+        "مقارنة Frontend وBackend",
+        "تحليل مثال تطبيق ويب",
+        "تلخيص المفاهيم",
+        "اختبار تمهيدي",
+        "أخرى"
+    ],
+    "Full Stack": [
+        "دراسة مفهوم Web Development",
+        "رسم دورة عمل الويب",
+        "مقارنة Frontend وBackend",
+        "تحليل مثال تطبيق ويب",
+        "تلخيص المفاهيم",
+        "اختبار تمهيدي",
+        "أخرى"
+    ],
+    "طريقة عمل المتصفح والخادم": [
+        "دراسة مفهوم Web Development",
+        "رسم دورة عمل الويب",
+        "مقارنة Frontend وBackend",
+        "تحليل مثال تطبيق ويب",
+        "تلخيص المفاهيم",
+        "اختبار تمهيدي",
+        "أخرى"
+    ],
+    "دورة طلب صفحة ويب": [
+        "دراسة مفهوم Web Development",
+        "رسم دورة عمل الويب",
+        "مقارنة Frontend وBackend",
+        "تحليل مثال تطبيق ويب",
+        "تلخيص المفاهيم",
+        "اختبار تمهيدي",
+        "أخرى"
+    ],
+    "Frontend Development": [
+        "تحليل واجهة موقع",
+        "تحديد أجزاء Frontend",
+        "بناء صفحة بسيطة",
+        "تحسين واجهة",
+        "كتابة ملاحظات UI",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Frontend": [
+        "تحليل واجهة موقع",
+        "تحديد أجزاء Frontend",
+        "بناء صفحة بسيطة",
+        "تحسين واجهة",
+        "كتابة ملاحظات UI",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "ما يراه المستخدم": [
+        "تحليل واجهة موقع",
+        "تحديد أجزاء Frontend",
+        "بناء صفحة بسيطة",
+        "تحسين واجهة",
+        "كتابة ملاحظات UI",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "HTML كبنية": [
+        "تحليل واجهة موقع",
+        "تحديد أجزاء Frontend",
+        "بناء صفحة بسيطة",
+        "تحسين واجهة",
+        "كتابة ملاحظات UI",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "CSS كتنسيق": [
+        "تحليل واجهة موقع",
+        "تحديد أجزاء Frontend",
+        "بناء صفحة بسيطة",
+        "تحسين واجهة",
+        "كتابة ملاحظات UI",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "JavaScript كتفاعل": [
+        "تحليل واجهة موقع",
+        "تحديد أجزاء Frontend",
+        "بناء صفحة بسيطة",
+        "تحسين واجهة",
+        "كتابة ملاحظات UI",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مسؤوليات مطور الواجهة": [
+        "تحليل واجهة موقع",
+        "تحديد أجزاء Frontend",
+        "بناء صفحة بسيطة",
+        "تحسين واجهة",
+        "كتابة ملاحظات UI",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Backend Development": [
+        "تحليل Backend لتطبيق",
+        "رسم سير طلب Backend",
+        "بناء Route بسيط",
+        "تصميم منطق خلفي",
+        "اختبار Endpoint",
+        "كتابة ملاحظات",
+        "أخرى"
+    ],
+    "مفهوم Backend": [
+        "تحليل Backend",
+        "بناء Route بسيط",
+        "كتابة منطق خلفي",
+        "ربط رد بالواجهة",
+        "اختبار طلب",
+        "أخرى"
+    ],
+    "الخادم Server": [
+        "تحليل Backend لتطبيق",
+        "رسم سير طلب Backend",
+        "بناء Route بسيط",
+        "تصميم منطق خلفي",
+        "اختبار Endpoint",
+        "كتابة ملاحظات",
+        "أخرى"
+    ],
+    "المنطق الخلفي": [
+        "تحليل Backend لتطبيق",
+        "رسم سير طلب Backend",
+        "بناء Route بسيط",
+        "تصميم منطق خلفي",
+        "اختبار Endpoint",
+        "كتابة ملاحظات",
+        "أخرى"
+    ],
+    "التعامل مع قواعد البيانات": [
+        "تحليل Backend لتطبيق",
+        "رسم سير طلب Backend",
+        "بناء Route بسيط",
+        "تصميم منطق خلفي",
+        "اختبار Endpoint",
+        "كتابة ملاحظات",
+        "أخرى"
+    ],
+    "إرسال واستقبال البيانات": [
+        "تحليل Backend لتطبيق",
+        "رسم سير طلب Backend",
+        "بناء Route بسيط",
+        "تصميم منطق خلفي",
+        "اختبار Endpoint",
+        "كتابة ملاحظات",
+        "أخرى"
+    ],
+    "حماية العمليات": [
+        "تحليل Backend لتطبيق",
+        "رسم سير طلب Backend",
+        "بناء Route بسيط",
+        "تصميم منطق خلفي",
+        "اختبار Endpoint",
+        "كتابة ملاحظات",
+        "أخرى"
+    ],
+    "Full Stack Development": [
+        "تحليل ميزة Full Stack",
+        "رسم تدفق البيانات",
+        "بناء ميزة صغيرة",
+        "اختبار ميزة كاملة",
+        "توثيق الخطوات",
+        "مراجعة الأخطاء",
+        "أخرى"
+    ],
+    "مفهوم Full Stack": [
+        "تحليل ميزة Full Stack",
+        "رسم تدفق البيانات",
+        "بناء ميزة صغيرة",
+        "اختبار ميزة كاملة",
+        "توثيق الخطوات",
+        "مراجعة الأخطاء",
+        "أخرى"
+    ],
+    "ربط Frontend وBackend": [
+        "تحليل ميزة Full Stack",
+        "رسم تدفق البيانات",
+        "بناء ميزة صغيرة",
+        "اختبار ميزة كاملة",
+        "توثيق الخطوات",
+        "مراجعة الأخطاء",
+        "أخرى"
+    ],
+    "تدفق البيانات بين الواجهة والخادم": [
+        "تحليل ميزة Full Stack",
+        "رسم تدفق البيانات",
+        "بناء ميزة صغيرة",
+        "اختبار ميزة كاملة",
+        "توثيق الخطوات",
+        "مراجعة الأخطاء",
+        "أخرى"
+    ],
+    "ربط التطبيق بقاعدة بيانات": [
+        "تحليل ميزة Full Stack",
+        "رسم تدفق البيانات",
+        "بناء ميزة صغيرة",
+        "اختبار ميزة كاملة",
+        "توثيق الخطوات",
+        "مراجعة الأخطاء",
+        "أخرى"
+    ],
+    "بناء ميزة كاملة": [
+        "تحليل ميزة Full Stack",
+        "رسم تدفق البيانات",
+        "بناء ميزة صغيرة",
+        "اختبار ميزة كاملة",
+        "توثيق الخطوات",
+        "مراجعة الأخطاء",
+        "أخرى"
+    ],
+    "اختبار الميزة كاملة": [
+        "تحليل ميزة Full Stack",
+        "رسم تدفق البيانات",
+        "بناء ميزة صغيرة",
+        "اختبار ميزة كاملة",
+        "توثيق الخطوات",
+        "مراجعة الأخطاء",
+        "أخرى"
+    ],
+    "HTML Basics": [
+        "بناء صفحة HTML",
+        "تحليل بنية صفحة",
+        "تصحيح وسم HTML",
+        "تنظيم عناصر صفحة",
+        "إضافة روابط وصور",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم HTML": [
+        "بناء صفحة HTML",
+        "تحليل بنية صفحة",
+        "تصحيح وسم HTML",
+        "تنظيم عناصر صفحة",
+        "إضافة روابط وصور",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "بنية صفحة HTML": [
+        "بناء صفحة HTML",
+        "تحليل بنية صفحة",
+        "تصحيح وسم HTML",
+        "تنظيم عناصر صفحة",
+        "إضافة روابط وصور",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "العناوين": [
+        "بناء صفحة HTML",
+        "تحليل بنية صفحة",
+        "تصحيح وسم HTML",
+        "تنظيم عناصر صفحة",
+        "إضافة روابط وصور",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "الفقرات": [
+        "بناء صفحة HTML",
+        "تحليل بنية صفحة",
+        "تصحيح وسم HTML",
+        "تنظيم عناصر صفحة",
+        "إضافة روابط وصور",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "الروابط": [
+        "بناء صفحة HTML",
+        "تحليل بنية صفحة",
+        "تصحيح وسم HTML",
+        "تنظيم عناصر صفحة",
+        "إضافة روابط وصور",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "الصور": [
+        "بناء صفحة HTML",
+        "تحليل بنية صفحة",
+        "تصحيح وسم HTML",
+        "تنظيم عناصر صفحة",
+        "إضافة روابط وصور",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "القوائم": [
+        "بناء صفحة HTML",
+        "تحليل بنية صفحة",
+        "تصحيح وسم HTML",
+        "تنظيم عناصر صفحة",
+        "إضافة روابط وصور",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "HTML Forms": [
+        "بناء Form",
+        "تحليل حقول إدخال",
+        "تصحيح نموذج",
+        "تحسين Labels",
+        "اختبار إرسال نموذج",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "مفهوم Form": [
+        "بناء Form",
+        "تحليل حقول إدخال",
+        "تصحيح نموذج",
+        "تحسين Labels",
+        "اختبار إرسال نموذج",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "حقول الإدخال": [
+        "بناء Form",
+        "تحليل حقول إدخال",
+        "تصحيح نموذج",
+        "تحسين Labels",
+        "اختبار إرسال نموذج",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "الأزرار": [
+        "بناء Form",
+        "تحليل حقول إدخال",
+        "تصحيح نموذج",
+        "تحسين Labels",
+        "اختبار إرسال نموذج",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Labels": [
+        "بناء Form",
+        "تحليل حقول إدخال",
+        "تصحيح نموذج",
+        "تحسين Labels",
+        "اختبار إرسال نموذج",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "أنواع input": [
+        "بناء Form",
+        "تحليل حقول إدخال",
+        "تصحيح نموذج",
+        "تحسين Labels",
+        "اختبار إرسال نموذج",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "إرسال النموذج": [
+        "بناء React Form",
+        "تحليل Controlled Input",
+        "التحقق من إدخال",
+        "عرض رسالة خطأ",
+        "اختبار إرسال Form",
+        "أخرى"
+    ],
+    "التحقق الأساسي من الحقول": [
+        "بناء Form",
+        "تحليل حقول إدخال",
+        "تصحيح نموذج",
+        "تحسين Labels",
+        "اختبار إرسال نموذج",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "HTML Semantic Elements": [
+        "تحسين دلالة HTML",
+        "تحويل div عشوائية إلى عناصر دلالية",
+        "تحليل صفحة",
+        "تنظيم هيكل الصفحة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Semantic HTML": [
+        "تحسين دلالة HTML",
+        "تحويل div عشوائية إلى عناصر دلالية",
+        "تحليل صفحة",
+        "تنظيم هيكل الصفحة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "header": [
+        "تحسين دلالة HTML",
+        "تحويل div عشوائية إلى عناصر دلالية",
+        "تحليل صفحة",
+        "تنظيم هيكل الصفحة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "nav": [
+        "تحسين دلالة HTML",
+        "تحويل div عشوائية إلى عناصر دلالية",
+        "تحليل صفحة",
+        "تنظيم هيكل الصفحة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "main": [
+        "تحسين دلالة HTML",
+        "تحويل div عشوائية إلى عناصر دلالية",
+        "تحليل صفحة",
+        "تنظيم هيكل الصفحة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "section": [
+        "تحسين دلالة HTML",
+        "تحويل div عشوائية إلى عناصر دلالية",
+        "تحليل صفحة",
+        "تنظيم هيكل الصفحة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "article": [
+        "تحسين دلالة HTML",
+        "تحويل div عشوائية إلى عناصر دلالية",
+        "تحليل صفحة",
+        "تنظيم هيكل الصفحة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "footer": [
+        "تحسين دلالة HTML",
+        "تحويل div عشوائية إلى عناصر دلالية",
+        "تحليل صفحة",
+        "تنظيم هيكل الصفحة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "أهمية الدلالة في الصفحة": [
+        "تحسين دلالة HTML",
+        "تحويل div عشوائية إلى عناصر دلالية",
+        "تحليل صفحة",
+        "تنظيم هيكل الصفحة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "CSS Basics": [
+        "تنسيق عنصر CSS",
+        "تحليل Selector",
+        "تعديل ألوان وخطوط",
+        "ضبط مسافات",
+        "حل مشكلة Box Model",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "مفهوم CSS": [
+        "تنسيق عنصر CSS",
+        "تحليل Selector",
+        "تعديل ألوان وخطوط",
+        "ضبط مسافات",
+        "حل مشكلة Box Model",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Selectors": [
+        "تنسيق عنصر CSS",
+        "تحليل Selector",
+        "تعديل ألوان وخطوط",
+        "ضبط مسافات",
+        "حل مشكلة Box Model",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Properties": [
+        "تنسيق عنصر CSS",
+        "تحليل Selector",
+        "تعديل ألوان وخطوط",
+        "ضبط مسافات",
+        "حل مشكلة Box Model",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Colors": [
+        "تنسيق عنصر CSS",
+        "تحليل Selector",
+        "تعديل ألوان وخطوط",
+        "ضبط مسافات",
+        "حل مشكلة Box Model",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Fonts": [
+        "تنسيق عنصر CSS",
+        "تحليل Selector",
+        "تعديل ألوان وخطوط",
+        "ضبط مسافات",
+        "حل مشكلة Box Model",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Spacing": [
+        "تنسيق عنصر CSS",
+        "تحليل Selector",
+        "تعديل ألوان وخطوط",
+        "ضبط مسافات",
+        "حل مشكلة Box Model",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Box Model": [
+        "تنسيق عنصر CSS",
+        "تحليل Selector",
+        "تعديل ألوان وخطوط",
+        "ضبط مسافات",
+        "حل مشكلة Box Model",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "CSS Layout": [
+        "بناء Layout بسيط",
+        "تحليل تموضع عنصر",
+        "تصحيح مشكلة ترتيب",
+        "ضبط مسافات",
+        "مقارنة Layouts",
+        "أخرى"
+    ],
+    "مفهوم Layout": [
+        "بناء Layout بسيط",
+        "تحليل تموضع عنصر",
+        "تصحيح مشكلة ترتيب",
+        "ضبط مسافات",
+        "مقارنة Layouts",
+        "أخرى"
+    ],
+    "Display": [
+        "بناء Layout بسيط",
+        "تحليل تموضع عنصر",
+        "تصحيح مشكلة ترتيب",
+        "ضبط مسافات",
+        "مقارنة Layouts",
+        "أخرى"
+    ],
+    "Position": [
+        "بناء Layout بسيط",
+        "تحليل تموضع عنصر",
+        "تصحيح مشكلة ترتيب",
+        "ضبط مسافات",
+        "مقارنة Layouts",
+        "أخرى"
+    ],
+    "Margin": [
+        "بناء Layout بسيط",
+        "تحليل تموضع عنصر",
+        "تصحيح مشكلة ترتيب",
+        "ضبط مسافات",
+        "مقارنة Layouts",
+        "أخرى"
+    ],
+    "Padding": [
+        "بناء Layout بسيط",
+        "تحليل تموضع عنصر",
+        "تصحيح مشكلة ترتيب",
+        "ضبط مسافات",
+        "مقارنة Layouts",
+        "أخرى"
+    ],
+    "Width and Height": [
+        "بناء Layout بسيط",
+        "تحليل تموضع عنصر",
+        "تصحيح مشكلة ترتيب",
+        "ضبط مسافات",
+        "مقارنة Layouts",
+        "أخرى"
+    ],
+    "ترتيب العناصر": [
+        "بناء Layout بسيط",
+        "تحليل تموضع عنصر",
+        "تصحيح مشكلة ترتيب",
+        "ضبط مسافات",
+        "مقارنة Layouts",
+        "أخرى"
+    ],
+    "Flexbox": [
+        "بناء Layout بـ Flexbox",
+        "توسيط عناصر",
+        "ترتيب بطاقات",
+        "تصحيح مشكلة محاذاة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Flexbox": [
+        "بناء Layout بـ Flexbox",
+        "توسيط عناصر",
+        "ترتيب بطاقات",
+        "تصحيح مشكلة محاذاة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "flex-direction": [
+        "بناء Layout بـ Flexbox",
+        "توسيط عناصر",
+        "ترتيب بطاقات",
+        "تصحيح مشكلة محاذاة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "justify-content": [
+        "بناء Layout بـ Flexbox",
+        "توسيط عناصر",
+        "ترتيب بطاقات",
+        "تصحيح مشكلة محاذاة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "align-items": [
+        "بناء Layout بـ Flexbox",
+        "توسيط عناصر",
+        "ترتيب بطاقات",
+        "تصحيح مشكلة محاذاة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "gap": [
+        "بناء Grid Layout",
+        "تقسيم صفحة إلى أعمدة",
+        "تصحيح مشكلة Grid",
+        "مقارنة Grid وFlexbox",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "flex-wrap": [
+        "بناء Layout بـ Flexbox",
+        "توسيط عناصر",
+        "ترتيب بطاقات",
+        "تصحيح مشكلة محاذاة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "استخدام Flexbox في البطاقات والقوائم": [
+        "بناء Layout بـ Flexbox",
+        "توسيط عناصر",
+        "ترتيب بطاقات",
+        "تصحيح مشكلة محاذاة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "CSS Grid": [
+        "بناء Grid Layout",
+        "تقسيم صفحة إلى أعمدة",
+        "تصحيح مشكلة Grid",
+        "مقارنة Grid وFlexbox",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "مفهوم CSS Grid": [
+        "بناء Grid Layout",
+        "تقسيم صفحة إلى أعمدة",
+        "تصحيح مشكلة Grid",
+        "مقارنة Grid وFlexbox",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Rows and Columns": [
+        "بناء Grid Layout",
+        "تقسيم صفحة إلى أعمدة",
+        "تصحيح مشكلة Grid",
+        "مقارنة Grid وFlexbox",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "grid-template-columns": [
+        "بناء Grid Layout",
+        "تقسيم صفحة إلى أعمدة",
+        "تصحيح مشكلة Grid",
+        "مقارنة Grid وFlexbox",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "grid-template-rows": [
+        "بناء Grid Layout",
+        "تقسيم صفحة إلى أعمدة",
+        "تصحيح مشكلة Grid",
+        "مقارنة Grid وFlexbox",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "تخطيط الصفحات": [
+        "بناء Grid Layout",
+        "تقسيم صفحة إلى أعمدة",
+        "تصحيح مشكلة Grid",
+        "مقارنة Grid وFlexbox",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Responsive Design": [
+        "تحسين استجابة صفحة",
+        "كتابة Media Query",
+        "اختبار صفحة على أحجام مختلفة",
+        "تصحيح مشكلة هاتف",
+        "تحليل تجربة مستخدم",
+        "أخرى"
+    ],
+    "مفهوم Responsive Design": [
+        "تحسين استجابة صفحة",
+        "كتابة Media Query",
+        "اختبار صفحة على أحجام مختلفة",
+        "تصحيح مشكلة هاتف",
+        "تحليل تجربة مستخدم",
+        "أخرى"
+    ],
+    "تصميم الهاتف": [
+        "تحسين استجابة صفحة",
+        "كتابة Media Query",
+        "اختبار صفحة على أحجام مختلفة",
+        "تصحيح مشكلة هاتف",
+        "تحليل تجربة مستخدم",
+        "أخرى"
+    ],
+    "تصميم الكمبيوتر": [
+        "تحسين استجابة صفحة",
+        "كتابة Media Query",
+        "اختبار صفحة على أحجام مختلفة",
+        "تصحيح مشكلة هاتف",
+        "تحليل تجربة مستخدم",
+        "أخرى"
+    ],
+    "Media Queries": [
+        "تحسين استجابة صفحة",
+        "كتابة Media Query",
+        "اختبار صفحة على أحجام مختلفة",
+        "تصحيح مشكلة هاتف",
+        "تحليل تجربة مستخدم",
+        "أخرى"
+    ],
+    "النسب المرنة": [
+        "تحسين استجابة صفحة",
+        "كتابة Media Query",
+        "اختبار صفحة على أحجام مختلفة",
+        "تصحيح مشكلة هاتف",
+        "تحليل تجربة مستخدم",
+        "أخرى"
+    ],
+    "تغير التخطيط حسب الشاشة": [
+        "تحسين استجابة صفحة",
+        "كتابة Media Query",
+        "اختبار صفحة على أحجام مختلفة",
+        "تصحيح مشكلة هاتف",
+        "تحليل تجربة مستخدم",
+        "أخرى"
+    ],
+    "CSS Animations Basics": [
+        "إضافة Transition",
+        "بناء Hover Effect",
+        "تحليل حركة CSS",
+        "تصحيح Animation",
+        "تحسين تجربة بصرية",
+        "أخرى"
+    ],
+    "مفهوم Animation": [
+        "إضافة Transition",
+        "بناء Hover Effect",
+        "تحليل حركة CSS",
+        "تصحيح Animation",
+        "تحسين تجربة بصرية",
+        "أخرى"
+    ],
+    "Transition": [
+        "إضافة Transition",
+        "بناء Hover Effect",
+        "تحليل حركة CSS",
+        "تصحيح Animation",
+        "تحسين تجربة بصرية",
+        "أخرى"
+    ],
+    "Transform": [
+        "إضافة Transition",
+        "بناء Hover Effect",
+        "تحليل حركة CSS",
+        "تصحيح Animation",
+        "تحسين تجربة بصرية",
+        "أخرى"
+    ],
+    "Hover Effects": [
+        "إضافة Transition",
+        "بناء Hover Effect",
+        "تحليل حركة CSS",
+        "تصحيح Animation",
+        "تحسين تجربة بصرية",
+        "أخرى"
+    ],
+    "Keyframes": [
+        "إضافة Transition",
+        "بناء Hover Effect",
+        "تحليل حركة CSS",
+        "تصحيح Animation",
+        "تحسين تجربة بصرية",
+        "أخرى"
+    ],
+    "استخدام الحركة دون إزعاج": [
+        "إضافة Transition",
+        "بناء Hover Effect",
+        "تحليل حركة CSS",
+        "تصحيح Animation",
+        "تحسين تجربة بصرية",
+        "أخرى"
+    ],
+    "JavaScript for Web": [
+        "كتابة JavaScript للويب",
+        "ربط ملف JS",
+        "تحديث عنصر صفحة",
+        "قراءة قيمة من input",
+        "تطبيق تفاعل بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "دور JavaScript في الويب": [
+        "كتابة JavaScript للويب",
+        "ربط ملف JS",
+        "تحديث عنصر صفحة",
+        "قراءة قيمة من input",
+        "تطبيق تفاعل بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "ربط JavaScript بصفحة HTML": [
+        "كتابة JavaScript للويب",
+        "ربط ملف JS",
+        "تحديث عنصر صفحة",
+        "قراءة قيمة من input",
+        "تطبيق تفاعل بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تغيير المحتوى": [
+        "كتابة JavaScript للويب",
+        "ربط ملف JS",
+        "تحديث عنصر صفحة",
+        "قراءة قيمة من input",
+        "تطبيق تفاعل بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "التفاعل مع المستخدم": [
+        "كتابة JavaScript للويب",
+        "ربط ملف JS",
+        "تحديث عنصر صفحة",
+        "قراءة قيمة من input",
+        "تطبيق تفاعل بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "قراءة القيم من الصفحة": [
+        "كتابة JavaScript للويب",
+        "ربط ملف JS",
+        "تحديث عنصر صفحة",
+        "قراءة قيمة من input",
+        "تطبيق تفاعل بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تحديث الواجهة": [
+        "كتابة JavaScript للويب",
+        "ربط ملف JS",
+        "تحديث عنصر صفحة",
+        "قراءة قيمة من input",
+        "تطبيق تفاعل بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "DOM Manipulation": [
+        "تحليل DOM",
+        "تعديل عنصر صفحة",
+        "إضافة عنصر جديد",
+        "حذف عنصر",
+        "تصحيح Selector",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "مفهوم DOM": [
+        "تحليل DOM",
+        "تعديل عنصر صفحة",
+        "إضافة عنصر جديد",
+        "حذف عنصر",
+        "تصحيح Selector",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "اختيار عنصر": [
+        "تحليل DOM",
+        "تعديل عنصر صفحة",
+        "إضافة عنصر جديد",
+        "حذف عنصر",
+        "تصحيح Selector",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "تغيير النص": [
+        "تحليل DOM",
+        "تعديل عنصر صفحة",
+        "إضافة عنصر جديد",
+        "حذف عنصر",
+        "تصحيح Selector",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "تغيير Style": [
+        "تحليل DOM",
+        "تعديل عنصر صفحة",
+        "إضافة عنصر جديد",
+        "حذف عنصر",
+        "تصحيح Selector",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "إضافة عنصر": [
+        "تحليل DOM",
+        "تعديل عنصر صفحة",
+        "إضافة عنصر جديد",
+        "حذف عنصر",
+        "تصحيح Selector",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "حذف عنصر": [
+        "تحليل DOM",
+        "تعديل عنصر صفحة",
+        "إضافة عنصر جديد",
+        "حذف عنصر",
+        "تصحيح Selector",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "تحديث قائمة عناصر": [
+        "تحليل DOM",
+        "تعديل عنصر صفحة",
+        "إضافة عنصر جديد",
+        "حذف عنصر",
+        "تصحيح Selector",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Events in JavaScript": [
+        "إضافة Event Listener",
+        "تحليل حدث",
+        "بناء تفاعل زر",
+        "معالجة Submit",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "مفهوم Event": [
+        "إضافة Event Listener",
+        "تحليل حدث",
+        "بناء تفاعل زر",
+        "معالجة Submit",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "click": [
+        "إضافة Event Listener",
+        "تحليل حدث",
+        "بناء تفاعل زر",
+        "معالجة Submit",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "submit": [
+        "إضافة Event Listener",
+        "تحليل حدث",
+        "بناء تفاعل زر",
+        "معالجة Submit",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "input": [
+        "إضافة Event Listener",
+        "تحليل حدث",
+        "بناء تفاعل زر",
+        "معالجة Submit",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "change": [
+        "إضافة Event Listener",
+        "تحليل حدث",
+        "بناء تفاعل زر",
+        "معالجة Submit",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "Event Listener": [
+        "إضافة Event Listener",
+        "تحليل حدث",
+        "بناء تفاعل زر",
+        "معالجة Submit",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "منع السلوك الافتراضي": [
+        "إضافة Event Listener",
+        "تحليل حدث",
+        "بناء تفاعل زر",
+        "معالجة Submit",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "Forms with JavaScript": [
+        "بناء Form تفاعلي",
+        "التحقق من Input",
+        "عرض رسالة للمستخدم",
+        "تصحيح خطأ Form",
+        "اختبار سيناريو إدخال",
+        "أخرى"
+    ],
+    "قراءة بيانات Form": [
+        "بناء Form تفاعلي",
+        "التحقق من Input",
+        "عرض رسالة للمستخدم",
+        "تصحيح خطأ Form",
+        "اختبار سيناريو إدخال",
+        "أخرى"
+    ],
+    "التحقق من الإدخال": [
+        "بناء Flask Form",
+        "استقبال بيانات",
+        "التحقق من إدخال",
+        "عرض رسالة خطأ",
+        "تصحيح Form",
+        "أخرى"
+    ],
+    "عرض رسالة خطأ": [
+        "بناء Form تفاعلي",
+        "التحقق من Input",
+        "عرض رسالة للمستخدم",
+        "تصحيح خطأ Form",
+        "اختبار سيناريو إدخال",
+        "أخرى"
+    ],
+    "منع إرسال خاطئ": [
+        "بناء Form تفاعلي",
+        "التحقق من Input",
+        "عرض رسالة للمستخدم",
+        "تصحيح خطأ Form",
+        "اختبار سيناريو إدخال",
+        "أخرى"
+    ],
+    "تنظيف الحقول": [
+        "بناء Form تفاعلي",
+        "التحقق من Input",
+        "عرض رسالة للمستخدم",
+        "تصحيح خطأ Form",
+        "اختبار سيناريو إدخال",
+        "أخرى"
+    ],
+    "تحسين تجربة النموذج": [
+        "بناء Form تفاعلي",
+        "التحقق من Input",
+        "عرض رسالة للمستخدم",
+        "تصحيح خطأ Form",
+        "اختبار سيناريو إدخال",
+        "أخرى"
+    ],
+    "Fetch API": [
+        "استخدام Fetch API",
+        "جلب بيانات",
+        "تحليل Response",
+        "عرض JSON في الصفحة",
+        "معالجة خطأ اتصال",
+        "اختبار Endpoint",
+        "أخرى"
+    ],
+    "مفهوم Fetch API": [
+        "استخدام Fetch API",
+        "جلب بيانات",
+        "تحليل Response",
+        "عرض JSON في الصفحة",
+        "معالجة خطأ اتصال",
+        "اختبار Endpoint",
+        "أخرى"
+    ],
+    "إرسال Request": [
+        "استخدام Fetch API",
+        "جلب بيانات",
+        "تحليل Response",
+        "عرض JSON في الصفحة",
+        "معالجة خطأ اتصال",
+        "اختبار Endpoint",
+        "أخرى"
+    ],
+    "استقبال Response": [
+        "استخدام Fetch API",
+        "جلب بيانات",
+        "تحليل Response",
+        "عرض JSON في الصفحة",
+        "معالجة خطأ اتصال",
+        "اختبار Endpoint",
+        "أخرى"
+    ],
+    "التعامل مع JSON": [
+        "استخدام Fetch API",
+        "جلب بيانات",
+        "تحليل Response",
+        "عرض JSON في الصفحة",
+        "معالجة خطأ اتصال",
+        "اختبار Endpoint",
+        "أخرى"
+    ],
+    "أخطاء الاتصال": [
+        "تحسين Error Handling",
+        "كتابة رسالة خطأ مناسبة",
+        "اختبار حالة فشل",
+        "تحليل خطأ تطبيق",
+        "تصحيح معالجة خطأ",
+        "أخرى"
+    ],
+    "عرض البيانات في الصفحة": [
+        "استخدام Fetch API",
+        "جلب بيانات",
+        "تحليل Response",
+        "عرض JSON في الصفحة",
+        "معالجة خطأ اتصال",
+        "اختبار Endpoint",
+        "أخرى"
+    ],
+    "JSON": [
+        "قراءة JSON",
+        "تحليل بنية JSON",
+        "كتابة JSON صحيح",
+        "تصحيح JSON خاطئ",
+        "عرض بيانات JSON",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم JSON": [
+        "قراءة JSON",
+        "تحليل بنية JSON",
+        "كتابة JSON صحيح",
+        "تصحيح JSON خاطئ",
+        "عرض بيانات JSON",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Key وValue": [
+        "قراءة JSON",
+        "تحليل بنية JSON",
+        "كتابة JSON صحيح",
+        "تصحيح JSON خاطئ",
+        "عرض بيانات JSON",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Objects": [
+        "قراءة JSON",
+        "تحليل بنية JSON",
+        "كتابة JSON صحيح",
+        "تصحيح JSON خاطئ",
+        "عرض بيانات JSON",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Arrays": [
+        "قراءة JSON",
+        "تحليل بنية JSON",
+        "كتابة JSON صحيح",
+        "تصحيح JSON خاطئ",
+        "عرض بيانات JSON",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "استخدام JSON في APIs": [
+        "قراءة JSON",
+        "تحليل بنية JSON",
+        "كتابة JSON صحيح",
+        "تصحيح JSON خاطئ",
+        "عرض بيانات JSON",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تحويل JSON إلى بيانات قابلة للعرض": [
+        "قراءة JSON",
+        "تحليل بنية JSON",
+        "كتابة JSON صحيح",
+        "تصحيح JSON خاطئ",
+        "عرض بيانات JSON",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Browser Storage": [
+        "استخدام localStorage",
+        "حفظ إعداد بسيط",
+        "قراءة قيمة محفوظة",
+        "حذف بيانات",
+        "تحليل متى نستخدم التخزين",
+        "أخرى"
+    ],
+    "مفهوم Browser Storage": [
+        "استخدام localStorage",
+        "حفظ إعداد بسيط",
+        "قراءة قيمة محفوظة",
+        "حذف بيانات",
+        "تحليل متى نستخدم التخزين",
+        "أخرى"
+    ],
+    "localStorage": [
+        "استخدام localStorage",
+        "حفظ إعداد بسيط",
+        "قراءة قيمة محفوظة",
+        "حذف بيانات",
+        "تحليل متى نستخدم التخزين",
+        "أخرى"
+    ],
+    "sessionStorage": [
+        "استخدام localStorage",
+        "حفظ إعداد بسيط",
+        "قراءة قيمة محفوظة",
+        "حذف بيانات",
+        "تحليل متى نستخدم التخزين",
+        "أخرى"
+    ],
+    "حفظ بيانات بسيطة": [
+        "استخدام localStorage",
+        "حفظ إعداد بسيط",
+        "قراءة قيمة محفوظة",
+        "حذف بيانات",
+        "تحليل متى نستخدم التخزين",
+        "أخرى"
+    ],
+    "قراءة بيانات محفوظة": [
+        "استخدام localStorage",
+        "حفظ إعداد بسيط",
+        "قراءة قيمة محفوظة",
+        "حذف بيانات",
+        "تحليل متى نستخدم التخزين",
+        "أخرى"
+    ],
+    "حذف بيانات محفوظة": [
+        "استخدام localStorage",
+        "حفظ إعداد بسيط",
+        "قراءة قيمة محفوظة",
+        "حذف بيانات",
+        "تحليل متى نستخدم التخزين",
+        "أخرى"
+    ],
+    "أخطاء التخزين في المتصفح": [
+        "استخدام localStorage",
+        "حفظ إعداد بسيط",
+        "قراءة قيمة محفوظة",
+        "حذف بيانات",
+        "تحليل متى نستخدم التخزين",
+        "أخرى"
+    ],
+    "React Basics": [
+        "دراسة React",
+        "إنشاء Component بسيط",
+        "تحليل JSX",
+        "تشغيل مشروع React",
+        "مقارنة React وJavaScript العادي",
+        "أخرى"
+    ],
+    "مفهوم React": [
+        "دراسة React",
+        "إنشاء Component بسيط",
+        "تحليل JSX",
+        "تشغيل مشروع React",
+        "مقارنة React وJavaScript العادي",
+        "أخرى"
+    ],
+    "SPA كمفهوم": [
+        "دراسة React",
+        "إنشاء Component بسيط",
+        "تحليل JSX",
+        "تشغيل مشروع React",
+        "مقارنة React وJavaScript العادي",
+        "أخرى"
+    ],
+    "Component-based UI": [
+        "دراسة React",
+        "إنشاء Component بسيط",
+        "تحليل JSX",
+        "تشغيل مشروع React",
+        "مقارنة React وJavaScript العادي",
+        "أخرى"
+    ],
+    "JSX": [
+        "دراسة React",
+        "إنشاء Component بسيط",
+        "تحليل JSX",
+        "تشغيل مشروع React",
+        "مقارنة React وJavaScript العادي",
+        "أخرى"
+    ],
+    "تشغيل مشروع React": [
+        "دراسة React",
+        "إنشاء Component بسيط",
+        "تحليل JSX",
+        "تشغيل مشروع React",
+        "مقارنة React وJavaScript العادي",
+        "أخرى"
+    ],
+    "بنية مشروع React": [
+        "دراسة React",
+        "إنشاء Component بسيط",
+        "تحليل JSX",
+        "تشغيل مشروع React",
+        "مقارنة React وJavaScript العادي",
+        "أخرى"
+    ],
+    "React Components": [
+        "بناء Component",
+        "تقسيم واجهة إلى Components",
+        "إعادة استخدام Component",
+        "تحليل علاقة أب وابن",
+        "تصحيح خطأ Component",
+        "أخرى"
+    ],
+    "مفهوم Component": [
+        "بناء Component",
+        "تقسيم واجهة إلى Components",
+        "إعادة استخدام Component",
+        "تحليل علاقة أب وابن",
+        "تصحيح خطأ Component",
+        "أخرى"
+    ],
+    "تقسيم الواجهة": [
+        "بناء Component",
+        "تقسيم واجهة إلى Components",
+        "إعادة استخدام Component",
+        "تحليل علاقة أب وابن",
+        "تصحيح خطأ Component",
+        "أخرى"
+    ],
+    "Component قابل لإعادة الاستخدام": [
+        "بناء Component",
+        "تقسيم واجهة إلى Components",
+        "إعادة استخدام Component",
+        "تحليل علاقة أب وابن",
+        "تصحيح خطأ Component",
+        "أخرى"
+    ],
+    "Component أب وابن": [
+        "بناء Component",
+        "تقسيم واجهة إلى Components",
+        "إعادة استخدام Component",
+        "تحليل علاقة أب وابن",
+        "تصحيح خطأ Component",
+        "أخرى"
+    ],
+    "تنظيم Components": [
+        "بناء Component",
+        "تقسيم واجهة إلى Components",
+        "إعادة استخدام Component",
+        "تحليل علاقة أب وابن",
+        "تصحيح خطأ Component",
+        "أخرى"
+    ],
+    "أخطاء Components": [
+        "بناء Component",
+        "تقسيم واجهة إلى Components",
+        "إعادة استخدام Component",
+        "تحليل علاقة أب وابن",
+        "تصحيح خطأ Component",
+        "أخرى"
+    ],
+    "Props and State": [
+        "تحليل Props وState",
+        "تمرير Props",
+        "تحديث State",
+        "تصحيح خطأ State",
+        "بناء تفاعل React",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Props": [
+        "تحليل Props وState",
+        "تمرير Props",
+        "تحديث State",
+        "تصحيح خطأ State",
+        "بناء تفاعل React",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم State": [
+        "تحليل Props وState",
+        "تمرير Props",
+        "تحديث State",
+        "تصحيح خطأ State",
+        "بناء تفاعل React",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "الفرق بين Props وState": [
+        "تحليل Props وState",
+        "تمرير Props",
+        "تحديث State",
+        "تصحيح خطأ State",
+        "بناء تفاعل React",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تمرير البيانات": [
+        "تحليل Props وState",
+        "تمرير Props",
+        "تحديث State",
+        "تصحيح خطأ State",
+        "بناء تفاعل React",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تحديث State": [
+        "تحليل Props وState",
+        "تمرير Props",
+        "تحديث State",
+        "تصحيح خطأ State",
+        "بناء تفاعل React",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "إعادة عرض الواجهة": [
+        "تحليل Props وState",
+        "تمرير Props",
+        "تحديث State",
+        "تصحيح خطأ State",
+        "بناء تفاعل React",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "React Events": [
+        "إضافة Event في React",
+        "بناء زر تفاعلي",
+        "معالجة Form",
+        "تحديث State",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "الأحداث في React": [
+        "إضافة Event في React",
+        "بناء زر تفاعلي",
+        "معالجة Form",
+        "تحديث State",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "onClick": [
+        "إضافة Event في React",
+        "بناء زر تفاعلي",
+        "معالجة Form",
+        "تحديث State",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "onChange": [
+        "إضافة Event في React",
+        "بناء زر تفاعلي",
+        "معالجة Form",
+        "تحديث State",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "onSubmit": [
+        "إضافة Event في React",
+        "بناء زر تفاعلي",
+        "معالجة Form",
+        "تحديث State",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "تمرير دالة للحدث": [
+        "إضافة Event في React",
+        "بناء زر تفاعلي",
+        "معالجة Form",
+        "تحديث State",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "تحديث State عند الحدث": [
+        "إضافة Event في React",
+        "بناء زر تفاعلي",
+        "معالجة Form",
+        "تحديث State",
+        "تصحيح مشكلة Event",
+        "أخرى"
+    ],
+    "React Forms": [
+        "بناء React Form",
+        "تحليل Controlled Input",
+        "التحقق من إدخال",
+        "عرض رسالة خطأ",
+        "اختبار إرسال Form",
+        "أخرى"
+    ],
+    "Controlled Components": [
+        "بناء React Form",
+        "تحليل Controlled Input",
+        "التحقق من إدخال",
+        "عرض رسالة خطأ",
+        "اختبار إرسال Form",
+        "أخرى"
+    ],
+    "قراءة قيمة input": [
+        "بناء React Form",
+        "تحليل Controlled Input",
+        "التحقق من إدخال",
+        "عرض رسالة خطأ",
+        "اختبار إرسال Form",
+        "أخرى"
+    ],
+    "تحديث State من Form": [
+        "بناء React Form",
+        "تحليل Controlled Input",
+        "التحقق من إدخال",
+        "عرض رسالة خطأ",
+        "اختبار إرسال Form",
+        "أخرى"
+    ],
+    "عرض رسائل خطأ": [
+        "بناء React Form",
+        "تحليل Controlled Input",
+        "التحقق من إدخال",
+        "عرض رسالة خطأ",
+        "اختبار إرسال Form",
+        "أخرى"
+    ],
+    "React Hooks Basics": [
+        "استخدام useState",
+        "استخدام useEffect",
+        "تحليل Dependency Array",
+        "تصحيح Hook خطأ",
+        "بناء Component تفاعلي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Hook": [
+        "استخدام useState",
+        "استخدام useEffect",
+        "تحليل Dependency Array",
+        "تصحيح Hook خطأ",
+        "بناء Component تفاعلي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "useState": [
+        "استخدام useState",
+        "استخدام useEffect",
+        "تحليل Dependency Array",
+        "تصحيح Hook خطأ",
+        "بناء Component تفاعلي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "useEffect": [
+        "استخدام useState",
+        "استخدام useEffect",
+        "تحليل Dependency Array",
+        "تصحيح Hook خطأ",
+        "بناء Component تفاعلي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "متى نستخدم useEffect": [
+        "استخدام useState",
+        "استخدام useEffect",
+        "تحليل Dependency Array",
+        "تصحيح Hook خطأ",
+        "بناء Component تفاعلي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Dependency Array": [
+        "استخدام useState",
+        "استخدام useEffect",
+        "تحليل Dependency Array",
+        "تصحيح Hook خطأ",
+        "بناء Component تفاعلي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "أخطاء Hooks الشائعة": [
+        "استخدام useState",
+        "استخدام useEffect",
+        "تحليل Dependency Array",
+        "تصحيح Hook خطأ",
+        "بناء Component تفاعلي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "React Router Basics": [
+        "إضافة Route",
+        "بناء تنقل بين صفحات",
+        "تحليل مسار",
+        "تصحيح خطأ Routing",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "مفهوم Routing": [
+        "إضافة Route",
+        "بناء تنقل بين صفحات",
+        "تحليل مسار",
+        "تصحيح خطأ Routing",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "صفحات داخل تطبيق React": [
+        "إضافة Route",
+        "بناء تنقل بين صفحات",
+        "تحليل مسار",
+        "تصحيح خطأ Routing",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Route": [
+        "بناء تطبيق Flask بسيط",
+        "إضافة Route",
+        "تشغيل Flask",
+        "تحليل بنية مشروع",
+        "تصحيح خطأ Flask",
+        "أخرى"
+    ],
+    "Link": [
+        "إضافة Route",
+        "بناء تنقل بين صفحات",
+        "تحليل مسار",
+        "تصحيح خطأ Routing",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Navigate": [
+        "إضافة Route",
+        "بناء تنقل بين صفحات",
+        "تحليل مسار",
+        "تصحيح خطأ Routing",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "تنظيم المسارات": [
+        "إضافة Route",
+        "بناء تنقل بين صفحات",
+        "تحليل مسار",
+        "تصحيح خطأ Routing",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Frontend Project Structure": [
+        "تنظيم مشروع Frontend",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء الملفات",
+        "توثيق بنية الواجهة",
+        "أخرى"
+    ],
+    "تنظيم ملفات الواجهة": [
+        "تنظيم مشروع Frontend",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء الملفات",
+        "توثيق بنية الواجهة",
+        "أخرى"
+    ],
+    "مجلد Components": [
+        "تنظيم مشروع Frontend",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء الملفات",
+        "توثيق بنية الواجهة",
+        "أخرى"
+    ],
+    "مجلد Pages": [
+        "تنظيم مشروع Frontend",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء الملفات",
+        "توثيق بنية الواجهة",
+        "أخرى"
+    ],
+    "مجلد Assets": [
+        "تنظيم مشروع Frontend",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء الملفات",
+        "توثيق بنية الواجهة",
+        "أخرى"
+    ],
+    "مجلد Styles": [
+        "تنظيم مشروع Frontend",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء الملفات",
+        "توثيق بنية الواجهة",
+        "أخرى"
+    ],
+    "فصل المنطق عن العرض": [
+        "تنظيم مشروع Frontend",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء الملفات",
+        "توثيق بنية الواجهة",
+        "أخرى"
+    ],
+    "UI Components": [
+        "بناء UI Component",
+        "تحسين Component",
+        "إعادة استخدام Component",
+        "تحليل تصميم Component",
+        "اختبار تفاعل Component",
+        "أخرى"
+    ],
+    "Button Component": [
+        "بناء UI Component",
+        "تحسين Component",
+        "إعادة استخدام Component",
+        "تحليل تصميم Component",
+        "اختبار تفاعل Component",
+        "أخرى"
+    ],
+    "Card Component": [
+        "بناء UI Component",
+        "تحسين Component",
+        "إعادة استخدام Component",
+        "تحليل تصميم Component",
+        "اختبار تفاعل Component",
+        "أخرى"
+    ],
+    "Navbar": [
+        "بناء UI Component",
+        "تحسين Component",
+        "إعادة استخدام Component",
+        "تحليل تصميم Component",
+        "اختبار تفاعل Component",
+        "أخرى"
+    ],
+    "Modal": [
+        "بناء UI Component",
+        "تحسين Component",
+        "إعادة استخدام Component",
+        "تحليل تصميم Component",
+        "اختبار تفاعل Component",
+        "أخرى"
+    ],
+    "Form Component": [
+        "بناء UI Component",
+        "تحسين Component",
+        "إعادة استخدام Component",
+        "تحليل تصميم Component",
+        "اختبار تفاعل Component",
+        "أخرى"
+    ],
+    "Reusable Components": [
+        "بناء UI Component",
+        "تحسين Component",
+        "إعادة استخدام Component",
+        "تحليل تصميم Component",
+        "اختبار تفاعل Component",
+        "أخرى"
+    ],
+    "Accessibility Basics": [
+        "فحص Accessibility",
+        "تحسين Label",
+        "إضافة Alt Text",
+        "تحليل تباين",
+        "مراجعة تجربة استخدام",
+        "أخرى"
+    ],
+    "مفهوم Accessibility": [
+        "فحص Accessibility",
+        "تحسين Label",
+        "إضافة Alt Text",
+        "تحليل تباين",
+        "مراجعة تجربة استخدام",
+        "أخرى"
+    ],
+    "استخدام Labels": [
+        "فحص Accessibility",
+        "تحسين Label",
+        "إضافة Alt Text",
+        "تحليل تباين",
+        "مراجعة تجربة استخدام",
+        "أخرى"
+    ],
+    "النص البديل للصور": [
+        "فحص Accessibility",
+        "تحسين Label",
+        "إضافة Alt Text",
+        "تحليل تباين",
+        "مراجعة تجربة استخدام",
+        "أخرى"
+    ],
+    "ترتيب العناوين": [
+        "فحص Accessibility",
+        "تحسين Label",
+        "إضافة Alt Text",
+        "تحليل تباين",
+        "مراجعة تجربة استخدام",
+        "أخرى"
+    ],
+    "تباين الألوان": [
+        "فحص Accessibility",
+        "تحسين Label",
+        "إضافة Alt Text",
+        "تحليل تباين",
+        "مراجعة تجربة استخدام",
+        "أخرى"
+    ],
+    "دعم لوحة المفاتيح": [
+        "فحص Accessibility",
+        "تحسين Label",
+        "إضافة Alt Text",
+        "تحليل تباين",
+        "مراجعة تجربة استخدام",
+        "أخرى"
+    ],
+    "Web Performance Basics": [
+        "تحليل أداء صفحة",
+        "تقليل حجم صورة",
+        "تحسين تحميل",
+        "مراجعة ملفات غير ضرورية",
+        "كتابة ملاحظات أداء",
+        "أخرى"
+    ],
+    "مفهوم أداء الويب": [
+        "تحليل أداء صفحة",
+        "تقليل حجم صورة",
+        "تحسين تحميل",
+        "مراجعة ملفات غير ضرورية",
+        "كتابة ملاحظات أداء",
+        "أخرى"
+    ],
+    "سرعة تحميل الصفحة": [
+        "تحليل أداء صفحة",
+        "تقليل حجم صورة",
+        "تحسين تحميل",
+        "مراجعة ملفات غير ضرورية",
+        "كتابة ملاحظات أداء",
+        "أخرى"
+    ],
+    "حجم الصور": [
+        "تحليل أداء صفحة",
+        "تقليل حجم صورة",
+        "تحسين تحميل",
+        "مراجعة ملفات غير ضرورية",
+        "كتابة ملاحظات أداء",
+        "أخرى"
+    ],
+    "تقليل الملفات غير الضرورية": [
+        "تحليل أداء صفحة",
+        "تقليل حجم صورة",
+        "تحسين تحميل",
+        "مراجعة ملفات غير ضرورية",
+        "كتابة ملاحظات أداء",
+        "أخرى"
+    ],
+    "تقليل إعادة الرسم": [
+        "تحليل أداء صفحة",
+        "تقليل حجم صورة",
+        "تحسين تحميل",
+        "مراجعة ملفات غير ضرورية",
+        "كتابة ملاحظات أداء",
+        "أخرى"
+    ],
+    "تجربة المستخدم والأداء": [
+        "تحليل أداء صفحة",
+        "تقليل حجم صورة",
+        "تحسين تحميل",
+        "مراجعة ملفات غير ضرورية",
+        "كتابة ملاحظات أداء",
+        "أخرى"
+    ],
+    "Backend Basics": [
+        "تحليل Backend",
+        "بناء Route بسيط",
+        "كتابة منطق خلفي",
+        "ربط رد بالواجهة",
+        "اختبار طلب",
+        "أخرى"
+    ],
+    "Server": [
+        "تحليل Backend",
+        "بناء Route بسيط",
+        "كتابة منطق خلفي",
+        "ربط رد بالواجهة",
+        "اختبار طلب",
+        "أخرى"
+    ],
+    "Controller كمفهوم": [
+        "تحليل Backend",
+        "بناء Route بسيط",
+        "كتابة منطق خلفي",
+        "ربط رد بالواجهة",
+        "اختبار طلب",
+        "أخرى"
+    ],
+    "Business Logic": [
+        "تحليل Backend",
+        "بناء Route بسيط",
+        "كتابة منطق خلفي",
+        "ربط رد بالواجهة",
+        "اختبار طلب",
+        "أخرى"
+    ],
+    "Database Connection": [
+        "تحليل Backend",
+        "بناء Route بسيط",
+        "كتابة منطق خلفي",
+        "ربط رد بالواجهة",
+        "اختبار طلب",
+        "أخرى"
+    ],
+    "API Response": [
+        "تحليل Backend",
+        "بناء Route بسيط",
+        "كتابة منطق خلفي",
+        "ربط رد بالواجهة",
+        "اختبار طلب",
+        "أخرى"
+    ],
+    "HTTP Basics": [
+        "تحليل طلب HTTP",
+        "اختيار Method مناسب",
+        "قراءة Status Code",
+        "اختبار Request",
+        "تصحيح خطأ HTTP",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم HTTP": [
+        "تحليل طلب HTTP",
+        "اختيار Method مناسب",
+        "قراءة Status Code",
+        "اختبار Request",
+        "تصحيح خطأ HTTP",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "GET": [
+        "تحليل طلب HTTP",
+        "اختيار Method مناسب",
+        "قراءة Status Code",
+        "اختبار Request",
+        "تصحيح خطأ HTTP",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "POST": [
+        "تحليل طلب HTTP",
+        "اختيار Method مناسب",
+        "قراءة Status Code",
+        "اختبار Request",
+        "تصحيح خطأ HTTP",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "PUT": [
+        "تحليل طلب HTTP",
+        "اختيار Method مناسب",
+        "قراءة Status Code",
+        "اختبار Request",
+        "تصحيح خطأ HTTP",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "DELETE": [
+        "كتابة Query",
+        "قراءة Query",
+        "تصحيح SQL",
+        "جلب بيانات",
+        "تعديل سجل",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Status Codes": [
+        "بناء Flask API",
+        "اختبار JSON Endpoint",
+        "تصحيح Status Code",
+        "ربط API بواجهة",
+        "توثيق API",
+        "أخرى"
+    ],
+    "Headers": [
+        "تحليل Request",
+        "بناء Response",
+        "تمييز Parameters",
+        "اختبار Endpoint",
+        "تصحيح Response خاطئ",
+        "أخرى"
+    ],
+    "Request and Response": [
+        "تحليل Request",
+        "بناء Response",
+        "تمييز Parameters",
+        "اختبار Endpoint",
+        "تصحيح Response خاطئ",
+        "أخرى"
+    ],
+    "مفهوم Request": [
+        "تحليل Request",
+        "بناء Response",
+        "تمييز Parameters",
+        "اختبار Endpoint",
+        "تصحيح Response خاطئ",
+        "أخرى"
+    ],
+    "مفهوم Response": [
+        "تحليل Request",
+        "بناء Response",
+        "تمييز Parameters",
+        "اختبار Endpoint",
+        "تصحيح Response خاطئ",
+        "أخرى"
+    ],
+    "Body": [
+        "تحليل Request",
+        "بناء Response",
+        "تمييز Parameters",
+        "اختبار Endpoint",
+        "تصحيح Response خاطئ",
+        "أخرى"
+    ],
+    "Query Parameters": [
+        "تحليل Request",
+        "بناء Response",
+        "تمييز Parameters",
+        "اختبار Endpoint",
+        "تصحيح Response خاطئ",
+        "أخرى"
+    ],
+    "Path Parameters": [
+        "تحليل Request",
+        "بناء Response",
+        "تمييز Parameters",
+        "اختبار Endpoint",
+        "تصحيح Response خاطئ",
+        "أخرى"
+    ],
+    "Response Format": [
+        "تحليل Request",
+        "بناء Response",
+        "تمييز Parameters",
+        "اختبار Endpoint",
+        "تصحيح Response خاطئ",
+        "أخرى"
+    ],
+    "REST API": [
+        "تصميم REST API",
+        "بناء Endpoint",
+        "اختبار API",
+        "تحليل Resource",
+        "توثيق API",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم REST API": [
+        "تصميم REST API",
+        "بناء Endpoint",
+        "اختبار API",
+        "تحليل Resource",
+        "توثيق API",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Resources": [
+        "تصميم REST API",
+        "بناء Endpoint",
+        "اختبار API",
+        "تحليل Resource",
+        "توثيق API",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Endpoints": [
+        "تصميم REST API",
+        "بناء Endpoint",
+        "اختبار API",
+        "تحليل Resource",
+        "توثيق API",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "HTTP Methods": [
+        "تصميم REST API",
+        "بناء Endpoint",
+        "اختبار API",
+        "تحليل Resource",
+        "توثيق API",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "JSON Response": [
+        "تصميم REST API",
+        "بناء Endpoint",
+        "اختبار API",
+        "تحليل Resource",
+        "توثيق API",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "CRUD عبر API": [
+        "تصميم REST API",
+        "بناء Endpoint",
+        "اختبار API",
+        "تحليل Resource",
+        "توثيق API",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تنظيم API": [
+        "تصميم REST API",
+        "بناء Endpoint",
+        "اختبار API",
+        "تحليل Resource",
+        "توثيق API",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "API Endpoints": [
+        "تصميم Endpoint",
+        "بناء Endpoint",
+        "اختبار Endpoint",
+        "تصحيح مسار",
+        "توثيق Endpoint",
+        "أخرى"
+    ],
+    "مفهوم Endpoint": [
+        "تصميم Endpoint",
+        "بناء Endpoint",
+        "اختبار Endpoint",
+        "تصحيح مسار",
+        "توثيق Endpoint",
+        "أخرى"
+    ],
+    "مسار Endpoint": [
+        "تصميم Endpoint",
+        "بناء Endpoint",
+        "اختبار Endpoint",
+        "تصحيح مسار",
+        "توثيق Endpoint",
+        "أخرى"
+    ],
+    "Endpoint للقراءة": [
+        "تصميم Endpoint",
+        "بناء Endpoint",
+        "اختبار Endpoint",
+        "تصحيح مسار",
+        "توثيق Endpoint",
+        "أخرى"
+    ],
+    "Endpoint للإضافة": [
+        "تصميم Endpoint",
+        "بناء Endpoint",
+        "اختبار Endpoint",
+        "تصحيح مسار",
+        "توثيق Endpoint",
+        "أخرى"
+    ],
+    "Endpoint للتعديل": [
+        "تصميم Endpoint",
+        "بناء Endpoint",
+        "اختبار Endpoint",
+        "تصحيح مسار",
+        "توثيق Endpoint",
+        "أخرى"
+    ],
+    "Endpoint للحذف": [
+        "تصميم Endpoint",
+        "بناء Endpoint",
+        "اختبار Endpoint",
+        "تصحيح مسار",
+        "توثيق Endpoint",
+        "أخرى"
+    ],
+    "JSON APIs": [
+        "بناء JSON API",
+        "تحليل Response",
+        "تصحيح JSON Response",
+        "اختبار إرسال JSON",
+        "توثيق شكل الاستجابة",
+        "أخرى"
+    ],
+    "إرجاع JSON": [
+        "بناء Express Server",
+        "إنشاء Route",
+        "إرجاع JSON",
+        "اختبار Request",
+        "تصحيح خطأ Express",
+        "أخرى"
+    ],
+    "استقبال JSON": [
+        "بناء Flask API",
+        "اختبار JSON Endpoint",
+        "تصحيح Status Code",
+        "ربط API بواجهة",
+        "توثيق API",
+        "أخرى"
+    ],
+    "تنسيق Response": [
+        "بناء JSON API",
+        "تحليل Response",
+        "تصحيح JSON Response",
+        "اختبار إرسال JSON",
+        "توثيق شكل الاستجابة",
+        "أخرى"
+    ],
+    "رسائل النجاح": [
+        "بناء JSON API",
+        "تحليل Response",
+        "تصحيح JSON Response",
+        "اختبار إرسال JSON",
+        "توثيق شكل الاستجابة",
+        "أخرى"
+    ],
+    "رسائل الخطأ": [
+        "بناء Validation",
+        "تحليل بيانات خاطئة",
+        "كتابة رسالة خطأ",
+        "اختبار إدخال غير صحيح",
+        "تصحيح منطق تحقق",
+        "أخرى"
+    ],
+    "توحيد شكل API": [
+        "بناء JSON API",
+        "تحليل Response",
+        "تصحيح JSON Response",
+        "اختبار إرسال JSON",
+        "توثيق شكل الاستجابة",
+        "أخرى"
+    ],
+    "Flask Basics": [
+        "بناء تطبيق Flask بسيط",
+        "إضافة Route",
+        "تشغيل Flask",
+        "تحليل بنية مشروع",
+        "تصحيح خطأ Flask",
+        "أخرى"
+    ],
+    "مفهوم Flask": [
+        "بناء تطبيق Flask بسيط",
+        "إضافة Route",
+        "تشغيل Flask",
+        "تحليل بنية مشروع",
+        "تصحيح خطأ Flask",
+        "أخرى"
+    ],
+    "إنشاء تطبيق Flask": [
+        "بناء تطبيق Flask بسيط",
+        "إضافة Route",
+        "تشغيل Flask",
+        "تحليل بنية مشروع",
+        "تصحيح خطأ Flask",
+        "أخرى"
+    ],
+    "View Function": [
+        "بناء تطبيق Flask بسيط",
+        "إضافة Route",
+        "تشغيل Flask",
+        "تحليل بنية مشروع",
+        "تصحيح خطأ Flask",
+        "أخرى"
+    ],
+    "تشغيل الخادم المحلي": [
+        "بناء تطبيق Flask بسيط",
+        "إضافة Route",
+        "تشغيل Flask",
+        "تحليل بنية مشروع",
+        "تصحيح خطأ Flask",
+        "أخرى"
+    ],
+    "بنية مشروع Flask": [
+        "بناء تطبيق Flask بسيط",
+        "إضافة Route",
+        "تشغيل Flask",
+        "تحليل بنية مشروع",
+        "تصحيح خطأ Flask",
+        "أخرى"
+    ],
+    "Flask Routes": [
+        "إنشاء Flask Route",
+        "اختبار Route",
+        "تحليل Route بمتغير",
+        "تصحيح خطأ مسار",
+        "توثيق Route",
+        "أخرى"
+    ],
+    "مفهوم Route في Flask": [
+        "إنشاء Flask Route",
+        "اختبار Route",
+        "تحليل Route بمتغير",
+        "تصحيح خطأ مسار",
+        "توثيق Route",
+        "أخرى"
+    ],
+    "Route ثابت": [
+        "إنشاء Flask Route",
+        "اختبار Route",
+        "تحليل Route بمتغير",
+        "تصحيح خطأ مسار",
+        "توثيق Route",
+        "أخرى"
+    ],
+    "Route بمتغير": [
+        "إنشاء Flask Route",
+        "اختبار Route",
+        "تحليل Route بمتغير",
+        "تصحيح خطأ مسار",
+        "توثيق Route",
+        "أخرى"
+    ],
+    "GET وPOST": [
+        "إنشاء Flask Route",
+        "اختبار Route",
+        "تحليل Route بمتغير",
+        "تصحيح خطأ مسار",
+        "توثيق Route",
+        "أخرى"
+    ],
+    "تنظيم Routes": [
+        "إنشاء Flask Route",
+        "اختبار Route",
+        "تحليل Route بمتغير",
+        "تصحيح خطأ مسار",
+        "توثيق Route",
+        "أخرى"
+    ],
+    "أخطاء المسارات": [
+        "إنشاء Flask Route",
+        "اختبار Route",
+        "تحليل Route بمتغير",
+        "تصحيح خطأ مسار",
+        "توثيق Route",
+        "أخرى"
+    ],
+    "Flask Templates": [
+        "بناء Template",
+        "تمرير بيانات",
+        "عرض قائمة",
+        "تصحيح خطأ Jinja",
+        "تحليل Template",
+        "أخرى"
+    ],
+    "مفهوم Template": [
+        "بناء Template",
+        "تمرير بيانات",
+        "عرض قائمة",
+        "تصحيح خطأ Jinja",
+        "تحليل Template",
+        "أخرى"
+    ],
+    "Jinja": [
+        "بناء Template",
+        "تمرير بيانات",
+        "عرض قائمة",
+        "تصحيح خطأ Jinja",
+        "تحليل Template",
+        "أخرى"
+    ],
+    "تمرير بيانات للصفحة": [
+        "بناء Template",
+        "تمرير بيانات",
+        "عرض قائمة",
+        "تصحيح خطأ Jinja",
+        "تحليل Template",
+        "أخرى"
+    ],
+    "عرض قائمة بيانات": [
+        "بناء Template",
+        "تمرير بيانات",
+        "عرض قائمة",
+        "تصحيح خطأ Jinja",
+        "تحليل Template",
+        "أخرى"
+    ],
+    "الشروط داخل Template": [
+        "بناء Template",
+        "تمرير بيانات",
+        "عرض قائمة",
+        "تصحيح خطأ Jinja",
+        "تحليل Template",
+        "أخرى"
+    ],
+    "الحلقات داخل Template": [
+        "بناء Template",
+        "تمرير بيانات",
+        "عرض قائمة",
+        "تصحيح خطأ Jinja",
+        "تحليل Template",
+        "أخرى"
+    ],
+    "Flask Forms": [
+        "بناء Flask Form",
+        "استقبال بيانات",
+        "التحقق من إدخال",
+        "عرض رسالة خطأ",
+        "تصحيح Form",
+        "أخرى"
+    ],
+    "استقبال بيانات Form": [
+        "بناء Flask Form",
+        "استقبال بيانات",
+        "التحقق من إدخال",
+        "عرض رسالة خطأ",
+        "تصحيح Form",
+        "أخرى"
+    ],
+    "Request Form": [
+        "بناء Flask Form",
+        "استقبال بيانات",
+        "التحقق من إدخال",
+        "عرض رسالة خطأ",
+        "تصحيح Form",
+        "أخرى"
+    ],
+    "عرض رسائل للمستخدم": [
+        "بناء Flask Form",
+        "استقبال بيانات",
+        "التحقق من إدخال",
+        "عرض رسالة خطأ",
+        "تصحيح Form",
+        "أخرى"
+    ],
+    "إعادة توجيه بعد الإرسال": [
+        "بناء Flask Form",
+        "استقبال بيانات",
+        "التحقق من إدخال",
+        "عرض رسالة خطأ",
+        "تصحيح Form",
+        "أخرى"
+    ],
+    "أخطاء Forms": [
+        "بناء Flask Form",
+        "استقبال بيانات",
+        "التحقق من إدخال",
+        "عرض رسالة خطأ",
+        "تصحيح Form",
+        "أخرى"
+    ],
+    "Flask APIs": [
+        "بناء Flask API",
+        "اختبار JSON Endpoint",
+        "تصحيح Status Code",
+        "ربط API بواجهة",
+        "توثيق API",
+        "أخرى"
+    ],
+    "إنشاء API في Flask": [
+        "بناء Flask API",
+        "اختبار JSON Endpoint",
+        "تصحيح Status Code",
+        "ربط API بواجهة",
+        "توثيق API",
+        "أخرى"
+    ],
+    "API للقراءة والإضافة": [
+        "بناء Flask API",
+        "اختبار JSON Endpoint",
+        "تصحيح Status Code",
+        "ربط API بواجهة",
+        "توثيق API",
+        "أخرى"
+    ],
+    "اختبار API": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "Django Basics": [
+        "استكشاف Django",
+        "إنشاء Project",
+        "إنشاء App",
+        "تشغيل الخادم",
+        "تحليل بنية Django",
+        "أخرى"
+    ],
+    "مفهوم Django": [
+        "استكشاف Django",
+        "إنشاء Project",
+        "إنشاء App",
+        "تشغيل الخادم",
+        "تحليل بنية Django",
+        "أخرى"
+    ],
+    "Project وApp": [
+        "استكشاف Django",
+        "إنشاء Project",
+        "إنشاء App",
+        "تشغيل الخادم",
+        "تحليل بنية Django",
+        "أخرى"
+    ],
+    "إعداد مشروع Django": [
+        "استكشاف Django",
+        "إنشاء Project",
+        "إنشاء App",
+        "تشغيل الخادم",
+        "تحليل بنية Django",
+        "أخرى"
+    ],
+    "تشغيل الخادم": [
+        "استكشاف Django",
+        "إنشاء Project",
+        "إنشاء App",
+        "تشغيل الخادم",
+        "تحليل بنية Django",
+        "أخرى"
+    ],
+    "بنية Django": [
+        "استكشاف Django",
+        "إنشاء Project",
+        "إنشاء App",
+        "تشغيل الخادم",
+        "تحليل بنية Django",
+        "أخرى"
+    ],
+    "متى نستخدم Django": [
+        "استكشاف Django",
+        "إنشاء Project",
+        "إنشاء App",
+        "تشغيل الخادم",
+        "تحليل بنية Django",
+        "أخرى"
+    ],
+    "Django Models": [
+        "بناء Django Model",
+        "إضافة Fields",
+        "تنفيذ Migration",
+        "تحليل Model",
+        "تصحيح خطأ Migration",
+        "أخرى"
+    ],
+    "مفهوم Model": [
+        "بناء Django Model",
+        "إضافة Fields",
+        "تنفيذ Migration",
+        "تحليل Model",
+        "تصحيح خطأ Migration",
+        "أخرى"
+    ],
+    "تمثيل جدول Database": [
+        "بناء Django Model",
+        "إضافة Fields",
+        "تنفيذ Migration",
+        "تحليل Model",
+        "تصحيح خطأ Migration",
+        "أخرى"
+    ],
+    "Fields": [
+        "بناء Django Model",
+        "إضافة Fields",
+        "تنفيذ Migration",
+        "تحليل Model",
+        "تصحيح خطأ Migration",
+        "أخرى"
+    ],
+    "Migrations": [
+        "بناء Django Model",
+        "إضافة Fields",
+        "تنفيذ Migration",
+        "تحليل Model",
+        "تصحيح خطأ Migration",
+        "أخرى"
+    ],
+    "Admin Panel": [
+        "بناء Django Model",
+        "إضافة Fields",
+        "تنفيذ Migration",
+        "تحليل Model",
+        "تصحيح خطأ Migration",
+        "أخرى"
+    ],
+    "العلاقة بين Model وDatabase": [
+        "بناء Django Model",
+        "إضافة Fields",
+        "تنفيذ Migration",
+        "تحليل Model",
+        "تصحيح خطأ Migration",
+        "أخرى"
+    ],
+    "Django Views": [
+        "بناء Django View",
+        "تحليل Request",
+        "تمرير بيانات",
+        "تصحيح View",
+        "اختبار صفحة",
+        "أخرى"
+    ],
+    "مفهوم View": [
+        "بناء Django View",
+        "تحليل Request",
+        "تمرير بيانات",
+        "تصحيح View",
+        "اختبار صفحة",
+        "أخرى"
+    ],
+    "Function-based View": [
+        "بناء Django View",
+        "تحليل Request",
+        "تمرير بيانات",
+        "تصحيح View",
+        "اختبار صفحة",
+        "أخرى"
+    ],
+    "استقبال Request": [
+        "بناء Express Server",
+        "إنشاء Route",
+        "إرجاع JSON",
+        "اختبار Request",
+        "تصحيح خطأ Express",
+        "أخرى"
+    ],
+    "إرجاع Response": [
+        "بناء Django View",
+        "تحليل Request",
+        "تمرير بيانات",
+        "تصحيح View",
+        "اختبار صفحة",
+        "أخرى"
+    ],
+    "تمرير بيانات إلى Template": [
+        "بناء Django View",
+        "تحليل Request",
+        "تمرير بيانات",
+        "تصحيح View",
+        "اختبار صفحة",
+        "أخرى"
+    ],
+    "تنظيم Views": [
+        "بناء Django View",
+        "تحليل Request",
+        "تمرير بيانات",
+        "تصحيح View",
+        "اختبار صفحة",
+        "أخرى"
+    ],
+    "Django Templates": [
+        "بناء Django Template",
+        "عرض قائمة بيانات",
+        "استخدام شرط",
+        "تصحيح Template",
+        "تحليل عرض البيانات",
+        "أخرى"
+    ],
+    "مفهوم Django Template": [
+        "بناء Django Template",
+        "عرض قائمة بيانات",
+        "استخدام شرط",
+        "تصحيح Template",
+        "تحليل عرض البيانات",
+        "أخرى"
+    ],
+    "Template Tags": [
+        "بناء Django Template",
+        "عرض قائمة بيانات",
+        "استخدام شرط",
+        "تصحيح Template",
+        "تحليل عرض البيانات",
+        "أخرى"
+    ],
+    "عرض بيانات": [
+        "بناء Django Template",
+        "عرض قائمة بيانات",
+        "استخدام شرط",
+        "تصحيح Template",
+        "تحليل عرض البيانات",
+        "أخرى"
+    ],
+    "الحلقات": [
+        "بناء Django Template",
+        "عرض قائمة بيانات",
+        "استخدام شرط",
+        "تصحيح Template",
+        "تحليل عرض البيانات",
+        "أخرى"
+    ],
+    "الشروط": [
+        "بناء Django Template",
+        "عرض قائمة بيانات",
+        "استخدام شرط",
+        "تصحيح Template",
+        "تحليل عرض البيانات",
+        "أخرى"
+    ],
+    "ربط Template بـ View": [
+        "بناء Django Template",
+        "عرض قائمة بيانات",
+        "استخدام شرط",
+        "تصحيح Template",
+        "تحليل عرض البيانات",
+        "أخرى"
+    ],
+    "Django Forms": [
+        "بناء Django Form",
+        "استخدام ModelForm",
+        "التحقق من إدخال",
+        "حفظ بيانات",
+        "اختبار Form",
+        "أخرى"
+    ],
+    "مفهوم Django Form": [
+        "بناء Django Form",
+        "استخدام ModelForm",
+        "التحقق من إدخال",
+        "حفظ بيانات",
+        "اختبار Form",
+        "أخرى"
+    ],
+    "ModelForm": [
+        "بناء Django Form",
+        "استخدام ModelForm",
+        "التحقق من إدخال",
+        "حفظ بيانات",
+        "اختبار Form",
+        "أخرى"
+    ],
+    "التحقق من البيانات": [
+        "بناء Django Form",
+        "استخدام ModelForm",
+        "التحقق من إدخال",
+        "حفظ بيانات",
+        "اختبار Form",
+        "أخرى"
+    ],
+    "عرض أخطاء الإدخال": [
+        "بناء Django Form",
+        "استخدام ModelForm",
+        "التحقق من إدخال",
+        "حفظ بيانات",
+        "اختبار Form",
+        "أخرى"
+    ],
+    "حفظ البيانات": [
+        "بناء Django Form",
+        "استخدام ModelForm",
+        "التحقق من إدخال",
+        "حفظ بيانات",
+        "اختبار Form",
+        "أخرى"
+    ],
+    "أمان Forms": [
+        "بناء Django Form",
+        "استخدام ModelForm",
+        "التحقق من إدخال",
+        "حفظ بيانات",
+        "اختبار Form",
+        "أخرى"
+    ],
+    "Node.js Basics": [
+        "تشغيل Node.js",
+        "إنشاء مشروع npm",
+        "تحليل package.json",
+        "بناء خادم بسيط",
+        "تصحيح خطأ Node",
+        "أخرى"
+    ],
+    "مفهوم Node.js": [
+        "تشغيل Node.js",
+        "إنشاء مشروع npm",
+        "تحليل package.json",
+        "بناء خادم بسيط",
+        "تصحيح خطأ Node",
+        "أخرى"
+    ],
+    "تشغيل JavaScript خارج المتصفح": [
+        "تشغيل Node.js",
+        "إنشاء مشروع npm",
+        "تحليل package.json",
+        "بناء خادم بسيط",
+        "تصحيح خطأ Node",
+        "أخرى"
+    ],
+    "npm": [
+        "تشغيل Node.js",
+        "إنشاء مشروع npm",
+        "تحليل package.json",
+        "بناء خادم بسيط",
+        "تصحيح خطأ Node",
+        "أخرى"
+    ],
+    "package.json": [
+        "تشغيل Node.js",
+        "إنشاء مشروع npm",
+        "تحليل package.json",
+        "بناء خادم بسيط",
+        "تصحيح خطأ Node",
+        "أخرى"
+    ],
+    "إنشاء خادم بسيط": [
+        "تشغيل Node.js",
+        "إنشاء مشروع npm",
+        "تحليل package.json",
+        "بناء خادم بسيط",
+        "تصحيح خطأ Node",
+        "أخرى"
+    ],
+    "استخدام Node في Backend": [
+        "تشغيل Node.js",
+        "إنشاء مشروع npm",
+        "تحليل package.json",
+        "بناء خادم بسيط",
+        "تصحيح خطأ Node",
+        "أخرى"
+    ],
+    "Express.js Basics": [
+        "بناء Express Server",
+        "إنشاء Route",
+        "إرجاع JSON",
+        "اختبار Request",
+        "تصحيح خطأ Express",
+        "أخرى"
+    ],
+    "مفهوم Express.js": [
+        "بناء Express Server",
+        "إنشاء Route",
+        "إرجاع JSON",
+        "اختبار Request",
+        "تصحيح خطأ Express",
+        "أخرى"
+    ],
+    "إنشاء Server": [
+        "بناء Express Server",
+        "إنشاء Route",
+        "إرجاع JSON",
+        "اختبار Request",
+        "تصحيح خطأ Express",
+        "أخرى"
+    ],
+    "Routes": [
+        "بناء Express Server",
+        "إنشاء Route",
+        "إرجاع JSON",
+        "اختبار Request",
+        "تصحيح خطأ Express",
+        "أخرى"
+    ],
+    "Middleware": [
+        "تحليل Middleware",
+        "بناء Middleware بسيط",
+        "تصحيح ترتيب Middleware",
+        "استخدام Middleware للتحقق",
+        "اختبار سلوك Middleware",
+        "أخرى"
+    ],
+    "مفهوم Middleware": [
+        "تحليل Middleware",
+        "بناء Middleware بسيط",
+        "تصحيح ترتيب Middleware",
+        "استخدام Middleware للتحقق",
+        "اختبار سلوك Middleware",
+        "أخرى"
+    ],
+    "تنفيذ كود قبل Route": [
+        "تحليل Middleware",
+        "بناء Middleware بسيط",
+        "تصحيح ترتيب Middleware",
+        "استخدام Middleware للتحقق",
+        "اختبار سلوك Middleware",
+        "أخرى"
+    ],
+    "التحقق من Request": [
+        "تحليل Middleware",
+        "بناء Middleware بسيط",
+        "تصحيح ترتيب Middleware",
+        "استخدام Middleware للتحقق",
+        "اختبار سلوك Middleware",
+        "أخرى"
+    ],
+    "تسجيل الطلبات": [
+        "تحليل Middleware",
+        "بناء Middleware بسيط",
+        "تصحيح ترتيب Middleware",
+        "استخدام Middleware للتحقق",
+        "اختبار سلوك Middleware",
+        "أخرى"
+    ],
+    "معالجة الأخطاء": [
+        "تحليل Middleware",
+        "بناء Middleware بسيط",
+        "تصحيح ترتيب Middleware",
+        "استخدام Middleware للتحقق",
+        "اختبار سلوك Middleware",
+        "أخرى"
+    ],
+    "ترتيب Middleware": [
+        "تحليل Middleware",
+        "بناء Middleware بسيط",
+        "تصحيح ترتيب Middleware",
+        "استخدام Middleware للتحقق",
+        "اختبار سلوك Middleware",
+        "أخرى"
+    ],
+    "Server-side Validation": [
+        "بناء Validation",
+        "تحليل بيانات خاطئة",
+        "كتابة رسالة خطأ",
+        "اختبار إدخال غير صحيح",
+        "تصحيح منطق تحقق",
+        "أخرى"
+    ],
+    "مفهوم Validation": [
+        "بناء Validation",
+        "تحليل بيانات خاطئة",
+        "كتابة رسالة خطأ",
+        "اختبار إدخال غير صحيح",
+        "تصحيح منطق تحقق",
+        "أخرى"
+    ],
+    "التحقق من الحقول": [
+        "بناء Validation",
+        "تحليل بيانات خاطئة",
+        "كتابة رسالة خطأ",
+        "اختبار إدخال غير صحيح",
+        "تصحيح منطق تحقق",
+        "أخرى"
+    ],
+    "منع البيانات الخاطئة": [
+        "بناء Validation",
+        "تحليل بيانات خاطئة",
+        "كتابة رسالة خطأ",
+        "اختبار إدخال غير صحيح",
+        "تصحيح منطق تحقق",
+        "أخرى"
+    ],
+    "التحقق في Backend": [
+        "بناء Validation",
+        "تحليل بيانات خاطئة",
+        "كتابة رسالة خطأ",
+        "اختبار إدخال غير صحيح",
+        "تصحيح منطق تحقق",
+        "أخرى"
+    ],
+    "الفرق بين Frontend وBackend Validation": [
+        "بناء Validation",
+        "تحليل بيانات خاطئة",
+        "كتابة رسالة خطأ",
+        "اختبار إدخال غير صحيح",
+        "تصحيح منطق تحقق",
+        "أخرى"
+    ],
+    "Authentication Basics": [
+        "تحليل Authentication",
+        "تصميم سير تسجيل دخول",
+        "بناء نموذج تسجيل دخول تعليمي",
+        "اختبار حالة دخول",
+        "مراجعة أخطاء المصادقة",
+        "أخرى"
+    ],
+    "مفهوم Authentication": [
+        "تحليل Authentication",
+        "تصميم سير تسجيل دخول",
+        "بناء نموذج تسجيل دخول تعليمي",
+        "اختبار حالة دخول",
+        "مراجعة أخطاء المصادقة",
+        "أخرى"
+    ],
+    "تسجيل الدخول": [
+        "تحليل Authentication",
+        "تصميم سير تسجيل دخول",
+        "بناء نموذج تسجيل دخول تعليمي",
+        "اختبار حالة دخول",
+        "مراجعة أخطاء المصادقة",
+        "أخرى"
+    ],
+    "إنشاء حساب": [
+        "تحليل Authentication",
+        "تصميم سير تسجيل دخول",
+        "بناء نموذج تسجيل دخول تعليمي",
+        "اختبار حالة دخول",
+        "مراجعة أخطاء المصادقة",
+        "أخرى"
+    ],
+    "التحقق من هوية المستخدم": [
+        "تحليل Authentication",
+        "تصميم سير تسجيل دخول",
+        "بناء نموذج تسجيل دخول تعليمي",
+        "اختبار حالة دخول",
+        "مراجعة أخطاء المصادقة",
+        "أخرى"
+    ],
+    "الجلسة Session": [
+        "تحليل Authentication",
+        "تصميم سير تسجيل دخول",
+        "بناء نموذج تسجيل دخول تعليمي",
+        "اختبار حالة دخول",
+        "مراجعة أخطاء المصادقة",
+        "أخرى"
+    ],
+    "Token كمفهوم": [
+        "تحليل Authentication",
+        "تصميم سير تسجيل دخول",
+        "بناء نموذج تسجيل دخول تعليمي",
+        "اختبار حالة دخول",
+        "مراجعة أخطاء المصادقة",
+        "أخرى"
+    ],
+    "أخطاء تسجيل الدخول": [
+        "تحليل Authentication",
+        "تصميم سير تسجيل دخول",
+        "بناء نموذج تسجيل دخول تعليمي",
+        "اختبار حالة دخول",
+        "مراجعة أخطاء المصادقة",
+        "أخرى"
+    ],
+    "Authorization Basics": [
+        "تحليل Authorization",
+        "تصميم أدوار بسيطة",
+        "فحص صلاحية",
+        "اختبار وصول صفحة",
+        "تصحيح خطأ صلاحيات",
+        "أخرى"
+    ],
+    "مفهوم Authorization": [
+        "تحليل Authorization",
+        "تصميم أدوار بسيطة",
+        "فحص صلاحية",
+        "اختبار وصول صفحة",
+        "تصحيح خطأ صلاحيات",
+        "أخرى"
+    ],
+    "الصلاحيات": [
+        "تحليل Authorization",
+        "تصميم أدوار بسيطة",
+        "فحص صلاحية",
+        "اختبار وصول صفحة",
+        "تصحيح خطأ صلاحيات",
+        "أخرى"
+    ],
+    "الأدوار Roles": [
+        "تحليل Authorization",
+        "تصميم أدوار بسيطة",
+        "فحص صلاحية",
+        "اختبار وصول صفحة",
+        "تصحيح خطأ صلاحيات",
+        "أخرى"
+    ],
+    "مستخدم عادي": [
+        "تحليل Authorization",
+        "تصميم أدوار بسيطة",
+        "فحص صلاحية",
+        "اختبار وصول صفحة",
+        "تصحيح خطأ صلاحيات",
+        "أخرى"
+    ],
+    "مدير": [
+        "تحليل Authorization",
+        "تصميم أدوار بسيطة",
+        "فحص صلاحية",
+        "اختبار وصول صفحة",
+        "تصحيح خطأ صلاحيات",
+        "أخرى"
+    ],
+    "منع الوصول غير المصرح": [
+        "تحليل Authorization",
+        "تصميم أدوار بسيطة",
+        "فحص صلاحية",
+        "اختبار وصول صفحة",
+        "تصحيح خطأ صلاحيات",
+        "أخرى"
+    ],
+    "Sessions and Cookies": [
+        "تحليل Session",
+        "تحليل Cookie",
+        "رسم سير جلسة مستخدم",
+        "اختبار تسجيل خروج",
+        "مراجعة أخطاء الجلسة",
+        "أخرى"
+    ],
+    "مفهوم Session": [
+        "تحليل Session",
+        "تحليل Cookie",
+        "رسم سير جلسة مستخدم",
+        "اختبار تسجيل خروج",
+        "مراجعة أخطاء الجلسة",
+        "أخرى"
+    ],
+    "مفهوم Cookie": [
+        "تحليل Session",
+        "تحليل Cookie",
+        "رسم سير جلسة مستخدم",
+        "اختبار تسجيل خروج",
+        "مراجعة أخطاء الجلسة",
+        "أخرى"
+    ],
+    "حفظ حالة المستخدم": [
+        "تحليل Session",
+        "تحليل Cookie",
+        "رسم سير جلسة مستخدم",
+        "اختبار تسجيل خروج",
+        "مراجعة أخطاء الجلسة",
+        "أخرى"
+    ],
+    "تسجيل الدخول المستمر": [
+        "تحليل Session",
+        "تحليل Cookie",
+        "رسم سير جلسة مستخدم",
+        "اختبار تسجيل خروج",
+        "مراجعة أخطاء الجلسة",
+        "أخرى"
+    ],
+    "حذف الجلسة": [
+        "تحليل Session",
+        "تحليل Cookie",
+        "رسم سير جلسة مستخدم",
+        "اختبار تسجيل خروج",
+        "مراجعة أخطاء الجلسة",
+        "أخرى"
+    ],
+    "مخاطر الاستخدام الخاطئ": [
+        "تحليل Session",
+        "تحليل Cookie",
+        "رسم سير جلسة مستخدم",
+        "اختبار تسجيل خروج",
+        "مراجعة أخطاء الجلسة",
+        "أخرى"
+    ],
+    "Password Handling Basics": [
+        "دراسة التعامل الآمن مع كلمة المرور",
+        "تحليل خطأ أمني شائع",
+        "كتابة قواعد حماية",
+        "مراجعة سيناريو تسجيل دخول",
+        "اختبار مفاهيمي",
+        "أخرى"
+    ],
+    "عدم حفظ كلمة المرور كنص صريح": [
+        "دراسة التعامل الآمن مع كلمة المرور",
+        "تحليل خطأ أمني شائع",
+        "كتابة قواعد حماية",
+        "مراجعة سيناريو تسجيل دخول",
+        "اختبار مفاهيمي",
+        "أخرى"
+    ],
+    "Hashing كمفهوم دفاعي": [
+        "دراسة التعامل الآمن مع كلمة المرور",
+        "تحليل خطأ أمني شائع",
+        "كتابة قواعد حماية",
+        "مراجعة سيناريو تسجيل دخول",
+        "اختبار مفاهيمي",
+        "أخرى"
+    ],
+    "Salt كمفهوم": [
+        "دراسة التعامل الآمن مع كلمة المرور",
+        "تحليل خطأ أمني شائع",
+        "كتابة قواعد حماية",
+        "مراجعة سيناريو تسجيل دخول",
+        "اختبار مفاهيمي",
+        "أخرى"
+    ],
+    "التحقق من كلمة المرور": [
+        "دراسة التعامل الآمن مع كلمة المرور",
+        "تحليل خطأ أمني شائع",
+        "كتابة قواعد حماية",
+        "مراجعة سيناريو تسجيل دخول",
+        "اختبار مفاهيمي",
+        "أخرى"
+    ],
+    "إعادة تعيين كلمة المرور كمفهوم": [
+        "دراسة التعامل الآمن مع كلمة المرور",
+        "تحليل خطأ أمني شائع",
+        "كتابة قواعد حماية",
+        "مراجعة سيناريو تسجيل دخول",
+        "اختبار مفاهيمي",
+        "أخرى"
+    ],
+    "قواعد السلامة الأساسية": [
+        "دراسة التعامل الآمن مع كلمة المرور",
+        "تحليل خطأ أمني شائع",
+        "كتابة قواعد حماية",
+        "مراجعة سيناريو تسجيل دخول",
+        "اختبار مفاهيمي",
+        "أخرى"
+    ],
+    "Databases Basics": [
+        "دراسة Database",
+        "تحليل جدول",
+        "تصميم جدول بسيط",
+        "تمييز صف وعمود",
+        "كتابة ملاحظات بنية",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Database": [
+        "دراسة Database",
+        "تحليل جدول",
+        "تصميم جدول بسيط",
+        "تمييز صف وعمود",
+        "كتابة ملاحظات بنية",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "جدول Table": [
+        "دراسة Database",
+        "تحليل جدول",
+        "تصميم جدول بسيط",
+        "تمييز صف وعمود",
+        "كتابة ملاحظات بنية",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "صف Row": [
+        "دراسة Database",
+        "تحليل جدول",
+        "تصميم جدول بسيط",
+        "تمييز صف وعمود",
+        "كتابة ملاحظات بنية",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "عمود Column": [
+        "دراسة Database",
+        "تحليل جدول",
+        "تصميم جدول بسيط",
+        "تمييز صف وعمود",
+        "كتابة ملاحظات بنية",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "سجل Record": [
+        "دراسة Database",
+        "تحليل جدول",
+        "تصميم جدول بسيط",
+        "تمييز صف وعمود",
+        "كتابة ملاحظات بنية",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "استخدام قاعدة البيانات في التطبيق": [
+        "دراسة Database",
+        "تحليل جدول",
+        "تصميم جدول بسيط",
+        "تمييز صف وعمود",
+        "كتابة ملاحظات بنية",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "SQL Basics": [
+        "كتابة Query",
+        "قراءة Query",
+        "تصحيح SQL",
+        "جلب بيانات",
+        "تعديل سجل",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم SQL": [
+        "كتابة Query",
+        "قراءة Query",
+        "تصحيح SQL",
+        "جلب بيانات",
+        "تعديل سجل",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "SELECT": [
+        "كتابة Query",
+        "قراءة Query",
+        "تصحيح SQL",
+        "جلب بيانات",
+        "تعديل سجل",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "INSERT": [
+        "كتابة Query",
+        "قراءة Query",
+        "تصحيح SQL",
+        "جلب بيانات",
+        "تعديل سجل",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "UPDATE": [
+        "كتابة Query",
+        "قراءة Query",
+        "تصحيح SQL",
+        "جلب بيانات",
+        "تعديل سجل",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "WHERE": [
+        "كتابة Query",
+        "قراءة Query",
+        "تصحيح SQL",
+        "جلب بيانات",
+        "تعديل سجل",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "ORDER BY": [
+        "كتابة Query",
+        "قراءة Query",
+        "تصحيح SQL",
+        "جلب بيانات",
+        "تعديل سجل",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "SQLite": [
+        "إنشاء SQLite Database",
+        "بناء جدول",
+        "إضافة سجل",
+        "استعلام بيانات",
+        "تحليل استخدام SQLite",
+        "أخرى"
+    ],
+    "مفهوم SQLite": [
+        "إنشاء SQLite Database",
+        "بناء جدول",
+        "إضافة سجل",
+        "استعلام بيانات",
+        "تحليل استخدام SQLite",
+        "أخرى"
+    ],
+    "قاعدة بيانات محلية": [
+        "إنشاء SQLite Database",
+        "بناء جدول",
+        "إضافة سجل",
+        "استعلام بيانات",
+        "تحليل استخدام SQLite",
+        "أخرى"
+    ],
+    "ملف قاعدة البيانات": [
+        "إنشاء SQLite Database",
+        "بناء جدول",
+        "إضافة سجل",
+        "استعلام بيانات",
+        "تحليل استخدام SQLite",
+        "أخرى"
+    ],
+    "إنشاء جدول": [
+        "إنشاء SQLite Database",
+        "بناء جدول",
+        "إضافة سجل",
+        "استعلام بيانات",
+        "تحليل استخدام SQLite",
+        "أخرى"
+    ],
+    "إضافة بيانات": [
+        "إنشاء SQLite Database",
+        "بناء جدول",
+        "إضافة سجل",
+        "استعلام بيانات",
+        "تحليل استخدام SQLite",
+        "أخرى"
+    ],
+    "استخدامها في التطبيقات الصغيرة": [
+        "إنشاء SQLite Database",
+        "بناء جدول",
+        "إضافة سجل",
+        "استعلام بيانات",
+        "تحليل استخدام SQLite",
+        "أخرى"
+    ],
+    "PostgreSQL Basics": [
+        "دراسة PostgreSQL",
+        "تصميم جدول",
+        "كتابة Query أساسي",
+        "تحليل متى نستخدمها",
+        "مقارنة مع SQLite",
+        "أخرى"
+    ],
+    "مفهوم PostgreSQL": [
+        "دراسة PostgreSQL",
+        "تصميم جدول",
+        "كتابة Query أساسي",
+        "تحليل متى نستخدمها",
+        "مقارنة مع SQLite",
+        "أخرى"
+    ],
+    "قاعدة بيانات قوية": [
+        "دراسة PostgreSQL",
+        "تصميم جدول",
+        "كتابة Query أساسي",
+        "تحليل متى نستخدمها",
+        "مقارنة مع SQLite",
+        "أخرى"
+    ],
+    "الجداول": [
+        "دراسة MySQL",
+        "كتابة Query أساسي",
+        "تحليل جدول",
+        "مقارنة MySQL وPostgreSQL",
+        "حل تمرين قاعدة بيانات",
+        "أخرى"
+    ],
+    "الأنواع": [
+        "دراسة PostgreSQL",
+        "تصميم جدول",
+        "كتابة Query أساسي",
+        "تحليل متى نستخدمها",
+        "مقارنة مع SQLite",
+        "أخرى"
+    ],
+    "العلاقات": [
+        "دراسة MySQL",
+        "كتابة Query أساسي",
+        "تحليل جدول",
+        "مقارنة MySQL وPostgreSQL",
+        "حل تمرين قاعدة بيانات",
+        "أخرى"
+    ],
+    "استخدامها في التطبيقات الحقيقية": [
+        "دراسة PostgreSQL",
+        "تصميم جدول",
+        "كتابة Query أساسي",
+        "تحليل متى نستخدمها",
+        "مقارنة مع SQLite",
+        "أخرى"
+    ],
+    "MySQL Basics": [
+        "دراسة MySQL",
+        "كتابة Query أساسي",
+        "تحليل جدول",
+        "مقارنة MySQL وPostgreSQL",
+        "حل تمرين قاعدة بيانات",
+        "أخرى"
+    ],
+    "مفهوم MySQL": [
+        "دراسة MySQL",
+        "كتابة Query أساسي",
+        "تحليل جدول",
+        "مقارنة MySQL وPostgreSQL",
+        "حل تمرين قاعدة بيانات",
+        "أخرى"
+    ],
+    "استخدام MySQL في الويب": [
+        "دراسة MySQL",
+        "كتابة Query أساسي",
+        "تحليل جدول",
+        "مقارنة MySQL وPostgreSQL",
+        "حل تمرين قاعدة بيانات",
+        "أخرى"
+    ],
+    "الاستعلامات": [
+        "دراسة MySQL",
+        "كتابة Query أساسي",
+        "تحليل جدول",
+        "مقارنة MySQL وPostgreSQL",
+        "حل تمرين قاعدة بيانات",
+        "أخرى"
+    ],
+    "إدارة بيانات تطبيق": [
+        "دراسة MySQL",
+        "كتابة Query أساسي",
+        "تحليل جدول",
+        "مقارنة MySQL وPostgreSQL",
+        "حل تمرين قاعدة بيانات",
+        "أخرى"
+    ],
+    "Database Tables": [
+        "تصميم Table",
+        "اختيار Columns",
+        "تحديد أنواع بيانات",
+        "إضافة Constraints",
+        "مراجعة تصميم جدول",
+        "أخرى"
+    ],
+    "تصميم جدول": [
+        "تصميم Table",
+        "اختيار Columns",
+        "تحديد أنواع بيانات",
+        "إضافة Constraints",
+        "مراجعة تصميم جدول",
+        "أخرى"
+    ],
+    "اسم الجدول": [
+        "تصميم Table",
+        "اختيار Columns",
+        "تحديد أنواع بيانات",
+        "إضافة Constraints",
+        "مراجعة تصميم جدول",
+        "أخرى"
+    ],
+    "الأعمدة": [
+        "تصميم Table",
+        "اختيار Columns",
+        "تحديد أنواع بيانات",
+        "إضافة Constraints",
+        "مراجعة تصميم جدول",
+        "أخرى"
+    ],
+    "أنواع الأعمدة": [
+        "تصميم Table",
+        "اختيار Columns",
+        "تحديد أنواع بيانات",
+        "إضافة Constraints",
+        "مراجعة تصميم جدول",
+        "أخرى"
+    ],
+    "القيود Constraints": [
+        "تصميم Table",
+        "اختيار Columns",
+        "تحديد أنواع بيانات",
+        "إضافة Constraints",
+        "مراجعة تصميم جدول",
+        "أخرى"
+    ],
+    "تنظيم البيانات": [
+        "تصميم Table",
+        "اختيار Columns",
+        "تحديد أنواع بيانات",
+        "إضافة Constraints",
+        "مراجعة تصميم جدول",
+        "أخرى"
+    ],
+    "Primary Key and Foreign Key": [
+        "تحديد Primary Key",
+        "تحديد Foreign Key",
+        "تحليل علاقة جداول",
+        "تصحيح تصميم خاطئ",
+        "حل تمارين",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Primary Key": [
+        "تحديد Primary Key",
+        "تحديد Foreign Key",
+        "تحليل علاقة جداول",
+        "تصحيح تصميم خاطئ",
+        "حل تمارين",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Foreign Key": [
+        "تحديد Primary Key",
+        "تحديد Foreign Key",
+        "تحليل علاقة جداول",
+        "تصحيح تصميم خاطئ",
+        "حل تمارين",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تمييز السجلات": [
+        "تحديد Primary Key",
+        "تحديد Foreign Key",
+        "تحليل علاقة جداول",
+        "تصحيح تصميم خاطئ",
+        "حل تمارين",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "ربط الجداول": [
+        "تحديد Primary Key",
+        "تحديد Foreign Key",
+        "تحليل علاقة جداول",
+        "تصحيح تصميم خاطئ",
+        "حل تمارين",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "سلامة العلاقات": [
+        "تحديد Primary Key",
+        "تحديد Foreign Key",
+        "تحليل علاقة جداول",
+        "تصحيح تصميم خاطئ",
+        "حل تمارين",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "أخطاء المفاتيح": [
+        "تحديد Primary Key",
+        "تحديد Foreign Key",
+        "تحليل علاقة جداول",
+        "تصحيح تصميم خاطئ",
+        "حل تمارين",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Database Relationships": [
+        "تحليل علاقة Database",
+        "رسم علاقة جداول",
+        "تصميم جدول وسيط",
+        "تمييز نوع العلاقة",
+        "تصحيح خطأ تصميم",
+        "أخرى"
+    ],
+    "One-to-One": [
+        "تحليل علاقة Database",
+        "رسم علاقة جداول",
+        "تصميم جدول وسيط",
+        "تمييز نوع العلاقة",
+        "تصحيح خطأ تصميم",
+        "أخرى"
+    ],
+    "One-to-Many": [
+        "تحليل علاقة Database",
+        "رسم علاقة جداول",
+        "تصميم جدول وسيط",
+        "تمييز نوع العلاقة",
+        "تصحيح خطأ تصميم",
+        "أخرى"
+    ],
+    "Many-to-Many": [
+        "تحليل علاقة Database",
+        "رسم علاقة جداول",
+        "تصميم جدول وسيط",
+        "تمييز نوع العلاقة",
+        "تصحيح خطأ تصميم",
+        "أخرى"
+    ],
+    "جدول وسيط": [
+        "تحليل علاقة Database",
+        "رسم علاقة جداول",
+        "تصميم جدول وسيط",
+        "تمييز نوع العلاقة",
+        "تصحيح خطأ تصميم",
+        "أخرى"
+    ],
+    "اختيار العلاقة المناسبة": [
+        "تحليل علاقة Database",
+        "رسم علاقة جداول",
+        "تصميم جدول وسيط",
+        "تمييز نوع العلاقة",
+        "تصحيح خطأ تصميم",
+        "أخرى"
+    ],
+    "أخطاء العلاقات": [
+        "تحليل علاقة Database",
+        "رسم علاقة جداول",
+        "تصميم جدول وسيط",
+        "تمييز نوع العلاقة",
+        "تصحيح خطأ تصميم",
+        "أخرى"
+    ],
+    "CRUD Operations": [
+        "بناء CRUD بسيط",
+        "اختبار إضافة بيانات",
+        "اختبار قراءة بيانات",
+        "اختبار تعديل وحذف",
+        "تحليل سير CRUD",
+        "أخرى"
+    ],
+    "Create": [
+        "استخدام Django ORM",
+        "كتابة QuerySet",
+        "إنشاء سجل",
+        "فلترة بيانات",
+        "اختبار CRUD",
+        "أخرى"
+    ],
+    "Read": [
+        "بناء CRUD بسيط",
+        "اختبار إضافة بيانات",
+        "اختبار قراءة بيانات",
+        "اختبار تعديل وحذف",
+        "تحليل سير CRUD",
+        "أخرى"
+    ],
+    "Update": [
+        "استخدام Django ORM",
+        "كتابة QuerySet",
+        "إنشاء سجل",
+        "فلترة بيانات",
+        "اختبار CRUD",
+        "أخرى"
+    ],
+    "Delete": [
+        "استخدام Django ORM",
+        "كتابة QuerySet",
+        "إنشاء سجل",
+        "فلترة بيانات",
+        "اختبار CRUD",
+        "أخرى"
+    ],
+    "CRUD في الواجهة": [
+        "بناء CRUD بسيط",
+        "اختبار إضافة بيانات",
+        "اختبار قراءة بيانات",
+        "اختبار تعديل وحذف",
+        "تحليل سير CRUD",
+        "أخرى"
+    ],
+    "CRUD في Backend": [
+        "بناء CRUD بسيط",
+        "اختبار إضافة بيانات",
+        "اختبار قراءة بيانات",
+        "اختبار تعديل وحذف",
+        "تحليل سير CRUD",
+        "أخرى"
+    ],
+    "CRUD في Database": [
+        "بناء CRUD بسيط",
+        "اختبار إضافة بيانات",
+        "اختبار قراءة بيانات",
+        "اختبار تعديل وحذف",
+        "تحليل سير CRUD",
+        "أخرى"
+    ],
+    "Joins Basics": [
+        "كتابة Join بسيط",
+        "تحليل نتيجة Join",
+        "تصحيح علاقة جداول",
+        "جلب بيانات مترابطة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Join": [
+        "كتابة Join بسيط",
+        "تحليل نتيجة Join",
+        "تصحيح علاقة جداول",
+        "جلب بيانات مترابطة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "INNER JOIN": [
+        "كتابة Join بسيط",
+        "تحليل نتيجة Join",
+        "تصحيح علاقة جداول",
+        "جلب بيانات مترابطة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "LEFT JOIN كمفهوم": [
+        "كتابة Join بسيط",
+        "تحليل نتيجة Join",
+        "تصحيح علاقة جداول",
+        "جلب بيانات مترابطة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "ربط جدولين": [
+        "كتابة Join بسيط",
+        "تحليل نتيجة Join",
+        "تصحيح علاقة جداول",
+        "جلب بيانات مترابطة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "جلب بيانات مترابطة": [
+        "كتابة Join بسيط",
+        "تحليل نتيجة Join",
+        "تصحيح علاقة جداول",
+        "جلب بيانات مترابطة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "أخطاء Joins": [
+        "كتابة Join بسيط",
+        "تحليل نتيجة Join",
+        "تصحيح علاقة جداول",
+        "جلب بيانات مترابطة",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Database Design Basics": [
+        "تصميم Database",
+        "تحليل متطلبات بيانات",
+        "رسم ERD بسيط",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "فهم متطلبات البيانات": [
+        "تصميم Database",
+        "تحليل متطلبات بيانات",
+        "رسم ERD بسيط",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "تحديد الجداول": [
+        "تصميم Database",
+        "تحليل متطلبات بيانات",
+        "رسم ERD بسيط",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "تحديد الأعمدة": [
+        "تصميم Database",
+        "تحليل متطلبات بيانات",
+        "رسم ERD بسيط",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "تحديد العلاقات": [
+        "تصميم Database",
+        "تحليل متطلبات بيانات",
+        "رسم ERD بسيط",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "تجنب التكرار": [
+        "تصميم Database",
+        "تحليل متطلبات بيانات",
+        "رسم ERD بسيط",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "قابلية التوسع": [
+        "تصميم Database",
+        "تحليل متطلبات بيانات",
+        "رسم ERD بسيط",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "ORM Basics": [
+        "دراسة ORM",
+        "تحليل Model",
+        "كتابة Query عبر ORM",
+        "مقارنة SQL وORM",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "مفهوم ORM": [
+        "دراسة ORM",
+        "تحليل Model",
+        "كتابة Query عبر ORM",
+        "مقارنة SQL وORM",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "تحويل الجداول إلى Objects": [
+        "دراسة ORM",
+        "تحليل Model",
+        "كتابة Query عبر ORM",
+        "مقارنة SQL وORM",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "التعامل مع Database بالكود": [
+        "دراسة ORM",
+        "تحليل Model",
+        "كتابة Query عبر ORM",
+        "مقارنة SQL وORM",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Models": [
+        "استخدام Django ORM",
+        "كتابة QuerySet",
+        "إنشاء سجل",
+        "فلترة بيانات",
+        "اختبار CRUD",
+        "أخرى"
+    ],
+    "Queries عبر ORM": [
+        "دراسة ORM",
+        "تحليل Model",
+        "كتابة Query عبر ORM",
+        "مقارنة SQL وORM",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "مزايا وقيود ORM": [
+        "دراسة ORM",
+        "تحليل Model",
+        "كتابة Query عبر ORM",
+        "مقارنة SQL وORM",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "SQLAlchemy Basics": [
+        "بناء Model بـ SQLAlchemy",
+        "إضافة سجل",
+        "تنفيذ Query",
+        "تحليل Session",
+        "تصحيح خطأ Relationship",
+        "أخرى"
+    ],
+    "مفهوم SQLAlchemy": [
+        "بناء Model بـ SQLAlchemy",
+        "إضافة سجل",
+        "تنفيذ Query",
+        "تحليل Session",
+        "تصحيح خطأ Relationship",
+        "أخرى"
+    ],
+    "Session": [
+        "بناء Model بـ SQLAlchemy",
+        "إضافة سجل",
+        "تنفيذ Query",
+        "تحليل Session",
+        "تصحيح خطأ Relationship",
+        "أخرى"
+    ],
+    "Query": [
+        "بناء Model بـ SQLAlchemy",
+        "إضافة سجل",
+        "تنفيذ Query",
+        "تحليل Session",
+        "تصحيح خطأ Relationship",
+        "أخرى"
+    ],
+    "Add and Commit": [
+        "بناء Model بـ SQLAlchemy",
+        "إضافة سجل",
+        "تنفيذ Query",
+        "تحليل Session",
+        "تصحيح خطأ Relationship",
+        "أخرى"
+    ],
+    "Relationships": [
+        "بناء Model بـ SQLAlchemy",
+        "إضافة سجل",
+        "تنفيذ Query",
+        "تحليل Session",
+        "تصحيح خطأ Relationship",
+        "أخرى"
+    ],
+    "Django ORM Basics": [
+        "استخدام Django ORM",
+        "كتابة QuerySet",
+        "إنشاء سجل",
+        "فلترة بيانات",
+        "اختبار CRUD",
+        "أخرى"
+    ],
+    "مفهوم Django ORM": [
+        "استخدام Django ORM",
+        "كتابة QuerySet",
+        "إنشاء سجل",
+        "فلترة بيانات",
+        "اختبار CRUD",
+        "أخرى"
+    ],
+    "QuerySet": [
+        "استخدام Django ORM",
+        "كتابة QuerySet",
+        "إنشاء سجل",
+        "فلترة بيانات",
+        "اختبار CRUD",
+        "أخرى"
+    ],
+    "Filter": [
+        "استخدام Django ORM",
+        "كتابة QuerySet",
+        "إنشاء سجل",
+        "فلترة بيانات",
+        "اختبار CRUD",
+        "أخرى"
+    ],
+    "API and Database Integration": [
+        "ربط API بقاعدة بيانات",
+        "بناء Endpoint يستخدم Database",
+        "اختبار CRUD عبر API",
+        "تصحيح خطأ اتصال",
+        "توثيق سير البيانات",
+        "أخرى"
+    ],
+    "ربط API بقاعدة بيانات": [
+        "ربط API بقاعدة بيانات",
+        "بناء Endpoint يستخدم Database",
+        "اختبار CRUD عبر API",
+        "تصحيح خطأ اتصال",
+        "توثيق سير البيانات",
+        "أخرى"
+    ],
+    "قراءة بيانات من Database": [
+        "ربط API بقاعدة بيانات",
+        "بناء Endpoint يستخدم Database",
+        "اختبار CRUD عبر API",
+        "تصحيح خطأ اتصال",
+        "توثيق سير البيانات",
+        "أخرى"
+    ],
+    "إضافة بيانات عبر API": [
+        "ربط API بقاعدة بيانات",
+        "بناء Endpoint يستخدم Database",
+        "اختبار CRUD عبر API",
+        "تصحيح خطأ اتصال",
+        "توثيق سير البيانات",
+        "أخرى"
+    ],
+    "تعديل بيانات عبر API": [
+        "ربط API بقاعدة بيانات",
+        "بناء Endpoint يستخدم Database",
+        "اختبار CRUD عبر API",
+        "تصحيح خطأ اتصال",
+        "توثيق سير البيانات",
+        "أخرى"
+    ],
+    "حذف بيانات عبر API": [
+        "ربط API بقاعدة بيانات",
+        "بناء Endpoint يستخدم Database",
+        "اختبار CRUD عبر API",
+        "تصحيح خطأ اتصال",
+        "توثيق سير البيانات",
+        "أخرى"
+    ],
+    "معالجة أخطاء Database": [
+        "ربط API بقاعدة بيانات",
+        "بناء Endpoint يستخدم Database",
+        "اختبار CRUD عبر API",
+        "تصحيح خطأ اتصال",
+        "توثيق سير البيانات",
+        "أخرى"
+    ],
+    "Git Basics": [
+        "إنشاء Repository",
+        "تنفيذ Commit",
+        "تحليل git status",
+        "تتبع تغييرات",
+        "تصحيح خطأ Git",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Git": [
+        "إنشاء Repository",
+        "تنفيذ Commit",
+        "تحليل git status",
+        "تتبع تغييرات",
+        "تصحيح خطأ Git",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تتبع التغييرات": [
+        "إنشاء Repository",
+        "تنفيذ Commit",
+        "تحليل git status",
+        "تتبع تغييرات",
+        "تصحيح خطأ Git",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Repository": [
+        "إنشاء Repository",
+        "تنفيذ Commit",
+        "تحليل git status",
+        "تتبع تغييرات",
+        "تصحيح خطأ Git",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "git init": [
+        "إنشاء Repository",
+        "تنفيذ Commit",
+        "تحليل git status",
+        "تتبع تغييرات",
+        "تصحيح خطأ Git",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "git status": [
+        "إنشاء Repository",
+        "تنفيذ Commit",
+        "تحليل git status",
+        "تتبع تغييرات",
+        "تصحيح خطأ Git",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "git add": [
+        "إنشاء Repository",
+        "تنفيذ Commit",
+        "تحليل git status",
+        "تتبع تغييرات",
+        "تصحيح خطأ Git",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "git commit": [
+        "إنشاء Repository",
+        "تنفيذ Commit",
+        "تحليل git status",
+        "تتبع تغييرات",
+        "تصحيح خطأ Git",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "GitHub Basics": [
+        "رفع مشروع إلى GitHub",
+        "ربط Remote",
+        "تنفيذ Push وPull",
+        "كتابة README",
+        "مراجعة صفحة مشروع",
+        "أخرى"
+    ],
+    "مفهوم GitHub": [
+        "رفع مشروع إلى GitHub",
+        "ربط Remote",
+        "تنفيذ Push وPull",
+        "كتابة README",
+        "مراجعة صفحة مشروع",
+        "أخرى"
+    ],
+    "رفع مشروع": [
+        "رفع مشروع إلى GitHub",
+        "ربط Remote",
+        "تنفيذ Push وPull",
+        "كتابة README",
+        "مراجعة صفحة مشروع",
+        "أخرى"
+    ],
+    "Remote Repository": [
+        "رفع مشروع إلى GitHub",
+        "ربط Remote",
+        "تنفيذ Push وPull",
+        "كتابة README",
+        "مراجعة صفحة مشروع",
+        "أخرى"
+    ],
+    "git push": [
+        "رفع مشروع إلى GitHub",
+        "ربط Remote",
+        "تنفيذ Push وPull",
+        "كتابة README",
+        "مراجعة صفحة مشروع",
+        "أخرى"
+    ],
+    "git pull": [
+        "رفع مشروع إلى GitHub",
+        "ربط Remote",
+        "تنفيذ Push وPull",
+        "كتابة README",
+        "مراجعة صفحة مشروع",
+        "أخرى"
+    ],
+    "README": [
+        "رفع مشروع إلى GitHub",
+        "ربط Remote",
+        "تنفيذ Push وPull",
+        "كتابة README",
+        "مراجعة صفحة مشروع",
+        "أخرى"
+    ],
+    "مشاركة المشروع": [
+        "رفع مشروع إلى GitHub",
+        "ربط Remote",
+        "تنفيذ Push وPull",
+        "كتابة README",
+        "مراجعة صفحة مشروع",
+        "أخرى"
+    ],
+    "Branches": [
+        "إنشاء Branch",
+        "تطوير ميزة على Branch",
+        "تحليل الفرق بين Branches",
+        "دمج Branch",
+        "تصحيح خطأ فرع",
+        "أخرى"
+    ],
+    "مفهوم Branch": [
+        "إنشاء Branch",
+        "تطوير ميزة على Branch",
+        "تحليل الفرق بين Branches",
+        "دمج Branch",
+        "تصحيح خطأ فرع",
+        "أخرى"
+    ],
+    "إنشاء Branch": [
+        "إنشاء Branch",
+        "تطوير ميزة على Branch",
+        "تحليل الفرق بين Branches",
+        "دمج Branch",
+        "تصحيح خطأ فرع",
+        "أخرى"
+    ],
+    "التبديل بين Branches": [
+        "إنشاء Branch",
+        "تطوير ميزة على Branch",
+        "تحليل الفرق بين Branches",
+        "دمج Branch",
+        "تصحيح خطأ فرع",
+        "أخرى"
+    ],
+    "تطوير ميزة منفصلة": [
+        "إنشاء Branch",
+        "تطوير ميزة على Branch",
+        "تحليل الفرق بين Branches",
+        "دمج Branch",
+        "تصحيح خطأ فرع",
+        "أخرى"
+    ],
+    "دمج Branch": [
+        "إنشاء Branch",
+        "تطوير ميزة على Branch",
+        "تحليل الفرق بين Branches",
+        "دمج Branch",
+        "تصحيح خطأ فرع",
+        "أخرى"
+    ],
+    "أخطاء Branches": [
+        "إنشاء Branch",
+        "تطوير ميزة على Branch",
+        "تحليل الفرق بين Branches",
+        "دمج Branch",
+        "تصحيح خطأ فرع",
+        "أخرى"
+    ],
+    "Commits": [
+        "كتابة Commit جيد",
+        "مراجعة تغييرات",
+        "تحسين رسالة Commit",
+        "تقسيم Commit كبير",
+        "تحليل سجل Commits",
+        "أخرى"
+    ],
+    "مفهوم Commit": [
+        "كتابة Commit جيد",
+        "مراجعة تغييرات",
+        "تحسين رسالة Commit",
+        "تقسيم Commit كبير",
+        "تحليل سجل Commits",
+        "أخرى"
+    ],
+    "رسالة Commit واضحة": [
+        "كتابة Commit جيد",
+        "مراجعة تغييرات",
+        "تحسين رسالة Commit",
+        "تقسيم Commit كبير",
+        "تحليل سجل Commits",
+        "أخرى"
+    ],
+    "Commit صغير ومنظم": [
+        "كتابة Commit جيد",
+        "مراجعة تغييرات",
+        "تحسين رسالة Commit",
+        "تقسيم Commit كبير",
+        "تحليل سجل Commits",
+        "أخرى"
+    ],
+    "مراجعة التغييرات قبل Commit": [
+        "كتابة Commit جيد",
+        "مراجعة تغييرات",
+        "تحسين رسالة Commit",
+        "تقسيم Commit كبير",
+        "تحليل سجل Commits",
+        "أخرى"
+    ],
+    "تاريخ التعديلات": [
+        "كتابة Commit جيد",
+        "مراجعة تغييرات",
+        "تحسين رسالة Commit",
+        "تقسيم Commit كبير",
+        "تحليل سجل Commits",
+        "أخرى"
+    ],
+    "أخطاء Commit": [
+        "كتابة Commit جيد",
+        "مراجعة تغييرات",
+        "تحسين رسالة Commit",
+        "تقسيم Commit كبير",
+        "تحليل سجل Commits",
+        "أخرى"
+    ],
+    "Pull Requests": [
+        "إنشاء Pull Request",
+        "كتابة وصف PR",
+        "مراجعة تغييرات",
+        "الرد على ملاحظات",
+        "تحليل جودة PR",
+        "أخرى"
+    ],
+    "مفهوم Pull Request": [
+        "إنشاء Pull Request",
+        "كتابة وصف PR",
+        "مراجعة تغييرات",
+        "الرد على ملاحظات",
+        "تحليل جودة PR",
+        "أخرى"
+    ],
+    "مراجعة التغييرات": [
+        "إنشاء Pull Request",
+        "كتابة وصف PR",
+        "مراجعة تغييرات",
+        "الرد على ملاحظات",
+        "تحليل جودة PR",
+        "أخرى"
+    ],
+    "وصف التعديل": [
+        "إنشاء Pull Request",
+        "كتابة وصف PR",
+        "مراجعة تغييرات",
+        "الرد على ملاحظات",
+        "تحليل جودة PR",
+        "أخرى"
+    ],
+    "تعليقات المراجعة": [
+        "إنشاء Pull Request",
+        "كتابة وصف PR",
+        "مراجعة تغييرات",
+        "الرد على ملاحظات",
+        "تحليل جودة PR",
+        "أخرى"
+    ],
+    "قبول التغييرات": [
+        "إنشاء Pull Request",
+        "كتابة وصف PR",
+        "مراجعة تغييرات",
+        "الرد على ملاحظات",
+        "تحليل جودة PR",
+        "أخرى"
+    ],
+    "دمج Pull Request": [
+        "إنشاء Pull Request",
+        "كتابة وصف PR",
+        "مراجعة تغييرات",
+        "الرد على ملاحظات",
+        "تحليل جودة PR",
+        "أخرى"
+    ],
+    "Merge Conflicts": [
+        "تحليل Merge Conflict",
+        "حل تعارض بسيط",
+        "مراجعة ملف متعارض",
+        "اختبار بعد الدمج",
+        "توثيق سبب التعارض",
+        "أخرى"
+    ],
+    "مفهوم Merge Conflict": [
+        "تحليل Merge Conflict",
+        "حل تعارض بسيط",
+        "مراجعة ملف متعارض",
+        "اختبار بعد الدمج",
+        "توثيق سبب التعارض",
+        "أخرى"
+    ],
+    "سبب التعارض": [
+        "تحليل Merge Conflict",
+        "حل تعارض بسيط",
+        "مراجعة ملف متعارض",
+        "اختبار بعد الدمج",
+        "توثيق سبب التعارض",
+        "أخرى"
+    ],
+    "قراءة التعارض": [
+        "تحليل Merge Conflict",
+        "حل تعارض بسيط",
+        "مراجعة ملف متعارض",
+        "اختبار بعد الدمج",
+        "توثيق سبب التعارض",
+        "أخرى"
+    ],
+    "اختيار التعديل الصحيح": [
+        "تحليل Merge Conflict",
+        "حل تعارض بسيط",
+        "مراجعة ملف متعارض",
+        "اختبار بعد الدمج",
+        "توثيق سبب التعارض",
+        "أخرى"
+    ],
+    "حل التعارض": [
+        "تحليل Merge Conflict",
+        "حل تعارض بسيط",
+        "مراجعة ملف متعارض",
+        "اختبار بعد الدمج",
+        "توثيق سبب التعارض",
+        "أخرى"
+    ],
+    "اختبار بعد الدمج": [
+        "تحليل Merge Conflict",
+        "حل تعارض بسيط",
+        "مراجعة ملف متعارض",
+        "اختبار بعد الدمج",
+        "توثيق سبب التعارض",
+        "أخرى"
+    ],
+    "README Files": [
+        "كتابة README",
+        "تحسين وصف مشروع",
+        "إضافة خطوات تشغيل",
+        "مراجعة README",
+        "تجهيز مشروع للعرض",
+        "أخرى"
+    ],
+    "مفهوم README": [
+        "كتابة README",
+        "تحسين وصف مشروع",
+        "إضافة خطوات تشغيل",
+        "مراجعة README",
+        "تجهيز مشروع للعرض",
+        "أخرى"
+    ],
+    "وصف المشروع": [
+        "كتابة README",
+        "تحسين وصف مشروع",
+        "إضافة خطوات تشغيل",
+        "مراجعة README",
+        "تجهيز مشروع للعرض",
+        "أخرى"
+    ],
+    "طريقة التشغيل": [
+        "كتابة README",
+        "تحسين وصف مشروع",
+        "إضافة خطوات تشغيل",
+        "مراجعة README",
+        "تجهيز مشروع للعرض",
+        "أخرى"
+    ],
+    "المتطلبات": [
+        "كتابة README",
+        "تحسين وصف مشروع",
+        "إضافة خطوات تشغيل",
+        "مراجعة README",
+        "تجهيز مشروع للعرض",
+        "أخرى"
+    ],
+    "صور أو أمثلة": [
+        "كتابة README",
+        "تحسين وصف مشروع",
+        "إضافة خطوات تشغيل",
+        "مراجعة README",
+        "تجهيز مشروع للعرض",
+        "أخرى"
+    ],
+    "ميزات المشروع": [
+        "كتابة README",
+        "تحسين وصف مشروع",
+        "إضافة خطوات تشغيل",
+        "مراجعة README",
+        "تجهيز مشروع للعرض",
+        "أخرى"
+    ],
+    "رخصة المشروع كمفهوم": [
+        "كتابة README",
+        "تحسين وصف مشروع",
+        "إضافة خطوات تشغيل",
+        "مراجعة README",
+        "تجهيز مشروع للعرض",
+        "أخرى"
+    ],
+    "Project Documentation": [
+        "كتابة توثيق مشروع",
+        "توثيق API",
+        "توثيق إعدادات",
+        "مراجعة وضوح التوثيق",
+        "تحسين دليل استخدام",
+        "أخرى"
+    ],
+    "مفهوم توثيق المشروع": [
+        "كتابة توثيق مشروع",
+        "توثيق API",
+        "توثيق إعدادات",
+        "مراجعة وضوح التوثيق",
+        "تحسين دليل استخدام",
+        "أخرى"
+    ],
+    "توثيق الإعداد": [
+        "كتابة توثيق مشروع",
+        "توثيق API",
+        "توثيق إعدادات",
+        "مراجعة وضوح التوثيق",
+        "تحسين دليل استخدام",
+        "أخرى"
+    ],
+    "توثيق API": [
+        "كتابة توثيق مشروع",
+        "توثيق API",
+        "توثيق إعدادات",
+        "مراجعة وضوح التوثيق",
+        "تحسين دليل استخدام",
+        "أخرى"
+    ],
+    "توثيق قاعدة البيانات": [
+        "كتابة توثيق مشروع",
+        "توثيق API",
+        "توثيق إعدادات",
+        "مراجعة وضوح التوثيق",
+        "تحسين دليل استخدام",
+        "أخرى"
+    ],
+    "توثيق الأخطاء المعروفة": [
+        "كتابة توثيق مشروع",
+        "توثيق API",
+        "توثيق إعدادات",
+        "مراجعة وضوح التوثيق",
+        "تحسين دليل استخدام",
+        "أخرى"
+    ],
+    "توثيق طريقة الاستخدام": [
+        "كتابة توثيق مشروع",
+        "توثيق API",
+        "توثيق إعدادات",
+        "مراجعة وضوح التوثيق",
+        "تحسين دليل استخدام",
+        "أخرى"
+    ],
+    "Software Engineering Basics": [
+        "دراسة Software Engineering",
+        "تحليل مشروع",
+        "ترتيب مراحل تطوير",
+        "كتابة متطلبات",
+        "مراجعة قرار تصميم",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Software Engineering": [
+        "دراسة Software Engineering",
+        "تحليل مشروع",
+        "ترتيب مراحل تطوير",
+        "كتابة متطلبات",
+        "مراجعة قرار تصميم",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تحليل المتطلبات": [
+        "دراسة Software Engineering",
+        "تحليل مشروع",
+        "ترتيب مراحل تطوير",
+        "كتابة متطلبات",
+        "مراجعة قرار تصميم",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تصميم الحل": [
+        "دراسة Software Engineering",
+        "تحليل مشروع",
+        "ترتيب مراحل تطوير",
+        "كتابة متطلبات",
+        "مراجعة قرار تصميم",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تنفيذ الحل": [
+        "دراسة Software Engineering",
+        "تحليل مشروع",
+        "ترتيب مراحل تطوير",
+        "كتابة متطلبات",
+        "مراجعة قرار تصميم",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "اختبار الحل": [
+        "دراسة Software Engineering",
+        "تحليل مشروع",
+        "ترتيب مراحل تطوير",
+        "كتابة متطلبات",
+        "مراجعة قرار تصميم",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "صيانة التطبيق": [
+        "دراسة Software Engineering",
+        "تحليل مشروع",
+        "ترتيب مراحل تطوير",
+        "كتابة متطلبات",
+        "مراجعة قرار تصميم",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "إدارة التغيير": [
+        "دراسة Software Engineering",
+        "تحليل مشروع",
+        "ترتيب مراحل تطوير",
+        "كتابة متطلبات",
+        "مراجعة قرار تصميم",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Requirements Basics": [
+        "كتابة Requirements",
+        "تمييز وظيفي وغير وظيفي",
+        "تحليل طلب مستخدم",
+        "تحسين صياغة متطلب",
+        "مراجعة متطلبات مشروع",
+        "أخرى"
+    ],
+    "مفهوم Requirements": [
+        "كتابة Requirements",
+        "تمييز وظيفي وغير وظيفي",
+        "تحليل طلب مستخدم",
+        "تحسين صياغة متطلب",
+        "مراجعة متطلبات مشروع",
+        "أخرى"
+    ],
+    "المتطلبات الوظيفية": [
+        "كتابة Requirements",
+        "تمييز وظيفي وغير وظيفي",
+        "تحليل طلب مستخدم",
+        "تحسين صياغة متطلب",
+        "مراجعة متطلبات مشروع",
+        "أخرى"
+    ],
+    "المتطلبات غير الوظيفية": [
+        "كتابة Requirements",
+        "تمييز وظيفي وغير وظيفي",
+        "تحليل طلب مستخدم",
+        "تحسين صياغة متطلب",
+        "مراجعة متطلبات مشروع",
+        "أخرى"
+    ],
+    "تحديد ما يريده المستخدم": [
+        "كتابة Requirements",
+        "تمييز وظيفي وغير وظيفي",
+        "تحليل طلب مستخدم",
+        "تحسين صياغة متطلب",
+        "مراجعة متطلبات مشروع",
+        "أخرى"
+    ],
+    "توضيح القيود": [
+        "كتابة Requirements",
+        "تمييز وظيفي وغير وظيفي",
+        "تحليل طلب مستخدم",
+        "تحسين صياغة متطلب",
+        "مراجعة متطلبات مشروع",
+        "أخرى"
+    ],
+    "أخطاء جمع المتطلبات": [
+        "كتابة Requirements",
+        "تمييز وظيفي وغير وظيفي",
+        "تحليل طلب مستخدم",
+        "تحسين صياغة متطلب",
+        "مراجعة متطلبات مشروع",
+        "أخرى"
+    ],
+    "User Stories": [
+        "كتابة User Story",
+        "تحليل ميزة",
+        "إضافة Acceptance Criteria",
+        "تقسيم قصة كبيرة",
+        "مراجعة وضوح القصة",
+        "أخرى"
+    ],
+    "مفهوم User Story": [
+        "كتابة User Story",
+        "تحليل ميزة",
+        "إضافة Acceptance Criteria",
+        "تقسيم قصة كبيرة",
+        "مراجعة وضوح القصة",
+        "أخرى"
+    ],
+    "بصيغة كمستخدم أريد": [
+        "كتابة User Story",
+        "تحليل ميزة",
+        "إضافة Acceptance Criteria",
+        "تقسيم قصة كبيرة",
+        "مراجعة وضوح القصة",
+        "أخرى"
+    ],
+    "تحديد الهدف": [
+        "كتابة User Story",
+        "تحليل ميزة",
+        "إضافة Acceptance Criteria",
+        "تقسيم قصة كبيرة",
+        "مراجعة وضوح القصة",
+        "أخرى"
+    ],
+    "تحديد الفائدة": [
+        "كتابة User Story",
+        "تحليل ميزة",
+        "إضافة Acceptance Criteria",
+        "تقسيم قصة كبيرة",
+        "مراجعة وضوح القصة",
+        "أخرى"
+    ],
+    "Acceptance Criteria": [
+        "كتابة User Story",
+        "تحليل ميزة",
+        "إضافة Acceptance Criteria",
+        "تقسيم قصة كبيرة",
+        "مراجعة وضوح القصة",
+        "أخرى"
+    ],
+    "تقسيم الميزات": [
+        "كتابة User Story",
+        "تحليل ميزة",
+        "إضافة Acceptance Criteria",
+        "تقسيم قصة كبيرة",
+        "مراجعة وضوح القصة",
+        "أخرى"
+    ],
+    "System Design Basics": [
+        "رسم تصميم نظام بسيط",
+        "تحليل مكونات تطبيق",
+        "تحديد تدفق البيانات",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "مفهوم System Design": [
+        "رسم تصميم نظام بسيط",
+        "تحليل مكونات تطبيق",
+        "تحديد تدفق البيانات",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "مكونات النظام": [
+        "رسم تصميم نظام بسيط",
+        "تحليل مكونات تطبيق",
+        "تحديد تدفق البيانات",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "تدفق البيانات": [
+        "رسم تصميم نظام بسيط",
+        "تحليل مكونات تطبيق",
+        "تحديد تدفق البيانات",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "الواجهة": [
+        "رسم تصميم نظام بسيط",
+        "تحليل مكونات تطبيق",
+        "تحديد تدفق البيانات",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "الخادم": [
+        "رسم تصميم نظام بسيط",
+        "تحليل مكونات تطبيق",
+        "تحديد تدفق البيانات",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "قاعدة البيانات": [
+        "رسم تصميم نظام بسيط",
+        "تحليل مكونات تطبيق",
+        "تحديد تدفق البيانات",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "التكامل بين الأجزاء": [
+        "رسم تصميم نظام بسيط",
+        "تحليل مكونات تطبيق",
+        "تحديد تدفق البيانات",
+        "مراجعة تصميم",
+        "اقتراح تحسين",
+        "أخرى"
+    ],
+    "Project Structure": [
+        "تنظيم Project Structure",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء المجلدات",
+        "توثيق الهيكل",
+        "أخرى"
+    ],
+    "تنظيم ملفات المشروع": [
+        "تنظيم Project Structure",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء المجلدات",
+        "توثيق الهيكل",
+        "أخرى"
+    ],
+    "مجلد Frontend": [
+        "تنظيم Project Structure",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء المجلدات",
+        "توثيق الهيكل",
+        "أخرى"
+    ],
+    "مجلد Backend": [
+        "تنظيم Project Structure",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء المجلدات",
+        "توثيق الهيكل",
+        "أخرى"
+    ],
+    "مجلد Static": [
+        "تنظيم Project Structure",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء المجلدات",
+        "توثيق الهيكل",
+        "أخرى"
+    ],
+    "مجلد Templates": [
+        "تنظيم Project Structure",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء المجلدات",
+        "توثيق الهيكل",
+        "أخرى"
+    ],
+    "مجلد Tests": [
+        "تنظيم Project Structure",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء المجلدات",
+        "توثيق الهيكل",
+        "أخرى"
+    ],
+    "ملفات الإعداد": [
+        "تنظيم Project Structure",
+        "إعادة ترتيب ملفات",
+        "تحليل بنية مشروع",
+        "تحسين أسماء المجلدات",
+        "توثيق الهيكل",
+        "أخرى"
+    ],
+    "Clean Architecture Basics": [
+        "دراسة Clean Architecture",
+        "تحليل تداخل الكود",
+        "فصل مسؤوليات",
+        "اقتراح هيكل أفضل",
+        "مراجعة تصميم مشروع",
+        "أخرى"
+    ],
+    "مفهوم Clean Architecture": [
+        "دراسة Clean Architecture",
+        "تحليل تداخل الكود",
+        "فصل مسؤوليات",
+        "اقتراح هيكل أفضل",
+        "مراجعة تصميم مشروع",
+        "أخرى"
+    ],
+    "فصل المسؤوليات": [
+        "دراسة Clean Architecture",
+        "تحليل تداخل الكود",
+        "فصل مسؤوليات",
+        "اقتراح هيكل أفضل",
+        "مراجعة تصميم مشروع",
+        "أخرى"
+    ],
+    "منطق التطبيق": [
+        "دراسة Clean Architecture",
+        "تحليل تداخل الكود",
+        "فصل مسؤوليات",
+        "اقتراح هيكل أفضل",
+        "مراجعة تصميم مشروع",
+        "أخرى"
+    ],
+    "طبقة البيانات": [
+        "دراسة Clean Architecture",
+        "تحليل تداخل الكود",
+        "فصل مسؤوليات",
+        "اقتراح هيكل أفضل",
+        "مراجعة تصميم مشروع",
+        "أخرى"
+    ],
+    "طبقة العرض": [
+        "دراسة Clean Architecture",
+        "تحليل تداخل الكود",
+        "فصل مسؤوليات",
+        "اقتراح هيكل أفضل",
+        "مراجعة تصميم مشروع",
+        "أخرى"
+    ],
+    "تقليل التداخل": [
+        "دراسة Clean Architecture",
+        "تحليل تداخل الكود",
+        "فصل مسؤوليات",
+        "اقتراح هيكل أفضل",
+        "مراجعة تصميم مشروع",
+        "أخرى"
+    ],
+    "Refactoring Basics": [
+        "تنفيذ Refactoring بسيط",
+        "تحسين دالة",
+        "إزالة تكرار",
+        "إعادة تسمية",
+        "اختبار بعد Refactoring",
+        "مراجعة الكود",
+        "أخرى"
+    ],
+    "مفهوم Refactoring": [
+        "تنفيذ Refactoring بسيط",
+        "تحسين دالة",
+        "إزالة تكرار",
+        "إعادة تسمية",
+        "اختبار بعد Refactoring",
+        "مراجعة الكود",
+        "أخرى"
+    ],
+    "تحسين الكود دون تغيير السلوك": [
+        "تنفيذ Refactoring بسيط",
+        "تحسين دالة",
+        "إزالة تكرار",
+        "إعادة تسمية",
+        "اختبار بعد Refactoring",
+        "مراجعة الكود",
+        "أخرى"
+    ],
+    "تقليل التكرار": [
+        "تقييم جودة كود",
+        "تحسين أسماء",
+        "تقليل تكرار",
+        "تقسيم دالة",
+        "مراجعة قابلية الصيانة",
+        "أخرى"
+    ],
+    "تقسيم دوال طويلة": [
+        "تنفيذ Refactoring بسيط",
+        "تحسين دالة",
+        "إزالة تكرار",
+        "إعادة تسمية",
+        "اختبار بعد Refactoring",
+        "مراجعة الكود",
+        "أخرى"
+    ],
+    "تحسين الأسماء": [
+        "تنفيذ Refactoring بسيط",
+        "تحسين دالة",
+        "إزالة تكرار",
+        "إعادة تسمية",
+        "اختبار بعد Refactoring",
+        "مراجعة الكود",
+        "أخرى"
+    ],
+    "تبسيط المنطق": [
+        "تنفيذ Refactoring بسيط",
+        "تحسين دالة",
+        "إزالة تكرار",
+        "إعادة تسمية",
+        "اختبار بعد Refactoring",
+        "مراجعة الكود",
+        "أخرى"
+    ],
+    "اختبار البرامج وجودة الكود": [
+        "دراسة اختبار البرامج",
+        "تحليل ميزة تحتاج اختباراً",
+        "كتابة خطة اختبار",
+        "تنفيذ اختبار يدوي",
+        "تقييم جودة كود",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم اختبار البرامج": [
+        "دراسة اختبار البرامج",
+        "تحليل ميزة تحتاج اختباراً",
+        "كتابة خطة اختبار",
+        "تنفيذ اختبار يدوي",
+        "تقييم جودة كود",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "لماذا نختبر البرامج": [
+        "دراسة اختبار البرامج",
+        "تحليل ميزة تحتاج اختباراً",
+        "كتابة خطة اختبار",
+        "تنفيذ اختبار يدوي",
+        "تقييم جودة كود",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "جودة الكود": [
+        "دراسة اختبار البرامج",
+        "تحليل ميزة تحتاج اختباراً",
+        "كتابة خطة اختبار",
+        "تنفيذ اختبار يدوي",
+        "تقييم جودة كود",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "منع كسر الميزات القديمة": [
+        "دراسة اختبار البرامج",
+        "تحليل ميزة تحتاج اختباراً",
+        "كتابة خطة اختبار",
+        "تنفيذ اختبار يدوي",
+        "تقييم جودة كود",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "اختبار الوظائف": [
+        "دراسة اختبار البرامج",
+        "تحليل ميزة تحتاج اختباراً",
+        "كتابة خطة اختبار",
+        "تنفيذ اختبار يدوي",
+        "تقييم جودة كود",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "اختبار الأخطاء": [
+        "دراسة اختبار البرامج",
+        "تحليل ميزة تحتاج اختباراً",
+        "كتابة خطة اختبار",
+        "تنفيذ اختبار يدوي",
+        "تقييم جودة كود",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Unit Testing": [
+        "كتابة Unit Test",
+        "اختبار دالة",
+        "تصميم حالات اختبار",
+        "تشغيل اختبار",
+        "تحليل فشل اختبار",
+        "أخرى"
+    ],
+    "مفهوم Unit Testing": [
+        "كتابة Unit Test",
+        "اختبار دالة",
+        "تصميم حالات اختبار",
+        "تشغيل اختبار",
+        "تحليل فشل اختبار",
+        "أخرى"
+    ],
+    "اختبار دالة واحدة": [
+        "كتابة Unit Test",
+        "اختبار دالة",
+        "تصميم حالات اختبار",
+        "تشغيل اختبار",
+        "تحليل فشل اختبار",
+        "أخرى"
+    ],
+    "اختبار مدخلات ومخرجات": [
+        "كتابة Unit Test",
+        "اختبار دالة",
+        "تصميم حالات اختبار",
+        "تشغيل اختبار",
+        "تحليل فشل اختبار",
+        "أخرى"
+    ],
+    "حالات صحيحة": [
+        "كتابة Unit Test",
+        "اختبار دالة",
+        "تصميم حالات اختبار",
+        "تشغيل اختبار",
+        "تحليل فشل اختبار",
+        "أخرى"
+    ],
+    "حالات خاطئة": [
+        "كتابة Unit Test",
+        "اختبار دالة",
+        "تصميم حالات اختبار",
+        "تشغيل اختبار",
+        "تحليل فشل اختبار",
+        "أخرى"
+    ],
+    "تكرار الاختبار بعد التعديل": [
+        "كتابة Unit Test",
+        "اختبار دالة",
+        "تصميم حالات اختبار",
+        "تشغيل اختبار",
+        "تحليل فشل اختبار",
+        "أخرى"
+    ],
+    "Integration Testing": [
+        "تصميم Integration Test",
+        "اختبار API وDatabase",
+        "تحليل خطأ تكامل",
+        "اختبار ميزة كاملة",
+        "توثيق نتيجة الاختبار",
+        "أخرى"
+    ],
+    "مفهوم Integration Testing": [
+        "تصميم Integration Test",
+        "اختبار API وDatabase",
+        "تحليل خطأ تكامل",
+        "اختبار ميزة كاملة",
+        "توثيق نتيجة الاختبار",
+        "أخرى"
+    ],
+    "اختبار أكثر من جزء معاً": [
+        "تصميم Integration Test",
+        "اختبار API وDatabase",
+        "تحليل خطأ تكامل",
+        "اختبار ميزة كاملة",
+        "توثيق نتيجة الاختبار",
+        "أخرى"
+    ],
+    "اختبار API مع Database": [
+        "تصميم Integration Test",
+        "اختبار API وDatabase",
+        "تحليل خطأ تكامل",
+        "اختبار ميزة كاملة",
+        "توثيق نتيجة الاختبار",
+        "أخرى"
+    ],
+    "اختبار Frontend مع Backend": [
+        "تصميم Integration Test",
+        "اختبار API وDatabase",
+        "تحليل خطأ تكامل",
+        "اختبار ميزة كاملة",
+        "توثيق نتيجة الاختبار",
+        "أخرى"
+    ],
+    "اختبار تدفق كامل": [
+        "تصميم Integration Test",
+        "اختبار API وDatabase",
+        "تحليل خطأ تكامل",
+        "اختبار ميزة كاملة",
+        "توثيق نتيجة الاختبار",
+        "أخرى"
+    ],
+    "أخطاء التكامل": [
+        "تصميم Integration Test",
+        "اختبار API وDatabase",
+        "تحليل خطأ تكامل",
+        "اختبار ميزة كاملة",
+        "توثيق نتيجة الاختبار",
+        "أخرى"
+    ],
+    "Functional Testing": [
+        "اختبار وظيفة تطبيق",
+        "كتابة سيناريو اختبار",
+        "تنفيذ اختبار يدوي",
+        "تحليل نتيجة غير صحيحة",
+        "مراجعة تجربة المستخدم",
+        "أخرى"
+    ],
+    "مفهوم Functional Testing": [
+        "اختبار وظيفة تطبيق",
+        "كتابة سيناريو اختبار",
+        "تنفيذ اختبار يدوي",
+        "تحليل نتيجة غير صحيحة",
+        "مراجعة تجربة المستخدم",
+        "أخرى"
+    ],
+    "اختبار ميزة من منظور المستخدم": [
+        "اختبار وظيفة تطبيق",
+        "كتابة سيناريو اختبار",
+        "تنفيذ اختبار يدوي",
+        "تحليل نتيجة غير صحيحة",
+        "مراجعة تجربة المستخدم",
+        "أخرى"
+    ],
+    "اختبار تسجيل الدخول": [
+        "اختبار وظيفة تطبيق",
+        "كتابة سيناريو اختبار",
+        "تنفيذ اختبار يدوي",
+        "تحليل نتيجة غير صحيحة",
+        "مراجعة تجربة المستخدم",
+        "أخرى"
+    ],
+    "اختبار الحفظ": [
+        "اختبار وظيفة تطبيق",
+        "كتابة سيناريو اختبار",
+        "تنفيذ اختبار يدوي",
+        "تحليل نتيجة غير صحيحة",
+        "مراجعة تجربة المستخدم",
+        "أخرى"
+    ],
+    "اختبار التعديل": [
+        "اختبار وظيفة تطبيق",
+        "كتابة سيناريو اختبار",
+        "تنفيذ اختبار يدوي",
+        "تحليل نتيجة غير صحيحة",
+        "مراجعة تجربة المستخدم",
+        "أخرى"
+    ],
+    "اختبار الحذف": [
+        "اختبار وظيفة تطبيق",
+        "كتابة سيناريو اختبار",
+        "تنفيذ اختبار يدوي",
+        "تحليل نتيجة غير صحيحة",
+        "مراجعة تجربة المستخدم",
+        "أخرى"
+    ],
+    "توقع النتيجة الصحيحة": [
+        "اختبار وظيفة تطبيق",
+        "كتابة سيناريو اختبار",
+        "تنفيذ اختبار يدوي",
+        "تحليل نتيجة غير صحيحة",
+        "مراجعة تجربة المستخدم",
+        "أخرى"
+    ],
+    "Frontend Testing Basics": [
+        "اختبار واجهة",
+        "فحص زر",
+        "اختبار Form",
+        "مراجعة شاشة هاتف",
+        "توثيق مشكلة UI",
+        "أخرى"
+    ],
+    "اختبار الواجهة": [
+        "اختبار واجهة",
+        "فحص زر",
+        "اختبار Form",
+        "مراجعة شاشة هاتف",
+        "توثيق مشكلة UI",
+        "أخرى"
+    ],
+    "اختبار الأزرار": [
+        "اختبار واجهة",
+        "فحص زر",
+        "اختبار Form",
+        "مراجعة شاشة هاتف",
+        "توثيق مشكلة UI",
+        "أخرى"
+    ],
+    "اختبار Forms": [
+        "اختبار واجهة",
+        "فحص زر",
+        "اختبار Form",
+        "مراجعة شاشة هاتف",
+        "توثيق مشكلة UI",
+        "أخرى"
+    ],
+    "اختبار Responsive Design": [
+        "اختبار واجهة",
+        "فحص زر",
+        "اختبار Form",
+        "مراجعة شاشة هاتف",
+        "توثيق مشكلة UI",
+        "أخرى"
+    ],
+    "اختبار الرسائل للمستخدم": [
+        "اختبار واجهة",
+        "فحص زر",
+        "اختبار Form",
+        "مراجعة شاشة هاتف",
+        "توثيق مشكلة UI",
+        "أخرى"
+    ],
+    "اختبار الأخطاء البصرية": [
+        "اختبار واجهة",
+        "فحص زر",
+        "اختبار Form",
+        "مراجعة شاشة هاتف",
+        "توثيق مشكلة UI",
+        "أخرى"
+    ],
+    "Backend Testing Basics": [
+        "اختبار Backend Route",
+        "اختبار Endpoint",
+        "تحليل Response",
+        "اختبار Validation",
+        "توثيق Bug",
+        "أخرى"
+    ],
+    "اختبار Routes": [
+        "اختبار Backend Route",
+        "اختبار Endpoint",
+        "تحليل Response",
+        "اختبار Validation",
+        "توثيق Bug",
+        "أخرى"
+    ],
+    "اختبار Validation": [
+        "اختبار Backend Route",
+        "اختبار Endpoint",
+        "تحليل Response",
+        "اختبار Validation",
+        "توثيق Bug",
+        "أخرى"
+    ],
+    "اختبار صلاحيات": [
+        "اختبار Backend Route",
+        "اختبار Endpoint",
+        "تحليل Response",
+        "اختبار Validation",
+        "توثيق Bug",
+        "أخرى"
+    ],
+    "اختبار Database Operations": [
+        "اختبار Backend Route",
+        "اختبار Endpoint",
+        "تحليل Response",
+        "اختبار Validation",
+        "توثيق Bug",
+        "أخرى"
+    ],
+    "اختبار رسائل الخطأ": [
+        "اختبار Backend Route",
+        "اختبار Endpoint",
+        "تحليل Response",
+        "اختبار Validation",
+        "توثيق Bug",
+        "أخرى"
+    ],
+    "Code Quality": [
+        "تقييم جودة كود",
+        "تحسين أسماء",
+        "تقليل تكرار",
+        "تقسيم دالة",
+        "مراجعة قابلية الصيانة",
+        "أخرى"
+    ],
+    "وضوح الكود": [
+        "تقييم جودة كود",
+        "تحسين أسماء",
+        "تقليل تكرار",
+        "تقسيم دالة",
+        "مراجعة قابلية الصيانة",
+        "أخرى"
+    ],
+    "أسماء مفهومة": [
+        "تقييم جودة كود",
+        "تحسين أسماء",
+        "تقليل تكرار",
+        "تقسيم دالة",
+        "مراجعة قابلية الصيانة",
+        "أخرى"
+    ],
+    "تقسيم الملفات": [
+        "تقييم جودة كود",
+        "تحسين أسماء",
+        "تقليل تكرار",
+        "تقسيم دالة",
+        "مراجعة قابلية الصيانة",
+        "أخرى"
+    ],
+    "تقسيم الدوال": [
+        "تقييم جودة كود",
+        "تحسين أسماء",
+        "تقليل تكرار",
+        "تقسيم دالة",
+        "مراجعة قابلية الصيانة",
+        "أخرى"
+    ],
+    "سهولة الصيانة": [
+        "تقييم جودة كود",
+        "تحسين أسماء",
+        "تقليل تكرار",
+        "تقسيم دالة",
+        "مراجعة قابلية الصيانة",
+        "أخرى"
+    ],
+    "Error Handling in Applications": [
+        "تحسين Error Handling",
+        "كتابة رسالة خطأ مناسبة",
+        "اختبار حالة فشل",
+        "تحليل خطأ تطبيق",
+        "تصحيح معالجة خطأ",
+        "أخرى"
+    ],
+    "التعامل مع أخطاء المستخدم": [
+        "تحسين Error Handling",
+        "كتابة رسالة خطأ مناسبة",
+        "اختبار حالة فشل",
+        "تحليل خطأ تطبيق",
+        "تصحيح معالجة خطأ",
+        "أخرى"
+    ],
+    "أخطاء قاعدة البيانات": [
+        "تحسين Error Handling",
+        "كتابة رسالة خطأ مناسبة",
+        "اختبار حالة فشل",
+        "تحليل خطأ تطبيق",
+        "تصحيح معالجة خطأ",
+        "أخرى"
+    ],
+    "رسائل خطأ واضحة": [
+        "تحسين Error Handling",
+        "كتابة رسالة خطأ مناسبة",
+        "اختبار حالة فشل",
+        "تحليل خطأ تطبيق",
+        "تصحيح معالجة خطأ",
+        "أخرى"
+    ],
+    "عدم إظهار تفاصيل حساسة": [
+        "تحسين Error Handling",
+        "كتابة رسالة خطأ مناسبة",
+        "اختبار حالة فشل",
+        "تحليل خطأ تطبيق",
+        "تصحيح معالجة خطأ",
+        "أخرى"
+    ],
+    "تجربة المستخدم عند الخطأ": [
+        "تحسين Error Handling",
+        "كتابة رسالة خطأ مناسبة",
+        "اختبار حالة فشل",
+        "تحليل خطأ تطبيق",
+        "تصحيح معالجة خطأ",
+        "أخرى"
+    ],
+    "Logging Basics": [
+        "إضافة Logging بسيط",
+        "تحليل Log",
+        "تحديد مستوى سجل",
+        "اكتشاف خطأ من السجلات",
+        "كتابة قواعد Logging آمنة",
+        "أخرى"
+    ],
+    "مفهوم Logging": [
+        "إضافة Logging بسيط",
+        "تحليل Log",
+        "تحديد مستوى سجل",
+        "اكتشاف خطأ من السجلات",
+        "كتابة قواعد Logging آمنة",
+        "أخرى"
+    ],
+    "تسجيل الأحداث": [
+        "إضافة Logging بسيط",
+        "تحليل Log",
+        "تحديد مستوى سجل",
+        "اكتشاف خطأ من السجلات",
+        "كتابة قواعد Logging آمنة",
+        "أخرى"
+    ],
+    "تسجيل الأخطاء": [
+        "إضافة Logging بسيط",
+        "تحليل Log",
+        "تحديد مستوى سجل",
+        "اكتشاف خطأ من السجلات",
+        "كتابة قواعد Logging آمنة",
+        "أخرى"
+    ],
+    "مستويات السجلات": [
+        "إضافة Logging بسيط",
+        "تحليل Log",
+        "تحديد مستوى سجل",
+        "اكتشاف خطأ من السجلات",
+        "كتابة قواعد Logging آمنة",
+        "أخرى"
+    ],
+    "فائدة السجلات في التصحيح": [
+        "إضافة Logging بسيط",
+        "تحليل Log",
+        "تحديد مستوى سجل",
+        "اكتشاف خطأ من السجلات",
+        "كتابة قواعد Logging آمنة",
+        "أخرى"
+    ],
+    "تجنب تسجيل بيانات حساسة": [
+        "إضافة Logging بسيط",
+        "تحليل Log",
+        "تحديد مستوى سجل",
+        "اكتشاف خطأ من السجلات",
+        "كتابة قواعد Logging آمنة",
+        "أخرى"
+    ],
+    "Deployment Basics": [
+        "دراسة Deployment",
+        "تجهيز مشروع للنشر",
+        "تحليل إعدادات تشغيل",
+        "اختبار بعد النشر",
+        "مراجعة خطأ نشر",
+        "أخرى"
+    ],
+    "مفهوم Deployment": [
+        "دراسة Deployment",
+        "تجهيز مشروع للنشر",
+        "تحليل إعدادات تشغيل",
+        "اختبار بعد النشر",
+        "مراجعة خطأ نشر",
+        "أخرى"
+    ],
+    "تشغيل التطبيق للمستخدمين": [
+        "دراسة Deployment",
+        "تجهيز مشروع للنشر",
+        "تحليل إعدادات تشغيل",
+        "اختبار بعد النشر",
+        "مراجعة خطأ نشر",
+        "أخرى"
+    ],
+    "بيئة التطوير": [
+        "دراسة Deployment",
+        "تجهيز مشروع للنشر",
+        "تحليل إعدادات تشغيل",
+        "اختبار بعد النشر",
+        "مراجعة خطأ نشر",
+        "أخرى"
+    ],
+    "بيئة الإنتاج": [
+        "دراسة Deployment",
+        "تجهيز مشروع للنشر",
+        "تحليل إعدادات تشغيل",
+        "اختبار بعد النشر",
+        "مراجعة خطأ نشر",
+        "أخرى"
+    ],
+    "إعدادات التشغيل": [
+        "دراسة Deployment",
+        "تجهيز مشروع للنشر",
+        "تحليل إعدادات تشغيل",
+        "اختبار بعد النشر",
+        "مراجعة خطأ نشر",
+        "أخرى"
+    ],
+    "أخطاء النشر الشائعة": [
+        "دراسة Deployment",
+        "تجهيز مشروع للنشر",
+        "تحليل إعدادات تشغيل",
+        "اختبار بعد النشر",
+        "مراجعة خطأ نشر",
+        "أخرى"
+    ],
+    "Environment Variables": [
+        "إعداد Environment Variable",
+        "تحليل إعدادات مشروع",
+        "تصحيح خطأ متغير بيئي",
+        "فصل إعدادات التطوير والإنتاج",
+        "كتابة ملاحظات أمان",
+        "أخرى"
+    ],
+    "مفهوم Environment Variables": [
+        "إعداد Environment Variable",
+        "تحليل إعدادات مشروع",
+        "تصحيح خطأ متغير بيئي",
+        "فصل إعدادات التطوير والإنتاج",
+        "كتابة ملاحظات أمان",
+        "أخرى"
+    ],
+    "إخفاء الإعدادات الحساسة": [
+        "إعداد Environment Variable",
+        "تحليل إعدادات مشروع",
+        "تصحيح خطأ متغير بيئي",
+        "فصل إعدادات التطوير والإنتاج",
+        "كتابة ملاحظات أمان",
+        "أخرى"
+    ],
+    "مفاتيح التطبيق": [
+        "إعداد Environment Variable",
+        "تحليل إعدادات مشروع",
+        "تصحيح خطأ متغير بيئي",
+        "فصل إعدادات التطوير والإنتاج",
+        "كتابة ملاحظات أمان",
+        "أخرى"
+    ],
+    "إعدادات قاعدة البيانات": [
+        "إعداد Environment Variable",
+        "تحليل إعدادات مشروع",
+        "تصحيح خطأ متغير بيئي",
+        "فصل إعدادات التطوير والإنتاج",
+        "كتابة ملاحظات أمان",
+        "أخرى"
+    ],
+    "الفرق بين إعدادات التطوير والإنتاج": [
+        "إعداد Environment Variable",
+        "تحليل إعدادات مشروع",
+        "تصحيح خطأ متغير بيئي",
+        "فصل إعدادات التطوير والإنتاج",
+        "كتابة ملاحظات أمان",
+        "أخرى"
+    ],
+    "أخطاء المتغيرات البيئية": [
+        "إعداد Environment Variable",
+        "تحليل إعدادات مشروع",
+        "تصحيح خطأ متغير بيئي",
+        "فصل إعدادات التطوير والإنتاج",
+        "كتابة ملاحظات أمان",
+        "أخرى"
+    ],
+    "Full Stack Project Planning": [
+        "تخطيط مشروع Full Stack",
+        "كتابة متطلبات",
+        "رسم تدفق بيانات",
+        "تقسيم المشروع إلى مهام",
+        "تحديد أولوية الميزات",
+        "توثيق الخطة",
+        "أخرى"
+    ],
+    "اختيار فكرة مشروع": [
+        "تخطيط مشروع Full Stack",
+        "كتابة متطلبات",
+        "رسم تدفق بيانات",
+        "تقسيم المشروع إلى مهام",
+        "تحديد أولوية الميزات",
+        "توثيق الخطة",
+        "أخرى"
+    ],
+    "تحديد المستخدمين": [
+        "تخطيط مشروع Full Stack",
+        "كتابة متطلبات",
+        "رسم تدفق بيانات",
+        "تقسيم المشروع إلى مهام",
+        "تحديد أولوية الميزات",
+        "توثيق الخطة",
+        "أخرى"
+    ],
+    "تحديد الميزات": [
+        "تخطيط مشروع Full Stack",
+        "كتابة متطلبات",
+        "رسم تدفق بيانات",
+        "تقسيم المشروع إلى مهام",
+        "تحديد أولوية الميزات",
+        "توثيق الخطة",
+        "أخرى"
+    ],
+    "تصميم الواجهة": [
+        "تخطيط مشروع Full Stack",
+        "كتابة متطلبات",
+        "رسم تدفق بيانات",
+        "تقسيم المشروع إلى مهام",
+        "تحديد أولوية الميزات",
+        "توثيق الخطة",
+        "أخرى"
+    ],
+    "تصميم Backend": [
+        "تخطيط مشروع Full Stack",
+        "كتابة متطلبات",
+        "رسم تدفق بيانات",
+        "تقسيم المشروع إلى مهام",
+        "تحديد أولوية الميزات",
+        "توثيق الخطة",
+        "أخرى"
+    ],
+    "تصميم Database": [
+        "تخطيط مشروع Full Stack",
+        "كتابة متطلبات",
+        "رسم تدفق بيانات",
+        "تقسيم المشروع إلى مهام",
+        "تحديد أولوية الميزات",
+        "توثيق الخطة",
+        "أخرى"
+    ],
+    "خطة التنفيذ": [
+        "تخطيط مشروع Full Stack",
+        "كتابة متطلبات",
+        "رسم تدفق بيانات",
+        "تقسيم المشروع إلى مهام",
+        "تحديد أولوية الميزات",
+        "توثيق الخطة",
+        "أخرى"
+    ],
+    "Full Stack Project Implementation": [
+        "تنفيذ مشروع Full Stack",
+        "بناء ميزة كاملة",
+        "ربط Frontend وBackend",
+        "اختبار CRUD",
+        "تحسين تجربة المستخدم",
+        "كتابة README",
+        "أخرى"
+    ],
+    "بناء الواجهة": [
+        "تنفيذ مشروع Full Stack",
+        "بناء ميزة كاملة",
+        "ربط Frontend وBackend",
+        "اختبار CRUD",
+        "تحسين تجربة المستخدم",
+        "كتابة README",
+        "أخرى"
+    ],
+    "بناء Backend": [
+        "تنفيذ مشروع Full Stack",
+        "بناء ميزة كاملة",
+        "ربط Frontend وBackend",
+        "اختبار CRUD",
+        "تحسين تجربة المستخدم",
+        "كتابة README",
+        "أخرى"
+    ],
+    "إنشاء Database": [
+        "تنفيذ مشروع Full Stack",
+        "بناء ميزة كاملة",
+        "ربط Frontend وBackend",
+        "اختبار CRUD",
+        "تحسين تجربة المستخدم",
+        "كتابة README",
+        "أخرى"
+    ],
+    "ربط API": [
+        "تنفيذ مشروع Full Stack",
+        "بناء ميزة كاملة",
+        "ربط Frontend وBackend",
+        "اختبار CRUD",
+        "تحسين تجربة المستخدم",
+        "كتابة README",
+        "أخرى"
+    ],
+    "إضافة Authentication": [
+        "تنفيذ مشروع Full Stack",
+        "بناء ميزة كاملة",
+        "ربط Frontend وBackend",
+        "اختبار CRUD",
+        "تحسين تجربة المستخدم",
+        "كتابة README",
+        "أخرى"
+    ],
+    "اختبار الميزات": [
+        "تنفيذ مشروع Full Stack",
+        "بناء ميزة كاملة",
+        "ربط Frontend وBackend",
+        "اختبار CRUD",
+        "تحسين تجربة المستخدم",
+        "كتابة README",
+        "أخرى"
+    ],
+    "توثيق المشروع": [
+        "تنفيذ مشروع Full Stack",
+        "بناء ميزة كاملة",
+        "ربط Frontend وBackend",
+        "اختبار CRUD",
+        "تحسين تجربة المستخدم",
+        "كتابة README",
+        "أخرى"
+    ],
+    "تحليل أخطاء تطوير التطبيقات": [
+        "تحليل خطأ تطبيق",
+        "تصحيح Bug",
+        "قراءة رسالة خطأ",
+        "عزل سبب المشكلة",
+        "اختبار بعد الإصلاح",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء HTML وCSS": [
+        "تحليل خطأ تطبيق",
+        "تصحيح Bug",
+        "قراءة رسالة خطأ",
+        "عزل سبب المشكلة",
+        "اختبار بعد الإصلاح",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء JavaScript في الواجهة": [
+        "تحليل خطأ تطبيق",
+        "تصحيح Bug",
+        "قراءة رسالة خطأ",
+        "عزل سبب المشكلة",
+        "اختبار بعد الإصلاح",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء React": [
+        "تحليل خطأ تطبيق",
+        "تصحيح Bug",
+        "قراءة رسالة خطأ",
+        "عزل سبب المشكلة",
+        "اختبار بعد الإصلاح",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء API": [
+        "تحليل خطأ تطبيق",
+        "تصحيح Bug",
+        "قراءة رسالة خطأ",
+        "عزل سبب المشكلة",
+        "اختبار بعد الإصلاح",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء Backend": [
+        "تحليل خطأ تطبيق",
+        "تصحيح Bug",
+        "قراءة رسالة خطأ",
+        "عزل سبب المشكلة",
+        "اختبار بعد الإصلاح",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء Database": [
+        "تحليل خطأ تطبيق",
+        "تصحيح Bug",
+        "قراءة رسالة خطأ",
+        "عزل سبب المشكلة",
+        "اختبار بعد الإصلاح",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء Git": [
+        "تحليل خطأ تطبيق",
+        "تصحيح Bug",
+        "قراءة رسالة خطأ",
+        "عزل سبب المشكلة",
+        "اختبار بعد الإصلاح",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء Deployment": [
+        "تحليل خطأ تطبيق",
+        "تصحيح Bug",
+        "قراءة رسالة خطأ",
+        "عزل سبب المشكلة",
+        "اختبار بعد الإصلاح",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "المراجعة الشاملة": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "بناء ميزة كاملة",
+        "تحليل أخطاء",
+        "مراجعة مشروع",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة Web Development": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "بناء ميزة كاملة",
+        "تحليل أخطاء",
+        "مراجعة مشروع",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة HTML وCSS": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "بناء ميزة كاملة",
+        "تحليل أخطاء",
+        "مراجعة مشروع",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة JavaScript للويب": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "بناء ميزة كاملة",
+        "تحليل أخطاء",
+        "مراجعة مشروع",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة React": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "بناء ميزة كاملة",
+        "تحليل أخطاء",
+        "مراجعة مشروع",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة Backend": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "بناء ميزة كاملة",
+        "تحليل أخطاء",
+        "مراجعة مشروع",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة APIs": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "بناء ميزة كاملة",
+        "تحليل أخطاء",
+        "مراجعة مشروع",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة Databases وSQL": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "بناء ميزة كاملة",
+        "تحليل أخطاء",
+        "مراجعة مشروع",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة Flask وDjango": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "بناء ميزة كاملة",
+        "تحليل أخطاء",
+        "مراجعة مشروع",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة Node.js وExpress": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "بناء ميزة كاملة",
+        "تحليل أخطاء",
+        "مراجعة مشروع",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة Git وGitHub": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "بناء ميزة كاملة",
+        "تحليل أخطاء",
+        "مراجعة مشروع",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة Testing وجودة الكود": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "بناء ميزة كاملة",
+        "تحليل أخطاء",
+        "مراجعة مشروع",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة Full Stack Projects": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "بناء ميزة كاملة",
+        "تحليل أخطاء",
+        "مراجعة مشروع",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "تدريب شامل": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "بناء ميزة كاملة",
+        "تحليل أخطاء",
+        "مراجعة مشروع",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "اختبار قصير": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار HTML وCSS": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار JavaScript للويب": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار React": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار Backend": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار SQL وDatabases": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار Git وGitHub": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار Testing": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار شامل قصير": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار تجريبي": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار متوسط": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار متقدم": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "محاكاة اختبار Web Development": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "محاكاة اختبار Full Stack": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار شامل في الجزء الثاني": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "تحليل نتيجة الاختبار": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "خطة علاج الأخطاء": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "أخرى": [
+        "نشاط مخصص",
+        "تحليل موضوع مخصص",
+        "تطبيق عملي مخصص",
+        "مراجعة مخصصة",
+        "أخرى"
+    ],
+    "موضوع مخصص": [
+        "نشاط مخصص",
+        "تحليل موضوع مخصص",
+        "تطبيق عملي مخصص",
+        "مراجعة مخصصة",
+        "أخرى"
+    ]
+};
+    const part2Training = [
+    "دراسة مفهوم Web Development",
+    "رسم دورة عمل الويب",
+    "مقارنة Frontend وBackend",
+    "تحليل مثال تطبيق ويب",
+    "تلخيص المفاهيم",
+    "اختبار تمهيدي",
+    "تحليل واجهة موقع",
+    "تحديد أجزاء Frontend",
+    "بناء صفحة بسيطة",
+    "تحسين واجهة",
+    "كتابة ملاحظات UI",
+    "اختبار قصير",
+    "تحليل Backend لتطبيق",
+    "رسم سير طلب Backend",
+    "بناء Route بسيط",
+    "تصميم منطق خلفي",
+    "اختبار Endpoint",
+    "كتابة ملاحظات",
+    "تحليل Backend",
+    "كتابة منطق خلفي",
+    "ربط رد بالواجهة",
+    "اختبار طلب",
+    "تحليل ميزة Full Stack",
+    "رسم تدفق البيانات",
+    "بناء ميزة صغيرة",
+    "اختبار ميزة كاملة",
+    "توثيق الخطوات",
+    "مراجعة الأخطاء",
+    "بناء صفحة HTML",
+    "تحليل بنية صفحة",
+    "تصحيح وسم HTML",
+    "تنظيم عناصر صفحة",
+    "إضافة روابط وصور",
+    "بناء Form",
+    "تحليل حقول إدخال",
+    "تصحيح نموذج",
+    "تحسين Labels",
+    "اختبار إرسال نموذج",
+    "تطبيق عملي",
+    "بناء React Form",
+    "تحليل Controlled Input",
+    "التحقق من إدخال",
+    "عرض رسالة خطأ",
+    "اختبار إرسال Form",
+    "تحسين دلالة HTML",
+    "تحويل div عشوائية إلى عناصر دلالية",
+    "تحليل صفحة",
+    "تنظيم هيكل الصفحة",
+    "تنسيق عنصر CSS",
+    "تحليل Selector",
+    "تعديل ألوان وخطوط",
+    "ضبط مسافات",
+    "حل مشكلة Box Model",
+    "بناء Layout بسيط",
+    "تحليل تموضع عنصر",
+    "تصحيح مشكلة ترتيب",
+    "مقارنة Layouts",
+    "بناء Layout بـ Flexbox",
+    "توسيط عناصر",
+    "ترتيب بطاقات",
+    "تصحيح مشكلة محاذاة",
+    "بناء Grid Layout",
+    "تقسيم صفحة إلى أعمدة",
+    "تصحيح مشكلة Grid",
+    "مقارنة Grid وFlexbox",
+    "تحسين استجابة صفحة",
+    "كتابة Media Query",
+    "اختبار صفحة على أحجام مختلفة",
+    "تصحيح مشكلة هاتف",
+    "تحليل تجربة مستخدم",
+    "إضافة Transition",
+    "بناء Hover Effect",
+    "تحليل حركة CSS",
+    "تصحيح Animation",
+    "تحسين تجربة بصرية",
+    "كتابة JavaScript للويب",
+    "ربط ملف JS",
+    "تحديث عنصر صفحة",
+    "قراءة قيمة من input",
+    "تطبيق تفاعل بسيط",
+    "تحليل DOM",
+    "تعديل عنصر صفحة",
+    "إضافة عنصر جديد",
+    "حذف عنصر",
+    "تصحيح Selector",
+    "إضافة Event Listener",
+    "تحليل حدث",
+    "بناء تفاعل زر",
+    "معالجة Submit",
+    "تصحيح مشكلة Event",
+    "بناء Form تفاعلي",
+    "التحقق من Input",
+    "عرض رسالة للمستخدم",
+    "تصحيح خطأ Form",
+    "اختبار سيناريو إدخال",
+    "بناء Flask Form",
+    "استقبال بيانات",
+    "تصحيح Form",
+    "استخدام Fetch API",
+    "جلب بيانات",
+    "تحليل Response",
+    "عرض JSON في الصفحة",
+    "معالجة خطأ اتصال",
+    "تحسين Error Handling",
+    "كتابة رسالة خطأ مناسبة",
+    "اختبار حالة فشل",
+    "تحليل خطأ تطبيق",
+    "تصحيح معالجة خطأ",
+    "قراءة JSON",
+    "تحليل بنية JSON",
+    "كتابة JSON صحيح",
+    "تصحيح JSON خاطئ",
+    "عرض بيانات JSON",
+    "استخدام localStorage",
+    "حفظ إعداد بسيط",
+    "قراءة قيمة محفوظة",
+    "حذف بيانات",
+    "تحليل متى نستخدم التخزين",
+    "دراسة React",
+    "إنشاء Component بسيط",
+    "تحليل JSX",
+    "تشغيل مشروع React",
+    "مقارنة React وJavaScript العادي",
+    "بناء Component",
+    "تقسيم واجهة إلى Components",
+    "إعادة استخدام Component",
+    "تحليل علاقة أب وابن",
+    "تصحيح خطأ Component",
+    "تحليل Props وState",
+    "تمرير Props",
+    "تحديث State",
+    "تصحيح خطأ State",
+    "بناء تفاعل React",
+    "إضافة Event في React",
+    "بناء زر تفاعلي",
+    "معالجة Form",
+    "استخدام useState",
+    "استخدام useEffect",
+    "تحليل Dependency Array",
+    "تصحيح Hook خطأ",
+    "بناء Component تفاعلي",
+    "إضافة Route",
+    "بناء تنقل بين صفحات",
+    "تحليل مسار",
+    "تصحيح خطأ Routing",
+    "بناء تطبيق Flask بسيط",
+    "تشغيل Flask",
+    "تحليل بنية مشروع",
+    "تصحيح خطأ Flask",
+    "تنظيم مشروع Frontend",
+    "إعادة ترتيب ملفات",
+    "تحسين أسماء الملفات",
+    "توثيق بنية الواجهة",
+    "بناء UI Component",
+    "تحسين Component",
+    "تحليل تصميم Component",
+    "اختبار تفاعل Component",
+    "فحص Accessibility",
+    "تحسين Label",
+    "إضافة Alt Text",
+    "تحليل تباين",
+    "مراجعة تجربة استخدام",
+    "تحليل أداء صفحة",
+    "تقليل حجم صورة",
+    "تحسين تحميل",
+    "مراجعة ملفات غير ضرورية",
+    "كتابة ملاحظات أداء",
+    "تحليل طلب HTTP",
+    "اختيار Method مناسب",
+    "قراءة Status Code",
+    "اختبار Request",
+    "تصحيح خطأ HTTP",
+    "كتابة Query",
+    "قراءة Query",
+    "تصحيح SQL",
+    "تعديل سجل",
+    "بناء Flask API",
+    "اختبار JSON Endpoint",
+    "تصحيح Status Code",
+    "ربط API بواجهة",
+    "توثيق API",
+    "تحليل Request",
+    "بناء Response",
+    "تمييز Parameters",
+    "تصحيح Response خاطئ",
+    "تصميم REST API",
+    "بناء Endpoint",
+    "اختبار API",
+    "تحليل Resource",
+    "تصميم Endpoint",
+    "تصحيح مسار",
+    "توثيق Endpoint",
+    "بناء JSON API",
+    "تصحيح JSON Response",
+    "اختبار إرسال JSON",
+    "توثيق شكل الاستجابة",
+    "بناء Express Server",
+    "إنشاء Route",
+    "إرجاع JSON",
+    "تصحيح خطأ Express",
+    "بناء Validation",
+    "تحليل بيانات خاطئة",
+    "كتابة رسالة خطأ",
+    "اختبار إدخال غير صحيح",
+    "تصحيح منطق تحقق",
+    "إنشاء Flask Route",
+    "اختبار Route",
+    "تحليل Route بمتغير",
+    "تصحيح خطأ مسار",
+    "توثيق Route",
+    "بناء Template",
+    "تمرير بيانات",
+    "عرض قائمة",
+    "تصحيح خطأ Jinja",
+    "تحليل Template",
+    "اختبار زمني",
+    "تصحيح ذاتي",
+    "تحليل الأخطاء",
+    "مراجعة بعد الاختبار",
+    "إعادة تدريب",
+    "استكشاف Django",
+    "إنشاء Project",
+    "إنشاء App",
+    "تشغيل الخادم",
+    "تحليل بنية Django",
+    "بناء Django Model",
+    "إضافة Fields",
+    "تنفيذ Migration",
+    "تحليل Model",
+    "تصحيح خطأ Migration",
+    "بناء Django View",
+    "تصحيح View",
+    "اختبار صفحة",
+    "بناء Django Template",
+    "عرض قائمة بيانات",
+    "استخدام شرط",
+    "تصحيح Template",
+    "تحليل عرض البيانات",
+    "بناء Django Form",
+    "استخدام ModelForm",
+    "حفظ بيانات",
+    "اختبار Form",
+    "تشغيل Node.js",
+    "إنشاء مشروع npm",
+    "تحليل package.json",
+    "بناء خادم بسيط",
+    "تصحيح خطأ Node",
+    "تحليل Middleware",
+    "بناء Middleware بسيط",
+    "تصحيح ترتيب Middleware",
+    "استخدام Middleware للتحقق",
+    "اختبار سلوك Middleware",
+    "تحليل Authentication",
+    "تصميم سير تسجيل دخول",
+    "بناء نموذج تسجيل دخول تعليمي",
+    "اختبار حالة دخول",
+    "مراجعة أخطاء المصادقة",
+    "تحليل Authorization",
+    "تصميم أدوار بسيطة",
+    "فحص صلاحية",
+    "اختبار وصول صفحة",
+    "تصحيح خطأ صلاحيات",
+    "تحليل Session",
+    "تحليل Cookie",
+    "رسم سير جلسة مستخدم",
+    "اختبار تسجيل خروج",
+    "مراجعة أخطاء الجلسة",
+    "دراسة التعامل الآمن مع كلمة المرور",
+    "تحليل خطأ أمني شائع",
+    "كتابة قواعد حماية",
+    "مراجعة سيناريو تسجيل دخول",
+    "اختبار مفاهيمي",
+    "دراسة Database",
+    "تحليل جدول",
+    "تصميم جدول بسيط",
+    "تمييز صف وعمود",
+    "كتابة ملاحظات بنية",
+    "إنشاء SQLite Database",
+    "بناء جدول",
+    "إضافة سجل",
+    "استعلام بيانات",
+    "تحليل استخدام SQLite",
+    "دراسة PostgreSQL",
+    "تصميم جدول",
+    "كتابة Query أساسي",
+    "تحليل متى نستخدمها",
+    "مقارنة مع SQLite",
+    "دراسة MySQL",
+    "مقارنة MySQL وPostgreSQL",
+    "حل تمرين قاعدة بيانات",
+    "تصميم Table",
+    "اختيار Columns",
+    "تحديد أنواع بيانات",
+    "إضافة Constraints",
+    "مراجعة تصميم جدول",
+    "تحديد Primary Key",
+    "تحديد Foreign Key",
+    "تحليل علاقة جداول",
+    "تصحيح تصميم خاطئ",
+    "حل تمارين",
+    "تحليل علاقة Database",
+    "رسم علاقة جداول",
+    "تصميم جدول وسيط",
+    "تمييز نوع العلاقة",
+    "تصحيح خطأ تصميم",
+    "بناء CRUD بسيط",
+    "اختبار إضافة بيانات",
+    "اختبار قراءة بيانات",
+    "اختبار تعديل وحذف",
+    "تحليل سير CRUD",
+    "استخدام Django ORM",
+    "كتابة QuerySet",
+    "إنشاء سجل",
+    "فلترة بيانات",
+    "اختبار CRUD",
+    "كتابة Join بسيط",
+    "تحليل نتيجة Join",
+    "تصحيح علاقة جداول",
+    "جلب بيانات مترابطة",
+    "تصميم Database",
+    "تحليل متطلبات بيانات",
+    "رسم ERD بسيط",
+    "مراجعة تصميم",
+    "اقتراح تحسين",
+    "دراسة ORM",
+    "كتابة Query عبر ORM",
+    "مقارنة SQL وORM",
+    "بناء Model بـ SQLAlchemy",
+    "تنفيذ Query",
+    "تصحيح خطأ Relationship",
+    "ربط API بقاعدة بيانات",
+    "بناء Endpoint يستخدم Database",
+    "اختبار CRUD عبر API",
+    "تصحيح خطأ اتصال",
+    "توثيق سير البيانات",
+    "إنشاء Repository",
+    "تنفيذ Commit",
+    "تحليل git status",
+    "تتبع تغييرات",
+    "تصحيح خطأ Git",
+    "رفع مشروع إلى GitHub",
+    "ربط Remote",
+    "تنفيذ Push وPull",
+    "كتابة README",
+    "مراجعة صفحة مشروع",
+    "إنشاء Branch",
+    "تطوير ميزة على Branch",
+    "تحليل الفرق بين Branches",
+    "دمج Branch",
+    "تصحيح خطأ فرع",
+    "كتابة Commit جيد",
+    "مراجعة تغييرات",
+    "تحسين رسالة Commit",
+    "تقسيم Commit كبير",
+    "تحليل سجل Commits",
+    "إنشاء Pull Request",
+    "كتابة وصف PR",
+    "الرد على ملاحظات",
+    "تحليل جودة PR",
+    "تحليل Merge Conflict",
+    "حل تعارض بسيط",
+    "مراجعة ملف متعارض",
+    "اختبار بعد الدمج",
+    "توثيق سبب التعارض",
+    "تحسين وصف مشروع",
+    "إضافة خطوات تشغيل",
+    "مراجعة README",
+    "تجهيز مشروع للعرض",
+    "كتابة توثيق مشروع",
+    "توثيق إعدادات",
+    "مراجعة وضوح التوثيق",
+    "تحسين دليل استخدام",
+    "دراسة Software Engineering",
+    "تحليل مشروع",
+    "ترتيب مراحل تطوير",
+    "كتابة متطلبات",
+    "مراجعة قرار تصميم",
+    "كتابة Requirements",
+    "تمييز وظيفي وغير وظيفي",
+    "تحليل طلب مستخدم",
+    "تحسين صياغة متطلب",
+    "مراجعة متطلبات مشروع",
+    "كتابة User Story",
+    "تحليل ميزة",
+    "إضافة Acceptance Criteria",
+    "تقسيم قصة كبيرة",
+    "مراجعة وضوح القصة",
+    "رسم تصميم نظام بسيط",
+    "تحليل مكونات تطبيق",
+    "تحديد تدفق البيانات",
+    "تنظيم Project Structure",
+    "تحسين أسماء المجلدات",
+    "توثيق الهيكل",
+    "دراسة Clean Architecture",
+    "تحليل تداخل الكود",
+    "فصل مسؤوليات",
+    "اقتراح هيكل أفضل",
+    "مراجعة تصميم مشروع",
+    "تنفيذ Refactoring بسيط",
+    "تحسين دالة",
+    "إزالة تكرار",
+    "إعادة تسمية",
+    "اختبار بعد Refactoring",
+    "مراجعة الكود",
+    "تقييم جودة كود",
+    "تحسين أسماء",
+    "تقليل تكرار",
+    "تقسيم دالة",
+    "مراجعة قابلية الصيانة",
+    "دراسة اختبار البرامج",
+    "تحليل ميزة تحتاج اختباراً",
+    "كتابة خطة اختبار",
+    "تنفيذ اختبار يدوي",
+    "كتابة Unit Test",
+    "اختبار دالة",
+    "تصميم حالات اختبار",
+    "تشغيل اختبار",
+    "تحليل فشل اختبار",
+    "تصميم Integration Test",
+    "اختبار API وDatabase",
+    "تحليل خطأ تكامل",
+    "توثيق نتيجة الاختبار",
+    "اختبار وظيفة تطبيق",
+    "كتابة سيناريو اختبار",
+    "تحليل نتيجة غير صحيحة",
+    "مراجعة تجربة المستخدم",
+    "اختبار واجهة",
+    "فحص زر",
+    "مراجعة شاشة هاتف",
+    "توثيق مشكلة UI",
+    "اختبار Backend Route",
+    "اختبار Validation",
+    "توثيق Bug",
+    "إضافة Logging بسيط",
+    "تحليل Log",
+    "تحديد مستوى سجل",
+    "اكتشاف خطأ من السجلات",
+    "كتابة قواعد Logging آمنة",
+    "دراسة Deployment",
+    "تجهيز مشروع للنشر",
+    "تحليل إعدادات تشغيل",
+    "اختبار بعد النشر",
+    "مراجعة خطأ نشر",
+    "إعداد Environment Variable",
+    "تحليل إعدادات مشروع",
+    "تصحيح خطأ متغير بيئي",
+    "فصل إعدادات التطوير والإنتاج",
+    "كتابة ملاحظات أمان",
+    "تخطيط مشروع Full Stack",
+    "رسم تدفق بيانات",
+    "تقسيم المشروع إلى مهام",
+    "تحديد أولوية الميزات",
+    "توثيق الخطة",
+    "تنفيذ مشروع Full Stack",
+    "بناء ميزة كاملة",
+    "ربط Frontend وBackend",
+    "تحسين تجربة المستخدم",
+    "تصحيح Bug",
+    "قراءة رسالة خطأ",
+    "عزل سبب المشكلة",
+    "اختبار بعد الإصلاح",
+    "بناء قائمة أخطاء شخصية",
+    "تدريب علاجي",
+    "مراجعة شاملة",
+    "حل تمارين متنوعة",
+    "تحليل أخطاء",
+    "مراجعة مشروع",
+    "بناء خطة تقوية",
+    "اختبار تجريبي",
+    "محاكاة اختبار",
+    "حل نموذج كامل",
+    "تصحيح النموذج",
+    "بناء خطة مراجعة",
+    "نشاط مخصص",
+    "تحليل موضوع مخصص",
+    "تطبيق عملي مخصص",
+    "مراجعة مخصصة",
+    "أخرى"
+];
+
+    // إضافة الجزء الثاني بعد الجزء الأول دون حذف أي بيانات سابقة.
+    programmingTasks.main = mergeLists(programmingTasks.main, part2Main);
+
+    part2Main.forEach((key) => {
+        if (key === "أخرى") return;
+        programmingTasks.sub[key] = mergeLists(programmingTasks.sub[key] || [], part2Details[key] || ["أخرى"]);
+    });
+
+    Object.keys(part2Details).forEach((key) => {
+        programmingTasks.detail[key] = mergeLists(programmingTasks.detail[key] || [], part2Details[key]);
+    });
+
+    Object.keys(part2Activities).forEach((key) => {
+        programmingTasks.trainingByDetail[key] = mergeLists(programmingTasks.trainingByDetail[key] || [], part2Activities[key]);
+    });
+
+    programmingTasks.training = mergeLists(programmingTasks.training, part2Training);
+
+    window.EDUPATH_TASKS_PROGRAMMING_TECHNOLOGY_PART2_V55115 = true;
+})();
+// === End EduPath AI v5.5.115: Tasks Programming and Technology Part 2 ===
+
