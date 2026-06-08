@@ -5184,6 +5184,22 @@ function generatedMilestonesForGoalV4611(typeValue, categoryValue, pathValue, ta
     if (selected.includes("toefl")) return "Reading, Listening, Writing, Speaking, Full Mock Test";
     if (selected.includes("duolingo")) return "Reading, Listening, Writing, Speaking, Full Mock Test";
     if (selected.includes("csca")) return "Mathematics, Physics, Chemistry, Full Exam Simulation";
+    if (typeValue === "Artificial Intelligence" || typeValue === "الذكاء الاصطناعي") {
+        if (categoryValue === "AI Fundamentals") return "فهم معنى AI، تمييز AI وML وDL، فهم دورة مشروع AI، فهم دور البيانات، بناء خريطة تعلم شخصية";
+        if (categoryValue === "Python for AI") return "استخدام Python في AI، تنظيم Notebooks، قراءة ملفات البيانات، كتابة Functions، تنظيم كود AI بسيط";
+        if (categoryValue === "Math for AI Basics") return "خريطة رياضيات AI، Linear Algebra، Statistics، Probability، Metrics، ربط الرياضيات بتطبيقات ML";
+        if (categoryValue === "Data for AI") return "فهم البيانات، Datasets، Features and Labels، Train/Test Data، Data Quality، Data Leakage، Data Ethics";
+        if (categoryValue === "NumPy for AI") return "NumPy Arrays، Shapes and Dimensions، Indexing، Broadcasting، عمليات عددية، تجهيز بيانات AI";
+        if (categoryValue === "Pandas for AI") return "DataFrames، قراءة Datasets، فحص البيانات، Filtering، Missing Values، Categorical Data، إعداد Dataset";
+        if (categoryValue === "Data Preparation") return "Data Cleaning، Missing Values، Encoding، Feature Scaling، Train/Test Split، Outliers، Pipeline";
+        if (categoryValue === "Data Visualization for AI") return "Visualizing Distributions، Relationships، Correlation، Model Results، EDA Report مرئي";
+        if (categoryValue === "Machine Learning") return "ML Workflow، البيانات والنموذج، Generalization، Overfitting وUnderfitting، أول نموذج ML";
+        if (categoryValue === "Model Evaluation") return "اختيار Metric، تقييم Regression وClassification، Error Analysis، Baseline Model، Evaluation Report";
+        if (categoryValue === "AI Projects Basics") return "اختيار فكرة، تخطيط مشروع، تنفيذ Regression أو Classification، EDA، توثيق وتحسين تدريجي";
+        if (categoryValue === "Responsible AI Basics") return "Bias، Fairness، Privacy، Data Quality، Model Limitations، Responsible Use";
+        return "تحديد المسار، تقييم المستوى، تجهيز البيانات، تدريب أو تحليل، تقييم وتوثيق، مراجعة مسؤولة";
+    }
+
     if (typeValue === "Programming & Technology" || typeValue === "البرمجة والتكنولوجيا" || typeValue === "البرمجة والتقنية") {
         if (categoryValue === "Programming Fundamentals") return "فهم المفاهيم الأساسية، كتابة كود بسيط، استخدام الشروط والحلقات، استخدام الدوال، تصحيح أخطاء أساسية";
         if (categoryValue === "Problem Solving") return "تحليل المسألة، تحديد المدخلات والمخرجات، كتابة Pseudocode، اختبار الحل، مراجعة الأخطاء";
@@ -5275,6 +5291,9 @@ function updateSmartGoalsV4610(changedId = "") {
         } else if (typeKeyV558 === "Programming & Technology") {
             const programmingOutcome = (data.outcomes && (data.outcomes[path.value] || data.outcomes[category.value])) || "مثال: أريد بناء مسار برمجي واضح وطويل المدى يناسب مستواي الحالي.";
             outcome.placeholder = programmingOutcome;
+        } else if (typeKeyV558 === "Artificial Intelligence" || type.value === "الذكاء الاصطناعي") {
+            const aiOutcome = (data.outcomes && (data.outcomes[path.value] || data.outcomes[category.value])) || "مثال: أريد بناء هدف واضح وطويل المدى في الذكاء الاصطناعي يناسب مستواي الحالي.";
+            outcome.placeholder = aiOutcome;
         } else {
             outcome.placeholder = "ماذا تريد أن يتحقق عند إنجاز هذا الهدف؟";
         }
@@ -17663,3 +17682,4145 @@ applyDeepLanguageTaskConfigV531();
     }
 })();
 // === End EduPath AI v5.5.122: Goals - Programming & Technology Bank Part 3 ===
+
+// === EduPath AI v5.5.123: Goals - Artificial Intelligence Bank Part 1 ===
+(function applyArtificialIntelligenceGoalsPart1V55123() {
+    const artificialIntelligenceBankPart1V55123 = {
+    "categories": [
+        "AI Fundamentals",
+        "Python for AI",
+        "Math for AI Basics",
+        "Data for AI",
+        "NumPy for AI",
+        "Pandas for AI",
+        "Data Preparation",
+        "Data Visualization for AI",
+        "Machine Learning",
+        "Supervised Learning",
+        "Unsupervised Learning",
+        "Regression",
+        "Classification",
+        "Clustering",
+        "Model Training",
+        "Model Evaluation",
+        "Feature Engineering Basics",
+        "Scikit-learn",
+        "AI Projects Basics",
+        "Responsible AI Basics",
+        "أخرى"
+    ],
+    "paths": {
+        "AI Fundamentals": [
+            "فهم معنى الذكاء الاصطناعي",
+            "فهم الفرق بين AI وMachine Learning وDeep Learning",
+            "فهم أنواع مشكلات الذكاء الاصطناعي",
+            "فهم دورة بناء مشروع AI",
+            "فهم دور البيانات في الذكاء الاصطناعي",
+            "فهم حدود الذكاء الاصطناعي",
+            "بناء خريطة تعلم AI شخصية",
+            "أخرى"
+        ],
+        "Python for AI": [
+            "استخدام Python في مشاريع AI",
+            "إتقان التعامل مع البيانات في Python",
+            "إتقان كتابة Notebooks منظمة",
+            "إتقان كتابة Functions تخدم AI Workflow",
+            "إتقان التعامل مع ملفات البيانات",
+            "تنظيم كود AI بسيط",
+            "أخرى"
+        ],
+        "Math for AI Basics": [
+            "فهم الرياضيات اللازمة كبداية للذكاء الاصطناعي",
+            "فهم Linear Algebra Basics for AI",
+            "فهم Statistics Basics for AI",
+            "فهم Probability Basics for AI",
+            "فهم Calculus Concepts for AI بشكل مبسط",
+            "فهم Metrics and Measurements",
+            "ربط الرياضيات بتطبيقات AI",
+            "أخرى"
+        ],
+        "Data for AI": [
+            "فهم دور البيانات في AI",
+            "فهم أنواع البيانات",
+            "فهم Datasets",
+            "فهم Data Quality",
+            "فهم Labels and Targets",
+            "فهم Training Data and Test Data",
+            "فهم Data Leakage",
+            "فهم Data Ethics Basics",
+            "أخرى"
+        ],
+        "NumPy for AI": [
+            "فهم NumPy Arrays",
+            "إتقان Array Operations",
+            "فهم Shapes and Dimensions",
+            "إتقان Indexing and Slicing",
+            "فهم Broadcasting",
+            "إتقان Basic Numerical Computation",
+            "استخدام NumPy في تجهيز بيانات AI",
+            "أخرى"
+        ],
+        "Pandas for AI": [
+            "فهم DataFrames and Series",
+            "إتقان قراءة Datasets",
+            "إتقان فحص البيانات",
+            "إتقان اختيار الصفوف والأعمدة",
+            "إتقان Filtering",
+            "إتقان Grouping and Aggregation",
+            "إتقان التعامل مع Missing Values",
+            "إتقان التعامل مع Categorical Data",
+            "إعداد Dataset أولية باستخدام Pandas",
+            "أخرى"
+        ],
+        "Data Preparation": [
+            "إتقان Data Cleaning",
+            "إتقان Missing Values Treatment",
+            "إتقان Encoding Categorical Variables",
+            "إتقان Feature Scaling",
+            "إتقان Train/Test Split",
+            "إتقان Handling Outliers",
+            "إتقان Data Preparation Pipeline",
+            "تجهيز Dataset كاملة لمشروع ML",
+            "أخرى"
+        ],
+        "Data Visualization for AI": [
+            "فهم دور Visualization في AI",
+            "إتقان الرسوم الإحصائية الأساسية",
+            "إتقان Visualizing Distributions",
+            "إتقان Visualizing Relationships",
+            "إتقان Correlation Analysis بصرياً",
+            "إتقان Visualizing Model Results",
+            "بناء EDA Report مرئي",
+            "أخرى"
+        ],
+        "Machine Learning": [
+            "فهم Machine Learning Basics",
+            "فهم أنواع Machine Learning",
+            "فهم ML Workflow",
+            "فهم العلاقة بين البيانات والنموذج",
+            "فهم Model Generalization",
+            "فهم Overfitting and Underfitting",
+            "بناء أول نموذج Machine Learning",
+            "بناء مسار تعلم ML منظم",
+            "أخرى"
+        ],
+        "Supervised Learning": [
+            "فهم Supervised Learning",
+            "فهم Features and Labels",
+            "فهم Regression vs Classification",
+            "إتقان اختيار نموذج Supervised مناسب",
+            "إتقان تدريب نموذج Supervised بسيط",
+            "إتقان تقييم نموذج Supervised",
+            "بناء مشروع Supervised Learning",
+            "أخرى"
+        ],
+        "Unsupervised Learning": [
+            "فهم Unsupervised Learning",
+            "فهم Clustering كمجال أساسي",
+            "فهم Dimensionality Reduction كمفهوم",
+            "فهم Patterns in Data",
+            "فهم تقييم Unsupervised Learning بشكل مبسط",
+            "بناء مشروع Unsupervised Learning بسيط",
+            "أخرى"
+        ],
+        "Regression": [
+            "فهم Regression Models",
+            "إتقان Linear Regression",
+            "فهم Multiple Regression",
+            "فهم Regression Metrics",
+            "فهم Error Analysis for Regression",
+            "مقارنة Regression Models",
+            "بناء مشروع Regression",
+            "أخرى"
+        ],
+        "Classification": [
+            "فهم Classification Problems",
+            "إتقان Binary Classification",
+            "فهم Multi-class Classification",
+            "فهم Classification Metrics",
+            "فهم Confusion Matrix",
+            "فهم Thresholds",
+            "بناء مشروع Classification",
+            "أخرى"
+        ],
+        "Clustering": [
+            "فهم Clustering",
+            "إتقان K-Means Basics",
+            "فهم اختيار عدد المجموعات",
+            "فهم تقييم Clustering بشكل مبسط",
+            "فهم Visualizing Clusters",
+            "بناء مشروع Clustering",
+            "أخرى"
+        ],
+        "Model Training": [
+            "فهم Training Process",
+            "إتقان Train/Test Workflow",
+            "فهم Hyperparameters",
+            "فهم Validation",
+            "فهم Cross-validation Basics",
+            "فهم Model Selection",
+            "تدريب أكثر من نموذج ومقارنتها",
+            "أخرى"
+        ],
+        "Model Evaluation": [
+            "فهم Model Evaluation",
+            "اختيار Metric مناسبة",
+            "تقييم Regression Models",
+            "تقييم Classification Models",
+            "تحليل Overfitting and Underfitting",
+            "فهم Baseline Model",
+            "فهم Error Analysis",
+            "كتابة Model Evaluation Report",
+            "أخرى"
+        ],
+        "Feature Engineering Basics": [
+            "فهم Feature Engineering",
+            "اختيار Features مناسبة",
+            "إنشاء Features جديدة",
+            "تحويل Features",
+            "التعامل مع Categorical Features",
+            "التعامل مع Numerical Features",
+            "تقييم أثر Feature Engineering",
+            "أخرى"
+        ],
+        "Scikit-learn": [
+            "فهم Scikit-learn Workflow",
+            "إتقان Estimators",
+            "إتقان fit and predict",
+            "إتقان Train/Test Split في Scikit-learn",
+            "إتقان Preprocessing Tools",
+            "إتقان Pipelines Basics",
+            "إتقان Model Selection Tools",
+            "بناء مشاريع Scikit-learn تأسيسية",
+            "أخرى"
+        ],
+        "AI Projects Basics": [
+            "اختيار فكرة مشروع AI تأسيسي",
+            "تخطيط مشروع AI بسيط",
+            "تنفيذ مشروع Regression",
+            "تنفيذ مشروع Classification",
+            "تنفيذ مشروع Clustering",
+            "تنفيذ مشروع Data Preparation كامل",
+            "تنفيذ مشروع EDA and Visualization",
+            "توثيق مشروع AI تأسيسي",
+            "تحسين مشروع AI تدريجياً",
+            "أخرى"
+        ],
+        "Responsible AI Basics": [
+            "فهم Responsible AI",
+            "فهم Bias في البيانات والنماذج",
+            "فهم Fairness Basics",
+            "فهم Privacy Basics",
+            "فهم Model Limitations",
+            "فهم Hallucination كمفهوم عام",
+            "فهم Data Quality and Responsibility",
+            "تقييم مشروع AI من زاوية مسؤولة",
+            "أخرى"
+        ],
+        "أخرى": [
+            "أخرى"
+        ]
+    },
+    "states": {
+        "فهم معنى الذكاء الاصطناعي": {
+            "current": [
+                "لا أعرف معنى الذكاء الاصطناعي بوضوح",
+                "أسمع عن AI لكنني أخلطه مع البرمجة العادية",
+                "أعرف أمثلة على AI لكن لا أفهم كيف يعمل",
+                "أستخدم أدوات AI دون فهم المفهوم",
+                "أحتاج إلى تأسيس واضح قبل البدء في Machine Learning",
+                "أخرى"
+            ],
+            "target": [
+                "شرح معنى AI بلغة بسيطة",
+                "تمييز AI عن البرامج التقليدية",
+                "فهم فكرة التعلم من البيانات",
+                "ذكر أمثلة صحيحة لاستخدامات AI",
+                "الاستعداد للانتقال إلى Machine Learning",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لفهم المفاهيم الأساسية",
+                "دراسة يومية قصيرة + تلخيص مفهوم واحد",
+                "جلسة قراءة + جلسة أمثلة + جلسة مراجعة أسبوعياً",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم الفرق بين AI وMachine Learning وDeep Learning": {
+            "current": [
+                "أخلط بين AI وML وDeep Learning",
+                "أعرف المصطلحات لكن لا أعرف العلاقة بينها",
+                "أظن أن كل AI هو Deep Learning",
+                "لا أعرف متى نستخدم Machine Learning",
+                "أحتاج إلى ترتيب المفاهيم قبل اختيار مسار تعلم",
+                "أخرى"
+            ],
+            "target": [
+                "تمييز AI وML وDeep Learning",
+                "شرح العلاقة الهرمية بينها",
+                "تحديد أمثلة لكل مجال",
+                "فهم أن ML جزء من AI",
+                "فهم أن Deep Learning جزء من ML",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلستان مفاهيم أسبوعياً + مراجعة مقارنة",
+                "تلخيص الفروقات في جدول تعليمي",
+                "اختبار ذاتي أسبوعي على المصطلحات",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم أنواع مشكلات الذكاء الاصطناعي": {
+            "current": [
+                "لم أبدأ بعد في فهم أنواع مشكلات الذكاء الاصطناعي",
+                "أعرف فكرة عامة عن فهم أنواع مشكلات الذكاء الاصطناعي فقط",
+                "أفهم بعض مفاهيم فهم أنواع مشكلات الذكاء الاصطناعي لكن لا أطبقها جيداً",
+                "طبقت فهم أنواع مشكلات الذكاء الاصطناعي في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم أنواع مشكلات الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم أنواع مشكلات الذكاء الاصطناعي بوضوح",
+                "تطبيق فهم أنواع مشكلات الذكاء الاصطناعي في أمثلة AI عملية",
+                "استخدام فهم أنواع مشكلات الذكاء الاصطناعي ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم أنواع مشكلات الذكاء الاصطناعي",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم أنواع مشكلات الذكاء الاصطناعي",
+                "تطبيق عملي أسبوعي على فهم أنواع مشكلات الذكاء الاصطناعي",
+                "Notebook أو تقرير قصير حول فهم أنواع مشكلات الذكاء الاصطناعي كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم دورة بناء مشروع AI": {
+            "current": [
+                "لا أعرف خطوات مشروع AI",
+                "أظن أن المشروع يبدأ بتدريب النموذج مباشرة",
+                "لا أفهم دور جمع البيانات وتنظيفها",
+                "لا أعرف أين يأتي التقييم في المشروع",
+                "أحتاج إلى رؤية كاملة لمراحل مشروع AI",
+                "أخرى"
+            ],
+            "target": [
+                "شرح مراحل مشروع AI كاملة",
+                "فهم جمع البيانات وتنظيفها",
+                "فهم التدريب والتقييم",
+                "فهم تجربة النماذج وتحسينها",
+                "فهم توثيق النتائج",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة أسبوعية لكل مرحلة من مراحل المشروع",
+                "تطبيق خريطة مشروع AI على فكرة بسيطة",
+                "مراجعة تقدم أسبوعية مع توثيق المراحل",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم دور البيانات في الذكاء الاصطناعي": {
+            "current": [
+                "لم أبدأ بعد في فهم دور البيانات في الذكاء الاصطناعي",
+                "أعرف فكرة عامة عن فهم دور البيانات في الذكاء الاصطناعي فقط",
+                "أفهم بعض مفاهيم فهم دور البيانات في الذكاء الاصطناعي لكن لا أطبقها جيداً",
+                "طبقت فهم دور البيانات في الذكاء الاصطناعي في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم دور البيانات في الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم دور البيانات في الذكاء الاصطناعي بوضوح",
+                "تطبيق فهم دور البيانات في الذكاء الاصطناعي في أمثلة AI عملية",
+                "استخدام فهم دور البيانات في الذكاء الاصطناعي ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم دور البيانات في الذكاء الاصطناعي",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم دور البيانات في الذكاء الاصطناعي",
+                "تطبيق عملي أسبوعي على فهم دور البيانات في الذكاء الاصطناعي",
+                "Notebook أو تقرير قصير حول فهم دور البيانات في الذكاء الاصطناعي كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم حدود الذكاء الاصطناعي": {
+            "current": [
+                "لم أبدأ بعد في فهم حدود الذكاء الاصطناعي",
+                "أعرف فكرة عامة عن فهم حدود الذكاء الاصطناعي فقط",
+                "أفهم بعض مفاهيم فهم حدود الذكاء الاصطناعي لكن لا أطبقها جيداً",
+                "طبقت فهم حدود الذكاء الاصطناعي في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم حدود الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم حدود الذكاء الاصطناعي بوضوح",
+                "تطبيق فهم حدود الذكاء الاصطناعي في أمثلة AI عملية",
+                "استخدام فهم حدود الذكاء الاصطناعي ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم حدود الذكاء الاصطناعي",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم حدود الذكاء الاصطناعي",
+                "تطبيق عملي أسبوعي على فهم حدود الذكاء الاصطناعي",
+                "Notebook أو تقرير قصير حول فهم حدود الذكاء الاصطناعي كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "بناء خريطة تعلم AI شخصية": {
+            "current": [
+                "لم أبدأ بعد في بناء خريطة تعلم AI شخصية",
+                "أعرف فكرة عامة عن بناء خريطة تعلم AI شخصية فقط",
+                "أفهم بعض مفاهيم بناء خريطة تعلم AI شخصية لكن لا أطبقها جيداً",
+                "طبقت بناء خريطة تعلم AI شخصية في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان بناء خريطة تعلم AI شخصية",
+                "أخرى"
+            ],
+            "target": [
+                "فهم بناء خريطة تعلم AI شخصية بوضوح",
+                "تطبيق بناء خريطة تعلم AI شخصية في أمثلة AI عملية",
+                "استخدام بناء خريطة تعلم AI شخصية ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في بناء خريطة تعلم AI شخصية",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار بناء خريطة تعلم AI شخصية",
+                "تطبيق عملي أسبوعي على بناء خريطة تعلم AI شخصية",
+                "Notebook أو تقرير قصير حول بناء خريطة تعلم AI شخصية كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "استخدام Python في مشاريع AI": {
+            "current": [
+                "أعرف Python بشكل عام لكن لا أعرف استخدامه في AI",
+                "أستطيع كتابة كود بسيط لكن لا أعرف AI Workflow",
+                "أستخدم Python عشوائياً دون تنظيم",
+                "لا أعرف كيف أربط Python بالبيانات والنماذج",
+                "أحتاج إلى استخدام Python لخدمة مشاريع AI",
+                "أخرى"
+            ],
+            "target": [
+                "استخدام Python لتنظيم مشروع AI بسيط",
+                "قراءة بيانات وتشغيل خطوات معالجة",
+                "كتابة Functions تساعد في تجهيز البيانات",
+                "تنظيم Notebook أو ملف مشروع AI",
+                "الاستعداد لاستخدام NumPy وPandas وScikit-learn",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات Python for AI أسبوعياً",
+                "تطبيق عملي على Dataset بسيطة كل أسبوع",
+                "جلسة تنظيم Notebook أسبوعية",
+                "---",
+                "أخرى"
+            ]
+        },
+        "إتقان التعامل مع البيانات في Python": {
+            "current": [
+                "لم أبدأ بعد في إتقان التعامل مع البيانات في Python",
+                "أعرف فكرة عامة عن إتقان التعامل مع البيانات في Python فقط",
+                "أفهم بعض مفاهيم إتقان التعامل مع البيانات في Python لكن لا أطبقها جيداً",
+                "طبقت إتقان التعامل مع البيانات في Python في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان التعامل مع البيانات في Python",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان التعامل مع البيانات في Python بوضوح",
+                "تطبيق إتقان التعامل مع البيانات في Python في أمثلة AI عملية",
+                "استخدام إتقان التعامل مع البيانات في Python ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان التعامل مع البيانات في Python",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان التعامل مع البيانات في Python",
+                "تطبيق عملي أسبوعي على إتقان التعامل مع البيانات في Python",
+                "Notebook أو تقرير قصير حول إتقان التعامل مع البيانات في Python كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان كتابة Notebooks منظمة": {
+            "current": [
+                "أستخدم Notebook بشكل عشوائي",
+                "لا أفصل بين الشرح والكود والنتائج",
+                "أعيد تشغيل الخلايا دون ترتيب",
+                "لا أوثق خطوات التجربة",
+                "أحتاج إلى Notebook واضح لمشاريع AI",
+                "أخرى"
+            ],
+            "target": [
+                "تقسيم Notebook إلى أقسام واضحة",
+                "توثيق الهدف والبيانات والخطوات",
+                "كتابة كود قابل للقراءة",
+                "عرض النتائج بوضوح",
+                "حفظ تجربة AI قابلة للمراجعة",
+                "أخرى"
+            ],
+            "commitment": [
+                "Notebook واحد منظم كل أسبوع",
+                "جلسة توثيق أسبوعية",
+                "مراجعة Notebook قديم وتحسينه كل أسبوعين",
+                "---",
+                "أخرى"
+            ]
+        },
+        "إتقان كتابة Functions تخدم AI Workflow": {
+            "current": [
+                "لم أبدأ بعد في إتقان كتابة Functions تخدم AI Workflow",
+                "أعرف فكرة عامة عن إتقان كتابة Functions تخدم AI Workflow فقط",
+                "أفهم بعض مفاهيم إتقان كتابة Functions تخدم AI Workflow لكن لا أطبقها جيداً",
+                "طبقت إتقان كتابة Functions تخدم AI Workflow في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان كتابة Functions تخدم AI Workflow",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان كتابة Functions تخدم AI Workflow بوضوح",
+                "تطبيق إتقان كتابة Functions تخدم AI Workflow في أمثلة AI عملية",
+                "استخدام إتقان كتابة Functions تخدم AI Workflow ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان كتابة Functions تخدم AI Workflow",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان كتابة Functions تخدم AI Workflow",
+                "تطبيق عملي أسبوعي على إتقان كتابة Functions تخدم AI Workflow",
+                "Notebook أو تقرير قصير حول إتقان كتابة Functions تخدم AI Workflow كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان التعامل مع ملفات البيانات": {
+            "current": [
+                "لا أعرف كيف أقرأ ملفات البيانات في Python جيداً",
+                "أتعامل مع CSV بصعوبة",
+                "أواجه أخطاء مسارات الملفات",
+                "لا أعرف تنظيم ملفات Dataset",
+                "أحتاج إلى التعامل مع بيانات مشاريع AI",
+                "أخرى"
+            ],
+            "target": [
+                "قراءة ملفات CSV وJSON بشكل أساسي",
+                "تنظيم مجلدات البيانات",
+                "فهم مسارات الملفات",
+                "فحص حجم وشكل البيانات",
+                "تجهيز الملفات للاستخدام في مشروع AI",
+                "أخرى"
+            ],
+            "commitment": [
+                "تطبيق أسبوعي على ملف بيانات مختلف",
+                "جلسة قراءة بيانات + جلسة تنظيم ملفات أسبوعياً",
+                "توثيق مشاكل البيانات بعد كل تجربة",
+                "---",
+                "أخرى"
+            ]
+        },
+        "تنظيم كود AI بسيط": {
+            "current": [
+                "لم أبدأ بعد في تنظيم كود AI بسيط",
+                "أعرف فكرة عامة عن تنظيم كود AI بسيط فقط",
+                "أفهم بعض مفاهيم تنظيم كود AI بسيط لكن لا أطبقها جيداً",
+                "طبقت تنظيم كود AI بسيط في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان تنظيم كود AI بسيط",
+                "أخرى"
+            ],
+            "target": [
+                "فهم تنظيم كود AI بسيط بوضوح",
+                "تطبيق تنظيم كود AI بسيط في أمثلة AI عملية",
+                "استخدام تنظيم كود AI بسيط ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في تنظيم كود AI بسيط",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار تنظيم كود AI بسيط",
+                "تطبيق عملي أسبوعي على تنظيم كود AI بسيط",
+                "Notebook أو تقرير قصير حول تنظيم كود AI بسيط كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم الرياضيات اللازمة كبداية للذكاء الاصطناعي": {
+            "current": [
+                "أخاف من الرياضيات في AI",
+                "لا أعرف ما الرياضيات التي أحتاجها فعلاً",
+                "أخلط بين الجبر والإحصاء والاحتمالات",
+                "أريد تعلم AI دون الغرق في تفاصيل رياضية كثيرة",
+                "أحتاج إلى خريطة رياضيات مناسبة للبدء",
+                "أخرى"
+            ],
+            "target": [
+                "معرفة الرياضيات الأساسية اللازمة لـ AI",
+                "تمييز دور الجبر والإحصاء والاحتمالات",
+                "ربط كل مفهوم رياضي باستخدام عملي",
+                "تجنب التشتت في موضوعات غير ضرورية في البداية",
+                "الاستعداد لفهم النماذج والمقاييس",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلستان رياضيات أسبوعياً + تطبيق AI بسيط",
+                "مراجعة مفهوم رياضي واحد كل يومين",
+                "ربط كل مفهوم رياضي بمثال ML",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Linear Algebra Basics for AI": {
+            "current": [
+                "لم أبدأ بعد في فهم Linear Algebra Basics for AI",
+                "أعرف فكرة عامة عن فهم Linear Algebra Basics for AI فقط",
+                "أفهم بعض مفاهيم فهم Linear Algebra Basics for AI لكن لا أطبقها جيداً",
+                "طبقت فهم Linear Algebra Basics for AI في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Linear Algebra Basics for AI",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Linear Algebra Basics for AI بوضوح",
+                "تطبيق فهم Linear Algebra Basics for AI في أمثلة AI عملية",
+                "استخدام فهم Linear Algebra Basics for AI ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Linear Algebra Basics for AI",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Linear Algebra Basics for AI",
+                "تطبيق عملي أسبوعي على فهم Linear Algebra Basics for AI",
+                "Notebook أو تقرير قصير حول فهم Linear Algebra Basics for AI كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Statistics Basics for AI": {
+            "current": [
+                "لا أفهم الإحصاء جيداً",
+                "أعرف المتوسط فقط",
+                "أخلط بين المتوسط والانحراف والتوزيع",
+                "لا أعرف كيف يرتبط الإحصاء بالبيانات",
+                "أحتاج إلى فهم البيانات قبل النماذج",
+                "أخرى"
+            ],
+            "target": [
+                "فهم mean وmedian وmode",
+                "فهم variance وstandard deviation",
+                "فهم distributions بشكل مبسط",
+                "وصف Dataset إحصائياً",
+                "استخدام الإحصاء لفهم البيانات قبل التدريب",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات إحصاء تطبيقي أسبوعياً",
+                "تحليل Dataset صغيرة أسبوعياً",
+                "تلخيص مؤشر إحصائي واحد يومياً",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Probability Basics for AI": {
+            "current": [
+                "لا أفهم الاحتمالات",
+                "أعرف فكرة النسبة فقط",
+                "لا أفهم uncertainty",
+                "أخلط بين probability وprediction",
+                "أحتاج إلى أساس لفهم التصنيف والتوقعات",
+                "أخرى"
+            ],
+            "target": [
+                "فهم معنى الاحتمال",
+                "فهم uncertainty في النماذج",
+                "تفسير احتمالات التصنيف",
+                "فهم threshold بشكل مبسط",
+                "ربط الاحتمالات بقرارات النموذج",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلستان أسبوعياً + أمثلة تصنيف",
+                "حل أسئلة احتمالات بسيطة",
+                "مراجعة تطبيقات الاحتمال في ML أسبوعياً",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Calculus Concepts for AI بشكل مبسط": {
+            "current": [
+                "لم أبدأ بعد في فهم Calculus Concepts for AI بشكل مبسط",
+                "أعرف فكرة عامة عن فهم Calculus Concepts for AI بشكل مبسط فقط",
+                "أفهم بعض مفاهيم فهم Calculus Concepts for AI بشكل مبسط لكن لا أطبقها جيداً",
+                "طبقت فهم Calculus Concepts for AI بشكل مبسط في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Calculus Concepts for AI بشكل مبسط",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Calculus Concepts for AI بشكل مبسط بوضوح",
+                "تطبيق فهم Calculus Concepts for AI بشكل مبسط في أمثلة AI عملية",
+                "استخدام فهم Calculus Concepts for AI بشكل مبسط ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Calculus Concepts for AI بشكل مبسط",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Calculus Concepts for AI بشكل مبسط",
+                "تطبيق عملي أسبوعي على فهم Calculus Concepts for AI بشكل مبسط",
+                "Notebook أو تقرير قصير حول فهم Calculus Concepts for AI بشكل مبسط كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Metrics and Measurements": {
+            "current": [
+                "لم أبدأ بعد في فهم Metrics and Measurements",
+                "أعرف فكرة عامة عن فهم Metrics and Measurements فقط",
+                "أفهم بعض مفاهيم فهم Metrics and Measurements لكن لا أطبقها جيداً",
+                "طبقت فهم Metrics and Measurements في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Metrics and Measurements",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Metrics and Measurements بوضوح",
+                "تطبيق فهم Metrics and Measurements في أمثلة AI عملية",
+                "استخدام فهم Metrics and Measurements ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Metrics and Measurements",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Metrics and Measurements",
+                "تطبيق عملي أسبوعي على فهم Metrics and Measurements",
+                "Notebook أو تقرير قصير حول فهم Metrics and Measurements كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "ربط الرياضيات بتطبيقات AI": {
+            "current": [
+                "لم أبدأ بعد في ربط الرياضيات بتطبيقات AI",
+                "أعرف فكرة عامة عن ربط الرياضيات بتطبيقات AI فقط",
+                "أفهم بعض مفاهيم ربط الرياضيات بتطبيقات AI لكن لا أطبقها جيداً",
+                "طبقت ربط الرياضيات بتطبيقات AI في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان ربط الرياضيات بتطبيقات AI",
+                "أخرى"
+            ],
+            "target": [
+                "فهم ربط الرياضيات بتطبيقات AI بوضوح",
+                "تطبيق ربط الرياضيات بتطبيقات AI في أمثلة AI عملية",
+                "استخدام ربط الرياضيات بتطبيقات AI ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في ربط الرياضيات بتطبيقات AI",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار ربط الرياضيات بتطبيقات AI",
+                "تطبيق عملي أسبوعي على ربط الرياضيات بتطبيقات AI",
+                "Notebook أو تقرير قصير حول ربط الرياضيات بتطبيقات AI كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم دور البيانات في AI": {
+            "current": [
+                "أظن أن النموذج أهم من البيانات دائماً",
+                "لا أعرف كيف تؤثر جودة البيانات على النموذج",
+                "لا أفهم علاقة البيانات بالتعلم",
+                "أستخدم Dataset دون فحصها",
+                "أحتاج إلى فهم البيانات قبل النماذج",
+                "أخرى"
+            ],
+            "target": [
+                "شرح دور البيانات في تدريب AI",
+                "فهم أن جودة البيانات تؤثر على جودة النموذج",
+                "فحص البيانات قبل التدريب",
+                "تمييز البيانات المناسبة وغير المناسبة",
+                "اتخاذ قرار أولي حول صلاحية Dataset",
+                "أخرى"
+            ],
+            "commitment": [
+                "تحليل Dataset أسبوعياً",
+                "جلسة فحص جودة بيانات كل أسبوع",
+                "توثيق ملاحظات البيانات قبل أي تدريب",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم أنواع البيانات": {
+            "current": [
+                "لم أبدأ بعد في فهم أنواع البيانات",
+                "أعرف فكرة عامة عن فهم أنواع البيانات فقط",
+                "أفهم بعض مفاهيم فهم أنواع البيانات لكن لا أطبقها جيداً",
+                "طبقت فهم أنواع البيانات في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم أنواع البيانات",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم أنواع البيانات بوضوح",
+                "تطبيق فهم أنواع البيانات في أمثلة AI عملية",
+                "استخدام فهم أنواع البيانات ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم أنواع البيانات",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم أنواع البيانات",
+                "تطبيق عملي أسبوعي على فهم أنواع البيانات",
+                "Notebook أو تقرير قصير حول فهم أنواع البيانات كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Datasets": {
+            "current": [
+                "لم أبدأ بعد في فهم Datasets",
+                "أعرف فكرة عامة عن فهم Datasets فقط",
+                "أفهم بعض مفاهيم فهم Datasets لكن لا أطبقها جيداً",
+                "طبقت فهم Datasets في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Datasets",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Datasets بوضوح",
+                "تطبيق فهم Datasets في أمثلة AI عملية",
+                "استخدام فهم Datasets ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Datasets",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Datasets",
+                "تطبيق عملي أسبوعي على فهم Datasets",
+                "Notebook أو تقرير قصير حول فهم Datasets كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Data Quality": {
+            "current": [
+                "لم أبدأ بعد في فهم Data Quality",
+                "أعرف فكرة عامة عن فهم Data Quality فقط",
+                "أفهم بعض مفاهيم فهم Data Quality لكن لا أطبقها جيداً",
+                "طبقت فهم Data Quality في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Data Quality",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Data Quality بوضوح",
+                "تطبيق فهم Data Quality في أمثلة AI عملية",
+                "استخدام فهم Data Quality ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Data Quality",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Data Quality",
+                "تطبيق عملي أسبوعي على فهم Data Quality",
+                "Notebook أو تقرير قصير حول فهم Data Quality كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Labels and Targets": {
+            "current": [
+                "لا أفهم معنى Label أو Target",
+                "أخلط بين Features وTarget",
+                "لا أعرف ماذا يتعلم النموذج بالضبط",
+                "أواجه صعوبة في تحديد عمود الهدف",
+                "أحتاج إلى فهم بنية Dataset",
+                "أخرى"
+            ],
+            "target": [
+                "تمييز Features عن Target",
+                "تحديد Label في Dataset",
+                "فهم علاقة الأعمدة بالهدف",
+                "اختيار Target مناسب للمشكلة",
+                "شرح ما يحاول النموذج توقعه",
+                "أخرى"
+            ],
+            "commitment": [
+                "تحديد Features وTarget في Dataset أسبوعياً",
+                "جلسة تحليل بنية بيانات أسبوعية",
+                "تطبيق على 3 Datasets مختلفة خلال شهر",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Training Data and Test Data": {
+            "current": [
+                "لم أبدأ بعد في فهم Training Data and Test Data",
+                "أعرف فكرة عامة عن فهم Training Data and Test Data فقط",
+                "أفهم بعض مفاهيم فهم Training Data and Test Data لكن لا أطبقها جيداً",
+                "طبقت فهم Training Data and Test Data في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Training Data and Test Data",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Training Data and Test Data بوضوح",
+                "تطبيق فهم Training Data and Test Data في أمثلة AI عملية",
+                "استخدام فهم Training Data and Test Data ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Training Data and Test Data",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Training Data and Test Data",
+                "تطبيق عملي أسبوعي على فهم Training Data and Test Data",
+                "Notebook أو تقرير قصير حول فهم Training Data and Test Data كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Data Leakage": {
+            "current": [
+                "لا أعرف معنى Data Leakage",
+                "أقسم البيانات عشوائياً دون تفكير",
+                "لا أعرف كيف قد يتسرب الجواب إلى التدريب",
+                "أحصل على نتائج عالية ولا أعرف هل هي حقيقية",
+                "أحتاج إلى حماية التقييم من الخداع",
+                "أخرى"
+            ],
+            "target": [
+                "شرح معنى Data Leakage",
+                "اكتشاف مؤشرات تسرب البيانات",
+                "تجنب استخدام معلومات غير عادلة أثناء التدريب",
+                "تقسيم البيانات بطريقة مناسبة",
+                "تفسير النتائج بحذر",
+                "أخرى"
+            ],
+            "commitment": [
+                "مراجعة تقسيم البيانات في كل مشروع",
+                "جلسة أسبوعية لتحليل أخطاء التقييم",
+                "كتابة Checklist لمنع Data Leakage",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Data Ethics Basics": {
+            "current": [
+                "لم أبدأ بعد في فهم Data Ethics Basics",
+                "أعرف فكرة عامة عن فهم Data Ethics Basics فقط",
+                "أفهم بعض مفاهيم فهم Data Ethics Basics لكن لا أطبقها جيداً",
+                "طبقت فهم Data Ethics Basics في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Data Ethics Basics",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Data Ethics Basics بوضوح",
+                "تطبيق فهم Data Ethics Basics في أمثلة AI عملية",
+                "استخدام فهم Data Ethics Basics ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Data Ethics Basics",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Data Ethics Basics",
+                "تطبيق عملي أسبوعي على فهم Data Ethics Basics",
+                "Notebook أو تقرير قصير حول فهم Data Ethics Basics كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم NumPy Arrays": {
+            "current": [
+                "لم أبدأ بعد في فهم NumPy Arrays",
+                "أعرف فكرة عامة عن فهم NumPy Arrays فقط",
+                "أفهم بعض مفاهيم فهم NumPy Arrays لكن لا أطبقها جيداً",
+                "طبقت فهم NumPy Arrays في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم NumPy Arrays",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم NumPy Arrays بوضوح",
+                "تطبيق فهم NumPy Arrays في أمثلة AI عملية",
+                "استخدام فهم NumPy Arrays ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم NumPy Arrays",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم NumPy Arrays",
+                "تطبيق عملي أسبوعي على فهم NumPy Arrays",
+                "Notebook أو تقرير قصير حول فهم NumPy Arrays كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Array Operations": {
+            "current": [
+                "لم أبدأ بعد في إتقان Array Operations",
+                "أعرف فكرة عامة عن إتقان Array Operations فقط",
+                "أفهم بعض مفاهيم إتقان Array Operations لكن لا أطبقها جيداً",
+                "طبقت إتقان Array Operations في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Array Operations",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Array Operations بوضوح",
+                "تطبيق إتقان Array Operations في أمثلة AI عملية",
+                "استخدام إتقان Array Operations ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Array Operations",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Array Operations",
+                "تطبيق عملي أسبوعي على إتقان Array Operations",
+                "Notebook أو تقرير قصير حول إتقان Array Operations كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Shapes and Dimensions": {
+            "current": [
+                "أستخدم arrays دون فهم shape",
+                "أخلط بين الصفوف والأعمدة",
+                "لا أفهم 1D و2D arrays",
+                "أواجه أخطاء dimensions",
+                "أحتاج إلى فهم شكل البيانات قبل التدريب",
+                "أخرى"
+            ],
+            "target": [
+                "قراءة shape لأي array",
+                "تمييز 1D و2D و3D بشكل أساسي",
+                "فهم rows وcolumns",
+                "تعديل shape عند الحاجة",
+                "تجنب أخطاء dimensions في مشاريع AI",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات NumPy أسبوعياً",
+                "تطبيق أسبوعي على arrays بأشكال مختلفة",
+                "مراجعة أخطاء shapes بعد كل تمرين",
+                "---",
+                "أخرى"
+            ]
+        },
+        "إتقان Indexing and Slicing": {
+            "current": [
+                "لم أبدأ بعد في إتقان Indexing and Slicing",
+                "أعرف فكرة عامة عن إتقان Indexing and Slicing فقط",
+                "أفهم بعض مفاهيم إتقان Indexing and Slicing لكن لا أطبقها جيداً",
+                "طبقت إتقان Indexing and Slicing في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Indexing and Slicing",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Indexing and Slicing بوضوح",
+                "تطبيق إتقان Indexing and Slicing في أمثلة AI عملية",
+                "استخدام إتقان Indexing and Slicing ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Indexing and Slicing",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Indexing and Slicing",
+                "تطبيق عملي أسبوعي على إتقان Indexing and Slicing",
+                "Notebook أو تقرير قصير حول إتقان Indexing and Slicing كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Broadcasting": {
+            "current": [
+                "لا أعرف معنى Broadcasting",
+                "تظهر لي نتائج غير متوقعة في العمليات",
+                "أخلط بين عمليات array وscalar",
+                "لا أفهم لماذا تعمل بعض العمليات وتفشل أخرى",
+                "أحتاج إلى فهم الحسابات العددية في AI",
+                "أخرى"
+            ],
+            "target": [
+                "شرح معنى Broadcasting",
+                "توقع نتيجة العمليات بين arrays",
+                "تجنب أخطاء shape",
+                "استخدام Broadcasting في عمليات AI بسيطة",
+                "فهم متى يكون Broadcasting مناسباً",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلستان Broadcasting أسبوعياً",
+                "تمارين مقارنة shapes",
+                "تطبيق Broadcasting على بيانات رقمية بسيطة",
+                "---",
+                "أخرى"
+            ]
+        },
+        "إتقان Basic Numerical Computation": {
+            "current": [
+                "لم أبدأ بعد في إتقان Basic Numerical Computation",
+                "أعرف فكرة عامة عن إتقان Basic Numerical Computation فقط",
+                "أفهم بعض مفاهيم إتقان Basic Numerical Computation لكن لا أطبقها جيداً",
+                "طبقت إتقان Basic Numerical Computation في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Basic Numerical Computation",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Basic Numerical Computation بوضوح",
+                "تطبيق إتقان Basic Numerical Computation في أمثلة AI عملية",
+                "استخدام إتقان Basic Numerical Computation ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Basic Numerical Computation",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Basic Numerical Computation",
+                "تطبيق عملي أسبوعي على إتقان Basic Numerical Computation",
+                "Notebook أو تقرير قصير حول إتقان Basic Numerical Computation كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "استخدام NumPy في تجهيز بيانات AI": {
+            "current": [
+                "لم أبدأ بعد في استخدام NumPy في تجهيز بيانات AI",
+                "أعرف فكرة عامة عن استخدام NumPy في تجهيز بيانات AI فقط",
+                "أفهم بعض مفاهيم استخدام NumPy في تجهيز بيانات AI لكن لا أطبقها جيداً",
+                "طبقت استخدام NumPy في تجهيز بيانات AI في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان استخدام NumPy في تجهيز بيانات AI",
+                "أخرى"
+            ],
+            "target": [
+                "فهم استخدام NumPy في تجهيز بيانات AI بوضوح",
+                "تطبيق استخدام NumPy في تجهيز بيانات AI في أمثلة AI عملية",
+                "استخدام استخدام NumPy في تجهيز بيانات AI ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في استخدام NumPy في تجهيز بيانات AI",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار استخدام NumPy في تجهيز بيانات AI",
+                "تطبيق عملي أسبوعي على استخدام NumPy في تجهيز بيانات AI",
+                "Notebook أو تقرير قصير حول استخدام NumPy في تجهيز بيانات AI كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم DataFrames and Series": {
+            "current": [
+                "لم أبدأ بعد في فهم DataFrames and Series",
+                "أعرف فكرة عامة عن فهم DataFrames and Series فقط",
+                "أفهم بعض مفاهيم فهم DataFrames and Series لكن لا أطبقها جيداً",
+                "طبقت فهم DataFrames and Series في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم DataFrames and Series",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم DataFrames and Series بوضوح",
+                "تطبيق فهم DataFrames and Series في أمثلة AI عملية",
+                "استخدام فهم DataFrames and Series ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم DataFrames and Series",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم DataFrames and Series",
+                "تطبيق عملي أسبوعي على فهم DataFrames and Series",
+                "Notebook أو تقرير قصير حول فهم DataFrames and Series كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان قراءة Datasets": {
+            "current": [
+                "لم أبدأ بعد في إتقان قراءة Datasets",
+                "أعرف فكرة عامة عن إتقان قراءة Datasets فقط",
+                "أفهم بعض مفاهيم إتقان قراءة Datasets لكن لا أطبقها جيداً",
+                "طبقت إتقان قراءة Datasets في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان قراءة Datasets",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان قراءة Datasets بوضوح",
+                "تطبيق إتقان قراءة Datasets في أمثلة AI عملية",
+                "استخدام إتقان قراءة Datasets ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان قراءة Datasets",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان قراءة Datasets",
+                "تطبيق عملي أسبوعي على إتقان قراءة Datasets",
+                "Notebook أو تقرير قصير حول إتقان قراءة Datasets كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان فحص البيانات": {
+            "current": [
+                "أفتح Dataset دون فحصها جيداً",
+                "لا أعرف استخدام head وinfo وdescribe",
+                "لا أعرف كيف أحدد أنواع الأعمدة",
+                "أحتاج إلى فهم Dataset قبل التنظيف",
+                "أخرى"
+            ],
+            "target": [
+                "فحص Dataset باستخدام أوامر Pandas الأساسية",
+                "معرفة عدد الصفوف والأعمدة",
+                "فهم أنواع البيانات",
+                "اكتشاف القيم المفقودة",
+                "كتابة ملخص أولي عن Dataset",
+                "أخرى"
+            ],
+            "commitment": [
+                "فحص Dataset واحدة أسبوعياً",
+                "كتابة تقرير EDA أولي قصير",
+                "تطبيق أوامر Pandas الأساسية يومين في الأسبوع",
+                "---",
+                "أخرى"
+            ]
+        },
+        "إتقان اختيار الصفوف والأعمدة": {
+            "current": [
+                "لم أبدأ بعد في إتقان اختيار الصفوف والأعمدة",
+                "أعرف فكرة عامة عن إتقان اختيار الصفوف والأعمدة فقط",
+                "أفهم بعض مفاهيم إتقان اختيار الصفوف والأعمدة لكن لا أطبقها جيداً",
+                "طبقت إتقان اختيار الصفوف والأعمدة في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان اختيار الصفوف والأعمدة",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان اختيار الصفوف والأعمدة بوضوح",
+                "تطبيق إتقان اختيار الصفوف والأعمدة في أمثلة AI عملية",
+                "استخدام إتقان اختيار الصفوف والأعمدة ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان اختيار الصفوف والأعمدة",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان اختيار الصفوف والأعمدة",
+                "تطبيق عملي أسبوعي على إتقان اختيار الصفوف والأعمدة",
+                "Notebook أو تقرير قصير حول إتقان اختيار الصفوف والأعمدة كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Filtering": {
+            "current": [
+                "لم أبدأ بعد في إتقان Filtering",
+                "أعرف فكرة عامة عن إتقان Filtering فقط",
+                "أفهم بعض مفاهيم إتقان Filtering لكن لا أطبقها جيداً",
+                "طبقت إتقان Filtering في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Filtering",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Filtering بوضوح",
+                "تطبيق إتقان Filtering في أمثلة AI عملية",
+                "استخدام إتقان Filtering ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Filtering",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Filtering",
+                "تطبيق عملي أسبوعي على إتقان Filtering",
+                "Notebook أو تقرير قصير حول إتقان Filtering كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Grouping and Aggregation": {
+            "current": [
+                "لم أبدأ بعد في إتقان Grouping and Aggregation",
+                "أعرف فكرة عامة عن إتقان Grouping and Aggregation فقط",
+                "أفهم بعض مفاهيم إتقان Grouping and Aggregation لكن لا أطبقها جيداً",
+                "طبقت إتقان Grouping and Aggregation في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Grouping and Aggregation",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Grouping and Aggregation بوضوح",
+                "تطبيق إتقان Grouping and Aggregation في أمثلة AI عملية",
+                "استخدام إتقان Grouping and Aggregation ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Grouping and Aggregation",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Grouping and Aggregation",
+                "تطبيق عملي أسبوعي على إتقان Grouping and Aggregation",
+                "Notebook أو تقرير قصير حول إتقان Grouping and Aggregation كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان التعامل مع Missing Values": {
+            "current": [
+                "أرى القيم المفقودة ولا أعرف ماذا أفعل",
+                "أحذف الصفوف عشوائياً",
+                "لا أعرف متى أملأ القيم",
+                "لا أفهم تأثير Missing Values على النموذج",
+                "أحتاج إلى طريقة منظمة لمعالجتها",
+                "أخرى"
+            ],
+            "target": [
+                "اكتشاف Missing Values",
+                "تحليل سببها وتأثيرها",
+                "اختيار حذف أو تعويض مناسب",
+                "تطبيق معالجة منظمة",
+                "توثيق قرار معالجة القيم المفقودة",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة أسبوعية لمعالجة Missing Values",
+                "تطبيق على Datasets مختلفة",
+                "كتابة سبب كل قرار تنظيف",
+                "---",
+                "أخرى"
+            ]
+        },
+        "إتقان التعامل مع Categorical Data": {
+            "current": [
+                "لم أبدأ بعد في إتقان التعامل مع Categorical Data",
+                "أعرف فكرة عامة عن إتقان التعامل مع Categorical Data فقط",
+                "أفهم بعض مفاهيم إتقان التعامل مع Categorical Data لكن لا أطبقها جيداً",
+                "طبقت إتقان التعامل مع Categorical Data في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان التعامل مع Categorical Data",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان التعامل مع Categorical Data بوضوح",
+                "تطبيق إتقان التعامل مع Categorical Data في أمثلة AI عملية",
+                "استخدام إتقان التعامل مع Categorical Data ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان التعامل مع Categorical Data",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان التعامل مع Categorical Data",
+                "تطبيق عملي أسبوعي على إتقان التعامل مع Categorical Data",
+                "Notebook أو تقرير قصير حول إتقان التعامل مع Categorical Data كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إعداد Dataset أولية باستخدام Pandas": {
+            "current": [
+                "لم أبدأ بعد في إعداد Dataset أولية باستخدام Pandas",
+                "أعرف فكرة عامة عن إعداد Dataset أولية باستخدام Pandas فقط",
+                "أفهم بعض مفاهيم إعداد Dataset أولية باستخدام Pandas لكن لا أطبقها جيداً",
+                "طبقت إعداد Dataset أولية باستخدام Pandas في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إعداد Dataset أولية باستخدام Pandas",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إعداد Dataset أولية باستخدام Pandas بوضوح",
+                "تطبيق إعداد Dataset أولية باستخدام Pandas في أمثلة AI عملية",
+                "استخدام إعداد Dataset أولية باستخدام Pandas ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إعداد Dataset أولية باستخدام Pandas",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إعداد Dataset أولية باستخدام Pandas",
+                "تطبيق عملي أسبوعي على إعداد Dataset أولية باستخدام Pandas",
+                "Notebook أو تقرير قصير حول إعداد Dataset أولية باستخدام Pandas كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Data Cleaning": {
+            "current": [
+                "لا أعرف من أين أبدأ تنظيف البيانات",
+                "أعالج الأخطاء عشوائياً",
+                "لا أفحص القيم المكررة أو غير المنطقية",
+                "لا أوثق خطوات التنظيف",
+                "أحتاج إلى Pipeline تنظيف واضح",
+                "أخرى"
+            ],
+            "target": [
+                "فحص جودة البيانات",
+                "إزالة أو معالجة القيم غير المناسبة",
+                "التعامل مع التكرار",
+                "تنظيف أسماء الأعمدة",
+                "توثيق خطوات التنظيف",
+                "تجهيز بيانات صالحة للتحليل والتدريب",
+                "أخرى"
+            ],
+            "commitment": [
+                "تنظيف Dataset واحدة كل أسبوعين",
+                "جلسة Cleaning + جلسة توثيق أسبوعياً",
+                "بناء Checklist تنظيف بيانات",
+                "---",
+                "أخرى"
+            ]
+        },
+        "إتقان Missing Values Treatment": {
+            "current": [
+                "لم أبدأ بعد في إتقان Missing Values Treatment",
+                "أعرف فكرة عامة عن إتقان Missing Values Treatment فقط",
+                "أفهم بعض مفاهيم إتقان Missing Values Treatment لكن لا أطبقها جيداً",
+                "طبقت إتقان Missing Values Treatment في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Missing Values Treatment",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Missing Values Treatment بوضوح",
+                "تطبيق إتقان Missing Values Treatment في أمثلة AI عملية",
+                "استخدام إتقان Missing Values Treatment ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Missing Values Treatment",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Missing Values Treatment",
+                "تطبيق عملي أسبوعي على إتقان Missing Values Treatment",
+                "Notebook أو تقرير قصير حول إتقان Missing Values Treatment كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Encoding Categorical Variables": {
+            "current": [
+                "لا أفهم كيف يتعامل النموذج مع النصوص والفئات",
+                "لا أعرف الفرق بين Label Encoding وOne-hot Encoding",
+                "أستخدم Encoding عشوائياً",
+                "أواجه أخطاء بعد التحويل",
+                "أحتاج إلى تجهيز الفئات للنماذج",
+                "أخرى"
+            ],
+            "target": [
+                "تمييز البيانات الفئوية",
+                "اختيار Encoding مناسب",
+                "تطبيق Label Encoding أو One-hot Encoding",
+                "فهم تأثير Encoding على النموذج",
+                "تجنب أخطاء التحويل",
+                "أخرى"
+            ],
+            "commitment": [
+                "تمارين Encoding أسبوعية",
+                "تطبيق على Dataset تحتوي فئات",
+                "مراجعة تأثير Encoding على النموذج",
+                "---",
+                "أخرى"
+            ]
+        },
+        "إتقان Feature Scaling": {
+            "current": [
+                "لم أبدأ بعد في إتقان Feature Scaling",
+                "أعرف فكرة عامة عن إتقان Feature Scaling فقط",
+                "أفهم بعض مفاهيم إتقان Feature Scaling لكن لا أطبقها جيداً",
+                "طبقت إتقان Feature Scaling في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Feature Scaling",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Feature Scaling بوضوح",
+                "تطبيق إتقان Feature Scaling في أمثلة AI عملية",
+                "استخدام إتقان Feature Scaling ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Feature Scaling",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Feature Scaling",
+                "تطبيق عملي أسبوعي على إتقان Feature Scaling",
+                "Notebook أو تقرير قصير حول إتقان Feature Scaling كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Train/Test Split": {
+            "current": [
+                "لا أعرف كيف أقسم البيانات",
+                "أدرب وأختبر على نفس البيانات",
+                "أخلط بين training وtesting",
+                "لا أفهم لماذا نحتاج test set",
+                "أحتاج إلى تقييم عادل للنموذج",
+                "أخرى"
+            ],
+            "target": [
+                "تقسيم البيانات إلى train وtest",
+                "فهم سبب التقسيم",
+                "تجنب اختبار النموذج على بيانات التدريب",
+                "استخدام split مناسب للمشكلة",
+                "توثيق طريقة التقسيم",
+                "أخرى"
+            ],
+            "commitment": [
+                "تطبيق split في كل مشروع ML",
+                "جلسة تقييم أسبوعية",
+                "كتابة ملاحظة توثيقية لطريقة التقسيم",
+                "---",
+                "أخرى"
+            ]
+        },
+        "إتقان Handling Outliers": {
+            "current": [
+                "لم أبدأ بعد في إتقان Handling Outliers",
+                "أعرف فكرة عامة عن إتقان Handling Outliers فقط",
+                "أفهم بعض مفاهيم إتقان Handling Outliers لكن لا أطبقها جيداً",
+                "طبقت إتقان Handling Outliers في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Handling Outliers",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Handling Outliers بوضوح",
+                "تطبيق إتقان Handling Outliers في أمثلة AI عملية",
+                "استخدام إتقان Handling Outliers ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Handling Outliers",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Handling Outliers",
+                "تطبيق عملي أسبوعي على إتقان Handling Outliers",
+                "Notebook أو تقرير قصير حول إتقان Handling Outliers كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Data Preparation Pipeline": {
+            "current": [
+                "لم أبدأ بعد في إتقان Data Preparation Pipeline",
+                "أعرف فكرة عامة عن إتقان Data Preparation Pipeline فقط",
+                "أفهم بعض مفاهيم إتقان Data Preparation Pipeline لكن لا أطبقها جيداً",
+                "طبقت إتقان Data Preparation Pipeline في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Data Preparation Pipeline",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Data Preparation Pipeline بوضوح",
+                "تطبيق إتقان Data Preparation Pipeline في أمثلة AI عملية",
+                "استخدام إتقان Data Preparation Pipeline ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Data Preparation Pipeline",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Data Preparation Pipeline",
+                "تطبيق عملي أسبوعي على إتقان Data Preparation Pipeline",
+                "Notebook أو تقرير قصير حول إتقان Data Preparation Pipeline كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "تجهيز Dataset كاملة لمشروع ML": {
+            "current": [
+                "لم أبدأ بعد في تجهيز Dataset كاملة لمشروع ML",
+                "أعرف فكرة عامة عن تجهيز Dataset كاملة لمشروع ML فقط",
+                "أفهم بعض مفاهيم تجهيز Dataset كاملة لمشروع ML لكن لا أطبقها جيداً",
+                "طبقت تجهيز Dataset كاملة لمشروع ML في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان تجهيز Dataset كاملة لمشروع ML",
+                "أخرى"
+            ],
+            "target": [
+                "فهم تجهيز Dataset كاملة لمشروع ML بوضوح",
+                "تطبيق تجهيز Dataset كاملة لمشروع ML في أمثلة AI عملية",
+                "استخدام تجهيز Dataset كاملة لمشروع ML ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في تجهيز Dataset كاملة لمشروع ML",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار تجهيز Dataset كاملة لمشروع ML",
+                "تطبيق عملي أسبوعي على تجهيز Dataset كاملة لمشروع ML",
+                "Notebook أو تقرير قصير حول تجهيز Dataset كاملة لمشروع ML كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم دور Visualization في AI": {
+            "current": [
+                "لم أبدأ بعد في فهم دور Visualization في AI",
+                "أعرف فكرة عامة عن فهم دور Visualization في AI فقط",
+                "أفهم بعض مفاهيم فهم دور Visualization في AI لكن لا أطبقها جيداً",
+                "طبقت فهم دور Visualization في AI في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم دور Visualization في AI",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم دور Visualization في AI بوضوح",
+                "تطبيق فهم دور Visualization في AI في أمثلة AI عملية",
+                "استخدام فهم دور Visualization في AI ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم دور Visualization في AI",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم دور Visualization في AI",
+                "تطبيق عملي أسبوعي على فهم دور Visualization في AI",
+                "Notebook أو تقرير قصير حول فهم دور Visualization في AI كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان الرسوم الإحصائية الأساسية": {
+            "current": [
+                "لم أبدأ بعد في إتقان الرسوم الإحصائية الأساسية",
+                "أعرف فكرة عامة عن إتقان الرسوم الإحصائية الأساسية فقط",
+                "أفهم بعض مفاهيم إتقان الرسوم الإحصائية الأساسية لكن لا أطبقها جيداً",
+                "طبقت إتقان الرسوم الإحصائية الأساسية في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان الرسوم الإحصائية الأساسية",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان الرسوم الإحصائية الأساسية بوضوح",
+                "تطبيق إتقان الرسوم الإحصائية الأساسية في أمثلة AI عملية",
+                "استخدام إتقان الرسوم الإحصائية الأساسية ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان الرسوم الإحصائية الأساسية",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان الرسوم الإحصائية الأساسية",
+                "تطبيق عملي أسبوعي على إتقان الرسوم الإحصائية الأساسية",
+                "Notebook أو تقرير قصير حول إتقان الرسوم الإحصائية الأساسية كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Visualizing Distributions": {
+            "current": [
+                "لا أعرف كيف أقرأ توزيع البيانات",
+                "أعتمد على الأرقام فقط",
+                "لا أميز القيم الشاذة بصرياً",
+                "لا أعرف متى أستخدم Histogram أو Boxplot",
+                "أحتاج إلى فهم شكل البيانات قبل التدريب",
+                "أخرى"
+            ],
+            "target": [
+                "رسم توزيع الأعمدة المهمة",
+                "تفسير Histogram وBoxplot",
+                "اكتشاف القيم الشاذة بصرياً",
+                "فهم skewness بشكل مبسط",
+                "ربط التوزيع بقرارات التنظيف والتدريب",
+                "أخرى"
+            ],
+            "commitment": [
+                "رسم توزيعات Dataset أسبوعياً",
+                "كتابة تفسير لكل رسم",
+                "تطبيق Visualization قبل أي تدريب نموذج",
+                "---",
+                "أخرى"
+            ]
+        },
+        "إتقان Visualizing Relationships": {
+            "current": [
+                "لم أبدأ بعد في إتقان Visualizing Relationships",
+                "أعرف فكرة عامة عن إتقان Visualizing Relationships فقط",
+                "أفهم بعض مفاهيم إتقان Visualizing Relationships لكن لا أطبقها جيداً",
+                "طبقت إتقان Visualizing Relationships في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Visualizing Relationships",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Visualizing Relationships بوضوح",
+                "تطبيق إتقان Visualizing Relationships في أمثلة AI عملية",
+                "استخدام إتقان Visualizing Relationships ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Visualizing Relationships",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Visualizing Relationships",
+                "تطبيق عملي أسبوعي على إتقان Visualizing Relationships",
+                "Notebook أو تقرير قصير حول إتقان Visualizing Relationships كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Correlation Analysis بصرياً": {
+            "current": [
+                "لم أبدأ بعد في إتقان Correlation Analysis بصرياً",
+                "أعرف فكرة عامة عن إتقان Correlation Analysis بصرياً فقط",
+                "أفهم بعض مفاهيم إتقان Correlation Analysis بصرياً لكن لا أطبقها جيداً",
+                "طبقت إتقان Correlation Analysis بصرياً في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Correlation Analysis بصرياً",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Correlation Analysis بصرياً بوضوح",
+                "تطبيق إتقان Correlation Analysis بصرياً في أمثلة AI عملية",
+                "استخدام إتقان Correlation Analysis بصرياً ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Correlation Analysis بصرياً",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Correlation Analysis بصرياً",
+                "تطبيق عملي أسبوعي على إتقان Correlation Analysis بصرياً",
+                "Notebook أو تقرير قصير حول إتقان Correlation Analysis بصرياً كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Visualizing Model Results": {
+            "current": [
+                "أرى أرقام التقييم فقط ولا أفهمها بصرياً",
+                "لا أعرف كيف أعرض أخطاء النموذج",
+                "لا أستخدم الرسوم لمقارنة النماذج",
+                "أحتاج إلى عرض نتائج واضح",
+                "أخرى"
+            ],
+            "target": [
+                "رسم نتائج النموذج بشكل واضح",
+                "عرض مقارنة بين النماذج",
+                "تصور الأخطاء",
+                "استخدام الرسوم لتفسير الأداء",
+                "كتابة تقرير بصري مختصر",
+                "أخرى"
+            ],
+            "commitment": [
+                "رسم نتائج كل نموذج يتم تدريبه",
+                "جلسة تقرير بصري أسبوعية",
+                "مقارنة نموذجين برسوم واضحة كل أسبوعين",
+                "---",
+                "أخرى"
+            ]
+        },
+        "بناء EDA Report مرئي": {
+            "current": [
+                "لم أبدأ بعد في بناء EDA Report مرئي",
+                "أعرف فكرة عامة عن بناء EDA Report مرئي فقط",
+                "أفهم بعض مفاهيم بناء EDA Report مرئي لكن لا أطبقها جيداً",
+                "طبقت بناء EDA Report مرئي في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان بناء EDA Report مرئي",
+                "أخرى"
+            ],
+            "target": [
+                "فهم بناء EDA Report مرئي بوضوح",
+                "تطبيق بناء EDA Report مرئي في أمثلة AI عملية",
+                "استخدام بناء EDA Report مرئي ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في بناء EDA Report مرئي",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار بناء EDA Report مرئي",
+                "تطبيق عملي أسبوعي على بناء EDA Report مرئي",
+                "Notebook أو تقرير قصير حول بناء EDA Report مرئي كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Machine Learning Basics": {
+            "current": [
+                "لم أبدأ بعد في فهم Machine Learning Basics",
+                "أعرف فكرة عامة عن فهم Machine Learning Basics فقط",
+                "أفهم بعض مفاهيم فهم Machine Learning Basics لكن لا أطبقها جيداً",
+                "طبقت فهم Machine Learning Basics في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Machine Learning Basics",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Machine Learning Basics بوضوح",
+                "تطبيق فهم Machine Learning Basics في أمثلة AI عملية",
+                "استخدام فهم Machine Learning Basics ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Machine Learning Basics",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Machine Learning Basics",
+                "تطبيق عملي أسبوعي على فهم Machine Learning Basics",
+                "Notebook أو تقرير قصير حول فهم Machine Learning Basics كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم أنواع Machine Learning": {
+            "current": [
+                "لم أبدأ بعد في فهم أنواع Machine Learning",
+                "أعرف فكرة عامة عن فهم أنواع Machine Learning فقط",
+                "أفهم بعض مفاهيم فهم أنواع Machine Learning لكن لا أطبقها جيداً",
+                "طبقت فهم أنواع Machine Learning في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم أنواع Machine Learning",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم أنواع Machine Learning بوضوح",
+                "تطبيق فهم أنواع Machine Learning في أمثلة AI عملية",
+                "استخدام فهم أنواع Machine Learning ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم أنواع Machine Learning",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم أنواع Machine Learning",
+                "تطبيق عملي أسبوعي على فهم أنواع Machine Learning",
+                "Notebook أو تقرير قصير حول فهم أنواع Machine Learning كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم ML Workflow": {
+            "current": [
+                "لا أعرف ترتيب خطوات ML",
+                "أبدأ بالتدريب مباشرة دون تجهيز",
+                "لا أعرف أين يأتي التقييم والتحسين",
+                "أحتاج إلى خطة واضحة لكل مشروع ML",
+                "أخرى"
+            ],
+            "target": [
+                "شرح ML Workflow",
+                "ترتيب خطوات البيانات والتدريب والتقييم",
+                "تطبيق Workflow على مشروع صغير",
+                "توثيق كل مرحلة",
+                "تجنب العمل العشوائي في ML",
+                "أخرى"
+            ],
+            "commitment": [
+                "مشروع ML صغير كل 3 أسابيع",
+                "جلسة Workflow أسبوعية",
+                "توثيق مرحلة واحدة كل جلسة",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم العلاقة بين البيانات والنموذج": {
+            "current": [
+                "لم أبدأ بعد في فهم العلاقة بين البيانات والنموذج",
+                "أعرف فكرة عامة عن فهم العلاقة بين البيانات والنموذج فقط",
+                "أفهم بعض مفاهيم فهم العلاقة بين البيانات والنموذج لكن لا أطبقها جيداً",
+                "طبقت فهم العلاقة بين البيانات والنموذج في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم العلاقة بين البيانات والنموذج",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم العلاقة بين البيانات والنموذج بوضوح",
+                "تطبيق فهم العلاقة بين البيانات والنموذج في أمثلة AI عملية",
+                "استخدام فهم العلاقة بين البيانات والنموذج ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم العلاقة بين البيانات والنموذج",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم العلاقة بين البيانات والنموذج",
+                "تطبيق عملي أسبوعي على فهم العلاقة بين البيانات والنموذج",
+                "Notebook أو تقرير قصير حول فهم العلاقة بين البيانات والنموذج كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Model Generalization": {
+            "current": [
+                "لم أبدأ بعد في فهم Model Generalization",
+                "أعرف فكرة عامة عن فهم Model Generalization فقط",
+                "أفهم بعض مفاهيم فهم Model Generalization لكن لا أطبقها جيداً",
+                "طبقت فهم Model Generalization في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Model Generalization",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Model Generalization بوضوح",
+                "تطبيق فهم Model Generalization في أمثلة AI عملية",
+                "استخدام فهم Model Generalization ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Model Generalization",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Model Generalization",
+                "تطبيق عملي أسبوعي على فهم Model Generalization",
+                "Notebook أو تقرير قصير حول فهم Model Generalization كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Overfitting and Underfitting": {
+            "current": [
+                "لا أعرف معنى Overfitting",
+                "أرى أن النموذج ممتاز على التدريب وضعيف على الاختبار ولا أفهم السبب",
+                "لا أفرق بين underfitting وoverfitting",
+                "لا أعرف كيف أقرأ مؤشرات المشكلة",
+                "أخرى"
+            ],
+            "target": [
+                "تمييز Overfitting وUnderfitting",
+                "مقارنة أداء التدريب والاختبار",
+                "اقتراح حلول أولية",
+                "استخدام validation بشكل أساسي",
+                "كتابة ملاحظة تقييم واضحة",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة تقييم أسبوعية",
+                "مقارنة نتائج train وtest في كل تجربة",
+                "توثيق علامات overfitting بعد كل نموذج",
+                "---",
+                "أخرى"
+            ]
+        },
+        "بناء أول نموذج Machine Learning": {
+            "current": [
+                "لم أبدأ بعد في بناء أول نموذج Machine Learning",
+                "أعرف فكرة عامة عن بناء أول نموذج Machine Learning فقط",
+                "أفهم بعض مفاهيم بناء أول نموذج Machine Learning لكن لا أطبقها جيداً",
+                "طبقت بناء أول نموذج Machine Learning في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان بناء أول نموذج Machine Learning",
+                "أخرى"
+            ],
+            "target": [
+                "فهم بناء أول نموذج Machine Learning بوضوح",
+                "تطبيق بناء أول نموذج Machine Learning في أمثلة AI عملية",
+                "استخدام بناء أول نموذج Machine Learning ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في بناء أول نموذج Machine Learning",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار بناء أول نموذج Machine Learning",
+                "تطبيق عملي أسبوعي على بناء أول نموذج Machine Learning",
+                "Notebook أو تقرير قصير حول بناء أول نموذج Machine Learning كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "بناء مسار تعلم ML منظم": {
+            "current": [
+                "لم أبدأ بعد في بناء مسار تعلم ML منظم",
+                "أعرف فكرة عامة عن بناء مسار تعلم ML منظم فقط",
+                "أفهم بعض مفاهيم بناء مسار تعلم ML منظم لكن لا أطبقها جيداً",
+                "طبقت بناء مسار تعلم ML منظم في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان بناء مسار تعلم ML منظم",
+                "أخرى"
+            ],
+            "target": [
+                "فهم بناء مسار تعلم ML منظم بوضوح",
+                "تطبيق بناء مسار تعلم ML منظم في أمثلة AI عملية",
+                "استخدام بناء مسار تعلم ML منظم ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في بناء مسار تعلم ML منظم",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار بناء مسار تعلم ML منظم",
+                "تطبيق عملي أسبوعي على بناء مسار تعلم ML منظم",
+                "Notebook أو تقرير قصير حول بناء مسار تعلم ML منظم كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Supervised Learning": {
+            "current": [
+                "لم أبدأ بعد في فهم Supervised Learning",
+                "أعرف فكرة عامة عن فهم Supervised Learning فقط",
+                "أفهم بعض مفاهيم فهم Supervised Learning لكن لا أطبقها جيداً",
+                "طبقت فهم Supervised Learning في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Supervised Learning",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Supervised Learning بوضوح",
+                "تطبيق فهم Supervised Learning في أمثلة AI عملية",
+                "استخدام فهم Supervised Learning ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Supervised Learning",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Supervised Learning",
+                "تطبيق عملي أسبوعي على فهم Supervised Learning",
+                "Notebook أو تقرير قصير حول فهم Supervised Learning كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Features and Labels": {
+            "current": [
+                "لم أبدأ بعد في فهم Features and Labels",
+                "أعرف فكرة عامة عن فهم Features and Labels فقط",
+                "أفهم بعض مفاهيم فهم Features and Labels لكن لا أطبقها جيداً",
+                "طبقت فهم Features and Labels في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Features and Labels",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Features and Labels بوضوح",
+                "تطبيق فهم Features and Labels في أمثلة AI عملية",
+                "استخدام فهم Features and Labels ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Features and Labels",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Features and Labels",
+                "تطبيق عملي أسبوعي على فهم Features and Labels",
+                "Notebook أو تقرير قصير حول فهم Features and Labels كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Regression vs Classification": {
+            "current": [
+                "أخلط بين Regression وClassification",
+                "لا أعرف متى يكون الهدف رقمياً أو فئوياً",
+                "أختار النموذج دون فهم نوع المشكلة",
+                "أحتاج إلى تمييز نوع المسألة قبل التدريب",
+                "أخرى"
+            ],
+            "target": [
+                "تمييز Regression وClassification",
+                "تحديد نوع Target",
+                "اختيار نوع نموذج مناسب",
+                "اختيار Metric أولية مناسبة",
+                "شرح سبب اختيار نوع التعلم",
+                "أخرى"
+            ],
+            "commitment": [
+                "تحليل 3 مسائل Supervised أسبوعياً",
+                "تحديد target وmetric لكل مثال",
+                "مراجعة اختيار النموذج أسبوعياً",
+                "---",
+                "أخرى"
+            ]
+        },
+        "إتقان اختيار نموذج Supervised مناسب": {
+            "current": [
+                "لم أبدأ بعد في إتقان اختيار نموذج Supervised مناسب",
+                "أعرف فكرة عامة عن إتقان اختيار نموذج Supervised مناسب فقط",
+                "أفهم بعض مفاهيم إتقان اختيار نموذج Supervised مناسب لكن لا أطبقها جيداً",
+                "طبقت إتقان اختيار نموذج Supervised مناسب في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان اختيار نموذج Supervised مناسب",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان اختيار نموذج Supervised مناسب بوضوح",
+                "تطبيق إتقان اختيار نموذج Supervised مناسب في أمثلة AI عملية",
+                "استخدام إتقان اختيار نموذج Supervised مناسب ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان اختيار نموذج Supervised مناسب",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان اختيار نموذج Supervised مناسب",
+                "تطبيق عملي أسبوعي على إتقان اختيار نموذج Supervised مناسب",
+                "Notebook أو تقرير قصير حول إتقان اختيار نموذج Supervised مناسب كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان تدريب نموذج Supervised بسيط": {
+            "current": [
+                "لم أبدأ بعد في إتقان تدريب نموذج Supervised بسيط",
+                "أعرف فكرة عامة عن إتقان تدريب نموذج Supervised بسيط فقط",
+                "أفهم بعض مفاهيم إتقان تدريب نموذج Supervised بسيط لكن لا أطبقها جيداً",
+                "طبقت إتقان تدريب نموذج Supervised بسيط في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان تدريب نموذج Supervised بسيط",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان تدريب نموذج Supervised بسيط بوضوح",
+                "تطبيق إتقان تدريب نموذج Supervised بسيط في أمثلة AI عملية",
+                "استخدام إتقان تدريب نموذج Supervised بسيط ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان تدريب نموذج Supervised بسيط",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان تدريب نموذج Supervised بسيط",
+                "تطبيق عملي أسبوعي على إتقان تدريب نموذج Supervised بسيط",
+                "Notebook أو تقرير قصير حول إتقان تدريب نموذج Supervised بسيط كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان تقييم نموذج Supervised": {
+            "current": [
+                "لم أبدأ بعد في إتقان تقييم نموذج Supervised",
+                "أعرف فكرة عامة عن إتقان تقييم نموذج Supervised فقط",
+                "أفهم بعض مفاهيم إتقان تقييم نموذج Supervised لكن لا أطبقها جيداً",
+                "طبقت إتقان تقييم نموذج Supervised في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان تقييم نموذج Supervised",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان تقييم نموذج Supervised بوضوح",
+                "تطبيق إتقان تقييم نموذج Supervised في أمثلة AI عملية",
+                "استخدام إتقان تقييم نموذج Supervised ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان تقييم نموذج Supervised",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان تقييم نموذج Supervised",
+                "تطبيق عملي أسبوعي على إتقان تقييم نموذج Supervised",
+                "Notebook أو تقرير قصير حول إتقان تقييم نموذج Supervised كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "بناء مشروع Supervised Learning": {
+            "current": [
+                "أفهم Supervised Learning نظرياً فقط",
+                "لم أبنِ مشروعاً كاملاً",
+                "لا أعرف ترتيب خطوات المشروع",
+                "أحتاج إلى تطبيق عملي من Dataset إلى تقييم",
+                "أخرى"
+            ],
+            "target": [
+                "اختيار Dataset مناسبة",
+                "تحديد Features وLabel",
+                "تجهيز البيانات",
+                "تدريب نموذج Supervised",
+                "تقييم النتائج",
+                "توثيق المشروع",
+                "أخرى"
+            ],
+            "commitment": [
+                "مشروع Supervised كل شهر",
+                "جلسة بيانات + جلسة تدريب + جلسة تقييم أسبوعياً",
+                "مراجعة تقرير المشروع في نهاية كل أسبوع",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Unsupervised Learning": {
+            "current": [
+                "لا أعرف Unsupervised Learning",
+                "أظن أن كل النماذج تحتاج Labels",
+                "لا أفهم كيف يتعلم النموذج بدون Target",
+                "أحتاج إلى فهم الأنماط داخل البيانات",
+                "أخرى"
+            ],
+            "target": [
+                "شرح معنى Unsupervised Learning",
+                "تمييزه عن Supervised Learning",
+                "فهم البحث عن الأنماط والمجموعات",
+                "معرفة متى يستخدم Clustering",
+                "تطبيق مثال بسيط",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلستان مفاهيم أسبوعياً + تجربة بسيطة",
+                "تحليل Dataset بدون Label كل أسبوعين",
+                "تلخيص أمثلة Unsupervised",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Clustering كمجال أساسي": {
+            "current": [
+                "لم أبدأ بعد في فهم Clustering كمجال أساسي",
+                "أعرف فكرة عامة عن فهم Clustering كمجال أساسي فقط",
+                "أفهم بعض مفاهيم فهم Clustering كمجال أساسي لكن لا أطبقها جيداً",
+                "طبقت فهم Clustering كمجال أساسي في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Clustering كمجال أساسي",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Clustering كمجال أساسي بوضوح",
+                "تطبيق فهم Clustering كمجال أساسي في أمثلة AI عملية",
+                "استخدام فهم Clustering كمجال أساسي ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Clustering كمجال أساسي",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Clustering كمجال أساسي",
+                "تطبيق عملي أسبوعي على فهم Clustering كمجال أساسي",
+                "Notebook أو تقرير قصير حول فهم Clustering كمجال أساسي كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Dimensionality Reduction كمفهوم": {
+            "current": [
+                "لم أبدأ بعد في فهم Dimensionality Reduction كمفهوم",
+                "أعرف فكرة عامة عن فهم Dimensionality Reduction كمفهوم فقط",
+                "أفهم بعض مفاهيم فهم Dimensionality Reduction كمفهوم لكن لا أطبقها جيداً",
+                "طبقت فهم Dimensionality Reduction كمفهوم في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Dimensionality Reduction كمفهوم",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Dimensionality Reduction كمفهوم بوضوح",
+                "تطبيق فهم Dimensionality Reduction كمفهوم في أمثلة AI عملية",
+                "استخدام فهم Dimensionality Reduction كمفهوم ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Dimensionality Reduction كمفهوم",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Dimensionality Reduction كمفهوم",
+                "تطبيق عملي أسبوعي على فهم Dimensionality Reduction كمفهوم",
+                "Notebook أو تقرير قصير حول فهم Dimensionality Reduction كمفهوم كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Patterns in Data": {
+            "current": [
+                "لم أبدأ بعد في فهم Patterns in Data",
+                "أعرف فكرة عامة عن فهم Patterns in Data فقط",
+                "أفهم بعض مفاهيم فهم Patterns in Data لكن لا أطبقها جيداً",
+                "طبقت فهم Patterns in Data في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Patterns in Data",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Patterns in Data بوضوح",
+                "تطبيق فهم Patterns in Data في أمثلة AI عملية",
+                "استخدام فهم Patterns in Data ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Patterns in Data",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Patterns in Data",
+                "تطبيق عملي أسبوعي على فهم Patterns in Data",
+                "Notebook أو تقرير قصير حول فهم Patterns in Data كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم تقييم Unsupervised Learning بشكل مبسط": {
+            "current": [
+                "لم أبدأ بعد في فهم تقييم Unsupervised Learning بشكل مبسط",
+                "أعرف فكرة عامة عن فهم تقييم Unsupervised Learning بشكل مبسط فقط",
+                "أفهم بعض مفاهيم فهم تقييم Unsupervised Learning بشكل مبسط لكن لا أطبقها جيداً",
+                "طبقت فهم تقييم Unsupervised Learning بشكل مبسط في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم تقييم Unsupervised Learning بشكل مبسط",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم تقييم Unsupervised Learning بشكل مبسط بوضوح",
+                "تطبيق فهم تقييم Unsupervised Learning بشكل مبسط في أمثلة AI عملية",
+                "استخدام فهم تقييم Unsupervised Learning بشكل مبسط ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم تقييم Unsupervised Learning بشكل مبسط",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم تقييم Unsupervised Learning بشكل مبسط",
+                "تطبيق عملي أسبوعي على فهم تقييم Unsupervised Learning بشكل مبسط",
+                "Notebook أو تقرير قصير حول فهم تقييم Unsupervised Learning بشكل مبسط كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "بناء مشروع Unsupervised Learning بسيط": {
+            "current": [
+                "أفهم الفكرة نظرياً فقط",
+                "لا أعرف اختيار Dataset مناسبة",
+                "لا أعرف كيف أفسر المجموعات",
+                "لا أعرف كيف أقيّم النتائج",
+                "أخرى"
+            ],
+            "target": [
+                "اختيار Dataset مناسبة",
+                "تجهيز البيانات",
+                "تطبيق Clustering بسيط",
+                "تصور النتائج",
+                "تفسير المجموعات بحذر",
+                "توثيق القيود",
+                "أخرى"
+            ],
+            "commitment": [
+                "مشروع Unsupervised كل شهر",
+                "جلسة Visualization + جلسة Clustering أسبوعياً",
+                "تقرير تفسير نتائج كل أسبوعين",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Regression Models": {
+            "current": [
+                "لم أبدأ بعد في فهم Regression Models",
+                "أعرف فكرة عامة عن فهم Regression Models فقط",
+                "أفهم بعض مفاهيم فهم Regression Models لكن لا أطبقها جيداً",
+                "طبقت فهم Regression Models في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Regression Models",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Regression Models بوضوح",
+                "تطبيق فهم Regression Models في أمثلة AI عملية",
+                "استخدام فهم Regression Models ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Regression Models",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Regression Models",
+                "تطبيق عملي أسبوعي على فهم Regression Models",
+                "Notebook أو تقرير قصير حول فهم Regression Models كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Linear Regression": {
+            "current": [
+                "لا أعرف Linear Regression",
+                "أعرف أنها تتوقع رقماً فقط",
+                "لا أفهم العلاقة بين feature وtarget",
+                "لا أعرف كيف أفسر الخطأ",
+                "أحتاج إلى تطبيق عملي",
+                "أخرى"
+            ],
+            "target": [
+                "شرح Linear Regression",
+                "تدريب نموذج Linear Regression",
+                "تفسير التوقعات",
+                "استخدام metrics مناسبة",
+                "رسم النتائج بشكل مبسط",
+                "بناء مشروع Regression صغير",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة Regression أسبوعياً + تطبيق",
+                "مشروع Regression كل 3 أسابيع",
+                "مقارنة النتائج بعد كل تجربة",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Multiple Regression": {
+            "current": [
+                "لم أبدأ بعد في فهم Multiple Regression",
+                "أعرف فكرة عامة عن فهم Multiple Regression فقط",
+                "أفهم بعض مفاهيم فهم Multiple Regression لكن لا أطبقها جيداً",
+                "طبقت فهم Multiple Regression في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Multiple Regression",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Multiple Regression بوضوح",
+                "تطبيق فهم Multiple Regression في أمثلة AI عملية",
+                "استخدام فهم Multiple Regression ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Multiple Regression",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Multiple Regression",
+                "تطبيق عملي أسبوعي على فهم Multiple Regression",
+                "Notebook أو تقرير قصير حول فهم Multiple Regression كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Regression Metrics": {
+            "current": [
+                "لا أعرف مقاييس Regression",
+                "أعتمد على score واحد دون فهم",
+                "لا أميز MAE وMSE وRMSE",
+                "لا أعرف كيف أفسر الخطأ",
+                "أخرى"
+            ],
+            "target": [
+                "فهم MAE وMSE وRMSE",
+                "اختيار metric مناسبة",
+                "تفسير الخطأ بلغة مفهومة",
+                "مقارنة نموذجين باستخدام metrics",
+                "كتابة تقرير تقييم Regression",
+                "أخرى"
+            ],
+            "commitment": [
+                "تمارين metrics أسبوعية",
+                "تقييم نموذج Regression كل أسبوعين",
+                "كتابة تفسير لكل metric",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Error Analysis for Regression": {
+            "current": [
+                "لم أبدأ بعد في فهم Error Analysis for Regression",
+                "أعرف فكرة عامة عن فهم Error Analysis for Regression فقط",
+                "أفهم بعض مفاهيم فهم Error Analysis for Regression لكن لا أطبقها جيداً",
+                "طبقت فهم Error Analysis for Regression في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Error Analysis for Regression",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Error Analysis for Regression بوضوح",
+                "تطبيق فهم Error Analysis for Regression في أمثلة AI عملية",
+                "استخدام فهم Error Analysis for Regression ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Error Analysis for Regression",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Error Analysis for Regression",
+                "تطبيق عملي أسبوعي على فهم Error Analysis for Regression",
+                "Notebook أو تقرير قصير حول فهم Error Analysis for Regression كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "مقارنة Regression Models": {
+            "current": [
+                "لم أبدأ بعد في مقارنة Regression Models",
+                "أعرف فكرة عامة عن مقارنة Regression Models فقط",
+                "أفهم بعض مفاهيم مقارنة Regression Models لكن لا أطبقها جيداً",
+                "طبقت مقارنة Regression Models في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان مقارنة Regression Models",
+                "أخرى"
+            ],
+            "target": [
+                "فهم مقارنة Regression Models بوضوح",
+                "تطبيق مقارنة Regression Models في أمثلة AI عملية",
+                "استخدام مقارنة Regression Models ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في مقارنة Regression Models",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار مقارنة Regression Models",
+                "تطبيق عملي أسبوعي على مقارنة Regression Models",
+                "Notebook أو تقرير قصير حول مقارنة Regression Models كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "بناء مشروع Regression": {
+            "current": [
+                "لم أبدأ بعد في بناء مشروع Regression",
+                "أعرف فكرة عامة عن بناء مشروع Regression فقط",
+                "أفهم بعض مفاهيم بناء مشروع Regression لكن لا أطبقها جيداً",
+                "طبقت بناء مشروع Regression في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان بناء مشروع Regression",
+                "أخرى"
+            ],
+            "target": [
+                "فهم بناء مشروع Regression بوضوح",
+                "تطبيق بناء مشروع Regression في أمثلة AI عملية",
+                "استخدام بناء مشروع Regression ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في بناء مشروع Regression",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار بناء مشروع Regression",
+                "تطبيق عملي أسبوعي على بناء مشروع Regression",
+                "Notebook أو تقرير قصير حول بناء مشروع Regression كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Classification Problems": {
+            "current": [
+                "لم أبدأ بعد في فهم Classification Problems",
+                "أعرف فكرة عامة عن فهم Classification Problems فقط",
+                "أفهم بعض مفاهيم فهم Classification Problems لكن لا أطبقها جيداً",
+                "طبقت فهم Classification Problems في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Classification Problems",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Classification Problems بوضوح",
+                "تطبيق فهم Classification Problems في أمثلة AI عملية",
+                "استخدام فهم Classification Problems ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Classification Problems",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Classification Problems",
+                "تطبيق عملي أسبوعي على فهم Classification Problems",
+                "Notebook أو تقرير قصير حول فهم Classification Problems كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Binary Classification": {
+            "current": [
+                "لم أبدأ بعد في إتقان Binary Classification",
+                "أعرف فكرة عامة عن إتقان Binary Classification فقط",
+                "أفهم بعض مفاهيم إتقان Binary Classification لكن لا أطبقها جيداً",
+                "طبقت إتقان Binary Classification في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Binary Classification",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Binary Classification بوضوح",
+                "تطبيق إتقان Binary Classification في أمثلة AI عملية",
+                "استخدام إتقان Binary Classification ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Binary Classification",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Binary Classification",
+                "تطبيق عملي أسبوعي على إتقان Binary Classification",
+                "Notebook أو تقرير قصير حول إتقان Binary Classification كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Multi-class Classification": {
+            "current": [
+                "لم أبدأ بعد في فهم Multi-class Classification",
+                "أعرف فكرة عامة عن فهم Multi-class Classification فقط",
+                "أفهم بعض مفاهيم فهم Multi-class Classification لكن لا أطبقها جيداً",
+                "طبقت فهم Multi-class Classification في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Multi-class Classification",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Multi-class Classification بوضوح",
+                "تطبيق فهم Multi-class Classification في أمثلة AI عملية",
+                "استخدام فهم Multi-class Classification ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Multi-class Classification",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Multi-class Classification",
+                "تطبيق عملي أسبوعي على فهم Multi-class Classification",
+                "Notebook أو تقرير قصير حول فهم Multi-class Classification كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Classification Metrics": {
+            "current": [
+                "أستخدم Accuracy فقط",
+                "لا أفهم Precision وRecall وF1",
+                "لا أعرف متى تكون Accuracy مضللة",
+                "أحتاج إلى اختيار metric حسب المشكلة",
+                "أخرى"
+            ],
+            "target": [
+                "فهم Accuracy وPrecision وRecall وF1",
+                "اختيار metric مناسبة",
+                "تفسير trade-off بين Precision وRecall",
+                "تقييم نموذج Classification بوضوح",
+                "كتابة تقرير تقييم",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة metrics أسبوعية",
+                "تقييم نموذج Classification كل أسبوعين",
+                "كتابة تقرير مقارنة metrics",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Confusion Matrix": {
+            "current": [
+                "لا أفهم Confusion Matrix",
+                "أعرف Accuracy فقط",
+                "أخلط بين True Positive وFalse Positive",
+                "لا أعرف كيف أقرأ أخطاء النموذج",
+                "أخرى"
+            ],
+            "target": [
+                "قراءة Confusion Matrix",
+                "تمييز TP وFP وTN وFN",
+                "فهم نوع أخطاء النموذج",
+                "ربطها بالمشكلة الواقعية",
+                "استخدامها لتحسين التقييم",
+                "أخرى"
+            ],
+            "commitment": [
+                "تحليل Confusion Matrix أسبوعياً",
+                "مقارنة أخطاء نموذجين",
+                "كتابة تفسير أخطاء التصنيف بعد كل تجربة",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Thresholds": {
+            "current": [
+                "لم أبدأ بعد في فهم Thresholds",
+                "أعرف فكرة عامة عن فهم Thresholds فقط",
+                "أفهم بعض مفاهيم فهم Thresholds لكن لا أطبقها جيداً",
+                "طبقت فهم Thresholds في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Thresholds",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Thresholds بوضوح",
+                "تطبيق فهم Thresholds في أمثلة AI عملية",
+                "استخدام فهم Thresholds ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Thresholds",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Thresholds",
+                "تطبيق عملي أسبوعي على فهم Thresholds",
+                "Notebook أو تقرير قصير حول فهم Thresholds كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "بناء مشروع Classification": {
+            "current": [
+                "لم أبدأ بعد في بناء مشروع Classification",
+                "أعرف فكرة عامة عن بناء مشروع Classification فقط",
+                "أفهم بعض مفاهيم بناء مشروع Classification لكن لا أطبقها جيداً",
+                "طبقت بناء مشروع Classification في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان بناء مشروع Classification",
+                "أخرى"
+            ],
+            "target": [
+                "فهم بناء مشروع Classification بوضوح",
+                "تطبيق بناء مشروع Classification في أمثلة AI عملية",
+                "استخدام بناء مشروع Classification ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في بناء مشروع Classification",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار بناء مشروع Classification",
+                "تطبيق عملي أسبوعي على بناء مشروع Classification",
+                "Notebook أو تقرير قصير حول بناء مشروع Classification كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Clustering": {
+            "current": [
+                "لم أبدأ بعد في فهم Clustering",
+                "أعرف فكرة عامة عن فهم Clustering فقط",
+                "أفهم بعض مفاهيم فهم Clustering لكن لا أطبقها جيداً",
+                "طبقت فهم Clustering في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Clustering",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Clustering بوضوح",
+                "تطبيق فهم Clustering في أمثلة AI عملية",
+                "استخدام فهم Clustering ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Clustering",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Clustering",
+                "تطبيق عملي أسبوعي على فهم Clustering",
+                "Notebook أو تقرير قصير حول فهم Clustering كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان K-Means Basics": {
+            "current": [
+                "لا أعرف K-Means",
+                "أعرف أنها تقسم البيانات فقط",
+                "لا أفهم معنى centroid",
+                "لا أعرف اختيار عدد clusters",
+                "أحتاج إلى تطبيق عملي بصري",
+                "أخرى"
+            ],
+            "target": [
+                "شرح K-Means",
+                "فهم centroid وclusters",
+                "تطبيق K-Means على Dataset",
+                "تصور المجموعات",
+                "تفسير النتائج بحذر",
+                "أخرى"
+            ],
+            "commitment": [
+                "تجربة Clustering كل أسبوعين",
+                "جلسة Visualization أسبوعية",
+                "كتابة تفسير لكل مجموعة",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم اختيار عدد المجموعات": {
+            "current": [
+                "لم أبدأ بعد في فهم اختيار عدد المجموعات",
+                "أعرف فكرة عامة عن فهم اختيار عدد المجموعات فقط",
+                "أفهم بعض مفاهيم فهم اختيار عدد المجموعات لكن لا أطبقها جيداً",
+                "طبقت فهم اختيار عدد المجموعات في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم اختيار عدد المجموعات",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم اختيار عدد المجموعات بوضوح",
+                "تطبيق فهم اختيار عدد المجموعات في أمثلة AI عملية",
+                "استخدام فهم اختيار عدد المجموعات ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم اختيار عدد المجموعات",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم اختيار عدد المجموعات",
+                "تطبيق عملي أسبوعي على فهم اختيار عدد المجموعات",
+                "Notebook أو تقرير قصير حول فهم اختيار عدد المجموعات كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم تقييم Clustering بشكل مبسط": {
+            "current": [
+                "لم أبدأ بعد في فهم تقييم Clustering بشكل مبسط",
+                "أعرف فكرة عامة عن فهم تقييم Clustering بشكل مبسط فقط",
+                "أفهم بعض مفاهيم فهم تقييم Clustering بشكل مبسط لكن لا أطبقها جيداً",
+                "طبقت فهم تقييم Clustering بشكل مبسط في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم تقييم Clustering بشكل مبسط",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم تقييم Clustering بشكل مبسط بوضوح",
+                "تطبيق فهم تقييم Clustering بشكل مبسط في أمثلة AI عملية",
+                "استخدام فهم تقييم Clustering بشكل مبسط ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم تقييم Clustering بشكل مبسط",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم تقييم Clustering بشكل مبسط",
+                "تطبيق عملي أسبوعي على فهم تقييم Clustering بشكل مبسط",
+                "Notebook أو تقرير قصير حول فهم تقييم Clustering بشكل مبسط كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Visualizing Clusters": {
+            "current": [
+                "لم أبدأ بعد في فهم Visualizing Clusters",
+                "أعرف فكرة عامة عن فهم Visualizing Clusters فقط",
+                "أفهم بعض مفاهيم فهم Visualizing Clusters لكن لا أطبقها جيداً",
+                "طبقت فهم Visualizing Clusters في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Visualizing Clusters",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Visualizing Clusters بوضوح",
+                "تطبيق فهم Visualizing Clusters في أمثلة AI عملية",
+                "استخدام فهم Visualizing Clusters ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Visualizing Clusters",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Visualizing Clusters",
+                "تطبيق عملي أسبوعي على فهم Visualizing Clusters",
+                "Notebook أو تقرير قصير حول فهم Visualizing Clusters كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "بناء مشروع Clustering": {
+            "current": [
+                "لم أبدأ بعد في بناء مشروع Clustering",
+                "أعرف فكرة عامة عن بناء مشروع Clustering فقط",
+                "أفهم بعض مفاهيم بناء مشروع Clustering لكن لا أطبقها جيداً",
+                "طبقت بناء مشروع Clustering في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان بناء مشروع Clustering",
+                "أخرى"
+            ],
+            "target": [
+                "فهم بناء مشروع Clustering بوضوح",
+                "تطبيق بناء مشروع Clustering في أمثلة AI عملية",
+                "استخدام بناء مشروع Clustering ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في بناء مشروع Clustering",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار بناء مشروع Clustering",
+                "تطبيق عملي أسبوعي على بناء مشروع Clustering",
+                "Notebook أو تقرير قصير حول بناء مشروع Clustering كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Training Process": {
+            "current": [
+                "لم أبدأ بعد في فهم Training Process",
+                "أعرف فكرة عامة عن فهم Training Process فقط",
+                "أفهم بعض مفاهيم فهم Training Process لكن لا أطبقها جيداً",
+                "طبقت فهم Training Process في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Training Process",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Training Process بوضوح",
+                "تطبيق فهم Training Process في أمثلة AI عملية",
+                "استخدام فهم Training Process ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Training Process",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Training Process",
+                "تطبيق عملي أسبوعي على فهم Training Process",
+                "Notebook أو تقرير قصير حول فهم Training Process كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Train/Test Workflow": {
+            "current": [
+                "لم أبدأ بعد في إتقان Train/Test Workflow",
+                "أعرف فكرة عامة عن إتقان Train/Test Workflow فقط",
+                "أفهم بعض مفاهيم إتقان Train/Test Workflow لكن لا أطبقها جيداً",
+                "طبقت إتقان Train/Test Workflow في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Train/Test Workflow",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Train/Test Workflow بوضوح",
+                "تطبيق إتقان Train/Test Workflow في أمثلة AI عملية",
+                "استخدام إتقان Train/Test Workflow ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Train/Test Workflow",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Train/Test Workflow",
+                "تطبيق عملي أسبوعي على إتقان Train/Test Workflow",
+                "Notebook أو تقرير قصير حول إتقان Train/Test Workflow كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Hyperparameters": {
+            "current": [
+                "لا أعرف معنى Hyperparameter",
+                "أستخدم الإعدادات الافتراضية فقط",
+                "أغير القيم عشوائياً",
+                "لا أعرف تأثير الإعدادات على الأداء",
+                "أحتاج إلى تحسين النموذج بطريقة منظمة",
+                "أخرى"
+            ],
+            "target": [
+                "شرح معنى Hyperparameter",
+                "تغيير إعدادات النموذج بوعي",
+                "مقارنة تأثير الإعدادات",
+                "توثيق التجارب",
+                "اختيار إعداد مناسب بناءً على تقييم",
+                "أخرى"
+            ],
+            "commitment": [
+                "تجربة إعدادات أسبوعياً",
+                "جدول مقارنة Hyperparameters",
+                "مراجعة نتائج التجارب كل أسبوعين",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Validation": {
+            "current": [
+                "لم أبدأ بعد في فهم Validation",
+                "أعرف فكرة عامة عن فهم Validation فقط",
+                "أفهم بعض مفاهيم فهم Validation لكن لا أطبقها جيداً",
+                "طبقت فهم Validation في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Validation",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Validation بوضوح",
+                "تطبيق فهم Validation في أمثلة AI عملية",
+                "استخدام فهم Validation ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Validation",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Validation",
+                "تطبيق عملي أسبوعي على فهم Validation",
+                "Notebook أو تقرير قصير حول فهم Validation كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Cross-validation Basics": {
+            "current": [
+                "لا أعرف Cross-validation",
+                "أعتمد فقط على train/test split",
+                "لا أعرف لماذا تختلف النتائج عند تغيير التقسيم",
+                "أحتاج إلى تقييم أكثر ثباتاً",
+                "أخرى"
+            ],
+            "target": [
+                "شرح Cross-validation",
+                "فهم فائدتها في التقييم",
+                "استخدامها بشكل أساسي",
+                "مقارنة النتائج مع split عادي",
+                "تفسير متوسط الأداء",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة Cross-validation أسبوعية",
+                "تطبيقها على نموذجين خلال الشهر",
+                "توثيق الفرق بين طرق التقييم",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Model Selection": {
+            "current": [
+                "لم أبدأ بعد في فهم Model Selection",
+                "أعرف فكرة عامة عن فهم Model Selection فقط",
+                "أفهم بعض مفاهيم فهم Model Selection لكن لا أطبقها جيداً",
+                "طبقت فهم Model Selection في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Model Selection",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Model Selection بوضوح",
+                "تطبيق فهم Model Selection في أمثلة AI عملية",
+                "استخدام فهم Model Selection ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Model Selection",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Model Selection",
+                "تطبيق عملي أسبوعي على فهم Model Selection",
+                "Notebook أو تقرير قصير حول فهم Model Selection كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "تدريب أكثر من نموذج ومقارنتها": {
+            "current": [
+                "لم أبدأ بعد في تدريب أكثر من نموذج ومقارنتها",
+                "أعرف فكرة عامة عن تدريب أكثر من نموذج ومقارنتها فقط",
+                "أفهم بعض مفاهيم تدريب أكثر من نموذج ومقارنتها لكن لا أطبقها جيداً",
+                "طبقت تدريب أكثر من نموذج ومقارنتها في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان تدريب أكثر من نموذج ومقارنتها",
+                "أخرى"
+            ],
+            "target": [
+                "فهم تدريب أكثر من نموذج ومقارنتها بوضوح",
+                "تطبيق تدريب أكثر من نموذج ومقارنتها في أمثلة AI عملية",
+                "استخدام تدريب أكثر من نموذج ومقارنتها ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في تدريب أكثر من نموذج ومقارنتها",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار تدريب أكثر من نموذج ومقارنتها",
+                "تطبيق عملي أسبوعي على تدريب أكثر من نموذج ومقارنتها",
+                "Notebook أو تقرير قصير حول تدريب أكثر من نموذج ومقارنتها كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Model Evaluation": {
+            "current": [
+                "لم أبدأ بعد في فهم Model Evaluation",
+                "أعرف فكرة عامة عن فهم Model Evaluation فقط",
+                "أفهم بعض مفاهيم فهم Model Evaluation لكن لا أطبقها جيداً",
+                "طبقت فهم Model Evaluation في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Model Evaluation",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Model Evaluation بوضوح",
+                "تطبيق فهم Model Evaluation في أمثلة AI عملية",
+                "استخدام فهم Model Evaluation ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Model Evaluation",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Model Evaluation",
+                "تطبيق عملي أسبوعي على فهم Model Evaluation",
+                "Notebook أو تقرير قصير حول فهم Model Evaluation كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "اختيار Metric مناسبة": {
+            "current": [
+                "لا أعرف أي metric أختار",
+                "أستخدم Accuracy لكل شيء",
+                "لا أفرق بين regression وclassification metrics",
+                "لا أربط metric بهدف المشكلة",
+                "أحتاج إلى تقييم نماذج بوعي",
+                "أخرى"
+            ],
+            "target": [
+                "اختيار metric حسب نوع المشكلة",
+                "ربط metric بالهدف الواقعي",
+                "تفسير metric للمستخدم",
+                "مقارنة models باستخدام metrics مناسبة",
+                "تجنب metrics المضللة",
+                "أخرى"
+            ],
+            "commitment": [
+                "تحليل metric لكل نموذج يتم تدريبه",
+                "جلسة تقييم أسبوعية",
+                "كتابة تقرير metric بعد كل مشروع",
+                "---",
+                "أخرى"
+            ]
+        },
+        "تقييم Regression Models": {
+            "current": [
+                "لم أبدأ بعد في تقييم Regression Models",
+                "أعرف فكرة عامة عن تقييم Regression Models فقط",
+                "أفهم بعض مفاهيم تقييم Regression Models لكن لا أطبقها جيداً",
+                "طبقت تقييم Regression Models في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان تقييم Regression Models",
+                "أخرى"
+            ],
+            "target": [
+                "فهم تقييم Regression Models بوضوح",
+                "تطبيق تقييم Regression Models في أمثلة AI عملية",
+                "استخدام تقييم Regression Models ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في تقييم Regression Models",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار تقييم Regression Models",
+                "تطبيق عملي أسبوعي على تقييم Regression Models",
+                "Notebook أو تقرير قصير حول تقييم Regression Models كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "تقييم Classification Models": {
+            "current": [
+                "لم أبدأ بعد في تقييم Classification Models",
+                "أعرف فكرة عامة عن تقييم Classification Models فقط",
+                "أفهم بعض مفاهيم تقييم Classification Models لكن لا أطبقها جيداً",
+                "طبقت تقييم Classification Models في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان تقييم Classification Models",
+                "أخرى"
+            ],
+            "target": [
+                "فهم تقييم Classification Models بوضوح",
+                "تطبيق تقييم Classification Models في أمثلة AI عملية",
+                "استخدام تقييم Classification Models ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في تقييم Classification Models",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار تقييم Classification Models",
+                "تطبيق عملي أسبوعي على تقييم Classification Models",
+                "Notebook أو تقرير قصير حول تقييم Classification Models كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "تحليل Overfitting and Underfitting": {
+            "current": [
+                "لم أبدأ بعد في تحليل Overfitting and Underfitting",
+                "أعرف فكرة عامة عن تحليل Overfitting and Underfitting فقط",
+                "أفهم بعض مفاهيم تحليل Overfitting and Underfitting لكن لا أطبقها جيداً",
+                "طبقت تحليل Overfitting and Underfitting في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان تحليل Overfitting and Underfitting",
+                "أخرى"
+            ],
+            "target": [
+                "فهم تحليل Overfitting and Underfitting بوضوح",
+                "تطبيق تحليل Overfitting and Underfitting في أمثلة AI عملية",
+                "استخدام تحليل Overfitting and Underfitting ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في تحليل Overfitting and Underfitting",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار تحليل Overfitting and Underfitting",
+                "تطبيق عملي أسبوعي على تحليل Overfitting and Underfitting",
+                "Notebook أو تقرير قصير حول تحليل Overfitting and Underfitting كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Baseline Model": {
+            "current": [
+                "لم أبدأ بعد في فهم Baseline Model",
+                "أعرف فكرة عامة عن فهم Baseline Model فقط",
+                "أفهم بعض مفاهيم فهم Baseline Model لكن لا أطبقها جيداً",
+                "طبقت فهم Baseline Model في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Baseline Model",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Baseline Model بوضوح",
+                "تطبيق فهم Baseline Model في أمثلة AI عملية",
+                "استخدام فهم Baseline Model ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Baseline Model",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Baseline Model",
+                "تطبيق عملي أسبوعي على فهم Baseline Model",
+                "Notebook أو تقرير قصير حول فهم Baseline Model كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Error Analysis": {
+            "current": [
+                "لم أبدأ بعد في فهم Error Analysis",
+                "أعرف فكرة عامة عن فهم Error Analysis فقط",
+                "أفهم بعض مفاهيم فهم Error Analysis لكن لا أطبقها جيداً",
+                "طبقت فهم Error Analysis في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Error Analysis",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Error Analysis بوضوح",
+                "تطبيق فهم Error Analysis في أمثلة AI عملية",
+                "استخدام فهم Error Analysis ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Error Analysis",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Error Analysis",
+                "تطبيق عملي أسبوعي على فهم Error Analysis",
+                "Notebook أو تقرير قصير حول فهم Error Analysis كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "كتابة Model Evaluation Report": {
+            "current": [
+                "أدرب النموذج ولا أوثق النتائج",
+                "لا أعرف ماذا أكتب في تقرير التقييم",
+                "أضع الأرقام دون تفسير",
+                "لا أقارن بالنموذج الأساسي",
+                "أحتاج إلى توثيق احترافي للتجربة",
+                "أخرى"
+            ],
+            "target": [
+                "كتابة تقرير تقييم منظم",
+                "عرض Dataset والمشكلة",
+                "ذكر metrics المستخدمة",
+                "تفسير النتائج",
+                "ذكر القيود والتحسينات القادمة",
+                "أخرى"
+            ],
+            "commitment": [
+                "تقرير تقييم لكل نموذج",
+                "جلسة كتابة تقرير أسبوعية",
+                "مراجعة تقرير سابق وتحسينه كل أسبوعين",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Feature Engineering": {
+            "current": [
+                "لم أبدأ بعد في فهم Feature Engineering",
+                "أعرف فكرة عامة عن فهم Feature Engineering فقط",
+                "أفهم بعض مفاهيم فهم Feature Engineering لكن لا أطبقها جيداً",
+                "طبقت فهم Feature Engineering في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Feature Engineering",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Feature Engineering بوضوح",
+                "تطبيق فهم Feature Engineering في أمثلة AI عملية",
+                "استخدام فهم Feature Engineering ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Feature Engineering",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Feature Engineering",
+                "تطبيق عملي أسبوعي على فهم Feature Engineering",
+                "Notebook أو تقرير قصير حول فهم Feature Engineering كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "اختيار Features مناسبة": {
+            "current": [
+                "أستخدم كل الأعمدة دون تفكير",
+                "لا أعرف أي features مهمة",
+                "لا أميز الأعمدة المفيدة من غير المفيدة",
+                "أخاف من حذف أعمدة",
+                "أحتاج إلى اختيار features بوعي",
+                "أخرى"
+            ],
+            "target": [
+                "تحليل علاقة features بالهدف",
+                "اختيار أعمدة مناسبة",
+                "حذف أعمدة غير مفيدة أو مضللة",
+                "توثيق سبب اختيار features",
+                "مقارنة النموذج قبل وبعد الاختيار",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة feature review أسبوعية",
+                "مقارنة نموذج قبل وبعد feature selection",
+                "كتابة ملاحظات اختيار الأعمدة",
+                "---",
+                "أخرى"
+            ]
+        },
+        "إنشاء Features جديدة": {
+            "current": [
+                "لم أبدأ بعد في إنشاء Features جديدة",
+                "أعرف فكرة عامة عن إنشاء Features جديدة فقط",
+                "أفهم بعض مفاهيم إنشاء Features جديدة لكن لا أطبقها جيداً",
+                "طبقت إنشاء Features جديدة في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إنشاء Features جديدة",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إنشاء Features جديدة بوضوح",
+                "تطبيق إنشاء Features جديدة في أمثلة AI عملية",
+                "استخدام إنشاء Features جديدة ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إنشاء Features جديدة",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إنشاء Features جديدة",
+                "تطبيق عملي أسبوعي على إنشاء Features جديدة",
+                "Notebook أو تقرير قصير حول إنشاء Features جديدة كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "تحويل Features": {
+            "current": [
+                "لم أبدأ بعد في تحويل Features",
+                "أعرف فكرة عامة عن تحويل Features فقط",
+                "أفهم بعض مفاهيم تحويل Features لكن لا أطبقها جيداً",
+                "طبقت تحويل Features في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان تحويل Features",
+                "أخرى"
+            ],
+            "target": [
+                "فهم تحويل Features بوضوح",
+                "تطبيق تحويل Features في أمثلة AI عملية",
+                "استخدام تحويل Features ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في تحويل Features",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار تحويل Features",
+                "تطبيق عملي أسبوعي على تحويل Features",
+                "Notebook أو تقرير قصير حول تحويل Features كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "التعامل مع Categorical Features": {
+            "current": [
+                "لم أبدأ بعد في التعامل مع Categorical Features",
+                "أعرف فكرة عامة عن التعامل مع Categorical Features فقط",
+                "أفهم بعض مفاهيم التعامل مع Categorical Features لكن لا أطبقها جيداً",
+                "طبقت التعامل مع Categorical Features في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان التعامل مع Categorical Features",
+                "أخرى"
+            ],
+            "target": [
+                "فهم التعامل مع Categorical Features بوضوح",
+                "تطبيق التعامل مع Categorical Features في أمثلة AI عملية",
+                "استخدام التعامل مع Categorical Features ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في التعامل مع Categorical Features",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار التعامل مع Categorical Features",
+                "تطبيق عملي أسبوعي على التعامل مع Categorical Features",
+                "Notebook أو تقرير قصير حول التعامل مع Categorical Features كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "التعامل مع Numerical Features": {
+            "current": [
+                "لم أبدأ بعد في التعامل مع Numerical Features",
+                "أعرف فكرة عامة عن التعامل مع Numerical Features فقط",
+                "أفهم بعض مفاهيم التعامل مع Numerical Features لكن لا أطبقها جيداً",
+                "طبقت التعامل مع Numerical Features في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان التعامل مع Numerical Features",
+                "أخرى"
+            ],
+            "target": [
+                "فهم التعامل مع Numerical Features بوضوح",
+                "تطبيق التعامل مع Numerical Features في أمثلة AI عملية",
+                "استخدام التعامل مع Numerical Features ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في التعامل مع Numerical Features",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار التعامل مع Numerical Features",
+                "تطبيق عملي أسبوعي على التعامل مع Numerical Features",
+                "Notebook أو تقرير قصير حول التعامل مع Numerical Features كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "تقييم أثر Feature Engineering": {
+            "current": [
+                "أغير features دون قياس الأثر",
+                "لا أعرف هل التحسين مفيد فعلاً",
+                "لا أوثق التجارب",
+                "أخلط بين تأثير البيانات وتأثير النموذج",
+                "أخرى"
+            ],
+            "target": [
+                "قياس الأداء قبل وبعد التغيير",
+                "توثيق كل تعديل على features",
+                "مقارنة التجارب بعدل",
+                "فهم تأثير feature engineering",
+                "اختيار التحسينات المفيدة فقط",
+                "أخرى"
+            ],
+            "commitment": [
+                "تجربة feature واحدة أسبوعياً",
+                "جدول مقارنة قبل وبعد",
+                "جلسة مراجعة تجارب كل أسبوعين",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Scikit-learn Workflow": {
+            "current": [
+                "لا أعرف Scikit-learn",
+                "أعرف أنه يستخدم ML فقط",
+                "أخلط بين fit وpredict",
+                "لا أعرف ترتيب خطوات التدريب",
+                "أحتاج إلى Workflow واضح",
+                "أخرى"
+            ],
+            "target": [
+                "فهم Scikit-learn Workflow",
+                "استخدام fit وpredict",
+                "تقسيم البيانات",
+                "تدريب نموذج بسيط",
+                "تقييم النموذج",
+                "تنظيم التجربة في Notebook",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات Scikit-learn أسبوعياً",
+                "نموذج بسيط كل أسبوع",
+                "Notebook منظم لكل تجربة",
+                "---",
+                "أخرى"
+            ]
+        },
+        "إتقان Estimators": {
+            "current": [
+                "لم أبدأ بعد في إتقان Estimators",
+                "أعرف فكرة عامة عن إتقان Estimators فقط",
+                "أفهم بعض مفاهيم إتقان Estimators لكن لا أطبقها جيداً",
+                "طبقت إتقان Estimators في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Estimators",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Estimators بوضوح",
+                "تطبيق إتقان Estimators في أمثلة AI عملية",
+                "استخدام إتقان Estimators ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Estimators",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Estimators",
+                "تطبيق عملي أسبوعي على إتقان Estimators",
+                "Notebook أو تقرير قصير حول إتقان Estimators كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان fit and predict": {
+            "current": [
+                "لم أبدأ بعد في إتقان fit and predict",
+                "أعرف فكرة عامة عن إتقان fit and predict فقط",
+                "أفهم بعض مفاهيم إتقان fit and predict لكن لا أطبقها جيداً",
+                "طبقت إتقان fit and predict في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان fit and predict",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان fit and predict بوضوح",
+                "تطبيق إتقان fit and predict في أمثلة AI عملية",
+                "استخدام إتقان fit and predict ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان fit and predict",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان fit and predict",
+                "تطبيق عملي أسبوعي على إتقان fit and predict",
+                "Notebook أو تقرير قصير حول إتقان fit and predict كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Train/Test Split في Scikit-learn": {
+            "current": [
+                "لم أبدأ بعد في إتقان Train/Test Split في Scikit-learn",
+                "أعرف فكرة عامة عن إتقان Train/Test Split في Scikit-learn فقط",
+                "أفهم بعض مفاهيم إتقان Train/Test Split في Scikit-learn لكن لا أطبقها جيداً",
+                "طبقت إتقان Train/Test Split في Scikit-learn في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Train/Test Split في Scikit-learn",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Train/Test Split في Scikit-learn بوضوح",
+                "تطبيق إتقان Train/Test Split في Scikit-learn في أمثلة AI عملية",
+                "استخدام إتقان Train/Test Split في Scikit-learn ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Train/Test Split في Scikit-learn",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Train/Test Split في Scikit-learn",
+                "تطبيق عملي أسبوعي على إتقان Train/Test Split في Scikit-learn",
+                "Notebook أو تقرير قصير حول إتقان Train/Test Split في Scikit-learn كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Preprocessing Tools": {
+            "current": [
+                "لم أبدأ بعد في إتقان Preprocessing Tools",
+                "أعرف فكرة عامة عن إتقان Preprocessing Tools فقط",
+                "أفهم بعض مفاهيم إتقان Preprocessing Tools لكن لا أطبقها جيداً",
+                "طبقت إتقان Preprocessing Tools في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Preprocessing Tools",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Preprocessing Tools بوضوح",
+                "تطبيق إتقان Preprocessing Tools في أمثلة AI عملية",
+                "استخدام إتقان Preprocessing Tools ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Preprocessing Tools",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Preprocessing Tools",
+                "تطبيق عملي أسبوعي على إتقان Preprocessing Tools",
+                "Notebook أو تقرير قصير حول إتقان Preprocessing Tools كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "إتقان Pipelines Basics": {
+            "current": [
+                "أجهز البيانات وأدرب النموذج بخطوات منفصلة عشوائية",
+                "لا أفهم Pipeline",
+                "أكرر نفس خطوات preprocessing",
+                "أحتاج إلى تنظيم خطوات التدريب",
+                "أخرى"
+            ],
+            "target": [
+                "فهم Pipeline",
+                "دمج preprocessing مع model",
+                "تقليل التكرار",
+                "تجنب أخطاء ترتيب الخطوات",
+                "استخدام Pipeline في مشروع بسيط",
+                "أخرى"
+            ],
+            "commitment": [
+                "تطبيق Pipeline كل أسبوعين",
+                "مراجعة Workflow قبل وبعد Pipeline",
+                "توثيق خطوات Pipeline",
+                "---",
+                "أخرى"
+            ]
+        },
+        "إتقان Model Selection Tools": {
+            "current": [
+                "لم أبدأ بعد في إتقان Model Selection Tools",
+                "أعرف فكرة عامة عن إتقان Model Selection Tools فقط",
+                "أفهم بعض مفاهيم إتقان Model Selection Tools لكن لا أطبقها جيداً",
+                "طبقت إتقان Model Selection Tools في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان إتقان Model Selection Tools",
+                "أخرى"
+            ],
+            "target": [
+                "فهم إتقان Model Selection Tools بوضوح",
+                "تطبيق إتقان Model Selection Tools في أمثلة AI عملية",
+                "استخدام إتقان Model Selection Tools ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في إتقان Model Selection Tools",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار إتقان Model Selection Tools",
+                "تطبيق عملي أسبوعي على إتقان Model Selection Tools",
+                "Notebook أو تقرير قصير حول إتقان Model Selection Tools كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "بناء مشاريع Scikit-learn تأسيسية": {
+            "current": [
+                "لم أبدأ بعد في بناء مشاريع Scikit-learn تأسيسية",
+                "أعرف فكرة عامة عن بناء مشاريع Scikit-learn تأسيسية فقط",
+                "أفهم بعض مفاهيم بناء مشاريع Scikit-learn تأسيسية لكن لا أطبقها جيداً",
+                "طبقت بناء مشاريع Scikit-learn تأسيسية في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان بناء مشاريع Scikit-learn تأسيسية",
+                "أخرى"
+            ],
+            "target": [
+                "فهم بناء مشاريع Scikit-learn تأسيسية بوضوح",
+                "تطبيق بناء مشاريع Scikit-learn تأسيسية في أمثلة AI عملية",
+                "استخدام بناء مشاريع Scikit-learn تأسيسية ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في بناء مشاريع Scikit-learn تأسيسية",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار بناء مشاريع Scikit-learn تأسيسية",
+                "تطبيق عملي أسبوعي على بناء مشاريع Scikit-learn تأسيسية",
+                "Notebook أو تقرير قصير حول بناء مشاريع Scikit-learn تأسيسية كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "اختيار فكرة مشروع AI تأسيسي": {
+            "current": [
+                "لم أبدأ بعد في اختيار فكرة مشروع AI تأسيسي",
+                "أعرف فكرة عامة عن اختيار فكرة مشروع AI تأسيسي فقط",
+                "أفهم بعض مفاهيم اختيار فكرة مشروع AI تأسيسي لكن لا أطبقها جيداً",
+                "طبقت اختيار فكرة مشروع AI تأسيسي في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان اختيار فكرة مشروع AI تأسيسي",
+                "أخرى"
+            ],
+            "target": [
+                "فهم اختيار فكرة مشروع AI تأسيسي بوضوح",
+                "تطبيق اختيار فكرة مشروع AI تأسيسي في أمثلة AI عملية",
+                "استخدام اختيار فكرة مشروع AI تأسيسي ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في اختيار فكرة مشروع AI تأسيسي",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار اختيار فكرة مشروع AI تأسيسي",
+                "تطبيق عملي أسبوعي على اختيار فكرة مشروع AI تأسيسي",
+                "Notebook أو تقرير قصير حول اختيار فكرة مشروع AI تأسيسي كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "تخطيط مشروع AI بسيط": {
+            "current": [
+                "أريد بناء مشروع AI لكن لا أعرف من أين أبدأ",
+                "أختار فكرة صعبة جداً",
+                "لا أحدد البيانات والمقياس بوضوح",
+                "أبدأ بالكود قبل التخطيط",
+                "أحتاج إلى خطة مشروع منظمة",
+                "أخرى"
+            ],
+            "target": [
+                "اختيار فكرة مناسبة للمستوى",
+                "تحديد Dataset",
+                "تحديد هدف المشروع",
+                "تحديد metric",
+                "تقسيم المشروع إلى مراحل",
+                "توثيق الخطة قبل التنفيذ",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة تخطيط مشروع أسبوعياً",
+                "مشروع AI تأسيسي كل شهر",
+                "مراجعة الخطة قبل التنفيذ",
+                "---",
+                "أخرى"
+            ]
+        },
+        "تنفيذ مشروع Regression": {
+            "current": [
+                "لم أبدأ بعد في تنفيذ مشروع Regression",
+                "أعرف فكرة عامة عن تنفيذ مشروع Regression فقط",
+                "أفهم بعض مفاهيم تنفيذ مشروع Regression لكن لا أطبقها جيداً",
+                "طبقت تنفيذ مشروع Regression في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان تنفيذ مشروع Regression",
+                "أخرى"
+            ],
+            "target": [
+                "فهم تنفيذ مشروع Regression بوضوح",
+                "تطبيق تنفيذ مشروع Regression في أمثلة AI عملية",
+                "استخدام تنفيذ مشروع Regression ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في تنفيذ مشروع Regression",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار تنفيذ مشروع Regression",
+                "تطبيق عملي أسبوعي على تنفيذ مشروع Regression",
+                "Notebook أو تقرير قصير حول تنفيذ مشروع Regression كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "تنفيذ مشروع Classification": {
+            "current": [
+                "لم أبدأ بعد في تنفيذ مشروع Classification",
+                "أعرف فكرة عامة عن تنفيذ مشروع Classification فقط",
+                "أفهم بعض مفاهيم تنفيذ مشروع Classification لكن لا أطبقها جيداً",
+                "طبقت تنفيذ مشروع Classification في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان تنفيذ مشروع Classification",
+                "أخرى"
+            ],
+            "target": [
+                "فهم تنفيذ مشروع Classification بوضوح",
+                "تطبيق تنفيذ مشروع Classification في أمثلة AI عملية",
+                "استخدام تنفيذ مشروع Classification ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في تنفيذ مشروع Classification",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار تنفيذ مشروع Classification",
+                "تطبيق عملي أسبوعي على تنفيذ مشروع Classification",
+                "Notebook أو تقرير قصير حول تنفيذ مشروع Classification كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "تنفيذ مشروع Clustering": {
+            "current": [
+                "لم أبدأ بعد في تنفيذ مشروع Clustering",
+                "أعرف فكرة عامة عن تنفيذ مشروع Clustering فقط",
+                "أفهم بعض مفاهيم تنفيذ مشروع Clustering لكن لا أطبقها جيداً",
+                "طبقت تنفيذ مشروع Clustering في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان تنفيذ مشروع Clustering",
+                "أخرى"
+            ],
+            "target": [
+                "فهم تنفيذ مشروع Clustering بوضوح",
+                "تطبيق تنفيذ مشروع Clustering في أمثلة AI عملية",
+                "استخدام تنفيذ مشروع Clustering ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في تنفيذ مشروع Clustering",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار تنفيذ مشروع Clustering",
+                "تطبيق عملي أسبوعي على تنفيذ مشروع Clustering",
+                "Notebook أو تقرير قصير حول تنفيذ مشروع Clustering كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "تنفيذ مشروع Data Preparation كامل": {
+            "current": [
+                "لم أبدأ بعد في تنفيذ مشروع Data Preparation كامل",
+                "أعرف فكرة عامة عن تنفيذ مشروع Data Preparation كامل فقط",
+                "أفهم بعض مفاهيم تنفيذ مشروع Data Preparation كامل لكن لا أطبقها جيداً",
+                "طبقت تنفيذ مشروع Data Preparation كامل في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان تنفيذ مشروع Data Preparation كامل",
+                "أخرى"
+            ],
+            "target": [
+                "فهم تنفيذ مشروع Data Preparation كامل بوضوح",
+                "تطبيق تنفيذ مشروع Data Preparation كامل في أمثلة AI عملية",
+                "استخدام تنفيذ مشروع Data Preparation كامل ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في تنفيذ مشروع Data Preparation كامل",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار تنفيذ مشروع Data Preparation كامل",
+                "تطبيق عملي أسبوعي على تنفيذ مشروع Data Preparation كامل",
+                "Notebook أو تقرير قصير حول تنفيذ مشروع Data Preparation كامل كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "تنفيذ مشروع EDA and Visualization": {
+            "current": [
+                "لم أبدأ بعد في تنفيذ مشروع EDA and Visualization",
+                "أعرف فكرة عامة عن تنفيذ مشروع EDA and Visualization فقط",
+                "أفهم بعض مفاهيم تنفيذ مشروع EDA and Visualization لكن لا أطبقها جيداً",
+                "طبقت تنفيذ مشروع EDA and Visualization في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان تنفيذ مشروع EDA and Visualization",
+                "أخرى"
+            ],
+            "target": [
+                "فهم تنفيذ مشروع EDA and Visualization بوضوح",
+                "تطبيق تنفيذ مشروع EDA and Visualization في أمثلة AI عملية",
+                "استخدام تنفيذ مشروع EDA and Visualization ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في تنفيذ مشروع EDA and Visualization",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار تنفيذ مشروع EDA and Visualization",
+                "تطبيق عملي أسبوعي على تنفيذ مشروع EDA and Visualization",
+                "Notebook أو تقرير قصير حول تنفيذ مشروع EDA and Visualization كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "توثيق مشروع AI تأسيسي": {
+            "current": [
+                "أنفذ المشروع دون توثيق",
+                "لا أشرح البيانات أو النتائج",
+                "لا أذكر القيود",
+                "لا أوثق التجارب",
+                "أحتاج إلى عرض المشروع بوضوح تعليمي",
+                "أخرى"
+            ],
+            "target": [
+                "توثيق المشكلة والبيانات",
+                "توثيق خطوات preprocessing",
+                "توثيق النموذج والمقاييس",
+                "تفسير النتائج",
+                "ذكر القيود والتحسينات القادمة",
+                "أخرى"
+            ],
+            "commitment": [
+                "تقرير قصير لكل مشروع",
+                "جلسة توثيق أسبوعية",
+                "مراجعة توثيق المشروع قبل اعتباره مكتملاً",
+                "---",
+                "أخرى"
+            ]
+        },
+        "تحسين مشروع AI تدريجياً": {
+            "current": [
+                "لم أبدأ بعد في تحسين مشروع AI تدريجياً",
+                "أعرف فكرة عامة عن تحسين مشروع AI تدريجياً فقط",
+                "أفهم بعض مفاهيم تحسين مشروع AI تدريجياً لكن لا أطبقها جيداً",
+                "طبقت تحسين مشروع AI تدريجياً في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان تحسين مشروع AI تدريجياً",
+                "أخرى"
+            ],
+            "target": [
+                "فهم تحسين مشروع AI تدريجياً بوضوح",
+                "تطبيق تحسين مشروع AI تدريجياً في أمثلة AI عملية",
+                "استخدام تحسين مشروع AI تدريجياً ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في تحسين مشروع AI تدريجياً",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار تحسين مشروع AI تدريجياً",
+                "تطبيق عملي أسبوعي على تحسين مشروع AI تدريجياً",
+                "Notebook أو تقرير قصير حول تحسين مشروع AI تدريجياً كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Responsible AI": {
+            "current": [
+                "لم أبدأ بعد في فهم Responsible AI",
+                "أعرف فكرة عامة عن فهم Responsible AI فقط",
+                "أفهم بعض مفاهيم فهم Responsible AI لكن لا أطبقها جيداً",
+                "طبقت فهم Responsible AI في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Responsible AI",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Responsible AI بوضوح",
+                "تطبيق فهم Responsible AI في أمثلة AI عملية",
+                "استخدام فهم Responsible AI ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Responsible AI",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Responsible AI",
+                "تطبيق عملي أسبوعي على فهم Responsible AI",
+                "Notebook أو تقرير قصير حول فهم Responsible AI كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Bias في البيانات والنماذج": {
+            "current": [
+                "لا أعرف معنى Bias في AI",
+                "أظن أن النموذج محايد دائماً",
+                "لا أفحص تمثيل البيانات",
+                "لا أعرف كيف تؤثر البيانات على النتائج",
+                "أحتاج إلى وعي مسؤول عند بناء النماذج",
+                "أخرى"
+            ],
+            "target": [
+                "شرح معنى Bias",
+                "فحص البيانات بحثاً عن تمثيل غير متوازن",
+                "فهم أثر Bias على النتائج",
+                "ذكر قيود النموذج بوضوح",
+                "اقتراح تحسينات مسؤولة",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة Responsible AI أسبوعية",
+                "مراجعة Bias في كل Dataset",
+                "كتابة قيود النموذج في كل تقرير",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Fairness Basics": {
+            "current": [
+                "لم أبدأ بعد في فهم Fairness Basics",
+                "أعرف فكرة عامة عن فهم Fairness Basics فقط",
+                "أفهم بعض مفاهيم فهم Fairness Basics لكن لا أطبقها جيداً",
+                "طبقت فهم Fairness Basics في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Fairness Basics",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Fairness Basics بوضوح",
+                "تطبيق فهم Fairness Basics في أمثلة AI عملية",
+                "استخدام فهم Fairness Basics ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Fairness Basics",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Fairness Basics",
+                "تطبيق عملي أسبوعي على فهم Fairness Basics",
+                "Notebook أو تقرير قصير حول فهم Fairness Basics كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Privacy Basics": {
+            "current": [
+                "لم أبدأ بعد في فهم Privacy Basics",
+                "أعرف فكرة عامة عن فهم Privacy Basics فقط",
+                "أفهم بعض مفاهيم فهم Privacy Basics لكن لا أطبقها جيداً",
+                "طبقت فهم Privacy Basics في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Privacy Basics",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Privacy Basics بوضوح",
+                "تطبيق فهم Privacy Basics في أمثلة AI عملية",
+                "استخدام فهم Privacy Basics ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Privacy Basics",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Privacy Basics",
+                "تطبيق عملي أسبوعي على فهم Privacy Basics",
+                "Notebook أو تقرير قصير حول فهم Privacy Basics كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Model Limitations": {
+            "current": [
+                "أثق بنتائج النموذج دون مراجعة",
+                "لا أذكر حدود النموذج",
+                "لا أفرق بين نتيجة جيدة ومناسبة للاستخدام",
+                "لا أعرف متى لا يجب الاعتماد على النموذج",
+                "أخرى"
+            ],
+            "target": [
+                "تحديد حدود النموذج",
+                "فهم أن النموذج قد يخطئ",
+                "ذكر الحالات التي لا يعمل فيها جيداً",
+                "عدم المبالغة في النتائج",
+                "كتابة قسم Limitations في التقرير",
+                "أخرى"
+            ],
+            "commitment": [
+                "كتابة limitations لكل تجربة",
+                "جلسة مراجعة أخلاقية ومسؤولة أسبوعياً",
+                "Checklist مسؤولية قبل إنهاء كل مشروع",
+                "---",
+                "أخرى"
+            ]
+        },
+        "فهم Hallucination كمفهوم عام": {
+            "current": [
+                "لم أبدأ بعد في فهم Hallucination كمفهوم عام",
+                "أعرف فكرة عامة عن فهم Hallucination كمفهوم عام فقط",
+                "أفهم بعض مفاهيم فهم Hallucination كمفهوم عام لكن لا أطبقها جيداً",
+                "طبقت فهم Hallucination كمفهوم عام في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Hallucination كمفهوم عام",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Hallucination كمفهوم عام بوضوح",
+                "تطبيق فهم Hallucination كمفهوم عام في أمثلة AI عملية",
+                "استخدام فهم Hallucination كمفهوم عام ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Hallucination كمفهوم عام",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Hallucination كمفهوم عام",
+                "تطبيق عملي أسبوعي على فهم Hallucination كمفهوم عام",
+                "Notebook أو تقرير قصير حول فهم Hallucination كمفهوم عام كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "فهم Data Quality and Responsibility": {
+            "current": [
+                "لم أبدأ بعد في فهم Data Quality and Responsibility",
+                "أعرف فكرة عامة عن فهم Data Quality and Responsibility فقط",
+                "أفهم بعض مفاهيم فهم Data Quality and Responsibility لكن لا أطبقها جيداً",
+                "طبقت فهم Data Quality and Responsibility في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان فهم Data Quality and Responsibility",
+                "أخرى"
+            ],
+            "target": [
+                "فهم فهم Data Quality and Responsibility بوضوح",
+                "تطبيق فهم Data Quality and Responsibility في أمثلة AI عملية",
+                "استخدام فهم Data Quality and Responsibility ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في فهم Data Quality and Responsibility",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار فهم Data Quality and Responsibility",
+                "تطبيق عملي أسبوعي على فهم Data Quality and Responsibility",
+                "Notebook أو تقرير قصير حول فهم Data Quality and Responsibility كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "تقييم مشروع AI من زاوية مسؤولة": {
+            "current": [
+                "لم أبدأ بعد في تقييم مشروع AI من زاوية مسؤولة",
+                "أعرف فكرة عامة عن تقييم مشروع AI من زاوية مسؤولة فقط",
+                "أفهم بعض مفاهيم تقييم مشروع AI من زاوية مسؤولة لكن لا أطبقها جيداً",
+                "طبقت تقييم مشروع AI من زاوية مسؤولة في أمثلة بسيطة",
+                "أحتاج إلى خطة منظمة لإتقان تقييم مشروع AI من زاوية مسؤولة",
+                "أخرى"
+            ],
+            "target": [
+                "فهم تقييم مشروع AI من زاوية مسؤولة بوضوح",
+                "تطبيق تقييم مشروع AI من زاوية مسؤولة في أمثلة AI عملية",
+                "استخدام تقييم مشروع AI من زاوية مسؤولة ضمن مشروع AI تأسيسي",
+                "توثيق ما تعلمته في تقييم مشروع AI من زاوية مسؤولة",
+                "الاستعداد للمرحلة التالية في مسار الذكاء الاصطناعي",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لمسار تقييم مشروع AI من زاوية مسؤولة",
+                "تطبيق عملي أسبوعي على تقييم مشروع AI من زاوية مسؤولة",
+                "Notebook أو تقرير قصير حول تقييم مشروع AI من زاوية مسؤولة كل أسبوع",
+                "مراجعة أسبوعية للأخطاء والملاحظات",
+                "أخرى"
+            ]
+        },
+        "أخرى": {
+            "current": [
+                "لم أبدأ بعد",
+                "أحتاج إلى تحديد مستوى مخصص",
+                "أخرى"
+            ],
+            "target": [
+                "بناء هدف AI مخصص وواضح",
+                "إتقان المسار الذي أختاره",
+                "أخرى"
+            ],
+            "commitment": [
+                "خطة مخصصة أسبوعية",
+                "مراجعة تقدم أسبوعية",
+                "أخرى"
+            ]
+        }
+    },
+    "outcomes": {
+        "AI Fundamentals": "مثال: أريد بناء هدف واضح في AI Fundamentals ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم معنى الذكاء الاصطناعي": "أريد فهم معنى الذكاء الاصطناعي من الصفر حتى أستطيع شرح الفرق بين AI والبرمجة التقليدية.",
+        "فهم الفرق بين AI وMachine Learning وDeep Learning": "أريد أن أميز بين AI وMachine Learning وDeep Learning حتى أختار مسار تعلمي بوضوح.",
+        "فهم أنواع مشكلات الذكاء الاصطناعي": "مثال: أريد إتقان فهم أنواع مشكلات الذكاء الاصطناعي ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم دورة بناء مشروع AI": "أريد فهم دورة مشروع AI من اختيار المشكلة حتى تقييم النموذج وتوثيق النتائج.",
+        "فهم دور البيانات في الذكاء الاصطناعي": "مثال: أريد إتقان فهم دور البيانات في الذكاء الاصطناعي ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم حدود الذكاء الاصطناعي": "مثال: أريد إتقان فهم حدود الذكاء الاصطناعي ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "بناء خريطة تعلم AI شخصية": "مثال: أريد إتقان بناء خريطة تعلم AI شخصية ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "Python for AI": "مثال: أريد بناء هدف واضح في Python for AI ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "استخدام Python في مشاريع AI": "أريد استخدام Python كأداة عملية في مشاريع الذكاء الاصطناعي، وليس مجرد لغة عامة.",
+        "إتقان التعامل مع البيانات في Python": "مثال: أريد إتقان إتقان التعامل مع البيانات في Python ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان كتابة Notebooks منظمة": "أريد إتقان تنظيم Jupyter Notebooks لمشاريع AI بحيث تكون مفهومة وقابلة للمراجعة.",
+        "إتقان كتابة Functions تخدم AI Workflow": "مثال: أريد إتقان إتقان كتابة Functions تخدم AI Workflow ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان التعامل مع ملفات البيانات": "أريد أن أتعامل مع ملفات البيانات بثقة داخل Python حتى أبدأ مشاريع AI بشكل منظم.",
+        "تنظيم كود AI بسيط": "مثال: أريد إتقان تنظيم كود AI بسيط ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "Math for AI Basics": "مثال: أريد بناء هدف واضح في Math for AI Basics ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم الرياضيات اللازمة كبداية للذكاء الاصطناعي": "أريد فهم الرياضيات الأساسية اللازمة للذكاء الاصطناعي دون تشتت أو تعقيد زائد.",
+        "فهم Linear Algebra Basics for AI": "مثال: أريد إتقان فهم Linear Algebra Basics for AI ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Statistics Basics for AI": "أريد فهم الإحصاء الأساسي حتى أستطيع تحليل البيانات قبل تدريب نماذج AI.",
+        "فهم Probability Basics for AI": "أريد فهم الاحتمالات الأساسية حتى أفسر مخرجات النماذج واحتمالات التصنيف.",
+        "فهم Calculus Concepts for AI بشكل مبسط": "مثال: أريد إتقان فهم Calculus Concepts for AI بشكل مبسط ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Metrics and Measurements": "مثال: أريد إتقان فهم Metrics and Measurements ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "ربط الرياضيات بتطبيقات AI": "مثال: أريد إتقان ربط الرياضيات بتطبيقات AI ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "Data for AI": "مثال: أريد بناء هدف واضح في Data for AI ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم دور البيانات في AI": "أريد فهم دور البيانات في الذكاء الاصطناعي حتى لا أبدأ التدريب قبل فحص Dataset.",
+        "فهم أنواع البيانات": "مثال: أريد إتقان فهم أنواع البيانات ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Datasets": "مثال: أريد إتقان فهم Datasets ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Data Quality": "مثال: أريد إتقان فهم Data Quality ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Labels and Targets": "أريد فهم Labels and Targets حتى أستطيع تحديد ما يتعلمه النموذج داخل Dataset.",
+        "فهم Training Data and Test Data": "مثال: أريد إتقان فهم Training Data and Test Data ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Data Leakage": "أريد فهم Data Leakage حتى لا أحصل على نتائج مضللة في مشاريع Machine Learning.",
+        "فهم Data Ethics Basics": "مثال: أريد إتقان فهم Data Ethics Basics ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "NumPy for AI": "مثال: أريد بناء هدف واضح في NumPy for AI ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم NumPy Arrays": "مثال: أريد إتقان فهم NumPy Arrays ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Array Operations": "مثال: أريد إتقان إتقان Array Operations ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Shapes and Dimensions": "أريد فهم Shapes and Dimensions في NumPy حتى لا أتعثر عند تجهيز البيانات للنماذج.",
+        "إتقان Indexing and Slicing": "مثال: أريد إتقان إتقان Indexing and Slicing ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Broadcasting": "أريد فهم Broadcasting في NumPy حتى أتعامل مع العمليات العددية في AI بثقة.",
+        "إتقان Basic Numerical Computation": "مثال: أريد إتقان إتقان Basic Numerical Computation ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "استخدام NumPy في تجهيز بيانات AI": "مثال: أريد إتقان استخدام NumPy في تجهيز بيانات AI ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "Pandas for AI": "مثال: أريد بناء هدف واضح في Pandas for AI ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم DataFrames and Series": "مثال: أريد إتقان فهم DataFrames and Series ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان قراءة Datasets": "مثال: أريد إتقان إتقان قراءة Datasets ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان فحص البيانات": "أريد إتقان فحص البيانات باستخدام Pandas حتى أفهم Dataset قبل تجهيزها للنماذج.",
+        "إتقان اختيار الصفوف والأعمدة": "مثال: أريد إتقان إتقان اختيار الصفوف والأعمدة ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Filtering": "مثال: أريد إتقان إتقان Filtering ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Grouping and Aggregation": "مثال: أريد إتقان إتقان Grouping and Aggregation ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان التعامل مع Missing Values": "أريد إتقان التعامل مع Missing Values حتى أجهز البيانات للنماذج بطريقة صحيحة.",
+        "إتقان التعامل مع Categorical Data": "مثال: أريد إتقان إتقان التعامل مع Categorical Data ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إعداد Dataset أولية باستخدام Pandas": "مثال: أريد إتقان إعداد Dataset أولية باستخدام Pandas ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "Data Preparation": "مثال: أريد بناء هدف واضح في Data Preparation ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "إتقان Data Cleaning": "أريد إتقان Data Cleaning حتى أستطيع تحويل Dataset خام إلى بيانات صالحة للتدريب.",
+        "إتقان Missing Values Treatment": "مثال: أريد إتقان إتقان Missing Values Treatment ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Encoding Categorical Variables": "أريد إتقان Encoding للبيانات الفئوية حتى أجهز Dataset للنماذج بشكل صحيح.",
+        "إتقان Feature Scaling": "مثال: أريد إتقان إتقان Feature Scaling ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Train/Test Split": "أريد إتقان Train/Test Split حتى أقيّم النموذج بطريقة عادلة.",
+        "إتقان Handling Outliers": "مثال: أريد إتقان إتقان Handling Outliers ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Data Preparation Pipeline": "مثال: أريد إتقان إتقان Data Preparation Pipeline ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "تجهيز Dataset كاملة لمشروع ML": "مثال: أريد إتقان تجهيز Dataset كاملة لمشروع ML ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "Data Visualization for AI": "مثال: أريد بناء هدف واضح في Data Visualization for AI ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم دور Visualization في AI": "مثال: أريد إتقان فهم دور Visualization في AI ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان الرسوم الإحصائية الأساسية": "مثال: أريد إتقان إتقان الرسوم الإحصائية الأساسية ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Visualizing Distributions": "أريد إتقان Visualizing Distributions حتى أفهم شكل البيانات قبل تدريب النموذج.",
+        "إتقان Visualizing Relationships": "مثال: أريد إتقان إتقان Visualizing Relationships ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Correlation Analysis بصرياً": "مثال: أريد إتقان إتقان Correlation Analysis بصرياً ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Visualizing Model Results": "أريد إتقان عرض نتائج النماذج بصرياً حتى أفهم الأداء وأشرح النتائج بوضوح.",
+        "بناء EDA Report مرئي": "مثال: أريد إتقان بناء EDA Report مرئي ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "Machine Learning": "مثال: أريد بناء هدف واضح في Machine Learning ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم Machine Learning Basics": "مثال: أريد إتقان فهم Machine Learning Basics ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم أنواع Machine Learning": "مثال: أريد إتقان فهم أنواع Machine Learning ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم ML Workflow": "أريد فهم ML Workflow حتى أبني مشاريع Machine Learning بطريقة منظمة من البيانات إلى التقييم.",
+        "فهم العلاقة بين البيانات والنموذج": "مثال: أريد إتقان فهم العلاقة بين البيانات والنموذج ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Model Generalization": "مثال: أريد إتقان فهم Model Generalization ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Overfitting and Underfitting": "أريد فهم Overfitting and Underfitting حتى أعرف لماذا يفشل النموذج على بيانات جديدة.",
+        "بناء أول نموذج Machine Learning": "مثال: أريد إتقان بناء أول نموذج Machine Learning ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "بناء مسار تعلم ML منظم": "مثال: أريد إتقان بناء مسار تعلم ML منظم ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "Supervised Learning": "مثال: أريد بناء هدف واضح في Supervised Learning ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم Supervised Learning": "مثال: أريد إتقان فهم Supervised Learning ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Features and Labels": "مثال: أريد إتقان فهم Features and Labels ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Regression vs Classification": "أريد فهم الفرق بين Regression وClassification حتى أختار نوع النموذج الصحيح لكل مشكلة.",
+        "إتقان اختيار نموذج Supervised مناسب": "مثال: أريد إتقان إتقان اختيار نموذج Supervised مناسب ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان تدريب نموذج Supervised بسيط": "مثال: أريد إتقان إتقان تدريب نموذج Supervised بسيط ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان تقييم نموذج Supervised": "مثال: أريد إتقان إتقان تقييم نموذج Supervised ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "بناء مشروع Supervised Learning": "أريد بناء مشروع Supervised Learning كامل يستخدم بيانات حقيقية ويعرض التدريب والتقييم بوضوح.",
+        "Unsupervised Learning": "مثال: أريد بناء هدف واضح في Unsupervised Learning ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم Unsupervised Learning": "أريد فهم Unsupervised Learning حتى أتعلم كيف نكتشف الأنماط داخل البيانات بدون Labels.",
+        "فهم Clustering كمجال أساسي": "مثال: أريد إتقان فهم Clustering كمجال أساسي ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Dimensionality Reduction كمفهوم": "مثال: أريد إتقان فهم Dimensionality Reduction كمفهوم ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Patterns in Data": "مثال: أريد إتقان فهم Patterns in Data ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم تقييم Unsupervised Learning بشكل مبسط": "مثال: أريد إتقان فهم تقييم Unsupervised Learning بشكل مبسط ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "بناء مشروع Unsupervised Learning بسيط": "أريد بناء مشروع Unsupervised Learning بسيط يكتشف مجموعات داخل Dataset ويشرح النتائج بصرياً.",
+        "Regression": "مثال: أريد بناء هدف واضح في Regression ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم Regression Models": "مثال: أريد إتقان فهم Regression Models ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Linear Regression": "أريد إتقان Linear Regression حتى أبني نموذجاً يتوقع قيمة رقمية وأفسر أداءه.",
+        "فهم Multiple Regression": "مثال: أريد إتقان فهم Multiple Regression ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Regression Metrics": "أريد فهم Regression Metrics حتى أستطيع تقييم نماذج التوقع الرقمي بوضوح.",
+        "فهم Error Analysis for Regression": "مثال: أريد إتقان فهم Error Analysis for Regression ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "مقارنة Regression Models": "مثال: أريد إتقان مقارنة Regression Models ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "بناء مشروع Regression": "مثال: أريد إتقان بناء مشروع Regression ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "Classification": "مثال: أريد بناء هدف واضح في Classification ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم Classification Problems": "مثال: أريد إتقان فهم Classification Problems ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Binary Classification": "مثال: أريد إتقان إتقان Binary Classification ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Multi-class Classification": "مثال: أريد إتقان فهم Multi-class Classification ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Classification Metrics": "أريد إتقان Classification Metrics حتى أقيم نماذج التصنيف بطريقة صحيحة.",
+        "فهم Confusion Matrix": "أريد فهم Confusion Matrix حتى أفسر أخطاء نموذج Classification بدقة.",
+        "فهم Thresholds": "مثال: أريد إتقان فهم Thresholds ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "بناء مشروع Classification": "مثال: أريد إتقان بناء مشروع Classification ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "Clustering": "مثال: أريد بناء هدف واضح في Clustering ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم Clustering": "مثال: أريد إتقان فهم Clustering ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان K-Means Basics": "أريد إتقان K-Means حتى أستطيع اكتشاف مجموعات داخل البيانات وتصويرها بصرياً.",
+        "فهم اختيار عدد المجموعات": "مثال: أريد إتقان فهم اختيار عدد المجموعات ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم تقييم Clustering بشكل مبسط": "مثال: أريد إتقان فهم تقييم Clustering بشكل مبسط ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Visualizing Clusters": "مثال: أريد إتقان فهم Visualizing Clusters ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "بناء مشروع Clustering": "مثال: أريد إتقان بناء مشروع Clustering ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "Model Training": "مثال: أريد بناء هدف واضح في Model Training ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم Training Process": "مثال: أريد إتقان فهم Training Process ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Train/Test Workflow": "مثال: أريد إتقان إتقان Train/Test Workflow ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Hyperparameters": "أريد فهم Hyperparameters حتى أحسن النماذج بطريقة منظمة وليس بالتجربة العشوائية.",
+        "فهم Validation": "مثال: أريد إتقان فهم Validation ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Cross-validation Basics": "أريد فهم Cross-validation حتى أقيم النموذج بثبات أكبر من تقسيم واحد فقط.",
+        "فهم Model Selection": "مثال: أريد إتقان فهم Model Selection ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "تدريب أكثر من نموذج ومقارنتها": "مثال: أريد إتقان تدريب أكثر من نموذج ومقارنتها ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "Model Evaluation": "مثال: أريد بناء هدف واضح في Model Evaluation ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم Model Evaluation": "مثال: أريد إتقان فهم Model Evaluation ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "اختيار Metric مناسبة": "أريد إتقان اختيار المقاييس المناسبة حتى أقيم النموذج حسب نوع المشكلة وليس عشوائياً.",
+        "تقييم Regression Models": "مثال: أريد إتقان تقييم Regression Models ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "تقييم Classification Models": "مثال: أريد إتقان تقييم Classification Models ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "تحليل Overfitting and Underfitting": "مثال: أريد إتقان تحليل Overfitting and Underfitting ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Baseline Model": "مثال: أريد إتقان فهم Baseline Model ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Error Analysis": "مثال: أريد إتقان فهم Error Analysis ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "كتابة Model Evaluation Report": "أريد إتقان كتابة Model Evaluation Report حتى أوثق نتائج النماذج بوضوح.",
+        "Feature Engineering Basics": "مثال: أريد بناء هدف واضح في Feature Engineering Basics ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم Feature Engineering": "مثال: أريد إتقان فهم Feature Engineering ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "اختيار Features مناسبة": "أريد فهم Feature Selection حتى أختار الأعمدة المناسبة للنموذج بدلاً من استخدام كل شيء عشوائياً.",
+        "إنشاء Features جديدة": "مثال: أريد إتقان إنشاء Features جديدة ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "تحويل Features": "مثال: أريد إتقان تحويل Features ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "التعامل مع Categorical Features": "مثال: أريد إتقان التعامل مع Categorical Features ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "التعامل مع Numerical Features": "مثال: أريد إتقان التعامل مع Numerical Features ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "تقييم أثر Feature Engineering": "أريد تقييم أثر Feature Engineering حتى أعرف هل تعديل البيانات حسن النموذج فعلاً أم لا.",
+        "Scikit-learn": "مثال: أريد بناء هدف واضح في Scikit-learn ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم Scikit-learn Workflow": "أريد فهم Scikit-learn Workflow حتى أستطيع بناء نماذج ML تأسيسية بطريقة منظمة.",
+        "إتقان Estimators": "مثال: أريد إتقان إتقان Estimators ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان fit and predict": "مثال: أريد إتقان إتقان fit and predict ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Train/Test Split في Scikit-learn": "مثال: أريد إتقان إتقان Train/Test Split في Scikit-learn ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Preprocessing Tools": "مثال: أريد إتقان إتقان Preprocessing Tools ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "إتقان Pipelines Basics": "أريد إتقان Pipelines Basics في Scikit-learn حتى أنظم خطوات preprocessing والتدريب.",
+        "إتقان Model Selection Tools": "مثال: أريد إتقان إتقان Model Selection Tools ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "بناء مشاريع Scikit-learn تأسيسية": "مثال: أريد إتقان بناء مشاريع Scikit-learn تأسيسية ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "AI Projects Basics": "مثال: أريد بناء هدف واضح في AI Projects Basics ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "اختيار فكرة مشروع AI تأسيسي": "مثال: أريد إتقان اختيار فكرة مشروع AI تأسيسي ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "تخطيط مشروع AI بسيط": "أريد تعلم تخطيط مشروع AI بسيط قبل البدء في الكود حتى يكون المشروع منظماً وقابلاً للإنجاز.",
+        "تنفيذ مشروع Regression": "مثال: أريد إتقان تنفيذ مشروع Regression ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "تنفيذ مشروع Classification": "مثال: أريد إتقان تنفيذ مشروع Classification ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "تنفيذ مشروع Clustering": "مثال: أريد إتقان تنفيذ مشروع Clustering ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "تنفيذ مشروع Data Preparation كامل": "مثال: أريد إتقان تنفيذ مشروع Data Preparation كامل ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "تنفيذ مشروع EDA and Visualization": "مثال: أريد إتقان تنفيذ مشروع EDA and Visualization ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "توثيق مشروع AI تأسيسي": "أريد توثيق مشاريع AI التأسيسية بحيث تكون مفهومة ومنظمة وقابلة للمراجعة.",
+        "تحسين مشروع AI تدريجياً": "مثال: أريد إتقان تحسين مشروع AI تدريجياً ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "Responsible AI Basics": "مثال: أريد بناء هدف واضح في Responsible AI Basics ضمن مسار الذكاء الاصطناعي بشكل طويل المدى ومنظم.",
+        "فهم Responsible AI": "مثال: أريد إتقان فهم Responsible AI ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Bias في البيانات والنماذج": "أريد فهم Bias في AI حتى لا أتعامل مع نتائج النماذج كأنها محايدة دائماً.",
+        "فهم Fairness Basics": "مثال: أريد إتقان فهم Fairness Basics ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Privacy Basics": "مثال: أريد إتقان فهم Privacy Basics ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Model Limitations": "أريد فهم Model Limitations حتى أستخدم النماذج بحذر وأشرح حدودها بوضوح.",
+        "فهم Hallucination كمفهوم عام": "مثال: أريد إتقان فهم Hallucination كمفهوم عام ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "فهم Data Quality and Responsibility": "مثال: أريد إتقان فهم Data Quality and Responsibility ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "تقييم مشروع AI من زاوية مسؤولة": "مثال: أريد إتقان تقييم مشروع AI من زاوية مسؤولة ضمن مسار الذكاء الاصطناعي حتى أستطيع تطبيقه في مشروع AI واضح.",
+        "أخرى": "مثال: أريد بناء هدف مخصص في الذكاء الاصطناعي يناسب مستواي الحالي وخطتي طويلة المدى."
+    }
+};
+
+    if (typeof GOAL_CONFIG_V524 !== "undefined") {
+        GOAL_CONFIG_V524["الذكاء الاصطناعي"] = artificialIntelligenceBankPart1V55123;
+        GOAL_CONFIG_V524["Artificial Intelligence"] = artificialIntelligenceBankPart1V55123;
+    }
+
+    if (typeof SMART_GOALS_V4610 !== "undefined") {
+        SMART_GOALS_V4610["Artificial Intelligence"] = artificialIntelligenceBankPart1V55123;
+        SMART_GOALS_V4610["الذكاء الاصطناعي"] = artificialIntelligenceBankPart1V55123;
+    }
+
+    if (typeof GOAL_TYPE_CANONICAL_V557 !== "undefined") {
+        GOAL_TYPE_CANONICAL_V557["Artificial Intelligence"] = "الذكاء الاصطناعي";
+        GOAL_TYPE_CANONICAL_V557["AI"] = "الذكاء الاصطناعي";
+        GOAL_TYPE_CANONICAL_V557["الذكاء الاصطناعي"] = "الذكاء الاصطناعي";
+    }
+
+    if (typeof SMART_GOAL_AR_LABELS_V520 !== "undefined") {
+        SMART_GOAL_AR_LABELS_V520["Artificial Intelligence"] = "الذكاء الاصطناعي";
+        SMART_GOAL_AR_LABELS_V520["AI Fundamentals"] = "AI Fundamentals";
+        SMART_GOAL_AR_LABELS_V520["Python for AI"] = "Python for AI";
+        SMART_GOAL_AR_LABELS_V520["Math for AI Basics"] = "Math for AI Basics";
+        SMART_GOAL_AR_LABELS_V520["Data for AI"] = "Data for AI";
+        SMART_GOAL_AR_LABELS_V520["NumPy for AI"] = "NumPy for AI";
+        SMART_GOAL_AR_LABELS_V520["Pandas for AI"] = "Pandas for AI";
+        SMART_GOAL_AR_LABELS_V520["Data Preparation"] = "Data Preparation";
+        SMART_GOAL_AR_LABELS_V520["Data Visualization for AI"] = "Data Visualization for AI";
+        SMART_GOAL_AR_LABELS_V520["Machine Learning"] = "Machine Learning";
+        SMART_GOAL_AR_LABELS_V520["Supervised Learning"] = "Supervised Learning";
+        SMART_GOAL_AR_LABELS_V520["Unsupervised Learning"] = "Unsupervised Learning";
+        SMART_GOAL_AR_LABELS_V520["Regression"] = "Regression";
+        SMART_GOAL_AR_LABELS_V520["Classification"] = "Classification";
+        SMART_GOAL_AR_LABELS_V520["Clustering"] = "Clustering";
+        SMART_GOAL_AR_LABELS_V520["Model Training"] = "Model Training";
+        SMART_GOAL_AR_LABELS_V520["Model Evaluation"] = "Model Evaluation";
+        SMART_GOAL_AR_LABELS_V520["Feature Engineering Basics"] = "Feature Engineering Basics";
+        SMART_GOAL_AR_LABELS_V520["Scikit-learn"] = "Scikit-learn";
+        SMART_GOAL_AR_LABELS_V520["AI Projects Basics"] = "AI Projects Basics";
+        SMART_GOAL_AR_LABELS_V520["Responsible AI Basics"] = "Responsible AI Basics";
+    }
+
+    if (typeof window !== "undefined") {
+        window.EDUPATH_ARTIFICIAL_INTELLIGENCE_GOALS_PART1_V55123 = true;
+    }
+})();
+// === End EduPath AI v5.5.123: Goals - Artificial Intelligence Bank Part 1 ===
+
