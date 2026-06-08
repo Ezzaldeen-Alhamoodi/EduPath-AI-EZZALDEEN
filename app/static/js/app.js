@@ -16042,3 +16042,824 @@ applyDeepLanguageTaskConfigV531();
 })();
 // === End EduPath AI v5.5.120: Goals - Programming & Technology Bank Part 1 ===
 
+
+
+// === EduPath AI v5.5.121: Goals - Programming & Technology Bank Part 2 ===
+(function applyProgrammingTechnologyGoalsPart2V55121() {
+    const programmingTechnologyBankPart2V55121 = {
+    "categories": [
+        "Web Development",
+        "HTML and CSS",
+        "JavaScript for Web",
+        "Frontend Development",
+        "React",
+        "Backend Development",
+        "APIs",
+        "Flask",
+        "Django",
+        "Node.js and Express",
+        "Databases",
+        "SQL",
+        "Git and GitHub",
+        "Software Engineering",
+        "Testing and Code Quality",
+        "Full Stack Projects",
+        "أخرى"
+    ],
+    "paths": {
+        "Web Development": [
+            "فهم أساسيات Web Development",
+            "فهم طريقة عمل الويب",
+            "فهم Frontend وBackend وFull Stack",
+            "فهم Client and Server",
+            "فهم HTTP Basics",
+            "فهم الفرق بين صفحات الويب وتطبيقات الويب",
+            "إتقان تنظيم مشروع ويب بسيط",
+            "بناء أساس قوي للانتقال إلى Frontend وBackend",
+            "أخرى"
+        ],
+        "HTML and CSS": [
+            "إتقان HTML Structure",
+            "إتقان عناصر النصوص والروابط والصور",
+            "إتقان HTML Forms",
+            "إتقان Semantic HTML",
+            "إتقان CSS Basics",
+            "إتقان Selectors وBox Model",
+            "إتقان Colors and Typography",
+            "إتقان CSS Layout",
+            "إتقان Flexbox",
+            "إتقان CSS Grid",
+            "إتقان Responsive CSS",
+            "إتقان CSS Animations الأساسية",
+            "بناء صفحات HTML and CSS متجاوبة",
+            "أخرى"
+        ],
+        "JavaScript for Web": [
+            "إتقان DOM Basics",
+            "إتقان اختيار العناصر وتعديلها",
+            "إتقان Events في JavaScript",
+            "إتقان Forms with JavaScript",
+            "إتقان Validation in Browser",
+            "إتقان Fetch API",
+            "إتقان JSON in Browser",
+            "إتقان Browser Storage",
+            "فهم Async Basics for Web",
+            "بناء واجهات تفاعلية باستخدام JavaScript",
+            "أخرى"
+        ],
+        "Frontend Development": [
+            "فهم Frontend Development بشكل شامل",
+            "إتقان UI Structure",
+            "إتقان بناء Reusable UI",
+            "فهم State in Frontend",
+            "فهم Routing كمفهوم عام",
+            "إتقان Accessibility Basics",
+            "إتقان Responsive UI",
+            "فهم Frontend Performance Basics",
+            "إتقان Frontend Project Structure",
+            "تحسين Frontend Debugging",
+            "بناء مشاريع Frontend عملية",
+            "أخرى"
+        ],
+        "React": [
+            "إتقان React Basics",
+            "إتقان JSX",
+            "إتقان Components",
+            "إتقان Props",
+            "إتقان State",
+            "إتقان Events in React",
+            "إتقان Forms in React",
+            "إتقان Hooks Basics",
+            "إتقان useEffect Basics",
+            "إتقان React Router",
+            "إتقان Conditional Rendering",
+            "إتقان Lists in React",
+            "إتقان API Calls in React",
+            "إتقان React Project Structure",
+            "بناء مشاريع React عملية",
+            "أخرى"
+        ],
+        "Backend Development": [
+            "فهم Backend Development",
+            "فهم Server Concepts",
+            "إتقان Routes",
+            "فهم Controllers كمفهوم",
+            "إتقان Request Handling",
+            "إتقان Response Handling",
+            "إتقان Validation in Backend",
+            "فهم Authentication Basics",
+            "فهم Authorization Basics",
+            "فهم Sessions and Cookies",
+            "فهم Password Handling Basics",
+            "إتقان Backend Error Handling",
+            "بناء Backend بسيط لتطبيق عملي",
+            "أخرى"
+        ],
+        "APIs": [
+            "فهم API Basics",
+            "إتقان REST API",
+            "إتقان تصميم Endpoints",
+            "إتقان HTTP Methods",
+            "إتقان Request Data",
+            "إتقان Response Data",
+            "إتقان Status Codes",
+            "إتقان JSON APIs",
+            "إتقان API Validation",
+            "إتقان API Error Handling",
+            "إتقان API Documentation",
+            "إتقان API Testing",
+            "بناء API عملي لمشروع",
+            "أخرى"
+        ],
+        "Flask": [
+            "إتقان Flask Basics",
+            "إتقان Flask Project Structure",
+            "إتقان Routes in Flask",
+            "إتقان Templates with Jinja",
+            "إتقان Forms in Flask",
+            "إتقان Flask APIs",
+            "إتقان Flask with Database",
+            "فهم Flask Authentication Basics",
+            "إتقان Flask Error Handling",
+            "فهم Flask Configuration",
+            "بناء تطبيق Flask عملي",
+            "أخرى"
+        ],
+        "Django": [
+            "إتقان Django Basics",
+            "إتقان Django Project Structure",
+            "إتقان Apps in Django",
+            "إتقان Models",
+            "إتقان Views",
+            "إتقان Templates",
+            "إتقان URLs",
+            "إتقان Forms",
+            "إتقان Django ORM",
+            "إتقان Admin Panel",
+            "فهم Authentication Basics في Django",
+            "بناء مشروع Django عملي",
+            "أخرى"
+        ],
+        "Node.js and Express": [
+            "إتقان Node.js Basics",
+            "إتقان npm and package.json",
+            "إتقان Modules in Node.js",
+            "إتقان Express Basics",
+            "إتقان Routes in Express",
+            "إتقان Middleware",
+            "إتقان Request and Response",
+            "إتقان Express APIs",
+            "إتقان Validation in Express",
+            "إتقان Error Handling in Express",
+            "إتقان Express with Database",
+            "بناء مشروع Node.js and Express عملي",
+            "أخرى"
+        ],
+        "Databases": [
+            "فهم Database Basics",
+            "إتقان Tables and Records",
+            "إتقان Columns and Data Types",
+            "فهم Keys",
+            "فهم Relationships",
+            "إتقان Database Design",
+            "إتقان CRUD in Databases",
+            "فهم Indexes كمفهوم",
+            "فهم Transactions كمفهوم",
+            "فهم Database Security Basics",
+            "فهم Database Backup Basics",
+            "تصميم قاعدة بيانات لمشروع عملي",
+            "أخرى"
+        ],
+        "SQL": [
+            "إتقان SQL Basics",
+            "إتقان SELECT Queries",
+            "إتقان Filtering Data",
+            "إتقان Sorting and Limiting",
+            "إتقان INSERT Data",
+            "إتقان UPDATE Data",
+            "إتقان DELETE Data",
+            "إتقان Aggregate Functions",
+            "إتقان GROUP BY",
+            "إتقان Joins",
+            "فهم Subqueries كمفهوم",
+            "التطبيق على SQLite",
+            "التطبيق على PostgreSQL أو MySQL",
+            "حل تمارين SQL عملية",
+            "أخرى"
+        ],
+        "Git and GitHub": [
+            "فهم Git Basics",
+            "إتقان Repositories",
+            "إتقان Staging Area",
+            "إتقان Commits",
+            "إتقان Branches",
+            "إتقان Merging",
+            "فهم Merge Conflicts",
+            "إتقان Remote Repositories",
+            "إتقان GitHub Basics",
+            "فهم Pull Requests",
+            "فهم Issues",
+            "إتقان README Files",
+            "إتقان Git Workflow",
+            "استخدام Git and GitHub في مشروع حقيقي",
+            "أخرى"
+        ],
+        "Software Engineering": [
+            "فهم Software Engineering Basics",
+            "إتقان Requirements",
+            "إتقان User Stories",
+            "إتقان Planning and Tasks",
+            "إتقان Project Structure",
+            "فهم Architecture Basics",
+            "فهم Clean Architecture Concepts",
+            "إتقان Refactoring",
+            "إتقان Documentation",
+            "فهم Maintenance",
+            "فهم Team Workflow كمفهوم تعليمي",
+            "تطبيق Software Engineering على مشروع",
+            "أخرى"
+        ],
+        "Testing and Code Quality": [
+            "فهم Testing Basics",
+            "إتقان Manual Testing",
+            "إتقان Unit Testing",
+            "فهم Integration Testing",
+            "فهم Functional Testing",
+            "إتقان Frontend Testing Basics",
+            "إتقان Backend Testing Basics",
+            "إتقان API Testing",
+            "إتقان Test Cases",
+            "إتقان Bug Reports",
+            "تحسين Code Quality",
+            "بناء Quality Checklist للمشاريع",
+            "أخرى"
+        ],
+        "Full Stack Projects": [
+            "تعلم Full Stack Planning",
+            "إتقان Frontend Implementation",
+            "إتقان Backend Implementation",
+            "إتقان Database Integration",
+            "إتقان API Integration",
+            "بناء Authentication Feature",
+            "بناء CRUD Feature",
+            "بناء Dashboard Feature",
+            "بناء User Profile Feature",
+            "فهم Admin Feature Basics",
+            "إتقان Project Testing",
+            "إتقان Project Documentation",
+            "الاستعداد الأساسي للنشر",
+            "بناء مشروع Full Stack كامل",
+            "أخرى"
+        ],
+        "أخرى": [
+            "مسار مخصص",
+            "أخرى"
+        ]
+    },
+    "states": {
+        "Web Development": {
+            "current": [
+                "لا أعرف كيف تعمل مواقع الويب",
+                "أعرف HTML وCSS بشكل بسيط لكنني لا أفهم الصورة الكاملة",
+                "أفهم الواجهة لكن لا أفهم Backend",
+                "أسمع عن HTTP وServer لكن لا أفهمهما جيداً",
+                "أريد تعلم تطوير الويب منظمًا من الصفر",
+                "أحتاج إلى ترتيب قبل الدخول في React أو Backend",
+                "أخرى"
+            ],
+            "target": [
+                "فهم دورة عمل الويب من المتصفح إلى الخادم",
+                "تمييز Frontend وBackend وFull Stack",
+                "فهم Request وResponse وHTTP بشكل أساسي",
+                "تنظيم مشروع ويب بسيط",
+                "الاستعداد لتعلم HTML وCSS وJavaScript للويب",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لفهم مفاهيم الويب وتطبيق أمثلة بسيطة",
+                "دراسة يومية قصيرة + تلخيص مفاهيم الويب",
+                "جلسة مفاهيم + جلسة تطبيق + جلسة مراجعة أسبوعياً",
+                "تدريب 30 دقيقة يومياً لمدة أسبوعين",
+                "مشروع صفحة ويب بسيطة بعد فهم الأساسيات",
+                "أخرى"
+            ]
+        },
+        "HTML and CSS": {
+            "current": [
+                "لا أعرف HTML وCSS",
+                "أعرف بعض وسوم HTML فقط",
+                "أستطيع بناء صفحة بسيطة لكن التنسيق ضعيف",
+                "أفهم CSS الأساسي لكنني أجد Layout صعباً",
+                "أجد Flexbox وGrid مربكين",
+                "لا أعرف كيف أجعل الصفحة متجاوبة",
+                "أحتاج إلى بناء صفحات كثيرة للتطبيق",
+                "أخرى"
+            ],
+            "target": [
+                "بناء صفحات HTML منظمة",
+                "استخدام Semantic HTML بشكل صحيح",
+                "تنسيق الصفحات باستخدام CSS",
+                "بناء Layout باستخدام Flexbox وGrid",
+                "جعل الصفحات متجاوبة للهاتف والكمبيوتر",
+                "بناء 3 صفحات HTML and CSS كاملة",
+                "أخرى"
+            ],
+            "commitment": [
+                "4 جلسات أسبوعياً: HTML + CSS + Layout + تطبيق",
+                "صفحة ويب صغيرة كل أسبوع",
+                "تدريب يومي 45 دقيقة على بناء عناصر وصفحات",
+                "جلسة Flexbox + جلسة Grid + جلسة Responsive أسبوعياً",
+                "مشروع واجهة كل أسبوعين مع مراجعة الكود",
+                "أخرى"
+            ]
+        },
+        "JavaScript for Web": {
+            "current": [
+                "أعرف JavaScript الأساسي لكنني لا أعرف استخدامه في الويب",
+                "أعرف المتغيرات والدوال لكن لا أفهم DOM",
+                "أستطيع تعديل عنصر بسيط فقط",
+                "أجد Events وForms صعبة",
+                "لا أفهم Fetch API جيداً",
+                "أحتاج إلى تطبيقات تفاعلية كثيرة",
+                "أخرى"
+            ],
+            "target": [
+                "استخدام DOM لتعديل الصفحة",
+                "إضافة Events للأزرار والنماذج",
+                "بناء Forms تفاعلية مع Validation",
+                "جلب بيانات باستخدام Fetch API",
+                "عرض JSON في الصفحة",
+                "حفظ بيانات بسيطة في Browser Storage",
+                "بناء واجهات تفاعلية صغيرة",
+                "أخرى"
+            ],
+            "commitment": [
+                "تدريب يومي 45 دقيقة على DOM وEvents",
+                "4 جلسات أسبوعياً: DOM + Forms + Fetch + مشروع",
+                "مشروع JavaScript تفاعلي صغير كل أسبوعين",
+                "جلسة تطبيق + جلسة Debugging أسبوعياً",
+                "مراجعة أخطاء الواجهة مرة أسبوعياً",
+                "أخرى"
+            ]
+        },
+        "Frontend Development": {
+            "current": [
+                "أعرف HTML وCSS فقط",
+                "أعرف JavaScript لكنني لا أبني واجهات منظمة",
+                "أبني صفحات لكنها غير مرتبة",
+                "أجد تنظيم الواجهة صعباً",
+                "لا أعرف كيف أفكر في Components",
+                "أحتاج إلى بناء مشاريع واجهة حقيقية",
+                "أخرى"
+            ],
+            "target": [
+                "بناء واجهات منظمة وقابلة للتوسع",
+                "تقسيم الواجهة إلى أجزاء قابلة لإعادة الاستخدام",
+                "فهم حالة الواجهة والتفاعل",
+                "بناء واجهات متجاوبة ومناسبة للمستخدم",
+                "تحسين Accessibility الأساسي",
+                "بناء مشروع Frontend كامل",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات Frontend أسبوعياً + مشروع واجهة كل أسبوعين",
+                "تدريب يومي على بناء Components أو صفحات",
+                "جلسة تصميم واجهة + جلسة تطبيق + جلسة تحسين أسبوعياً",
+                "مشروع Frontend شهري مع مراجعة منظمة",
+                "تطبيق عملي 4 أيام أسبوعياً",
+                "أخرى"
+            ]
+        },
+        "React": {
+            "current": [
+                "لا أعرف React",
+                "أعرف JavaScript وأريد تعلم React",
+                "أعرف Components بشكل بسيط",
+                "أفهم Props لكنني أضعف في State",
+                "أجد useEffect صعباً",
+                "أعرف React نظرياً لكنني لا أبني مشاريع",
+                "أحتاج إلى تنظيم مشروع React كامل",
+                "أخرى"
+            ],
+            "target": [
+                "بناء Components منظمة",
+                "استخدام Props وState بثقة",
+                "التعامل مع Events وForms",
+                "استخدام Hooks الأساسية",
+                "استخدام useEffect لجلب البيانات",
+                "إضافة Routing لتطبيق React",
+                "بناء تطبيق React عملي متكامل",
+                "أخرى"
+            ],
+            "commitment": [
+                "4 جلسات React أسبوعياً: مفهوم + تطبيق + مشروع",
+                "تطبيق Component جديد كل يومين",
+                "مشروع React صغير كل 3 أسابيع",
+                "جلسة Hooks أسبوعية + جلسة API Calls",
+                "مراجعة أخطاء React مرة أسبوعياً",
+                "أخرى"
+            ]
+        },
+        "Backend Development": {
+            "current": [
+                "لا أفهم Backend",
+                "أعرف Frontend فقط",
+                "أعرف أن Backend يتعامل مع البيانات لكنني لا أفهم التفاصيل",
+                "أستطيع بناء Route بسيط فقط",
+                "أجد Authentication وAuthorization صعبة",
+                "أحتاج إلى بناء Backend عملي منظم",
+                "أخرى"
+            ],
+            "target": [
+                "فهم دور Backend في التطبيق",
+                "بناء Routes منظمة",
+                "استقبال Request وإرجاع Response",
+                "إضافة Validation",
+                "فهم Authentication وAuthorization أساسياً",
+                "معالجة أخطاء Backend بشكل آمن",
+                "بناء Backend بسيط لتطبيق",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات Backend أسبوعياً + تطبيق عملي",
+                "جلسة مفاهيم + جلسة بناء Routes + جلسة اختبار",
+                "مشروع Backend صغير كل 3 أسابيع",
+                "تدريب يومي 40 دقيقة على Request وResponse",
+                "مراجعة أخطاء Backend أسبوعياً",
+                "أخرى"
+            ]
+        },
+        "APIs": {
+            "current": [
+                "لا أعرف ما هي API",
+                "أعرف أن API تربط الواجهة بالخلفية فقط",
+                "أستطيع استخدام API جاهزة لكن لا أبني API",
+                "أجد REST وEndpoints وMethods مربكة",
+                "لا أعرف اختيار Status Code مناسب",
+                "أحتاج إلى بناء API منظمة",
+                "أخرى"
+            ],
+            "target": [
+                "فهم API ودورها في التطبيقات",
+                "تصميم REST API واضحة",
+                "اختيار Endpoints وHTTP Methods مناسبة",
+                "إرجاع JSON Responses منظمة",
+                "إضافة Validation وError Handling",
+                "توثيق API واختبارها",
+                "بناء API CRUD كاملة",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات API أسبوعياً + اختبار عملي",
+                "تصميم Endpoint جديد كل يومين",
+                "مشروع API صغير كل أسبوعين",
+                "جلسة توثيق API أسبوعياً",
+                "جلسة اختبار API ومراجعة أخطاء أسبوعياً",
+                "أخرى"
+            ]
+        },
+        "Flask": {
+            "current": [
+                "لا أعرف Flask",
+                "أعرف Python فقط",
+                "أستطيع تشغيل Flask بسيط لكن لا أبني تطبيقاً كاملاً",
+                "أفهم Routes لكنني أضعف في Templates وForms",
+                "أحتاج إلى ربط Flask بقاعدة بيانات",
+                "أحتاج إلى مشروع Flask منظم",
+                "أخرى"
+            ],
+            "target": [
+                "بناء تطبيق Flask منظم",
+                "إنشاء Routes وصفحات",
+                "استخدام Templates وForms",
+                "بناء APIs باستخدام Flask",
+                "ربط Flask بقاعدة بيانات",
+                "فهم Authentication أساسي",
+                "بناء مشروع Flask عملي كامل",
+                "أخرى"
+            ],
+            "commitment": [
+                "4 جلسات Flask أسبوعياً: شرح + تطبيق + مشروع",
+                "تنفيذ ميزة Flask جديدة كل أسبوع",
+                "مشروع Flask كامل خلال شهر",
+                "جلسة Debugging أسبوعية لأخطاء Flask",
+                "مراجعة بنية المشروع مرة أسبوعياً",
+                "أخرى"
+            ]
+        },
+        "Django": {
+            "current": [
+                "لا أعرف Django",
+                "أعرف Python وأريد إطاراً أكبر من Flask",
+                "أعرف تشغيل Django فقط",
+                "أجد Models وMigrations صعبة",
+                "أحتاج إلى فهم Views وTemplates وURLs",
+                "أريد بناء مشروع Django كامل",
+                "أخرى"
+            ],
+            "target": [
+                "إنشاء مشروع Django منظم",
+                "تقسيم المشروع إلى Apps",
+                "بناء Models وتنفيذ Migrations",
+                "استخدام Views وTemplates وURLs",
+                "استخدام Django ORM",
+                "بناء Forms وCRUD",
+                "بناء مشروع Django عملي",
+                "أخرى"
+            ],
+            "commitment": [
+                "4 جلسات Django أسبوعياً",
+                "تنفيذ App صغير كل أسبوعين",
+                "جلسة Models وORM أسبوعية",
+                "مشروع Django كامل خلال 4 إلى 6 أسابيع",
+                "مراجعة أخطاء Migrations وTemplates أسبوعياً",
+                "أخرى"
+            ]
+        },
+        "Node.js and Express": {
+            "current": [
+                "لا أعرف Node.js",
+                "أعرف JavaScript وأريد استخدامها في Backend",
+                "أستطيع تشغيل ملف Node بسيط",
+                "أفهم Express بشكل عام لكن لا أبني API منظمة",
+                "أجد Middleware وError Handling صعبة",
+                "أحتاج إلى مشروع Express عملي",
+                "أخرى"
+            ],
+            "target": [
+                "تشغيل Node.js وفهم npm",
+                "بناء Server باستخدام Express",
+                "تنظيم Routes وMiddleware",
+                "بناء APIs باستخدام Express",
+                "إضافة Validation وError Handling",
+                "ربط Express بقاعدة بيانات",
+                "بناء مشروع Backend عملي",
+                "أخرى"
+            ],
+            "commitment": [
+                "4 جلسات Node.js أسبوعياً",
+                "بناء Endpoint جديد كل يومين",
+                "مشروع Express صغير كل 3 أسابيع",
+                "جلسة Middleware وValidation أسبوعية",
+                "اختبار API ومراجعة الأخطاء أسبوعياً",
+                "أخرى"
+            ]
+        },
+        "Databases": {
+            "current": [
+                "لا أعرف قواعد البيانات",
+                "أعرف الجداول فقط بشكل بسيط",
+                "أعرف إضافة بيانات لكن لا أفهم العلاقات",
+                "أجد Primary Key وForeign Key مربكين",
+                "أحتاج إلى تصميم قاعدة بيانات لمشروع",
+                "أحتاج إلى فهم CRUD وربطه بالتطبيق",
+                "أخرى"
+            ],
+            "target": [
+                "فهم الجداول والسجلات والأعمدة",
+                "اختيار أنواع بيانات مناسبة",
+                "فهم المفاتيح والعلاقات",
+                "تصميم قاعدة بيانات بسيطة",
+                "تنفيذ CRUD داخل مشروع",
+                "فهم أساسيات الأمان والنسخ الاحتياطي",
+                "تصميم قاعدة بيانات لمشروع كامل",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات قواعد بيانات أسبوعياً",
+                "تصميم جدول أو علاقة في كل جلسة",
+                "مشروع Database صغير كل أسبوعين",
+                "جلسة مراجعة تصميم أسبوعية",
+                "تطبيق CRUD عملي بعد كل مفهوم",
+                "أخرى"
+            ]
+        },
+        "SQL": {
+            "current": [
+                "لا أعرف SQL",
+                "أعرف SELECT فقط",
+                "أستطيع جلب بيانات بسيطة",
+                "أجد WHERE وJOIN صعبة",
+                "أعرف CRUD لكنني لا أستخدم GROUP BY",
+                "أحتاج إلى تمارين SQL كثيرة",
+                "أريد استخدام SQL داخل مشروع",
+                "أخرى"
+            ],
+            "target": [
+                "كتابة SELECT Queries بثقة",
+                "فلترة وترتيب البيانات",
+                "تنفيذ INSERT وUPDATE وDELETE بحذر",
+                "استخدام Aggregate Functions وGROUP BY",
+                "استخدام Joins لربط الجداول",
+                "حل تمارين SQL عملية",
+                "استخدام SQL داخل مشروع تطبيقي",
+                "أخرى"
+            ],
+            "commitment": [
+                "تدريب SQL يومي 20 إلى 30 دقيقة",
+                "5 استعلامات SQL يومياً",
+                "3 جلسات أسبوعياً + اختبار قصير",
+                "تمارين CRUD وJOIN كل أسبوع",
+                "مشروع SQL صغير كل أسبوعين",
+                "أخرى"
+            ]
+        },
+        "Git and GitHub": {
+            "current": [
+                "لا أعرف Git",
+                "أرفع الملفات يدوياً ولا أستخدم Git",
+                "أعرف git add وcommit فقط",
+                "أخاف من Branches وConflicts",
+                "لا أعرف GitHub جيداً",
+                "أحتاج إلى استخدام Git في مشاريعي بانتظام",
+                "أخرى"
+            ],
+            "target": [
+                "إنشاء Repository وإدارة التغييرات",
+                "كتابة Commits واضحة",
+                "استخدام Branches لتنظيم العمل",
+                "حل Merge Conflicts بسيطة",
+                "رفع المشاريع إلى GitHub",
+                "كتابة README جيد",
+                "استخدام Git Workflow في مشروع حقيقي",
+                "أخرى"
+            ],
+            "commitment": [
+                "استخدام Git في كل مشروع تدريبي",
+                "Commit بعد كل إنجاز مهم",
+                "جلسة Git أسبوعية للتدريب على Branches",
+                "رفع مشروع إلى GitHub كل أسبوعين",
+                "مراجعة README وتحسينه أسبوعياً",
+                "أخرى"
+            ]
+        },
+        "Software Engineering": {
+            "current": [
+                "أكتب كوداً دون تخطيط",
+                "أبدأ المشاريع دون متطلبات واضحة",
+                "مشاريعي غير منظمة",
+                "أجد تقسيم المشروع صعباً",
+                "لا أوثق مشاريعي جيداً",
+                "أحتاج إلى طريقة منهجية لبناء المشاريع",
+                "أخرى"
+            ],
+            "target": [
+                "تحليل المشروع قبل التنفيذ",
+                "كتابة Requirements واضحة",
+                "تقسيم المشروع إلى مهام",
+                "تنظيم ملفات المشروع",
+                "فهم Architecture بشكل أساسي",
+                "تحسين الكود عبر Refactoring",
+                "توثيق المشروع وصيانته",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة تخطيط مشروع أسبوعياً",
+                "كتابة Requirements قبل كل مشروع",
+                "مراجعة Project Structure مرة أسبوعياً",
+                "جلسة Refactoring أسبوعية",
+                "توثيق ما تم إنجازه في نهاية كل أسبوع",
+                "أخرى"
+            ]
+        },
+        "Testing and Code Quality": {
+            "current": [
+                "لا أختبر مشاريعي بانتظام",
+                "أختبر التطبيق يدوياً بشكل عشوائي",
+                "لا أعرف كتابة Test Cases",
+                "لا أعرف الفرق بين Unit وIntegration Testing",
+                "أجد Bug Reports غير واضحة",
+                "كودي يعمل لكنه صعب الصيانة",
+                "أخرى"
+            ],
+            "target": [
+                "اختبار الميزات بطريقة منظمة",
+                "كتابة Test Cases واضحة",
+                "فهم Unit وIntegration وFunctional Testing",
+                "اختبار Frontend وBackend وAPIs",
+                "كتابة Bug Reports مفيدة",
+                "تحسين جودة الكود وقابليته للصيانة",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة اختبار أسبوعية لكل مشروع",
+                "كتابة Test Cases بعد كل ميزة",
+                "مراجعة جودة الكود مرة أسبوعياً",
+                "تسجيل Bug Reports عند ظهور الأخطاء",
+                "Checklist قبل إنهاء كل مشروع",
+                "أخرى"
+            ]
+        },
+        "Full Stack Projects": {
+            "current": [
+                "لم أبنِ مشروع Full Stack من قبل",
+                "أعرف Frontend فقط",
+                "أعرف Backend فقط",
+                "أعرف كل جزء منفرداً لكن لا أعرف ربطها",
+                "أجد Database وAPI Integration صعبة",
+                "أبدأ المشاريع الكبيرة ثم أتوقف",
+                "أحتاج إلى مشروع كامل منظم",
+                "أخرى"
+            ],
+            "target": [
+                "تخطيط مشروع Full Stack كامل",
+                "بناء Frontend وBackend وربطهما",
+                "تصميم قاعدة بيانات وربطها بالتطبيق",
+                "تنفيذ CRUD كامل",
+                "إضافة Authentication أساسي",
+                "اختبار المشروع وتوثيقه",
+                "بناء مشروع Full Stack قابل للتطوير لاحقاً",
+                "أخرى"
+            ],
+            "commitment": [
+                "خطة مشروع لمدة 4 إلى 8 أسابيع",
+                "4 جلسات أسبوعياً: Frontend + Backend + Database + Testing",
+                "تنفيذ ميزة كاملة كل أسبوع",
+                "جلسة توثيق ومراجعة أسبوعية",
+                "تقسيم المشروع إلى مراحل صغيرة قابلة للإنجاز",
+                "أخرى"
+            ]
+        },
+        "أخرى": {
+            "current": [
+                "أحتاج إلى تحديد مستواي",
+                "مبتدئ",
+                "متوسط",
+                "متقدم",
+                "أخرى"
+            ],
+            "target": [
+                "بناء هدف تقني واضح",
+                "تحسين المستوى",
+                "إتقان مسار مخصص",
+                "أخرى"
+            ],
+            "commitment": [
+                "دراسة يومية",
+                "تطبيق أسبوعي",
+                "مراجعة أسبوعية",
+                "أخرى"
+            ]
+        }
+    },
+    "outcomes": {
+        "Web Development": "مثال: أريد فهم طريقة عمل الويب حتى أتعلم تطوير المواقع والتطبيقات بشكل منظم.",
+        "HTML and CSS": "مثال: أريد إتقان HTML and CSS حتى أستطيع بناء صفحات ويب جميلة ومتجاوبة.",
+        "JavaScript for Web": "مثال: أريد إتقان JavaScript for Web حتى أبني صفحات تفاعلية.",
+        "Frontend Development": "مثال: أريد إتقان Frontend Development حتى أبني واجهات منظمة وتفاعلية.",
+        "React": "مثال: أريد إتقان React حتى أبني تطبيقات واجهة أمامية تفاعلية.",
+        "Backend Development": "مثال: أريد إتقان Backend Development حتى أبني منطق التطبيق وأتعامل مع البيانات.",
+        "APIs": "مثال: أريد إتقان بناء APIs حتى أربط الواجهة الأمامية بالخلفية.",
+        "Flask": "مثال: أريد إتقان Flask حتى أبني تطبيق ويب عملي باستخدام Python.",
+        "Django": "مثال: أريد إتقان Django حتى أبني تطبيق ويب كامل باستخدام Python.",
+        "Node.js and Express": "مثال: أريد إتقان Node.js and Express حتى أبني Backend باستخدام JavaScript.",
+        "Databases": "مثال: أريد إتقان قواعد البيانات حتى أصمم جداول وعلاقات لمشاريعي.",
+        "SQL": "مثال: أريد إتقان SQL حتى أستطيع التعامل مع قواعد البيانات داخل مشاريعي.",
+        "Git and GitHub": "مثال: أريد إتقان Git and GitHub حتى أدير مشاريعي البرمجية بشكل منظم.",
+        "Software Engineering": "مثال: أريد تعلم Software Engineering حتى أبني مشاريع منظمة لا تعتمد على العشوائية.",
+        "Testing and Code Quality": "مثال: أريد إتقان Testing and Code Quality حتى أتأكد أن مشاريعي تعمل بشكل صحيح.",
+        "Full Stack Projects": "مثال: أريد بناء مشروع Full Stack كامل يجمع Frontend وBackend وDatabase وAPI.",
+        "أخرى": "مثال: أريد بناء هدف تقني واضح وطويل المدى يناسب مستواي الحالي."
+    }
+};
+
+    function uniqueBeforeOther(items) {
+        const result = [];
+        (items || []).forEach((item) => {
+            if (!item || item === "أخرى") return;
+            if (!result.includes(item)) result.push(item);
+        });
+        result.push("أخرى");
+        return result;
+    }
+
+    function mergeProgrammingTechnologyBank(base) {
+        const merged = base || { categories: [], paths: {}, states: {}, outcomes: {} };
+        merged.categories = uniqueBeforeOther([...(merged.categories || []), ...programmingTechnologyBankPart2V55121.categories]);
+        merged.paths = Object.assign({}, merged.paths || {}, programmingTechnologyBankPart2V55121.paths);
+        merged.states = Object.assign({}, merged.states || {}, programmingTechnologyBankPart2V55121.states);
+        merged.outcomes = Object.assign({}, merged.outcomes || {}, programmingTechnologyBankPart2V55121.outcomes);
+        return merged;
+    }
+
+    if (typeof GOAL_CONFIG_V524 !== "undefined") {
+        GOAL_CONFIG_V524["البرمجة والتكنولوجيا"] = mergeProgrammingTechnologyBank(GOAL_CONFIG_V524["البرمجة والتكنولوجيا"] || GOAL_CONFIG_V524["Programming & Technology"]);
+        GOAL_CONFIG_V524["Programming & Technology"] = GOAL_CONFIG_V524["البرمجة والتكنولوجيا"];
+    }
+
+    if (typeof SMART_GOALS_V4610 !== "undefined") {
+        SMART_GOALS_V4610["البرمجة والتكنولوجيا"] = mergeProgrammingTechnologyBank(SMART_GOALS_V4610["البرمجة والتكنولوجيا"] || SMART_GOALS_V4610["Programming & Technology"]);
+        SMART_GOALS_V4610["Programming & Technology"] = SMART_GOALS_V4610["البرمجة والتكنولوجيا"];
+    }
+
+    if (typeof GOAL_TYPE_CANONICAL_V557 !== "undefined") {
+        GOAL_TYPE_CANONICAL_V557["Programming & Technology"] = "البرمجة والتكنولوجيا";
+        GOAL_TYPE_CANONICAL_V557["البرمجة والتكنولوجيا"] = "البرمجة والتكنولوجيا";
+        GOAL_TYPE_CANONICAL_V557["البرمجة والتقنية"] = "البرمجة والتكنولوجيا";
+    }
+
+    if (typeof window !== "undefined") {
+        window.EDUPATH_PROGRAMMING_TECHNOLOGY_GOALS_PART2_V55121 = true;
+    }
+})();
+// === End EduPath AI v5.5.121: Goals - Programming & Technology Bank Part 2 ===
