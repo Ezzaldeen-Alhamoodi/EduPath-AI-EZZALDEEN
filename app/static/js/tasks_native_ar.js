@@ -1,4 +1,4 @@
-window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.109-tasks-math-finance-management-economics-complete";
+window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.111-tasks-math-main-order-exact";
 window.EDUPATH_TASKS_AR_DATA = {
   "حفظ القرآن الكريم": {
     icon: "📖",
@@ -37050,4 +37050,35 @@ window.SMART_EXAM_DATA = {
     window.EDUPATH_TASKS_FINANCE_MANAGEMENT_ECONOMICS_V55109_COMPLETE = true;
 })();
 // === End EduPath AI v5.5.109: Tasks Math Finance Management Economics Complete ===
+
+// === EduPath AI v5.5.111: Exact Math Main Category Order ===
+(function () {
+    const root = window.EDUPATH_TASKS_AR_DATA = window.EDUPATH_TASKS_AR_DATA || {};
+    const mathTasks = root["الرياضيات"] = root["الرياضيات"] || { icon: "📐", main: [], sub: {}, detail: {}, training: [], trainingByDetail: {} };
+    mathTasks.main = [
+        "الحساب الأساسي",
+        "الجبر",
+        "الهندسة",
+        "حساب المثلثات",
+        "المتتاليات",
+        "ما قبل التفاضل",
+        "التفاضل",
+        "التكامل",
+        "المعادلات التفاضلية",
+        "الإحصاء",
+        "الاحتمالات",
+        "الجبر الخطي",
+        "المنطق الرياضي",
+        "الرياضيات المتقطعة",
+        "رياضيات البرمجة",
+        "رياضيات الذكاء الاصطناعي",
+        "رياضيات علوم البيانات",
+        "رياضيات الأمن السيبراني",
+        "رياضيات المالية والإدارة والاقتصاد",
+        "اختبارات سابقة",
+        "أخرى"
+    ];
+    window.EDUPATH_TASKS_MATH_MAIN_ORDER_V55111_EXACT = true;
+})();
+// === End EduPath AI v5.5.111: Exact Math Main Category Order ===
 
