@@ -2593,13 +2593,53 @@ TASK_NATIVE_AR_LABELS_V542 = {
     "أيام محددة": "أيام محددة"
 }
 
+
+TASK_UNIVERSITY_NATIVE_AR_LABELS_V55131 = {
+    "University": "المرحلة الجامعية",
+    "University Study": "المرحلة الجامعية",
+    "الجامعة": "المرحلة الجامعية",
+    "الجامعي": "المرحلة الجامعية",
+    "المرحلة الجامعية": "المرحلة الجامعية",
+    "Human Medicine": "الطب البشري",
+    "Dentistry": "طب الأسنان",
+    "Pharmacy": "الصيدلة",
+    "Nursing": "التمريض",
+    "Medical Laboratories": "المختبرات الطبية",
+    "Radiology and Medical Imaging": "الأشعة والتصوير الطبي",
+    "Physical Therapy": "العلاج الطبيعي",
+    "Public Health": "الصحة العامة",
+    "Civil Engineering": "الهندسة المدنية",
+    "Architecture": "الهندسة المعمارية",
+    "Electrical Engineering": "الهندسة الكهربائية",
+    "Mechanical Engineering": "الهندسة الميكانيكية",
+    "Industrial Engineering": "الهندسة الصناعية",
+    "Chemical Engineering": "الهندسة الكيميائية",
+    "Computer Engineering": "هندسة الحاسوب",
+    "Computer Science": "علوم الحاسوب",
+    "Information Technology": "تقنية المعلومات",
+    "Information Systems": "نظم المعلومات",
+    "Cybersecurity": "الأمن السيبراني",
+    "Data Science": "علوم البيانات",
+    "Artificial Intelligence": "الذكاء الاصطناعي",
+    "Business Administration": "إدارة الأعمال",
+    "Accounting": "المحاسبة",
+    "Finance": "التمويل",
+    "Marketing": "التسويق",
+    "Economics": "الاقتصاد",
+    "Law": "القانون",
+    "Education": "التربية",
+    "Media and Communication": "الإعلام والاتصال",
+    "Graduation Project and University Research": "مشروع التخرج والبحث الجامعي",
+    "University Academic Skills": "المهارات الأكاديمية الجامعية"
+}
+
 def native_task_label_v541(value):
     if value is None:
         return ""
     text = str(value)
     if text in TASK_EXAM_CONTENT_KEEP_V532:
         return text
-    return TASK_NATIVE_AR_LABELS_V542.get(text) or TASK_NATIVE_AR_LABELS_V541.get(text) or task_ar(text)
+    return TASK_UNIVERSITY_NATIVE_AR_LABELS_V55131.get(text) or TASK_NATIVE_AR_LABELS_V542.get(text) or TASK_NATIVE_AR_LABELS_V541.get(text) or task_ar(text)
 
 
 
