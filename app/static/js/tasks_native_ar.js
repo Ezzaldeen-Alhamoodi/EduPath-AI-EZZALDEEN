@@ -1,4 +1,4 @@
-window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.115-tasks-programming-technology-part2";
+window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.117-tasks-programming-technology-part1-rebuild";
 window.EDUPATH_TASKS_AR_DATA = {
   "حفظ القرآن الكريم": {
     icon: "📖",
@@ -60496,3 +60496,7973 @@ window.SMART_EXAM_DATA = {
 })();
 // === End EduPath AI v5.5.115: Tasks Programming and Technology Part 2 ===
 
+// === EduPath AI v5.5.117: Rebuild Programming and Technology Part 1 ===
+(function () {
+    const root = (typeof window !== "undefined" && window.EDUPATH_TASKS_AR_DATA)
+        ? window.EDUPATH_TASKS_AR_DATA
+        : (typeof SMART_TASK_DATA !== "undefined" ? SMART_TASK_DATA : null);
+    if (!root) return;
+
+    const programmingTechnologyPart1 = {
+    "icon": "💻",
+    "main": [
+        "Programming Fundamentals",
+        "Problem Solving",
+        "Python",
+        "C",
+        "C++",
+        "Java",
+        "JavaScript",
+        "TypeScript",
+        "Object-Oriented Programming",
+        "Debugging and Code Quality Basics",
+        "Small Programming Projects",
+        "أخرى"
+    ],
+    "sub": {
+        "Programming Fundamentals": [
+            "مقدمة البرمجة",
+            "كتابة الكود",
+            "Syntax",
+            "Variables",
+            "Data Types",
+            "Input and Output",
+            "Operators",
+            "Conditions",
+            "Loops",
+            "Functions",
+            "Scope",
+            "Basic Error Handling",
+            "Code Organization",
+            "Comments",
+            "Modules and Packages كمفهوم عام",
+            "أخرى"
+        ],
+        "Problem Solving": [
+            "Problem Solving Basics",
+            "Understanding the Problem",
+            "Inputs and Outputs",
+            "Step-by-step Thinking",
+            "Pseudocode",
+            "Flowcharts",
+            "Code Tracing",
+            "Test Cases",
+            "Edge Cases",
+            "Brute Force Thinking",
+            "Pattern Recognition",
+            "Basic Optimization",
+            "Problem Solving Practice",
+            "أخرى"
+        ],
+        "Python": [
+            "Python Basics",
+            "Variables and Data Types",
+            "Input and Output",
+            "Conditions and Loops",
+            "Functions",
+            "Data Structures in Python",
+            "Strings in Python",
+            "Files in Python",
+            "Modules and Packages",
+            "Error Handling in Python",
+            "OOP in Python",
+            "Python Practice Projects",
+            "أخرى"
+        ],
+        "C": [
+            "C Basics",
+            "Variables and Data Types",
+            "Input and Output",
+            "Conditions",
+            "Loops",
+            "Functions",
+            "Arrays",
+            "Strings in C",
+            "Pointers",
+            "Memory Basics",
+            "Files in C",
+            "C Practice Projects",
+            "أخرى"
+        ],
+        "C++": [
+            "C++ Basics",
+            "Variables and Types",
+            "Input and Output",
+            "Conditions and Loops",
+            "Functions",
+            "Arrays and Vectors",
+            "Strings in C++",
+            "References and Pointers",
+            "OOP in C++",
+            "STL Basics",
+            "Files in C++",
+            "C++ Practice Projects",
+            "أخرى"
+        ],
+        "Java": [
+            "Java Basics",
+            "Variables and Data Types",
+            "Input and Output",
+            "Conditions and Loops",
+            "Methods",
+            "Arrays",
+            "Strings in Java",
+            "OOP in Java",
+            "Classes and Objects",
+            "Exception Handling",
+            "Collections Basics",
+            "Files in Java",
+            "Java Practice Projects",
+            "أخرى"
+        ],
+        "JavaScript": [
+            "JavaScript Basics",
+            "Variables and Data Types",
+            "Operators",
+            "Conditions and Loops",
+            "Functions",
+            "Arrays",
+            "Objects",
+            "Strings in JavaScript",
+            "ES6 Basics",
+            "Error Handling",
+            "JavaScript Practice Projects",
+            "أخرى"
+        ],
+        "TypeScript": [
+            "TypeScript Basics",
+            "Types",
+            "Functions in TypeScript",
+            "Objects and Interfaces",
+            "Arrays and Tuples",
+            "Union Types",
+            "Type Aliases",
+            "Classes in TypeScript",
+            "Generics Basics",
+            "TypeScript Practice",
+            "أخرى"
+        ],
+        "Object-Oriented Programming": [
+            "OOP Concepts",
+            "Classes and Objects",
+            "Attributes and Methods",
+            "Constructors",
+            "Encapsulation",
+            "Inheritance",
+            "Polymorphism",
+            "Abstraction",
+            "Interfaces",
+            "OOP Design Practice",
+            "أخرى"
+        ],
+        "Debugging and Code Quality Basics": [
+            "Debugging Basics",
+            "Reading Error Messages",
+            "Syntax Errors",
+            "Runtime Errors",
+            "Logic Errors",
+            "Exception Handling Basics",
+            "Code Tracing for Debugging",
+            "Clean Code Basics",
+            "Naming and Style",
+            "Refactoring Basics",
+            "Code Review Basics",
+            "Personal Error Log",
+            "أخرى"
+        ],
+        "Small Programming Projects": [
+            "Project Planning Basics",
+            "Console Applications",
+            "Calculator Projects",
+            "Text Processing Projects",
+            "File-based Projects",
+            "Student Management Projects",
+            "Games for Beginners",
+            "OOP Mini Projects",
+            "Multi-language Practice",
+            "Project Testing Basics",
+            "Project Documentation Basics",
+            "Project Improvement",
+            "أخرى"
+        ],
+        "أخرى": [
+            "موضوع مخصص في البرمجة والتكنولوجيا",
+            "تدريب مخصص في البرمجة والتكنولوجيا",
+            "أخرى"
+        ]
+    },
+    "detail": {
+        "مقدمة البرمجة": [
+            "مفهوم البرمجة",
+            "لماذا نتعلم البرمجة",
+            "كيف يعمل البرنامج",
+            "البرنامج كتعليمات",
+            "المدخلات والمعالجة والمخرجات",
+            "الفرق بين المبرمج والمستخدم",
+            "أمثلة على برامج بسيطة",
+            "أخرى"
+        ],
+        "كتابة الكود": [
+            "ترتيب الأسطر",
+            "قراءة الكود",
+            "وضوح الكود",
+            "أسماء المتغيرات",
+            "تنظيم التعليمات",
+            "تقليل التكرار",
+            "كتابة كود مفهوم",
+            "أخرى"
+        ],
+        "Syntax": [
+            "قواعد كتابة اللغة",
+            "الأقواس",
+            "الفواصل",
+            "النقطتان",
+            "المسافات البادئة",
+            "الأخطاء الكتابية",
+            "قراءة Syntax Error",
+            "أخرى"
+        ],
+        "Variables": [
+            "مفهوم Variable",
+            "تخزين قيمة",
+            "تغيير قيمة",
+            "تسمية المتغير",
+            "تتبع قيمة متغير",
+            "استخدام متغير في عملية",
+            "أخطاء المتغيرات",
+            "أخرى"
+        ],
+        "Data Types": [
+            "Integer",
+            "Float",
+            "String",
+            "Boolean",
+            "List كمفهوم عام",
+            "Dictionary كمفهوم عام",
+            "تحويل نوع البيانات",
+            "اختيار نوع مناسب",
+            "أخرى"
+        ],
+        "Input and Output": [
+            "Scanner",
+            "قراءة نص",
+            "قراءة رقم",
+            "طباعة نتيجة",
+            "تنسيق الإخراج",
+            "أخطاء Scanner",
+            "أخرى"
+        ],
+        "Operators": [
+            "العمليات الحسابية",
+            "المقارنات",
+            "logical operators",
+            "strict equality",
+            "باقي القسمة",
+            "أخطاء المقارنة",
+            "أخرى"
+        ],
+        "Conditions": [
+            "if",
+            "else",
+            "else if",
+            "switch",
+            "comparison operators",
+            "logical operators",
+            "nested conditions",
+            "أخرى"
+        ],
+        "Loops": [
+            "for",
+            "while",
+            "do while",
+            "عداد الحلقة",
+            "break",
+            "continue",
+            "nested loops",
+            "أخرى"
+        ],
+        "Functions": [
+            "function declaration",
+            "function expression",
+            "arrow function",
+            "parameters",
+            "return",
+            "scope",
+            "callback كمفهوم",
+            "أخرى"
+        ],
+        "Scope": [
+            "مفهوم Scope",
+            "المتغير المحلي",
+            "المتغير العام",
+            "نطاق الدالة",
+            "الوصول إلى المتغيرات",
+            "أخطاء Scope",
+            "أخرى"
+        ],
+        "Basic Error Handling": [
+            "مفهوم Error",
+            "Syntax Error",
+            "Runtime Error",
+            "Logic Error",
+            "سبب الخطأ",
+            "قراءة رسالة الخطأ",
+            "إصلاح خطأ بسيط",
+            "أخرى"
+        ],
+        "Code Organization": [
+            "تقسيم الكود",
+            "ترتيب الدوال",
+            "إزالة الكود المكرر",
+            "تسمية واضحة",
+            "تنظيم الملفات كمفهوم",
+            "قابلية القراءة",
+            "أخرى"
+        ],
+        "Comments": [
+            "مفهوم Comment",
+            "متى نكتب تعليقاً",
+            "التعليق المفيد",
+            "التعليق الزائد",
+            "شرح دالة",
+            "توثيق فكرة مهمة",
+            "أخرى"
+        ],
+        "Modules and Packages كمفهوم عام": [
+            "مفهوم Module",
+            "مفهوم Package",
+            "استيراد مكتبة",
+            "استخدام كود جاهز",
+            "تنظيم الكود",
+            "أخطاء الاستيراد كمفهوم",
+            "أخرى"
+        ],
+        "Problem Solving Basics": [
+            "مفهوم حل المشكلات",
+            "تقسيم المشكلة",
+            "البحث عن الفكرة الأساسية",
+            "اختيار حل بسيط أولاً",
+            "اختبار الحل",
+            "تحسين الحل",
+            "أخرى"
+        ],
+        "Understanding the Problem": [
+            "قراءة نص المسألة",
+            "استخراج المطلوب",
+            "تحديد القيود",
+            "تمييز المعلومات المهمة",
+            "إعادة صياغة المسألة",
+            "اكتشاف الغموض",
+            "أخرى"
+        ],
+        "Inputs and Outputs": [
+            "تحديد المدخلات",
+            "تحديد المخرجات",
+            "شكل الإدخال",
+            "شكل الإخراج",
+            "أمثلة الإدخال والإخراج",
+            "أخطاء فهم المخرجات",
+            "أخرى"
+        ],
+        "Step-by-step Thinking": [
+            "كتابة الخطوات",
+            "ترتيب الحل",
+            "تحويل الفكرة إلى تعليمات",
+            "اكتشاف خطوة ناقصة",
+            "تبسيط الحل",
+            "مراجعة المنطق",
+            "أخرى"
+        ],
+        "Pseudocode": [
+            "مفهوم Pseudocode",
+            "كتابة شبه كود",
+            "استخدام شروط",
+            "استخدام حلقات",
+            "استخدام دوال",
+            "تحويل Pseudocode إلى Code",
+            "أخرى"
+        ],
+        "Flowcharts": [
+            "مفهوم Flowchart",
+            "رمز البداية والنهاية",
+            "رمز الإدخال والإخراج",
+            "رمز العملية",
+            "رمز القرار",
+            "تتبع مسار الحل",
+            "أخرى"
+        ],
+        "Code Tracing": [
+            "تتبع المتغيرات",
+            "تتبع الشروط",
+            "تتبع الحلقات",
+            "تتبع الدوال",
+            "جدول التتبع",
+            "اكتشاف الخطأ بالتتبع",
+            "أخرى"
+        ],
+        "Test Cases": [
+            "مفهوم Test Case",
+            "اختبار مثال بسيط",
+            "اختبار أكثر من حالة",
+            "اختبار حالة صحيحة",
+            "اختبار حالة خاطئة",
+            "مقارنة الناتج المتوقع والفعلي",
+            "أخرى"
+        ],
+        "Edge Cases": [
+            "مفهوم Edge Case",
+            "القيمة الصفرية",
+            "القيمة الفارغة",
+            "أكبر قيمة",
+            "أصغر قيمة",
+            "حالة عنصر واحد",
+            "حالة تكرار القيم",
+            "أخرى"
+        ],
+        "Brute Force Thinking": [
+            "مفهوم Brute Force",
+            "الحل المباشر",
+            "متى يكون مناسباً",
+            "حدوده",
+            "مقارنته بالحل المحسن",
+            "استخدامه كبداية",
+            "أخرى"
+        ],
+        "Pattern Recognition": [
+            "التعرف على النمط",
+            "تكرار العمليات",
+            "المجاميع",
+            "العد",
+            "البحث",
+            "التصنيف",
+            "أخرى"
+        ],
+        "Basic Optimization": [
+            "تقليل التكرار",
+            "استخدام متغيرات مساعدة",
+            "تجنب الحساب المتكرر",
+            "تبسيط الشرط",
+            "تحسين قابلية القراءة",
+            "أخرى"
+        ],
+        "Problem Solving Practice": [
+            "مسائل متغيرات",
+            "مسائل شروط",
+            "مسائل حلقات",
+            "مسائل دوال",
+            "مسائل قوائم بسيطة",
+            "مسائل تتبع كود",
+            "أخرى"
+        ],
+        "Python Basics": [
+            "تشغيل Python",
+            "كتابة أول برنامج",
+            "print",
+            "indentation",
+            "التعليقات",
+            "تشغيل ملف Python",
+            "أخطاء البداية",
+            "أخرى"
+        ],
+        "Variables and Data Types": [
+            "let",
+            "const",
+            "var كمفهوم قديم",
+            "number",
+            "string",
+            "boolean",
+            "null",
+            "undefined",
+            "أخرى"
+        ],
+        "Conditions and Loops": [
+            "if",
+            "else",
+            "switch",
+            "for",
+            "while",
+            "for of",
+            "break وcontinue",
+            "أخرى"
+        ],
+        "Data Structures in Python": [
+            "List",
+            "Tuple",
+            "Dictionary",
+            "Set",
+            "الوصول للعناصر",
+            "الإضافة والحذف",
+            "التكرار على العناصر",
+            "اختيار البنية المناسبة",
+            "أخرى"
+        ],
+        "Strings in Python": [
+            "فهرسة النص",
+            "تقطيع النص",
+            "دمج النصوص",
+            "split",
+            "join",
+            "replace",
+            "lower وupper",
+            "أخرى"
+        ],
+        "Files in Python": [
+            "open",
+            "with open",
+            "read",
+            "write",
+            "append",
+            "قراءة الأسطر",
+            "أخطاء مسار الملف",
+            "أخرى"
+        ],
+        "Modules and Packages": [
+            "import",
+            "math",
+            "random",
+            "datetime كمفهوم",
+            "إنشاء Module",
+            "pip كمفهوم",
+            "Import Error",
+            "أخرى"
+        ],
+        "Error Handling in Python": [
+            "try",
+            "except",
+            "finally كمفهوم",
+            "ValueError",
+            "TypeError",
+            "FileNotFoundError",
+            "رسائل الخطأ",
+            "أخرى"
+        ],
+        "OOP in Python": [
+            "class",
+            "object",
+            "**init**",
+            "attributes",
+            "methods",
+            "inheritance",
+            "encapsulation كمفهوم",
+            "أخرى"
+        ],
+        "Python Practice Projects": [
+            "آلة حاسبة",
+            "لعبة تخمين رقم",
+            "مدير مهام بسيط",
+            "برنامج قراءة ملف",
+            "برنامج قائمة طلاب",
+            "محول وحدات",
+            "أخرى"
+        ],
+        "C Basics": [
+            "بنية برنامج C",
+            "main function",
+            "include",
+            "compile and run",
+            "printf",
+            "scanf",
+            "أخطاء Compilation",
+            "أخرى"
+        ],
+        "Arrays": [
+            "إنشاء Array",
+            "push",
+            "pop",
+            "map كمفهوم",
+            "filter كمفهوم",
+            "forEach",
+            "الوصول للعناصر",
+            "أخرى"
+        ],
+        "Strings in C": [
+            "char array",
+            "null character",
+            "قراءة String",
+            "طباعة String",
+            "strlen كمفهوم",
+            "strcmp كمفهوم",
+            "أخطاء النصوص",
+            "أخرى"
+        ],
+        "Pointers": [
+            "مفهوم Pointer",
+            "عنوان الذاكرة",
+            "استخدام &",
+            "استخدام *",
+            "Pointer مع المتغيرات",
+            "Pointer مع Arrays",
+            "Pointer مع Functions",
+            "أخطاء Pointers",
+            "أخرى"
+        ],
+        "Memory Basics": [
+            "Stack كمفهوم",
+            "Heap كمفهوم",
+            "malloc كمفهوم",
+            "free كمفهوم",
+            "Memory Leak كمفهوم",
+            "الوصول خارج الحدود",
+            "أخرى"
+        ],
+        "Files in C": [
+            "فتح ملف",
+            "قراءة ملف",
+            "كتابة ملف",
+            "fopen",
+            "fclose",
+            "fprintf",
+            "fscanf",
+            "أخطاء الملفات",
+            "أخرى"
+        ],
+        "C Practice Projects": [
+            "آلة حاسبة",
+            "برنامج إدارة درجات",
+            "برنامج عد كلمات",
+            "برنامج مصفوفات",
+            "برنامج ملفات بسيط",
+            "برنامج قائمة طلاب",
+            "أخرى"
+        ],
+        "C++ Basics": [
+            "بنية برنامج C++",
+            "iostream",
+            "main",
+            "namespace",
+            "compile and run",
+            "cout",
+            "cin",
+            "أخرى"
+        ],
+        "Variables and Types": [
+            "int",
+            "double",
+            "char",
+            "bool",
+            "string",
+            "auto كمفهوم",
+            "const",
+            "أخرى"
+        ],
+        "Arrays and Vectors": [
+            "Array",
+            "Vector",
+            "push_back",
+            "size",
+            "الوصول للفهرس",
+            "التكرار على Vector",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "Strings in C++": [
+            "string",
+            "length",
+            "substr",
+            "find",
+            "تجميع النصوص",
+            "قراءة سطر",
+            "معالجة نص",
+            "أخرى"
+        ],
+        "References and Pointers": [
+            "reference",
+            "pointer",
+            "الفرق بينهما",
+            "تمرير by reference",
+            "استخدام pointer",
+            "أخطاء المؤشرات",
+            "أخرى"
+        ],
+        "OOP in C++": [
+            "class",
+            "object",
+            "constructor",
+            "method",
+            "access modifiers",
+            "inheritance",
+            "polymorphism كمفهوم",
+            "أخرى"
+        ],
+        "STL Basics": [
+            "vector",
+            "map",
+            "set",
+            "stack",
+            "queue",
+            "algorithm library كمفهوم",
+            "اختيار STL مناسب",
+            "أخرى"
+        ],
+        "Files in C++": [
+            "ifstream",
+            "ofstream",
+            "قراءة ملف",
+            "كتابة ملف",
+            "إغلاق ملف",
+            "أخطاء الملفات",
+            "أخرى"
+        ],
+        "C++ Practice Projects": [
+            "آلة حاسبة",
+            "برنامج إدارة مكتبة",
+            "برنامج درجات",
+            "برنامج ملفات",
+            "برنامج باستخدام Vector",
+            "برنامج OOP بسيط",
+            "أخرى"
+        ],
+        "Java Basics": [
+            "بنية برنامج Java",
+            "class",
+            "main method",
+            "System.out.println",
+            "compile and run",
+            "JDK كمفهوم",
+            "أخطاء البداية",
+            "أخرى"
+        ],
+        "Methods": [
+            "تعريف Method",
+            "static method",
+            "parameters",
+            "return type",
+            "void",
+            "method overloading",
+            "أخطاء Methods",
+            "أخرى"
+        ],
+        "Strings in Java": [
+            "String",
+            "length",
+            "charAt",
+            "substring",
+            "equals",
+            "contains",
+            "StringBuilder كمفهوم",
+            "أخرى"
+        ],
+        "OOP in Java": [
+            "مفهوم OOP",
+            "Class",
+            "Object",
+            "Constructor",
+            "Method",
+            "Attribute",
+            "Encapsulation",
+            "Inheritance",
+            "Polymorphism",
+            "Interface",
+            "أخرى"
+        ],
+        "Classes and Objects": [
+            "Class",
+            "Object",
+            "إنشاء كائن",
+            "العلاقة بين Class وObject",
+            "أمثلة واقعية",
+            "أخطاء إنشاء الكائنات",
+            "أخرى"
+        ],
+        "Exception Handling": [
+            "try",
+            "catch",
+            "finally كمفهوم",
+            "Exception",
+            "رسالة الخطأ",
+            "منع توقف البرنامج",
+            "أخرى"
+        ],
+        "Collections Basics": [
+            "ArrayList",
+            "HashMap",
+            "HashSet كمفهوم",
+            "إضافة عناصر",
+            "حذف عناصر",
+            "التكرار على Collection",
+            "اختيار Collection مناسبة",
+            "أخرى"
+        ],
+        "Files in Java": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "File class كمفهوم",
+            "Scanner مع File",
+            "أخطاء الملفات",
+            "أخرى"
+        ],
+        "Java Practice Projects": [
+            "برنامج حساب درجات",
+            "برنامج إدارة طلاب",
+            "برنامج مكتبة بسيط",
+            "برنامج OOP",
+            "برنامج ملفات",
+            "برنامج Collections",
+            "أخرى"
+        ],
+        "JavaScript Basics": [
+            "تشغيل JavaScript",
+            "console.log",
+            "ربط المفهوم بالمتصفح وNode كمفهوم",
+            "Syntax",
+            "التعليقات",
+            "أخطاء البداية",
+            "أخرى"
+        ],
+        "Objects": [
+            "مفهوم Object",
+            "key وvalue",
+            "properties",
+            "methods",
+            "الوصول للخصائص",
+            "تعديل الخصائص",
+            "أخرى"
+        ],
+        "Strings in JavaScript": [
+            "length",
+            "slice",
+            "includes",
+            "replace",
+            "split",
+            "template literals",
+            "أخرى"
+        ],
+        "ES6 Basics": [
+            "let وconst",
+            "arrow functions",
+            "template literals",
+            "destructuring كمفهوم",
+            "spread operator كمفهوم",
+            "modules كمفهوم",
+            "أخرى"
+        ],
+        "Error Handling": [
+            "try",
+            "catch",
+            "throw كمفهوم",
+            "قراءة رسالة خطأ",
+            "TypeError",
+            "ReferenceError",
+            "أخرى"
+        ],
+        "JavaScript Practice Projects": [
+            "آلة حاسبة بسيطة",
+            "برنامج قائمة مهام منطقي",
+            "لعبة تخمين",
+            "معالج نصوص بسيط",
+            "برنامج عداد",
+            "مشروع Arrays وObjects",
+            "أخرى"
+        ],
+        "TypeScript Basics": [
+            "مفهوم TypeScript",
+            "الفرق بين JavaScript وTypeScript",
+            "التحقق من الأنواع",
+            "تشغيل TypeScript",
+            "ملف ts",
+            "أخطاء TypeScript",
+            "أخرى"
+        ],
+        "Types": [
+            "string",
+            "number",
+            "boolean",
+            "any",
+            "unknown كمفهوم",
+            "void",
+            "تحديد نوع المتغير",
+            "أخرى"
+        ],
+        "Functions in TypeScript": [
+            "نوع Parameters",
+            "نوع Return",
+            "Optional Parameters",
+            "Default Parameters",
+            "Function Type كمفهوم",
+            "أخطاء الدوال",
+            "أخرى"
+        ],
+        "Objects and Interfaces": [
+            "مفهوم Interface",
+            "تعريف شكل Object",
+            "خصائص إلزامية",
+            "خصائص اختيارية",
+            "استخدام Interface مع Function",
+            "أخرى"
+        ],
+        "Arrays and Tuples": [
+            "Typed Arrays",
+            "Array of Objects",
+            "Tuple",
+            "قراءة عناصر",
+            "تعديل عناصر",
+            "أخطاء نوع Array",
+            "أخرى"
+        ],
+        "Union Types": [
+            "مفهوم Union",
+            "أكثر من نوع",
+            "التحقق قبل الاستخدام",
+            "استخدامه في الدوال",
+            "أخطاء Union",
+            "أخرى"
+        ],
+        "Type Aliases": [
+            "مفهوم Type Alias",
+            "تعريف نوع مخصص",
+            "استخدامه مع Objects",
+            "استخدامه مع Union",
+            "مقارنة Type وInterface",
+            "أخرى"
+        ],
+        "Classes in TypeScript": [
+            "class",
+            "constructor",
+            "public",
+            "private",
+            "readonly كمفهوم",
+            "implements interface",
+            "أخرى"
+        ],
+        "Generics Basics": [
+            "مفهوم Generic",
+            "دالة عامة",
+            "نوع مرن",
+            "Generic Array",
+            "فائدة Generics",
+            "حدود الأساسيات",
+            "أخرى"
+        ],
+        "TypeScript Practice": [
+            "تحويل كود JS إلى TS",
+            "تصحيح Type Errors",
+            "كتابة Interface",
+            "كتابة Function typed",
+            "بناء نموذج بيانات",
+            "أخرى"
+        ],
+        "OOP Concepts": [
+            "مفهوم OOP",
+            "لماذا نستخدم OOP",
+            "النمذجة بالكائنات",
+            "تقسيم المسؤوليات",
+            "إعادة استخدام الكود",
+            "أخطاء فهم OOP",
+            "أخرى"
+        ],
+        "Attributes and Methods": [
+            "Attribute",
+            "Method",
+            "الفرق بين البيانات والسلوك",
+            "تعديل Attribute",
+            "استدعاء Method",
+            "تنظيم الكائن",
+            "أخرى"
+        ],
+        "Constructors": [
+            "مفهوم Constructor",
+            "تهيئة الكائن",
+            "Parameters داخل Constructor",
+            "Constructor افتراضي",
+            "أخطاء Constructor",
+            "أخرى"
+        ],
+        "Encapsulation": [
+            "مفهوم Encapsulation",
+            "إخفاء التفاصيل",
+            "حماية البيانات",
+            "Getters and Setters كمفهوم",
+            "تقليل الوصول المباشر",
+            "أخرى"
+        ],
+        "Inheritance": [
+            "مفهوم Inheritance",
+            "Parent Class",
+            "Child Class",
+            "إعادة استخدام الكود",
+            "توسيع السلوك",
+            "أخطاء الوراثة",
+            "أخرى"
+        ],
+        "Polymorphism": [
+            "مفهوم Polymorphism",
+            "نفس الواجهة بسلوك مختلف",
+            "Override كمفهوم",
+            "استخدامه في التصميم",
+            "أمثلة تطبيقية",
+            "أخرى"
+        ],
+        "Abstraction": [
+            "مفهوم Abstraction",
+            "إخفاء التعقيد",
+            "إظهار المهم فقط",
+            "Abstract Class كمفهوم",
+            "تصميم واجهة بسيطة",
+            "أخرى"
+        ],
+        "Interfaces": [
+            "مفهوم Interface",
+            "عقد برمجي",
+            "تحديد السلوك المطلوب",
+            "فصل التنفيذ عن التعريف",
+            "استخدامات Interface",
+            "أخرى"
+        ],
+        "OOP Design Practice": [
+            "تصميم كائن طالب",
+            "تصميم كائن منتج",
+            "تصميم كائن حساب بنكي تعليمي",
+            "تصميم نظام مكتبة بسيط",
+            "تحليل مسؤوليات الأصناف",
+            "أخرى"
+        ],
+        "Debugging Basics": [
+            "مفهوم Debugging",
+            "إعادة إنتاج الخطأ",
+            "عزل المشكلة",
+            "تتبع التنفيذ",
+            "تجربة إصلاح",
+            "اختبار بعد الإصلاح",
+            "أخرى"
+        ],
+        "Reading Error Messages": [
+            "نوع الخطأ",
+            "مكان الخطأ",
+            "السطر المسبب",
+            "Traceback كمفهوم",
+            "رسالة السبب",
+            "البحث عن معنى الخطأ",
+            "أخرى"
+        ],
+        "Syntax Errors": [
+            "أقواس ناقصة",
+            "فاصلة ناقصة",
+            "خطأ مسافات",
+            "كتابة كلمة محجوزة خطأ",
+            "خطأ indentation",
+            "أخرى"
+        ],
+        "Runtime Errors": [
+            "قسمة على صفر",
+            "ملف غير موجود",
+            "نوع بيانات غير مناسب",
+            "فهرس خارج النطاق",
+            "استدعاء شيء غير موجود",
+            "أخرى"
+        ],
+        "Logic Errors": [
+            "ناتج غير صحيح",
+            "شرط خاطئ",
+            "حلقة زائدة",
+            "ترتيب خطوات خاطئ",
+            "حساب غير دقيق",
+            "اختبار يكشف الخطأ",
+            "أخرى"
+        ],
+        "Exception Handling Basics": [
+            "try",
+            "except أو catch",
+            "منع توقف البرنامج",
+            "معالجة إدخال خاطئ",
+            "رسالة خطأ واضحة",
+            "أخطاء المعالجة الزائدة",
+            "أخرى"
+        ],
+        "Code Tracing for Debugging": [
+            "جدول تتبع",
+            "تتبع متغير",
+            "تتبع شرط",
+            "تتبع حلقة",
+            "تتبع دالة",
+            "اكتشاف مكان الخلل",
+            "أخرى"
+        ],
+        "Clean Code Basics": [
+            "أسماء واضحة",
+            "دوال قصيرة",
+            "تجنب التكرار",
+            "تقليل التعقيد",
+            "تعليقات مفيدة",
+            "تنظيم منطقي",
+            "أخرى"
+        ],
+        "Naming and Style": [
+            "تسمية المتغيرات",
+            "تسمية الدوال",
+            "اتساق الأسلوب",
+            "تجنب الاختصارات الغامضة",
+            "اتباع نمط اللغة",
+            "أخرى"
+        ],
+        "Refactoring Basics": [
+            "تحسين الكود دون تغيير السلوك",
+            "تقسيم دالة طويلة",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "تحسين أسماء",
+            "اختبار بعد التعديل",
+            "أخرى"
+        ],
+        "Code Review Basics": [
+            "قراءة كود شخص آخر",
+            "اكتشاف خطأ",
+            "اقتراح تحسين",
+            "مراجعة الوضوح",
+            "مراجعة الحالات الخاصة",
+            "كتابة ملاحظات Review",
+            "أخرى"
+        ],
+        "Personal Error Log": [
+            "تسجيل الأخطاء المتكررة",
+            "سبب الخطأ",
+            "طريقة الحل",
+            "الدرس المستفاد",
+            "مراجعة الأخطاء أسبوعياً",
+            "تقليل تكرار الخطأ",
+            "أخرى"
+        ],
+        "Project Planning Basics": [
+            "اختيار فكرة مشروع",
+            "تحديد الهدف",
+            "تحديد المدخلات والمخرجات",
+            "تقسيم المشروع إلى مهام",
+            "ترتيب الأولويات",
+            "تحديد نسخة أولى بسيطة",
+            "أخرى"
+        ],
+        "Console Applications": [
+            "برنامج تفاعلي بسيط",
+            "قائمة خيارات",
+            "قراءة إدخال المستخدم",
+            "تنفيذ أوامر",
+            "إظهار نتيجة",
+            "التعامل مع إدخال خاطئ",
+            "أخرى"
+        ],
+        "Calculator Projects": [
+            "آلة حاسبة بسيطة",
+            "عمليات متعددة",
+            "قائمة اختيار عملية",
+            "معالجة قسمة على صفر",
+            "تحسين الإخراج",
+            "اختبار العمليات",
+            "أخرى"
+        ],
+        "Text Processing Projects": [
+            "عد الكلمات",
+            "عد الحروف",
+            "تنظيف نص",
+            "البحث داخل نص",
+            "استبدال كلمات",
+            "تلخيص إحصاءات نصية بسيطة",
+            "أخرى"
+        ],
+        "File-based Projects": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "تعديل محتوى ملف",
+            "حفظ نتائج",
+            "قراءة أسطر",
+            "معالجة أخطاء الملفات",
+            "أخرى"
+        ],
+        "Student Management Projects": [
+            "إضافة طالب",
+            "عرض الطلاب",
+            "البحث عن طالب",
+            "تعديل بيانات",
+            "حذف طالب",
+            "حساب متوسط درجات",
+            "أخرى"
+        ],
+        "Games for Beginners": [
+            "لعبة تخمين رقم",
+            "لعبة أسئلة قصيرة",
+            "لعبة حجر ورقة مقص",
+            "نظام نقاط",
+            "إعادة اللعب",
+            "معالجة إدخال خاطئ",
+            "أخرى"
+        ],
+        "OOP Mini Projects": [
+            "نظام مكتبة بسيط",
+            "حساب بنكي تعليمي",
+            "إدارة منتجات",
+            "إدارة مهام",
+            "تصميم Classes",
+            "ربط Objects",
+            "أخرى"
+        ],
+        "Multi-language Practice": [
+            "تنفيذ نفس المشروع بـ Python",
+            "تنفيذ نفس المشروع بـ C",
+            "تنفيذ نفس المشروع بـ C++",
+            "تنفيذ نفس المشروع بـ Java",
+            "مقارنة الحلول",
+            "تحليل اختلاف اللغة",
+            "أخرى"
+        ],
+        "Project Testing Basics": [
+            "اختبار الميزة",
+            "اختبار إدخال خاطئ",
+            "اختبار حالة خاصة",
+            "اختبار بعد تعديل",
+            "تسجيل الأخطاء",
+            "تحسين بناء على الاختبار",
+            "أخرى"
+        ],
+        "Project Documentation Basics": [
+            "وصف المشروع",
+            "طريقة التشغيل",
+            "شرح الميزات",
+            "كتابة أمثلة استخدام",
+            "تسجيل القيود",
+            "كتابة ملاحظات تطوير لاحق",
+            "أخرى"
+        ],
+        "Project Improvement": [
+            "تحسين الواجهة النصية",
+            "تقليل التكرار",
+            "تقسيم الكود إلى دوال",
+            "إضافة ميزة",
+            "تحسين التعامل مع الأخطاء",
+            "تنظيف الكود",
+            "أخرى"
+        ],
+        "أخرى": [
+            "موضوع مخصص",
+            "تفصيل مخصص",
+            "أخرى"
+        ]
+    },
+    "training": [
+        "دراسة مفهوم",
+        "تلخيص الفكرة",
+        "تحليل مثال بسيط",
+        "كتابة ملاحظات",
+        "حل أسئلة مفاهيمية",
+        "اختبار قصير",
+        "كتابة كود بسيط",
+        "تصحيح Syntax Error",
+        "مقارنة كود صحيح وخاطئ",
+        "إعادة ترتيب كود",
+        "قراءة رسالة خطأ",
+        "تعريف متغير",
+        "تتبع قيمة متغير",
+        "تصنيف نوع بيانات",
+        "تحويل نوع بيانات",
+        "تصحيح خطأ نوع",
+        "حل تمرين تطبيقي",
+        "كتابة شرط",
+        "تحليل تفرع",
+        "تتبع تنفيذ شرط",
+        "تصحيح شرط خاطئ",
+        "حل تمرين if وelse",
+        "كتابة Loop",
+        "تتبع عدد التكرارات",
+        "تصحيح حلقة لا نهائية",
+        "تحليل Loop متداخلة",
+        "حل تمرين تكرار",
+        "كتابة Function",
+        "تحديد Parameters",
+        "تمرير Arguments",
+        "استخدام Return",
+        "تقسيم كود إلى دوال",
+        "تصحيح خطأ دالة",
+        "تحليل نص مسألة",
+        "استخراج المطلوب",
+        "تحديد المدخلات والمخرجات",
+        "إعادة صياغة المسألة",
+        "كتابة ملاحظات فهم",
+        "كتابة Pseudocode",
+        "رسم Flowchart",
+        "تحويل مخطط إلى كود",
+        "تصحيح خطوة منطقية",
+        "مراجعة ترتيب الحل",
+        "تتبع كود",
+        "إنشاء جدول تتبع",
+        "تحديد قيمة متغير",
+        "اكتشاف خطأ منطقي",
+        "حل تمرين تتبع",
+        "كتابة Test Cases",
+        "توقع المخرجات",
+        "اختبار Edge Case",
+        "مقارنة الناتج المتوقع والفعلي",
+        "توسيع حالات الاختبار",
+        "حل مسألة برمجية",
+        "تحليل الحل",
+        "تطبيق حل مباشر",
+        "تحسين الحل",
+        "مراجعة الأخطاء",
+        "إعادة المحاولة",
+        "كتابة أول برنامج Python",
+        "تشغيل ملف Python",
+        "تصحيح indentation",
+        "تحليل print",
+        "حل تمرين بداية",
+        "تعريف متغير Python",
+        "حل تمرين بيانات",
+        "كتابة شرط Python",
+        "كتابة for loop",
+        "كتابة while loop",
+        "تحليل nested loops",
+        "كتابة دالة Python",
+        "تمرير Parameters",
+        "حل تمرين",
+        "استخدام List",
+        "استخدام Dictionary",
+        "اختيار بنية مناسبة",
+        "تعديل عناصر",
+        "حل تمرين قوائم أو قواميس",
+        "قراءة ملف",
+        "كتابة ملف",
+        "استخدام Module",
+        "تصحيح Import Error",
+        "توثيق تجربة",
+        "تخطيط مشروع صغير",
+        "تنفيذ ميزة",
+        "اختبار المشروع",
+        "تحسين الكود",
+        "كتابة README بسيط",
+        "كتابة برنامج C بسيط",
+        "تحليل main",
+        "تشغيل compile",
+        "تصحيح Compilation Error",
+        "استخدام printf وscanf",
+        "تعريف متغير C",
+        "اختيار نوع مناسب",
+        "تحليل format specifier",
+        "حل تمرين حسابي",
+        "كتابة شرط C",
+        "كتابة حلقة C",
+        "تتبع تنفيذ",
+        "كتابة Function في C",
+        "تحديد return type",
+        "استخدام prototype",
+        "تمرير parameters",
+        "تعريف Array",
+        "تتبع الفهارس",
+        "معالجة نص بسيط",
+        "تصحيح خطأ out of bounds",
+        "حل تمرين Array",
+        "دراسة Pointer",
+        "تحليل عنوان ذاكرة",
+        "تتبع dereference",
+        "تصحيح خطأ Pointer",
+        "مراجعة Memory Leak كمفهوم",
+        "تخطيط مشروع C",
+        "كتابة وظائف المشروع",
+        "اختبار حالات",
+        "تصحيح أخطاء",
+        "توثيق المشروع",
+        "كتابة برنامج C++",
+        "استخدام cin وcout",
+        "تصحيح خطأ بداية",
+        "استخدام Vector",
+        "اختيار STL مناسب",
+        "تحليل فهارس",
+        "مقارنة Array وVector",
+        "تحليل Reference",
+        "تحليل Pointer",
+        "مقارنة pass by value وreference",
+        "تصحيح خطأ مؤشر",
+        "كتابة Class",
+        "إنشاء Object",
+        "استخدام Constructor",
+        "تحليل access modifiers",
+        "تطبيق Inheritance",
+        "تخطيط مشروع C++",
+        "استخدام OOP أو STL",
+        "كتابة برنامج Java",
+        "تحليل main method",
+        "تصميم Class",
+        "كتابة Constructor",
+        "تطبيق Encapsulation",
+        "تحليل Inheritance",
+        "كتابة Method",
+        "تحليل static",
+        "تصحيح خطأ Method",
+        "استخدام ArrayList",
+        "استخدام HashMap",
+        "اختيار Collection مناسبة",
+        "تخطيط مشروع Java",
+        "تنفيذ Class",
+        "اختبار وظيفة",
+        "تحسين التصميم",
+        "كتابة كود JavaScript",
+        "استخدام console.log",
+        "تصحيح Syntax",
+        "تحليل ناتج كود",
+        "كتابة Arrow Function",
+        "تحليل Scope",
+        "تطبيق Callback كمفهوم",
+        "إنشاء Array أو Object",
+        "تعديل بيانات",
+        "استخدام map أو filter كمفهوم",
+        "تصحيح خطأ",
+        "تخطيط مشروع JS",
+        "تنفيذ منطق المشروع",
+        "اختبار المخرجات",
+        "توثيق الفكرة",
+        "دراسة TypeScript",
+        "إضافة Types للكود",
+        "تحليل Type Error",
+        "تصحيح نوع متغير",
+        "مقارنة JS وTS",
+        "تعريف Interface",
+        "تعريف Type Alias",
+        "تحليل Object shape",
+        "مقارنة Type وInterface",
+        "تطبيق عملي",
+        "دراسة مفهوم OOP",
+        "تحليل مثال واقعي",
+        "رسم نموذج كائنات",
+        "مقارنة Procedural وOOP",
+        "تحديد الخصائص",
+        "استدعاء Method",
+        "تصحيح خطأ كائن",
+        "تحليل مفهوم OOP متقدم",
+        "كتابة مثال بسيط",
+        "مقارنة تصميمين",
+        "تصحيح استخدام خاطئ",
+        "تصميم أصناف",
+        "رسم علاقات",
+        "تحديد مسؤوليات",
+        "كتابة كود تطبيقي",
+        "مراجعة التصميم",
+        "تحليل خطأ",
+        "إعادة إنتاج Bug",
+        "عزل سبب المشكلة",
+        "تصحيح كود",
+        "اختبار بعد الإصلاح",
+        "كتابة تقرير خطأ",
+        "تحديد نوع الخطأ",
+        "تحديد السطر",
+        "اقتراح سبب",
+        "البحث عن معنى الخطأ",
+        "إنشاء Test Case",
+        "تصحيح منطق",
+        "مراجعة الحل",
+        "تحسين أسماء",
+        "تقسيم كود",
+        "إزالة تكرار",
+        "تبسيط شرط",
+        "مراجعة جودة الكود",
+        "تسجيل خطأ جديد",
+        "تصنيف الخطأ",
+        "كتابة الحل",
+        "مراجعة أخطاء الأسبوع",
+        "بناء خطة علاج",
+        "تحديد فكرة مشروع",
+        "كتابة متطلبات بسيطة",
+        "تقسيم المشروع إلى مهام",
+        "تحديد نسخة أولى",
+        "ترتيب الأولويات",
+        "بناء مشروع صغير",
+        "اختبار إدخال",
+        "تحسين تجربة المستخدم",
+        "شرح طريقة التشغيل",
+        "إضافة أمثلة",
+        "تسجيل التحسينات القادمة",
+        "تصميم بيانات المشروع",
+        "كتابة عمليات إضافة وعرض",
+        "اختبار الحفظ والقراءة",
+        "معالجة أخطاء الملفات",
+        "تحسين التنظيم",
+        "تصميم Classes",
+        "تحديد Attributes وMethods",
+        "إنشاء Objects",
+        "اختبار العلاقات",
+        "أخرى"
+    ],
+    "trainingByDetail": {
+        "مقدمة البرمجة": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "مفهوم البرمجة": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "لماذا نتعلم البرمجة": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "كيف يعمل البرنامج": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "البرنامج كتعليمات": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "المدخلات والمعالجة والمخرجات": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "الفرق بين المبرمج والمستخدم": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "أمثلة على برامج بسيطة": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "كتابة الكود": [
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "ترتيب الأسطر": [
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "قراءة الكود": [
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "وضوح الكود": [
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "أسماء المتغيرات": [
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "تنظيم التعليمات": [
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "تقليل التكرار": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "كتابة كود مفهوم": [
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Syntax": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "قواعد كتابة اللغة": [
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "الأقواس": [
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "الفواصل": [
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "النقطتان": [
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "المسافات البادئة": [
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "الأخطاء الكتابية": [
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "قراءة Syntax Error": [
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Variables": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "مفهوم Variable": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "تخزين قيمة": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "تغيير قيمة": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "تسمية المتغير": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "تتبع قيمة متغير": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "استخدام متغير في عملية": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "أخطاء المتغيرات": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Data Types": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Integer": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Float": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "String": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Boolean": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "List كمفهوم عام": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Dictionary كمفهوم عام": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "تحويل نوع البيانات": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "اختيار نوع مناسب": [
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Input and Output": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Scanner": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "قراءة نص": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "قراءة رقم": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "طباعة نتيجة": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "تنسيق الإخراج": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "أخطاء Scanner": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Operators": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "العمليات الحسابية": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "المقارنات": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "logical operators": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "strict equality": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "باقي القسمة": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "أخطاء المقارنة": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Conditions": [
+            "كتابة شرط C",
+            "كتابة حلقة C",
+            "تتبع تنفيذ",
+            "تصحيح شرط خاطئ",
+            "تحليل nested loops",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "if": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "else": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "else if": [
+            "كتابة شرط C",
+            "كتابة حلقة C",
+            "تتبع تنفيذ",
+            "تصحيح شرط خاطئ",
+            "تحليل nested loops",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "switch": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "comparison operators": [
+            "كتابة شرط C",
+            "كتابة حلقة C",
+            "تتبع تنفيذ",
+            "تصحيح شرط خاطئ",
+            "تحليل nested loops",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "nested conditions": [
+            "كتابة شرط C",
+            "كتابة حلقة C",
+            "تتبع تنفيذ",
+            "تصحيح شرط خاطئ",
+            "تحليل nested loops",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Loops": [
+            "كتابة شرط C",
+            "كتابة حلقة C",
+            "تتبع تنفيذ",
+            "تصحيح شرط خاطئ",
+            "تحليل nested loops",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "for": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "while": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "do while": [
+            "كتابة شرط C",
+            "كتابة حلقة C",
+            "تتبع تنفيذ",
+            "تصحيح شرط خاطئ",
+            "تحليل nested loops",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "عداد الحلقة": [
+            "كتابة شرط C",
+            "كتابة حلقة C",
+            "تتبع تنفيذ",
+            "تصحيح شرط خاطئ",
+            "تحليل nested loops",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "break": [
+            "كتابة شرط C",
+            "كتابة حلقة C",
+            "تتبع تنفيذ",
+            "تصحيح شرط خاطئ",
+            "تحليل nested loops",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "continue": [
+            "كتابة شرط C",
+            "كتابة حلقة C",
+            "تتبع تنفيذ",
+            "تصحيح شرط خاطئ",
+            "تحليل nested loops",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "nested loops": [
+            "كتابة شرط C",
+            "كتابة حلقة C",
+            "تتبع تنفيذ",
+            "تصحيح شرط خاطئ",
+            "تحليل nested loops",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Functions": [
+            "كتابة Function",
+            "كتابة Arrow Function",
+            "استخدام Return",
+            "تحليل Scope",
+            "تطبيق Callback كمفهوم",
+            "أخرى"
+        ],
+        "function declaration": [
+            "كتابة Function",
+            "كتابة Arrow Function",
+            "استخدام Return",
+            "تحليل Scope",
+            "تطبيق Callback كمفهوم",
+            "أخرى"
+        ],
+        "function expression": [
+            "كتابة Function",
+            "كتابة Arrow Function",
+            "استخدام Return",
+            "تحليل Scope",
+            "تطبيق Callback كمفهوم",
+            "أخرى"
+        ],
+        "arrow function": [
+            "كتابة Function",
+            "كتابة Arrow Function",
+            "استخدام Return",
+            "تحليل Scope",
+            "تطبيق Callback كمفهوم",
+            "أخرى"
+        ],
+        "parameters": [
+            "كتابة Function",
+            "كتابة Arrow Function",
+            "استخدام Return",
+            "تحليل Scope",
+            "تطبيق Callback كمفهوم",
+            "أخرى"
+        ],
+        "return": [
+            "كتابة Function",
+            "كتابة Arrow Function",
+            "استخدام Return",
+            "تحليل Scope",
+            "تطبيق Callback كمفهوم",
+            "أخرى"
+        ],
+        "scope": [
+            "كتابة Function",
+            "كتابة Arrow Function",
+            "استخدام Return",
+            "تحليل Scope",
+            "تطبيق Callback كمفهوم",
+            "أخرى"
+        ],
+        "callback كمفهوم": [
+            "كتابة Function",
+            "كتابة Arrow Function",
+            "استخدام Return",
+            "تحليل Scope",
+            "تطبيق Callback كمفهوم",
+            "أخرى"
+        ],
+        "Scope": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "مفهوم Scope": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "المتغير المحلي": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "المتغير العام": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "نطاق الدالة": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "الوصول إلى المتغيرات": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "أخطاء Scope": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Basic Error Handling": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "مفهوم Error": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Syntax Error": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Runtime Error": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Logic Error": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "سبب الخطأ": [
+            "تسجيل خطأ جديد",
+            "تصنيف الخطأ",
+            "كتابة الحل",
+            "مراجعة أخطاء الأسبوع",
+            "بناء خطة علاج",
+            "أخرى"
+        ],
+        "قراءة رسالة الخطأ": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "إصلاح خطأ بسيط": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Code Organization": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "تقسيم الكود": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "ترتيب الدوال": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "إزالة الكود المكرر": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "تسمية واضحة": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "تنظيم الملفات كمفهوم": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "قابلية القراءة": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Comments": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "مفهوم Comment": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "متى نكتب تعليقاً": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "التعليق المفيد": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "التعليق الزائد": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "شرح دالة": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "توثيق فكرة مهمة": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Modules and Packages كمفهوم عام": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "مفهوم Module": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "مفهوم Package": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "استيراد مكتبة": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "استخدام كود جاهز": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "تنظيم الكود": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "أخطاء الاستيراد كمفهوم": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Programming Fundamentals": [
+            "دراسة مفهوم",
+            "تلخيص الفكرة",
+            "تحليل مثال بسيط",
+            "كتابة ملاحظات",
+            "حل أسئلة مفاهيمية",
+            "اختبار قصير",
+            "كتابة كود بسيط",
+            "تصحيح Syntax Error",
+            "مقارنة كود صحيح وخاطئ",
+            "إعادة ترتيب كود",
+            "قراءة رسالة خطأ",
+            "تعريف متغير",
+            "تتبع قيمة متغير",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تصحيح خطأ نوع",
+            "حل تمرين تطبيقي",
+            "كتابة شرط",
+            "تحليل تفرع",
+            "تتبع تنفيذ شرط",
+            "تصحيح شرط خاطئ",
+            "حل تمرين if وelse",
+            "كتابة Loop",
+            "تتبع عدد التكرارات",
+            "تصحيح حلقة لا نهائية",
+            "تحليل Loop متداخلة",
+            "حل تمرين تكرار",
+            "كتابة Function",
+            "تحديد Parameters",
+            "تمرير Arguments",
+            "استخدام Return",
+            "تقسيم كود إلى دوال",
+            "تصحيح خطأ دالة",
+            "أخرى"
+        ],
+        "Problem Solving Basics": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "مفهوم حل المشكلات": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "تقسيم المشكلة": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "البحث عن الفكرة الأساسية": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "اختيار حل بسيط أولاً": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "اختبار الحل": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "تحسين الحل": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "Understanding the Problem": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "قراءة نص المسألة": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "استخراج المطلوب": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "تحديد القيود": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "تمييز المعلومات المهمة": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "إعادة صياغة المسألة": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "اكتشاف الغموض": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "Inputs and Outputs": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "تحديد المدخلات": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "تحديد المخرجات": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "شكل الإدخال": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "شكل الإخراج": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "أمثلة الإدخال والإخراج": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "أخطاء فهم المخرجات": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "Step-by-step Thinking": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "كتابة الخطوات": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "ترتيب الحل": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "تحويل الفكرة إلى تعليمات": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "اكتشاف خطوة ناقصة": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "تبسيط الحل": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "مراجعة المنطق": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "أخرى"
+        ],
+        "Pseudocode": [
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "أخرى"
+        ],
+        "مفهوم Pseudocode": [
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "أخرى"
+        ],
+        "كتابة شبه كود": [
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "أخرى"
+        ],
+        "استخدام شروط": [
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "أخرى"
+        ],
+        "استخدام حلقات": [
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "أخرى"
+        ],
+        "استخدام دوال": [
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "أخرى"
+        ],
+        "تحويل Pseudocode إلى Code": [
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "أخرى"
+        ],
+        "Flowcharts": [
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "أخرى"
+        ],
+        "مفهوم Flowchart": [
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "أخرى"
+        ],
+        "رمز البداية والنهاية": [
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "أخرى"
+        ],
+        "رمز الإدخال والإخراج": [
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "أخرى"
+        ],
+        "رمز العملية": [
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "أخرى"
+        ],
+        "رمز القرار": [
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "أخرى"
+        ],
+        "تتبع مسار الحل": [
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "أخرى"
+        ],
+        "Code Tracing": [
+            "تتبع كود",
+            "إنشاء جدول تتبع",
+            "تحديد قيمة متغير",
+            "اكتشاف خطأ منطقي",
+            "حل تمرين تتبع",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "تتبع المتغيرات": [
+            "تتبع كود",
+            "إنشاء جدول تتبع",
+            "تحديد قيمة متغير",
+            "اكتشاف خطأ منطقي",
+            "حل تمرين تتبع",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "تتبع الشروط": [
+            "تتبع كود",
+            "إنشاء جدول تتبع",
+            "تحديد قيمة متغير",
+            "اكتشاف خطأ منطقي",
+            "حل تمرين تتبع",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "تتبع الحلقات": [
+            "تتبع كود",
+            "إنشاء جدول تتبع",
+            "تحديد قيمة متغير",
+            "اكتشاف خطأ منطقي",
+            "حل تمرين تتبع",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "تتبع الدوال": [
+            "تتبع كود",
+            "إنشاء جدول تتبع",
+            "تحديد قيمة متغير",
+            "اكتشاف خطأ منطقي",
+            "حل تمرين تتبع",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "جدول التتبع": [
+            "تتبع كود",
+            "إنشاء جدول تتبع",
+            "تحديد قيمة متغير",
+            "اكتشاف خطأ منطقي",
+            "حل تمرين تتبع",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "اكتشاف الخطأ بالتتبع": [
+            "تتبع كود",
+            "إنشاء جدول تتبع",
+            "تحديد قيمة متغير",
+            "اكتشاف خطأ منطقي",
+            "حل تمرين تتبع",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Test Cases": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "مفهوم Test Case": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "اختبار مثال بسيط": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "اختبار أكثر من حالة": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "اختبار حالة صحيحة": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "اختبار حالة خاطئة": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "مقارنة الناتج المتوقع والفعلي": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "Edge Cases": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "مفهوم Edge Case": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "القيمة الصفرية": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "القيمة الفارغة": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "أكبر قيمة": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "أصغر قيمة": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "حالة عنصر واحد": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "حالة تكرار القيم": [
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "أخرى"
+        ],
+        "Brute Force Thinking": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "مفهوم Brute Force": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "الحل المباشر": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "متى يكون مناسباً": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "حدوده": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "مقارنته بالحل المحسن": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "استخدامه كبداية": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "Pattern Recognition": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "التعرف على النمط": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "تكرار العمليات": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "المجاميع": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "العد": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "البحث": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "التصنيف": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "Basic Optimization": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "استخدام متغيرات مساعدة": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "تجنب الحساب المتكرر": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "تبسيط الشرط": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "تحسين قابلية القراءة": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "Problem Solving Practice": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "مسائل متغيرات": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "مسائل شروط": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "مسائل حلقات": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "مسائل دوال": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "مسائل قوائم بسيطة": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "مسائل تتبع كود": [
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "Problem Solving": [
+            "تحليل نص مسألة",
+            "استخراج المطلوب",
+            "تحديد المدخلات والمخرجات",
+            "إعادة صياغة المسألة",
+            "كتابة ملاحظات فهم",
+            "كتابة Pseudocode",
+            "رسم Flowchart",
+            "تحويل مخطط إلى كود",
+            "تصحيح خطوة منطقية",
+            "مراجعة ترتيب الحل",
+            "تتبع كود",
+            "إنشاء جدول تتبع",
+            "تحديد قيمة متغير",
+            "اكتشاف خطأ منطقي",
+            "حل تمرين تتبع",
+            "اختبار قصير",
+            "كتابة Test Cases",
+            "توقع المخرجات",
+            "اختبار Edge Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "توسيع حالات الاختبار",
+            "حل مسألة برمجية",
+            "تحليل الحل",
+            "تطبيق حل مباشر",
+            "تحسين الحل",
+            "مراجعة الأخطاء",
+            "إعادة المحاولة",
+            "أخرى"
+        ],
+        "Python Basics": [
+            "كتابة أول برنامج Python",
+            "تشغيل ملف Python",
+            "تصحيح indentation",
+            "تحليل print",
+            "حل تمرين بداية",
+            "أخرى"
+        ],
+        "تشغيل Python": [
+            "كتابة أول برنامج Python",
+            "تشغيل ملف Python",
+            "تصحيح indentation",
+            "تحليل print",
+            "حل تمرين بداية",
+            "أخرى"
+        ],
+        "كتابة أول برنامج": [
+            "كتابة أول برنامج Python",
+            "تشغيل ملف Python",
+            "تصحيح indentation",
+            "تحليل print",
+            "حل تمرين بداية",
+            "أخرى"
+        ],
+        "print": [
+            "كتابة أول برنامج Python",
+            "تشغيل ملف Python",
+            "تصحيح indentation",
+            "تحليل print",
+            "حل تمرين بداية",
+            "أخرى"
+        ],
+        "indentation": [
+            "كتابة أول برنامج Python",
+            "تشغيل ملف Python",
+            "تصحيح indentation",
+            "تحليل print",
+            "حل تمرين بداية",
+            "أخرى"
+        ],
+        "التعليقات": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "تشغيل ملف Python": [
+            "كتابة أول برنامج Python",
+            "تشغيل ملف Python",
+            "تصحيح indentation",
+            "تحليل print",
+            "حل تمرين بداية",
+            "أخرى"
+        ],
+        "أخطاء البداية": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Variables and Data Types": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "let": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "const": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "var كمفهوم قديم": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "number": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "string": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "boolean": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "null": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "undefined": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Conditions and Loops": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "for of": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "break وcontinue": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Data Structures in Python": [
+            "استخدام List",
+            "استخدام Dictionary",
+            "اختيار بنية مناسبة",
+            "تعديل عناصر",
+            "حل تمرين قوائم أو قواميس",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "List": [
+            "استخدام List",
+            "استخدام Dictionary",
+            "اختيار بنية مناسبة",
+            "تعديل عناصر",
+            "حل تمرين قوائم أو قواميس",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "Tuple": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "Dictionary": [
+            "استخدام List",
+            "استخدام Dictionary",
+            "اختيار بنية مناسبة",
+            "تعديل عناصر",
+            "حل تمرين قوائم أو قواميس",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "Set": [
+            "استخدام List",
+            "استخدام Dictionary",
+            "اختيار بنية مناسبة",
+            "تعديل عناصر",
+            "حل تمرين قوائم أو قواميس",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "الوصول للعناصر": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "الإضافة والحذف": [
+            "استخدام List",
+            "استخدام Dictionary",
+            "اختيار بنية مناسبة",
+            "تعديل عناصر",
+            "حل تمرين قوائم أو قواميس",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "التكرار على العناصر": [
+            "استخدام List",
+            "استخدام Dictionary",
+            "اختيار بنية مناسبة",
+            "تعديل عناصر",
+            "حل تمرين قوائم أو قواميس",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "اختيار البنية المناسبة": [
+            "استخدام List",
+            "استخدام Dictionary",
+            "اختيار بنية مناسبة",
+            "تعديل عناصر",
+            "حل تمرين قوائم أو قواميس",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "Strings in Python": [
+            "استخدام List",
+            "استخدام Dictionary",
+            "اختيار بنية مناسبة",
+            "تعديل عناصر",
+            "حل تمرين قوائم أو قواميس",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "فهرسة النص": [
+            "استخدام List",
+            "استخدام Dictionary",
+            "اختيار بنية مناسبة",
+            "تعديل عناصر",
+            "حل تمرين قوائم أو قواميس",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "تقطيع النص": [
+            "استخدام List",
+            "استخدام Dictionary",
+            "اختيار بنية مناسبة",
+            "تعديل عناصر",
+            "حل تمرين قوائم أو قواميس",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "دمج النصوص": [
+            "استخدام List",
+            "استخدام Dictionary",
+            "اختيار بنية مناسبة",
+            "تعديل عناصر",
+            "حل تمرين قوائم أو قواميس",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "split": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "join": [
+            "استخدام List",
+            "استخدام Dictionary",
+            "اختيار بنية مناسبة",
+            "تعديل عناصر",
+            "حل تمرين قوائم أو قواميس",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "replace": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "lower وupper": [
+            "استخدام List",
+            "استخدام Dictionary",
+            "اختيار بنية مناسبة",
+            "تعديل عناصر",
+            "حل تمرين قوائم أو قواميس",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "Files in Python": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "open": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "with open": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "read": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "write": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "append": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "قراءة الأسطر": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "أخطاء مسار الملف": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "Modules and Packages": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "import": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "math": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "random": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "datetime كمفهوم": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "إنشاء Module": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "pip كمفهوم": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "Import Error": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "Error Handling in Python": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "try": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "except": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "finally كمفهوم": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "ValueError": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "TypeError": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "FileNotFoundError": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "رسائل الخطأ": [
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "أخرى"
+        ],
+        "OOP in Python": [
+            "تخطيط مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "كتابة README بسيط",
+            "أخرى"
+        ],
+        "class": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "object": [
+            "كتابة Class",
+            "إنشاء Object",
+            "استخدام Constructor",
+            "تحليل access modifiers",
+            "تطبيق Inheritance",
+            "أخرى"
+        ],
+        "**init**": [
+            "تخطيط مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "كتابة README بسيط",
+            "أخرى"
+        ],
+        "attributes": [
+            "تخطيط مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "كتابة README بسيط",
+            "أخرى"
+        ],
+        "methods": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "inheritance": [
+            "كتابة Class",
+            "إنشاء Object",
+            "استخدام Constructor",
+            "تحليل access modifiers",
+            "تطبيق Inheritance",
+            "أخرى"
+        ],
+        "encapsulation كمفهوم": [
+            "تخطيط مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "كتابة README بسيط",
+            "أخرى"
+        ],
+        "Python Practice Projects": [
+            "تخطيط مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "كتابة README بسيط",
+            "أخرى"
+        ],
+        "آلة حاسبة": [
+            "تخطيط مشروع C++",
+            "تنفيذ ميزة",
+            "استخدام OOP أو STL",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "أخرى"
+        ],
+        "لعبة تخمين رقم": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "مدير مهام بسيط": [
+            "تخطيط مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "كتابة README بسيط",
+            "أخرى"
+        ],
+        "برنامج قراءة ملف": [
+            "تخطيط مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "كتابة README بسيط",
+            "أخرى"
+        ],
+        "برنامج قائمة طلاب": [
+            "تخطيط مشروع C",
+            "كتابة وظائف المشروع",
+            "اختبار حالات",
+            "تصحيح أخطاء",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "محول وحدات": [
+            "تخطيط مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "كتابة README بسيط",
+            "أخرى"
+        ],
+        "Python": [
+            "كتابة أول برنامج Python",
+            "تشغيل ملف Python",
+            "تصحيح indentation",
+            "تحليل print",
+            "حل تمرين بداية",
+            "تعريف متغير Python",
+            "تصنيف نوع بيانات",
+            "تحويل نوع بيانات",
+            "تتبع قيمة متغير",
+            "حل تمرين بيانات",
+            "كتابة شرط Python",
+            "كتابة for loop",
+            "كتابة while loop",
+            "تصحيح حلقة لا نهائية",
+            "تحليل nested loops",
+            "اختبار قصير",
+            "كتابة دالة Python",
+            "استخدام Return",
+            "تمرير Parameters",
+            "تصحيح خطأ دالة",
+            "تقسيم كود إلى دوال",
+            "حل تمرين",
+            "استخدام List",
+            "استخدام Dictionary",
+            "اختيار بنية مناسبة",
+            "تعديل عناصر",
+            "حل تمرين قوائم أو قواميس",
+            "مراجعة الأخطاء",
+            "قراءة ملف",
+            "كتابة ملف",
+            "استخدام Module",
+            "تصحيح Import Error",
+            "توثيق تجربة",
+            "تخطيط مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "كتابة README بسيط",
+            "أخرى"
+        ],
+        "C Basics": [
+            "كتابة برنامج C بسيط",
+            "تحليل main",
+            "تشغيل compile",
+            "تصحيح Compilation Error",
+            "استخدام printf وscanf",
+            "أخرى"
+        ],
+        "بنية برنامج C": [
+            "كتابة برنامج C بسيط",
+            "تحليل main",
+            "تشغيل compile",
+            "تصحيح Compilation Error",
+            "استخدام printf وscanf",
+            "أخرى"
+        ],
+        "main function": [
+            "كتابة برنامج C بسيط",
+            "تحليل main",
+            "تشغيل compile",
+            "تصحيح Compilation Error",
+            "استخدام printf وscanf",
+            "أخرى"
+        ],
+        "include": [
+            "كتابة برنامج C بسيط",
+            "تحليل main",
+            "تشغيل compile",
+            "تصحيح Compilation Error",
+            "استخدام printf وscanf",
+            "أخرى"
+        ],
+        "compile and run": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "printf": [
+            "كتابة برنامج C بسيط",
+            "تحليل main",
+            "تشغيل compile",
+            "تصحيح Compilation Error",
+            "استخدام printf وscanf",
+            "أخرى"
+        ],
+        "scanf": [
+            "كتابة برنامج C بسيط",
+            "تحليل main",
+            "تشغيل compile",
+            "تصحيح Compilation Error",
+            "استخدام printf وscanf",
+            "أخرى"
+        ],
+        "أخطاء Compilation": [
+            "كتابة برنامج C بسيط",
+            "تحليل main",
+            "تشغيل compile",
+            "تصحيح Compilation Error",
+            "استخدام printf وscanf",
+            "أخرى"
+        ],
+        "Arrays": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "إنشاء Array": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "push": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "pop": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "map كمفهوم": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "filter كمفهوم": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "forEach": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "Strings in C": [
+            "تعريف Array",
+            "تتبع الفهارس",
+            "معالجة نص بسيط",
+            "تصحيح خطأ out of bounds",
+            "حل تمرين Array",
+            "أخرى"
+        ],
+        "char array": [
+            "تعريف Array",
+            "تتبع الفهارس",
+            "معالجة نص بسيط",
+            "تصحيح خطأ out of bounds",
+            "حل تمرين Array",
+            "أخرى"
+        ],
+        "null character": [
+            "تعريف Array",
+            "تتبع الفهارس",
+            "معالجة نص بسيط",
+            "تصحيح خطأ out of bounds",
+            "حل تمرين Array",
+            "أخرى"
+        ],
+        "قراءة String": [
+            "تعريف Array",
+            "تتبع الفهارس",
+            "معالجة نص بسيط",
+            "تصحيح خطأ out of bounds",
+            "حل تمرين Array",
+            "أخرى"
+        ],
+        "طباعة String": [
+            "تعريف Array",
+            "تتبع الفهارس",
+            "معالجة نص بسيط",
+            "تصحيح خطأ out of bounds",
+            "حل تمرين Array",
+            "أخرى"
+        ],
+        "strlen كمفهوم": [
+            "تعريف Array",
+            "تتبع الفهارس",
+            "معالجة نص بسيط",
+            "تصحيح خطأ out of bounds",
+            "حل تمرين Array",
+            "أخرى"
+        ],
+        "strcmp كمفهوم": [
+            "تعريف Array",
+            "تتبع الفهارس",
+            "معالجة نص بسيط",
+            "تصحيح خطأ out of bounds",
+            "حل تمرين Array",
+            "أخرى"
+        ],
+        "أخطاء النصوص": [
+            "تعريف Array",
+            "تتبع الفهارس",
+            "معالجة نص بسيط",
+            "تصحيح خطأ out of bounds",
+            "حل تمرين Array",
+            "أخرى"
+        ],
+        "Pointers": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "مفهوم Pointer": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "عنوان الذاكرة": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "استخدام &": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "استخدام *": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Pointer مع المتغيرات": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Pointer مع Arrays": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Pointer مع Functions": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "أخطاء Pointers": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Memory Basics": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Stack كمفهوم": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Heap كمفهوم": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "malloc كمفهوم": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "free كمفهوم": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Memory Leak كمفهوم": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "الوصول خارج الحدود": [
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Files in C": [
+            "تخطيط مشروع C",
+            "كتابة وظائف المشروع",
+            "اختبار حالات",
+            "تصحيح أخطاء",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "فتح ملف": [
+            "تخطيط مشروع C",
+            "كتابة وظائف المشروع",
+            "اختبار حالات",
+            "تصحيح أخطاء",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "قراءة ملف": [
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "أخرى"
+        ],
+        "كتابة ملف": [
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "أخرى"
+        ],
+        "fopen": [
+            "تخطيط مشروع C",
+            "كتابة وظائف المشروع",
+            "اختبار حالات",
+            "تصحيح أخطاء",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "fclose": [
+            "تخطيط مشروع C",
+            "كتابة وظائف المشروع",
+            "اختبار حالات",
+            "تصحيح أخطاء",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "fprintf": [
+            "تخطيط مشروع C",
+            "كتابة وظائف المشروع",
+            "اختبار حالات",
+            "تصحيح أخطاء",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "fscanf": [
+            "تخطيط مشروع C",
+            "كتابة وظائف المشروع",
+            "اختبار حالات",
+            "تصحيح أخطاء",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "أخطاء الملفات": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "C Practice Projects": [
+            "تخطيط مشروع C",
+            "كتابة وظائف المشروع",
+            "اختبار حالات",
+            "تصحيح أخطاء",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "برنامج إدارة درجات": [
+            "تخطيط مشروع C",
+            "كتابة وظائف المشروع",
+            "اختبار حالات",
+            "تصحيح أخطاء",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "برنامج عد كلمات": [
+            "تخطيط مشروع C",
+            "كتابة وظائف المشروع",
+            "اختبار حالات",
+            "تصحيح أخطاء",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "برنامج مصفوفات": [
+            "تخطيط مشروع C",
+            "كتابة وظائف المشروع",
+            "اختبار حالات",
+            "تصحيح أخطاء",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "برنامج ملفات بسيط": [
+            "تخطيط مشروع C",
+            "كتابة وظائف المشروع",
+            "اختبار حالات",
+            "تصحيح أخطاء",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "C": [
+            "كتابة برنامج C بسيط",
+            "تحليل main",
+            "تشغيل compile",
+            "تصحيح Compilation Error",
+            "استخدام printf وscanf",
+            "تعريف متغير C",
+            "اختيار نوع مناسب",
+            "تحليل format specifier",
+            "تصحيح خطأ نوع",
+            "حل تمرين حسابي",
+            "كتابة شرط C",
+            "كتابة حلقة C",
+            "تتبع تنفيذ",
+            "تصحيح شرط خاطئ",
+            "تحليل nested loops",
+            "اختبار قصير",
+            "كتابة Function في C",
+            "تحديد return type",
+            "استخدام prototype",
+            "تمرير parameters",
+            "تصحيح خطأ دالة",
+            "تعريف Array",
+            "تتبع الفهارس",
+            "معالجة نص بسيط",
+            "تصحيح خطأ out of bounds",
+            "حل تمرين Array",
+            "دراسة Pointer",
+            "تحليل عنوان ذاكرة",
+            "تتبع dereference",
+            "تصحيح خطأ Pointer",
+            "مراجعة Memory Leak كمفهوم",
+            "تخطيط مشروع C",
+            "كتابة وظائف المشروع",
+            "اختبار حالات",
+            "تصحيح أخطاء",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "C++ Basics": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "بنية برنامج C++": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "iostream": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "main": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "namespace": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "cout": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "cin": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Variables and Types": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "int": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "double": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "char": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "bool": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "auto كمفهوم": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Arrays and Vectors": [
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "Array": [
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "Vector": [
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "push_back": [
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "size": [
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "الوصول للفهرس": [
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "التكرار على Vector": [
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "مقارنة Array وVector": [
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "Strings in C++": [
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "length": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "substr": [
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "find": [
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "تجميع النصوص": [
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "قراءة سطر": [
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "معالجة نص": [
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "أخرى"
+        ],
+        "References and Pointers": [
+            "تحليل Reference",
+            "تحليل Pointer",
+            "مقارنة pass by value وreference",
+            "تصحيح خطأ مؤشر",
+            "حل تمرين",
+            "أخرى"
+        ],
+        "reference": [
+            "تحليل Reference",
+            "تحليل Pointer",
+            "مقارنة pass by value وreference",
+            "تصحيح خطأ مؤشر",
+            "حل تمرين",
+            "أخرى"
+        ],
+        "pointer": [
+            "تحليل Reference",
+            "تحليل Pointer",
+            "مقارنة pass by value وreference",
+            "تصحيح خطأ مؤشر",
+            "حل تمرين",
+            "أخرى"
+        ],
+        "الفرق بينهما": [
+            "تحليل Reference",
+            "تحليل Pointer",
+            "مقارنة pass by value وreference",
+            "تصحيح خطأ مؤشر",
+            "حل تمرين",
+            "أخرى"
+        ],
+        "تمرير by reference": [
+            "تحليل Reference",
+            "تحليل Pointer",
+            "مقارنة pass by value وreference",
+            "تصحيح خطأ مؤشر",
+            "حل تمرين",
+            "أخرى"
+        ],
+        "استخدام pointer": [
+            "تحليل Reference",
+            "تحليل Pointer",
+            "مقارنة pass by value وreference",
+            "تصحيح خطأ مؤشر",
+            "حل تمرين",
+            "أخرى"
+        ],
+        "أخطاء المؤشرات": [
+            "تحليل Reference",
+            "تحليل Pointer",
+            "مقارنة pass by value وreference",
+            "تصحيح خطأ مؤشر",
+            "حل تمرين",
+            "أخرى"
+        ],
+        "OOP in C++": [
+            "كتابة Class",
+            "إنشاء Object",
+            "استخدام Constructor",
+            "تحليل access modifiers",
+            "تطبيق Inheritance",
+            "أخرى"
+        ],
+        "constructor": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "method": [
+            "كتابة Class",
+            "إنشاء Object",
+            "استخدام Constructor",
+            "تحليل access modifiers",
+            "تطبيق Inheritance",
+            "أخرى"
+        ],
+        "access modifiers": [
+            "كتابة Class",
+            "إنشاء Object",
+            "استخدام Constructor",
+            "تحليل access modifiers",
+            "تطبيق Inheritance",
+            "أخرى"
+        ],
+        "polymorphism كمفهوم": [
+            "كتابة Class",
+            "إنشاء Object",
+            "استخدام Constructor",
+            "تحليل access modifiers",
+            "تطبيق Inheritance",
+            "أخرى"
+        ],
+        "STL Basics": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "vector": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "map": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "set": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "stack": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "queue": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "algorithm library كمفهوم": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "اختيار STL مناسب": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Files in C++": [
+            "تخطيط مشروع C++",
+            "تنفيذ ميزة",
+            "استخدام OOP أو STL",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "أخرى"
+        ],
+        "ifstream": [
+            "تخطيط مشروع C++",
+            "تنفيذ ميزة",
+            "استخدام OOP أو STL",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "أخرى"
+        ],
+        "ofstream": [
+            "تخطيط مشروع C++",
+            "تنفيذ ميزة",
+            "استخدام OOP أو STL",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "أخرى"
+        ],
+        "إغلاق ملف": [
+            "تخطيط مشروع C++",
+            "تنفيذ ميزة",
+            "استخدام OOP أو STL",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "أخرى"
+        ],
+        "C++ Practice Projects": [
+            "تخطيط مشروع C++",
+            "تنفيذ ميزة",
+            "استخدام OOP أو STL",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "أخرى"
+        ],
+        "برنامج إدارة مكتبة": [
+            "تخطيط مشروع C++",
+            "تنفيذ ميزة",
+            "استخدام OOP أو STL",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "أخرى"
+        ],
+        "برنامج درجات": [
+            "تخطيط مشروع C++",
+            "تنفيذ ميزة",
+            "استخدام OOP أو STL",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "أخرى"
+        ],
+        "برنامج ملفات": [
+            "تخطيط مشروع Java",
+            "تنفيذ Class",
+            "اختبار وظيفة",
+            "تحسين التصميم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "برنامج باستخدام Vector": [
+            "تخطيط مشروع C++",
+            "تنفيذ ميزة",
+            "استخدام OOP أو STL",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "أخرى"
+        ],
+        "برنامج OOP بسيط": [
+            "تخطيط مشروع C++",
+            "تنفيذ ميزة",
+            "استخدام OOP أو STL",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "أخرى"
+        ],
+        "C++": [
+            "كتابة برنامج C++",
+            "تشغيل compile",
+            "استخدام cin وcout",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "استخدام Vector",
+            "اختيار STL مناسب",
+            "تحليل فهارس",
+            "حل تمرين بيانات",
+            "مقارنة Array وVector",
+            "تحليل Reference",
+            "تحليل Pointer",
+            "مقارنة pass by value وreference",
+            "تصحيح خطأ مؤشر",
+            "حل تمرين",
+            "كتابة Class",
+            "إنشاء Object",
+            "استخدام Constructor",
+            "تحليل access modifiers",
+            "تطبيق Inheritance",
+            "تخطيط مشروع C++",
+            "تنفيذ ميزة",
+            "استخدام OOP أو STL",
+            "اختبار المشروع",
+            "تحسين الكود",
+            "أخرى"
+        ],
+        "Java Basics": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "بنية برنامج Java": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "main method": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "System.out.println": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "JDK كمفهوم": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Methods": [
+            "كتابة Method",
+            "تحديد return type",
+            "تمرير parameters",
+            "تحليل static",
+            "تصحيح خطأ Method",
+            "أخرى"
+        ],
+        "تعريف Method": [
+            "كتابة Method",
+            "تحديد return type",
+            "تمرير parameters",
+            "تحليل static",
+            "تصحيح خطأ Method",
+            "أخرى"
+        ],
+        "static method": [
+            "كتابة Method",
+            "تحديد return type",
+            "تمرير parameters",
+            "تحليل static",
+            "تصحيح خطأ Method",
+            "أخرى"
+        ],
+        "return type": [
+            "كتابة Method",
+            "تحديد return type",
+            "تمرير parameters",
+            "تحليل static",
+            "تصحيح خطأ Method",
+            "أخرى"
+        ],
+        "void": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "method overloading": [
+            "كتابة Method",
+            "تحديد return type",
+            "تمرير parameters",
+            "تحليل static",
+            "تصحيح خطأ Method",
+            "أخرى"
+        ],
+        "أخطاء Methods": [
+            "كتابة Method",
+            "تحديد return type",
+            "تمرير parameters",
+            "تحليل static",
+            "تصحيح خطأ Method",
+            "أخرى"
+        ],
+        "Strings in Java": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "charAt": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "substring": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "equals": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "contains": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "StringBuilder كمفهوم": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "OOP in Java": [
+            "تصميم Class",
+            "إنشاء Object",
+            "كتابة Constructor",
+            "تطبيق Encapsulation",
+            "تحليل Inheritance",
+            "أخرى"
+        ],
+        "مفهوم OOP": [
+            "دراسة مفهوم OOP",
+            "تحليل مثال واقعي",
+            "رسم نموذج كائنات",
+            "مقارنة Procedural وOOP",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Class": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "Object": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "Constructor": [
+            "تصميم Class",
+            "إنشاء Object",
+            "كتابة Constructor",
+            "تطبيق Encapsulation",
+            "تحليل Inheritance",
+            "أخرى"
+        ],
+        "Method": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "Attribute": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "Encapsulation": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Inheritance": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Polymorphism": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Interface": [
+            "تصميم Class",
+            "إنشاء Object",
+            "كتابة Constructor",
+            "تطبيق Encapsulation",
+            "تحليل Inheritance",
+            "أخرى"
+        ],
+        "Classes and Objects": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "إنشاء كائن": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "العلاقة بين Class وObject": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "أمثلة واقعية": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "أخطاء إنشاء الكائنات": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "Exception Handling": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "catch": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Exception": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "رسالة الخطأ": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "منع توقف البرنامج": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "Collections Basics": [
+            "استخدام ArrayList",
+            "استخدام HashMap",
+            "اختيار Collection مناسبة",
+            "حل تمرين بيانات",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "ArrayList": [
+            "استخدام ArrayList",
+            "استخدام HashMap",
+            "اختيار Collection مناسبة",
+            "حل تمرين بيانات",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "HashMap": [
+            "استخدام ArrayList",
+            "استخدام HashMap",
+            "اختيار Collection مناسبة",
+            "حل تمرين بيانات",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "HashSet كمفهوم": [
+            "استخدام ArrayList",
+            "استخدام HashMap",
+            "اختيار Collection مناسبة",
+            "حل تمرين بيانات",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "إضافة عناصر": [
+            "استخدام ArrayList",
+            "استخدام HashMap",
+            "اختيار Collection مناسبة",
+            "حل تمرين بيانات",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "حذف عناصر": [
+            "استخدام ArrayList",
+            "استخدام HashMap",
+            "اختيار Collection مناسبة",
+            "حل تمرين بيانات",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "التكرار على Collection": [
+            "استخدام ArrayList",
+            "استخدام HashMap",
+            "اختيار Collection مناسبة",
+            "حل تمرين بيانات",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "اختيار Collection مناسبة": [
+            "استخدام ArrayList",
+            "استخدام HashMap",
+            "اختيار Collection مناسبة",
+            "حل تمرين بيانات",
+            "مراجعة الأخطاء",
+            "أخرى"
+        ],
+        "Files in Java": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "File class كمفهوم": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Scanner مع File": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Java Practice Projects": [
+            "تخطيط مشروع Java",
+            "تنفيذ Class",
+            "اختبار وظيفة",
+            "تحسين التصميم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "برنامج حساب درجات": [
+            "تخطيط مشروع Java",
+            "تنفيذ Class",
+            "اختبار وظيفة",
+            "تحسين التصميم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "برنامج إدارة طلاب": [
+            "تخطيط مشروع Java",
+            "تنفيذ Class",
+            "اختبار وظيفة",
+            "تحسين التصميم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "برنامج مكتبة بسيط": [
+            "تخطيط مشروع Java",
+            "تنفيذ Class",
+            "اختبار وظيفة",
+            "تحسين التصميم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "برنامج OOP": [
+            "تخطيط مشروع Java",
+            "تنفيذ Class",
+            "اختبار وظيفة",
+            "تحسين التصميم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "برنامج Collections": [
+            "تخطيط مشروع Java",
+            "تنفيذ Class",
+            "اختبار وظيفة",
+            "تحسين التصميم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "Java": [
+            "كتابة برنامج Java",
+            "تشغيل compile",
+            "تحليل main method",
+            "تصحيح خطأ بداية",
+            "اختبار قصير",
+            "تصميم Class",
+            "إنشاء Object",
+            "كتابة Constructor",
+            "تطبيق Encapsulation",
+            "تحليل Inheritance",
+            "كتابة Method",
+            "تحديد return type",
+            "تمرير parameters",
+            "تحليل static",
+            "تصحيح خطأ Method",
+            "استخدام ArrayList",
+            "استخدام HashMap",
+            "اختيار Collection مناسبة",
+            "حل تمرين بيانات",
+            "مراجعة الأخطاء",
+            "تخطيط مشروع Java",
+            "تنفيذ Class",
+            "اختبار وظيفة",
+            "تحسين التصميم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "JavaScript Basics": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "تشغيل JavaScript": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "console.log": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "ربط المفهوم بالمتصفح وNode كمفهوم": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Objects": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "مفهوم Object": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "key وvalue": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "properties": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "الوصول للخصائص": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "تعديل الخصائص": [
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "أخرى"
+        ],
+        "Strings in JavaScript": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "slice": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "includes": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "template literals": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "ES6 Basics": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "let وconst": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "arrow functions": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "destructuring كمفهوم": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "spread operator كمفهوم": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "modules كمفهوم": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Error Handling": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "throw كمفهوم": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "قراءة رسالة خطأ": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "ReferenceError": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "JavaScript Practice Projects": [
+            "تخطيط مشروع JS",
+            "تنفيذ منطق المشروع",
+            "اختبار المخرجات",
+            "تحسين الكود",
+            "توثيق الفكرة",
+            "أخرى"
+        ],
+        "آلة حاسبة بسيطة": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "برنامج قائمة مهام منطقي": [
+            "تخطيط مشروع JS",
+            "تنفيذ منطق المشروع",
+            "اختبار المخرجات",
+            "تحسين الكود",
+            "توثيق الفكرة",
+            "أخرى"
+        ],
+        "لعبة تخمين": [
+            "تخطيط مشروع JS",
+            "تنفيذ منطق المشروع",
+            "اختبار المخرجات",
+            "تحسين الكود",
+            "توثيق الفكرة",
+            "أخرى"
+        ],
+        "معالج نصوص بسيط": [
+            "تخطيط مشروع JS",
+            "تنفيذ منطق المشروع",
+            "اختبار المخرجات",
+            "تحسين الكود",
+            "توثيق الفكرة",
+            "أخرى"
+        ],
+        "برنامج عداد": [
+            "تخطيط مشروع JS",
+            "تنفيذ منطق المشروع",
+            "اختبار المخرجات",
+            "تحسين الكود",
+            "توثيق الفكرة",
+            "أخرى"
+        ],
+        "مشروع Arrays وObjects": [
+            "تخطيط مشروع JS",
+            "تنفيذ منطق المشروع",
+            "اختبار المخرجات",
+            "تحسين الكود",
+            "توثيق الفكرة",
+            "أخرى"
+        ],
+        "JavaScript": [
+            "كتابة كود JavaScript",
+            "استخدام console.log",
+            "تصحيح Syntax",
+            "تحليل ناتج كود",
+            "اختبار قصير",
+            "كتابة Function",
+            "كتابة Arrow Function",
+            "استخدام Return",
+            "تحليل Scope",
+            "تطبيق Callback كمفهوم",
+            "إنشاء Array أو Object",
+            "تعديل بيانات",
+            "استخدام map أو filter كمفهوم",
+            "حل تمرين بيانات",
+            "تصحيح خطأ",
+            "تخطيط مشروع JS",
+            "تنفيذ منطق المشروع",
+            "اختبار المخرجات",
+            "تحسين الكود",
+            "توثيق الفكرة",
+            "أخرى"
+        ],
+        "TypeScript Basics": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "مفهوم TypeScript": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "الفرق بين JavaScript وTypeScript": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "التحقق من الأنواع": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "تشغيل TypeScript": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "ملف ts": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "أخطاء TypeScript": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "Types": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "any": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "unknown كمفهوم": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "تحديد نوع المتغير": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "Functions in TypeScript": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "نوع Parameters": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "نوع Return": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "Optional Parameters": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "Default Parameters": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "Function Type كمفهوم": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "أخطاء الدوال": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "Objects and Interfaces": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "مفهوم Interface": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "تعريف شكل Object": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "خصائص إلزامية": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "خصائص اختيارية": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "استخدام Interface مع Function": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "Arrays and Tuples": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "Typed Arrays": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "Array of Objects": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "قراءة عناصر": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "تعديل عناصر": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "أخطاء نوع Array": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "Union Types": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "مفهوم Union": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "أكثر من نوع": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "التحقق قبل الاستخدام": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "استخدامه في الدوال": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "أخطاء Union": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "Type Aliases": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "مفهوم Type Alias": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "تعريف نوع مخصص": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "استخدامه مع Objects": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "استخدامه مع Union": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "مقارنة Type وInterface": [
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "Classes in TypeScript": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "public": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "private": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "readonly كمفهوم": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "implements interface": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "Generics Basics": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "مفهوم Generic": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "دالة عامة": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "نوع مرن": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "Generic Array": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "فائدة Generics": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "حدود الأساسيات": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "TypeScript Practice": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "تحويل كود JS إلى TS": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "تصحيح Type Errors": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "كتابة Interface": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "كتابة Function typed": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "بناء نموذج بيانات": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "أخرى"
+        ],
+        "TypeScript": [
+            "دراسة TypeScript",
+            "إضافة Types للكود",
+            "تحليل Type Error",
+            "تصحيح نوع متغير",
+            "مقارنة JS وTS",
+            "تعريف Interface",
+            "تعريف Type Alias",
+            "تحليل Object shape",
+            "مقارنة Type وInterface",
+            "تطبيق عملي",
+            "أخرى"
+        ],
+        "OOP Concepts": [
+            "دراسة مفهوم OOP",
+            "تحليل مثال واقعي",
+            "رسم نموذج كائنات",
+            "مقارنة Procedural وOOP",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "لماذا نستخدم OOP": [
+            "دراسة مفهوم OOP",
+            "تحليل مثال واقعي",
+            "رسم نموذج كائنات",
+            "مقارنة Procedural وOOP",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "النمذجة بالكائنات": [
+            "دراسة مفهوم OOP",
+            "تحليل مثال واقعي",
+            "رسم نموذج كائنات",
+            "مقارنة Procedural وOOP",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "تقسيم المسؤوليات": [
+            "دراسة مفهوم OOP",
+            "تحليل مثال واقعي",
+            "رسم نموذج كائنات",
+            "مقارنة Procedural وOOP",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "إعادة استخدام الكود": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "أخطاء فهم OOP": [
+            "دراسة مفهوم OOP",
+            "تحليل مثال واقعي",
+            "رسم نموذج كائنات",
+            "مقارنة Procedural وOOP",
+            "اختبار قصير",
+            "أخرى"
+        ],
+        "Attributes and Methods": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "الفرق بين البيانات والسلوك": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "تعديل Attribute": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "استدعاء Method": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "تنظيم الكائن": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "Constructors": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "مفهوم Constructor": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "تهيئة الكائن": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "Parameters داخل Constructor": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "Constructor افتراضي": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "أخطاء Constructor": [
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "أخرى"
+        ],
+        "مفهوم Encapsulation": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "إخفاء التفاصيل": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "حماية البيانات": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Getters and Setters كمفهوم": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "تقليل الوصول المباشر": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "مفهوم Inheritance": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Parent Class": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Child Class": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "توسيع السلوك": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "أخطاء الوراثة": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "مفهوم Polymorphism": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "نفس الواجهة بسلوك مختلف": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Override كمفهوم": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "استخدامه في التصميم": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "أمثلة تطبيقية": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Abstraction": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "مفهوم Abstraction": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "إخفاء التعقيد": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "إظهار المهم فقط": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Abstract Class كمفهوم": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "تصميم واجهة بسيطة": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "Interfaces": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "عقد برمجي": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "تحديد السلوك المطلوب": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "فصل التنفيذ عن التعريف": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "استخدامات Interface": [
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "أخرى"
+        ],
+        "OOP Design Practice": [
+            "تصميم أصناف",
+            "رسم علاقات",
+            "تحديد مسؤوليات",
+            "كتابة كود تطبيقي",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "تصميم كائن طالب": [
+            "تصميم أصناف",
+            "رسم علاقات",
+            "تحديد مسؤوليات",
+            "كتابة كود تطبيقي",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "تصميم كائن منتج": [
+            "تصميم أصناف",
+            "رسم علاقات",
+            "تحديد مسؤوليات",
+            "كتابة كود تطبيقي",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "تصميم كائن حساب بنكي تعليمي": [
+            "تصميم أصناف",
+            "رسم علاقات",
+            "تحديد مسؤوليات",
+            "كتابة كود تطبيقي",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "تصميم نظام مكتبة بسيط": [
+            "تصميم أصناف",
+            "رسم علاقات",
+            "تحديد مسؤوليات",
+            "كتابة كود تطبيقي",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "تحليل مسؤوليات الأصناف": [
+            "تصميم أصناف",
+            "رسم علاقات",
+            "تحديد مسؤوليات",
+            "كتابة كود تطبيقي",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "Object-Oriented Programming": [
+            "دراسة مفهوم OOP",
+            "تحليل مثال واقعي",
+            "رسم نموذج كائنات",
+            "مقارنة Procedural وOOP",
+            "اختبار قصير",
+            "كتابة Class",
+            "إنشاء Object",
+            "تحديد الخصائص",
+            "استدعاء Method",
+            "تصحيح خطأ كائن",
+            "تحليل مفهوم OOP متقدم",
+            "كتابة مثال بسيط",
+            "مقارنة تصميمين",
+            "تصحيح استخدام خاطئ",
+            "حل تمرين تطبيقي",
+            "تصميم أصناف",
+            "رسم علاقات",
+            "تحديد مسؤوليات",
+            "كتابة كود تطبيقي",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "Debugging Basics": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "مفهوم Debugging": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "إعادة إنتاج الخطأ": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "عزل المشكلة": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "تتبع التنفيذ": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "تجربة إصلاح": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "اختبار بعد الإصلاح": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "Reading Error Messages": [
+            "قراءة رسالة خطأ",
+            "تحديد نوع الخطأ",
+            "تحديد السطر",
+            "اقتراح سبب",
+            "البحث عن معنى الخطأ",
+            "أخرى"
+        ],
+        "نوع الخطأ": [
+            "قراءة رسالة خطأ",
+            "تحديد نوع الخطأ",
+            "تحديد السطر",
+            "اقتراح سبب",
+            "البحث عن معنى الخطأ",
+            "أخرى"
+        ],
+        "مكان الخطأ": [
+            "قراءة رسالة خطأ",
+            "تحديد نوع الخطأ",
+            "تحديد السطر",
+            "اقتراح سبب",
+            "البحث عن معنى الخطأ",
+            "أخرى"
+        ],
+        "السطر المسبب": [
+            "قراءة رسالة خطأ",
+            "تحديد نوع الخطأ",
+            "تحديد السطر",
+            "اقتراح سبب",
+            "البحث عن معنى الخطأ",
+            "أخرى"
+        ],
+        "Traceback كمفهوم": [
+            "قراءة رسالة خطأ",
+            "تحديد نوع الخطأ",
+            "تحديد السطر",
+            "اقتراح سبب",
+            "البحث عن معنى الخطأ",
+            "أخرى"
+        ],
+        "رسالة السبب": [
+            "قراءة رسالة خطأ",
+            "تحديد نوع الخطأ",
+            "تحديد السطر",
+            "اقتراح سبب",
+            "البحث عن معنى الخطأ",
+            "أخرى"
+        ],
+        "البحث عن معنى الخطأ": [
+            "قراءة رسالة خطأ",
+            "تحديد نوع الخطأ",
+            "تحديد السطر",
+            "اقتراح سبب",
+            "البحث عن معنى الخطأ",
+            "أخرى"
+        ],
+        "Syntax Errors": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "أقواس ناقصة": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "فاصلة ناقصة": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "خطأ مسافات": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "كتابة كلمة محجوزة خطأ": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "خطأ indentation": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "Runtime Errors": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "قسمة على صفر": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "ملف غير موجود": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "نوع بيانات غير مناسب": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "فهرس خارج النطاق": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "استدعاء شيء غير موجود": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "Logic Errors": [
+            "تتبع كود",
+            "إنشاء Test Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "تصحيح منطق",
+            "مراجعة الحل",
+            "أخرى"
+        ],
+        "ناتج غير صحيح": [
+            "تتبع كود",
+            "إنشاء Test Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "تصحيح منطق",
+            "مراجعة الحل",
+            "أخرى"
+        ],
+        "شرط خاطئ": [
+            "تتبع كود",
+            "إنشاء Test Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "تصحيح منطق",
+            "مراجعة الحل",
+            "أخرى"
+        ],
+        "حلقة زائدة": [
+            "تتبع كود",
+            "إنشاء Test Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "تصحيح منطق",
+            "مراجعة الحل",
+            "أخرى"
+        ],
+        "ترتيب خطوات خاطئ": [
+            "تتبع كود",
+            "إنشاء Test Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "تصحيح منطق",
+            "مراجعة الحل",
+            "أخرى"
+        ],
+        "حساب غير دقيق": [
+            "تتبع كود",
+            "إنشاء Test Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "تصحيح منطق",
+            "مراجعة الحل",
+            "أخرى"
+        ],
+        "اختبار يكشف الخطأ": [
+            "تتبع كود",
+            "إنشاء Test Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "تصحيح منطق",
+            "مراجعة الحل",
+            "أخرى"
+        ],
+        "Exception Handling Basics": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "except أو catch": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "معالجة إدخال خاطئ": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "رسالة خطأ واضحة": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "أخطاء المعالجة الزائدة": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "Code Tracing for Debugging": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "جدول تتبع": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "تتبع متغير": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "تتبع شرط": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "تتبع حلقة": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "تتبع دالة": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "اكتشاف مكان الخلل": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "أخرى"
+        ],
+        "Clean Code Basics": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "أسماء واضحة": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "دوال قصيرة": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "تجنب التكرار": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "تقليل التعقيد": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "تعليقات مفيدة": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "تنظيم منطقي": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "Naming and Style": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "تسمية المتغيرات": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "تسمية الدوال": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "اتساق الأسلوب": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "تجنب الاختصارات الغامضة": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "اتباع نمط اللغة": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "Refactoring Basics": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "تحسين الكود دون تغيير السلوك": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "تقسيم دالة طويلة": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "إزالة تكرار": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "تبسيط شرط": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "تحسين أسماء": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "اختبار بعد التعديل": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "Code Review Basics": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "قراءة كود شخص آخر": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "اكتشاف خطأ": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "اقتراح تحسين": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "مراجعة الوضوح": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "مراجعة الحالات الخاصة": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "كتابة ملاحظات Review": [
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "أخرى"
+        ],
+        "Personal Error Log": [
+            "تسجيل خطأ جديد",
+            "تصنيف الخطأ",
+            "كتابة الحل",
+            "مراجعة أخطاء الأسبوع",
+            "بناء خطة علاج",
+            "أخرى"
+        ],
+        "تسجيل الأخطاء المتكررة": [
+            "تسجيل خطأ جديد",
+            "تصنيف الخطأ",
+            "كتابة الحل",
+            "مراجعة أخطاء الأسبوع",
+            "بناء خطة علاج",
+            "أخرى"
+        ],
+        "طريقة الحل": [
+            "تسجيل خطأ جديد",
+            "تصنيف الخطأ",
+            "كتابة الحل",
+            "مراجعة أخطاء الأسبوع",
+            "بناء خطة علاج",
+            "أخرى"
+        ],
+        "الدرس المستفاد": [
+            "تسجيل خطأ جديد",
+            "تصنيف الخطأ",
+            "كتابة الحل",
+            "مراجعة أخطاء الأسبوع",
+            "بناء خطة علاج",
+            "أخرى"
+        ],
+        "مراجعة الأخطاء أسبوعياً": [
+            "تسجيل خطأ جديد",
+            "تصنيف الخطأ",
+            "كتابة الحل",
+            "مراجعة أخطاء الأسبوع",
+            "بناء خطة علاج",
+            "أخرى"
+        ],
+        "تقليل تكرار الخطأ": [
+            "تسجيل خطأ جديد",
+            "تصنيف الخطأ",
+            "كتابة الحل",
+            "مراجعة أخطاء الأسبوع",
+            "بناء خطة علاج",
+            "أخرى"
+        ],
+        "Debugging and Code Quality Basics": [
+            "تحليل خطأ",
+            "إعادة إنتاج Bug",
+            "عزل سبب المشكلة",
+            "تصحيح كود",
+            "اختبار بعد الإصلاح",
+            "كتابة تقرير خطأ",
+            "قراءة رسالة خطأ",
+            "تحديد نوع الخطأ",
+            "تحديد السطر",
+            "اقتراح سبب",
+            "البحث عن معنى الخطأ",
+            "تتبع كود",
+            "إنشاء Test Case",
+            "مقارنة الناتج المتوقع والفعلي",
+            "تصحيح منطق",
+            "مراجعة الحل",
+            "تحسين أسماء",
+            "تقسيم كود",
+            "إزالة تكرار",
+            "تبسيط شرط",
+            "مراجعة جودة الكود",
+            "تسجيل خطأ جديد",
+            "تصنيف الخطأ",
+            "كتابة الحل",
+            "مراجعة أخطاء الأسبوع",
+            "بناء خطة علاج",
+            "أخرى"
+        ],
+        "Project Planning Basics": [
+            "تحديد فكرة مشروع",
+            "كتابة متطلبات بسيطة",
+            "تقسيم المشروع إلى مهام",
+            "تحديد نسخة أولى",
+            "ترتيب الأولويات",
+            "أخرى"
+        ],
+        "اختيار فكرة مشروع": [
+            "تحديد فكرة مشروع",
+            "كتابة متطلبات بسيطة",
+            "تقسيم المشروع إلى مهام",
+            "تحديد نسخة أولى",
+            "ترتيب الأولويات",
+            "أخرى"
+        ],
+        "تحديد الهدف": [
+            "تحديد فكرة مشروع",
+            "كتابة متطلبات بسيطة",
+            "تقسيم المشروع إلى مهام",
+            "تحديد نسخة أولى",
+            "ترتيب الأولويات",
+            "أخرى"
+        ],
+        "تحديد المدخلات والمخرجات": [
+            "تحديد فكرة مشروع",
+            "كتابة متطلبات بسيطة",
+            "تقسيم المشروع إلى مهام",
+            "تحديد نسخة أولى",
+            "ترتيب الأولويات",
+            "أخرى"
+        ],
+        "تقسيم المشروع إلى مهام": [
+            "تحديد فكرة مشروع",
+            "كتابة متطلبات بسيطة",
+            "تقسيم المشروع إلى مهام",
+            "تحديد نسخة أولى",
+            "ترتيب الأولويات",
+            "أخرى"
+        ],
+        "ترتيب الأولويات": [
+            "تحديد فكرة مشروع",
+            "كتابة متطلبات بسيطة",
+            "تقسيم المشروع إلى مهام",
+            "تحديد نسخة أولى",
+            "ترتيب الأولويات",
+            "أخرى"
+        ],
+        "تحديد نسخة أولى بسيطة": [
+            "تحديد فكرة مشروع",
+            "كتابة متطلبات بسيطة",
+            "تقسيم المشروع إلى مهام",
+            "تحديد نسخة أولى",
+            "ترتيب الأولويات",
+            "أخرى"
+        ],
+        "Console Applications": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "برنامج تفاعلي بسيط": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "قائمة خيارات": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "قراءة إدخال المستخدم": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "تنفيذ أوامر": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "إظهار نتيجة": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "التعامل مع إدخال خاطئ": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "Calculator Projects": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "عمليات متعددة": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "قائمة اختيار عملية": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "معالجة قسمة على صفر": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "تحسين الإخراج": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "اختبار العمليات": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "Text Processing Projects": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "عد الكلمات": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "عد الحروف": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "تنظيف نص": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "البحث داخل نص": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "استبدال كلمات": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "تلخيص إحصاءات نصية بسيطة": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "File-based Projects": [
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "أخرى"
+        ],
+        "تعديل محتوى ملف": [
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "أخرى"
+        ],
+        "حفظ نتائج": [
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "أخرى"
+        ],
+        "قراءة أسطر": [
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "أخرى"
+        ],
+        "معالجة أخطاء الملفات": [
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "أخرى"
+        ],
+        "Student Management Projects": [
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "أخرى"
+        ],
+        "إضافة طالب": [
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "أخرى"
+        ],
+        "عرض الطلاب": [
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "أخرى"
+        ],
+        "البحث عن طالب": [
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "أخرى"
+        ],
+        "تعديل بيانات": [
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "أخرى"
+        ],
+        "حذف طالب": [
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "أخرى"
+        ],
+        "حساب متوسط درجات": [
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "أخرى"
+        ],
+        "Games for Beginners": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "لعبة أسئلة قصيرة": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "لعبة حجر ورقة مقص": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "نظام نقاط": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "إعادة اللعب": [
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "أخرى"
+        ],
+        "OOP Mini Projects": [
+            "تصميم Classes",
+            "تحديد Attributes وMethods",
+            "إنشاء Objects",
+            "اختبار العلاقات",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "نظام مكتبة بسيط": [
+            "تصميم Classes",
+            "تحديد Attributes وMethods",
+            "إنشاء Objects",
+            "اختبار العلاقات",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "حساب بنكي تعليمي": [
+            "تصميم Classes",
+            "تحديد Attributes وMethods",
+            "إنشاء Objects",
+            "اختبار العلاقات",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "إدارة منتجات": [
+            "تصميم Classes",
+            "تحديد Attributes وMethods",
+            "إنشاء Objects",
+            "اختبار العلاقات",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "إدارة مهام": [
+            "تصميم Classes",
+            "تحديد Attributes وMethods",
+            "إنشاء Objects",
+            "اختبار العلاقات",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "تصميم Classes": [
+            "تصميم Classes",
+            "تحديد Attributes وMethods",
+            "إنشاء Objects",
+            "اختبار العلاقات",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "ربط Objects": [
+            "تصميم Classes",
+            "تحديد Attributes وMethods",
+            "إنشاء Objects",
+            "اختبار العلاقات",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "Multi-language Practice": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "تنفيذ نفس المشروع بـ Python": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "تنفيذ نفس المشروع بـ C": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "تنفيذ نفس المشروع بـ C++": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "تنفيذ نفس المشروع بـ Java": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "مقارنة الحلول": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "تحليل اختلاف اللغة": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "Project Testing Basics": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "اختبار الميزة": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "اختبار إدخال خاطئ": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "اختبار حالة خاصة": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "اختبار بعد تعديل": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "تسجيل الأخطاء": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "تحسين بناء على الاختبار": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "Project Documentation Basics": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "وصف المشروع": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "طريقة التشغيل": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "شرح الميزات": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "كتابة أمثلة استخدام": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "تسجيل القيود": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "كتابة ملاحظات تطوير لاحق": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "Project Improvement": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "تحسين الواجهة النصية": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "تقسيم الكود إلى دوال": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "إضافة ميزة": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "تحسين التعامل مع الأخطاء": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "تنظيف الكود": [
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "أخرى"
+        ],
+        "Small Programming Projects": [
+            "تحديد فكرة مشروع",
+            "كتابة متطلبات بسيطة",
+            "تقسيم المشروع إلى مهام",
+            "تحديد نسخة أولى",
+            "ترتيب الأولويات",
+            "بناء مشروع صغير",
+            "تنفيذ ميزة",
+            "اختبار إدخال",
+            "تصحيح خطأ",
+            "تحسين تجربة المستخدم",
+            "توثيق المشروع",
+            "كتابة README بسيط",
+            "شرح طريقة التشغيل",
+            "إضافة أمثلة",
+            "تحسين الكود",
+            "تسجيل التحسينات القادمة",
+            "تصميم بيانات المشروع",
+            "كتابة عمليات إضافة وعرض",
+            "اختبار الحفظ والقراءة",
+            "معالجة أخطاء الملفات",
+            "تحسين التنظيم",
+            "تصميم Classes",
+            "تحديد Attributes وMethods",
+            "إنشاء Objects",
+            "اختبار العلاقات",
+            "مراجعة التصميم",
+            "أخرى"
+        ],
+        "موضوع مخصص في البرمجة والتكنولوجيا": [
+            "دراسة مفهوم مخصص",
+            "تحليل كود مخصص",
+            "تطبيق عملي مخصص",
+            "مراجعة مخصصة",
+            "أخرى"
+        ],
+        "تدريب مخصص في البرمجة والتكنولوجيا": [
+            "تدريب مخصص",
+            "حل تمرين مخصص",
+            "مراجعة أخطاء مخصصة",
+            "أخرى"
+        ],
+        "أخرى": [
+            "نشاط مخصص",
+            "تحليل موضوع مخصص",
+            "تطبيق عملي مخصص",
+            "مراجعة مخصصة",
+            "أخرى"
+        ]
+    }
+};
+
+    // استبدال بنك البرمجة والتكنولوجيا الحالي بالجزء الأول الجديد فقط، دون تغيير الحقول أو التصميم.
+    root["البرمجة والتكنولوجيا"] = programmingTechnologyPart1;
+
+    window.EDUPATH_TASKS_PROGRAMMING_TECHNOLOGY_PART1_REBUILT_V55117 = true;
+})();
+// === End EduPath AI v5.5.117: Rebuild Programming and Technology Part 1 ===
