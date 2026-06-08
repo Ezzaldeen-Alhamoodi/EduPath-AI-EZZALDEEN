@@ -8224,3 +8224,30 @@ small.hint {
     direction: ltr;
     text-align: center;
 }
+
+
+
+/* EduPath AI v5.5.93 Native Arabic Profile */
+.profile-hero-ar-v5593,
+.profile-grid-ar-v5593,
+.profile-grid-ar-v5593 .card,
+.profile-grid-ar-v5593 form,
+.paid-profile-card-v478 {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.profile-grid-ar-v5593 input {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.profile-hero-ar-v5593 p,
+.profile-grid-ar-v5593 .muted,
+.profile-grid-ar-v5593 .improved {
+    line-height: 1.8;
+}
+
+.profile-stats-ar-v5593 h3 {
+    line-height: 1.5;
+}

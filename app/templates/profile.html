@@ -1,81 +1,85 @@
-\
 {% extends "base.html" %}
-{% block page_title %}Profile{% endblock %}
+{% block page_title %}الملف الشخصي{% endblock %}
 {% block content %}
 
-<section class="hero compact">
+<section class="hero compact profile-hero-ar-v5593">
     <div>
-        <span class="tag">Private Profile</span>
+        <span class="tag">الملف الشخصي الخاص</span>
         <h2>👤 {{ current_user.name }}</h2>
         <p>{{ current_user.email }}</p>
-        {% if current_user.email_verified %}<span class="tag verified">✅ Email verified</span>{% else %}<a class="button ghost" href="{{ url_for('resend_verification') }}">📩 Verify Email</a>{% endif %}
+        {% if current_user.email_verified %}
+            <span class="tag verified">✅ البريد الإلكتروني مؤكد</span>
+        {% else %}
+            <a class="button ghost" href="{{ url_for('resend_verification') }}">📩 تأكيد البريد الإلكتروني</a>
+        {% endif %}
     </div>
-    <a class="button light" href="{{ url_for('logout') }}">🚪 Logout</a>
+    <a class="button light" href="{{ url_for('logout') }}">🚪 تسجيل الخروج</a>
 </section>
 
-<section class="stats-grid">
-    <div class="stat-card blue"><span>◎</span><h3>Your Goals</h3><p>{{ total_goals }}{% if goal_limit is not none %}/{{ goal_limit }}{% endif %}</p></div>
-    <div class="stat-card purple"><span>▣</span><h3>Your Tasks</h3><p>{{ total_tasks }}{% if task_limit is not none %}/{{ task_limit }}{% endif %}</p></div>
-    <div class="stat-card green"><span>✓</span><h3>Completed</h3><p>{{ completed_tasks }}</p></div>
-    <div class="stat-card orange"><span>✦</span><h3>AI Today</h3><p>{{ ai_used_today }}{% if ai_limit is not none %}/{{ ai_limit }}{% else %}/∞{% endif %}</p></div>
+<section class="stats-grid profile-stats-ar-v5593">
+    <div class="stat-card blue"><span>◎</span><h3>أهدافك</h3><p>{{ total_goals }}{% if goal_limit is not none %}/{{ goal_limit }}{% endif %}</p></div>
+    <div class="stat-card purple"><span>▣</span><h3>مهامك</h3><p>{{ total_tasks }}{% if task_limit is not none %}/{{ task_limit }}{% endif %}</p></div>
+    <div class="stat-card green"><span>✓</span><h3>المهام المكتملة</h3><p>{{ completed_tasks }}</p></div>
+    <div class="stat-card orange"><span>✦</span><h3>استخدام الذكاء اليوم</h3><p>{{ ai_used_today }}{% if ai_limit is not none %}/{{ ai_limit }}{% else %}/∞{% endif %}</p></div>
 </section>
 
-<section class="grid-2">
+<section class="grid-2 profile-grid-ar-v5593">
     <div class="card">
-        <h2>✏️ Edit Profile</h2>
+        <h2>✏️ تعديل الملف الشخصي</h2>
         <form method="POST" class="form">
             <input type="hidden" name="form_action" value="profile">
-            <label>Name</label>
-            <input name="name" value="{{ current_user.name }}">
 
-            <label>Country</label>
-            <input name="country" value="{{ current_user.country or '' }}" placeholder="Example: Yemen">
+            <label>الاسم</label>
+            <input name="name" value="{{ current_user.name }}" placeholder="اكتب اسمك">
 
-            <label>Major</label>
-            <input name="major" value="{{ current_user.major or '' }}" placeholder="Example: Computer Science">
+            <label>الدولة</label>
+            <input name="country" value="{{ current_user.country or '' }}" placeholder="مثال: اليمن">
 
-            <label>Target Degree</label>
-            <input name="target_degree" value="{{ current_user.target_degree or '' }}" placeholder="Example: Bachelor">
+            <label>التخصص</label>
+            <input name="major" value="{{ current_user.major or '' }}" placeholder="مثال: علوم الحاسوب">
 
-            <label>Languages</label>
-            <input name="languages" value="{{ current_user.languages or '' }}" placeholder="English, Chinese, Russian">
+            <label>الدرجة المستهدفة</label>
+            <input name="target_degree" value="{{ current_user.target_degree or '' }}" placeholder="مثال: بكالوريوس">
 
-            <button type="submit">💾 Save Profile</button>
+            <label>اللغات</label>
+            <input name="languages" value="{{ current_user.languages or '' }}" placeholder="مثال: العربية، الإنجليزية، الصينية">
+
+            <button type="submit">💾 حفظ الملف الشخصي</button>
         </form>
     </div>
 
     <div class="card paid-profile-card-v478">
-        <h2>Paid Version</h2>
+        <h2>النسخة المدفوعة</h2>
         {% if current_user.paid_active %}
-            <p class="improved">Your paid version is active. You now have higher limits for tasks, goals, and AI Coach.</p>
+            <p class="improved">النسخة المدفوعة مفعّلة لديك. أصبحت حدود المهام والأهداف ومدرب الذكاء الاصطناعي أعلى.</p>
             <div class="paid-status-grid-v479">
-                <span>Days left: <b>{{ paid_days_left }}</b></span>
+                <span>الأيام المتبقية: <b>{{ paid_days_left }}</b></span>
                 {% if current_user.subscription_expires_at %}
-                    <span>Expires: <b>{{ current_user.subscription_expires_at.strftime("%Y-%m-%d") }}</b></span>
+                    <span>ينتهي الاشتراك في: <b>{{ current_user.subscription_expires_at.strftime("%Y-%m-%d") }}</b></span>
                 {% endif %}
             </div>
             {% if current_user.paid_activated_at %}
-                <p class="muted">Activated at: {{ current_user.paid_activated_at.strftime("%Y-%m-%d") }}</p>
+                <p class="muted">تاريخ التفعيل: {{ current_user.paid_activated_at.strftime("%Y-%m-%d") }}</p>
             {% endif %}
         {% else %}
-            <p class="muted">If you received a subscription code from EduPath AI administration, enter it here. Each code can be used once only, and the subscription duration starts from activation.</p>
+            <p class="muted">إذا حصلت على رمز اشتراك من إدارة EduPath AI، أدخله هنا. يمكن استخدام كل رمز مرة واحدة فقط، وتبدأ مدة الاشتراك من وقت التفعيل.</p>
             <form method="POST" class="form compact-paid-form-v478">
                 <input type="hidden" name="form_action" value="activate_paid">
-                <label>Subscription Code</label>
-                <input name="subscription_code" placeholder="Example: EDU-ABC123-XYZ789" autocomplete="off">
-                <button type="submit">Activate Paid Version</button>
+                <label>رمز الاشتراك</label>
+                <input name="subscription_code" placeholder="مثال: EDU-ABC123-XYZ789" autocomplete="off">
+                <button type="submit">تفعيل النسخة المدفوعة</button>
             </form>
         {% endif %}
     </div>
 
     <div class="card">
-        <h2>Privacy</h2>
+        <h2>الخصوصية</h2>
         <p class="improved">
-            Your goals, tasks, scholarship plans, coding notes, and interview answers are linked to your account only.
-            Other users cannot see or edit your data.
+            أهدافك ومهامك وخطط المنح وملاحظات البرمجة وإجابات التدريب مرتبطة بحسابك فقط.
+            لا يستطيع أي مستخدم آخر رؤية بياناتك أو تعديلها.
         </p>
         <p class="muted">
-            Platform name remains EduPath AI EZZALDEEN, while each student has a separate private workspace.
+            يبقى اسم المنصة EduPath AI EZZALDEEN، بينما يمتلك كل مستخدم مساحة خاصة منفصلة داخل التطبيق.
         </p>
     </div>
 </section>

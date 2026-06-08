@@ -629,26 +629,26 @@ def record_subscription_attempt(user, code, success):
 def activate_subscription_code_for_user(user, raw_code):
     code_value = (raw_code or "").strip().upper()
     if too_many_subscription_attempts(user):
-        return False, "Too many failed activation attempts. Please try again later."
+        return False, "تمت محاولات تفعيل كثيرة غير ناجحة. يرجى المحاولة لاحقاً."
 
     if getattr(user, "paid_active", False) and user.subscription_expires_at and datetime.utcnow() < user.subscription_expires_at:
-        return False, "You already have an active paid subscription."
+        return False, "لديك اشتراك مدفوع نشط بالفعل."
 
     subscription_code = SubscriptionCode.query.filter_by(code=code_value).first()
     if not subscription_code:
         record_subscription_attempt(user, code_value, False)
         db.session.commit()
-        return False, "Invalid subscription code."
+        return False, "رمز الاشتراك غير صالح."
 
     if subscription_code.is_cancelled:
         record_subscription_attempt(user, code_value, False)
         db.session.commit()
-        return False, "This subscription code has been cancelled."
+        return False, "تم إلغاء رمز الاشتراك هذا."
 
     if subscription_code.is_used:
         record_subscription_attempt(user, code_value, False)
         db.session.commit()
-        return False, "This subscription code has already been used."
+        return False, "تم استخدام رمز الاشتراك هذا من قبل."
 
     now = datetime.utcnow()
     subscription_code.is_used = True
@@ -662,7 +662,7 @@ def activate_subscription_code_for_user(user, raw_code):
 
     record_subscription_attempt(user, code_value, True)
     db.session.commit()
-    return True, f"Paid version activated successfully for {subscription_code.duration_days} days."
+    return True, f"تم تفعيل النسخة المدفوعة بنجاح لمدة {subscription_code.duration_days} يوم."
 
 
 def user_has_unlimited_access(user):
@@ -692,14 +692,14 @@ def user_ai_limit(user):
 
 def limit_upgrade_message(section_name):
     return (
-        f"You have reached the allowed {section_name} limit for your current plan. "
-        "To use more, please contact EduPath AI administration to subscribe to the paid version."
+        f"لقد وصلت إلى الحد المسموح به في {section_name} ضمن خطتك الحالية. "
+        "لاستخدام المزيد، يرجى التواصل مع إدارة EduPath AI للاشتراك في النسخة المدفوعة."
     )
 
 
 def ai_usage_status(user, tool_name="general"):
     if user_has_unlimited_access(user):
-        return {"allowed": True, "used": 0, "limit": "unlimited"}
+        return {"allowed": True, "used": 0, "limit": "بلا حدود"}
 
     if not getattr(user, "ai_enabled", True):
         return {"allowed": False, "used": 0, "limit": 0}
@@ -2799,7 +2799,7 @@ def create_app():
             current_user.target_degree = request.form.get("target_degree", "").strip()
             current_user.languages = request.form.get("languages", "").strip()
             db.session.commit()
-            flash("Profile updated.", "success")
+            flash("تم تحديث الملف الشخصي بنجاح.", "success")
             return redirect(url_for("profile"))
 
         total_goals = Goal.query.filter_by(user_id=current_user.id).count()
