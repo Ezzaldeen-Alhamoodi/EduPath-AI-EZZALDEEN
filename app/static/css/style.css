@@ -8338,3 +8338,91 @@ small.hint {
         min-width: 64px !important;
     }
 }
+
+
+/* EduPath AI v5.5.132 Home readability, desktop sidebar spacing, and clean centered mobile logo */
+.dashboard-ar-v513,
+.dashboard-ar-v513 p,
+.dashboard-ar-v513 span,
+.dashboard-ar-v513 small,
+.dashboard-ar-v513 strong,
+.dashboard-ar-v513 a,
+.dashboard-ar-v513 h1,
+.dashboard-ar-v513 h2,
+.dashboard-ar-v513 h3,
+.dashboard-ar-v513 .button,
+.dashboard-ar-v513 .small-button,
+.dashboard-ar-v513 .stat-card,
+.dashboard-ar-v513 .task-mini,
+.dashboard-ar-v513 .goal-tile {
+    font-weight: 600;
+}
+
+.dashboard-ar-v513 h1,
+.dashboard-ar-v513 h2,
+.dashboard-ar-v513 h3,
+.dashboard-ar-v513 .home-tag-ar-v513,
+.dashboard-ar-v513 .stat-card p,
+.dashboard-ar-v513 .section-title-row h2,
+.dashboard-ar-v513 .task-mini strong,
+.dashboard-ar-v513 .goal-tile strong {
+    font-weight: 800;
+}
+
+.dashboard-ar-v513 .muted,
+.dashboard-ar-v513 .home-hero-text-ar-v513 p,
+.dashboard-ar-v513 .home-progress-ar-v513 small {
+    font-weight: 500;
+}
+
+@media (min-width: 981px) {
+    .desktop-icon-nav-v483 a {
+        grid-template-columns: 38px 1fr !important;
+        column-gap: 12px !important;
+        gap: 12px !important;
+        font-weight: 900 !important;
+    }
+
+    .desktop-icon-nav-v483 i {
+        margin-inline-end: 0 !important;
+        flex-shrink: 0 !important;
+    }
+}
+
+.logo,
+.mobile-app-logo,
+.logo-link,
+.brand-block {
+    background: transparent !important;
+}
+
+.logo,
+.mobile-app-logo img {
+    object-fit: contain !important;
+}
+
+@media (max-width: 900px) {
+    .mobile-app-header {
+        grid-template-columns: 1fr !important;
+        justify-items: center !important;
+        align-items: center !important;
+        padding: 8px 16px 6px !important;
+    }
+
+    .mobile-app-logo {
+        justify-self: center !important;
+        margin-inline: auto !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+
+    .mobile-app-logo img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+}
