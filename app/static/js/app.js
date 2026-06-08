@@ -1194,6 +1194,7 @@ function smartGoalCanonicalTypeV558(value) {
         "اللغات": "Language",
         "الاختبارات الدولية": "Exam / Certificate",
         "البرمجة والتقنية": "Programming & Technology",
+        "البرمجة والتكنولوجيا": "Programming & Technology",
         "الذكاء الاصطناعي": "Artificial Intelligence",
         "المنح الدراسية": "Scholarship",
         "الجامعة": "University",
@@ -15761,3 +15762,11 @@ applyDeepLanguageTaskConfigV531();
 
 
 
+
+// === EduPath AI v5.5.122: Restore Goals Programming & Technology Type Option ===
+(function eduPathRestoreProgrammingTechnologyGoalTypeV55122() {
+    if (typeof window !== "undefined") {
+        window.EDUPATH_GOALS_PROGRAMMING_TECH_TYPE_OPTION_V55122 = true;
+    }
+})();
+// === End EduPath AI v5.5.122: Restore Goals Programming & Technology Type Option ===
