@@ -16863,3 +16863,803 @@ applyDeepLanguageTaskConfigV531();
     }
 })();
 // === End EduPath AI v5.5.121: Goals - Programming & Technology Bank Part 2 ===
+
+// === EduPath AI v5.5.122: Goals - Programming & Technology Bank Part 3 ===
+(function applyProgrammingTechnologyGoalsPart3V55122() {
+    const programmingTechnologyBankPart3V55122 = {
+    "categories": [
+        "Computer Systems",
+        "Operating Systems",
+        "Linux",
+        "Shell and Bash",
+        "Networking",
+        "Cloud Computing",
+        "Containers and Docker",
+        "DevOps and CI/CD",
+        "Monitoring and Logging",
+        "Performance and Scalability",
+        "Secure Coding Basics",
+        "Data Structures",
+        "Algorithms",
+        "Advanced Problem Solving",
+        "System Design Basics",
+        "Advanced Technical Projects",
+        "أخرى"
+    ],
+    "paths": {
+        "Computer Systems": [
+            "فهم أساسيات أنظمة الحاسوب",
+            "فهم العلاقة بين Hardware and Software",
+            "فهم CPU ودوره في تشغيل البرامج",
+            "فهم Memory واستهلاك الموارد",
+            "فهم Storage والملفات",
+            "فهم Input and Output Operations",
+            "فهم كيف تعمل البرامج داخل الحاسوب",
+            "فهم Binary and Data Representation",
+            "فهم System Resources",
+            "فهم Computer Performance Basics",
+            "بناء أساس تقني لفهم الأنظمة والتطبيقات",
+            "أخرى"
+        ],
+        "Operating Systems": [
+            "فهم أساسيات Operating Systems",
+            "فهم Processes",
+            "فهم Threads",
+            "فهم Memory Management",
+            "فهم File Systems",
+            "فهم Users and Permissions",
+            "فهم Environment Variables and Paths",
+            "فهم System Services",
+            "فهم Task Scheduling Basics",
+            "إتقان Operating System Troubleshooting الأساسي",
+            "بناء أساس للانتقال إلى Linux والأنظمة المتقدمة",
+            "أخرى"
+        ],
+        "Linux": [
+            "فهم Linux Basics",
+            "إتقان Linux File System",
+            "إتقان Linux Commands",
+            "فهم Users and Groups",
+            "إتقان Permissions in Linux",
+            "إتقان Package Management",
+            "فهم Process Management",
+            "فهم System Services in Linux",
+            "إتقان Text Processing in Linux",
+            "إتقان Linux Troubleshooting الأساسي",
+            "استخدام Linux في بيئة التطوير",
+            "أخرى"
+        ],
+        "Shell and Bash": [
+            "فهم Shell Basics",
+            "إتقان Bash Commands",
+            "إتقان Variables in Bash",
+            "إتقان Input and Output Redirection",
+            "إتقان Pipes",
+            "فهم Bash Conditions",
+            "فهم Bash Loops",
+            "إتقان Shell Scripts",
+            "إتقان Automation Tasks",
+            "إتقان Bash Debugging",
+            "بناء Scripts عملية صغيرة",
+            "أخرى"
+        ],
+        "Networking": [
+            "فهم Networking Basics",
+            "فهم Internet Basics",
+            "فهم IP Addresses",
+            "فهم Ports",
+            "فهم DNS",
+            "فهم TCP and UDP",
+            "فهم HTTP and HTTPS",
+            "فهم Client-Server Communication",
+            "فهم Firewalls Basics دفاعياً",
+            "إتقان Network Troubleshooting الأساسي",
+            "فهم الشبكات من منظور التطبيقات",
+            "أخرى"
+        ],
+        "Cloud Computing": [
+            "فهم Cloud Basics",
+            "فهم Virtual Machines",
+            "فهم Cloud Storage",
+            "فهم Cloud Databases",
+            "فهم Serverless Basics",
+            "فهم Cloud Networking Basics",
+            "فهم Cloud Security Basics",
+            "فهم Cloud Cost Basics",
+            "فهم AWS Basics",
+            "فهم Azure Basics",
+            "فهم Google Cloud Basics",
+            "تصميم بنية سحابية تعليمية بسيطة",
+            "أخرى"
+        ],
+        "Containers and Docker": [
+            "فهم Container Basics",
+            "فهم Docker Basics",
+            "إتقان Images",
+            "إتقان Containers",
+            "إتقان Dockerfile",
+            "فهم Docker Volumes",
+            "فهم Docker Networking",
+            "فهم Docker Compose",
+            "فهم Docker Security Basics دفاعياً",
+            "إتقان Container Troubleshooting",
+            "تشغيل مشروع داخل Docker",
+            "أخرى"
+        ],
+        "DevOps and CI/CD": [
+            "فهم DevOps Basics",
+            "فهم Automation",
+            "فهم CI Basics",
+            "فهم CD Basics",
+            "فهم Build Pipeline",
+            "فهم Test Pipeline",
+            "فهم Deployment Pipeline",
+            "فهم GitHub Actions Basics",
+            "فهم Release Management",
+            "فهم Rollback Basics",
+            "إتقان CI/CD Troubleshooting الأساسي",
+            "بناء Pipeline تعليمي لمشروع",
+            "أخرى"
+        ],
+        "Monitoring and Logging": [
+            "فهم Monitoring Basics",
+            "إتقان Logging Basics",
+            "فهم Production Logs",
+            "فهم Metrics",
+            "فهم Alerts",
+            "فهم Dashboards",
+            "فهم Observability Basics",
+            "فهم Error Tracking",
+            "فهم Health Checks",
+            "فهم Incident Response Basics",
+            "بناء خطة مراقبة بسيطة لتطبيق",
+            "أخرى"
+        ],
+        "Performance and Scalability": [
+            "فهم Performance Basics",
+            "فهم Latency and Response Time",
+            "فهم CPU Performance",
+            "فهم Memory Performance",
+            "فهم Database Performance Concepts",
+            "فهم Frontend Performance Concepts",
+            "فهم Caching",
+            "فهم Load Balancing",
+            "فهم Scalability",
+            "فهم Reliability",
+            "فهم Backup and Recovery",
+            "إتقان Performance Troubleshooting الأساسي",
+            "تحسين أداء مشروع تدريبي",
+            "أخرى"
+        ],
+        "Secure Coding Basics": [
+            "فهم Secure Coding Concepts",
+            "إتقان Input Validation",
+            "فهم Output Escaping",
+            "فهم Authentication Safety",
+            "فهم Authorization Safety",
+            "فهم Password Safety",
+            "فهم Secrets Management",
+            "فهم Dependency Security",
+            "فهم Security Updates",
+            "فهم Error Messages Safety",
+            "فهم OWASP Concepts دفاعياً",
+            "مراجعة مشروع من ناحية الأمان الدفاعي",
+            "أخرى"
+        ],
+        "Data Structures": [
+            "فهم Data Structure Basics",
+            "إتقان Arrays",
+            "فهم Linked Lists",
+            "إتقان Stacks",
+            "إتقان Queues",
+            "فهم Hash Tables",
+            "فهم Trees",
+            "فهم Binary Trees",
+            "فهم Heaps",
+            "فهم Graphs",
+            "إتقان Data Structure Selection",
+            "حل تمارين Data Structures عملية",
+            "أخرى"
+        ],
+        "Algorithms": [
+            "فهم Algorithm Basics",
+            "إتقان Big O Notation",
+            "إتقان Time Complexity",
+            "إتقان Space Complexity",
+            "إتقان Searching Algorithms",
+            "إتقان Sorting Algorithms",
+            "إتقان Recursion",
+            "إتقان Two Pointers",
+            "إتقان Sliding Window",
+            "فهم Divide and Conquer",
+            "فهم Greedy Algorithms",
+            "فهم Dynamic Programming Basics",
+            "فهم Graph Algorithms Basics",
+            "حل تمارين Algorithms عملية",
+            "أخرى"
+        ],
+        "Advanced Problem Solving": [
+            "إتقان Problem Analysis",
+            "إتقان Constraints Analysis",
+            "إتقان Pattern Selection",
+            "الانتقال من Brute Force إلى الحل المحسن",
+            "إتقان Edge Case Mastery",
+            "إتقان Test Strategy",
+            "فهم Competitive Programming Basics كتدريب خوارزمي فقط",
+            "إتقان Debugging Algorithmic Solutions",
+            "إتقان Solution Explanation",
+            "بناء Practice Routine منظمة",
+            "أخرى"
+        ],
+        "System Design Basics": [
+            "فهم System Design Concepts",
+            "فهم Requirements for Systems",
+            "فهم Components and Services",
+            "فهم Data Flow",
+            "فهم Client and Server Design",
+            "فهم API Design from System View",
+            "فهم Database Design from System View",
+            "فهم Scalability Concepts",
+            "فهم Reliability Concepts",
+            "فهم Security Considerations",
+            "إتقان Architecture Diagrams",
+            "تصميم أنظمة بسيطة تعليمية",
+            "أخرى"
+        ],
+        "Advanced Technical Projects": [
+            "تعلم Technical Project Planning",
+            "بناء CLI Tools",
+            "بناء Automation Projects",
+            "بناء Dockerized Applications",
+            "بناء Monitoring Dashboard Projects",
+            "بناء CI/CD Project تعليمي",
+            "بناء Performance Improvement Project",
+            "بناء Secure Coding Review Project",
+            "بناء Data Structures Project",
+            "بناء Algorithms Project",
+            "بناء System Design Mini Project",
+            "بناء مشروع تقني متقدم يجمع أكثر من مهارة",
+            "أخرى"
+        ],
+        "أخرى": [
+            "مسار مخصص",
+            "أخرى"
+        ]
+    },
+    "states": {
+        "Computer Systems": {
+            "current": [
+                "لا أعرف كيف يعمل الحاسوب من الداخل",
+                "أعرف مكونات الحاسوب بشكل عام فقط",
+                "أفهم البرمجة لكن لا أفهم ما يحدث عند تشغيل البرنامج",
+                "لا أميز جيداً بين RAM وStorage",
+                "لا أفهم CPU Usage وMemory Usage",
+                "أحتاج إلى أساس تقني لفهم الأنظمة وLinux لاحقاً",
+                "أخرى"
+            ],
+            "target": [
+                "فهم مكونات الحاسوب الأساسية",
+                "شرح كيف يعمل البرنامج داخل الحاسوب",
+                "تمييز دور CPU وMemory وStorage",
+                "فهم استهلاك الموارد بشكل أساسي",
+                "قراءة مؤشرات أداء بسيطة",
+                "الاستعداد لتعلم Operating Systems وLinux",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً لفهم مفاهيم الحاسوب",
+                "جلسة مفاهيم + جلسة تطبيق + جلسة مراجعة أسبوعياً",
+                "قراءة تقنية قصيرة يومياً مع تلخيص",
+                "تطبيق عملي أسبوعي على مراقبة الموارد",
+                "مراجعة أسبوعية للمفاهيم الأساسية",
+                "أخرى"
+            ]
+        },
+        "Operating Systems": {
+            "current": [
+                "لا أعرف دور نظام التشغيل بوضوح",
+                "أستخدم النظام فقط ولا أفهم ما يديره",
+                "لا أفهم Processes وThreads",
+                "أواجه مشاكل مسارات وصلاحيات",
+                "لا أفهم Environment Variables",
+                "أحتاج إلى فهم النظام قبل Linux وDevOps",
+                "أخرى"
+            ],
+            "target": [
+                "فهم دور نظام التشغيل في إدارة البرامج والملفات والذاكرة",
+                "تمييز Process وThread",
+                "فهم File Systems والصلاحيات",
+                "فهم Environment Variables and Paths",
+                "تشخيص مشاكل نظام بسيطة",
+                "الاستعداد لاستخدام Linux بثقة أكبر",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات أسبوعياً: مفهوم + تطبيق + Troubleshooting",
+                "جلسة أسبوعية لفهم Process وMemory وFile System",
+                "تطبيق عملي على المسارات والصلاحيات",
+                "مراجعة أخطاء نظام أسبوعياً",
+                "تلخيص مفهوم واحد يومياً",
+                "أخرى"
+            ]
+        },
+        "Linux": {
+            "current": [
+                "لا أعرف Linux",
+                "أستخدم Terminal بشكل بسيط جداً",
+                "أعرف أوامر قليلة مثل cd وls",
+                "لا أفهم بنية ملفات Linux",
+                "أجد الصلاحيات وPermission Denied صعبة",
+                "لا أعرف إدارة الحزم أو الخدمات",
+                "أحتاج إلى استخدام Linux في مشاريعي",
+                "أخرى"
+            ],
+            "target": [
+                "استخدام Linux بثقة في بيئة التطوير",
+                "فهم بنية ملفات Linux",
+                "تنفيذ أوامر Linux الأساسية",
+                "فهم الصلاحيات والمستخدمين",
+                "تثبيت وإدارة الحزم بشكل أساسي",
+                "تشخيص أخطاء Linux الشائعة",
+                "أخرى"
+            ],
+            "commitment": [
+                "تطبيق يومي 20 إلى 30 دقيقة في Terminal",
+                "3 جلسات Linux أسبوعياً",
+                "جلسة أوامر + جلسة صلاحيات + جلسة Troubleshooting أسبوعياً",
+                "تطبيق عملي أسبوعي على إدارة ملفات وحزم",
+                "مراجعة أوامر Linux مرة أسبوعياً",
+                "أخرى"
+            ]
+        },
+        "Shell and Bash": {
+            "current": [
+                "لا أعرف Shell أو Bash",
+                "أستخدم أوامر فقط دون فهم",
+                "لا أعرف كتابة Script",
+                "لا أفهم pipes وredirection",
+                "أريد أتمتة مهام بسيطة",
+                "أجد أخطاء Bash مربكة",
+                "أخرى"
+            ],
+            "target": [
+                "فهم Shell وBash",
+                "تنفيذ أوامر Bash بثقة",
+                "استخدام Variables وPipes وRedirection",
+                "كتابة Shell Scripts بسيطة",
+                "أتمتة مهام متكررة",
+                "تصحيح أخطاء Bash الأساسية",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات Bash أسبوعياً",
+                "كتابة Script بسيط كل أسبوع",
+                "تطبيق يومي قصير على أمر أو pipe",
+                "جلسة Automation أسبوعية",
+                "مراجعة أخطاء Bash مرة أسبوعياً",
+                "أخرى"
+            ]
+        },
+        "Networking": {
+            "current": [
+                "لا أفهم الشبكات",
+                "أستخدم الإنترنت فقط دون معرفة كيف يعمل",
+                "لا أفهم IP وPort",
+                "أجد DNS وHTTP مربكين",
+                "لا أعرف سبب أخطاء الاتصال",
+                "أحتاج إلى فهم الشبكات لتطوير وتشغيل التطبيقات",
+                "أخرى"
+            ],
+            "target": [
+                "فهم أساسيات الشبكات والإنترنت",
+                "تمييز IP وPort وDNS",
+                "فهم TCP وUDP بشكل أساسي",
+                "فهم HTTP وHTTPS وClient-Server",
+                "تشخيص مشاكل اتصال بسيطة",
+                "فهم الشبكات التي تعتمد عليها التطبيقات",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات Networking أسبوعياً",
+                "جلسة مفاهيم + جلسة رسم اتصال + جلسة Troubleshooting أسبوعياً",
+                "تلخيص بروتوكول أو مفهوم كل يومين",
+                "تطبيق عملي أسبوعي على تحليل Request أو Port",
+                "مراجعة أخطاء اتصال أسبوعياً",
+                "أخرى"
+            ]
+        },
+        "Cloud Computing": {
+            "current": [
+                "لا أعرف الحوسبة السحابية",
+                "أعرف أن Cloud يعني خوادم على الإنترنت فقط",
+                "لا أفهم VM أو Serverless",
+                "لا أعرف الفرق بين التخزين السحابي وقواعد البيانات السحابية",
+                "أحتاج إلى فهم السحابة لتشغيل المشاريع لاحقاً",
+                "أخاف من التكلفة والإعدادات",
+                "أخرى"
+            ],
+            "target": [
+                "فهم Cloud Computing بشكل عملي",
+                "تمييز VM وStorage وDatabase وServerless",
+                "فهم أساسيات الصلاحيات والتكلفة",
+                "اختيار خدمة سحابية مناسبة لهدف تعليمي",
+                "تصميم بنية سحابية بسيطة لتطبيق",
+                "الاستعداد لتعلم النشر السحابي لاحقاً",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات Cloud أسبوعياً",
+                "جلسة مفاهيم + جلسة مقارنة خدمات + جلسة تصميم أسبوعياً",
+                "قراءة خدمة سحابية واحدة كل أسبوع",
+                "تطبيق تصميم سحابي تعليمي كل أسبوعين",
+                "مراجعة التكلفة والصلاحيات أسبوعياً",
+                "أخرى"
+            ]
+        },
+        "Containers and Docker": {
+            "current": [
+                "لا أعرف Docker",
+                "أعرف أن Docker يشغل التطبيقات فقط",
+                "لا أفهم Image وContainer",
+                "لا أعرف كتابة Dockerfile",
+                "أجد Docker Compose مربكاً",
+                "أحتاج إلى تشغيل مشاريعي بطريقة موحدة",
+                "أخرى"
+            ],
+            "target": [
+                "فهم الفرق بين Image وContainer",
+                "كتابة Dockerfile بسيط",
+                "تشغيل تطبيق داخل Container",
+                "فهم Volumes وNetworking أساسياً",
+                "استخدام Docker Compose لمشروع تعليمي",
+                "تشخيص أخطاء Docker الأساسية",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات Docker أسبوعياً",
+                "تشغيل Container تعليمي كل أسبوع",
+                "كتابة Dockerfile لمشروع صغير",
+                "جلسة Troubleshooting أسبوعية",
+                "مشروع Docker Compose بسيط كل 3 أسابيع",
+                "أخرى"
+            ]
+        },
+        "DevOps and CI/CD": {
+            "current": [
+                "لا أعرف DevOps",
+                "أسمع عن CI/CD لكن لا أفهمه",
+                "أرفع التحديثات يدوياً دون أتمتة",
+                "لا أفهم Pipeline",
+                "لا أعرف GitHub Actions",
+                "أريد تنظيم اختبار وبناء وتشغيل مشاريعي",
+                "أخرى"
+            ],
+            "target": [
+                "فهم DevOps كربط بين التطوير والتشغيل",
+                "فهم CI وCD بشكل تعليمي",
+                "تصميم Pipeline بسيطة",
+                "تشغيل اختبارات تلقائياً",
+                "فهم Build وDeployment Pipeline",
+                "استخدام GitHub Actions أساسياً",
+                "تشخيص فشل Pipeline بسيط",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات DevOps أسبوعياً",
+                "تصميم Pipeline صغيرة كل أسبوعين",
+                "جلسة GitHub Actions أسبوعية",
+                "مراجعة فشل Pipeline عند حدوثه",
+                "توثيق خطوات CI/CD أسبوعياً",
+                "أخرى"
+            ]
+        },
+        "Monitoring and Logging": {
+            "current": [
+                "لا أراقب تطبيقاتي",
+                "لا أعرف قراءة Logs جيداً",
+                "لا أفهم Metrics مثل Error Rate أو Response Time",
+                "أعرف أن التطبيق فيه أخطاء لكن لا أعرف كيف أتابعها",
+                "لا أعرف معنى Health Check",
+                "أحتاج إلى تنظيم متابعة الأخطاء والأداء",
+                "أخرى"
+            ],
+            "target": [
+                "فهم أهمية Monitoring وLogging",
+                "قراءة Logs واستخراج الأخطاء",
+                "فهم Metrics الأساسية",
+                "تصميم Alerts بسيطة",
+                "فهم Health Checks",
+                "كتابة تقرير Incident تعليمي",
+                "بناء خطة مراقبة لتطبيق",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة Monitoring أسبوعية",
+                "تحليل Logs مرة أسبوعياً",
+                "تحديد Metrics لمشروع تدريبي",
+                "كتابة تقرير حالة أسبوعي",
+                "مراجعة الأخطاء والتنبيهات بعد كل مشروع",
+                "أخرى"
+            ]
+        },
+        "Performance and Scalability": {
+            "current": [
+                "لا أعرف كيف أقيس أداء التطبيق",
+                "ألاحظ البطء لكن لا أعرف السبب",
+                "لا أفهم Latency أو Response Time",
+                "لا أعرف Bottleneck",
+                "لا أعرف متى أستخدم Cache",
+                "لا أفهم Scalability وReliability",
+                "أخرى"
+            ],
+            "target": [
+                "فهم مؤشرات الأداء الأساسية",
+                "تحديد Bottleneck بشكل أولي",
+                "تحليل CPU وMemory وResponse Time",
+                "فهم Caching وLoad Balancing كمفاهيم",
+                "فهم Scalability وReliability",
+                "تحسين أداء مشروع تدريبي بناءً على قياس",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة أداء أسبوعية على مشروع تدريبي",
+                "قياس قبل وبعد أي تحسين",
+                "مراجعة Bottleneck مرة أسبوعياً",
+                "دراسة مفهوم Performance كل يومين",
+                "تقرير أداء صغير كل أسبوعين",
+                "أخرى"
+            ]
+        },
+        "Secure Coding Basics": {
+            "current": [
+                "لا أعرف Secure Coding",
+                "أكتب الكود دون التفكير في الأمان",
+                "لا أتحقق من المدخلات جيداً",
+                "لا أعرف كيف أخفي الأسرار",
+                "أخاف من أخطاء الصلاحيات",
+                "أريد حماية مشاريعي بشكل دفاعي",
+                "أخرى"
+            ],
+            "target": [
+                "كتابة كود أكثر أماناً",
+                "التحقق من المدخلات",
+                "عدم كشف الأسرار داخل الكود",
+                "فهم Password Safety أساسياً",
+                "مراجعة الصلاحيات",
+                "تحديث Dependencies",
+                "كتابة رسائل خطأ آمنة",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة أمان دفاعي أسبوعية",
+                "مراجعة مدخلات مشروع مرة أسبوعياً",
+                "Checklist أمان قبل إنهاء أي مشروع",
+                "تحديث Dependencies بشكل دوري",
+                "مراجعة Secrets ورسائل الخطأ بعد كل ميزة",
+                "أخرى"
+            ]
+        },
+        "Data Structures": {
+            "current": [
+                "لا أعرف هياكل البيانات",
+                "أعرف Array فقط",
+                "أستخدم List أو Dictionary دون فهم عميق",
+                "أجد Stack وQueue مربكة",
+                "لا أفهم Trees وGraphs",
+                "لا أعرف اختيار البنية المناسبة",
+                "أخرى"
+            ],
+            "target": [
+                "فهم وظيفة كل Data Structure",
+                "استخدام Arrays وStacks وQueues وHash Tables",
+                "فهم Trees وGraphs أساسياً",
+                "اختيار Data Structure مناسبة للمشكلة",
+                "حل تمارين عملية على هياكل البيانات",
+                "الاستعداد لتعلم Algorithms بعمق",
+                "أخرى"
+            ],
+            "commitment": [
+                "3 جلسات Data Structures أسبوعياً",
+                "بنية بيانات واحدة كل أسبوع",
+                "حل 5 تمارين أسبوعياً",
+                "رسم البنية وتتبع العمليات",
+                "مراجعة أسبوعية لاختيار البنية المناسبة",
+                "أخرى"
+            ]
+        },
+        "Algorithms": {
+            "current": [
+                "لا أعرف الخوارزميات",
+                "أحل بطريقة عشوائية",
+                "لا أفهم Big O",
+                "أجد Recursion صعبة",
+                "لا أعرف الفرق بين Searching وSorting",
+                "أحتاج إلى تدريب منظم على الأنماط",
+                "أخرى"
+            ],
+            "target": [
+                "فهم الخوارزمية كخطوات حل",
+                "تحليل Time وSpace Complexity",
+                "استخدام Searching وSorting",
+                "فهم Recursion",
+                "استخدام Two Pointers وSliding Window",
+                "فهم Greedy وDP وGraph Algorithms أساسياً",
+                "حل مسائل خوارزمية منظمة",
+                "أخرى"
+            ],
+            "commitment": [
+                "حل 4 إلى 6 مسائل Algorithms أسبوعياً",
+                "جلسة Big O أسبوعية",
+                "دراسة نمط خوارزمي واحد كل أسبوع",
+                "مراجعة حلول خاطئة أسبوعياً",
+                "تدريب يومي 30 إلى 45 دقيقة",
+                "أخرى"
+            ]
+        },
+        "Advanced Problem Solving": {
+            "current": [
+                "أفهم الأساسيات لكنني أتعثر في المسائل المتوسطة",
+                "أكتب الحل المباشر فقط",
+                "لا أستخدم القيود لاختيار الحل",
+                "أنسى Edge Cases",
+                "لا أعرف اختيار النمط المناسب",
+                "أحتاج إلى روتين تدريب منظم",
+                "أخرى"
+            ],
+            "target": [
+                "تحليل المسألة قبل الحل",
+                "فهم القيود واختيار تعقيد مناسب",
+                "اختيار نمط حل مناسب",
+                "تحسين الحل من Brute Force",
+                "اختبار Edge Cases",
+                "شرح الحل والتعقيد بوضوح",
+                "بناء روتين تدريب ثابت",
+                "أخرى"
+            ],
+            "commitment": [
+                "حل مسألة متوسطة كل يومين",
+                "جلسة تحليل قيود أسبوعياً",
+                "مراجعة 3 حلول خاطئة أسبوعياً",
+                "تدريب أسبوعي على Edge Cases",
+                "خطة شهرية لأنماط الحل",
+                "أخرى"
+            ]
+        },
+        "System Design Basics": {
+            "current": [
+                "لا أعرف System Design",
+                "أبني أجزاء منفصلة ولا أفهم النظام الكامل",
+                "لا أعرف رسم مكونات النظام",
+                "أجد تدفق البيانات غير واضح",
+                "لا أعرف كيف أفكر في التوسع والموثوقية",
+                "أحتاج إلى تصميم أنظمة بسيطة قبل المشاريع الكبيرة",
+                "أخرى"
+            ],
+            "target": [
+                "فهم مكونات النظام والعلاقات بينها",
+                "كتابة متطلبات نظام بسيطة",
+                "رسم Data Flow",
+                "تصميم API وDatabase من منظور النظام",
+                "فهم Scalability وReliability أساسياً",
+                "رسم Architecture Diagram واضح",
+                "تصميم نظام تعليمي بسيط",
+                "أخرى"
+            ],
+            "commitment": [
+                "جلسة System Design أسبوعية",
+                "رسم مخطط نظام كل أسبوعين",
+                "تحليل نظام بسيط مرة أسبوعياً",
+                "كتابة متطلبات وتدفق بيانات لمشروع تدريبي",
+                "مراجعة تصميم قبل التنفيذ",
+                "أخرى"
+            ]
+        },
+        "Advanced Technical Projects": {
+            "current": [
+                "أريد الانتقال إلى مشاريع تقنية أقوى",
+                "بنيت مشاريع بسيطة فقط",
+                "أعرف المفاهيم منفصلة لكن لا أجمعها في مشروع",
+                "لا أعرف كيف أخطط لمشروع متقدم",
+                "أحتاج إلى مشروع يجمع Docker أو CI/CD أو Monitoring",
+                "أريد تطبيق Data Structures أو Algorithms في مشروع",
+                "أخرى"
+            ],
+            "target": [
+                "تخطيط مشروع تقني متقدم",
+                "اختيار التقنيات المناسبة",
+                "بناء مشروع يجمع أكثر من مهارة",
+                "توثيق التصميم والتنفيذ",
+                "اختبار المشروع وتحسينه",
+                "مراجعة الأداء أو الأمان أو التشغيل",
+                "إنجاز مشروع تقني قوي تعليمي",
+                "أخرى"
+            ],
+            "commitment": [
+                "خطة مشروع لمدة 4 إلى 8 أسابيع",
+                "3 إلى 4 جلسات تنفيذ أسبوعياً",
+                "جلسة تصميم + جلسة تنفيذ + جلسة اختبار أسبوعياً",
+                "مراجعة تقدم أسبوعية",
+                "توثيق كل مرحلة من المشروع",
+                "أخرى"
+            ]
+        },
+        "أخرى": {
+            "current": [
+                "أحتاج إلى تحديد مستواي الحالي",
+                "لدي هدف تقني خاص خارج الخيارات",
+                "أخرى"
+            ],
+            "target": [
+                "صياغة هدف تقني واضح",
+                "بناء مسار تعلم مخصص",
+                "أخرى"
+            ],
+            "commitment": [
+                "خطة أسبوعية مخصصة",
+                "تطبيق عملي منتظم",
+                "مراجعة تقدم أسبوعية",
+                "أخرى"
+            ]
+        }
+    },
+    "outcomes": {
+        "Computer Systems": "مثال: أريد فهم أنظمة الحاسوب حتى أعرف كيف يعمل البرنامج داخل الجهاز.",
+        "Operating Systems": "مثال: أريد فهم أنظمة التشغيل حتى أتعامل مع البرامج والملفات والعمليات بثقة.",
+        "Linux": "مثال: أريد إتقان Linux حتى أستطيع تشغيل مشاريعي وإدارة الملفات والخدمات.",
+        "Shell and Bash": "مثال: أريد إتقان Bash حتى أستطيع أتمتة مهام الملفات والتشغيل.",
+        "Networking": "مثال: أريد فهم الشبكات حتى أعرف كيف تتصل التطبيقات والخوادم والواجهات.",
+        "Cloud Computing": "مثال: أريد فهم Cloud Computing حتى أعرف كيف تُشغل التطبيقات على خوادم سحابية.",
+        "Containers and Docker": "مثال: أريد إتقان Docker حتى أستطيع تشغيل مشاريعي بنفس البيئة دون مشاكل.",
+        "DevOps and CI/CD": "مثال: أريد فهم DevOps and CI/CD حتى أجعل اختبار وتشغيل مشاريعي أكثر تنظيماً.",
+        "Monitoring and Logging": "مثال: أريد فهم Monitoring and Logging حتى أستطيع متابعة حالة التطبيق وأخطائه.",
+        "Performance and Scalability": "مثال: أريد فهم Performance and Scalability حتى أعرف كيف أجعل تطبيقاتي أسرع وأكثر استقراراً.",
+        "Secure Coding Basics": "مثال: أريد تعلم Secure Coding Basics حتى أحمي مشاريعي من الأخطاء الشائعة.",
+        "Data Structures": "مثال: أريد إتقان Data Structures حتى أستطيع اختيار البنية المناسبة لكل مشكلة.",
+        "Algorithms": "مثال: أريد إتقان Algorithms حتى أحل المشكلات البرمجية بطريقة منظمة وفعالة.",
+        "Advanced Problem Solving": "مثال: أريد تطوير Advanced Problem Solving حتى أتعامل مع المسائل المتوسطة بثقة.",
+        "System Design Basics": "مثال: أريد فهم System Design Basics حتى أستطيع تصميم تطبيقات منظمة قبل بنائها.",
+        "Advanced Technical Projects": "مثال: أريد بناء مشروع تقني متقدم يجمع Docker وAPI وMonitoring بشكل تعليمي.",
+        "أخرى": "مثال: أريد بناء هدف تقني متقدم واضح وطويل المدى يناسب مستواي الحالي."
+    }
+};
+
+    function uniqueBeforeOther(items) {
+        const result = [];
+        (items || []).forEach((item) => {
+            if (!item || item === "أخرى") return;
+            if (!result.includes(item)) result.push(item);
+        });
+        result.push("أخرى");
+        return result;
+    }
+
+    function mergeProgrammingTechnologyBankPart3(base) {
+        const merged = base || { categories: [], paths: {}, states: {}, outcomes: {} };
+        merged.categories = uniqueBeforeOther([...(merged.categories || []), ...programmingTechnologyBankPart3V55122.categories]);
+        merged.paths = Object.assign({}, merged.paths || {}, programmingTechnologyBankPart3V55122.paths);
+        merged.states = Object.assign({}, merged.states || {}, programmingTechnologyBankPart3V55122.states);
+        merged.outcomes = Object.assign({}, merged.outcomes || {}, programmingTechnologyBankPart3V55122.outcomes);
+        return merged;
+    }
+
+    if (typeof GOAL_CONFIG_V524 !== "undefined") {
+        GOAL_CONFIG_V524["البرمجة والتكنولوجيا"] = mergeProgrammingTechnologyBankPart3(GOAL_CONFIG_V524["البرمجة والتكنولوجيا"] || GOAL_CONFIG_V524["Programming & Technology"]);
+        GOAL_CONFIG_V524["Programming & Technology"] = GOAL_CONFIG_V524["البرمجة والتكنولوجيا"];
+    }
+
+    if (typeof SMART_GOALS_V4610 !== "undefined") {
+        SMART_GOALS_V4610["البرمجة والتكنولوجيا"] = mergeProgrammingTechnologyBankPart3(SMART_GOALS_V4610["البرمجة والتكنولوجيا"] || SMART_GOALS_V4610["Programming & Technology"]);
+        SMART_GOALS_V4610["Programming & Technology"] = SMART_GOALS_V4610["البرمجة والتكنولوجيا"];
+    }
+
+    if (typeof GOAL_TYPE_CANONICAL_V557 !== "undefined") {
+        GOAL_TYPE_CANONICAL_V557["Programming & Technology"] = "البرمجة والتكنولوجيا";
+        GOAL_TYPE_CANONICAL_V557["البرمجة والتكنولوجيا"] = "البرمجة والتكنولوجيا";
+        GOAL_TYPE_CANONICAL_V557["البرمجة والتقنية"] = "البرمجة والتكنولوجيا";
+    }
+
+    if (typeof window !== "undefined") {
+        window.EDUPATH_PROGRAMMING_TECHNOLOGY_GOALS_PART3_V55122 = true;
+    }
+})();
+// === End EduPath AI v5.5.122: Goals - Programming & Technology Bank Part 3 ===
