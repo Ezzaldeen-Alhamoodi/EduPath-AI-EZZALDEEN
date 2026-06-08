@@ -7,24 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#2563eb">
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=5.5.127">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}?v=5.5.128">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}?v=5.5.128">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}?v=5.5.128">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=5.5.128">
 </head>
 <body>
 
     <header class="mobile-app-header">
-        <a class="mobile-app-logo mobile-app-logo-named" href="{{ url_for('index') }}" aria-label="EduPath AI Home">
-            <span>✦</span>
-            <small>EduPath AI</small>
+        <a class="mobile-app-logo" href="{{ url_for('index') }}" aria-label="EduPath AI Home">
+            <img src="{{ url_for('static', filename='app-logo.png') }}?v=5.5.128" alt="EduPath AI EZZALDEEN">
         </a>
     </header>
 
     <aside class="sidebar">
         <div class="brand-block">
-            <div class="logo">✦</div>
-            <div>
-                <div class="brand">EduPath AI</div>
-                <div class="brand-small">EZZALDEEN</div>
-            </div>
+            <a class="logo-link" href="{{ url_for('index') }}" aria-label="EduPath AI Home">
+                <img class="logo" src="{{ url_for('static', filename='app-logo.png') }}?v=5.5.128" alt="EduPath AI EZZALDEEN">
+            </a>
         </div>
 
         <div class="desktop-quick-controls-v481">
