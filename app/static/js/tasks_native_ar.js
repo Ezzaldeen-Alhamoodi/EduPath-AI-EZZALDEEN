@@ -1,4 +1,4 @@
-window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.112-tasks-ai-fundamentals-part1";
+window.EDUPATH_TASKS_NATIVE_AR_BUILD = "5.5.113-tasks-ai-advanced-part2-final";
 window.EDUPATH_TASKS_AR_DATA = {
   "حفظ القرآن الكريم": {
     icon: "📖",
@@ -38783,4 +38783,8623 @@ window.SMART_EXAM_DATA = {
     Object.keys(aiActivities).forEach(function (key) { aiTasks.trainingByDetail[key] = ensureOtherLast(aiActivities[key]); });
 
     window.EDUPATH_TASKS_AI_FUNDAMENTALS_PART1_V55112 = true;
+})();
+
+
+// === EduPath AI v5.5.113: Tasks AI Advanced Part 2 Final ===
+(function () {
+    const data = window.EDUPATH_TASKS_AR_DATA = window.EDUPATH_TASKS_AR_DATA || {};
+    function ensureOtherLast(list) {
+        const values = Array.isArray(list) ? list.filter(Boolean) : [];
+        const cleaned = [];
+        values.forEach(function (item) {
+            if (item !== "أخرى" && cleaned.indexOf(item) === -1) cleaned.push(item);
+        });
+        cleaned.push("أخرى");
+        return cleaned;
+    }
+    function mergeLists() {
+        const merged = [];
+        Array.prototype.slice.call(arguments).forEach(function (list) {
+            (Array.isArray(list) ? list : []).forEach(function (item) {
+                if (item && item !== "أخرى" && merged.indexOf(item) === -1) merged.push(item);
+            });
+        });
+        merged.push("أخرى");
+        return merged;
+    }
+
+    const aiPart2Main = [
+    "مقدمة في Deep Learning",
+    "Neural Networks",
+    "العصبون الاصطناعي",
+    "طبقات الشبكة العصبية",
+    "دوال التنشيط",
+    "Forward Propagation",
+    "Backpropagation",
+    "Training Deep Models",
+    "Optimizers",
+    "Learning Rate Scheduling",
+    "Regularization in Deep Learning",
+    "Dropout",
+    "Batch Normalization",
+    "Vanishing and Exploding Gradients",
+    "TensorFlow",
+    "Keras",
+    "PyTorch",
+    "Deep Learning Workflow",
+    "CNN",
+    "Convolution Layer",
+    "Pooling Layer",
+    "Image Classification",
+    "Object Detection",
+    "Image Segmentation",
+    "Computer Vision",
+    "Image Preprocessing for AI",
+    "Transfer Learning",
+    "RNN",
+    "LSTM",
+    "GRU",
+    "Sequence Models",
+    "NLP",
+    "Text Preprocessing for NLP",
+    "Tokenization",
+    "Embeddings",
+    "Word Embeddings",
+    "Text Classification",
+    "Sentiment Analysis",
+    "Named Entity Recognition",
+    "Machine Translation",
+    "Text Summarization",
+    "Transformers",
+    "Attention Mechanism",
+    "Self-Attention",
+    "Encoder and Decoder",
+    "BERT",
+    "GPT",
+    "LLMs",
+    "LLM Capabilities",
+    "LLM Limitations",
+    "Prompt Engineering",
+    "Prompt Patterns",
+    "Zero-shot Prompting",
+    "Few-shot Prompting",
+    "Chain-of-Thought Prompting كمفهوم تعليمي",
+    "Prompt Evaluation",
+    "Generative AI",
+    "Text Generation",
+    "Image Generation",
+    "Audio Generation",
+    "Diffusion Models",
+    "RAG",
+    "Retrieval",
+    "Vector Embeddings",
+    "Vector Database",
+    "Knowledge Base for AI",
+    "Fine-tuning",
+    "Instruction Tuning",
+    "Parameter-Efficient Fine-tuning",
+    "AI Agents",
+    "Tool Use",
+    "Planning in AI Agents",
+    "Memory in AI Agents",
+    "Multi-Agent Systems",
+    "Multimodal AI",
+    "Vision-Language Models",
+    "Speech AI",
+    "Speech Recognition",
+    "Text-to-Speech",
+    "Recommendation Systems",
+    "Reinforcement Learning Basics",
+    "Agent and Environment",
+    "Reward Function",
+    "Policy",
+    "Q-Learning Basics",
+    "AI Model Deployment",
+    "Serving AI Models",
+    "Model Monitoring",
+    "MLOps for AI",
+    "Experiment Tracking",
+    "Data Drift",
+    "Model Drift",
+    "Advanced AI Evaluation",
+    "LLM Evaluation",
+    "Human Evaluation",
+    "AI Safety",
+    "Hallucination in AI",
+    "Bias in Advanced AI",
+    "Privacy in Advanced AI",
+    "AI Security Basics",
+    "Applied Deep Learning Projects",
+    "Applied NLP Projects",
+    "Applied Computer Vision Projects",
+    "Applied LLM Projects",
+    "AI Research Skills",
+    "Reading AI Papers",
+    "Reproducing AI Experiments",
+    "AI Portfolio Projects",
+    "تحليل أخطاء الذكاء الاصطناعي المتقدم",
+    "المراجعة الشاملة",
+    "اختبار قصير",
+    "اختبار تجريبي",
+    "أخرى"
+];
+    const aiPart2Sub = {
+        "الذكاء الاصطناعي": aiPart2Main,
+        "أخرى": [
+            "موضوع مخصص في الذكاء الاصطناعي المتقدم",
+            "تطبيق مخصص في الذكاء الاصطناعي المتقدم",
+            "أخرى"
+        ]
+    };
+    const aiPart2Details = {
+    "مقدمة في Deep Learning": [
+        "مفهوم Deep Learning",
+        "العلاقة بين Deep Learning وMachine Learning",
+        "متى نحتاج Deep Learning",
+        "البيانات الكبيرة في Deep Learning",
+        "النماذج العميقة",
+        "حدود Deep Learning",
+        "أخرى"
+    ],
+    "Neural Networks": [
+        "مفهوم Neural Network",
+        "المدخلات",
+        "المخرجات",
+        "الأوزان",
+        "الانحيازات",
+        "الطبقات",
+        "التنبؤ داخل الشبكة",
+        "أخرى"
+    ],
+    "العصبون الاصطناعي": [
+        "مفهوم العصبون الاصطناعي",
+        "المدخلات",
+        "الأوزان",
+        "المجموع الموزون",
+        "الانحياز",
+        "دالة التنشيط",
+        "ناتج العصبون",
+        "أخرى"
+    ],
+    "طبقات الشبكة العصبية": [
+        "طبقة الإدخال",
+        "الطبقات المخفية",
+        "طبقة الإخراج",
+        "عدد الطبقات",
+        "عدد الوحدات العصبية",
+        "أثر العمق والعرض",
+        "أخرى"
+    ],
+    "دوال التنشيط": [
+        "مفهوم Activation Function",
+        "Sigmoid",
+        "Tanh",
+        "ReLU",
+        "Softmax",
+        "اختيار دالة تنشيط",
+        "أثر دالة التنشيط",
+        "أخرى"
+    ],
+    "Forward Propagation": [
+        "مفهوم Forward Propagation",
+        "انتقال البيانات عبر الطبقات",
+        "حساب المجموع الموزون",
+        "تطبيق دالة التنشيط",
+        "إنتاج التنبؤ",
+        "تتبع الحساب داخل الشبكة",
+        "أخرى"
+    ],
+    "Backpropagation": [
+        "مفهوم Backpropagation",
+        "انتشار الخطأ للخلف",
+        "حساب التدرجات",
+        "تحديث الأوزان",
+        "العلاقة مع دالة الخسارة",
+        "فكرة قاعدة السلسلة",
+        "أخرى"
+    ],
+    "Training Deep Models": [
+        "مفهوم تدريب النماذج العميقة",
+        "Epoch",
+        "Batch",
+        "Mini-batch",
+        "Loss Curve",
+        "Validation Curve",
+        "تتبع التدريب",
+        "أخرى"
+    ],
+    "Optimizers": [
+        "مفهوم Optimizer",
+        "Gradient Descent",
+        "SGD",
+        "Adam",
+        "تحديث الأوزان",
+        "اختيار Optimizer",
+        "أثر Optimizer على التدريب",
+        "أخرى"
+    ],
+    "Learning Rate Scheduling": [
+        "مفهوم Learning Rate",
+        "تغيير Learning Rate أثناء التدريب",
+        "Learning Rate كبير جداً",
+        "Learning Rate صغير جداً",
+        "Scheduling",
+        "أثره على الاستقرار",
+        "أخرى"
+    ],
+    "Regularization in Deep Learning": [
+        "مفهوم Regularization",
+        "تقليل Overfitting",
+        "تبسيط النموذج",
+        "عقوبة الأوزان",
+        "Regularization في الشبكات العميقة",
+        "أثره على التعميم",
+        "أخرى"
+    ],
+    "Dropout": [
+        "مفهوم Dropout",
+        "إيقاف عشوائي لبعض الوحدات",
+        "تقليل الاعتماد الزائد",
+        "أثر Dropout على التدريب",
+        "متى نستخدم Dropout",
+        "أخطاء استخدام Dropout",
+        "أخرى"
+    ],
+    "Batch Normalization": [
+        "مفهوم Batch Normalization",
+        "استقرار التدريب",
+        "توحيد القيم داخل الشبكة",
+        "تسريع التدريب",
+        "أثره على الشبكات العميقة",
+        "متى يستخدم",
+        "أخرى"
+    ],
+    "Vanishing and Exploding Gradients": [
+        "مفهوم Vanishing Gradients",
+        "مفهوم Exploding Gradients",
+        "أثر عمق الشبكة",
+        "أثر دوال التنشيط",
+        "علامات المشكلة",
+        "طرق التخفيف",
+        "أخرى"
+    ],
+    "TensorFlow": [
+        "مفهوم TensorFlow",
+        "بناء نموذج Deep Learning",
+        "الطبقات Layers",
+        "التدريب",
+        "التقييم",
+        "استخدامه في المشاريع",
+        "أخرى"
+    ],
+    "Keras": [
+        "مفهوم Keras",
+        "Sequential Model",
+        "Layers",
+        "Compile",
+        "Fit",
+        "Evaluate",
+        "Predict",
+        "أخرى"
+    ],
+    "PyTorch": [
+        "مفهوم PyTorch",
+        "Tensor",
+        "Model Class",
+        "Forward Method",
+        "Training Loop",
+        "Loss and Optimizer",
+        "استخدامه في الأبحاث",
+        "أخرى"
+    ],
+    "Deep Learning Workflow": [
+        "تحديد المشكلة",
+        "تجهيز البيانات",
+        "اختيار بنية النموذج",
+        "تدريب النموذج",
+        "تقييم النموذج",
+        "تحسين النموذج",
+        "توثيق التجربة",
+        "أخرى"
+    ],
+    "CNN": [
+        "مفهوم CNN",
+        "استخدام CNN مع الصور",
+        "Convolution",
+        "Filters",
+        "Feature Maps",
+        "Pooling",
+        "Fully Connected Layer",
+        "أخرى"
+    ],
+    "Convolution Layer": [
+        "مفهوم Convolution Layer",
+        "المرشح Filter",
+        "حجم المرشح",
+        "استخراج الخصائص",
+        "Feature Map",
+        "Stride",
+        "Padding",
+        "أخرى"
+    ],
+    "Pooling Layer": [
+        "مفهوم Pooling",
+        "Max Pooling",
+        "Average Pooling",
+        "تقليل الأبعاد",
+        "الاحتفاظ بالخصائص المهمة",
+        "أثر Pooling على النموذج",
+        "أخرى"
+    ],
+    "Image Classification": [
+        "مفهوم Image Classification",
+        "تصنيف صورة إلى فئة",
+        "Dataset للصور",
+        "Training Images",
+        "Validation Images",
+        "تقييم تصنيف الصور",
+        "أخرى"
+    ],
+    "Object Detection": [
+        "مفهوم Object Detection",
+        "تحديد مكان الكائن",
+        "Bounding Box",
+        "الفئة Class",
+        "اكتشاف أكثر من كائن",
+        "استخداماته",
+        "أخرى"
+    ],
+    "Image Segmentation": [
+        "مفهوم Image Segmentation",
+        "تقسيم الصورة إلى مناطق",
+        "Pixel Classification",
+        "Semantic Segmentation",
+        "Instance Segmentation",
+        "تطبيقات طبية وصناعية",
+        "أخرى"
+    ],
+    "Computer Vision": [
+        "مفهوم Computer Vision",
+        "فهم الصور والفيديو",
+        "التصنيف",
+        "الكشف",
+        "التقسيم",
+        "تطبيقات Computer Vision",
+        "تحديات الصور",
+        "أخرى"
+    ],
+    "Image Preprocessing for AI": [
+        "تغيير حجم الصورة",
+        "تطبيع قيم البكسل",
+        "تحويل الصورة إلى مصفوفة",
+        "زيادة البيانات Data Augmentation",
+        "قص الصورة",
+        "تدوير الصورة",
+        "أخرى"
+    ],
+    "Transfer Learning": [
+        "مفهوم Transfer Learning",
+        "استخدام نموذج مدرب مسبقاً",
+        "Fine-tuning محدود",
+        "تجميد الطبقات",
+        "استخدامه عند قلة البيانات",
+        "أمثلة في الصور والنصوص",
+        "أخرى"
+    ],
+    "RNN": [
+        "مفهوم RNN",
+        "البيانات المتسلسلة",
+        "الذاكرة الداخلية",
+        "معالجة النصوص المتتابعة",
+        "معالجة السلاسل الزمنية",
+        "مشكلات RNN",
+        "أخرى"
+    ],
+    "LSTM": [
+        "مفهوم LSTM",
+        "حل مشكلة الذاكرة القصيرة",
+        "الخلايا Gates كمفهوم",
+        "التتابعات الطويلة",
+        "استخدامها في النصوص",
+        "استخدامها في السلاسل الزمنية",
+        "أخرى"
+    ],
+    "GRU": [
+        "مفهوم GRU",
+        "العلاقة بين GRU وLSTM",
+        "تبسيط بنية الذاكرة",
+        "استخدامه في التسلسلات",
+        "مقارنة الأداء والبساطة",
+        "أخرى"
+    ],
+    "Sequence Models": [
+        "مفهوم Sequence Models",
+        "النص كسلسلة",
+        "الصوت كسلسلة",
+        "الزمن كسلسلة",
+        "التنبؤ بالعنصر التالي",
+        "تحديات البيانات المتسلسلة",
+        "أخرى"
+    ],
+    "NLP": [
+        "مفهوم NLP",
+        "فهم اللغة الطبيعية",
+        "تحليل النصوص",
+        "تصنيف النصوص",
+        "تلخيص النصوص",
+        "ترجمة آلية",
+        "تحديات اللغة",
+        "أخرى"
+    ],
+    "Text Preprocessing for NLP": [
+        "تنظيف النص",
+        "إزالة الرموز غير المهمة",
+        "توحيد النص",
+        "تقسيم النص",
+        "إزالة الكلمات الشائعة عند الحاجة",
+        "تحويل النص إلى تمثيل عددي",
+        "أخرى"
+    ],
+    "Tokenization": [
+        "مفهوم Tokenization",
+        "تقسيم النص إلى كلمات",
+        "تقسيم النص إلى أجزاء",
+        "Tokens",
+        "Subword Tokenization",
+        "أثر Tokenization على النموذج",
+        "أخرى"
+    ],
+    "Embeddings": [
+        "مفهوم Embeddings",
+        "تمثيل النص كمتجه",
+        "تشابه المعاني",
+        "Embeddings للجمل",
+        "Embeddings للصور",
+        "استخدامها في البحث الذكي",
+        "أخرى"
+    ],
+    "Word Embeddings": [
+        "مفهوم Word Embeddings",
+        "تمثيل الكلمات رقمياً",
+        "تشابه الكلمات",
+        "Word2Vec كمفهوم",
+        "GloVe كمفهوم",
+        "حدود تمثيل الكلمات وحدها",
+        "أخرى"
+    ],
+    "Text Classification": [
+        "مفهوم Text Classification",
+        "تصنيف الرسائل",
+        "تصنيف الأخبار",
+        "تصنيف المشاعر",
+        "تصنيف النوايا",
+        "Labels في النصوص",
+        "تقييم التصنيف النصي",
+        "أخرى"
+    ],
+    "Sentiment Analysis": [
+        "مفهوم Sentiment Analysis",
+        "مشاعر إيجابية",
+        "مشاعر سلبية",
+        "مشاعر محايدة",
+        "تحليل آراء المستخدمين",
+        "تحديات السخرية والسياق",
+        "أخرى"
+    ],
+    "Named Entity Recognition": [
+        "مفهوم NER",
+        "التعرف على أسماء الأشخاص",
+        "التعرف على الأماكن",
+        "التعرف على المنظمات",
+        "التعرف على التواريخ",
+        "استخدامات NER",
+        "أخرى"
+    ],
+    "Machine Translation": [
+        "مفهوم Machine Translation",
+        "ترجمة النصوص آلياً",
+        "جودة الترجمة",
+        "السياق في الترجمة",
+        "الأخطاء الشائعة",
+        "تقييم الترجمة",
+        "أخرى"
+    ],
+    "Text Summarization": [
+        "مفهوم Text Summarization",
+        "تلخيص استخراجي",
+        "تلخيص توليدي",
+        "اختصار النص",
+        "الحفاظ على المعنى",
+        "تقييم الملخص",
+        "أخرى"
+    ],
+    "Transformers": [
+        "مفهوم Transformers",
+        "سبب أهميتها في AI الحديث",
+        "معالجة التسلسلات",
+        "Attention",
+        "التوازي في التدريب",
+        "استخدامها في النصوص والصور",
+        "أخرى"
+    ],
+    "Attention Mechanism": [
+        "مفهوم Attention",
+        "تركيز النموذج على أجزاء مهمة",
+        "العلاقة بين الكلمات",
+        "الأهمية النسبية",
+        "Attention Scores",
+        "دور Attention في Transformers",
+        "أخرى"
+    ],
+    "Self-Attention": [
+        "مفهوم Self-Attention",
+        "علاقة الكلمة بباقي الكلمات",
+        "السياق داخل الجملة",
+        "تمثيل كل كلمة حسب الجملة",
+        "Multi-head Attention كمفهوم",
+        "أثره على فهم النص",
+        "أخرى"
+    ],
+    "Encoder and Decoder": [
+        "مفهوم Encoder",
+        "مفهوم Decoder",
+        "تحويل المدخل إلى تمثيل",
+        "توليد المخرج",
+        "استخدام Encoder في الفهم",
+        "استخدام Decoder في التوليد",
+        "أخرى"
+    ],
+    "BERT": [
+        "مفهوم BERT",
+        "نموذج مبني على Encoder",
+        "فهم النص",
+        "تمثيل الجمل",
+        "استخدامه في التصنيف",
+        "استخدامه في NER",
+        "أخرى"
+    ],
+    "GPT": [
+        "مفهوم GPT",
+        "نموذج مبني على Decoder",
+        "توليد النص",
+        "التنبؤ بالكلمة التالية",
+        "الحوار",
+        "كتابة المحتوى",
+        "حدود GPT",
+        "أخرى"
+    ],
+    "LLMs": [
+        "مفهوم LLMs",
+        "النماذج اللغوية الكبيرة",
+        "التدريب على نصوص ضخمة",
+        "فهم اللغة وتوليدها",
+        "السياق Context",
+        "حدود LLMs",
+        "أخرى"
+    ],
+    "LLM Capabilities": [
+        "توليد النصوص",
+        "الإجابة عن الأسئلة",
+        "التلخيص",
+        "الترجمة",
+        "شرح المفاهيم",
+        "كتابة الكود كمساعدة",
+        "الاستدلال المحدود",
+        "أخرى"
+    ],
+    "LLM Limitations": [
+        "مفهوم حدود LLM",
+        "الأخطاء الواقعية",
+        "Hallucination",
+        "ضعف التحقق من المصادر",
+        "الحساسية لصياغة السؤال",
+        "التحيز في الإجابات",
+        "أخرى"
+    ],
+    "Prompt Engineering": [
+        "مفهوم Prompt Engineering",
+        "صياغة السؤال",
+        "تحديد الدور",
+        "تحديد السياق",
+        "تحديد شكل الإجابة",
+        "تحسين المخرجات",
+        "أخطاء كتابة Prompt",
+        "أخرى"
+    ],
+    "Prompt Patterns": [
+        "Prompt للتلخيص",
+        "Prompt للشرح",
+        "Prompt للمقارنة",
+        "Prompt للتحليل",
+        "Prompt لتوليد أفكار",
+        "Prompt لاستخراج بيانات",
+        "أخرى"
+    ],
+    "Zero-shot Prompting": [
+        "مفهوم Zero-shot Prompting",
+        "إعطاء المهمة دون أمثلة",
+        "متى يكون مناسباً",
+        "حدوده",
+        "أمثلة تعليمية",
+        "تحسين الصياغة",
+        "أخرى"
+    ],
+    "Few-shot Prompting": [
+        "مفهوم Few-shot Prompting",
+        "إعطاء أمثلة للنموذج",
+        "اختيار أمثلة جيدة",
+        "أثر الأمثلة على النتيجة",
+        "عدد الأمثلة",
+        "أخطاء الأمثلة",
+        "أخرى"
+    ],
+    "Chain-of-Thought Prompting كمفهوم تعليمي": [
+        "مفهوم التفكير خطوة بخطوة",
+        "استخدامه في حل المسائل",
+        "طلب تفسير مختصر ومنظم",
+        "تقليل الغموض في السؤال",
+        "حدود الاعتماد عليه",
+        "متى نستخدمه",
+        "أخرى"
+    ],
+    "Prompt Evaluation": [
+        "تقييم جودة Prompt",
+        "وضوح التعليمات",
+        "اكتمال السياق",
+        "دقة المخرج",
+        "ثبات النتائج",
+        "قابلية إعادة الاستخدام",
+        "أخرى"
+    ],
+    "Generative AI": [
+        "مفهوم Generative AI",
+        "توليد النص",
+        "توليد الصور",
+        "توليد الصوت",
+        "توليد الفيديو كمفهوم",
+        "الفائدة والحدود",
+        "أخرى"
+    ],
+    "Text Generation": [
+        "مفهوم Text Generation",
+        "توليد فقرة",
+        "توليد إجابة",
+        "توليد قصة",
+        "توليد شرح",
+        "توليد كود كمساعدة",
+        "تقييم النص المولد",
+        "أخرى"
+    ],
+    "Image Generation": [
+        "مفهوم Image Generation",
+        "Prompt للصور",
+        "الأسلوب البصري",
+        "العناصر داخل الصورة",
+        "تحسين وصف الصورة",
+        "حدود توليد الصور",
+        "أخرى"
+    ],
+    "Audio Generation": [
+        "مفهوم Audio Generation",
+        "توليد صوت",
+        "توليد موسيقى كمفهوم",
+        "تحويل النص إلى كلام",
+        "جودة الصوت",
+        "القيود الأخلاقية",
+        "أخرى"
+    ],
+    "Diffusion Models": [
+        "مفهوم Diffusion Models",
+        "الفكرة العامة للضوضاء والإزالة",
+        "استخدامها في الصور",
+        "خطوات التوليد كمفهوم",
+        "Prompt وتأثيره",
+        "حدود النماذج",
+        "أخرى"
+    ],
+    "RAG": [
+        "مفهوم RAG",
+        "الجمع بين البحث والتوليد",
+        "استرجاع معلومات من مصدر",
+        "إدخال السياق إلى LLM",
+        "تقليل Hallucination",
+        "استخداماته في التطبيقات",
+        "أخرى"
+    ],
+    "Retrieval": [
+        "مفهوم Retrieval",
+        "البحث عن معلومات مناسبة",
+        "استرجاع مقاطع مرتبطة بالسؤال",
+        "ترتيب النتائج",
+        "جودة المصدر المسترجع",
+        "أثر Retrieval على الإجابة",
+        "أخرى"
+    ],
+    "Vector Embeddings": [
+        "مفهوم Vector Embeddings",
+        "تمثيل النص كمتجه",
+        "البحث بالتشابه",
+        "قرب المعنى",
+        "Embeddings في RAG",
+        "قيود التشابه الدلالي",
+        "أخرى"
+    ],
+    "Vector Database": [
+        "مفهوم Vector Database",
+        "تخزين Embeddings",
+        "البحث عن أقرب متجهات",
+        "استخدامها في RAG",
+        "تحديث قاعدة المعرفة",
+        "حدود البحث المتجهي",
+        "أخرى"
+    ],
+    "Knowledge Base for AI": [
+        "مفهوم Knowledge Base",
+        "مصادر المعرفة",
+        "تنظيم الوثائق",
+        "تقطيع النصوص",
+        "ربط المعرفة بـ LLM",
+        "تحديث المعرفة",
+        "أخرى"
+    ],
+    "Fine-tuning": [
+        "مفهوم Fine-tuning",
+        "تخصيص نموذج مدرب مسبقاً",
+        "الفرق بين Fine-tuning وPrompting",
+        "البيانات المطلوبة",
+        "متى نستخدم Fine-tuning",
+        "مخاطر Fine-tuning",
+        "أخرى"
+    ],
+    "Instruction Tuning": [
+        "مفهوم Instruction Tuning",
+        "تدريب النموذج على اتباع التعليمات",
+        "أمثلة التعليمات والإجابات",
+        "تحسين سلوك النموذج",
+        "العلاقة مع LLMs",
+        "حدوده",
+        "أخرى"
+    ],
+    "Parameter-Efficient Fine-tuning": [
+        "مفهوم Parameter-Efficient Fine-tuning",
+        "تعديل جزء صغير من النموذج",
+        "LoRA كمفهوم",
+        "تقليل التكلفة",
+        "متى يكون مناسباً",
+        "حدوده",
+        "أخرى"
+    ],
+    "AI Agents": [
+        "مفهوم AI Agent",
+        "الهدف Goal",
+        "الملاحظة Observation",
+        "التخطيط Planning",
+        "استخدام الأدوات",
+        "تنفيذ خطوات متعددة",
+        "أخرى"
+    ],
+    "Tool Use": [
+        "مفهوم Tool Use",
+        "استخدام نموذج لأداة خارجية",
+        "البحث",
+        "الحاسبة",
+        "قراءة ملف",
+        "استدعاء API",
+        "التحقق من النتائج",
+        "أخرى"
+    ],
+    "Planning in AI Agents": [
+        "مفهوم Planning",
+        "تقسيم الهدف إلى خطوات",
+        "ترتيب المهام",
+        "اختيار الإجراء التالي",
+        "مراجعة الخطة",
+        "تعديل الخطة",
+        "أخرى"
+    ],
+    "Memory in AI Agents": [
+        "مفهوم Memory",
+        "ذاكرة قصيرة المدى",
+        "ذاكرة طويلة المدى",
+        "تخزين معلومات مهمة",
+        "استرجاع السياق",
+        "مخاطر الذاكرة الخاطئة",
+        "أخرى"
+    ],
+    "Multi-Agent Systems": [
+        "مفهوم Multi-Agent Systems",
+        "تعاون أكثر من Agent",
+        "تقسيم الأدوار",
+        "التواصل بين الوكلاء",
+        "حل المشكلات الجماعي",
+        "تحديات التنسيق",
+        "أخرى"
+    ],
+    "Multimodal AI": [
+        "مفهوم Multimodal AI",
+        "النص والصورة",
+        "النص والصوت",
+        "الصورة والسؤال",
+        "دمج أكثر من نوع بيانات",
+        "تطبيقات Multimodal AI",
+        "أخرى"
+    ],
+    "Vision-Language Models": [
+        "مفهوم Vision-Language Models",
+        "فهم الصورة والنص معاً",
+        "وصف الصور",
+        "الإجابة عن أسئلة على الصور",
+        "البحث بالصورة والنص",
+        "استخداماتها",
+        "أخرى"
+    ],
+    "Speech AI": [
+        "مفهوم Speech AI",
+        "تحويل الكلام إلى نص",
+        "تحويل النص إلى كلام",
+        "فهم الأوامر الصوتية",
+        "الضوضاء في الصوت",
+        "تطبيقات Speech AI",
+        "أخرى"
+    ],
+    "Speech Recognition": [
+        "مفهوم Speech Recognition",
+        "تحويل الكلام إلى نص",
+        "دقة التعرف",
+        "اللهجات",
+        "الضوضاء",
+        "تقييم النص الناتج",
+        "أخرى"
+    ],
+    "Text-to-Speech": [
+        "مفهوم Text-to-Speech",
+        "تحويل النص إلى صوت",
+        "طبيعية الصوت",
+        "النطق",
+        "السرعة",
+        "الاستخدامات التعليمية",
+        "أخرى"
+    ],
+    "Recommendation Systems": [
+        "مفهوم Recommendation Systems",
+        "التوصية بالمحتوى",
+        "التوصية بالمنتجات",
+        "اهتمامات المستخدم",
+        "تشابه المستخدمين",
+        "تشابه العناصر",
+        "تحديات التوصية",
+        "أخرى"
+    ],
+    "Reinforcement Learning Basics": [
+        "مفهوم Reinforcement Learning",
+        "التعلم من التجربة",
+        "الوكيل Agent",
+        "البيئة Environment",
+        "الفعل Action",
+        "الحالة State",
+        "المكافأة Reward",
+        "أخرى"
+    ],
+    "Agent and Environment": [
+        "مفهوم Agent",
+        "مفهوم Environment",
+        "تفاعل الوكيل مع البيئة",
+        "الملاحظة",
+        "الفعل",
+        "تغير الحالة",
+        "أخرى"
+    ],
+    "Reward Function": [
+        "مفهوم Reward Function",
+        "المكافأة الفورية",
+        "المكافأة المستقبلية",
+        "تأثير المكافأة على السلوك",
+        "تصميم مكافأة مناسبة",
+        "أخطاء تصميم المكافآت",
+        "أخرى"
+    ],
+    "Policy": [
+        "مفهوم Policy",
+        "اختيار الفعل",
+        "السياسة الجيدة",
+        "السياسة العشوائية",
+        "تحسين السياسة",
+        "العلاقة بالمكافأة",
+        "أخرى"
+    ],
+    "Q-Learning Basics": [
+        "مفهوم Q-Learning",
+        "قيمة الحالة والفعل",
+        "جدول Q",
+        "تحديث القيم كمفهوم",
+        "الاستكشاف والاستغلال",
+        "حدود الفهم الأساسي",
+        "أخرى"
+    ],
+    "AI Model Deployment": [
+        "مفهوم نشر نموذج AI",
+        "استخدام النموذج خارج التجربة",
+        "تقديم تنبؤات للمستخدم",
+        "متطلبات النشر",
+        "قيود النشر",
+        "مخاطر النشر المبكر",
+        "أخرى"
+    ],
+    "Serving AI Models": [
+        "مفهوم Serving",
+        "استقبال مدخلات",
+        "إرجاع تنبؤ",
+        "زمن الاستجابة",
+        "التعامل مع الطلبات",
+        "تحديث النموذج",
+        "أخرى"
+    ],
+    "Model Monitoring": [
+        "مفهوم Model Monitoring",
+        "متابعة أداء النموذج",
+        "تغير جودة التنبؤ",
+        "أخطاء المستخدمين",
+        "بيانات جديدة",
+        "تنبيهات الأداء",
+        "أخرى"
+    ],
+    "MLOps for AI": [
+        "مفهوم MLOps",
+        "تنظيم دورة حياة النموذج",
+        "تتبع التجارب",
+        "إدارة النماذج",
+        "نشر النموذج",
+        "مراقبة النموذج",
+        "أخرى"
+    ],
+    "Experiment Tracking": [
+        "مفهوم Experiment Tracking",
+        "تسجيل إعدادات التجربة",
+        "تسجيل النتائج",
+        "مقارنة التجارب",
+        "حفظ أفضل نموذج",
+        "توثيق الملاحظات",
+        "أخرى"
+    ],
+    "Data Drift": [
+        "مفهوم Data Drift",
+        "تغير خصائص البيانات",
+        "اختلاف بيانات التدريب عن البيانات الجديدة",
+        "أثره على الأداء",
+        "اكتشاف Data Drift",
+        "معالجته",
+        "أخرى"
+    ],
+    "Model Drift": [
+        "مفهوم Model Drift",
+        "تدهور أداء النموذج مع الزمن",
+        "تغير العلاقة بين البيانات والنتيجة",
+        "أسباب Model Drift",
+        "اكتشاف التدهور",
+        "إعادة التدريب",
+        "أخرى"
+    ],
+    "Advanced AI Evaluation": [
+        "مفهوم التقييم المتقدم",
+        "تقييم الجودة",
+        "تقييم الثبات",
+        "تقييم العدالة",
+        "تقييم الأمان",
+        "تقييم تجربة المستخدم",
+        "تقييم الأداء في حالات صعبة",
+        "أخرى"
+    ],
+    "LLM Evaluation": [
+        "تقييم إجابات LLM",
+        "الدقة الواقعية",
+        "الاتساق",
+        "الاكتمال",
+        "الوضوح",
+        "الالتزام بالتعليمات",
+        "السلامة",
+        "أخرى"
+    ],
+    "Human Evaluation": [
+        "مفهوم Human Evaluation",
+        "تقييم الإنسان للمخرجات",
+        "معايير الحكم",
+        "اتفاق المقيمين",
+        "التحيز في التقييم البشري",
+        "توثيق الملاحظات",
+        "أخرى"
+    ],
+    "AI Safety": [
+        "مفهوم AI Safety",
+        "تقليل الضرر",
+        "التحقق من الاستخدام الآمن",
+        "منع المخرجات الخطرة",
+        "القيود والسياسات",
+        "اختبار الأمان",
+        "أخرى"
+    ],
+    "Hallucination in AI": [
+        "مفهوم Hallucination",
+        "إجابة تبدو صحيحة لكنها خاطئة",
+        "أسباب Hallucination",
+        "اكتشاف Hallucination",
+        "تقليلها بالسياق والمصادر",
+        "حدود النماذج",
+        "أخرى"
+    ],
+    "Bias in Advanced AI": [
+        "مفهوم Bias في النماذج المتقدمة",
+        "تحيز البيانات",
+        "تحيز المخرجات",
+        "تحيز اللغة",
+        "تأثير التحيز على المستخدمين",
+        "تقليل التحيز",
+        "أخرى"
+    ],
+    "Privacy in Advanced AI": [
+        "خصوصية البيانات",
+        "البيانات الحساسة",
+        "استخدام بيانات المستخدمين",
+        "مخاطر إدخال معلومات شخصية",
+        "إخفاء الهوية",
+        "تقليل البيانات",
+        "أخرى"
+    ],
+    "AI Security Basics": [
+        "مفهوم AI Security",
+        "حماية النماذج",
+        "حماية البيانات",
+        "الهجمات على المدخلات كمفهوم دفاعي",
+        "إساءة استخدام النماذج",
+        "مراقبة الاستخدام",
+        "أخرى"
+    ],
+    "Applied Deep Learning Projects": [
+        "مشروع تصنيف صور",
+        "مشروع تصنيف نصوص عميق",
+        "مشروع توقع باستخدام شبكة عصبية",
+        "مشروع Transfer Learning",
+        "مشروع مقارنة Optimizers",
+        "مشروع تحليل منحنى تدريب",
+        "أخرى"
+    ],
+    "Applied NLP Projects": [
+        "مشروع تصنيف مشاعر",
+        "مشروع تلخيص نصوص",
+        "مشروع استخراج كيانات",
+        "مشروع ترجمة آلية تعليمي",
+        "مشروع Chatbot بسيط",
+        "مشروع Embeddings Search",
+        "أخرى"
+    ],
+    "Applied Computer Vision Projects": [
+        "مشروع تصنيف صور",
+        "مشروع كشف كائنات",
+        "مشروع تقسيم صور",
+        "مشروع Transfer Learning للصور",
+        "مشروع تحليل أخطاء تصنيف الصور",
+        "مشروع تجهيز صور",
+        "أخرى"
+    ],
+    "Applied LLM Projects": [
+        "مشروع مساعد ذكي",
+        "مشروع تلخيص مستندات",
+        "مشروع RAG بسيط",
+        "مشروع Prompt Library",
+        "مشروع تقييم مخرجات LLM",
+        "مشروع AI Agent بسيط",
+        "أخرى"
+    ],
+    "AI Research Skills": [
+        "فهم السؤال البحثي",
+        "قراءة الملخص Abstract",
+        "فهم المنهجية",
+        "فهم النتائج",
+        "مقارنة أوراق علمية",
+        "تحديد الفجوة البحثية",
+        "أخرى"
+    ],
+    "Reading AI Papers": [
+        "اختيار ورقة مناسبة",
+        "قراءة المقدمة",
+        "قراءة الرسوم والجداول",
+        "فهم التجارب",
+        "فهم المقاييس",
+        "تلخيص الورقة",
+        "أخرى"
+    ],
+    "Reproducing AI Experiments": [
+        "مفهوم إعادة التجربة",
+        "فهم إعدادات التجربة",
+        "استخدام نفس البيانات",
+        "مقارنة النتائج",
+        "توثيق الاختلافات",
+        "صعوبة إعادة النتائج",
+        "أخرى"
+    ],
+    "AI Portfolio Projects": [
+        "اختيار مشروع Portfolio",
+        "تحديد المشكلة",
+        "تحديد البيانات",
+        "بناء النموذج",
+        "تقييم النتائج",
+        "كتابة README",
+        "عرض المشروع",
+        "أخرى"
+    ],
+    "تحليل أخطاء الذكاء الاصطناعي المتقدم": [
+        "أخطاء Deep Learning",
+        "أخطاء CNN",
+        "أخطاء NLP",
+        "أخطاء Transformers",
+        "أخطاء LLMs",
+        "أخطاء RAG",
+        "أخطاء AI Agents",
+        "أخطاء النشر والمراقبة",
+        "أخرى"
+    ],
+    "المراجعة الشاملة": [
+        "مراجعة Deep Learning",
+        "مراجعة Neural Networks",
+        "مراجعة CNN وComputer Vision",
+        "مراجعة RNN وSequence Models",
+        "مراجعة NLP",
+        "مراجعة Transformers",
+        "مراجعة LLMs",
+        "مراجعة Prompt Engineering",
+        "مراجعة Generative AI",
+        "مراجعة RAG",
+        "مراجعة Fine-tuning",
+        "مراجعة AI Agents",
+        "مراجعة Multimodal AI",
+        "مراجعة AI Safety",
+        "تدريب شامل",
+        "أخرى"
+    ],
+    "اختبار قصير": [
+        "اختبار Deep Learning",
+        "اختبار Neural Networks",
+        "اختبار CNN",
+        "اختبار NLP",
+        "اختبار Transformers",
+        "اختبار LLMs",
+        "اختبار Prompt Engineering",
+        "اختبار RAG",
+        "اختبار AI Agents",
+        "اختبار شامل قصير",
+        "أخرى"
+    ],
+    "اختبار تجريبي": [
+        "اختبار متوسط",
+        "اختبار متقدم",
+        "محاكاة اختبار AI Advanced",
+        "اختبار شامل في الجزء الثاني",
+        "تحليل نتيجة الاختبار",
+        "خطة علاج الأخطاء",
+        "أخرى"
+    ],
+    "أخرى": [
+        "موضوع مخصص في الذكاء الاصطناعي",
+        "تطبيق مخصص في الذكاء الاصطناعي",
+        "أخرى"
+    ]
+};
+    const aiPart2Activities = {
+    "مقدمة في Deep Learning": [
+        "دراسة مفهوم Deep Learning",
+        "مقارنة Deep Learning وMachine Learning",
+        "تحليل حالة استخدام",
+        "تلخيص الفكرة",
+        "تمييز متى نستخدم Deep Learning",
+        "حل أسئلة مفاهيمية",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Neural Networks": [
+        "تحليل Neural Network بسيطة",
+        "رسم بنية شبكة",
+        "تحديد المدخلات والمخرجات",
+        "تفسير دور الأوزان",
+        "تتبع تنبؤ بسيط",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "العصبون الاصطناعي": [
+        "حساب ناتج عصبون",
+        "تحليل وزن وانحياز",
+        "تتبع المجموع الموزون",
+        "تطبيق دالة تنشيط",
+        "رسم عصبون بسيط",
+        "مراجعة الأخطاء",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "طبقات الشبكة العصبية": [
+        "تحليل طبقات شبكة",
+        "تحديد نوع الطبقة",
+        "مقارنة شبكات مختلفة",
+        "اقتراح بنية بسيطة",
+        "رسم مخطط شبكة",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "دوال التنشيط": [
+        "تحليل Activation Function",
+        "مقارنة ReLU وSigmoid",
+        "تطبيق Softmax مفاهيمياً",
+        "اختيار دالة مناسبة",
+        "تفسير أثر التنشيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Forward Propagation": [
+        "تتبع Forward Propagation",
+        "حساب خطوة أمامية بسيطة",
+        "تحليل ناتج طبقة",
+        "تفسير تنبؤ شبكة",
+        "رسم مسار البيانات",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "Backpropagation": [
+        "دراسة Backpropagation",
+        "تتبع فكرة انتشار الخطأ",
+        "تحليل تحديث وزن",
+        "ربط التدرج بالخسارة",
+        "تلخيص خطوات التدريب",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "Training Deep Models": [
+        "تحليل عملية تدريب",
+        "تفسير Epoch وBatch",
+        "قراءة Loss Curve",
+        "مقارنة تدريب وتحقق",
+        "اكتشاف مشكلة تدريب",
+        "تطبيق تجربة بسيطة",
+        "أخرى"
+    ],
+    "Optimizers": [
+        "دراسة Optimizer",
+        "مقارنة SGD وAdam",
+        "تحليل تحديث أوزان",
+        "اختيار Optimizer مناسب",
+        "تفسير أثره على التدريب",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Learning Rate Scheduling": [
+        "تحليل Learning Rate",
+        "تفسير تذبذب التدريب",
+        "مقارنة معدلات تعلم",
+        "اقتراح تعديل",
+        "قراءة منحنى تدريب",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "Regularization in Deep Learning": [
+        "تحليل Regularization",
+        "تفسير تقليل Overfitting",
+        "مقارنة قبل وبعد",
+        "اختيار معالجة مناسبة",
+        "قراءة نتائج نموذج",
+        "أخرى"
+    ],
+    "Dropout": [
+        "دراسة Dropout",
+        "تحليل أثره على الشبكة",
+        "مقارنة نموذج مع وبدون Dropout",
+        "تفسير تقليل Overfitting",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "Batch Normalization": [
+        "دراسة Batch Normalization",
+        "تحليل أثره على التدريب",
+        "تفسير استقرار القيم",
+        "مقارنة نموذجين",
+        "تلخيص المفهوم",
+        "أخرى"
+    ],
+    "Vanishing and Exploding Gradients": [
+        "تحليل مشكلة Gradients",
+        "تمييز Vanishing وExploding",
+        "قراءة منحنى تدريب",
+        "اقتراح حل",
+        "مراجعة أخطاء تدريب",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "TensorFlow": [
+        "استكشاف TensorFlow",
+        "بناء نموذج بسيط",
+        "تدريب نموذج تعليمي",
+        "قراءة توثيق TensorFlow",
+        "تحليل نتائج تدريب",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Keras": [
+        "بناء نموذج Keras بسيط",
+        "ترتيب Layers",
+        "تطبيق Compile وFit",
+        "تقييم النموذج",
+        "تنفيذ Predict",
+        "مراجعة أخطاء Keras",
+        "أخرى"
+    ],
+    "PyTorch": [
+        "استكشاف PyTorch",
+        "تحليل Tensor",
+        "بناء نموذج بسيط",
+        "تتبع Training Loop",
+        "قراءة توثيق PyTorch",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Deep Learning Workflow": [
+        "بناء خطة Deep Learning",
+        "ترتيب Workflow",
+        "تحليل مرحلة ناقصة",
+        "تصميم تجربة تدريب",
+        "مقارنة تجارب",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "CNN": [
+        "دراسة CNN",
+        "تحليل بنية CNN",
+        "رسم طبقات CNN",
+        "تفسير Filter",
+        "تتبع معالجة صورة",
+        "بناء نموذج CNN بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Convolution Layer": [
+        "تحليل Convolution Layer",
+        "تفسير دور Filter",
+        "حساب حجم مخرج بسيط",
+        "مقارنة Stride وPadding",
+        "تتبع مثال صورة",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "Pooling Layer": [
+        "تحليل Pooling Layer",
+        "تطبيق Max Pooling بسيط",
+        "مقارنة Max وAverage",
+        "تفسير تقليل الأبعاد",
+        "حل تمارين صورية",
+        "أخرى"
+    ],
+    "Image Classification": [
+        "تحليل مشروع Image Classification",
+        "تجهيز صور تدريبية",
+        "بناء نموذج تصنيف صور",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Object Detection": [
+        "دراسة Object Detection",
+        "تحليل صورة مع Bounding Boxes",
+        "تمييز التصنيف والكشف",
+        "تفسير مخرجات نموذج",
+        "مراجعة أخطاء الكشف",
+        "أخرى"
+    ],
+    "Image Segmentation": [
+        "دراسة Image Segmentation",
+        "تحليل مثال تقسيم صورة",
+        "مقارنة Segmentation وDetection",
+        "تفسير مخرجات نموذج",
+        "تلخيص الاستخدامات",
+        "أخرى"
+    ],
+    "Computer Vision": [
+        "تحليل تطبيق Computer Vision",
+        "تصنيف نوع المهمة",
+        "مقارنة التصنيف والكشف والتقسيم",
+        "كتابة وصف مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Image Preprocessing for AI": [
+        "تجهيز صور لنموذج AI",
+        "تطبيق Resize",
+        "تحليل Data Augmentation",
+        "مقارنة قبل وبعد المعالجة",
+        "توثيق خطوات تجهيز الصور",
+        "أخرى"
+    ],
+    "Transfer Learning": [
+        "تحليل Transfer Learning",
+        "اختيار نموذج مدرب مسبقاً",
+        "تفسير تجميد الطبقات",
+        "مقارنة تدريب من الصفر ونقل التعلم",
+        "بناء تجربة تعليمية",
+        "أخرى"
+    ],
+    "RNN": [
+        "دراسة RNN",
+        "تحليل بيانات متسلسلة",
+        "رسم بنية RNN",
+        "تفسير الذاكرة الداخلية",
+        "مقارنة مع الشبكات العادية",
+        "أخرى"
+    ],
+    "LSTM": [
+        "دراسة LSTM",
+        "مقارنة RNN وLSTM",
+        "تحليل تسلسل طويل",
+        "تفسير فكرة Gates",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "GRU": [
+        "دراسة GRU",
+        "مقارنة GRU وLSTM",
+        "تحليل حالة استخدام",
+        "تلخيص الفروق",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Sequence Models": [
+        "تحليل Sequence Model",
+        "تمييز نوع تسلسل",
+        "تفسير التنبؤ التالي",
+        "تصميم مهمة تسلسلية",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "NLP": [
+        "دراسة NLP",
+        "تحليل مهمة نصية",
+        "تصنيف تطبيق NLP",
+        "تلخيص مفهوم",
+        "كتابة فكرة مشروع NLP",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Text Preprocessing for NLP": [
+        "تجهيز نص لـ NLP",
+        "تنظيف نص",
+        "تحليل خطوات معالجة",
+        "مقارنة قبل وبعد التنظيف",
+        "توثيق خطوات التجهيز",
+        "أخرى"
+    ],
+    "Tokenization": [
+        "تطبيق Tokenization",
+        "تحليل Tokens",
+        "مقارنة طرق التقسيم",
+        "تفسير أثرها على LLM",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "Embeddings": [
+        "تحليل Embeddings",
+        "مقارنة معنى متجهات",
+        "تطبيق بحث تشابه",
+        "تفسير قرب دلالي",
+        "ربط Embeddings بـ RAG",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Word Embeddings": [
+        "دراسة Word Embeddings",
+        "تحليل تشابه كلمات",
+        "مقارنة تمثيلات",
+        "شرح مثال دلالي",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "Text Classification": [
+        "تحليل مشروع Text Classification",
+        "تجهيز بيانات نصية",
+        "بناء نموذج تصنيف نصي",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "أخرى"
+    ],
+    "Sentiment Analysis": [
+        "تحليل Sentiment",
+        "تصنيف أمثلة نصية",
+        "تفسير خطأ تصنيف",
+        "بناء تجربة بسيطة",
+        "مراجعة نتائج",
+        "أخرى"
+    ],
+    "Named Entity Recognition": [
+        "تحليل NER",
+        "استخراج كيانات من نص",
+        "تمييز أنواع الكيانات",
+        "مراجعة أخطاء الاستخراج",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Machine Translation": [
+        "تحليل ترجمة آلية",
+        "مقارنة ترجمتين",
+        "اكتشاف خطأ سياقي",
+        "تقييم جودة ترجمة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "Text Summarization": [
+        "تحليل ملخص",
+        "مقارنة نص وملخص",
+        "تجربة تلخيص",
+        "تقييم دقة الملخص",
+        "اكتشاف حذف معنى مهم",
+        "أخرى"
+    ],
+    "Transformers": [
+        "دراسة Transformers",
+        "تلخيص الفكرة",
+        "مقارنة Transformers وRNN",
+        "تحليل تطبيق حديث",
+        "قراءة شرح مبسط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Attention Mechanism": [
+        "تحليل Attention",
+        "تفسير تركيز النموذج",
+        "رسم علاقة بين كلمات",
+        "قراءة Attention بشكل مبسط",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "Self-Attention": [
+        "دراسة Self-Attention",
+        "تحليل جملة وسياق",
+        "تفسير علاقة كلمات",
+        "مقارنة Attention وSelf-Attention",
+        "تلخيص المفهوم",
+        "أخرى"
+    ],
+    "Encoder and Decoder": [
+        "مقارنة Encoder وDecoder",
+        "تحليل بنية نموذج",
+        "رسم مخطط مبسط",
+        "تصنيف نماذج حسب البنية",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "BERT": [
+        "دراسة BERT",
+        "تحليل استخدام BERT",
+        "مقارنة BERT وGPT",
+        "اختيار تطبيق مناسب",
+        "قراءة توثيق مبسط",
+        "أخرى"
+    ],
+    "GPT": [
+        "دراسة GPT",
+        "تحليل طريقة التوليد",
+        "تجربة Prompt",
+        "تقييم مخرجات نصية",
+        "مقارنة BERT وGPT",
+        "أخرى"
+    ],
+    "LLMs": [
+        "دراسة LLMs",
+        "تحليل قدرة نموذج لغوي",
+        "تجربة أسئلة مختلفة",
+        "تقييم إجابات LLM",
+        "تلخيص حدود النموذج",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "LLM Capabilities": [
+        "تجربة قدرة LLM",
+        "تحليل مخرج نموذج",
+        "مقارنة مهام مختلفة",
+        "تقييم جودة إجابة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "LLM Limitations": [
+        "تحليل حدود LLM",
+        "اكتشاف Hallucination",
+        "مقارنة إجابات",
+        "تقييم موثوقية",
+        "كتابة قواعد استخدام آمن",
+        "أخرى"
+    ],
+    "Prompt Engineering": [
+        "كتابة Prompt",
+        "تحسين Prompt",
+        "مقارنة أكثر من Prompt",
+        "تحليل سبب اختلاف النتائج",
+        "تقييم مخرج النموذج",
+        "تطبيق عملي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Prompt Patterns": [
+        "بناء Prompt Pattern",
+        "تجربة نمط Prompt",
+        "مقارنة أنماط",
+        "تحسين صياغة",
+        "توثيق أفضل صيغة",
+        "أخرى"
+    ],
+    "Zero-shot Prompting": [
+        "تجربة Zero-shot Prompt",
+        "تحليل النتيجة",
+        "تحسين Prompt",
+        "مقارنة مع Few-shot",
+        "كتابة ملاحظات",
+        "أخرى"
+    ],
+    "Few-shot Prompting": [
+        "بناء Few-shot Prompt",
+        "اختيار أمثلة",
+        "مقارنة قبل وبعد الأمثلة",
+        "تقييم مخرج النموذج",
+        "تحسين الأمثلة",
+        "أخرى"
+    ],
+    "Chain-of-Thought Prompting كمفهوم تعليمي": [
+        "صياغة Prompt تفكير منظم",
+        "تحليل خطوات إجابة",
+        "طلب تفسير مختصر",
+        "مقارنة إجابة مباشرة ومنظمة",
+        "تقييم جودة الاستدلال الظاهر",
+        "أخرى"
+    ],
+    "Prompt Evaluation": [
+        "تقييم Prompt",
+        "تحسين تعليمات",
+        "مقارنة نتائج",
+        "كتابة Rubric بسيط",
+        "توثيق Prompt ناجح",
+        "أخرى"
+    ],
+    "Generative AI": [
+        "دراسة Generative AI",
+        "تحليل تطبيق توليدي",
+        "تجربة توليد آمن",
+        "تقييم المخرجات",
+        "مقارنة أنواع التوليد",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Text Generation": [
+        "تجربة Text Generation",
+        "تقييم نص مولد",
+        "تحسين Prompt",
+        "تحليل الاتساق",
+        "مراجعة أخطاء النص",
+        "أخرى"
+    ],
+    "Image Generation": [
+        "كتابة Prompt صورة",
+        "تحليل نتيجة صورة",
+        "تحسين وصف بصري",
+        "مقارنة مخرجات",
+        "تقييم توافق الصورة مع الوصف",
+        "أخرى"
+    ],
+    "Audio Generation": [
+        "دراسة Audio Generation",
+        "تحليل حالة استخدام",
+        "تقييم جودة مخرج صوتي",
+        "كتابة تعليمات توليد آمنة",
+        "تلخيص القيود",
+        "أخرى"
+    ],
+    "Diffusion Models": [
+        "دراسة Diffusion Models",
+        "تلخيص الفكرة",
+        "تحليل تطبيق في الصور",
+        "مقارنة مع توليد نص",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "RAG": [
+        "تحليل RAG",
+        "تصميم سير عمل RAG",
+        "تحديد مصادر معرفة",
+        "تقييم إجابة مدعومة بسياق",
+        "مقارنة LLM عادي وRAG",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Retrieval": [
+        "تحليل Retrieval",
+        "اختيار مصدر مناسب",
+        "تقييم مقاطع مسترجعة",
+        "مقارنة نتائج بحث",
+        "تحسين سؤال البحث",
+        "أخرى"
+    ],
+    "Vector Embeddings": [
+        "تحليل Vector Embeddings",
+        "تفسير تشابه دلالي",
+        "مقارنة جمل متشابهة",
+        "تصميم بحث متجهي",
+        "ربط Embeddings بـ RAG",
+        "أخرى"
+    ],
+    "Vector Database": [
+        "دراسة Vector Database",
+        "رسم سير عمل تخزين وبحث",
+        "تحليل استخدامها في RAG",
+        "مقارنة بحث عادي وبحث متجهي",
+        "كتابة خطة تجربة",
+        "أخرى"
+    ],
+    "Knowledge Base for AI": [
+        "تصميم Knowledge Base",
+        "تنظيم مصادر",
+        "تحليل جودة الوثائق",
+        "اقتراح طريقة تقطيع نصوص",
+        "تقييم تغطية المعرفة",
+        "أخرى"
+    ],
+    "Fine-tuning": [
+        "دراسة Fine-tuning",
+        "مقارنة Prompting وFine-tuning",
+        "تحليل حاجة مشروع",
+        "تجهيز خطة بيانات",
+        "تقييم مخاطر",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Instruction Tuning": [
+        "دراسة Instruction Tuning",
+        "تحليل أمثلة تعليمات",
+        "تصميم عينة تدريب تعليمية",
+        "تقييم استجابة نموذج",
+        "تلخيص الفكرة",
+        "أخرى"
+    ],
+    "Parameter-Efficient Fine-tuning": [
+        "دراسة PEFT",
+        "تفسير LoRA كمفهوم",
+        "مقارنة Fine-tuning كامل ومحدود",
+        "تحليل فائدة التكلفة",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "AI Agents": [
+        "تحليل AI Agent",
+        "رسم سير عمل Agent",
+        "تحديد الهدف والأدوات",
+        "تقييم خطة Agent",
+        "مقارنة Agent وChatbot",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Tool Use": [
+        "تحليل Tool Use",
+        "اختيار أداة مناسبة",
+        "تصميم مهمة تستخدم أداة",
+        "تقييم نتيجة الأداة",
+        "مراجعة أخطاء الاستخدام",
+        "أخرى"
+    ],
+    "Planning in AI Agents": [
+        "بناء خطة Agent",
+        "تحليل خطوات تنفيذ",
+        "اكتشاف خطوة ناقصة",
+        "تحسين خطة",
+        "مقارنة خطتين",
+        "أخرى"
+    ],
+    "Memory in AI Agents": [
+        "تحليل Memory في Agent",
+        "تحديد ما يجب حفظه",
+        "تصميم ذاكرة بسيطة",
+        "تقييم استرجاع السياق",
+        "مراجعة أخطاء الذاكرة",
+        "أخرى"
+    ],
+    "Multi-Agent Systems": [
+        "تحليل Multi-Agent System",
+        "توزيع أدوار بين Agents",
+        "رسم تفاعل الوكلاء",
+        "تقييم التنسيق",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "Multimodal AI": [
+        "تحليل Multimodal AI",
+        "تصنيف نوع المدخلات",
+        "تجربة سؤال على صورة",
+        "تقييم مخرج متعدد الوسائط",
+        "كتابة فكرة مشروع",
+        "أخرى"
+    ],
+    "Vision-Language Models": [
+        "تحليل Vision-Language Model",
+        "تجربة وصف صورة",
+        "تقييم إجابة على صورة",
+        "مقارنة مخرج نصي وبصري",
+        "تلخيص الاستخدامات",
+        "أخرى"
+    ],
+    "Speech AI": [
+        "دراسة Speech AI",
+        "تحليل تطبيق صوتي",
+        "تمييز Speech-to-Text وText-to-Speech",
+        "تقييم مخرج صوتي",
+        "كتابة فكرة مشروع",
+        "أخرى"
+    ],
+    "Speech Recognition": [
+        "تحليل Speech Recognition",
+        "تقييم نص مستخرج",
+        "اكتشاف أخطاء تعرف صوتي",
+        "مقارنة حالات صوتية",
+        "تلخيص التحديات",
+        "أخرى"
+    ],
+    "Text-to-Speech": [
+        "تحليل Text-to-Speech",
+        "تقييم طبيعية الصوت",
+        "كتابة نص مناسب للصوت",
+        "مقارنة مخرجات",
+        "تحديد أخطاء نطق",
+        "أخرى"
+    ],
+    "Recommendation Systems": [
+        "تحليل نظام توصية",
+        "تحديد بيانات التوصية",
+        "مقارنة طرق توصية",
+        "تفسير نتيجة توصية",
+        "كتابة فكرة مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Reinforcement Learning Basics": [
+        "دراسة Reinforcement Learning",
+        "تحليل موقف تعلم معزز",
+        "تحديد Agent وEnvironment",
+        "تفسير Reward",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "Agent and Environment": [
+        "تحليل Agent وEnvironment",
+        "رسم دورة تفاعل",
+        "تحديد الحالات والأفعال",
+        "تصميم مثال بسيط",
+        "مراجعة الأخطاء",
+        "أخرى"
+    ],
+    "Reward Function": [
+        "تحليل Reward Function",
+        "اقتراح مكافأة مناسبة",
+        "تفسير سلوك Agent",
+        "اكتشاف مكافأة خاطئة",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "Policy": [
+        "تحليل Policy",
+        "مقارنة سياسات",
+        "اقتراح فعل مناسب",
+        "تفسير اختيار Agent",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "Q-Learning Basics": [
+        "دراسة Q-Learning",
+        "تحليل جدول Q بسيط",
+        "تمييز Exploration وExploitation",
+        "تتبع تحديث مفاهيمي",
+        "حل أسئلة أساسية",
+        "أخرى"
+    ],
+    "AI Model Deployment": [
+        "تحليل نشر نموذج AI",
+        "كتابة خطة نشر تعليمية",
+        "تحديد متطلبات نشر",
+        "تقييم جاهزية النموذج",
+        "مراجعة مخاطر النشر",
+        "أخرى"
+    ],
+    "Serving AI Models": [
+        "تحليل خدمة نموذج",
+        "رسم سير تنبؤ",
+        "تقييم زمن استجابة",
+        "تحديد مدخلات ومخرجات",
+        "كتابة خطة استخدام نموذج",
+        "أخرى"
+    ],
+    "Model Monitoring": [
+        "تحليل مراقبة نموذج",
+        "اختيار مؤشرات متابعة",
+        "اكتشاف تدهور أداء",
+        "كتابة خطة مراقبة",
+        "مراجعة نتائج نموذج",
+        "أخرى"
+    ],
+    "MLOps for AI": [
+        "دراسة MLOps",
+        "رسم دورة حياة نموذج",
+        "تحليل خطوات MLOps",
+        "تحديد مرحلة ناقصة",
+        "كتابة ملخص تطبيقي",
+        "أخرى"
+    ],
+    "Experiment Tracking": [
+        "تصميم سجل تجارب",
+        "مقارنة تجربتين",
+        "توثيق إعدادات نموذج",
+        "اختيار أفضل نتيجة",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "Data Drift": [
+        "تحليل Data Drift",
+        "مقارنة بيانات قديمة وجديدة",
+        "اكتشاف تغير في التوزيع",
+        "اقتراح معالجة",
+        "كتابة تقرير متابعة",
+        "أخرى"
+    ],
+    "Model Drift": [
+        "تحليل Model Drift",
+        "قراءة أداء عبر الزمن",
+        "تحديد سبب التدهور",
+        "اقتراح إعادة تدريب",
+        "مراجعة مؤشرات الأداء",
+        "أخرى"
+    ],
+    "Advanced AI Evaluation": [
+        "تصميم تقييم متقدم",
+        "اختيار معايير تقييم",
+        "تحليل حالة اختبار صعبة",
+        "مقارنة نتائج",
+        "كتابة تقرير تقييم",
+        "أخرى"
+    ],
+    "LLM Evaluation": [
+        "تقييم إجابة LLM",
+        "بناء Rubric تقييم",
+        "مقارنة إجابتين",
+        "اكتشاف خطأ واقعي",
+        "تحسين Prompt بناء على التقييم",
+        "أخرى"
+    ],
+    "Human Evaluation": [
+        "تصميم تقييم بشري",
+        "كتابة معايير تقييم",
+        "مقارنة تقييمات",
+        "تحليل اختلاف آراء",
+        "توثيق ملاحظات",
+        "أخرى"
+    ],
+    "AI Safety": [
+        "دراسة AI Safety",
+        "تحليل خطر محتمل",
+        "تقييم مخرج غير آمن",
+        "اقتراح ضوابط",
+        "كتابة قواعد استخدام مسؤول",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Hallucination in AI": [
+        "اكتشاف Hallucination",
+        "تحليل إجابة مشكوك فيها",
+        "مقارنة مع مصدر",
+        "تحسين Prompt لتقليل الخطأ",
+        "تقييم موثوقية مخرج",
+        "أخرى"
+    ],
+    "Bias in Advanced AI": [
+        "تحليل Bias في مخرجات AI",
+        "اكتشاف تحيز محتمل",
+        "مقارنة نتائج لفئات مختلفة",
+        "اقتراح تقليل التحيز",
+        "كتابة ملاحظات أخلاقية",
+        "أخرى"
+    ],
+    "Privacy in Advanced AI": [
+        "تحليل خصوصية استخدام AI",
+        "تمييز بيانات حساسة",
+        "كتابة قواعد حماية",
+        "تقييم سيناريو مشاركة بيانات",
+        "اقتراح بدائل آمنة",
+        "أخرى"
+    ],
+    "AI Security Basics": [
+        "دراسة AI Security",
+        "تحليل خطر دفاعي",
+        "اقتراح إجراء حماية",
+        "تمييز استخدام آمن وغير آمن",
+        "كتابة ملاحظات وقائية",
+        "أخرى"
+    ],
+    "Applied Deep Learning Projects": [
+        "بناء مشروع Deep Learning",
+        "اختيار فكرة مشروع",
+        "تجهيز بيانات المشروع",
+        "تدريب نموذج عميق",
+        "تقييم النموذج",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "Applied NLP Projects": [
+        "بناء مشروع NLP",
+        "تجهيز بيانات نصية",
+        "اختيار نموذج مناسب",
+        "تقييم مخرجات نصية",
+        "تحليل أخطاء اللغة",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "Applied Computer Vision Projects": [
+        "بناء مشروع Computer Vision",
+        "تجهيز صور",
+        "تدريب نموذج صور",
+        "تقييم مخرجات بصرية",
+        "تحليل أخطاء صور",
+        "توثيق المشروع",
+        "أخرى"
+    ],
+    "Applied LLM Projects": [
+        "بناء مشروع LLM",
+        "تصميم Prompts",
+        "إنشاء Knowledge Base",
+        "تقييم مخرجات LLM",
+        "تحسين تجربة المستخدم",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "AI Research Skills": [
+        "قراءة ورقة AI",
+        "تلخيص Abstract",
+        "استخراج المشكلة والمنهجية",
+        "تحليل النتائج",
+        "كتابة أسئلة بحثية",
+        "مقارنة ورقتين",
+        "أخرى"
+    ],
+    "Reading AI Papers": [
+        "قراءة Paper",
+        "تلخيص قسم من الورقة",
+        "استخراج المصطلحات",
+        "تحليل التجارب",
+        "كتابة ملخص عربي",
+        "مراجعة الفهم",
+        "أخرى"
+    ],
+    "Reproducing AI Experiments": [
+        "تحليل تجربة AI",
+        "كتابة خطة إعادة تجربة",
+        "مقارنة نتائج",
+        "توثيق إعدادات",
+        "اكتشاف سبب اختلاف",
+        "أخرى"
+    ],
+    "AI Portfolio Projects": [
+        "تخطيط مشروع Portfolio",
+        "بناء مشروع تطبيقي",
+        "كتابة وصف مشروع",
+        "تقييم جودة المشروع",
+        "تحسين العرض",
+        "إعداد ملخص نهائي",
+        "أخرى"
+    ],
+    "تحليل أخطاء الذكاء الاصطناعي المتقدم": [
+        "تحليل خطأ متقدم",
+        "مراجعة تجربة فاشلة",
+        "اكتشاف سبب ضعف الأداء",
+        "تصحيح إعدادات",
+        "مقارنة حلول",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "المراجعة الشاملة": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "اختبار قصير": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار تجريبي": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "أخرى": [
+        "نشاط مخصص",
+        "دراسة مخصصة",
+        "تطبيق مخصص",
+        "مراجعة مخصصة",
+        "أخرى"
+    ],
+    "مفهوم Deep Learning": [
+        "دراسة مفهوم Deep Learning",
+        "مقارنة Deep Learning وMachine Learning",
+        "تحليل حالة استخدام",
+        "تلخيص الفكرة",
+        "تمييز متى نستخدم Deep Learning",
+        "حل أسئلة مفاهيمية",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "العلاقة بين Deep Learning وMachine Learning": [
+        "دراسة مفهوم Deep Learning",
+        "مقارنة Deep Learning وMachine Learning",
+        "تحليل حالة استخدام",
+        "تلخيص الفكرة",
+        "تمييز متى نستخدم Deep Learning",
+        "حل أسئلة مفاهيمية",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "متى نحتاج Deep Learning": [
+        "دراسة مفهوم Deep Learning",
+        "مقارنة Deep Learning وMachine Learning",
+        "تحليل حالة استخدام",
+        "تلخيص الفكرة",
+        "تمييز متى نستخدم Deep Learning",
+        "حل أسئلة مفاهيمية",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "البيانات الكبيرة في Deep Learning": [
+        "دراسة مفهوم Deep Learning",
+        "مقارنة Deep Learning وMachine Learning",
+        "تحليل حالة استخدام",
+        "تلخيص الفكرة",
+        "تمييز متى نستخدم Deep Learning",
+        "حل أسئلة مفاهيمية",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "النماذج العميقة": [
+        "دراسة مفهوم Deep Learning",
+        "مقارنة Deep Learning وMachine Learning",
+        "تحليل حالة استخدام",
+        "تلخيص الفكرة",
+        "تمييز متى نستخدم Deep Learning",
+        "حل أسئلة مفاهيمية",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "حدود Deep Learning": [
+        "دراسة مفهوم Deep Learning",
+        "مقارنة Deep Learning وMachine Learning",
+        "تحليل حالة استخدام",
+        "تلخيص الفكرة",
+        "تمييز متى نستخدم Deep Learning",
+        "حل أسئلة مفاهيمية",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Neural Network": [
+        "تحليل Neural Network بسيطة",
+        "رسم بنية شبكة",
+        "تحديد المدخلات والمخرجات",
+        "تفسير دور الأوزان",
+        "تتبع تنبؤ بسيط",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "المدخلات": [
+        "تحليل Neural Network بسيطة",
+        "رسم بنية شبكة",
+        "تحديد المدخلات والمخرجات",
+        "تفسير دور الأوزان",
+        "تتبع تنبؤ بسيط",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "المخرجات": [
+        "تحليل Neural Network بسيطة",
+        "رسم بنية شبكة",
+        "تحديد المدخلات والمخرجات",
+        "تفسير دور الأوزان",
+        "تتبع تنبؤ بسيط",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "الأوزان": [
+        "تحليل Neural Network بسيطة",
+        "رسم بنية شبكة",
+        "تحديد المدخلات والمخرجات",
+        "تفسير دور الأوزان",
+        "تتبع تنبؤ بسيط",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "الانحيازات": [
+        "تحليل Neural Network بسيطة",
+        "رسم بنية شبكة",
+        "تحديد المدخلات والمخرجات",
+        "تفسير دور الأوزان",
+        "تتبع تنبؤ بسيط",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "الطبقات": [
+        "تحليل Neural Network بسيطة",
+        "رسم بنية شبكة",
+        "تحديد المدخلات والمخرجات",
+        "تفسير دور الأوزان",
+        "تتبع تنبؤ بسيط",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "التنبؤ داخل الشبكة": [
+        "تحليل Neural Network بسيطة",
+        "رسم بنية شبكة",
+        "تحديد المدخلات والمخرجات",
+        "تفسير دور الأوزان",
+        "تتبع تنبؤ بسيط",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "مفهوم العصبون الاصطناعي": [
+        "حساب ناتج عصبون",
+        "تحليل وزن وانحياز",
+        "تتبع المجموع الموزون",
+        "تطبيق دالة تنشيط",
+        "رسم عصبون بسيط",
+        "مراجعة الأخطاء",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "المجموع الموزون": [
+        "حساب ناتج عصبون",
+        "تحليل وزن وانحياز",
+        "تتبع المجموع الموزون",
+        "تطبيق دالة تنشيط",
+        "رسم عصبون بسيط",
+        "مراجعة الأخطاء",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "الانحياز": [
+        "حساب ناتج عصبون",
+        "تحليل وزن وانحياز",
+        "تتبع المجموع الموزون",
+        "تطبيق دالة تنشيط",
+        "رسم عصبون بسيط",
+        "مراجعة الأخطاء",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "دالة التنشيط": [
+        "حساب ناتج عصبون",
+        "تحليل وزن وانحياز",
+        "تتبع المجموع الموزون",
+        "تطبيق دالة تنشيط",
+        "رسم عصبون بسيط",
+        "مراجعة الأخطاء",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "ناتج العصبون": [
+        "حساب ناتج عصبون",
+        "تحليل وزن وانحياز",
+        "تتبع المجموع الموزون",
+        "تطبيق دالة تنشيط",
+        "رسم عصبون بسيط",
+        "مراجعة الأخطاء",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "طبقة الإدخال": [
+        "تحليل طبقات شبكة",
+        "تحديد نوع الطبقة",
+        "مقارنة شبكات مختلفة",
+        "اقتراح بنية بسيطة",
+        "رسم مخطط شبكة",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "الطبقات المخفية": [
+        "تحليل طبقات شبكة",
+        "تحديد نوع الطبقة",
+        "مقارنة شبكات مختلفة",
+        "اقتراح بنية بسيطة",
+        "رسم مخطط شبكة",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "طبقة الإخراج": [
+        "تحليل طبقات شبكة",
+        "تحديد نوع الطبقة",
+        "مقارنة شبكات مختلفة",
+        "اقتراح بنية بسيطة",
+        "رسم مخطط شبكة",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "عدد الطبقات": [
+        "تحليل طبقات شبكة",
+        "تحديد نوع الطبقة",
+        "مقارنة شبكات مختلفة",
+        "اقتراح بنية بسيطة",
+        "رسم مخطط شبكة",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "عدد الوحدات العصبية": [
+        "تحليل طبقات شبكة",
+        "تحديد نوع الطبقة",
+        "مقارنة شبكات مختلفة",
+        "اقتراح بنية بسيطة",
+        "رسم مخطط شبكة",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "أثر العمق والعرض": [
+        "تحليل طبقات شبكة",
+        "تحديد نوع الطبقة",
+        "مقارنة شبكات مختلفة",
+        "اقتراح بنية بسيطة",
+        "رسم مخطط شبكة",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "مفهوم Activation Function": [
+        "تحليل Activation Function",
+        "مقارنة ReLU وSigmoid",
+        "تطبيق Softmax مفاهيمياً",
+        "اختيار دالة مناسبة",
+        "تفسير أثر التنشيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Sigmoid": [
+        "تحليل Activation Function",
+        "مقارنة ReLU وSigmoid",
+        "تطبيق Softmax مفاهيمياً",
+        "اختيار دالة مناسبة",
+        "تفسير أثر التنشيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Tanh": [
+        "تحليل Activation Function",
+        "مقارنة ReLU وSigmoid",
+        "تطبيق Softmax مفاهيمياً",
+        "اختيار دالة مناسبة",
+        "تفسير أثر التنشيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "ReLU": [
+        "تحليل Activation Function",
+        "مقارنة ReLU وSigmoid",
+        "تطبيق Softmax مفاهيمياً",
+        "اختيار دالة مناسبة",
+        "تفسير أثر التنشيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Softmax": [
+        "تحليل Activation Function",
+        "مقارنة ReLU وSigmoid",
+        "تطبيق Softmax مفاهيمياً",
+        "اختيار دالة مناسبة",
+        "تفسير أثر التنشيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "اختيار دالة تنشيط": [
+        "تحليل Activation Function",
+        "مقارنة ReLU وSigmoid",
+        "تطبيق Softmax مفاهيمياً",
+        "اختيار دالة مناسبة",
+        "تفسير أثر التنشيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "أثر دالة التنشيط": [
+        "تحليل Activation Function",
+        "مقارنة ReLU وSigmoid",
+        "تطبيق Softmax مفاهيمياً",
+        "اختيار دالة مناسبة",
+        "تفسير أثر التنشيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Forward Propagation": [
+        "تتبع Forward Propagation",
+        "حساب خطوة أمامية بسيطة",
+        "تحليل ناتج طبقة",
+        "تفسير تنبؤ شبكة",
+        "رسم مسار البيانات",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "انتقال البيانات عبر الطبقات": [
+        "تتبع Forward Propagation",
+        "حساب خطوة أمامية بسيطة",
+        "تحليل ناتج طبقة",
+        "تفسير تنبؤ شبكة",
+        "رسم مسار البيانات",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "حساب المجموع الموزون": [
+        "تتبع Forward Propagation",
+        "حساب خطوة أمامية بسيطة",
+        "تحليل ناتج طبقة",
+        "تفسير تنبؤ شبكة",
+        "رسم مسار البيانات",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "تطبيق دالة التنشيط": [
+        "تتبع Forward Propagation",
+        "حساب خطوة أمامية بسيطة",
+        "تحليل ناتج طبقة",
+        "تفسير تنبؤ شبكة",
+        "رسم مسار البيانات",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "إنتاج التنبؤ": [
+        "تتبع Forward Propagation",
+        "حساب خطوة أمامية بسيطة",
+        "تحليل ناتج طبقة",
+        "تفسير تنبؤ شبكة",
+        "رسم مسار البيانات",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "تتبع الحساب داخل الشبكة": [
+        "تتبع Forward Propagation",
+        "حساب خطوة أمامية بسيطة",
+        "تحليل ناتج طبقة",
+        "تفسير تنبؤ شبكة",
+        "رسم مسار البيانات",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "مفهوم Backpropagation": [
+        "دراسة Backpropagation",
+        "تتبع فكرة انتشار الخطأ",
+        "تحليل تحديث وزن",
+        "ربط التدرج بالخسارة",
+        "تلخيص خطوات التدريب",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "انتشار الخطأ للخلف": [
+        "دراسة Backpropagation",
+        "تتبع فكرة انتشار الخطأ",
+        "تحليل تحديث وزن",
+        "ربط التدرج بالخسارة",
+        "تلخيص خطوات التدريب",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "حساب التدرجات": [
+        "دراسة Backpropagation",
+        "تتبع فكرة انتشار الخطأ",
+        "تحليل تحديث وزن",
+        "ربط التدرج بالخسارة",
+        "تلخيص خطوات التدريب",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "تحديث الأوزان": [
+        "دراسة Backpropagation",
+        "تتبع فكرة انتشار الخطأ",
+        "تحليل تحديث وزن",
+        "ربط التدرج بالخسارة",
+        "تلخيص خطوات التدريب",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "العلاقة مع دالة الخسارة": [
+        "دراسة Backpropagation",
+        "تتبع فكرة انتشار الخطأ",
+        "تحليل تحديث وزن",
+        "ربط التدرج بالخسارة",
+        "تلخيص خطوات التدريب",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "فكرة قاعدة السلسلة": [
+        "دراسة Backpropagation",
+        "تتبع فكرة انتشار الخطأ",
+        "تحليل تحديث وزن",
+        "ربط التدرج بالخسارة",
+        "تلخيص خطوات التدريب",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "مفهوم تدريب النماذج العميقة": [
+        "تحليل عملية تدريب",
+        "تفسير Epoch وBatch",
+        "قراءة Loss Curve",
+        "مقارنة تدريب وتحقق",
+        "اكتشاف مشكلة تدريب",
+        "تطبيق تجربة بسيطة",
+        "أخرى"
+    ],
+    "Epoch": [
+        "تحليل عملية تدريب",
+        "تفسير Epoch وBatch",
+        "قراءة Loss Curve",
+        "مقارنة تدريب وتحقق",
+        "اكتشاف مشكلة تدريب",
+        "تطبيق تجربة بسيطة",
+        "أخرى"
+    ],
+    "Batch": [
+        "تحليل عملية تدريب",
+        "تفسير Epoch وBatch",
+        "قراءة Loss Curve",
+        "مقارنة تدريب وتحقق",
+        "اكتشاف مشكلة تدريب",
+        "تطبيق تجربة بسيطة",
+        "أخرى"
+    ],
+    "Mini-batch": [
+        "تحليل عملية تدريب",
+        "تفسير Epoch وBatch",
+        "قراءة Loss Curve",
+        "مقارنة تدريب وتحقق",
+        "اكتشاف مشكلة تدريب",
+        "تطبيق تجربة بسيطة",
+        "أخرى"
+    ],
+    "Loss Curve": [
+        "تحليل عملية تدريب",
+        "تفسير Epoch وBatch",
+        "قراءة Loss Curve",
+        "مقارنة تدريب وتحقق",
+        "اكتشاف مشكلة تدريب",
+        "تطبيق تجربة بسيطة",
+        "أخرى"
+    ],
+    "Validation Curve": [
+        "تحليل عملية تدريب",
+        "تفسير Epoch وBatch",
+        "قراءة Loss Curve",
+        "مقارنة تدريب وتحقق",
+        "اكتشاف مشكلة تدريب",
+        "تطبيق تجربة بسيطة",
+        "أخرى"
+    ],
+    "تتبع التدريب": [
+        "تحليل عملية تدريب",
+        "تفسير Epoch وBatch",
+        "قراءة Loss Curve",
+        "مقارنة تدريب وتحقق",
+        "اكتشاف مشكلة تدريب",
+        "تطبيق تجربة بسيطة",
+        "أخرى"
+    ],
+    "مفهوم Optimizer": [
+        "دراسة Optimizer",
+        "مقارنة SGD وAdam",
+        "تحليل تحديث أوزان",
+        "اختيار Optimizer مناسب",
+        "تفسير أثره على التدريب",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Gradient Descent": [
+        "دراسة Optimizer",
+        "مقارنة SGD وAdam",
+        "تحليل تحديث أوزان",
+        "اختيار Optimizer مناسب",
+        "تفسير أثره على التدريب",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "SGD": [
+        "دراسة Optimizer",
+        "مقارنة SGD وAdam",
+        "تحليل تحديث أوزان",
+        "اختيار Optimizer مناسب",
+        "تفسير أثره على التدريب",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Adam": [
+        "دراسة Optimizer",
+        "مقارنة SGD وAdam",
+        "تحليل تحديث أوزان",
+        "اختيار Optimizer مناسب",
+        "تفسير أثره على التدريب",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "اختيار Optimizer": [
+        "دراسة Optimizer",
+        "مقارنة SGD وAdam",
+        "تحليل تحديث أوزان",
+        "اختيار Optimizer مناسب",
+        "تفسير أثره على التدريب",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "أثر Optimizer على التدريب": [
+        "دراسة Optimizer",
+        "مقارنة SGD وAdam",
+        "تحليل تحديث أوزان",
+        "اختيار Optimizer مناسب",
+        "تفسير أثره على التدريب",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Learning Rate": [
+        "تحليل Learning Rate",
+        "تفسير تذبذب التدريب",
+        "مقارنة معدلات تعلم",
+        "اقتراح تعديل",
+        "قراءة منحنى تدريب",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "تغيير Learning Rate أثناء التدريب": [
+        "تحليل Learning Rate",
+        "تفسير تذبذب التدريب",
+        "مقارنة معدلات تعلم",
+        "اقتراح تعديل",
+        "قراءة منحنى تدريب",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "Learning Rate كبير جداً": [
+        "تحليل Learning Rate",
+        "تفسير تذبذب التدريب",
+        "مقارنة معدلات تعلم",
+        "اقتراح تعديل",
+        "قراءة منحنى تدريب",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "Learning Rate صغير جداً": [
+        "تحليل Learning Rate",
+        "تفسير تذبذب التدريب",
+        "مقارنة معدلات تعلم",
+        "اقتراح تعديل",
+        "قراءة منحنى تدريب",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "Scheduling": [
+        "تحليل Learning Rate",
+        "تفسير تذبذب التدريب",
+        "مقارنة معدلات تعلم",
+        "اقتراح تعديل",
+        "قراءة منحنى تدريب",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "أثره على الاستقرار": [
+        "تحليل Learning Rate",
+        "تفسير تذبذب التدريب",
+        "مقارنة معدلات تعلم",
+        "اقتراح تعديل",
+        "قراءة منحنى تدريب",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "مفهوم Regularization": [
+        "تحليل Regularization",
+        "تفسير تقليل Overfitting",
+        "مقارنة قبل وبعد",
+        "اختيار معالجة مناسبة",
+        "قراءة نتائج نموذج",
+        "أخرى"
+    ],
+    "تقليل Overfitting": [
+        "تحليل Regularization",
+        "تفسير تقليل Overfitting",
+        "مقارنة قبل وبعد",
+        "اختيار معالجة مناسبة",
+        "قراءة نتائج نموذج",
+        "أخرى"
+    ],
+    "تبسيط النموذج": [
+        "تحليل Regularization",
+        "تفسير تقليل Overfitting",
+        "مقارنة قبل وبعد",
+        "اختيار معالجة مناسبة",
+        "قراءة نتائج نموذج",
+        "أخرى"
+    ],
+    "عقوبة الأوزان": [
+        "تحليل Regularization",
+        "تفسير تقليل Overfitting",
+        "مقارنة قبل وبعد",
+        "اختيار معالجة مناسبة",
+        "قراءة نتائج نموذج",
+        "أخرى"
+    ],
+    "Regularization في الشبكات العميقة": [
+        "تحليل Regularization",
+        "تفسير تقليل Overfitting",
+        "مقارنة قبل وبعد",
+        "اختيار معالجة مناسبة",
+        "قراءة نتائج نموذج",
+        "أخرى"
+    ],
+    "أثره على التعميم": [
+        "تحليل Regularization",
+        "تفسير تقليل Overfitting",
+        "مقارنة قبل وبعد",
+        "اختيار معالجة مناسبة",
+        "قراءة نتائج نموذج",
+        "أخرى"
+    ],
+    "مفهوم Dropout": [
+        "دراسة Dropout",
+        "تحليل أثره على الشبكة",
+        "مقارنة نموذج مع وبدون Dropout",
+        "تفسير تقليل Overfitting",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "إيقاف عشوائي لبعض الوحدات": [
+        "دراسة Dropout",
+        "تحليل أثره على الشبكة",
+        "مقارنة نموذج مع وبدون Dropout",
+        "تفسير تقليل Overfitting",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "تقليل الاعتماد الزائد": [
+        "دراسة Dropout",
+        "تحليل أثره على الشبكة",
+        "مقارنة نموذج مع وبدون Dropout",
+        "تفسير تقليل Overfitting",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "أثر Dropout على التدريب": [
+        "دراسة Dropout",
+        "تحليل أثره على الشبكة",
+        "مقارنة نموذج مع وبدون Dropout",
+        "تفسير تقليل Overfitting",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "متى نستخدم Dropout": [
+        "دراسة Dropout",
+        "تحليل أثره على الشبكة",
+        "مقارنة نموذج مع وبدون Dropout",
+        "تفسير تقليل Overfitting",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "أخطاء استخدام Dropout": [
+        "دراسة Dropout",
+        "تحليل أثره على الشبكة",
+        "مقارنة نموذج مع وبدون Dropout",
+        "تفسير تقليل Overfitting",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "مفهوم Batch Normalization": [
+        "دراسة Batch Normalization",
+        "تحليل أثره على التدريب",
+        "تفسير استقرار القيم",
+        "مقارنة نموذجين",
+        "تلخيص المفهوم",
+        "أخرى"
+    ],
+    "استقرار التدريب": [
+        "دراسة Batch Normalization",
+        "تحليل أثره على التدريب",
+        "تفسير استقرار القيم",
+        "مقارنة نموذجين",
+        "تلخيص المفهوم",
+        "أخرى"
+    ],
+    "توحيد القيم داخل الشبكة": [
+        "دراسة Batch Normalization",
+        "تحليل أثره على التدريب",
+        "تفسير استقرار القيم",
+        "مقارنة نموذجين",
+        "تلخيص المفهوم",
+        "أخرى"
+    ],
+    "تسريع التدريب": [
+        "دراسة Batch Normalization",
+        "تحليل أثره على التدريب",
+        "تفسير استقرار القيم",
+        "مقارنة نموذجين",
+        "تلخيص المفهوم",
+        "أخرى"
+    ],
+    "أثره على الشبكات العميقة": [
+        "دراسة Batch Normalization",
+        "تحليل أثره على التدريب",
+        "تفسير استقرار القيم",
+        "مقارنة نموذجين",
+        "تلخيص المفهوم",
+        "أخرى"
+    ],
+    "متى يستخدم": [
+        "دراسة Batch Normalization",
+        "تحليل أثره على التدريب",
+        "تفسير استقرار القيم",
+        "مقارنة نموذجين",
+        "تلخيص المفهوم",
+        "أخرى"
+    ],
+    "مفهوم Vanishing Gradients": [
+        "تحليل مشكلة Gradients",
+        "تمييز Vanishing وExploding",
+        "قراءة منحنى تدريب",
+        "اقتراح حل",
+        "مراجعة أخطاء تدريب",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Exploding Gradients": [
+        "تحليل مشكلة Gradients",
+        "تمييز Vanishing وExploding",
+        "قراءة منحنى تدريب",
+        "اقتراح حل",
+        "مراجعة أخطاء تدريب",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "أثر عمق الشبكة": [
+        "تحليل مشكلة Gradients",
+        "تمييز Vanishing وExploding",
+        "قراءة منحنى تدريب",
+        "اقتراح حل",
+        "مراجعة أخطاء تدريب",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "أثر دوال التنشيط": [
+        "تحليل مشكلة Gradients",
+        "تمييز Vanishing وExploding",
+        "قراءة منحنى تدريب",
+        "اقتراح حل",
+        "مراجعة أخطاء تدريب",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "علامات المشكلة": [
+        "تحليل مشكلة Gradients",
+        "تمييز Vanishing وExploding",
+        "قراءة منحنى تدريب",
+        "اقتراح حل",
+        "مراجعة أخطاء تدريب",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "طرق التخفيف": [
+        "تحليل مشكلة Gradients",
+        "تمييز Vanishing وExploding",
+        "قراءة منحنى تدريب",
+        "اقتراح حل",
+        "مراجعة أخطاء تدريب",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم TensorFlow": [
+        "استكشاف TensorFlow",
+        "بناء نموذج بسيط",
+        "تدريب نموذج تعليمي",
+        "قراءة توثيق TensorFlow",
+        "تحليل نتائج تدريب",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "بناء نموذج Deep Learning": [
+        "استكشاف TensorFlow",
+        "بناء نموذج بسيط",
+        "تدريب نموذج تعليمي",
+        "قراءة توثيق TensorFlow",
+        "تحليل نتائج تدريب",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "الطبقات Layers": [
+        "استكشاف TensorFlow",
+        "بناء نموذج بسيط",
+        "تدريب نموذج تعليمي",
+        "قراءة توثيق TensorFlow",
+        "تحليل نتائج تدريب",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "التدريب": [
+        "استكشاف TensorFlow",
+        "بناء نموذج بسيط",
+        "تدريب نموذج تعليمي",
+        "قراءة توثيق TensorFlow",
+        "تحليل نتائج تدريب",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "التقييم": [
+        "استكشاف TensorFlow",
+        "بناء نموذج بسيط",
+        "تدريب نموذج تعليمي",
+        "قراءة توثيق TensorFlow",
+        "تحليل نتائج تدريب",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "استخدامه في المشاريع": [
+        "استكشاف TensorFlow",
+        "بناء نموذج بسيط",
+        "تدريب نموذج تعليمي",
+        "قراءة توثيق TensorFlow",
+        "تحليل نتائج تدريب",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "مفهوم Keras": [
+        "بناء نموذج Keras بسيط",
+        "ترتيب Layers",
+        "تطبيق Compile وFit",
+        "تقييم النموذج",
+        "تنفيذ Predict",
+        "مراجعة أخطاء Keras",
+        "أخرى"
+    ],
+    "Sequential Model": [
+        "بناء نموذج Keras بسيط",
+        "ترتيب Layers",
+        "تطبيق Compile وFit",
+        "تقييم النموذج",
+        "تنفيذ Predict",
+        "مراجعة أخطاء Keras",
+        "أخرى"
+    ],
+    "Layers": [
+        "بناء نموذج Keras بسيط",
+        "ترتيب Layers",
+        "تطبيق Compile وFit",
+        "تقييم النموذج",
+        "تنفيذ Predict",
+        "مراجعة أخطاء Keras",
+        "أخرى"
+    ],
+    "Compile": [
+        "بناء نموذج Keras بسيط",
+        "ترتيب Layers",
+        "تطبيق Compile وFit",
+        "تقييم النموذج",
+        "تنفيذ Predict",
+        "مراجعة أخطاء Keras",
+        "أخرى"
+    ],
+    "Fit": [
+        "بناء نموذج Keras بسيط",
+        "ترتيب Layers",
+        "تطبيق Compile وFit",
+        "تقييم النموذج",
+        "تنفيذ Predict",
+        "مراجعة أخطاء Keras",
+        "أخرى"
+    ],
+    "Evaluate": [
+        "بناء نموذج Keras بسيط",
+        "ترتيب Layers",
+        "تطبيق Compile وFit",
+        "تقييم النموذج",
+        "تنفيذ Predict",
+        "مراجعة أخطاء Keras",
+        "أخرى"
+    ],
+    "Predict": [
+        "بناء نموذج Keras بسيط",
+        "ترتيب Layers",
+        "تطبيق Compile وFit",
+        "تقييم النموذج",
+        "تنفيذ Predict",
+        "مراجعة أخطاء Keras",
+        "أخرى"
+    ],
+    "مفهوم PyTorch": [
+        "استكشاف PyTorch",
+        "تحليل Tensor",
+        "بناء نموذج بسيط",
+        "تتبع Training Loop",
+        "قراءة توثيق PyTorch",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Tensor": [
+        "استكشاف PyTorch",
+        "تحليل Tensor",
+        "بناء نموذج بسيط",
+        "تتبع Training Loop",
+        "قراءة توثيق PyTorch",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Model Class": [
+        "استكشاف PyTorch",
+        "تحليل Tensor",
+        "بناء نموذج بسيط",
+        "تتبع Training Loop",
+        "قراءة توثيق PyTorch",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Forward Method": [
+        "استكشاف PyTorch",
+        "تحليل Tensor",
+        "بناء نموذج بسيط",
+        "تتبع Training Loop",
+        "قراءة توثيق PyTorch",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Training Loop": [
+        "استكشاف PyTorch",
+        "تحليل Tensor",
+        "بناء نموذج بسيط",
+        "تتبع Training Loop",
+        "قراءة توثيق PyTorch",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Loss and Optimizer": [
+        "استكشاف PyTorch",
+        "تحليل Tensor",
+        "بناء نموذج بسيط",
+        "تتبع Training Loop",
+        "قراءة توثيق PyTorch",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "استخدامه في الأبحاث": [
+        "استكشاف PyTorch",
+        "تحليل Tensor",
+        "بناء نموذج بسيط",
+        "تتبع Training Loop",
+        "قراءة توثيق PyTorch",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "تحديد المشكلة": [
+        "بناء خطة Deep Learning",
+        "ترتيب Workflow",
+        "تحليل مرحلة ناقصة",
+        "تصميم تجربة تدريب",
+        "مقارنة تجارب",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "تجهيز البيانات": [
+        "بناء خطة Deep Learning",
+        "ترتيب Workflow",
+        "تحليل مرحلة ناقصة",
+        "تصميم تجربة تدريب",
+        "مقارنة تجارب",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "اختيار بنية النموذج": [
+        "بناء خطة Deep Learning",
+        "ترتيب Workflow",
+        "تحليل مرحلة ناقصة",
+        "تصميم تجربة تدريب",
+        "مقارنة تجارب",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "تدريب النموذج": [
+        "بناء خطة Deep Learning",
+        "ترتيب Workflow",
+        "تحليل مرحلة ناقصة",
+        "تصميم تجربة تدريب",
+        "مقارنة تجارب",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "تقييم النموذج": [
+        "بناء خطة Deep Learning",
+        "ترتيب Workflow",
+        "تحليل مرحلة ناقصة",
+        "تصميم تجربة تدريب",
+        "مقارنة تجارب",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "تحسين النموذج": [
+        "بناء خطة Deep Learning",
+        "ترتيب Workflow",
+        "تحليل مرحلة ناقصة",
+        "تصميم تجربة تدريب",
+        "مقارنة تجارب",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "توثيق التجربة": [
+        "بناء خطة Deep Learning",
+        "ترتيب Workflow",
+        "تحليل مرحلة ناقصة",
+        "تصميم تجربة تدريب",
+        "مقارنة تجارب",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "مفهوم CNN": [
+        "دراسة CNN",
+        "تحليل بنية CNN",
+        "رسم طبقات CNN",
+        "تفسير Filter",
+        "تتبع معالجة صورة",
+        "بناء نموذج CNN بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "استخدام CNN مع الصور": [
+        "دراسة CNN",
+        "تحليل بنية CNN",
+        "رسم طبقات CNN",
+        "تفسير Filter",
+        "تتبع معالجة صورة",
+        "بناء نموذج CNN بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Convolution": [
+        "دراسة CNN",
+        "تحليل بنية CNN",
+        "رسم طبقات CNN",
+        "تفسير Filter",
+        "تتبع معالجة صورة",
+        "بناء نموذج CNN بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Filters": [
+        "دراسة CNN",
+        "تحليل بنية CNN",
+        "رسم طبقات CNN",
+        "تفسير Filter",
+        "تتبع معالجة صورة",
+        "بناء نموذج CNN بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Feature Maps": [
+        "دراسة CNN",
+        "تحليل بنية CNN",
+        "رسم طبقات CNN",
+        "تفسير Filter",
+        "تتبع معالجة صورة",
+        "بناء نموذج CNN بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Pooling": [
+        "دراسة CNN",
+        "تحليل بنية CNN",
+        "رسم طبقات CNN",
+        "تفسير Filter",
+        "تتبع معالجة صورة",
+        "بناء نموذج CNN بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Fully Connected Layer": [
+        "دراسة CNN",
+        "تحليل بنية CNN",
+        "رسم طبقات CNN",
+        "تفسير Filter",
+        "تتبع معالجة صورة",
+        "بناء نموذج CNN بسيط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Convolution Layer": [
+        "تحليل Convolution Layer",
+        "تفسير دور Filter",
+        "حساب حجم مخرج بسيط",
+        "مقارنة Stride وPadding",
+        "تتبع مثال صورة",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "المرشح Filter": [
+        "تحليل Convolution Layer",
+        "تفسير دور Filter",
+        "حساب حجم مخرج بسيط",
+        "مقارنة Stride وPadding",
+        "تتبع مثال صورة",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "حجم المرشح": [
+        "تحليل Convolution Layer",
+        "تفسير دور Filter",
+        "حساب حجم مخرج بسيط",
+        "مقارنة Stride وPadding",
+        "تتبع مثال صورة",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "استخراج الخصائص": [
+        "تحليل Convolution Layer",
+        "تفسير دور Filter",
+        "حساب حجم مخرج بسيط",
+        "مقارنة Stride وPadding",
+        "تتبع مثال صورة",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "Feature Map": [
+        "تحليل Convolution Layer",
+        "تفسير دور Filter",
+        "حساب حجم مخرج بسيط",
+        "مقارنة Stride وPadding",
+        "تتبع مثال صورة",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "Stride": [
+        "تحليل Convolution Layer",
+        "تفسير دور Filter",
+        "حساب حجم مخرج بسيط",
+        "مقارنة Stride وPadding",
+        "تتبع مثال صورة",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "Padding": [
+        "تحليل Convolution Layer",
+        "تفسير دور Filter",
+        "حساب حجم مخرج بسيط",
+        "مقارنة Stride وPadding",
+        "تتبع مثال صورة",
+        "حل تمارين",
+        "أخرى"
+    ],
+    "مفهوم Pooling": [
+        "تحليل Pooling Layer",
+        "تطبيق Max Pooling بسيط",
+        "مقارنة Max وAverage",
+        "تفسير تقليل الأبعاد",
+        "حل تمارين صورية",
+        "أخرى"
+    ],
+    "Max Pooling": [
+        "تحليل Pooling Layer",
+        "تطبيق Max Pooling بسيط",
+        "مقارنة Max وAverage",
+        "تفسير تقليل الأبعاد",
+        "حل تمارين صورية",
+        "أخرى"
+    ],
+    "Average Pooling": [
+        "تحليل Pooling Layer",
+        "تطبيق Max Pooling بسيط",
+        "مقارنة Max وAverage",
+        "تفسير تقليل الأبعاد",
+        "حل تمارين صورية",
+        "أخرى"
+    ],
+    "تقليل الأبعاد": [
+        "تحليل Pooling Layer",
+        "تطبيق Max Pooling بسيط",
+        "مقارنة Max وAverage",
+        "تفسير تقليل الأبعاد",
+        "حل تمارين صورية",
+        "أخرى"
+    ],
+    "الاحتفاظ بالخصائص المهمة": [
+        "تحليل Pooling Layer",
+        "تطبيق Max Pooling بسيط",
+        "مقارنة Max وAverage",
+        "تفسير تقليل الأبعاد",
+        "حل تمارين صورية",
+        "أخرى"
+    ],
+    "أثر Pooling على النموذج": [
+        "تحليل Pooling Layer",
+        "تطبيق Max Pooling بسيط",
+        "مقارنة Max وAverage",
+        "تفسير تقليل الأبعاد",
+        "حل تمارين صورية",
+        "أخرى"
+    ],
+    "مفهوم Image Classification": [
+        "تحليل مشروع Image Classification",
+        "تجهيز صور تدريبية",
+        "بناء نموذج تصنيف صور",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "تصنيف صورة إلى فئة": [
+        "تحليل مشروع Image Classification",
+        "تجهيز صور تدريبية",
+        "بناء نموذج تصنيف صور",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Dataset للصور": [
+        "تحليل مشروع Image Classification",
+        "تجهيز صور تدريبية",
+        "بناء نموذج تصنيف صور",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Training Images": [
+        "تحليل مشروع Image Classification",
+        "تجهيز صور تدريبية",
+        "بناء نموذج تصنيف صور",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "Validation Images": [
+        "تحليل مشروع Image Classification",
+        "تجهيز صور تدريبية",
+        "بناء نموذج تصنيف صور",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "تقييم تصنيف الصور": [
+        "تحليل مشروع Image Classification",
+        "تجهيز صور تدريبية",
+        "بناء نموذج تصنيف صور",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "مفهوم Object Detection": [
+        "دراسة Object Detection",
+        "تحليل صورة مع Bounding Boxes",
+        "تمييز التصنيف والكشف",
+        "تفسير مخرجات نموذج",
+        "مراجعة أخطاء الكشف",
+        "أخرى"
+    ],
+    "تحديد مكان الكائن": [
+        "دراسة Object Detection",
+        "تحليل صورة مع Bounding Boxes",
+        "تمييز التصنيف والكشف",
+        "تفسير مخرجات نموذج",
+        "مراجعة أخطاء الكشف",
+        "أخرى"
+    ],
+    "Bounding Box": [
+        "دراسة Object Detection",
+        "تحليل صورة مع Bounding Boxes",
+        "تمييز التصنيف والكشف",
+        "تفسير مخرجات نموذج",
+        "مراجعة أخطاء الكشف",
+        "أخرى"
+    ],
+    "الفئة Class": [
+        "دراسة Object Detection",
+        "تحليل صورة مع Bounding Boxes",
+        "تمييز التصنيف والكشف",
+        "تفسير مخرجات نموذج",
+        "مراجعة أخطاء الكشف",
+        "أخرى"
+    ],
+    "اكتشاف أكثر من كائن": [
+        "دراسة Object Detection",
+        "تحليل صورة مع Bounding Boxes",
+        "تمييز التصنيف والكشف",
+        "تفسير مخرجات نموذج",
+        "مراجعة أخطاء الكشف",
+        "أخرى"
+    ],
+    "استخداماته": [
+        "دراسة Object Detection",
+        "تحليل صورة مع Bounding Boxes",
+        "تمييز التصنيف والكشف",
+        "تفسير مخرجات نموذج",
+        "مراجعة أخطاء الكشف",
+        "أخرى"
+    ],
+    "مفهوم Image Segmentation": [
+        "دراسة Image Segmentation",
+        "تحليل مثال تقسيم صورة",
+        "مقارنة Segmentation وDetection",
+        "تفسير مخرجات نموذج",
+        "تلخيص الاستخدامات",
+        "أخرى"
+    ],
+    "تقسيم الصورة إلى مناطق": [
+        "دراسة Image Segmentation",
+        "تحليل مثال تقسيم صورة",
+        "مقارنة Segmentation وDetection",
+        "تفسير مخرجات نموذج",
+        "تلخيص الاستخدامات",
+        "أخرى"
+    ],
+    "Pixel Classification": [
+        "دراسة Image Segmentation",
+        "تحليل مثال تقسيم صورة",
+        "مقارنة Segmentation وDetection",
+        "تفسير مخرجات نموذج",
+        "تلخيص الاستخدامات",
+        "أخرى"
+    ],
+    "Semantic Segmentation": [
+        "دراسة Image Segmentation",
+        "تحليل مثال تقسيم صورة",
+        "مقارنة Segmentation وDetection",
+        "تفسير مخرجات نموذج",
+        "تلخيص الاستخدامات",
+        "أخرى"
+    ],
+    "Instance Segmentation": [
+        "دراسة Image Segmentation",
+        "تحليل مثال تقسيم صورة",
+        "مقارنة Segmentation وDetection",
+        "تفسير مخرجات نموذج",
+        "تلخيص الاستخدامات",
+        "أخرى"
+    ],
+    "تطبيقات طبية وصناعية": [
+        "دراسة Image Segmentation",
+        "تحليل مثال تقسيم صورة",
+        "مقارنة Segmentation وDetection",
+        "تفسير مخرجات نموذج",
+        "تلخيص الاستخدامات",
+        "أخرى"
+    ],
+    "مفهوم Computer Vision": [
+        "تحليل تطبيق Computer Vision",
+        "تصنيف نوع المهمة",
+        "مقارنة التصنيف والكشف والتقسيم",
+        "كتابة وصف مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "فهم الصور والفيديو": [
+        "تحليل تطبيق Computer Vision",
+        "تصنيف نوع المهمة",
+        "مقارنة التصنيف والكشف والتقسيم",
+        "كتابة وصف مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "التصنيف": [
+        "تحليل تطبيق Computer Vision",
+        "تصنيف نوع المهمة",
+        "مقارنة التصنيف والكشف والتقسيم",
+        "كتابة وصف مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "الكشف": [
+        "تحليل تطبيق Computer Vision",
+        "تصنيف نوع المهمة",
+        "مقارنة التصنيف والكشف والتقسيم",
+        "كتابة وصف مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "التقسيم": [
+        "تحليل تطبيق Computer Vision",
+        "تصنيف نوع المهمة",
+        "مقارنة التصنيف والكشف والتقسيم",
+        "كتابة وصف مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تطبيقات Computer Vision": [
+        "تحليل تطبيق Computer Vision",
+        "تصنيف نوع المهمة",
+        "مقارنة التصنيف والكشف والتقسيم",
+        "كتابة وصف مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تحديات الصور": [
+        "تحليل تطبيق Computer Vision",
+        "تصنيف نوع المهمة",
+        "مقارنة التصنيف والكشف والتقسيم",
+        "كتابة وصف مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تغيير حجم الصورة": [
+        "تجهيز صور لنموذج AI",
+        "تطبيق Resize",
+        "تحليل Data Augmentation",
+        "مقارنة قبل وبعد المعالجة",
+        "توثيق خطوات تجهيز الصور",
+        "أخرى"
+    ],
+    "تطبيع قيم البكسل": [
+        "تجهيز صور لنموذج AI",
+        "تطبيق Resize",
+        "تحليل Data Augmentation",
+        "مقارنة قبل وبعد المعالجة",
+        "توثيق خطوات تجهيز الصور",
+        "أخرى"
+    ],
+    "تحويل الصورة إلى مصفوفة": [
+        "تجهيز صور لنموذج AI",
+        "تطبيق Resize",
+        "تحليل Data Augmentation",
+        "مقارنة قبل وبعد المعالجة",
+        "توثيق خطوات تجهيز الصور",
+        "أخرى"
+    ],
+    "زيادة البيانات Data Augmentation": [
+        "تجهيز صور لنموذج AI",
+        "تطبيق Resize",
+        "تحليل Data Augmentation",
+        "مقارنة قبل وبعد المعالجة",
+        "توثيق خطوات تجهيز الصور",
+        "أخرى"
+    ],
+    "قص الصورة": [
+        "تجهيز صور لنموذج AI",
+        "تطبيق Resize",
+        "تحليل Data Augmentation",
+        "مقارنة قبل وبعد المعالجة",
+        "توثيق خطوات تجهيز الصور",
+        "أخرى"
+    ],
+    "تدوير الصورة": [
+        "تجهيز صور لنموذج AI",
+        "تطبيق Resize",
+        "تحليل Data Augmentation",
+        "مقارنة قبل وبعد المعالجة",
+        "توثيق خطوات تجهيز الصور",
+        "أخرى"
+    ],
+    "مفهوم Transfer Learning": [
+        "تحليل Transfer Learning",
+        "اختيار نموذج مدرب مسبقاً",
+        "تفسير تجميد الطبقات",
+        "مقارنة تدريب من الصفر ونقل التعلم",
+        "بناء تجربة تعليمية",
+        "أخرى"
+    ],
+    "استخدام نموذج مدرب مسبقاً": [
+        "تحليل Transfer Learning",
+        "اختيار نموذج مدرب مسبقاً",
+        "تفسير تجميد الطبقات",
+        "مقارنة تدريب من الصفر ونقل التعلم",
+        "بناء تجربة تعليمية",
+        "أخرى"
+    ],
+    "Fine-tuning محدود": [
+        "تحليل Transfer Learning",
+        "اختيار نموذج مدرب مسبقاً",
+        "تفسير تجميد الطبقات",
+        "مقارنة تدريب من الصفر ونقل التعلم",
+        "بناء تجربة تعليمية",
+        "أخرى"
+    ],
+    "تجميد الطبقات": [
+        "تحليل Transfer Learning",
+        "اختيار نموذج مدرب مسبقاً",
+        "تفسير تجميد الطبقات",
+        "مقارنة تدريب من الصفر ونقل التعلم",
+        "بناء تجربة تعليمية",
+        "أخرى"
+    ],
+    "استخدامه عند قلة البيانات": [
+        "تحليل Transfer Learning",
+        "اختيار نموذج مدرب مسبقاً",
+        "تفسير تجميد الطبقات",
+        "مقارنة تدريب من الصفر ونقل التعلم",
+        "بناء تجربة تعليمية",
+        "أخرى"
+    ],
+    "أمثلة في الصور والنصوص": [
+        "تحليل Transfer Learning",
+        "اختيار نموذج مدرب مسبقاً",
+        "تفسير تجميد الطبقات",
+        "مقارنة تدريب من الصفر ونقل التعلم",
+        "بناء تجربة تعليمية",
+        "أخرى"
+    ],
+    "مفهوم RNN": [
+        "دراسة RNN",
+        "تحليل بيانات متسلسلة",
+        "رسم بنية RNN",
+        "تفسير الذاكرة الداخلية",
+        "مقارنة مع الشبكات العادية",
+        "أخرى"
+    ],
+    "البيانات المتسلسلة": [
+        "دراسة RNN",
+        "تحليل بيانات متسلسلة",
+        "رسم بنية RNN",
+        "تفسير الذاكرة الداخلية",
+        "مقارنة مع الشبكات العادية",
+        "أخرى"
+    ],
+    "الذاكرة الداخلية": [
+        "دراسة RNN",
+        "تحليل بيانات متسلسلة",
+        "رسم بنية RNN",
+        "تفسير الذاكرة الداخلية",
+        "مقارنة مع الشبكات العادية",
+        "أخرى"
+    ],
+    "معالجة النصوص المتتابعة": [
+        "دراسة RNN",
+        "تحليل بيانات متسلسلة",
+        "رسم بنية RNN",
+        "تفسير الذاكرة الداخلية",
+        "مقارنة مع الشبكات العادية",
+        "أخرى"
+    ],
+    "معالجة السلاسل الزمنية": [
+        "دراسة RNN",
+        "تحليل بيانات متسلسلة",
+        "رسم بنية RNN",
+        "تفسير الذاكرة الداخلية",
+        "مقارنة مع الشبكات العادية",
+        "أخرى"
+    ],
+    "مشكلات RNN": [
+        "دراسة RNN",
+        "تحليل بيانات متسلسلة",
+        "رسم بنية RNN",
+        "تفسير الذاكرة الداخلية",
+        "مقارنة مع الشبكات العادية",
+        "أخرى"
+    ],
+    "مفهوم LSTM": [
+        "دراسة LSTM",
+        "مقارنة RNN وLSTM",
+        "تحليل تسلسل طويل",
+        "تفسير فكرة Gates",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "حل مشكلة الذاكرة القصيرة": [
+        "دراسة LSTM",
+        "مقارنة RNN وLSTM",
+        "تحليل تسلسل طويل",
+        "تفسير فكرة Gates",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "الخلايا Gates كمفهوم": [
+        "دراسة LSTM",
+        "مقارنة RNN وLSTM",
+        "تحليل تسلسل طويل",
+        "تفسير فكرة Gates",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "التتابعات الطويلة": [
+        "دراسة LSTM",
+        "مقارنة RNN وLSTM",
+        "تحليل تسلسل طويل",
+        "تفسير فكرة Gates",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "استخدامها في النصوص": [
+        "دراسة LSTM",
+        "مقارنة RNN وLSTM",
+        "تحليل تسلسل طويل",
+        "تفسير فكرة Gates",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "استخدامها في السلاسل الزمنية": [
+        "دراسة LSTM",
+        "مقارنة RNN وLSTM",
+        "تحليل تسلسل طويل",
+        "تفسير فكرة Gates",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "مفهوم GRU": [
+        "دراسة GRU",
+        "مقارنة GRU وLSTM",
+        "تحليل حالة استخدام",
+        "تلخيص الفروق",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "العلاقة بين GRU وLSTM": [
+        "دراسة GRU",
+        "مقارنة GRU وLSTM",
+        "تحليل حالة استخدام",
+        "تلخيص الفروق",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تبسيط بنية الذاكرة": [
+        "دراسة GRU",
+        "مقارنة GRU وLSTM",
+        "تحليل حالة استخدام",
+        "تلخيص الفروق",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "استخدامه في التسلسلات": [
+        "دراسة GRU",
+        "مقارنة GRU وLSTM",
+        "تحليل حالة استخدام",
+        "تلخيص الفروق",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مقارنة الأداء والبساطة": [
+        "دراسة GRU",
+        "مقارنة GRU وLSTM",
+        "تحليل حالة استخدام",
+        "تلخيص الفروق",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Sequence Models": [
+        "تحليل Sequence Model",
+        "تمييز نوع تسلسل",
+        "تفسير التنبؤ التالي",
+        "تصميم مهمة تسلسلية",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "النص كسلسلة": [
+        "تحليل Sequence Model",
+        "تمييز نوع تسلسل",
+        "تفسير التنبؤ التالي",
+        "تصميم مهمة تسلسلية",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "الصوت كسلسلة": [
+        "تحليل Sequence Model",
+        "تمييز نوع تسلسل",
+        "تفسير التنبؤ التالي",
+        "تصميم مهمة تسلسلية",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "الزمن كسلسلة": [
+        "تحليل Sequence Model",
+        "تمييز نوع تسلسل",
+        "تفسير التنبؤ التالي",
+        "تصميم مهمة تسلسلية",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "التنبؤ بالعنصر التالي": [
+        "تحليل Sequence Model",
+        "تمييز نوع تسلسل",
+        "تفسير التنبؤ التالي",
+        "تصميم مهمة تسلسلية",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "تحديات البيانات المتسلسلة": [
+        "تحليل Sequence Model",
+        "تمييز نوع تسلسل",
+        "تفسير التنبؤ التالي",
+        "تصميم مهمة تسلسلية",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "مفهوم NLP": [
+        "دراسة NLP",
+        "تحليل مهمة نصية",
+        "تصنيف تطبيق NLP",
+        "تلخيص مفهوم",
+        "كتابة فكرة مشروع NLP",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "فهم اللغة الطبيعية": [
+        "دراسة NLP",
+        "تحليل مهمة نصية",
+        "تصنيف تطبيق NLP",
+        "تلخيص مفهوم",
+        "كتابة فكرة مشروع NLP",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تحليل النصوص": [
+        "دراسة NLP",
+        "تحليل مهمة نصية",
+        "تصنيف تطبيق NLP",
+        "تلخيص مفهوم",
+        "كتابة فكرة مشروع NLP",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تصنيف النصوص": [
+        "دراسة NLP",
+        "تحليل مهمة نصية",
+        "تصنيف تطبيق NLP",
+        "تلخيص مفهوم",
+        "كتابة فكرة مشروع NLP",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تلخيص النصوص": [
+        "دراسة NLP",
+        "تحليل مهمة نصية",
+        "تصنيف تطبيق NLP",
+        "تلخيص مفهوم",
+        "كتابة فكرة مشروع NLP",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "ترجمة آلية": [
+        "دراسة NLP",
+        "تحليل مهمة نصية",
+        "تصنيف تطبيق NLP",
+        "تلخيص مفهوم",
+        "كتابة فكرة مشروع NLP",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تحديات اللغة": [
+        "دراسة NLP",
+        "تحليل مهمة نصية",
+        "تصنيف تطبيق NLP",
+        "تلخيص مفهوم",
+        "كتابة فكرة مشروع NLP",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تنظيف النص": [
+        "تجهيز نص لـ NLP",
+        "تنظيف نص",
+        "تحليل خطوات معالجة",
+        "مقارنة قبل وبعد التنظيف",
+        "توثيق خطوات التجهيز",
+        "أخرى"
+    ],
+    "إزالة الرموز غير المهمة": [
+        "تجهيز نص لـ NLP",
+        "تنظيف نص",
+        "تحليل خطوات معالجة",
+        "مقارنة قبل وبعد التنظيف",
+        "توثيق خطوات التجهيز",
+        "أخرى"
+    ],
+    "توحيد النص": [
+        "تجهيز نص لـ NLP",
+        "تنظيف نص",
+        "تحليل خطوات معالجة",
+        "مقارنة قبل وبعد التنظيف",
+        "توثيق خطوات التجهيز",
+        "أخرى"
+    ],
+    "تقسيم النص": [
+        "تجهيز نص لـ NLP",
+        "تنظيف نص",
+        "تحليل خطوات معالجة",
+        "مقارنة قبل وبعد التنظيف",
+        "توثيق خطوات التجهيز",
+        "أخرى"
+    ],
+    "إزالة الكلمات الشائعة عند الحاجة": [
+        "تجهيز نص لـ NLP",
+        "تنظيف نص",
+        "تحليل خطوات معالجة",
+        "مقارنة قبل وبعد التنظيف",
+        "توثيق خطوات التجهيز",
+        "أخرى"
+    ],
+    "تحويل النص إلى تمثيل عددي": [
+        "تجهيز نص لـ NLP",
+        "تنظيف نص",
+        "تحليل خطوات معالجة",
+        "مقارنة قبل وبعد التنظيف",
+        "توثيق خطوات التجهيز",
+        "أخرى"
+    ],
+    "مفهوم Tokenization": [
+        "تطبيق Tokenization",
+        "تحليل Tokens",
+        "مقارنة طرق التقسيم",
+        "تفسير أثرها على LLM",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "تقسيم النص إلى كلمات": [
+        "تطبيق Tokenization",
+        "تحليل Tokens",
+        "مقارنة طرق التقسيم",
+        "تفسير أثرها على LLM",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "تقسيم النص إلى أجزاء": [
+        "تطبيق Tokenization",
+        "تحليل Tokens",
+        "مقارنة طرق التقسيم",
+        "تفسير أثرها على LLM",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "Tokens": [
+        "تطبيق Tokenization",
+        "تحليل Tokens",
+        "مقارنة طرق التقسيم",
+        "تفسير أثرها على LLM",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "Subword Tokenization": [
+        "تطبيق Tokenization",
+        "تحليل Tokens",
+        "مقارنة طرق التقسيم",
+        "تفسير أثرها على LLM",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "أثر Tokenization على النموذج": [
+        "تطبيق Tokenization",
+        "تحليل Tokens",
+        "مقارنة طرق التقسيم",
+        "تفسير أثرها على LLM",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "مفهوم Embeddings": [
+        "تحليل Embeddings",
+        "مقارنة معنى متجهات",
+        "تطبيق بحث تشابه",
+        "تفسير قرب دلالي",
+        "ربط Embeddings بـ RAG",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تمثيل النص كمتجه": [
+        "تحليل Embeddings",
+        "مقارنة معنى متجهات",
+        "تطبيق بحث تشابه",
+        "تفسير قرب دلالي",
+        "ربط Embeddings بـ RAG",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تشابه المعاني": [
+        "تحليل Embeddings",
+        "مقارنة معنى متجهات",
+        "تطبيق بحث تشابه",
+        "تفسير قرب دلالي",
+        "ربط Embeddings بـ RAG",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Embeddings للجمل": [
+        "تحليل Embeddings",
+        "مقارنة معنى متجهات",
+        "تطبيق بحث تشابه",
+        "تفسير قرب دلالي",
+        "ربط Embeddings بـ RAG",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Embeddings للصور": [
+        "تحليل Embeddings",
+        "مقارنة معنى متجهات",
+        "تطبيق بحث تشابه",
+        "تفسير قرب دلالي",
+        "ربط Embeddings بـ RAG",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "استخدامها في البحث الذكي": [
+        "تحليل Embeddings",
+        "مقارنة معنى متجهات",
+        "تطبيق بحث تشابه",
+        "تفسير قرب دلالي",
+        "ربط Embeddings بـ RAG",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Word Embeddings": [
+        "دراسة Word Embeddings",
+        "تحليل تشابه كلمات",
+        "مقارنة تمثيلات",
+        "شرح مثال دلالي",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "تمثيل الكلمات رقمياً": [
+        "دراسة Word Embeddings",
+        "تحليل تشابه كلمات",
+        "مقارنة تمثيلات",
+        "شرح مثال دلالي",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "تشابه الكلمات": [
+        "دراسة Word Embeddings",
+        "تحليل تشابه كلمات",
+        "مقارنة تمثيلات",
+        "شرح مثال دلالي",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "Word2Vec كمفهوم": [
+        "دراسة Word Embeddings",
+        "تحليل تشابه كلمات",
+        "مقارنة تمثيلات",
+        "شرح مثال دلالي",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "GloVe كمفهوم": [
+        "دراسة Word Embeddings",
+        "تحليل تشابه كلمات",
+        "مقارنة تمثيلات",
+        "شرح مثال دلالي",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "حدود تمثيل الكلمات وحدها": [
+        "دراسة Word Embeddings",
+        "تحليل تشابه كلمات",
+        "مقارنة تمثيلات",
+        "شرح مثال دلالي",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "مفهوم Text Classification": [
+        "تحليل مشروع Text Classification",
+        "تجهيز بيانات نصية",
+        "بناء نموذج تصنيف نصي",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "أخرى"
+    ],
+    "تصنيف الرسائل": [
+        "تحليل مشروع Text Classification",
+        "تجهيز بيانات نصية",
+        "بناء نموذج تصنيف نصي",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "أخرى"
+    ],
+    "تصنيف الأخبار": [
+        "تحليل مشروع Text Classification",
+        "تجهيز بيانات نصية",
+        "بناء نموذج تصنيف نصي",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "أخرى"
+    ],
+    "تصنيف المشاعر": [
+        "تحليل مشروع Text Classification",
+        "تجهيز بيانات نصية",
+        "بناء نموذج تصنيف نصي",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "أخرى"
+    ],
+    "تصنيف النوايا": [
+        "تحليل مشروع Text Classification",
+        "تجهيز بيانات نصية",
+        "بناء نموذج تصنيف نصي",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "أخرى"
+    ],
+    "Labels في النصوص": [
+        "تحليل مشروع Text Classification",
+        "تجهيز بيانات نصية",
+        "بناء نموذج تصنيف نصي",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "أخرى"
+    ],
+    "تقييم التصنيف النصي": [
+        "تحليل مشروع Text Classification",
+        "تجهيز بيانات نصية",
+        "بناء نموذج تصنيف نصي",
+        "تقييم النتائج",
+        "تحليل أخطاء التصنيف",
+        "أخرى"
+    ],
+    "مفهوم Sentiment Analysis": [
+        "تحليل Sentiment",
+        "تصنيف أمثلة نصية",
+        "تفسير خطأ تصنيف",
+        "بناء تجربة بسيطة",
+        "مراجعة نتائج",
+        "أخرى"
+    ],
+    "مشاعر إيجابية": [
+        "تحليل Sentiment",
+        "تصنيف أمثلة نصية",
+        "تفسير خطأ تصنيف",
+        "بناء تجربة بسيطة",
+        "مراجعة نتائج",
+        "أخرى"
+    ],
+    "مشاعر سلبية": [
+        "تحليل Sentiment",
+        "تصنيف أمثلة نصية",
+        "تفسير خطأ تصنيف",
+        "بناء تجربة بسيطة",
+        "مراجعة نتائج",
+        "أخرى"
+    ],
+    "مشاعر محايدة": [
+        "تحليل Sentiment",
+        "تصنيف أمثلة نصية",
+        "تفسير خطأ تصنيف",
+        "بناء تجربة بسيطة",
+        "مراجعة نتائج",
+        "أخرى"
+    ],
+    "تحليل آراء المستخدمين": [
+        "تحليل Sentiment",
+        "تصنيف أمثلة نصية",
+        "تفسير خطأ تصنيف",
+        "بناء تجربة بسيطة",
+        "مراجعة نتائج",
+        "أخرى"
+    ],
+    "تحديات السخرية والسياق": [
+        "تحليل Sentiment",
+        "تصنيف أمثلة نصية",
+        "تفسير خطأ تصنيف",
+        "بناء تجربة بسيطة",
+        "مراجعة نتائج",
+        "أخرى"
+    ],
+    "مفهوم NER": [
+        "تحليل NER",
+        "استخراج كيانات من نص",
+        "تمييز أنواع الكيانات",
+        "مراجعة أخطاء الاستخراج",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "التعرف على أسماء الأشخاص": [
+        "تحليل NER",
+        "استخراج كيانات من نص",
+        "تمييز أنواع الكيانات",
+        "مراجعة أخطاء الاستخراج",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "التعرف على الأماكن": [
+        "تحليل NER",
+        "استخراج كيانات من نص",
+        "تمييز أنواع الكيانات",
+        "مراجعة أخطاء الاستخراج",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "التعرف على المنظمات": [
+        "تحليل NER",
+        "استخراج كيانات من نص",
+        "تمييز أنواع الكيانات",
+        "مراجعة أخطاء الاستخراج",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "التعرف على التواريخ": [
+        "تحليل NER",
+        "استخراج كيانات من نص",
+        "تمييز أنواع الكيانات",
+        "مراجعة أخطاء الاستخراج",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "استخدامات NER": [
+        "تحليل NER",
+        "استخراج كيانات من نص",
+        "تمييز أنواع الكيانات",
+        "مراجعة أخطاء الاستخراج",
+        "تطبيق عملي",
+        "أخرى"
+    ],
+    "مفهوم Machine Translation": [
+        "تحليل ترجمة آلية",
+        "مقارنة ترجمتين",
+        "اكتشاف خطأ سياقي",
+        "تقييم جودة ترجمة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "ترجمة النصوص آلياً": [
+        "تحليل ترجمة آلية",
+        "مقارنة ترجمتين",
+        "اكتشاف خطأ سياقي",
+        "تقييم جودة ترجمة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "جودة الترجمة": [
+        "تحليل ترجمة آلية",
+        "مقارنة ترجمتين",
+        "اكتشاف خطأ سياقي",
+        "تقييم جودة ترجمة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "السياق في الترجمة": [
+        "تحليل ترجمة آلية",
+        "مقارنة ترجمتين",
+        "اكتشاف خطأ سياقي",
+        "تقييم جودة ترجمة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "الأخطاء الشائعة": [
+        "تحليل ترجمة آلية",
+        "مقارنة ترجمتين",
+        "اكتشاف خطأ سياقي",
+        "تقييم جودة ترجمة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "تقييم الترجمة": [
+        "تحليل ترجمة آلية",
+        "مقارنة ترجمتين",
+        "اكتشاف خطأ سياقي",
+        "تقييم جودة ترجمة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "مفهوم Text Summarization": [
+        "تحليل ملخص",
+        "مقارنة نص وملخص",
+        "تجربة تلخيص",
+        "تقييم دقة الملخص",
+        "اكتشاف حذف معنى مهم",
+        "أخرى"
+    ],
+    "تلخيص استخراجي": [
+        "تحليل ملخص",
+        "مقارنة نص وملخص",
+        "تجربة تلخيص",
+        "تقييم دقة الملخص",
+        "اكتشاف حذف معنى مهم",
+        "أخرى"
+    ],
+    "تلخيص توليدي": [
+        "تحليل ملخص",
+        "مقارنة نص وملخص",
+        "تجربة تلخيص",
+        "تقييم دقة الملخص",
+        "اكتشاف حذف معنى مهم",
+        "أخرى"
+    ],
+    "اختصار النص": [
+        "تحليل ملخص",
+        "مقارنة نص وملخص",
+        "تجربة تلخيص",
+        "تقييم دقة الملخص",
+        "اكتشاف حذف معنى مهم",
+        "أخرى"
+    ],
+    "الحفاظ على المعنى": [
+        "تحليل ملخص",
+        "مقارنة نص وملخص",
+        "تجربة تلخيص",
+        "تقييم دقة الملخص",
+        "اكتشاف حذف معنى مهم",
+        "أخرى"
+    ],
+    "تقييم الملخص": [
+        "تحليل ملخص",
+        "مقارنة نص وملخص",
+        "تجربة تلخيص",
+        "تقييم دقة الملخص",
+        "اكتشاف حذف معنى مهم",
+        "أخرى"
+    ],
+    "مفهوم Transformers": [
+        "دراسة Transformers",
+        "تلخيص الفكرة",
+        "مقارنة Transformers وRNN",
+        "تحليل تطبيق حديث",
+        "قراءة شرح مبسط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "سبب أهميتها في AI الحديث": [
+        "دراسة Transformers",
+        "تلخيص الفكرة",
+        "مقارنة Transformers وRNN",
+        "تحليل تطبيق حديث",
+        "قراءة شرح مبسط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "معالجة التسلسلات": [
+        "دراسة Transformers",
+        "تلخيص الفكرة",
+        "مقارنة Transformers وRNN",
+        "تحليل تطبيق حديث",
+        "قراءة شرح مبسط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Attention": [
+        "دراسة Transformers",
+        "تلخيص الفكرة",
+        "مقارنة Transformers وRNN",
+        "تحليل تطبيق حديث",
+        "قراءة شرح مبسط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "التوازي في التدريب": [
+        "دراسة Transformers",
+        "تلخيص الفكرة",
+        "مقارنة Transformers وRNN",
+        "تحليل تطبيق حديث",
+        "قراءة شرح مبسط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "استخدامها في النصوص والصور": [
+        "دراسة Transformers",
+        "تلخيص الفكرة",
+        "مقارنة Transformers وRNN",
+        "تحليل تطبيق حديث",
+        "قراءة شرح مبسط",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Attention": [
+        "تحليل Attention",
+        "تفسير تركيز النموذج",
+        "رسم علاقة بين كلمات",
+        "قراءة Attention بشكل مبسط",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "تركيز النموذج على أجزاء مهمة": [
+        "تحليل Attention",
+        "تفسير تركيز النموذج",
+        "رسم علاقة بين كلمات",
+        "قراءة Attention بشكل مبسط",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "العلاقة بين الكلمات": [
+        "تحليل Attention",
+        "تفسير تركيز النموذج",
+        "رسم علاقة بين كلمات",
+        "قراءة Attention بشكل مبسط",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "الأهمية النسبية": [
+        "تحليل Attention",
+        "تفسير تركيز النموذج",
+        "رسم علاقة بين كلمات",
+        "قراءة Attention بشكل مبسط",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "Attention Scores": [
+        "تحليل Attention",
+        "تفسير تركيز النموذج",
+        "رسم علاقة بين كلمات",
+        "قراءة Attention بشكل مبسط",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "دور Attention في Transformers": [
+        "تحليل Attention",
+        "تفسير تركيز النموذج",
+        "رسم علاقة بين كلمات",
+        "قراءة Attention بشكل مبسط",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "مفهوم Self-Attention": [
+        "دراسة Self-Attention",
+        "تحليل جملة وسياق",
+        "تفسير علاقة كلمات",
+        "مقارنة Attention وSelf-Attention",
+        "تلخيص المفهوم",
+        "أخرى"
+    ],
+    "علاقة الكلمة بباقي الكلمات": [
+        "دراسة Self-Attention",
+        "تحليل جملة وسياق",
+        "تفسير علاقة كلمات",
+        "مقارنة Attention وSelf-Attention",
+        "تلخيص المفهوم",
+        "أخرى"
+    ],
+    "السياق داخل الجملة": [
+        "دراسة Self-Attention",
+        "تحليل جملة وسياق",
+        "تفسير علاقة كلمات",
+        "مقارنة Attention وSelf-Attention",
+        "تلخيص المفهوم",
+        "أخرى"
+    ],
+    "تمثيل كل كلمة حسب الجملة": [
+        "دراسة Self-Attention",
+        "تحليل جملة وسياق",
+        "تفسير علاقة كلمات",
+        "مقارنة Attention وSelf-Attention",
+        "تلخيص المفهوم",
+        "أخرى"
+    ],
+    "Multi-head Attention كمفهوم": [
+        "دراسة Self-Attention",
+        "تحليل جملة وسياق",
+        "تفسير علاقة كلمات",
+        "مقارنة Attention وSelf-Attention",
+        "تلخيص المفهوم",
+        "أخرى"
+    ],
+    "أثره على فهم النص": [
+        "دراسة Self-Attention",
+        "تحليل جملة وسياق",
+        "تفسير علاقة كلمات",
+        "مقارنة Attention وSelf-Attention",
+        "تلخيص المفهوم",
+        "أخرى"
+    ],
+    "مفهوم Encoder": [
+        "مقارنة Encoder وDecoder",
+        "تحليل بنية نموذج",
+        "رسم مخطط مبسط",
+        "تصنيف نماذج حسب البنية",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "مفهوم Decoder": [
+        "مقارنة Encoder وDecoder",
+        "تحليل بنية نموذج",
+        "رسم مخطط مبسط",
+        "تصنيف نماذج حسب البنية",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "تحويل المدخل إلى تمثيل": [
+        "مقارنة Encoder وDecoder",
+        "تحليل بنية نموذج",
+        "رسم مخطط مبسط",
+        "تصنيف نماذج حسب البنية",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "توليد المخرج": [
+        "مقارنة Encoder وDecoder",
+        "تحليل بنية نموذج",
+        "رسم مخطط مبسط",
+        "تصنيف نماذج حسب البنية",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "استخدام Encoder في الفهم": [
+        "مقارنة Encoder وDecoder",
+        "تحليل بنية نموذج",
+        "رسم مخطط مبسط",
+        "تصنيف نماذج حسب البنية",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "استخدام Decoder في التوليد": [
+        "مقارنة Encoder وDecoder",
+        "تحليل بنية نموذج",
+        "رسم مخطط مبسط",
+        "تصنيف نماذج حسب البنية",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "مفهوم BERT": [
+        "دراسة BERT",
+        "تحليل استخدام BERT",
+        "مقارنة BERT وGPT",
+        "اختيار تطبيق مناسب",
+        "قراءة توثيق مبسط",
+        "أخرى"
+    ],
+    "نموذج مبني على Encoder": [
+        "دراسة BERT",
+        "تحليل استخدام BERT",
+        "مقارنة BERT وGPT",
+        "اختيار تطبيق مناسب",
+        "قراءة توثيق مبسط",
+        "أخرى"
+    ],
+    "فهم النص": [
+        "دراسة BERT",
+        "تحليل استخدام BERT",
+        "مقارنة BERT وGPT",
+        "اختيار تطبيق مناسب",
+        "قراءة توثيق مبسط",
+        "أخرى"
+    ],
+    "تمثيل الجمل": [
+        "دراسة BERT",
+        "تحليل استخدام BERT",
+        "مقارنة BERT وGPT",
+        "اختيار تطبيق مناسب",
+        "قراءة توثيق مبسط",
+        "أخرى"
+    ],
+    "استخدامه في التصنيف": [
+        "دراسة BERT",
+        "تحليل استخدام BERT",
+        "مقارنة BERT وGPT",
+        "اختيار تطبيق مناسب",
+        "قراءة توثيق مبسط",
+        "أخرى"
+    ],
+    "استخدامه في NER": [
+        "دراسة BERT",
+        "تحليل استخدام BERT",
+        "مقارنة BERT وGPT",
+        "اختيار تطبيق مناسب",
+        "قراءة توثيق مبسط",
+        "أخرى"
+    ],
+    "مفهوم GPT": [
+        "دراسة GPT",
+        "تحليل طريقة التوليد",
+        "تجربة Prompt",
+        "تقييم مخرجات نصية",
+        "مقارنة BERT وGPT",
+        "أخرى"
+    ],
+    "نموذج مبني على Decoder": [
+        "دراسة GPT",
+        "تحليل طريقة التوليد",
+        "تجربة Prompt",
+        "تقييم مخرجات نصية",
+        "مقارنة BERT وGPT",
+        "أخرى"
+    ],
+    "توليد النص": [
+        "دراسة GPT",
+        "تحليل طريقة التوليد",
+        "تجربة Prompt",
+        "تقييم مخرجات نصية",
+        "مقارنة BERT وGPT",
+        "أخرى"
+    ],
+    "التنبؤ بالكلمة التالية": [
+        "دراسة GPT",
+        "تحليل طريقة التوليد",
+        "تجربة Prompt",
+        "تقييم مخرجات نصية",
+        "مقارنة BERT وGPT",
+        "أخرى"
+    ],
+    "الحوار": [
+        "دراسة GPT",
+        "تحليل طريقة التوليد",
+        "تجربة Prompt",
+        "تقييم مخرجات نصية",
+        "مقارنة BERT وGPT",
+        "أخرى"
+    ],
+    "كتابة المحتوى": [
+        "دراسة GPT",
+        "تحليل طريقة التوليد",
+        "تجربة Prompt",
+        "تقييم مخرجات نصية",
+        "مقارنة BERT وGPT",
+        "أخرى"
+    ],
+    "حدود GPT": [
+        "دراسة GPT",
+        "تحليل طريقة التوليد",
+        "تجربة Prompt",
+        "تقييم مخرجات نصية",
+        "مقارنة BERT وGPT",
+        "أخرى"
+    ],
+    "مفهوم LLMs": [
+        "دراسة LLMs",
+        "تحليل قدرة نموذج لغوي",
+        "تجربة أسئلة مختلفة",
+        "تقييم إجابات LLM",
+        "تلخيص حدود النموذج",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "النماذج اللغوية الكبيرة": [
+        "دراسة LLMs",
+        "تحليل قدرة نموذج لغوي",
+        "تجربة أسئلة مختلفة",
+        "تقييم إجابات LLM",
+        "تلخيص حدود النموذج",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "التدريب على نصوص ضخمة": [
+        "دراسة LLMs",
+        "تحليل قدرة نموذج لغوي",
+        "تجربة أسئلة مختلفة",
+        "تقييم إجابات LLM",
+        "تلخيص حدود النموذج",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "فهم اللغة وتوليدها": [
+        "دراسة LLMs",
+        "تحليل قدرة نموذج لغوي",
+        "تجربة أسئلة مختلفة",
+        "تقييم إجابات LLM",
+        "تلخيص حدود النموذج",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "السياق Context": [
+        "دراسة LLMs",
+        "تحليل قدرة نموذج لغوي",
+        "تجربة أسئلة مختلفة",
+        "تقييم إجابات LLM",
+        "تلخيص حدود النموذج",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "حدود LLMs": [
+        "دراسة LLMs",
+        "تحليل قدرة نموذج لغوي",
+        "تجربة أسئلة مختلفة",
+        "تقييم إجابات LLM",
+        "تلخيص حدود النموذج",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "توليد النصوص": [
+        "تجربة قدرة LLM",
+        "تحليل مخرج نموذج",
+        "مقارنة مهام مختلفة",
+        "تقييم جودة إجابة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "الإجابة عن الأسئلة": [
+        "تجربة قدرة LLM",
+        "تحليل مخرج نموذج",
+        "مقارنة مهام مختلفة",
+        "تقييم جودة إجابة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "التلخيص": [
+        "تجربة قدرة LLM",
+        "تحليل مخرج نموذج",
+        "مقارنة مهام مختلفة",
+        "تقييم جودة إجابة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "الترجمة": [
+        "تجربة قدرة LLM",
+        "تحليل مخرج نموذج",
+        "مقارنة مهام مختلفة",
+        "تقييم جودة إجابة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "شرح المفاهيم": [
+        "تجربة قدرة LLM",
+        "تحليل مخرج نموذج",
+        "مقارنة مهام مختلفة",
+        "تقييم جودة إجابة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "كتابة الكود كمساعدة": [
+        "تجربة قدرة LLM",
+        "تحليل مخرج نموذج",
+        "مقارنة مهام مختلفة",
+        "تقييم جودة إجابة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "الاستدلال المحدود": [
+        "تجربة قدرة LLM",
+        "تحليل مخرج نموذج",
+        "مقارنة مهام مختلفة",
+        "تقييم جودة إجابة",
+        "كتابة ملاحظات تحسين",
+        "أخرى"
+    ],
+    "مفهوم حدود LLM": [
+        "تحليل حدود LLM",
+        "اكتشاف Hallucination",
+        "مقارنة إجابات",
+        "تقييم موثوقية",
+        "كتابة قواعد استخدام آمن",
+        "أخرى"
+    ],
+    "الأخطاء الواقعية": [
+        "تحليل حدود LLM",
+        "اكتشاف Hallucination",
+        "مقارنة إجابات",
+        "تقييم موثوقية",
+        "كتابة قواعد استخدام آمن",
+        "أخرى"
+    ],
+    "Hallucination": [
+        "تحليل حدود LLM",
+        "اكتشاف Hallucination",
+        "مقارنة إجابات",
+        "تقييم موثوقية",
+        "كتابة قواعد استخدام آمن",
+        "أخرى"
+    ],
+    "ضعف التحقق من المصادر": [
+        "تحليل حدود LLM",
+        "اكتشاف Hallucination",
+        "مقارنة إجابات",
+        "تقييم موثوقية",
+        "كتابة قواعد استخدام آمن",
+        "أخرى"
+    ],
+    "الحساسية لصياغة السؤال": [
+        "تحليل حدود LLM",
+        "اكتشاف Hallucination",
+        "مقارنة إجابات",
+        "تقييم موثوقية",
+        "كتابة قواعد استخدام آمن",
+        "أخرى"
+    ],
+    "التحيز في الإجابات": [
+        "تحليل حدود LLM",
+        "اكتشاف Hallucination",
+        "مقارنة إجابات",
+        "تقييم موثوقية",
+        "كتابة قواعد استخدام آمن",
+        "أخرى"
+    ],
+    "مفهوم Prompt Engineering": [
+        "كتابة Prompt",
+        "تحسين Prompt",
+        "مقارنة أكثر من Prompt",
+        "تحليل سبب اختلاف النتائج",
+        "تقييم مخرج النموذج",
+        "تطبيق عملي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "صياغة السؤال": [
+        "كتابة Prompt",
+        "تحسين Prompt",
+        "مقارنة أكثر من Prompt",
+        "تحليل سبب اختلاف النتائج",
+        "تقييم مخرج النموذج",
+        "تطبيق عملي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تحديد الدور": [
+        "كتابة Prompt",
+        "تحسين Prompt",
+        "مقارنة أكثر من Prompt",
+        "تحليل سبب اختلاف النتائج",
+        "تقييم مخرج النموذج",
+        "تطبيق عملي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تحديد السياق": [
+        "كتابة Prompt",
+        "تحسين Prompt",
+        "مقارنة أكثر من Prompt",
+        "تحليل سبب اختلاف النتائج",
+        "تقييم مخرج النموذج",
+        "تطبيق عملي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تحديد شكل الإجابة": [
+        "كتابة Prompt",
+        "تحسين Prompt",
+        "مقارنة أكثر من Prompt",
+        "تحليل سبب اختلاف النتائج",
+        "تقييم مخرج النموذج",
+        "تطبيق عملي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تحسين المخرجات": [
+        "كتابة Prompt",
+        "تحسين Prompt",
+        "مقارنة أكثر من Prompt",
+        "تحليل سبب اختلاف النتائج",
+        "تقييم مخرج النموذج",
+        "تطبيق عملي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "أخطاء كتابة Prompt": [
+        "كتابة Prompt",
+        "تحسين Prompt",
+        "مقارنة أكثر من Prompt",
+        "تحليل سبب اختلاف النتائج",
+        "تقييم مخرج النموذج",
+        "تطبيق عملي",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "Prompt للتلخيص": [
+        "بناء Prompt Pattern",
+        "تجربة نمط Prompt",
+        "مقارنة أنماط",
+        "تحسين صياغة",
+        "توثيق أفضل صيغة",
+        "أخرى"
+    ],
+    "Prompt للشرح": [
+        "بناء Prompt Pattern",
+        "تجربة نمط Prompt",
+        "مقارنة أنماط",
+        "تحسين صياغة",
+        "توثيق أفضل صيغة",
+        "أخرى"
+    ],
+    "Prompt للمقارنة": [
+        "بناء Prompt Pattern",
+        "تجربة نمط Prompt",
+        "مقارنة أنماط",
+        "تحسين صياغة",
+        "توثيق أفضل صيغة",
+        "أخرى"
+    ],
+    "Prompt للتحليل": [
+        "بناء Prompt Pattern",
+        "تجربة نمط Prompt",
+        "مقارنة أنماط",
+        "تحسين صياغة",
+        "توثيق أفضل صيغة",
+        "أخرى"
+    ],
+    "Prompt لتوليد أفكار": [
+        "بناء Prompt Pattern",
+        "تجربة نمط Prompt",
+        "مقارنة أنماط",
+        "تحسين صياغة",
+        "توثيق أفضل صيغة",
+        "أخرى"
+    ],
+    "Prompt لاستخراج بيانات": [
+        "بناء Prompt Pattern",
+        "تجربة نمط Prompt",
+        "مقارنة أنماط",
+        "تحسين صياغة",
+        "توثيق أفضل صيغة",
+        "أخرى"
+    ],
+    "مفهوم Zero-shot Prompting": [
+        "تجربة Zero-shot Prompt",
+        "تحليل النتيجة",
+        "تحسين Prompt",
+        "مقارنة مع Few-shot",
+        "كتابة ملاحظات",
+        "أخرى"
+    ],
+    "إعطاء المهمة دون أمثلة": [
+        "تجربة Zero-shot Prompt",
+        "تحليل النتيجة",
+        "تحسين Prompt",
+        "مقارنة مع Few-shot",
+        "كتابة ملاحظات",
+        "أخرى"
+    ],
+    "متى يكون مناسباً": [
+        "تجربة Zero-shot Prompt",
+        "تحليل النتيجة",
+        "تحسين Prompt",
+        "مقارنة مع Few-shot",
+        "كتابة ملاحظات",
+        "أخرى"
+    ],
+    "حدوده": [
+        "تجربة Zero-shot Prompt",
+        "تحليل النتيجة",
+        "تحسين Prompt",
+        "مقارنة مع Few-shot",
+        "كتابة ملاحظات",
+        "أخرى"
+    ],
+    "أمثلة تعليمية": [
+        "تجربة Zero-shot Prompt",
+        "تحليل النتيجة",
+        "تحسين Prompt",
+        "مقارنة مع Few-shot",
+        "كتابة ملاحظات",
+        "أخرى"
+    ],
+    "تحسين الصياغة": [
+        "تجربة Zero-shot Prompt",
+        "تحليل النتيجة",
+        "تحسين Prompt",
+        "مقارنة مع Few-shot",
+        "كتابة ملاحظات",
+        "أخرى"
+    ],
+    "مفهوم Few-shot Prompting": [
+        "بناء Few-shot Prompt",
+        "اختيار أمثلة",
+        "مقارنة قبل وبعد الأمثلة",
+        "تقييم مخرج النموذج",
+        "تحسين الأمثلة",
+        "أخرى"
+    ],
+    "إعطاء أمثلة للنموذج": [
+        "بناء Few-shot Prompt",
+        "اختيار أمثلة",
+        "مقارنة قبل وبعد الأمثلة",
+        "تقييم مخرج النموذج",
+        "تحسين الأمثلة",
+        "أخرى"
+    ],
+    "اختيار أمثلة جيدة": [
+        "بناء Few-shot Prompt",
+        "اختيار أمثلة",
+        "مقارنة قبل وبعد الأمثلة",
+        "تقييم مخرج النموذج",
+        "تحسين الأمثلة",
+        "أخرى"
+    ],
+    "أثر الأمثلة على النتيجة": [
+        "بناء Few-shot Prompt",
+        "اختيار أمثلة",
+        "مقارنة قبل وبعد الأمثلة",
+        "تقييم مخرج النموذج",
+        "تحسين الأمثلة",
+        "أخرى"
+    ],
+    "عدد الأمثلة": [
+        "بناء Few-shot Prompt",
+        "اختيار أمثلة",
+        "مقارنة قبل وبعد الأمثلة",
+        "تقييم مخرج النموذج",
+        "تحسين الأمثلة",
+        "أخرى"
+    ],
+    "أخطاء الأمثلة": [
+        "بناء Few-shot Prompt",
+        "اختيار أمثلة",
+        "مقارنة قبل وبعد الأمثلة",
+        "تقييم مخرج النموذج",
+        "تحسين الأمثلة",
+        "أخرى"
+    ],
+    "مفهوم التفكير خطوة بخطوة": [
+        "صياغة Prompt تفكير منظم",
+        "تحليل خطوات إجابة",
+        "طلب تفسير مختصر",
+        "مقارنة إجابة مباشرة ومنظمة",
+        "تقييم جودة الاستدلال الظاهر",
+        "أخرى"
+    ],
+    "استخدامه في حل المسائل": [
+        "صياغة Prompt تفكير منظم",
+        "تحليل خطوات إجابة",
+        "طلب تفسير مختصر",
+        "مقارنة إجابة مباشرة ومنظمة",
+        "تقييم جودة الاستدلال الظاهر",
+        "أخرى"
+    ],
+    "طلب تفسير مختصر ومنظم": [
+        "صياغة Prompt تفكير منظم",
+        "تحليل خطوات إجابة",
+        "طلب تفسير مختصر",
+        "مقارنة إجابة مباشرة ومنظمة",
+        "تقييم جودة الاستدلال الظاهر",
+        "أخرى"
+    ],
+    "تقليل الغموض في السؤال": [
+        "صياغة Prompt تفكير منظم",
+        "تحليل خطوات إجابة",
+        "طلب تفسير مختصر",
+        "مقارنة إجابة مباشرة ومنظمة",
+        "تقييم جودة الاستدلال الظاهر",
+        "أخرى"
+    ],
+    "حدود الاعتماد عليه": [
+        "صياغة Prompt تفكير منظم",
+        "تحليل خطوات إجابة",
+        "طلب تفسير مختصر",
+        "مقارنة إجابة مباشرة ومنظمة",
+        "تقييم جودة الاستدلال الظاهر",
+        "أخرى"
+    ],
+    "متى نستخدمه": [
+        "صياغة Prompt تفكير منظم",
+        "تحليل خطوات إجابة",
+        "طلب تفسير مختصر",
+        "مقارنة إجابة مباشرة ومنظمة",
+        "تقييم جودة الاستدلال الظاهر",
+        "أخرى"
+    ],
+    "تقييم جودة Prompt": [
+        "تقييم Prompt",
+        "تحسين تعليمات",
+        "مقارنة نتائج",
+        "كتابة Rubric بسيط",
+        "توثيق Prompt ناجح",
+        "أخرى"
+    ],
+    "وضوح التعليمات": [
+        "تقييم Prompt",
+        "تحسين تعليمات",
+        "مقارنة نتائج",
+        "كتابة Rubric بسيط",
+        "توثيق Prompt ناجح",
+        "أخرى"
+    ],
+    "اكتمال السياق": [
+        "تقييم Prompt",
+        "تحسين تعليمات",
+        "مقارنة نتائج",
+        "كتابة Rubric بسيط",
+        "توثيق Prompt ناجح",
+        "أخرى"
+    ],
+    "دقة المخرج": [
+        "تقييم Prompt",
+        "تحسين تعليمات",
+        "مقارنة نتائج",
+        "كتابة Rubric بسيط",
+        "توثيق Prompt ناجح",
+        "أخرى"
+    ],
+    "ثبات النتائج": [
+        "تقييم Prompt",
+        "تحسين تعليمات",
+        "مقارنة نتائج",
+        "كتابة Rubric بسيط",
+        "توثيق Prompt ناجح",
+        "أخرى"
+    ],
+    "قابلية إعادة الاستخدام": [
+        "تقييم Prompt",
+        "تحسين تعليمات",
+        "مقارنة نتائج",
+        "كتابة Rubric بسيط",
+        "توثيق Prompt ناجح",
+        "أخرى"
+    ],
+    "مفهوم Generative AI": [
+        "دراسة Generative AI",
+        "تحليل تطبيق توليدي",
+        "تجربة توليد آمن",
+        "تقييم المخرجات",
+        "مقارنة أنواع التوليد",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "توليد الصور": [
+        "دراسة Generative AI",
+        "تحليل تطبيق توليدي",
+        "تجربة توليد آمن",
+        "تقييم المخرجات",
+        "مقارنة أنواع التوليد",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "توليد الصوت": [
+        "دراسة Generative AI",
+        "تحليل تطبيق توليدي",
+        "تجربة توليد آمن",
+        "تقييم المخرجات",
+        "مقارنة أنواع التوليد",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "توليد الفيديو كمفهوم": [
+        "دراسة Generative AI",
+        "تحليل تطبيق توليدي",
+        "تجربة توليد آمن",
+        "تقييم المخرجات",
+        "مقارنة أنواع التوليد",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "الفائدة والحدود": [
+        "دراسة Generative AI",
+        "تحليل تطبيق توليدي",
+        "تجربة توليد آمن",
+        "تقييم المخرجات",
+        "مقارنة أنواع التوليد",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Text Generation": [
+        "تجربة Text Generation",
+        "تقييم نص مولد",
+        "تحسين Prompt",
+        "تحليل الاتساق",
+        "مراجعة أخطاء النص",
+        "أخرى"
+    ],
+    "توليد فقرة": [
+        "تجربة Text Generation",
+        "تقييم نص مولد",
+        "تحسين Prompt",
+        "تحليل الاتساق",
+        "مراجعة أخطاء النص",
+        "أخرى"
+    ],
+    "توليد إجابة": [
+        "تجربة Text Generation",
+        "تقييم نص مولد",
+        "تحسين Prompt",
+        "تحليل الاتساق",
+        "مراجعة أخطاء النص",
+        "أخرى"
+    ],
+    "توليد قصة": [
+        "تجربة Text Generation",
+        "تقييم نص مولد",
+        "تحسين Prompt",
+        "تحليل الاتساق",
+        "مراجعة أخطاء النص",
+        "أخرى"
+    ],
+    "توليد شرح": [
+        "تجربة Text Generation",
+        "تقييم نص مولد",
+        "تحسين Prompt",
+        "تحليل الاتساق",
+        "مراجعة أخطاء النص",
+        "أخرى"
+    ],
+    "توليد كود كمساعدة": [
+        "تجربة Text Generation",
+        "تقييم نص مولد",
+        "تحسين Prompt",
+        "تحليل الاتساق",
+        "مراجعة أخطاء النص",
+        "أخرى"
+    ],
+    "تقييم النص المولد": [
+        "تجربة Text Generation",
+        "تقييم نص مولد",
+        "تحسين Prompt",
+        "تحليل الاتساق",
+        "مراجعة أخطاء النص",
+        "أخرى"
+    ],
+    "مفهوم Image Generation": [
+        "كتابة Prompt صورة",
+        "تحليل نتيجة صورة",
+        "تحسين وصف بصري",
+        "مقارنة مخرجات",
+        "تقييم توافق الصورة مع الوصف",
+        "أخرى"
+    ],
+    "Prompt للصور": [
+        "كتابة Prompt صورة",
+        "تحليل نتيجة صورة",
+        "تحسين وصف بصري",
+        "مقارنة مخرجات",
+        "تقييم توافق الصورة مع الوصف",
+        "أخرى"
+    ],
+    "الأسلوب البصري": [
+        "كتابة Prompt صورة",
+        "تحليل نتيجة صورة",
+        "تحسين وصف بصري",
+        "مقارنة مخرجات",
+        "تقييم توافق الصورة مع الوصف",
+        "أخرى"
+    ],
+    "العناصر داخل الصورة": [
+        "كتابة Prompt صورة",
+        "تحليل نتيجة صورة",
+        "تحسين وصف بصري",
+        "مقارنة مخرجات",
+        "تقييم توافق الصورة مع الوصف",
+        "أخرى"
+    ],
+    "تحسين وصف الصورة": [
+        "كتابة Prompt صورة",
+        "تحليل نتيجة صورة",
+        "تحسين وصف بصري",
+        "مقارنة مخرجات",
+        "تقييم توافق الصورة مع الوصف",
+        "أخرى"
+    ],
+    "حدود توليد الصور": [
+        "كتابة Prompt صورة",
+        "تحليل نتيجة صورة",
+        "تحسين وصف بصري",
+        "مقارنة مخرجات",
+        "تقييم توافق الصورة مع الوصف",
+        "أخرى"
+    ],
+    "مفهوم Audio Generation": [
+        "دراسة Audio Generation",
+        "تحليل حالة استخدام",
+        "تقييم جودة مخرج صوتي",
+        "كتابة تعليمات توليد آمنة",
+        "تلخيص القيود",
+        "أخرى"
+    ],
+    "توليد صوت": [
+        "دراسة Audio Generation",
+        "تحليل حالة استخدام",
+        "تقييم جودة مخرج صوتي",
+        "كتابة تعليمات توليد آمنة",
+        "تلخيص القيود",
+        "أخرى"
+    ],
+    "توليد موسيقى كمفهوم": [
+        "دراسة Audio Generation",
+        "تحليل حالة استخدام",
+        "تقييم جودة مخرج صوتي",
+        "كتابة تعليمات توليد آمنة",
+        "تلخيص القيود",
+        "أخرى"
+    ],
+    "تحويل النص إلى كلام": [
+        "دراسة Audio Generation",
+        "تحليل حالة استخدام",
+        "تقييم جودة مخرج صوتي",
+        "كتابة تعليمات توليد آمنة",
+        "تلخيص القيود",
+        "أخرى"
+    ],
+    "جودة الصوت": [
+        "دراسة Audio Generation",
+        "تحليل حالة استخدام",
+        "تقييم جودة مخرج صوتي",
+        "كتابة تعليمات توليد آمنة",
+        "تلخيص القيود",
+        "أخرى"
+    ],
+    "القيود الأخلاقية": [
+        "دراسة Audio Generation",
+        "تحليل حالة استخدام",
+        "تقييم جودة مخرج صوتي",
+        "كتابة تعليمات توليد آمنة",
+        "تلخيص القيود",
+        "أخرى"
+    ],
+    "مفهوم Diffusion Models": [
+        "دراسة Diffusion Models",
+        "تلخيص الفكرة",
+        "تحليل تطبيق في الصور",
+        "مقارنة مع توليد نص",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "الفكرة العامة للضوضاء والإزالة": [
+        "دراسة Diffusion Models",
+        "تلخيص الفكرة",
+        "تحليل تطبيق في الصور",
+        "مقارنة مع توليد نص",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "استخدامها في الصور": [
+        "دراسة Diffusion Models",
+        "تلخيص الفكرة",
+        "تحليل تطبيق في الصور",
+        "مقارنة مع توليد نص",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "خطوات التوليد كمفهوم": [
+        "دراسة Diffusion Models",
+        "تلخيص الفكرة",
+        "تحليل تطبيق في الصور",
+        "مقارنة مع توليد نص",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "Prompt وتأثيره": [
+        "دراسة Diffusion Models",
+        "تلخيص الفكرة",
+        "تحليل تطبيق في الصور",
+        "مقارنة مع توليد نص",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "حدود النماذج": [
+        "دراسة Diffusion Models",
+        "تلخيص الفكرة",
+        "تحليل تطبيق في الصور",
+        "مقارنة مع توليد نص",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "مفهوم RAG": [
+        "تحليل RAG",
+        "تصميم سير عمل RAG",
+        "تحديد مصادر معرفة",
+        "تقييم إجابة مدعومة بسياق",
+        "مقارنة LLM عادي وRAG",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "الجمع بين البحث والتوليد": [
+        "تحليل RAG",
+        "تصميم سير عمل RAG",
+        "تحديد مصادر معرفة",
+        "تقييم إجابة مدعومة بسياق",
+        "مقارنة LLM عادي وRAG",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "استرجاع معلومات من مصدر": [
+        "تحليل RAG",
+        "تصميم سير عمل RAG",
+        "تحديد مصادر معرفة",
+        "تقييم إجابة مدعومة بسياق",
+        "مقارنة LLM عادي وRAG",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "إدخال السياق إلى LLM": [
+        "تحليل RAG",
+        "تصميم سير عمل RAG",
+        "تحديد مصادر معرفة",
+        "تقييم إجابة مدعومة بسياق",
+        "مقارنة LLM عادي وRAG",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تقليل Hallucination": [
+        "تحليل RAG",
+        "تصميم سير عمل RAG",
+        "تحديد مصادر معرفة",
+        "تقييم إجابة مدعومة بسياق",
+        "مقارنة LLM عادي وRAG",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "استخداماته في التطبيقات": [
+        "تحليل RAG",
+        "تصميم سير عمل RAG",
+        "تحديد مصادر معرفة",
+        "تقييم إجابة مدعومة بسياق",
+        "مقارنة LLM عادي وRAG",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Retrieval": [
+        "تحليل Retrieval",
+        "اختيار مصدر مناسب",
+        "تقييم مقاطع مسترجعة",
+        "مقارنة نتائج بحث",
+        "تحسين سؤال البحث",
+        "أخرى"
+    ],
+    "البحث عن معلومات مناسبة": [
+        "تحليل Retrieval",
+        "اختيار مصدر مناسب",
+        "تقييم مقاطع مسترجعة",
+        "مقارنة نتائج بحث",
+        "تحسين سؤال البحث",
+        "أخرى"
+    ],
+    "استرجاع مقاطع مرتبطة بالسؤال": [
+        "تحليل Retrieval",
+        "اختيار مصدر مناسب",
+        "تقييم مقاطع مسترجعة",
+        "مقارنة نتائج بحث",
+        "تحسين سؤال البحث",
+        "أخرى"
+    ],
+    "ترتيب النتائج": [
+        "تحليل Retrieval",
+        "اختيار مصدر مناسب",
+        "تقييم مقاطع مسترجعة",
+        "مقارنة نتائج بحث",
+        "تحسين سؤال البحث",
+        "أخرى"
+    ],
+    "جودة المصدر المسترجع": [
+        "تحليل Retrieval",
+        "اختيار مصدر مناسب",
+        "تقييم مقاطع مسترجعة",
+        "مقارنة نتائج بحث",
+        "تحسين سؤال البحث",
+        "أخرى"
+    ],
+    "أثر Retrieval على الإجابة": [
+        "تحليل Retrieval",
+        "اختيار مصدر مناسب",
+        "تقييم مقاطع مسترجعة",
+        "مقارنة نتائج بحث",
+        "تحسين سؤال البحث",
+        "أخرى"
+    ],
+    "مفهوم Vector Embeddings": [
+        "تحليل Vector Embeddings",
+        "تفسير تشابه دلالي",
+        "مقارنة جمل متشابهة",
+        "تصميم بحث متجهي",
+        "ربط Embeddings بـ RAG",
+        "أخرى"
+    ],
+    "البحث بالتشابه": [
+        "تحليل Vector Embeddings",
+        "تفسير تشابه دلالي",
+        "مقارنة جمل متشابهة",
+        "تصميم بحث متجهي",
+        "ربط Embeddings بـ RAG",
+        "أخرى"
+    ],
+    "قرب المعنى": [
+        "تحليل Vector Embeddings",
+        "تفسير تشابه دلالي",
+        "مقارنة جمل متشابهة",
+        "تصميم بحث متجهي",
+        "ربط Embeddings بـ RAG",
+        "أخرى"
+    ],
+    "Embeddings في RAG": [
+        "تحليل Vector Embeddings",
+        "تفسير تشابه دلالي",
+        "مقارنة جمل متشابهة",
+        "تصميم بحث متجهي",
+        "ربط Embeddings بـ RAG",
+        "أخرى"
+    ],
+    "قيود التشابه الدلالي": [
+        "تحليل Vector Embeddings",
+        "تفسير تشابه دلالي",
+        "مقارنة جمل متشابهة",
+        "تصميم بحث متجهي",
+        "ربط Embeddings بـ RAG",
+        "أخرى"
+    ],
+    "مفهوم Vector Database": [
+        "دراسة Vector Database",
+        "رسم سير عمل تخزين وبحث",
+        "تحليل استخدامها في RAG",
+        "مقارنة بحث عادي وبحث متجهي",
+        "كتابة خطة تجربة",
+        "أخرى"
+    ],
+    "تخزين Embeddings": [
+        "دراسة Vector Database",
+        "رسم سير عمل تخزين وبحث",
+        "تحليل استخدامها في RAG",
+        "مقارنة بحث عادي وبحث متجهي",
+        "كتابة خطة تجربة",
+        "أخرى"
+    ],
+    "البحث عن أقرب متجهات": [
+        "دراسة Vector Database",
+        "رسم سير عمل تخزين وبحث",
+        "تحليل استخدامها في RAG",
+        "مقارنة بحث عادي وبحث متجهي",
+        "كتابة خطة تجربة",
+        "أخرى"
+    ],
+    "استخدامها في RAG": [
+        "دراسة Vector Database",
+        "رسم سير عمل تخزين وبحث",
+        "تحليل استخدامها في RAG",
+        "مقارنة بحث عادي وبحث متجهي",
+        "كتابة خطة تجربة",
+        "أخرى"
+    ],
+    "تحديث قاعدة المعرفة": [
+        "دراسة Vector Database",
+        "رسم سير عمل تخزين وبحث",
+        "تحليل استخدامها في RAG",
+        "مقارنة بحث عادي وبحث متجهي",
+        "كتابة خطة تجربة",
+        "أخرى"
+    ],
+    "حدود البحث المتجهي": [
+        "دراسة Vector Database",
+        "رسم سير عمل تخزين وبحث",
+        "تحليل استخدامها في RAG",
+        "مقارنة بحث عادي وبحث متجهي",
+        "كتابة خطة تجربة",
+        "أخرى"
+    ],
+    "مفهوم Knowledge Base": [
+        "تصميم Knowledge Base",
+        "تنظيم مصادر",
+        "تحليل جودة الوثائق",
+        "اقتراح طريقة تقطيع نصوص",
+        "تقييم تغطية المعرفة",
+        "أخرى"
+    ],
+    "مصادر المعرفة": [
+        "تصميم Knowledge Base",
+        "تنظيم مصادر",
+        "تحليل جودة الوثائق",
+        "اقتراح طريقة تقطيع نصوص",
+        "تقييم تغطية المعرفة",
+        "أخرى"
+    ],
+    "تنظيم الوثائق": [
+        "تصميم Knowledge Base",
+        "تنظيم مصادر",
+        "تحليل جودة الوثائق",
+        "اقتراح طريقة تقطيع نصوص",
+        "تقييم تغطية المعرفة",
+        "أخرى"
+    ],
+    "تقطيع النصوص": [
+        "تصميم Knowledge Base",
+        "تنظيم مصادر",
+        "تحليل جودة الوثائق",
+        "اقتراح طريقة تقطيع نصوص",
+        "تقييم تغطية المعرفة",
+        "أخرى"
+    ],
+    "ربط المعرفة بـ LLM": [
+        "تصميم Knowledge Base",
+        "تنظيم مصادر",
+        "تحليل جودة الوثائق",
+        "اقتراح طريقة تقطيع نصوص",
+        "تقييم تغطية المعرفة",
+        "أخرى"
+    ],
+    "تحديث المعرفة": [
+        "تصميم Knowledge Base",
+        "تنظيم مصادر",
+        "تحليل جودة الوثائق",
+        "اقتراح طريقة تقطيع نصوص",
+        "تقييم تغطية المعرفة",
+        "أخرى"
+    ],
+    "مفهوم Fine-tuning": [
+        "دراسة Fine-tuning",
+        "مقارنة Prompting وFine-tuning",
+        "تحليل حاجة مشروع",
+        "تجهيز خطة بيانات",
+        "تقييم مخاطر",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تخصيص نموذج مدرب مسبقاً": [
+        "دراسة Fine-tuning",
+        "مقارنة Prompting وFine-tuning",
+        "تحليل حاجة مشروع",
+        "تجهيز خطة بيانات",
+        "تقييم مخاطر",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "الفرق بين Fine-tuning وPrompting": [
+        "دراسة Fine-tuning",
+        "مقارنة Prompting وFine-tuning",
+        "تحليل حاجة مشروع",
+        "تجهيز خطة بيانات",
+        "تقييم مخاطر",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "البيانات المطلوبة": [
+        "دراسة Fine-tuning",
+        "مقارنة Prompting وFine-tuning",
+        "تحليل حاجة مشروع",
+        "تجهيز خطة بيانات",
+        "تقييم مخاطر",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "متى نستخدم Fine-tuning": [
+        "دراسة Fine-tuning",
+        "مقارنة Prompting وFine-tuning",
+        "تحليل حاجة مشروع",
+        "تجهيز خطة بيانات",
+        "تقييم مخاطر",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مخاطر Fine-tuning": [
+        "دراسة Fine-tuning",
+        "مقارنة Prompting وFine-tuning",
+        "تحليل حاجة مشروع",
+        "تجهيز خطة بيانات",
+        "تقييم مخاطر",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Instruction Tuning": [
+        "دراسة Instruction Tuning",
+        "تحليل أمثلة تعليمات",
+        "تصميم عينة تدريب تعليمية",
+        "تقييم استجابة نموذج",
+        "تلخيص الفكرة",
+        "أخرى"
+    ],
+    "تدريب النموذج على اتباع التعليمات": [
+        "دراسة Instruction Tuning",
+        "تحليل أمثلة تعليمات",
+        "تصميم عينة تدريب تعليمية",
+        "تقييم استجابة نموذج",
+        "تلخيص الفكرة",
+        "أخرى"
+    ],
+    "أمثلة التعليمات والإجابات": [
+        "دراسة Instruction Tuning",
+        "تحليل أمثلة تعليمات",
+        "تصميم عينة تدريب تعليمية",
+        "تقييم استجابة نموذج",
+        "تلخيص الفكرة",
+        "أخرى"
+    ],
+    "تحسين سلوك النموذج": [
+        "دراسة Instruction Tuning",
+        "تحليل أمثلة تعليمات",
+        "تصميم عينة تدريب تعليمية",
+        "تقييم استجابة نموذج",
+        "تلخيص الفكرة",
+        "أخرى"
+    ],
+    "العلاقة مع LLMs": [
+        "دراسة Instruction Tuning",
+        "تحليل أمثلة تعليمات",
+        "تصميم عينة تدريب تعليمية",
+        "تقييم استجابة نموذج",
+        "تلخيص الفكرة",
+        "أخرى"
+    ],
+    "مفهوم Parameter-Efficient Fine-tuning": [
+        "دراسة PEFT",
+        "تفسير LoRA كمفهوم",
+        "مقارنة Fine-tuning كامل ومحدود",
+        "تحليل فائدة التكلفة",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "تعديل جزء صغير من النموذج": [
+        "دراسة PEFT",
+        "تفسير LoRA كمفهوم",
+        "مقارنة Fine-tuning كامل ومحدود",
+        "تحليل فائدة التكلفة",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "LoRA كمفهوم": [
+        "دراسة PEFT",
+        "تفسير LoRA كمفهوم",
+        "مقارنة Fine-tuning كامل ومحدود",
+        "تحليل فائدة التكلفة",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "تقليل التكلفة": [
+        "دراسة PEFT",
+        "تفسير LoRA كمفهوم",
+        "مقارنة Fine-tuning كامل ومحدود",
+        "تحليل فائدة التكلفة",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "مفهوم AI Agent": [
+        "تحليل AI Agent",
+        "رسم سير عمل Agent",
+        "تحديد الهدف والأدوات",
+        "تقييم خطة Agent",
+        "مقارنة Agent وChatbot",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "الهدف Goal": [
+        "تحليل AI Agent",
+        "رسم سير عمل Agent",
+        "تحديد الهدف والأدوات",
+        "تقييم خطة Agent",
+        "مقارنة Agent وChatbot",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "الملاحظة Observation": [
+        "تحليل AI Agent",
+        "رسم سير عمل Agent",
+        "تحديد الهدف والأدوات",
+        "تقييم خطة Agent",
+        "مقارنة Agent وChatbot",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "التخطيط Planning": [
+        "تحليل AI Agent",
+        "رسم سير عمل Agent",
+        "تحديد الهدف والأدوات",
+        "تقييم خطة Agent",
+        "مقارنة Agent وChatbot",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "استخدام الأدوات": [
+        "تحليل AI Agent",
+        "رسم سير عمل Agent",
+        "تحديد الهدف والأدوات",
+        "تقييم خطة Agent",
+        "مقارنة Agent وChatbot",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تنفيذ خطوات متعددة": [
+        "تحليل AI Agent",
+        "رسم سير عمل Agent",
+        "تحديد الهدف والأدوات",
+        "تقييم خطة Agent",
+        "مقارنة Agent وChatbot",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Tool Use": [
+        "تحليل Tool Use",
+        "اختيار أداة مناسبة",
+        "تصميم مهمة تستخدم أداة",
+        "تقييم نتيجة الأداة",
+        "مراجعة أخطاء الاستخدام",
+        "أخرى"
+    ],
+    "استخدام نموذج لأداة خارجية": [
+        "تحليل Tool Use",
+        "اختيار أداة مناسبة",
+        "تصميم مهمة تستخدم أداة",
+        "تقييم نتيجة الأداة",
+        "مراجعة أخطاء الاستخدام",
+        "أخرى"
+    ],
+    "البحث": [
+        "تحليل Tool Use",
+        "اختيار أداة مناسبة",
+        "تصميم مهمة تستخدم أداة",
+        "تقييم نتيجة الأداة",
+        "مراجعة أخطاء الاستخدام",
+        "أخرى"
+    ],
+    "الحاسبة": [
+        "تحليل Tool Use",
+        "اختيار أداة مناسبة",
+        "تصميم مهمة تستخدم أداة",
+        "تقييم نتيجة الأداة",
+        "مراجعة أخطاء الاستخدام",
+        "أخرى"
+    ],
+    "قراءة ملف": [
+        "تحليل Tool Use",
+        "اختيار أداة مناسبة",
+        "تصميم مهمة تستخدم أداة",
+        "تقييم نتيجة الأداة",
+        "مراجعة أخطاء الاستخدام",
+        "أخرى"
+    ],
+    "استدعاء API": [
+        "تحليل Tool Use",
+        "اختيار أداة مناسبة",
+        "تصميم مهمة تستخدم أداة",
+        "تقييم نتيجة الأداة",
+        "مراجعة أخطاء الاستخدام",
+        "أخرى"
+    ],
+    "التحقق من النتائج": [
+        "تحليل Tool Use",
+        "اختيار أداة مناسبة",
+        "تصميم مهمة تستخدم أداة",
+        "تقييم نتيجة الأداة",
+        "مراجعة أخطاء الاستخدام",
+        "أخرى"
+    ],
+    "مفهوم Planning": [
+        "بناء خطة Agent",
+        "تحليل خطوات تنفيذ",
+        "اكتشاف خطوة ناقصة",
+        "تحسين خطة",
+        "مقارنة خطتين",
+        "أخرى"
+    ],
+    "تقسيم الهدف إلى خطوات": [
+        "بناء خطة Agent",
+        "تحليل خطوات تنفيذ",
+        "اكتشاف خطوة ناقصة",
+        "تحسين خطة",
+        "مقارنة خطتين",
+        "أخرى"
+    ],
+    "ترتيب المهام": [
+        "بناء خطة Agent",
+        "تحليل خطوات تنفيذ",
+        "اكتشاف خطوة ناقصة",
+        "تحسين خطة",
+        "مقارنة خطتين",
+        "أخرى"
+    ],
+    "اختيار الإجراء التالي": [
+        "بناء خطة Agent",
+        "تحليل خطوات تنفيذ",
+        "اكتشاف خطوة ناقصة",
+        "تحسين خطة",
+        "مقارنة خطتين",
+        "أخرى"
+    ],
+    "مراجعة الخطة": [
+        "بناء خطة Agent",
+        "تحليل خطوات تنفيذ",
+        "اكتشاف خطوة ناقصة",
+        "تحسين خطة",
+        "مقارنة خطتين",
+        "أخرى"
+    ],
+    "تعديل الخطة": [
+        "بناء خطة Agent",
+        "تحليل خطوات تنفيذ",
+        "اكتشاف خطوة ناقصة",
+        "تحسين خطة",
+        "مقارنة خطتين",
+        "أخرى"
+    ],
+    "مفهوم Memory": [
+        "تحليل Memory في Agent",
+        "تحديد ما يجب حفظه",
+        "تصميم ذاكرة بسيطة",
+        "تقييم استرجاع السياق",
+        "مراجعة أخطاء الذاكرة",
+        "أخرى"
+    ],
+    "ذاكرة قصيرة المدى": [
+        "تحليل Memory في Agent",
+        "تحديد ما يجب حفظه",
+        "تصميم ذاكرة بسيطة",
+        "تقييم استرجاع السياق",
+        "مراجعة أخطاء الذاكرة",
+        "أخرى"
+    ],
+    "ذاكرة طويلة المدى": [
+        "تحليل Memory في Agent",
+        "تحديد ما يجب حفظه",
+        "تصميم ذاكرة بسيطة",
+        "تقييم استرجاع السياق",
+        "مراجعة أخطاء الذاكرة",
+        "أخرى"
+    ],
+    "تخزين معلومات مهمة": [
+        "تحليل Memory في Agent",
+        "تحديد ما يجب حفظه",
+        "تصميم ذاكرة بسيطة",
+        "تقييم استرجاع السياق",
+        "مراجعة أخطاء الذاكرة",
+        "أخرى"
+    ],
+    "استرجاع السياق": [
+        "تحليل Memory في Agent",
+        "تحديد ما يجب حفظه",
+        "تصميم ذاكرة بسيطة",
+        "تقييم استرجاع السياق",
+        "مراجعة أخطاء الذاكرة",
+        "أخرى"
+    ],
+    "مخاطر الذاكرة الخاطئة": [
+        "تحليل Memory في Agent",
+        "تحديد ما يجب حفظه",
+        "تصميم ذاكرة بسيطة",
+        "تقييم استرجاع السياق",
+        "مراجعة أخطاء الذاكرة",
+        "أخرى"
+    ],
+    "مفهوم Multi-Agent Systems": [
+        "تحليل Multi-Agent System",
+        "توزيع أدوار بين Agents",
+        "رسم تفاعل الوكلاء",
+        "تقييم التنسيق",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "تعاون أكثر من Agent": [
+        "تحليل Multi-Agent System",
+        "توزيع أدوار بين Agents",
+        "رسم تفاعل الوكلاء",
+        "تقييم التنسيق",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "تقسيم الأدوار": [
+        "تحليل Multi-Agent System",
+        "توزيع أدوار بين Agents",
+        "رسم تفاعل الوكلاء",
+        "تقييم التنسيق",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "التواصل بين الوكلاء": [
+        "تحليل Multi-Agent System",
+        "توزيع أدوار بين Agents",
+        "رسم تفاعل الوكلاء",
+        "تقييم التنسيق",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "حل المشكلات الجماعي": [
+        "تحليل Multi-Agent System",
+        "توزيع أدوار بين Agents",
+        "رسم تفاعل الوكلاء",
+        "تقييم التنسيق",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "تحديات التنسيق": [
+        "تحليل Multi-Agent System",
+        "توزيع أدوار بين Agents",
+        "رسم تفاعل الوكلاء",
+        "تقييم التنسيق",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "مفهوم Multimodal AI": [
+        "تحليل Multimodal AI",
+        "تصنيف نوع المدخلات",
+        "تجربة سؤال على صورة",
+        "تقييم مخرج متعدد الوسائط",
+        "كتابة فكرة مشروع",
+        "أخرى"
+    ],
+    "النص والصورة": [
+        "تحليل Multimodal AI",
+        "تصنيف نوع المدخلات",
+        "تجربة سؤال على صورة",
+        "تقييم مخرج متعدد الوسائط",
+        "كتابة فكرة مشروع",
+        "أخرى"
+    ],
+    "النص والصوت": [
+        "تحليل Multimodal AI",
+        "تصنيف نوع المدخلات",
+        "تجربة سؤال على صورة",
+        "تقييم مخرج متعدد الوسائط",
+        "كتابة فكرة مشروع",
+        "أخرى"
+    ],
+    "الصورة والسؤال": [
+        "تحليل Multimodal AI",
+        "تصنيف نوع المدخلات",
+        "تجربة سؤال على صورة",
+        "تقييم مخرج متعدد الوسائط",
+        "كتابة فكرة مشروع",
+        "أخرى"
+    ],
+    "دمج أكثر من نوع بيانات": [
+        "تحليل Multimodal AI",
+        "تصنيف نوع المدخلات",
+        "تجربة سؤال على صورة",
+        "تقييم مخرج متعدد الوسائط",
+        "كتابة فكرة مشروع",
+        "أخرى"
+    ],
+    "تطبيقات Multimodal AI": [
+        "تحليل Multimodal AI",
+        "تصنيف نوع المدخلات",
+        "تجربة سؤال على صورة",
+        "تقييم مخرج متعدد الوسائط",
+        "كتابة فكرة مشروع",
+        "أخرى"
+    ],
+    "مفهوم Vision-Language Models": [
+        "تحليل Vision-Language Model",
+        "تجربة وصف صورة",
+        "تقييم إجابة على صورة",
+        "مقارنة مخرج نصي وبصري",
+        "تلخيص الاستخدامات",
+        "أخرى"
+    ],
+    "فهم الصورة والنص معاً": [
+        "تحليل Vision-Language Model",
+        "تجربة وصف صورة",
+        "تقييم إجابة على صورة",
+        "مقارنة مخرج نصي وبصري",
+        "تلخيص الاستخدامات",
+        "أخرى"
+    ],
+    "وصف الصور": [
+        "تحليل Vision-Language Model",
+        "تجربة وصف صورة",
+        "تقييم إجابة على صورة",
+        "مقارنة مخرج نصي وبصري",
+        "تلخيص الاستخدامات",
+        "أخرى"
+    ],
+    "الإجابة عن أسئلة على الصور": [
+        "تحليل Vision-Language Model",
+        "تجربة وصف صورة",
+        "تقييم إجابة على صورة",
+        "مقارنة مخرج نصي وبصري",
+        "تلخيص الاستخدامات",
+        "أخرى"
+    ],
+    "البحث بالصورة والنص": [
+        "تحليل Vision-Language Model",
+        "تجربة وصف صورة",
+        "تقييم إجابة على صورة",
+        "مقارنة مخرج نصي وبصري",
+        "تلخيص الاستخدامات",
+        "أخرى"
+    ],
+    "استخداماتها": [
+        "تحليل Vision-Language Model",
+        "تجربة وصف صورة",
+        "تقييم إجابة على صورة",
+        "مقارنة مخرج نصي وبصري",
+        "تلخيص الاستخدامات",
+        "أخرى"
+    ],
+    "مفهوم Speech AI": [
+        "دراسة Speech AI",
+        "تحليل تطبيق صوتي",
+        "تمييز Speech-to-Text وText-to-Speech",
+        "تقييم مخرج صوتي",
+        "كتابة فكرة مشروع",
+        "أخرى"
+    ],
+    "تحويل الكلام إلى نص": [
+        "دراسة Speech AI",
+        "تحليل تطبيق صوتي",
+        "تمييز Speech-to-Text وText-to-Speech",
+        "تقييم مخرج صوتي",
+        "كتابة فكرة مشروع",
+        "أخرى"
+    ],
+    "فهم الأوامر الصوتية": [
+        "دراسة Speech AI",
+        "تحليل تطبيق صوتي",
+        "تمييز Speech-to-Text وText-to-Speech",
+        "تقييم مخرج صوتي",
+        "كتابة فكرة مشروع",
+        "أخرى"
+    ],
+    "الضوضاء في الصوت": [
+        "دراسة Speech AI",
+        "تحليل تطبيق صوتي",
+        "تمييز Speech-to-Text وText-to-Speech",
+        "تقييم مخرج صوتي",
+        "كتابة فكرة مشروع",
+        "أخرى"
+    ],
+    "تطبيقات Speech AI": [
+        "دراسة Speech AI",
+        "تحليل تطبيق صوتي",
+        "تمييز Speech-to-Text وText-to-Speech",
+        "تقييم مخرج صوتي",
+        "كتابة فكرة مشروع",
+        "أخرى"
+    ],
+    "مفهوم Speech Recognition": [
+        "تحليل Speech Recognition",
+        "تقييم نص مستخرج",
+        "اكتشاف أخطاء تعرف صوتي",
+        "مقارنة حالات صوتية",
+        "تلخيص التحديات",
+        "أخرى"
+    ],
+    "دقة التعرف": [
+        "تحليل Speech Recognition",
+        "تقييم نص مستخرج",
+        "اكتشاف أخطاء تعرف صوتي",
+        "مقارنة حالات صوتية",
+        "تلخيص التحديات",
+        "أخرى"
+    ],
+    "اللهجات": [
+        "تحليل Speech Recognition",
+        "تقييم نص مستخرج",
+        "اكتشاف أخطاء تعرف صوتي",
+        "مقارنة حالات صوتية",
+        "تلخيص التحديات",
+        "أخرى"
+    ],
+    "الضوضاء": [
+        "تحليل Speech Recognition",
+        "تقييم نص مستخرج",
+        "اكتشاف أخطاء تعرف صوتي",
+        "مقارنة حالات صوتية",
+        "تلخيص التحديات",
+        "أخرى"
+    ],
+    "تقييم النص الناتج": [
+        "تحليل Speech Recognition",
+        "تقييم نص مستخرج",
+        "اكتشاف أخطاء تعرف صوتي",
+        "مقارنة حالات صوتية",
+        "تلخيص التحديات",
+        "أخرى"
+    ],
+    "مفهوم Text-to-Speech": [
+        "تحليل Text-to-Speech",
+        "تقييم طبيعية الصوت",
+        "كتابة نص مناسب للصوت",
+        "مقارنة مخرجات",
+        "تحديد أخطاء نطق",
+        "أخرى"
+    ],
+    "تحويل النص إلى صوت": [
+        "تحليل Text-to-Speech",
+        "تقييم طبيعية الصوت",
+        "كتابة نص مناسب للصوت",
+        "مقارنة مخرجات",
+        "تحديد أخطاء نطق",
+        "أخرى"
+    ],
+    "طبيعية الصوت": [
+        "تحليل Text-to-Speech",
+        "تقييم طبيعية الصوت",
+        "كتابة نص مناسب للصوت",
+        "مقارنة مخرجات",
+        "تحديد أخطاء نطق",
+        "أخرى"
+    ],
+    "النطق": [
+        "تحليل Text-to-Speech",
+        "تقييم طبيعية الصوت",
+        "كتابة نص مناسب للصوت",
+        "مقارنة مخرجات",
+        "تحديد أخطاء نطق",
+        "أخرى"
+    ],
+    "السرعة": [
+        "تحليل Text-to-Speech",
+        "تقييم طبيعية الصوت",
+        "كتابة نص مناسب للصوت",
+        "مقارنة مخرجات",
+        "تحديد أخطاء نطق",
+        "أخرى"
+    ],
+    "الاستخدامات التعليمية": [
+        "تحليل Text-to-Speech",
+        "تقييم طبيعية الصوت",
+        "كتابة نص مناسب للصوت",
+        "مقارنة مخرجات",
+        "تحديد أخطاء نطق",
+        "أخرى"
+    ],
+    "مفهوم Recommendation Systems": [
+        "تحليل نظام توصية",
+        "تحديد بيانات التوصية",
+        "مقارنة طرق توصية",
+        "تفسير نتيجة توصية",
+        "كتابة فكرة مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "التوصية بالمحتوى": [
+        "تحليل نظام توصية",
+        "تحديد بيانات التوصية",
+        "مقارنة طرق توصية",
+        "تفسير نتيجة توصية",
+        "كتابة فكرة مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "التوصية بالمنتجات": [
+        "تحليل نظام توصية",
+        "تحديد بيانات التوصية",
+        "مقارنة طرق توصية",
+        "تفسير نتيجة توصية",
+        "كتابة فكرة مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "اهتمامات المستخدم": [
+        "تحليل نظام توصية",
+        "تحديد بيانات التوصية",
+        "مقارنة طرق توصية",
+        "تفسير نتيجة توصية",
+        "كتابة فكرة مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تشابه المستخدمين": [
+        "تحليل نظام توصية",
+        "تحديد بيانات التوصية",
+        "مقارنة طرق توصية",
+        "تفسير نتيجة توصية",
+        "كتابة فكرة مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تشابه العناصر": [
+        "تحليل نظام توصية",
+        "تحديد بيانات التوصية",
+        "مقارنة طرق توصية",
+        "تفسير نتيجة توصية",
+        "كتابة فكرة مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تحديات التوصية": [
+        "تحليل نظام توصية",
+        "تحديد بيانات التوصية",
+        "مقارنة طرق توصية",
+        "تفسير نتيجة توصية",
+        "كتابة فكرة مشروع",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Reinforcement Learning": [
+        "دراسة Reinforcement Learning",
+        "تحليل موقف تعلم معزز",
+        "تحديد Agent وEnvironment",
+        "تفسير Reward",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "التعلم من التجربة": [
+        "دراسة Reinforcement Learning",
+        "تحليل موقف تعلم معزز",
+        "تحديد Agent وEnvironment",
+        "تفسير Reward",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "الوكيل Agent": [
+        "دراسة Reinforcement Learning",
+        "تحليل موقف تعلم معزز",
+        "تحديد Agent وEnvironment",
+        "تفسير Reward",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "البيئة Environment": [
+        "دراسة Reinforcement Learning",
+        "تحليل موقف تعلم معزز",
+        "تحديد Agent وEnvironment",
+        "تفسير Reward",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "الفعل Action": [
+        "دراسة Reinforcement Learning",
+        "تحليل موقف تعلم معزز",
+        "تحديد Agent وEnvironment",
+        "تفسير Reward",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "الحالة State": [
+        "دراسة Reinforcement Learning",
+        "تحليل موقف تعلم معزز",
+        "تحديد Agent وEnvironment",
+        "تفسير Reward",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "المكافأة Reward": [
+        "دراسة Reinforcement Learning",
+        "تحليل موقف تعلم معزز",
+        "تحديد Agent وEnvironment",
+        "تفسير Reward",
+        "حل أسئلة مفاهيمية",
+        "أخرى"
+    ],
+    "مفهوم Agent": [
+        "تحليل Agent وEnvironment",
+        "رسم دورة تفاعل",
+        "تحديد الحالات والأفعال",
+        "تصميم مثال بسيط",
+        "مراجعة الأخطاء",
+        "أخرى"
+    ],
+    "مفهوم Environment": [
+        "تحليل Agent وEnvironment",
+        "رسم دورة تفاعل",
+        "تحديد الحالات والأفعال",
+        "تصميم مثال بسيط",
+        "مراجعة الأخطاء",
+        "أخرى"
+    ],
+    "تفاعل الوكيل مع البيئة": [
+        "تحليل Agent وEnvironment",
+        "رسم دورة تفاعل",
+        "تحديد الحالات والأفعال",
+        "تصميم مثال بسيط",
+        "مراجعة الأخطاء",
+        "أخرى"
+    ],
+    "الملاحظة": [
+        "تحليل Agent وEnvironment",
+        "رسم دورة تفاعل",
+        "تحديد الحالات والأفعال",
+        "تصميم مثال بسيط",
+        "مراجعة الأخطاء",
+        "أخرى"
+    ],
+    "الفعل": [
+        "تحليل Agent وEnvironment",
+        "رسم دورة تفاعل",
+        "تحديد الحالات والأفعال",
+        "تصميم مثال بسيط",
+        "مراجعة الأخطاء",
+        "أخرى"
+    ],
+    "تغير الحالة": [
+        "تحليل Agent وEnvironment",
+        "رسم دورة تفاعل",
+        "تحديد الحالات والأفعال",
+        "تصميم مثال بسيط",
+        "مراجعة الأخطاء",
+        "أخرى"
+    ],
+    "مفهوم Reward Function": [
+        "تحليل Reward Function",
+        "اقتراح مكافأة مناسبة",
+        "تفسير سلوك Agent",
+        "اكتشاف مكافأة خاطئة",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "المكافأة الفورية": [
+        "تحليل Reward Function",
+        "اقتراح مكافأة مناسبة",
+        "تفسير سلوك Agent",
+        "اكتشاف مكافأة خاطئة",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "المكافأة المستقبلية": [
+        "تحليل Reward Function",
+        "اقتراح مكافأة مناسبة",
+        "تفسير سلوك Agent",
+        "اكتشاف مكافأة خاطئة",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "تأثير المكافأة على السلوك": [
+        "تحليل Reward Function",
+        "اقتراح مكافأة مناسبة",
+        "تفسير سلوك Agent",
+        "اكتشاف مكافأة خاطئة",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "تصميم مكافأة مناسبة": [
+        "تحليل Reward Function",
+        "اقتراح مكافأة مناسبة",
+        "تفسير سلوك Agent",
+        "اكتشاف مكافأة خاطئة",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "أخطاء تصميم المكافآت": [
+        "تحليل Reward Function",
+        "اقتراح مكافأة مناسبة",
+        "تفسير سلوك Agent",
+        "اكتشاف مكافأة خاطئة",
+        "حل أسئلة تطبيقية",
+        "أخرى"
+    ],
+    "مفهوم Policy": [
+        "تحليل Policy",
+        "مقارنة سياسات",
+        "اقتراح فعل مناسب",
+        "تفسير اختيار Agent",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "اختيار الفعل": [
+        "تحليل Policy",
+        "مقارنة سياسات",
+        "اقتراح فعل مناسب",
+        "تفسير اختيار Agent",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "السياسة الجيدة": [
+        "تحليل Policy",
+        "مقارنة سياسات",
+        "اقتراح فعل مناسب",
+        "تفسير اختيار Agent",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "السياسة العشوائية": [
+        "تحليل Policy",
+        "مقارنة سياسات",
+        "اقتراح فعل مناسب",
+        "تفسير اختيار Agent",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "تحسين السياسة": [
+        "تحليل Policy",
+        "مقارنة سياسات",
+        "اقتراح فعل مناسب",
+        "تفسير اختيار Agent",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "العلاقة بالمكافأة": [
+        "تحليل Policy",
+        "مقارنة سياسات",
+        "اقتراح فعل مناسب",
+        "تفسير اختيار Agent",
+        "حل تمارين مفاهيمية",
+        "أخرى"
+    ],
+    "مفهوم Q-Learning": [
+        "دراسة Q-Learning",
+        "تحليل جدول Q بسيط",
+        "تمييز Exploration وExploitation",
+        "تتبع تحديث مفاهيمي",
+        "حل أسئلة أساسية",
+        "أخرى"
+    ],
+    "قيمة الحالة والفعل": [
+        "دراسة Q-Learning",
+        "تحليل جدول Q بسيط",
+        "تمييز Exploration وExploitation",
+        "تتبع تحديث مفاهيمي",
+        "حل أسئلة أساسية",
+        "أخرى"
+    ],
+    "جدول Q": [
+        "دراسة Q-Learning",
+        "تحليل جدول Q بسيط",
+        "تمييز Exploration وExploitation",
+        "تتبع تحديث مفاهيمي",
+        "حل أسئلة أساسية",
+        "أخرى"
+    ],
+    "تحديث القيم كمفهوم": [
+        "دراسة Q-Learning",
+        "تحليل جدول Q بسيط",
+        "تمييز Exploration وExploitation",
+        "تتبع تحديث مفاهيمي",
+        "حل أسئلة أساسية",
+        "أخرى"
+    ],
+    "الاستكشاف والاستغلال": [
+        "دراسة Q-Learning",
+        "تحليل جدول Q بسيط",
+        "تمييز Exploration وExploitation",
+        "تتبع تحديث مفاهيمي",
+        "حل أسئلة أساسية",
+        "أخرى"
+    ],
+    "حدود الفهم الأساسي": [
+        "دراسة Q-Learning",
+        "تحليل جدول Q بسيط",
+        "تمييز Exploration وExploitation",
+        "تتبع تحديث مفاهيمي",
+        "حل أسئلة أساسية",
+        "أخرى"
+    ],
+    "مفهوم نشر نموذج AI": [
+        "تحليل نشر نموذج AI",
+        "كتابة خطة نشر تعليمية",
+        "تحديد متطلبات نشر",
+        "تقييم جاهزية النموذج",
+        "مراجعة مخاطر النشر",
+        "أخرى"
+    ],
+    "استخدام النموذج خارج التجربة": [
+        "تحليل نشر نموذج AI",
+        "كتابة خطة نشر تعليمية",
+        "تحديد متطلبات نشر",
+        "تقييم جاهزية النموذج",
+        "مراجعة مخاطر النشر",
+        "أخرى"
+    ],
+    "تقديم تنبؤات للمستخدم": [
+        "تحليل نشر نموذج AI",
+        "كتابة خطة نشر تعليمية",
+        "تحديد متطلبات نشر",
+        "تقييم جاهزية النموذج",
+        "مراجعة مخاطر النشر",
+        "أخرى"
+    ],
+    "متطلبات النشر": [
+        "تحليل نشر نموذج AI",
+        "كتابة خطة نشر تعليمية",
+        "تحديد متطلبات نشر",
+        "تقييم جاهزية النموذج",
+        "مراجعة مخاطر النشر",
+        "أخرى"
+    ],
+    "قيود النشر": [
+        "تحليل نشر نموذج AI",
+        "كتابة خطة نشر تعليمية",
+        "تحديد متطلبات نشر",
+        "تقييم جاهزية النموذج",
+        "مراجعة مخاطر النشر",
+        "أخرى"
+    ],
+    "مخاطر النشر المبكر": [
+        "تحليل نشر نموذج AI",
+        "كتابة خطة نشر تعليمية",
+        "تحديد متطلبات نشر",
+        "تقييم جاهزية النموذج",
+        "مراجعة مخاطر النشر",
+        "أخرى"
+    ],
+    "مفهوم Serving": [
+        "تحليل خدمة نموذج",
+        "رسم سير تنبؤ",
+        "تقييم زمن استجابة",
+        "تحديد مدخلات ومخرجات",
+        "كتابة خطة استخدام نموذج",
+        "أخرى"
+    ],
+    "استقبال مدخلات": [
+        "تحليل خدمة نموذج",
+        "رسم سير تنبؤ",
+        "تقييم زمن استجابة",
+        "تحديد مدخلات ومخرجات",
+        "كتابة خطة استخدام نموذج",
+        "أخرى"
+    ],
+    "إرجاع تنبؤ": [
+        "تحليل خدمة نموذج",
+        "رسم سير تنبؤ",
+        "تقييم زمن استجابة",
+        "تحديد مدخلات ومخرجات",
+        "كتابة خطة استخدام نموذج",
+        "أخرى"
+    ],
+    "زمن الاستجابة": [
+        "تحليل خدمة نموذج",
+        "رسم سير تنبؤ",
+        "تقييم زمن استجابة",
+        "تحديد مدخلات ومخرجات",
+        "كتابة خطة استخدام نموذج",
+        "أخرى"
+    ],
+    "التعامل مع الطلبات": [
+        "تحليل خدمة نموذج",
+        "رسم سير تنبؤ",
+        "تقييم زمن استجابة",
+        "تحديد مدخلات ومخرجات",
+        "كتابة خطة استخدام نموذج",
+        "أخرى"
+    ],
+    "تحديث النموذج": [
+        "تحليل خدمة نموذج",
+        "رسم سير تنبؤ",
+        "تقييم زمن استجابة",
+        "تحديد مدخلات ومخرجات",
+        "كتابة خطة استخدام نموذج",
+        "أخرى"
+    ],
+    "مفهوم Model Monitoring": [
+        "تحليل مراقبة نموذج",
+        "اختيار مؤشرات متابعة",
+        "اكتشاف تدهور أداء",
+        "كتابة خطة مراقبة",
+        "مراجعة نتائج نموذج",
+        "أخرى"
+    ],
+    "متابعة أداء النموذج": [
+        "تحليل مراقبة نموذج",
+        "اختيار مؤشرات متابعة",
+        "اكتشاف تدهور أداء",
+        "كتابة خطة مراقبة",
+        "مراجعة نتائج نموذج",
+        "أخرى"
+    ],
+    "تغير جودة التنبؤ": [
+        "تحليل مراقبة نموذج",
+        "اختيار مؤشرات متابعة",
+        "اكتشاف تدهور أداء",
+        "كتابة خطة مراقبة",
+        "مراجعة نتائج نموذج",
+        "أخرى"
+    ],
+    "أخطاء المستخدمين": [
+        "تحليل مراقبة نموذج",
+        "اختيار مؤشرات متابعة",
+        "اكتشاف تدهور أداء",
+        "كتابة خطة مراقبة",
+        "مراجعة نتائج نموذج",
+        "أخرى"
+    ],
+    "بيانات جديدة": [
+        "تحليل مراقبة نموذج",
+        "اختيار مؤشرات متابعة",
+        "اكتشاف تدهور أداء",
+        "كتابة خطة مراقبة",
+        "مراجعة نتائج نموذج",
+        "أخرى"
+    ],
+    "تنبيهات الأداء": [
+        "تحليل مراقبة نموذج",
+        "اختيار مؤشرات متابعة",
+        "اكتشاف تدهور أداء",
+        "كتابة خطة مراقبة",
+        "مراجعة نتائج نموذج",
+        "أخرى"
+    ],
+    "مفهوم MLOps": [
+        "دراسة MLOps",
+        "رسم دورة حياة نموذج",
+        "تحليل خطوات MLOps",
+        "تحديد مرحلة ناقصة",
+        "كتابة ملخص تطبيقي",
+        "أخرى"
+    ],
+    "تنظيم دورة حياة النموذج": [
+        "دراسة MLOps",
+        "رسم دورة حياة نموذج",
+        "تحليل خطوات MLOps",
+        "تحديد مرحلة ناقصة",
+        "كتابة ملخص تطبيقي",
+        "أخرى"
+    ],
+    "تتبع التجارب": [
+        "دراسة MLOps",
+        "رسم دورة حياة نموذج",
+        "تحليل خطوات MLOps",
+        "تحديد مرحلة ناقصة",
+        "كتابة ملخص تطبيقي",
+        "أخرى"
+    ],
+    "إدارة النماذج": [
+        "دراسة MLOps",
+        "رسم دورة حياة نموذج",
+        "تحليل خطوات MLOps",
+        "تحديد مرحلة ناقصة",
+        "كتابة ملخص تطبيقي",
+        "أخرى"
+    ],
+    "نشر النموذج": [
+        "دراسة MLOps",
+        "رسم دورة حياة نموذج",
+        "تحليل خطوات MLOps",
+        "تحديد مرحلة ناقصة",
+        "كتابة ملخص تطبيقي",
+        "أخرى"
+    ],
+    "مراقبة النموذج": [
+        "دراسة MLOps",
+        "رسم دورة حياة نموذج",
+        "تحليل خطوات MLOps",
+        "تحديد مرحلة ناقصة",
+        "كتابة ملخص تطبيقي",
+        "أخرى"
+    ],
+    "مفهوم Experiment Tracking": [
+        "تصميم سجل تجارب",
+        "مقارنة تجربتين",
+        "توثيق إعدادات نموذج",
+        "اختيار أفضل نتيجة",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "تسجيل إعدادات التجربة": [
+        "تصميم سجل تجارب",
+        "مقارنة تجربتين",
+        "توثيق إعدادات نموذج",
+        "اختيار أفضل نتيجة",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "تسجيل النتائج": [
+        "تصميم سجل تجارب",
+        "مقارنة تجربتين",
+        "توثيق إعدادات نموذج",
+        "اختيار أفضل نتيجة",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "مقارنة التجارب": [
+        "تصميم سجل تجارب",
+        "مقارنة تجربتين",
+        "توثيق إعدادات نموذج",
+        "اختيار أفضل نتيجة",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "حفظ أفضل نموذج": [
+        "تصميم سجل تجارب",
+        "مقارنة تجربتين",
+        "توثيق إعدادات نموذج",
+        "اختيار أفضل نتيجة",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "توثيق الملاحظات": [
+        "تصميم سجل تجارب",
+        "مقارنة تجربتين",
+        "توثيق إعدادات نموذج",
+        "اختيار أفضل نتيجة",
+        "كتابة تقرير تجربة",
+        "أخرى"
+    ],
+    "مفهوم Data Drift": [
+        "تحليل Data Drift",
+        "مقارنة بيانات قديمة وجديدة",
+        "اكتشاف تغير في التوزيع",
+        "اقتراح معالجة",
+        "كتابة تقرير متابعة",
+        "أخرى"
+    ],
+    "تغير خصائص البيانات": [
+        "تحليل Data Drift",
+        "مقارنة بيانات قديمة وجديدة",
+        "اكتشاف تغير في التوزيع",
+        "اقتراح معالجة",
+        "كتابة تقرير متابعة",
+        "أخرى"
+    ],
+    "اختلاف بيانات التدريب عن البيانات الجديدة": [
+        "تحليل Data Drift",
+        "مقارنة بيانات قديمة وجديدة",
+        "اكتشاف تغير في التوزيع",
+        "اقتراح معالجة",
+        "كتابة تقرير متابعة",
+        "أخرى"
+    ],
+    "أثره على الأداء": [
+        "تحليل Data Drift",
+        "مقارنة بيانات قديمة وجديدة",
+        "اكتشاف تغير في التوزيع",
+        "اقتراح معالجة",
+        "كتابة تقرير متابعة",
+        "أخرى"
+    ],
+    "اكتشاف Data Drift": [
+        "تحليل Data Drift",
+        "مقارنة بيانات قديمة وجديدة",
+        "اكتشاف تغير في التوزيع",
+        "اقتراح معالجة",
+        "كتابة تقرير متابعة",
+        "أخرى"
+    ],
+    "معالجته": [
+        "تحليل Data Drift",
+        "مقارنة بيانات قديمة وجديدة",
+        "اكتشاف تغير في التوزيع",
+        "اقتراح معالجة",
+        "كتابة تقرير متابعة",
+        "أخرى"
+    ],
+    "مفهوم Model Drift": [
+        "تحليل Model Drift",
+        "قراءة أداء عبر الزمن",
+        "تحديد سبب التدهور",
+        "اقتراح إعادة تدريب",
+        "مراجعة مؤشرات الأداء",
+        "أخرى"
+    ],
+    "تدهور أداء النموذج مع الزمن": [
+        "تحليل Model Drift",
+        "قراءة أداء عبر الزمن",
+        "تحديد سبب التدهور",
+        "اقتراح إعادة تدريب",
+        "مراجعة مؤشرات الأداء",
+        "أخرى"
+    ],
+    "تغير العلاقة بين البيانات والنتيجة": [
+        "تحليل Model Drift",
+        "قراءة أداء عبر الزمن",
+        "تحديد سبب التدهور",
+        "اقتراح إعادة تدريب",
+        "مراجعة مؤشرات الأداء",
+        "أخرى"
+    ],
+    "أسباب Model Drift": [
+        "تحليل Model Drift",
+        "قراءة أداء عبر الزمن",
+        "تحديد سبب التدهور",
+        "اقتراح إعادة تدريب",
+        "مراجعة مؤشرات الأداء",
+        "أخرى"
+    ],
+    "اكتشاف التدهور": [
+        "تحليل Model Drift",
+        "قراءة أداء عبر الزمن",
+        "تحديد سبب التدهور",
+        "اقتراح إعادة تدريب",
+        "مراجعة مؤشرات الأداء",
+        "أخرى"
+    ],
+    "إعادة التدريب": [
+        "تحليل Model Drift",
+        "قراءة أداء عبر الزمن",
+        "تحديد سبب التدهور",
+        "اقتراح إعادة تدريب",
+        "مراجعة مؤشرات الأداء",
+        "أخرى"
+    ],
+    "مفهوم التقييم المتقدم": [
+        "تصميم تقييم متقدم",
+        "اختيار معايير تقييم",
+        "تحليل حالة اختبار صعبة",
+        "مقارنة نتائج",
+        "كتابة تقرير تقييم",
+        "أخرى"
+    ],
+    "تقييم الجودة": [
+        "تصميم تقييم متقدم",
+        "اختيار معايير تقييم",
+        "تحليل حالة اختبار صعبة",
+        "مقارنة نتائج",
+        "كتابة تقرير تقييم",
+        "أخرى"
+    ],
+    "تقييم الثبات": [
+        "تصميم تقييم متقدم",
+        "اختيار معايير تقييم",
+        "تحليل حالة اختبار صعبة",
+        "مقارنة نتائج",
+        "كتابة تقرير تقييم",
+        "أخرى"
+    ],
+    "تقييم العدالة": [
+        "تصميم تقييم متقدم",
+        "اختيار معايير تقييم",
+        "تحليل حالة اختبار صعبة",
+        "مقارنة نتائج",
+        "كتابة تقرير تقييم",
+        "أخرى"
+    ],
+    "تقييم الأمان": [
+        "تصميم تقييم متقدم",
+        "اختيار معايير تقييم",
+        "تحليل حالة اختبار صعبة",
+        "مقارنة نتائج",
+        "كتابة تقرير تقييم",
+        "أخرى"
+    ],
+    "تقييم تجربة المستخدم": [
+        "تصميم تقييم متقدم",
+        "اختيار معايير تقييم",
+        "تحليل حالة اختبار صعبة",
+        "مقارنة نتائج",
+        "كتابة تقرير تقييم",
+        "أخرى"
+    ],
+    "تقييم الأداء في حالات صعبة": [
+        "تصميم تقييم متقدم",
+        "اختيار معايير تقييم",
+        "تحليل حالة اختبار صعبة",
+        "مقارنة نتائج",
+        "كتابة تقرير تقييم",
+        "أخرى"
+    ],
+    "تقييم إجابات LLM": [
+        "تقييم إجابة LLM",
+        "بناء Rubric تقييم",
+        "مقارنة إجابتين",
+        "اكتشاف خطأ واقعي",
+        "تحسين Prompt بناء على التقييم",
+        "أخرى"
+    ],
+    "الدقة الواقعية": [
+        "تقييم إجابة LLM",
+        "بناء Rubric تقييم",
+        "مقارنة إجابتين",
+        "اكتشاف خطأ واقعي",
+        "تحسين Prompt بناء على التقييم",
+        "أخرى"
+    ],
+    "الاتساق": [
+        "تقييم إجابة LLM",
+        "بناء Rubric تقييم",
+        "مقارنة إجابتين",
+        "اكتشاف خطأ واقعي",
+        "تحسين Prompt بناء على التقييم",
+        "أخرى"
+    ],
+    "الاكتمال": [
+        "تقييم إجابة LLM",
+        "بناء Rubric تقييم",
+        "مقارنة إجابتين",
+        "اكتشاف خطأ واقعي",
+        "تحسين Prompt بناء على التقييم",
+        "أخرى"
+    ],
+    "الوضوح": [
+        "تقييم إجابة LLM",
+        "بناء Rubric تقييم",
+        "مقارنة إجابتين",
+        "اكتشاف خطأ واقعي",
+        "تحسين Prompt بناء على التقييم",
+        "أخرى"
+    ],
+    "الالتزام بالتعليمات": [
+        "تقييم إجابة LLM",
+        "بناء Rubric تقييم",
+        "مقارنة إجابتين",
+        "اكتشاف خطأ واقعي",
+        "تحسين Prompt بناء على التقييم",
+        "أخرى"
+    ],
+    "السلامة": [
+        "تقييم إجابة LLM",
+        "بناء Rubric تقييم",
+        "مقارنة إجابتين",
+        "اكتشاف خطأ واقعي",
+        "تحسين Prompt بناء على التقييم",
+        "أخرى"
+    ],
+    "مفهوم Human Evaluation": [
+        "تصميم تقييم بشري",
+        "كتابة معايير تقييم",
+        "مقارنة تقييمات",
+        "تحليل اختلاف آراء",
+        "توثيق ملاحظات",
+        "أخرى"
+    ],
+    "تقييم الإنسان للمخرجات": [
+        "تصميم تقييم بشري",
+        "كتابة معايير تقييم",
+        "مقارنة تقييمات",
+        "تحليل اختلاف آراء",
+        "توثيق ملاحظات",
+        "أخرى"
+    ],
+    "معايير الحكم": [
+        "تصميم تقييم بشري",
+        "كتابة معايير تقييم",
+        "مقارنة تقييمات",
+        "تحليل اختلاف آراء",
+        "توثيق ملاحظات",
+        "أخرى"
+    ],
+    "اتفاق المقيمين": [
+        "تصميم تقييم بشري",
+        "كتابة معايير تقييم",
+        "مقارنة تقييمات",
+        "تحليل اختلاف آراء",
+        "توثيق ملاحظات",
+        "أخرى"
+    ],
+    "التحيز في التقييم البشري": [
+        "تصميم تقييم بشري",
+        "كتابة معايير تقييم",
+        "مقارنة تقييمات",
+        "تحليل اختلاف آراء",
+        "توثيق ملاحظات",
+        "أخرى"
+    ],
+    "مفهوم AI Safety": [
+        "دراسة AI Safety",
+        "تحليل خطر محتمل",
+        "تقييم مخرج غير آمن",
+        "اقتراح ضوابط",
+        "كتابة قواعد استخدام مسؤول",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "تقليل الضرر": [
+        "دراسة AI Safety",
+        "تحليل خطر محتمل",
+        "تقييم مخرج غير آمن",
+        "اقتراح ضوابط",
+        "كتابة قواعد استخدام مسؤول",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "التحقق من الاستخدام الآمن": [
+        "دراسة AI Safety",
+        "تحليل خطر محتمل",
+        "تقييم مخرج غير آمن",
+        "اقتراح ضوابط",
+        "كتابة قواعد استخدام مسؤول",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "منع المخرجات الخطرة": [
+        "دراسة AI Safety",
+        "تحليل خطر محتمل",
+        "تقييم مخرج غير آمن",
+        "اقتراح ضوابط",
+        "كتابة قواعد استخدام مسؤول",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "القيود والسياسات": [
+        "دراسة AI Safety",
+        "تحليل خطر محتمل",
+        "تقييم مخرج غير آمن",
+        "اقتراح ضوابط",
+        "كتابة قواعد استخدام مسؤول",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "اختبار الأمان": [
+        "دراسة AI Safety",
+        "تحليل خطر محتمل",
+        "تقييم مخرج غير آمن",
+        "اقتراح ضوابط",
+        "كتابة قواعد استخدام مسؤول",
+        "اختبار قصير",
+        "أخرى"
+    ],
+    "مفهوم Hallucination": [
+        "اكتشاف Hallucination",
+        "تحليل إجابة مشكوك فيها",
+        "مقارنة مع مصدر",
+        "تحسين Prompt لتقليل الخطأ",
+        "تقييم موثوقية مخرج",
+        "أخرى"
+    ],
+    "إجابة تبدو صحيحة لكنها خاطئة": [
+        "اكتشاف Hallucination",
+        "تحليل إجابة مشكوك فيها",
+        "مقارنة مع مصدر",
+        "تحسين Prompt لتقليل الخطأ",
+        "تقييم موثوقية مخرج",
+        "أخرى"
+    ],
+    "أسباب Hallucination": [
+        "اكتشاف Hallucination",
+        "تحليل إجابة مشكوك فيها",
+        "مقارنة مع مصدر",
+        "تحسين Prompt لتقليل الخطأ",
+        "تقييم موثوقية مخرج",
+        "أخرى"
+    ],
+    "اكتشاف Hallucination": [
+        "اكتشاف Hallucination",
+        "تحليل إجابة مشكوك فيها",
+        "مقارنة مع مصدر",
+        "تحسين Prompt لتقليل الخطأ",
+        "تقييم موثوقية مخرج",
+        "أخرى"
+    ],
+    "تقليلها بالسياق والمصادر": [
+        "اكتشاف Hallucination",
+        "تحليل إجابة مشكوك فيها",
+        "مقارنة مع مصدر",
+        "تحسين Prompt لتقليل الخطأ",
+        "تقييم موثوقية مخرج",
+        "أخرى"
+    ],
+    "مفهوم Bias في النماذج المتقدمة": [
+        "تحليل Bias في مخرجات AI",
+        "اكتشاف تحيز محتمل",
+        "مقارنة نتائج لفئات مختلفة",
+        "اقتراح تقليل التحيز",
+        "كتابة ملاحظات أخلاقية",
+        "أخرى"
+    ],
+    "تحيز البيانات": [
+        "تحليل Bias في مخرجات AI",
+        "اكتشاف تحيز محتمل",
+        "مقارنة نتائج لفئات مختلفة",
+        "اقتراح تقليل التحيز",
+        "كتابة ملاحظات أخلاقية",
+        "أخرى"
+    ],
+    "تحيز المخرجات": [
+        "تحليل Bias في مخرجات AI",
+        "اكتشاف تحيز محتمل",
+        "مقارنة نتائج لفئات مختلفة",
+        "اقتراح تقليل التحيز",
+        "كتابة ملاحظات أخلاقية",
+        "أخرى"
+    ],
+    "تحيز اللغة": [
+        "تحليل Bias في مخرجات AI",
+        "اكتشاف تحيز محتمل",
+        "مقارنة نتائج لفئات مختلفة",
+        "اقتراح تقليل التحيز",
+        "كتابة ملاحظات أخلاقية",
+        "أخرى"
+    ],
+    "تأثير التحيز على المستخدمين": [
+        "تحليل Bias في مخرجات AI",
+        "اكتشاف تحيز محتمل",
+        "مقارنة نتائج لفئات مختلفة",
+        "اقتراح تقليل التحيز",
+        "كتابة ملاحظات أخلاقية",
+        "أخرى"
+    ],
+    "تقليل التحيز": [
+        "تحليل Bias في مخرجات AI",
+        "اكتشاف تحيز محتمل",
+        "مقارنة نتائج لفئات مختلفة",
+        "اقتراح تقليل التحيز",
+        "كتابة ملاحظات أخلاقية",
+        "أخرى"
+    ],
+    "خصوصية البيانات": [
+        "تحليل خصوصية استخدام AI",
+        "تمييز بيانات حساسة",
+        "كتابة قواعد حماية",
+        "تقييم سيناريو مشاركة بيانات",
+        "اقتراح بدائل آمنة",
+        "أخرى"
+    ],
+    "البيانات الحساسة": [
+        "تحليل خصوصية استخدام AI",
+        "تمييز بيانات حساسة",
+        "كتابة قواعد حماية",
+        "تقييم سيناريو مشاركة بيانات",
+        "اقتراح بدائل آمنة",
+        "أخرى"
+    ],
+    "استخدام بيانات المستخدمين": [
+        "تحليل خصوصية استخدام AI",
+        "تمييز بيانات حساسة",
+        "كتابة قواعد حماية",
+        "تقييم سيناريو مشاركة بيانات",
+        "اقتراح بدائل آمنة",
+        "أخرى"
+    ],
+    "مخاطر إدخال معلومات شخصية": [
+        "تحليل خصوصية استخدام AI",
+        "تمييز بيانات حساسة",
+        "كتابة قواعد حماية",
+        "تقييم سيناريو مشاركة بيانات",
+        "اقتراح بدائل آمنة",
+        "أخرى"
+    ],
+    "إخفاء الهوية": [
+        "تحليل خصوصية استخدام AI",
+        "تمييز بيانات حساسة",
+        "كتابة قواعد حماية",
+        "تقييم سيناريو مشاركة بيانات",
+        "اقتراح بدائل آمنة",
+        "أخرى"
+    ],
+    "تقليل البيانات": [
+        "تحليل خصوصية استخدام AI",
+        "تمييز بيانات حساسة",
+        "كتابة قواعد حماية",
+        "تقييم سيناريو مشاركة بيانات",
+        "اقتراح بدائل آمنة",
+        "أخرى"
+    ],
+    "مفهوم AI Security": [
+        "دراسة AI Security",
+        "تحليل خطر دفاعي",
+        "اقتراح إجراء حماية",
+        "تمييز استخدام آمن وغير آمن",
+        "كتابة ملاحظات وقائية",
+        "أخرى"
+    ],
+    "حماية النماذج": [
+        "دراسة AI Security",
+        "تحليل خطر دفاعي",
+        "اقتراح إجراء حماية",
+        "تمييز استخدام آمن وغير آمن",
+        "كتابة ملاحظات وقائية",
+        "أخرى"
+    ],
+    "حماية البيانات": [
+        "دراسة AI Security",
+        "تحليل خطر دفاعي",
+        "اقتراح إجراء حماية",
+        "تمييز استخدام آمن وغير آمن",
+        "كتابة ملاحظات وقائية",
+        "أخرى"
+    ],
+    "الهجمات على المدخلات كمفهوم دفاعي": [
+        "دراسة AI Security",
+        "تحليل خطر دفاعي",
+        "اقتراح إجراء حماية",
+        "تمييز استخدام آمن وغير آمن",
+        "كتابة ملاحظات وقائية",
+        "أخرى"
+    ],
+    "إساءة استخدام النماذج": [
+        "دراسة AI Security",
+        "تحليل خطر دفاعي",
+        "اقتراح إجراء حماية",
+        "تمييز استخدام آمن وغير آمن",
+        "كتابة ملاحظات وقائية",
+        "أخرى"
+    ],
+    "مراقبة الاستخدام": [
+        "دراسة AI Security",
+        "تحليل خطر دفاعي",
+        "اقتراح إجراء حماية",
+        "تمييز استخدام آمن وغير آمن",
+        "كتابة ملاحظات وقائية",
+        "أخرى"
+    ],
+    "مشروع تصنيف صور": [
+        "بناء مشروع Deep Learning",
+        "اختيار فكرة مشروع",
+        "تجهيز بيانات المشروع",
+        "تدريب نموذج عميق",
+        "تقييم النموذج",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع تصنيف نصوص عميق": [
+        "بناء مشروع Deep Learning",
+        "اختيار فكرة مشروع",
+        "تجهيز بيانات المشروع",
+        "تدريب نموذج عميق",
+        "تقييم النموذج",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع توقع باستخدام شبكة عصبية": [
+        "بناء مشروع Deep Learning",
+        "اختيار فكرة مشروع",
+        "تجهيز بيانات المشروع",
+        "تدريب نموذج عميق",
+        "تقييم النموذج",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع Transfer Learning": [
+        "بناء مشروع Deep Learning",
+        "اختيار فكرة مشروع",
+        "تجهيز بيانات المشروع",
+        "تدريب نموذج عميق",
+        "تقييم النموذج",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع مقارنة Optimizers": [
+        "بناء مشروع Deep Learning",
+        "اختيار فكرة مشروع",
+        "تجهيز بيانات المشروع",
+        "تدريب نموذج عميق",
+        "تقييم النموذج",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع تحليل منحنى تدريب": [
+        "بناء مشروع Deep Learning",
+        "اختيار فكرة مشروع",
+        "تجهيز بيانات المشروع",
+        "تدريب نموذج عميق",
+        "تقييم النموذج",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع تصنيف مشاعر": [
+        "بناء مشروع NLP",
+        "تجهيز بيانات نصية",
+        "اختيار نموذج مناسب",
+        "تقييم مخرجات نصية",
+        "تحليل أخطاء اللغة",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع تلخيص نصوص": [
+        "بناء مشروع NLP",
+        "تجهيز بيانات نصية",
+        "اختيار نموذج مناسب",
+        "تقييم مخرجات نصية",
+        "تحليل أخطاء اللغة",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع استخراج كيانات": [
+        "بناء مشروع NLP",
+        "تجهيز بيانات نصية",
+        "اختيار نموذج مناسب",
+        "تقييم مخرجات نصية",
+        "تحليل أخطاء اللغة",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع ترجمة آلية تعليمي": [
+        "بناء مشروع NLP",
+        "تجهيز بيانات نصية",
+        "اختيار نموذج مناسب",
+        "تقييم مخرجات نصية",
+        "تحليل أخطاء اللغة",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع Chatbot بسيط": [
+        "بناء مشروع NLP",
+        "تجهيز بيانات نصية",
+        "اختيار نموذج مناسب",
+        "تقييم مخرجات نصية",
+        "تحليل أخطاء اللغة",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع Embeddings Search": [
+        "بناء مشروع NLP",
+        "تجهيز بيانات نصية",
+        "اختيار نموذج مناسب",
+        "تقييم مخرجات نصية",
+        "تحليل أخطاء اللغة",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع كشف كائنات": [
+        "بناء مشروع Computer Vision",
+        "تجهيز صور",
+        "تدريب نموذج صور",
+        "تقييم مخرجات بصرية",
+        "تحليل أخطاء صور",
+        "توثيق المشروع",
+        "أخرى"
+    ],
+    "مشروع تقسيم صور": [
+        "بناء مشروع Computer Vision",
+        "تجهيز صور",
+        "تدريب نموذج صور",
+        "تقييم مخرجات بصرية",
+        "تحليل أخطاء صور",
+        "توثيق المشروع",
+        "أخرى"
+    ],
+    "مشروع Transfer Learning للصور": [
+        "بناء مشروع Computer Vision",
+        "تجهيز صور",
+        "تدريب نموذج صور",
+        "تقييم مخرجات بصرية",
+        "تحليل أخطاء صور",
+        "توثيق المشروع",
+        "أخرى"
+    ],
+    "مشروع تحليل أخطاء تصنيف الصور": [
+        "بناء مشروع Computer Vision",
+        "تجهيز صور",
+        "تدريب نموذج صور",
+        "تقييم مخرجات بصرية",
+        "تحليل أخطاء صور",
+        "توثيق المشروع",
+        "أخرى"
+    ],
+    "مشروع تجهيز صور": [
+        "بناء مشروع Computer Vision",
+        "تجهيز صور",
+        "تدريب نموذج صور",
+        "تقييم مخرجات بصرية",
+        "تحليل أخطاء صور",
+        "توثيق المشروع",
+        "أخرى"
+    ],
+    "مشروع مساعد ذكي": [
+        "بناء مشروع LLM",
+        "تصميم Prompts",
+        "إنشاء Knowledge Base",
+        "تقييم مخرجات LLM",
+        "تحسين تجربة المستخدم",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع تلخيص مستندات": [
+        "بناء مشروع LLM",
+        "تصميم Prompts",
+        "إنشاء Knowledge Base",
+        "تقييم مخرجات LLM",
+        "تحسين تجربة المستخدم",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع RAG بسيط": [
+        "بناء مشروع LLM",
+        "تصميم Prompts",
+        "إنشاء Knowledge Base",
+        "تقييم مخرجات LLM",
+        "تحسين تجربة المستخدم",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع Prompt Library": [
+        "بناء مشروع LLM",
+        "تصميم Prompts",
+        "إنشاء Knowledge Base",
+        "تقييم مخرجات LLM",
+        "تحسين تجربة المستخدم",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع تقييم مخرجات LLM": [
+        "بناء مشروع LLM",
+        "تصميم Prompts",
+        "إنشاء Knowledge Base",
+        "تقييم مخرجات LLM",
+        "تحسين تجربة المستخدم",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "مشروع AI Agent بسيط": [
+        "بناء مشروع LLM",
+        "تصميم Prompts",
+        "إنشاء Knowledge Base",
+        "تقييم مخرجات LLM",
+        "تحسين تجربة المستخدم",
+        "كتابة تقرير مشروع",
+        "أخرى"
+    ],
+    "فهم السؤال البحثي": [
+        "قراءة ورقة AI",
+        "تلخيص Abstract",
+        "استخراج المشكلة والمنهجية",
+        "تحليل النتائج",
+        "كتابة أسئلة بحثية",
+        "مقارنة ورقتين",
+        "أخرى"
+    ],
+    "قراءة الملخص Abstract": [
+        "قراءة ورقة AI",
+        "تلخيص Abstract",
+        "استخراج المشكلة والمنهجية",
+        "تحليل النتائج",
+        "كتابة أسئلة بحثية",
+        "مقارنة ورقتين",
+        "أخرى"
+    ],
+    "فهم المنهجية": [
+        "قراءة ورقة AI",
+        "تلخيص Abstract",
+        "استخراج المشكلة والمنهجية",
+        "تحليل النتائج",
+        "كتابة أسئلة بحثية",
+        "مقارنة ورقتين",
+        "أخرى"
+    ],
+    "فهم النتائج": [
+        "قراءة ورقة AI",
+        "تلخيص Abstract",
+        "استخراج المشكلة والمنهجية",
+        "تحليل النتائج",
+        "كتابة أسئلة بحثية",
+        "مقارنة ورقتين",
+        "أخرى"
+    ],
+    "مقارنة أوراق علمية": [
+        "قراءة ورقة AI",
+        "تلخيص Abstract",
+        "استخراج المشكلة والمنهجية",
+        "تحليل النتائج",
+        "كتابة أسئلة بحثية",
+        "مقارنة ورقتين",
+        "أخرى"
+    ],
+    "تحديد الفجوة البحثية": [
+        "قراءة ورقة AI",
+        "تلخيص Abstract",
+        "استخراج المشكلة والمنهجية",
+        "تحليل النتائج",
+        "كتابة أسئلة بحثية",
+        "مقارنة ورقتين",
+        "أخرى"
+    ],
+    "اختيار ورقة مناسبة": [
+        "قراءة Paper",
+        "تلخيص قسم من الورقة",
+        "استخراج المصطلحات",
+        "تحليل التجارب",
+        "كتابة ملخص عربي",
+        "مراجعة الفهم",
+        "أخرى"
+    ],
+    "قراءة المقدمة": [
+        "قراءة Paper",
+        "تلخيص قسم من الورقة",
+        "استخراج المصطلحات",
+        "تحليل التجارب",
+        "كتابة ملخص عربي",
+        "مراجعة الفهم",
+        "أخرى"
+    ],
+    "قراءة الرسوم والجداول": [
+        "قراءة Paper",
+        "تلخيص قسم من الورقة",
+        "استخراج المصطلحات",
+        "تحليل التجارب",
+        "كتابة ملخص عربي",
+        "مراجعة الفهم",
+        "أخرى"
+    ],
+    "فهم التجارب": [
+        "قراءة Paper",
+        "تلخيص قسم من الورقة",
+        "استخراج المصطلحات",
+        "تحليل التجارب",
+        "كتابة ملخص عربي",
+        "مراجعة الفهم",
+        "أخرى"
+    ],
+    "فهم المقاييس": [
+        "قراءة Paper",
+        "تلخيص قسم من الورقة",
+        "استخراج المصطلحات",
+        "تحليل التجارب",
+        "كتابة ملخص عربي",
+        "مراجعة الفهم",
+        "أخرى"
+    ],
+    "تلخيص الورقة": [
+        "قراءة Paper",
+        "تلخيص قسم من الورقة",
+        "استخراج المصطلحات",
+        "تحليل التجارب",
+        "كتابة ملخص عربي",
+        "مراجعة الفهم",
+        "أخرى"
+    ],
+    "مفهوم إعادة التجربة": [
+        "تحليل تجربة AI",
+        "كتابة خطة إعادة تجربة",
+        "مقارنة نتائج",
+        "توثيق إعدادات",
+        "اكتشاف سبب اختلاف",
+        "أخرى"
+    ],
+    "فهم إعدادات التجربة": [
+        "تحليل تجربة AI",
+        "كتابة خطة إعادة تجربة",
+        "مقارنة نتائج",
+        "توثيق إعدادات",
+        "اكتشاف سبب اختلاف",
+        "أخرى"
+    ],
+    "استخدام نفس البيانات": [
+        "تحليل تجربة AI",
+        "كتابة خطة إعادة تجربة",
+        "مقارنة نتائج",
+        "توثيق إعدادات",
+        "اكتشاف سبب اختلاف",
+        "أخرى"
+    ],
+    "مقارنة النتائج": [
+        "تحليل تجربة AI",
+        "كتابة خطة إعادة تجربة",
+        "مقارنة نتائج",
+        "توثيق إعدادات",
+        "اكتشاف سبب اختلاف",
+        "أخرى"
+    ],
+    "توثيق الاختلافات": [
+        "تحليل تجربة AI",
+        "كتابة خطة إعادة تجربة",
+        "مقارنة نتائج",
+        "توثيق إعدادات",
+        "اكتشاف سبب اختلاف",
+        "أخرى"
+    ],
+    "صعوبة إعادة النتائج": [
+        "تحليل تجربة AI",
+        "كتابة خطة إعادة تجربة",
+        "مقارنة نتائج",
+        "توثيق إعدادات",
+        "اكتشاف سبب اختلاف",
+        "أخرى"
+    ],
+    "اختيار مشروع Portfolio": [
+        "تخطيط مشروع Portfolio",
+        "بناء مشروع تطبيقي",
+        "كتابة وصف مشروع",
+        "تقييم جودة المشروع",
+        "تحسين العرض",
+        "إعداد ملخص نهائي",
+        "أخرى"
+    ],
+    "تحديد البيانات": [
+        "تخطيط مشروع Portfolio",
+        "بناء مشروع تطبيقي",
+        "كتابة وصف مشروع",
+        "تقييم جودة المشروع",
+        "تحسين العرض",
+        "إعداد ملخص نهائي",
+        "أخرى"
+    ],
+    "بناء النموذج": [
+        "تخطيط مشروع Portfolio",
+        "بناء مشروع تطبيقي",
+        "كتابة وصف مشروع",
+        "تقييم جودة المشروع",
+        "تحسين العرض",
+        "إعداد ملخص نهائي",
+        "أخرى"
+    ],
+    "تقييم النتائج": [
+        "تخطيط مشروع Portfolio",
+        "بناء مشروع تطبيقي",
+        "كتابة وصف مشروع",
+        "تقييم جودة المشروع",
+        "تحسين العرض",
+        "إعداد ملخص نهائي",
+        "أخرى"
+    ],
+    "كتابة README": [
+        "تخطيط مشروع Portfolio",
+        "بناء مشروع تطبيقي",
+        "كتابة وصف مشروع",
+        "تقييم جودة المشروع",
+        "تحسين العرض",
+        "إعداد ملخص نهائي",
+        "أخرى"
+    ],
+    "عرض المشروع": [
+        "تخطيط مشروع Portfolio",
+        "بناء مشروع تطبيقي",
+        "كتابة وصف مشروع",
+        "تقييم جودة المشروع",
+        "تحسين العرض",
+        "إعداد ملخص نهائي",
+        "أخرى"
+    ],
+    "أخطاء Deep Learning": [
+        "تحليل خطأ متقدم",
+        "مراجعة تجربة فاشلة",
+        "اكتشاف سبب ضعف الأداء",
+        "تصحيح إعدادات",
+        "مقارنة حلول",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء CNN": [
+        "تحليل خطأ متقدم",
+        "مراجعة تجربة فاشلة",
+        "اكتشاف سبب ضعف الأداء",
+        "تصحيح إعدادات",
+        "مقارنة حلول",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء NLP": [
+        "تحليل خطأ متقدم",
+        "مراجعة تجربة فاشلة",
+        "اكتشاف سبب ضعف الأداء",
+        "تصحيح إعدادات",
+        "مقارنة حلول",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء Transformers": [
+        "تحليل خطأ متقدم",
+        "مراجعة تجربة فاشلة",
+        "اكتشاف سبب ضعف الأداء",
+        "تصحيح إعدادات",
+        "مقارنة حلول",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء LLMs": [
+        "تحليل خطأ متقدم",
+        "مراجعة تجربة فاشلة",
+        "اكتشاف سبب ضعف الأداء",
+        "تصحيح إعدادات",
+        "مقارنة حلول",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء RAG": [
+        "تحليل خطأ متقدم",
+        "مراجعة تجربة فاشلة",
+        "اكتشاف سبب ضعف الأداء",
+        "تصحيح إعدادات",
+        "مقارنة حلول",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء AI Agents": [
+        "تحليل خطأ متقدم",
+        "مراجعة تجربة فاشلة",
+        "اكتشاف سبب ضعف الأداء",
+        "تصحيح إعدادات",
+        "مقارنة حلول",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "أخطاء النشر والمراقبة": [
+        "تحليل خطأ متقدم",
+        "مراجعة تجربة فاشلة",
+        "اكتشاف سبب ضعف الأداء",
+        "تصحيح إعدادات",
+        "مقارنة حلول",
+        "بناء قائمة أخطاء شخصية",
+        "تدريب علاجي",
+        "أخرى"
+    ],
+    "مراجعة Deep Learning": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة Neural Networks": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة CNN وComputer Vision": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة RNN وSequence Models": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة NLP": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة Transformers": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة LLMs": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة Prompt Engineering": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة Generative AI": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة RAG": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة Fine-tuning": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة AI Agents": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة Multimodal AI": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "مراجعة AI Safety": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "تدريب شامل": [
+        "مراجعة شاملة",
+        "حل تمارين متنوعة",
+        "تلخيص المفاهيم",
+        "بناء تجربة متقدمة",
+        "تحليل الأخطاء",
+        "بناء خطة تقوية",
+        "إعادة تدريب",
+        "اختبار تجريبي",
+        "أخرى"
+    ],
+    "اختبار Deep Learning": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار Neural Networks": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار CNN": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار NLP": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار Transformers": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار LLMs": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار Prompt Engineering": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار RAG": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار AI Agents": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار شامل قصير": [
+        "اختبار قصير",
+        "اختبار زمني",
+        "تصحيح ذاتي",
+        "تحليل الأخطاء",
+        "مراجعة بعد الاختبار",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار متوسط": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار متقدم": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "محاكاة اختبار AI Advanced": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "اختبار شامل في الجزء الثاني": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "تحليل نتيجة الاختبار": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "خطة علاج الأخطاء": [
+        "اختبار تجريبي",
+        "محاكاة اختبار",
+        "حل نموذج كامل",
+        "تصحيح النموذج",
+        "تحليل الأخطاء",
+        "بناء خطة مراجعة",
+        "إعادة تدريب",
+        "أخرى"
+    ],
+    "موضوع مخصص في الذكاء الاصطناعي": [
+        "نشاط مخصص",
+        "دراسة مخصصة",
+        "تطبيق مخصص",
+        "مراجعة مخصصة",
+        "أخرى"
+    ],
+    "تطبيق مخصص في الذكاء الاصطناعي": [
+        "نشاط مخصص",
+        "دراسة مخصصة",
+        "تطبيق مخصص",
+        "مراجعة مخصصة",
+        "أخرى"
+    ]
+};
+    const aiPart2Training = [
+    "دراسة مفهوم Deep Learning",
+    "مقارنة Deep Learning وMachine Learning",
+    "تحليل حالة استخدام",
+    "تلخيص الفكرة",
+    "تمييز متى نستخدم Deep Learning",
+    "حل أسئلة مفاهيمية",
+    "اختبار قصير",
+    "تحليل Neural Network بسيطة",
+    "رسم بنية شبكة",
+    "تحديد المدخلات والمخرجات",
+    "تفسير دور الأوزان",
+    "تتبع تنبؤ بسيط",
+    "حل تمارين مفاهيمية",
+    "حساب ناتج عصبون",
+    "تحليل وزن وانحياز",
+    "تتبع المجموع الموزون",
+    "تطبيق دالة تنشيط",
+    "رسم عصبون بسيط",
+    "مراجعة الأخطاء",
+    "تحليل طبقات شبكة",
+    "تحديد نوع الطبقة",
+    "مقارنة شبكات مختلفة",
+    "اقتراح بنية بسيطة",
+    "رسم مخطط شبكة",
+    "حل أسئلة تطبيقية",
+    "تحليل Activation Function",
+    "مقارنة ReLU وSigmoid",
+    "تطبيق Softmax مفاهيمياً",
+    "اختيار دالة مناسبة",
+    "تفسير أثر التنشيط",
+    "تتبع Forward Propagation",
+    "حساب خطوة أمامية بسيطة",
+    "تحليل ناتج طبقة",
+    "تفسير تنبؤ شبكة",
+    "رسم مسار البيانات",
+    "حل تمارين",
+    "دراسة Backpropagation",
+    "تتبع فكرة انتشار الخطأ",
+    "تحليل تحديث وزن",
+    "ربط التدرج بالخسارة",
+    "تلخيص خطوات التدريب",
+    "تحليل عملية تدريب",
+    "تفسير Epoch وBatch",
+    "قراءة Loss Curve",
+    "مقارنة تدريب وتحقق",
+    "اكتشاف مشكلة تدريب",
+    "تطبيق تجربة بسيطة",
+    "دراسة Optimizer",
+    "مقارنة SGD وAdam",
+    "تحليل تحديث أوزان",
+    "اختيار Optimizer مناسب",
+    "تفسير أثره على التدريب",
+    "تحليل Learning Rate",
+    "تفسير تذبذب التدريب",
+    "مقارنة معدلات تعلم",
+    "اقتراح تعديل",
+    "قراءة منحنى تدريب",
+    "تحليل Regularization",
+    "تفسير تقليل Overfitting",
+    "مقارنة قبل وبعد",
+    "اختيار معالجة مناسبة",
+    "قراءة نتائج نموذج",
+    "دراسة Dropout",
+    "تحليل أثره على الشبكة",
+    "مقارنة نموذج مع وبدون Dropout",
+    "دراسة Batch Normalization",
+    "تحليل أثره على التدريب",
+    "تفسير استقرار القيم",
+    "مقارنة نموذجين",
+    "تلخيص المفهوم",
+    "تحليل مشكلة Gradients",
+    "تمييز Vanishing وExploding",
+    "اقتراح حل",
+    "مراجعة أخطاء تدريب",
+    "استكشاف TensorFlow",
+    "بناء نموذج بسيط",
+    "تدريب نموذج تعليمي",
+    "قراءة توثيق TensorFlow",
+    "تحليل نتائج تدريب",
+    "تطبيق عملي",
+    "بناء نموذج Keras بسيط",
+    "ترتيب Layers",
+    "تطبيق Compile وFit",
+    "تقييم النموذج",
+    "تنفيذ Predict",
+    "مراجعة أخطاء Keras",
+    "استكشاف PyTorch",
+    "تحليل Tensor",
+    "تتبع Training Loop",
+    "قراءة توثيق PyTorch",
+    "بناء خطة Deep Learning",
+    "ترتيب Workflow",
+    "تحليل مرحلة ناقصة",
+    "تصميم تجربة تدريب",
+    "مقارنة تجارب",
+    "كتابة تقرير تجربة",
+    "دراسة CNN",
+    "تحليل بنية CNN",
+    "رسم طبقات CNN",
+    "تفسير Filter",
+    "تتبع معالجة صورة",
+    "بناء نموذج CNN بسيط",
+    "تحليل Convolution Layer",
+    "تفسير دور Filter",
+    "حساب حجم مخرج بسيط",
+    "مقارنة Stride وPadding",
+    "تتبع مثال صورة",
+    "تحليل Pooling Layer",
+    "تطبيق Max Pooling بسيط",
+    "مقارنة Max وAverage",
+    "تفسير تقليل الأبعاد",
+    "حل تمارين صورية",
+    "تحليل مشروع Image Classification",
+    "تجهيز صور تدريبية",
+    "بناء نموذج تصنيف صور",
+    "تقييم النتائج",
+    "تحليل أخطاء التصنيف",
+    "دراسة Object Detection",
+    "تحليل صورة مع Bounding Boxes",
+    "تمييز التصنيف والكشف",
+    "تفسير مخرجات نموذج",
+    "مراجعة أخطاء الكشف",
+    "دراسة Image Segmentation",
+    "تحليل مثال تقسيم صورة",
+    "مقارنة Segmentation وDetection",
+    "تلخيص الاستخدامات",
+    "تحليل تطبيق Computer Vision",
+    "تصنيف نوع المهمة",
+    "مقارنة التصنيف والكشف والتقسيم",
+    "كتابة وصف مشروع",
+    "تجهيز صور لنموذج AI",
+    "تطبيق Resize",
+    "تحليل Data Augmentation",
+    "مقارنة قبل وبعد المعالجة",
+    "توثيق خطوات تجهيز الصور",
+    "تحليل Transfer Learning",
+    "اختيار نموذج مدرب مسبقاً",
+    "تفسير تجميد الطبقات",
+    "مقارنة تدريب من الصفر ونقل التعلم",
+    "بناء تجربة تعليمية",
+    "دراسة RNN",
+    "تحليل بيانات متسلسلة",
+    "رسم بنية RNN",
+    "تفسير الذاكرة الداخلية",
+    "مقارنة مع الشبكات العادية",
+    "دراسة LSTM",
+    "مقارنة RNN وLSTM",
+    "تحليل تسلسل طويل",
+    "تفسير فكرة Gates",
+    "دراسة GRU",
+    "مقارنة GRU وLSTM",
+    "تلخيص الفروق",
+    "تحليل Sequence Model",
+    "تمييز نوع تسلسل",
+    "تفسير التنبؤ التالي",
+    "تصميم مهمة تسلسلية",
+    "دراسة NLP",
+    "تحليل مهمة نصية",
+    "تصنيف تطبيق NLP",
+    "تلخيص مفهوم",
+    "كتابة فكرة مشروع NLP",
+    "تجهيز نص لـ NLP",
+    "تنظيف نص",
+    "تحليل خطوات معالجة",
+    "مقارنة قبل وبعد التنظيف",
+    "توثيق خطوات التجهيز",
+    "تطبيق Tokenization",
+    "تحليل Tokens",
+    "مقارنة طرق التقسيم",
+    "تفسير أثرها على LLM",
+    "تحليل Embeddings",
+    "مقارنة معنى متجهات",
+    "تطبيق بحث تشابه",
+    "تفسير قرب دلالي",
+    "ربط Embeddings بـ RAG",
+    "دراسة Word Embeddings",
+    "تحليل تشابه كلمات",
+    "مقارنة تمثيلات",
+    "شرح مثال دلالي",
+    "تحليل مشروع Text Classification",
+    "تجهيز بيانات نصية",
+    "بناء نموذج تصنيف نصي",
+    "تحليل Sentiment",
+    "تصنيف أمثلة نصية",
+    "تفسير خطأ تصنيف",
+    "بناء تجربة بسيطة",
+    "مراجعة نتائج",
+    "تحليل NER",
+    "استخراج كيانات من نص",
+    "تمييز أنواع الكيانات",
+    "مراجعة أخطاء الاستخراج",
+    "تحليل ترجمة آلية",
+    "مقارنة ترجمتين",
+    "اكتشاف خطأ سياقي",
+    "تقييم جودة ترجمة",
+    "كتابة ملاحظات تحسين",
+    "تحليل ملخص",
+    "مقارنة نص وملخص",
+    "تجربة تلخيص",
+    "تقييم دقة الملخص",
+    "اكتشاف حذف معنى مهم",
+    "دراسة Transformers",
+    "مقارنة Transformers وRNN",
+    "تحليل تطبيق حديث",
+    "قراءة شرح مبسط",
+    "تحليل Attention",
+    "تفسير تركيز النموذج",
+    "رسم علاقة بين كلمات",
+    "قراءة Attention بشكل مبسط",
+    "دراسة Self-Attention",
+    "تحليل جملة وسياق",
+    "تفسير علاقة كلمات",
+    "مقارنة Attention وSelf-Attention",
+    "مقارنة Encoder وDecoder",
+    "تحليل بنية نموذج",
+    "رسم مخطط مبسط",
+    "تصنيف نماذج حسب البنية",
+    "دراسة BERT",
+    "تحليل استخدام BERT",
+    "مقارنة BERT وGPT",
+    "اختيار تطبيق مناسب",
+    "قراءة توثيق مبسط",
+    "دراسة GPT",
+    "تحليل طريقة التوليد",
+    "تجربة Prompt",
+    "تقييم مخرجات نصية",
+    "دراسة LLMs",
+    "تحليل قدرة نموذج لغوي",
+    "تجربة أسئلة مختلفة",
+    "تقييم إجابات LLM",
+    "تلخيص حدود النموذج",
+    "تجربة قدرة LLM",
+    "تحليل مخرج نموذج",
+    "مقارنة مهام مختلفة",
+    "تقييم جودة إجابة",
+    "تحليل حدود LLM",
+    "اكتشاف Hallucination",
+    "مقارنة إجابات",
+    "تقييم موثوقية",
+    "كتابة قواعد استخدام آمن",
+    "كتابة Prompt",
+    "تحسين Prompt",
+    "مقارنة أكثر من Prompt",
+    "تحليل سبب اختلاف النتائج",
+    "تقييم مخرج النموذج",
+    "بناء Prompt Pattern",
+    "تجربة نمط Prompt",
+    "مقارنة أنماط",
+    "تحسين صياغة",
+    "توثيق أفضل صيغة",
+    "تجربة Zero-shot Prompt",
+    "تحليل النتيجة",
+    "مقارنة مع Few-shot",
+    "كتابة ملاحظات",
+    "بناء Few-shot Prompt",
+    "اختيار أمثلة",
+    "مقارنة قبل وبعد الأمثلة",
+    "تحسين الأمثلة",
+    "صياغة Prompt تفكير منظم",
+    "تحليل خطوات إجابة",
+    "طلب تفسير مختصر",
+    "مقارنة إجابة مباشرة ومنظمة",
+    "تقييم جودة الاستدلال الظاهر",
+    "تقييم Prompt",
+    "تحسين تعليمات",
+    "مقارنة نتائج",
+    "كتابة Rubric بسيط",
+    "توثيق Prompt ناجح",
+    "دراسة Generative AI",
+    "تحليل تطبيق توليدي",
+    "تجربة توليد آمن",
+    "تقييم المخرجات",
+    "مقارنة أنواع التوليد",
+    "تجربة Text Generation",
+    "تقييم نص مولد",
+    "تحليل الاتساق",
+    "مراجعة أخطاء النص",
+    "كتابة Prompt صورة",
+    "تحليل نتيجة صورة",
+    "تحسين وصف بصري",
+    "مقارنة مخرجات",
+    "تقييم توافق الصورة مع الوصف",
+    "دراسة Audio Generation",
+    "تقييم جودة مخرج صوتي",
+    "كتابة تعليمات توليد آمنة",
+    "تلخيص القيود",
+    "دراسة Diffusion Models",
+    "تحليل تطبيق في الصور",
+    "مقارنة مع توليد نص",
+    "تحليل RAG",
+    "تصميم سير عمل RAG",
+    "تحديد مصادر معرفة",
+    "تقييم إجابة مدعومة بسياق",
+    "مقارنة LLM عادي وRAG",
+    "تحليل Retrieval",
+    "اختيار مصدر مناسب",
+    "تقييم مقاطع مسترجعة",
+    "مقارنة نتائج بحث",
+    "تحسين سؤال البحث",
+    "تحليل Vector Embeddings",
+    "تفسير تشابه دلالي",
+    "مقارنة جمل متشابهة",
+    "تصميم بحث متجهي",
+    "دراسة Vector Database",
+    "رسم سير عمل تخزين وبحث",
+    "تحليل استخدامها في RAG",
+    "مقارنة بحث عادي وبحث متجهي",
+    "كتابة خطة تجربة",
+    "تصميم Knowledge Base",
+    "تنظيم مصادر",
+    "تحليل جودة الوثائق",
+    "اقتراح طريقة تقطيع نصوص",
+    "تقييم تغطية المعرفة",
+    "دراسة Fine-tuning",
+    "مقارنة Prompting وFine-tuning",
+    "تحليل حاجة مشروع",
+    "تجهيز خطة بيانات",
+    "تقييم مخاطر",
+    "دراسة Instruction Tuning",
+    "تحليل أمثلة تعليمات",
+    "تصميم عينة تدريب تعليمية",
+    "تقييم استجابة نموذج",
+    "دراسة PEFT",
+    "تفسير LoRA كمفهوم",
+    "مقارنة Fine-tuning كامل ومحدود",
+    "تحليل فائدة التكلفة",
+    "تحليل AI Agent",
+    "رسم سير عمل Agent",
+    "تحديد الهدف والأدوات",
+    "تقييم خطة Agent",
+    "مقارنة Agent وChatbot",
+    "تحليل Tool Use",
+    "اختيار أداة مناسبة",
+    "تصميم مهمة تستخدم أداة",
+    "تقييم نتيجة الأداة",
+    "مراجعة أخطاء الاستخدام",
+    "بناء خطة Agent",
+    "تحليل خطوات تنفيذ",
+    "اكتشاف خطوة ناقصة",
+    "تحسين خطة",
+    "مقارنة خطتين",
+    "تحليل Memory في Agent",
+    "تحديد ما يجب حفظه",
+    "تصميم ذاكرة بسيطة",
+    "تقييم استرجاع السياق",
+    "مراجعة أخطاء الذاكرة",
+    "تحليل Multi-Agent System",
+    "توزيع أدوار بين Agents",
+    "رسم تفاعل الوكلاء",
+    "تقييم التنسيق",
+    "تحليل Multimodal AI",
+    "تصنيف نوع المدخلات",
+    "تجربة سؤال على صورة",
+    "تقييم مخرج متعدد الوسائط",
+    "كتابة فكرة مشروع",
+    "تحليل Vision-Language Model",
+    "تجربة وصف صورة",
+    "تقييم إجابة على صورة",
+    "مقارنة مخرج نصي وبصري",
+    "دراسة Speech AI",
+    "تحليل تطبيق صوتي",
+    "تمييز Speech-to-Text وText-to-Speech",
+    "تقييم مخرج صوتي",
+    "تحليل Speech Recognition",
+    "تقييم نص مستخرج",
+    "اكتشاف أخطاء تعرف صوتي",
+    "مقارنة حالات صوتية",
+    "تلخيص التحديات",
+    "تحليل Text-to-Speech",
+    "تقييم طبيعية الصوت",
+    "كتابة نص مناسب للصوت",
+    "تحديد أخطاء نطق",
+    "تحليل نظام توصية",
+    "تحديد بيانات التوصية",
+    "مقارنة طرق توصية",
+    "تفسير نتيجة توصية",
+    "دراسة Reinforcement Learning",
+    "تحليل موقف تعلم معزز",
+    "تحديد Agent وEnvironment",
+    "تفسير Reward",
+    "تحليل Agent وEnvironment",
+    "رسم دورة تفاعل",
+    "تحديد الحالات والأفعال",
+    "تصميم مثال بسيط",
+    "تحليل Reward Function",
+    "اقتراح مكافأة مناسبة",
+    "تفسير سلوك Agent",
+    "اكتشاف مكافأة خاطئة",
+    "تحليل Policy",
+    "مقارنة سياسات",
+    "اقتراح فعل مناسب",
+    "تفسير اختيار Agent",
+    "دراسة Q-Learning",
+    "تحليل جدول Q بسيط",
+    "تمييز Exploration وExploitation",
+    "تتبع تحديث مفاهيمي",
+    "حل أسئلة أساسية",
+    "تحليل نشر نموذج AI",
+    "كتابة خطة نشر تعليمية",
+    "تحديد متطلبات نشر",
+    "تقييم جاهزية النموذج",
+    "مراجعة مخاطر النشر",
+    "تحليل خدمة نموذج",
+    "رسم سير تنبؤ",
+    "تقييم زمن استجابة",
+    "تحديد مدخلات ومخرجات",
+    "كتابة خطة استخدام نموذج",
+    "تحليل مراقبة نموذج",
+    "اختيار مؤشرات متابعة",
+    "اكتشاف تدهور أداء",
+    "كتابة خطة مراقبة",
+    "مراجعة نتائج نموذج",
+    "دراسة MLOps",
+    "رسم دورة حياة نموذج",
+    "تحليل خطوات MLOps",
+    "تحديد مرحلة ناقصة",
+    "كتابة ملخص تطبيقي",
+    "تصميم سجل تجارب",
+    "مقارنة تجربتين",
+    "توثيق إعدادات نموذج",
+    "اختيار أفضل نتيجة",
+    "تحليل Data Drift",
+    "مقارنة بيانات قديمة وجديدة",
+    "اكتشاف تغير في التوزيع",
+    "اقتراح معالجة",
+    "كتابة تقرير متابعة",
+    "تحليل Model Drift",
+    "قراءة أداء عبر الزمن",
+    "تحديد سبب التدهور",
+    "اقتراح إعادة تدريب",
+    "مراجعة مؤشرات الأداء",
+    "تصميم تقييم متقدم",
+    "اختيار معايير تقييم",
+    "تحليل حالة اختبار صعبة",
+    "كتابة تقرير تقييم",
+    "تقييم إجابة LLM",
+    "بناء Rubric تقييم",
+    "مقارنة إجابتين",
+    "اكتشاف خطأ واقعي",
+    "تحسين Prompt بناء على التقييم",
+    "تصميم تقييم بشري",
+    "كتابة معايير تقييم",
+    "مقارنة تقييمات",
+    "تحليل اختلاف آراء",
+    "توثيق ملاحظات",
+    "دراسة AI Safety",
+    "تحليل خطر محتمل",
+    "تقييم مخرج غير آمن",
+    "اقتراح ضوابط",
+    "كتابة قواعد استخدام مسؤول",
+    "تحليل إجابة مشكوك فيها",
+    "مقارنة مع مصدر",
+    "تحسين Prompt لتقليل الخطأ",
+    "تقييم موثوقية مخرج",
+    "تحليل Bias في مخرجات AI",
+    "اكتشاف تحيز محتمل",
+    "مقارنة نتائج لفئات مختلفة",
+    "اقتراح تقليل التحيز",
+    "كتابة ملاحظات أخلاقية",
+    "تحليل خصوصية استخدام AI",
+    "تمييز بيانات حساسة",
+    "كتابة قواعد حماية",
+    "تقييم سيناريو مشاركة بيانات",
+    "اقتراح بدائل آمنة",
+    "دراسة AI Security",
+    "تحليل خطر دفاعي",
+    "اقتراح إجراء حماية",
+    "تمييز استخدام آمن وغير آمن",
+    "كتابة ملاحظات وقائية",
+    "بناء مشروع Deep Learning",
+    "اختيار فكرة مشروع",
+    "تجهيز بيانات المشروع",
+    "تدريب نموذج عميق",
+    "كتابة تقرير مشروع",
+    "بناء مشروع NLP",
+    "اختيار نموذج مناسب",
+    "تحليل أخطاء اللغة",
+    "بناء مشروع Computer Vision",
+    "تجهيز صور",
+    "تدريب نموذج صور",
+    "تقييم مخرجات بصرية",
+    "تحليل أخطاء صور",
+    "توثيق المشروع",
+    "بناء مشروع LLM",
+    "تصميم Prompts",
+    "إنشاء Knowledge Base",
+    "تقييم مخرجات LLM",
+    "تحسين تجربة المستخدم",
+    "قراءة ورقة AI",
+    "تلخيص Abstract",
+    "استخراج المشكلة والمنهجية",
+    "تحليل النتائج",
+    "كتابة أسئلة بحثية",
+    "مقارنة ورقتين",
+    "قراءة Paper",
+    "تلخيص قسم من الورقة",
+    "استخراج المصطلحات",
+    "تحليل التجارب",
+    "كتابة ملخص عربي",
+    "مراجعة الفهم",
+    "تحليل تجربة AI",
+    "كتابة خطة إعادة تجربة",
+    "توثيق إعدادات",
+    "اكتشاف سبب اختلاف",
+    "تخطيط مشروع Portfolio",
+    "بناء مشروع تطبيقي",
+    "تقييم جودة المشروع",
+    "تحسين العرض",
+    "إعداد ملخص نهائي",
+    "تحليل خطأ متقدم",
+    "مراجعة تجربة فاشلة",
+    "اكتشاف سبب ضعف الأداء",
+    "تصحيح إعدادات",
+    "مقارنة حلول",
+    "بناء قائمة أخطاء شخصية",
+    "تدريب علاجي",
+    "مراجعة شاملة",
+    "حل تمارين متنوعة",
+    "تلخيص المفاهيم",
+    "بناء تجربة متقدمة",
+    "تحليل الأخطاء",
+    "بناء خطة تقوية",
+    "إعادة تدريب",
+    "اختبار تجريبي",
+    "اختبار زمني",
+    "تصحيح ذاتي",
+    "مراجعة بعد الاختبار",
+    "محاكاة اختبار",
+    "حل نموذج كامل",
+    "تصحيح النموذج",
+    "بناء خطة مراجعة",
+    "نشاط مخصص",
+    "دراسة مخصصة",
+    "تطبيق مخصص",
+    "مراجعة مخصصة",
+    "أخرى"
+];
+
+    data["الذكاء الاصطناعي"] = data["الذكاء الاصطناعي"] || { icon: "🤖", main: [], sub: {}, detail: {}, training: [], trainingByDetail: {} };
+    const aiTasks = data["الذكاء الاصطناعي"];
+    aiTasks.icon = "🤖";
+    aiTasks.main = mergeLists(aiTasks.main || [], aiPart2Main);
+    aiTasks.sub = aiTasks.sub || {};
+    aiTasks.detail = aiTasks.detail || {};
+    aiTasks.trainingByDetail = aiTasks.trainingByDetail || {};
+    aiTasks.training = mergeLists(aiTasks.training || [], aiPart2Training);
+
+    Object.keys(aiPart2Sub).forEach(function (key) {
+        aiTasks.sub[key] = mergeLists(aiTasks.sub[key] || [], aiPart2Sub[key]);
+    });
+    Object.keys(aiPart2Details).forEach(function (key) {
+        aiTasks.detail[key] = ensureOtherLast(aiPart2Details[key]);
+    });
+    Object.keys(aiPart2Activities).forEach(function (key) {
+        aiTasks.trainingByDetail[key] = ensureOtherLast(aiPart2Activities[key]);
+    });
+
+    window.EDUPATH_TASKS_AI_ADVANCED_PART2_FINAL_V55113 = true;
 })();
