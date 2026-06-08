@@ -1593,11 +1593,190 @@ DASHBOARD_AR_LABELS = {
     "Prepare": "تحضير",
 }
 
+
+HOME_DASHBOARD_EXTRA_AR_LABELS_V55129 = {
+    # Status and generic values
+    "done": "مكتملة",
+    "completed": "مكتملة",
+    "Complete": "مكتملة",
+    "Completed": "مكتملة",
+    "pending": "قيد التنفيذ",
+    "Pending": "قيد التنفيذ",
+    "in_progress": "قيد التنفيذ",
+    "In progress": "قيد التنفيذ",
+    "Incomplete": "غير مكتملة",
+    "Upcoming": "قادمة",
+    "Overdue": "متأخرة",
+    "No reminder": "بدون تذكير",
+    "Not set": "غير محدد",
+    "not set": "غير محدد",
+    "None": "غير محدد",
+
+    # Main task/goal categories
+    "Programming": "البرمجة",
+    "Programming & Technology": "البرمجة والتكنولوجيا",
+    "Artificial Intelligence": "الذكاء الاصطناعي",
+    "AI": "الذكاء الاصطناعي",
+    "Mathematics": "الرياضيات",
+    "Scholarships": "المنح الدراسية",
+    "Scholarship": "المنح الدراسية",
+    "Exams & Certificates": "الاختبارات الدولية",
+    "Quran Memorization": "حفظ القرآن الكريم",
+    "Secondary School": "المرحلة الثانوية",
+    "University": "المرحلة الجامعية",
+    "Languages": "اللغات",
+    "Language": "اللغات",
+    "Daily Life": "الحياة اليومية",
+    "Projects": "المشاريع",
+    "Reading & Research": "القراءة والبحث",
+    "General": "عام",
+    "Other": "أخرى",
+    "Custom": "أخرى",
+
+    # Programming and technology labels
+    "Programming Fundamentals": "أساسيات البرمجة",
+    "Problem Solving": "حل المشكلات",
+    "Python": "Python",
+    "C": "C",
+    "C++": "C++",
+    "Java": "Java",
+    "JavaScript": "JavaScript",
+    "TypeScript": "TypeScript",
+    "Object-Oriented Programming": "البرمجة كائنية التوجه",
+    "Debugging and Code Quality": "تصحيح الأخطاء وجودة الكود",
+    "Small Programming Projects": "المشاريع البرمجية الصغيرة",
+    "Web Development": "تطوير الويب",
+    "HTML and CSS": "HTML وCSS",
+    "JavaScript for Web": "JavaScript للويب",
+    "Frontend Development": "تطوير الواجهات الأمامية",
+    "React": "React",
+    "Backend Development": "تطوير الخلفية",
+    "APIs": "واجهات API",
+    "Flask": "Flask",
+    "Django": "Django",
+    "Node.js and Express": "Node.js وExpress",
+    "Databases": "قواعد البيانات",
+    "SQL": "SQL",
+    "Git and GitHub": "Git وGitHub",
+    "Software Engineering": "هندسة البرمجيات",
+    "Testing and Code Quality": "اختبار البرامج وجودة الكود",
+    "Full Stack Projects": "مشاريع Full Stack",
+    "Computer Systems": "أنظمة الحاسوب",
+    "Operating Systems": "أنظمة التشغيل",
+    "Linux": "Linux",
+    "Shell and Bash": "Shell وBash",
+    "Networking": "الشبكات",
+    "Cloud Computing": "الحوسبة السحابية",
+    "Containers and Docker": "الحاويات وDocker",
+    "DevOps and CI/CD": "DevOps وCI/CD",
+    "Monitoring and Logging": "المراقبة والسجلات",
+    "Performance and Scalability": "الأداء وقابلية التوسع",
+    "Secure Coding Basics": "أساسيات البرمجة الآمنة",
+    "Data Structures": "هياكل البيانات",
+    "Algorithms": "الخوارزميات",
+    "Advanced Problem Solving": "حل المشكلات المتقدم",
+    "System Design Basics": "أساسيات تصميم الأنظمة",
+    "Advanced Technical Projects": "المشاريع التقنية المتقدمة",
+
+    # AI labels shown on dashboard when used in tasks/goals/weaknesses
+    "AI Fundamentals": "أساسيات الذكاء الاصطناعي",
+    "Python for AI": "Python للذكاء الاصطناعي",
+    "Math for AI Basics": "رياضيات الذكاء الاصطناعي الأساسية",
+    "Data for AI": "البيانات للذكاء الاصطناعي",
+    "NumPy for AI": "NumPy للذكاء الاصطناعي",
+    "Pandas for AI": "Pandas للذكاء الاصطناعي",
+    "Data Preparation": "تجهيز البيانات",
+    "Data Visualization for AI": "تصور البيانات للذكاء الاصطناعي",
+    "Machine Learning": "تعلم الآلة",
+    "Supervised Learning": "التعلم الخاضع للإشراف",
+    "Unsupervised Learning": "التعلم غير الخاضع للإشراف",
+    "Regression": "الانحدار",
+    "Classification": "التصنيف",
+    "Clustering": "التجميع",
+    "Model Training": "تدريب النماذج",
+    "Model Evaluation": "تقييم النماذج",
+    "Feature Engineering Basics": "أساسيات هندسة الخصائص",
+    "Scikit-learn": "Scikit-learn",
+    "AI Projects Basics": "مشاريع الذكاء الاصطناعي التأسيسية",
+    "Responsible AI Basics": "أساسيات الذكاء الاصطناعي المسؤول",
+    "Deep Learning": "التعلم العميق",
+    "Neural Networks": "الشبكات العصبية",
+    "Computer Vision": "الرؤية الحاسوبية",
+    "Natural Language Processing": "معالجة اللغة الطبيعية",
+    "Transformers": "Transformers",
+    "Large Language Models": "النماذج اللغوية الكبيرة",
+    "Prompt Engineering": "هندسة التوجيهات",
+    "Generative AI": "الذكاء الاصطناعي التوليدي",
+    "Embeddings and Vector Search": "التضمينات والبحث المتجهي",
+    "RAG Applications": "تطبيقات RAG",
+    "Fine-tuning Basics": "أساسيات الضبط الدقيق",
+    "AI Agents": "وكلاء الذكاء الاصطناعي",
+    "Multimodal AI": "الذكاء الاصطناعي متعدد الوسائط",
+    "Speech AI": "ذكاء الصوت",
+    "Recommendation Systems": "أنظمة التوصية",
+    "Reinforcement Learning Basics": "أساسيات التعلم المعزز",
+    "AI Deployment and MLOps Basics": "نشر نماذج الذكاء الاصطناعي وأساسيات MLOps",
+    "AI Safety and Evaluation": "سلامة الذكاء الاصطناعي وتقييمه",
+    "AI Research Skills": "مهارات البحث في الذكاء الاصطناعي",
+    "Advanced AI Projects": "مشاريع الذكاء الاصطناعي المتقدمة",
+
+    # Common task action labels
+    "Study": "دراسة",
+    "Practice": "تدريب",
+    "Review": "مراجعة",
+    "Homework": "واجب",
+    "Exam": "اختبار",
+    "Project": "مشروع",
+    "Assignment": "واجب",
+    "Lecture": "محاضرة",
+    "Research": "بحث",
+    "Presentation": "عرض تقديمي",
+    "Lecture Study": "دراسة محاضرة",
+    "Lab Practice": "تطبيق عملي",
+    "Project Work": "عمل على مشروع",
+    "Exam Review": "مراجعة اختبار",
+    "Solve Exercises": "حل تمارين",
+    "Practice Problems": "حل مسائل تدريبية",
+    "Review Terms": "مراجعة مصطلحات",
+    "Read": "قراءة",
+    "Summary": "تلخيص",
+    "Take Notes": "تدوين ملاحظات",
+}
+
 def dashboard_ar(value):
     if value is None:
         return "غير محدد"
-    text = str(value)
-    return DASHBOARD_AR_LABELS.get(text, text)
+    text = str(value).strip()
+    if not text:
+        return "غير محدد"
+
+    # الصفحة الرئيسية يجب أن تعرض النصوص النظامية بالعربية من الأصل.
+    # نحافظ على نص المستخدم كما كتبه، لكن نترجم القيم النظامية المخزنة بالإنجليزية.
+    lookup_sources = [
+        globals().get("DASHBOARD_AR_LABELS", {}),
+        globals().get("HOME_DASHBOARD_EXTRA_AR_LABELS_V55129", {}),
+        globals().get("TASK_NATIVE_AR_LABELS_V542", {}),
+        globals().get("TASK_NATIVE_AR_LABELS_V541", {}),
+        globals().get("TASK_AR_LABELS_V529", {}),
+        globals().get("GOALS_AR_LABELS", {}),
+    ]
+
+    for mapping in lookup_sources:
+        translated = mapping.get(text) if isinstance(mapping, dict) else None
+        if translated:
+            return translated
+
+    lower_map = {
+        "done": "مكتملة",
+        "completed": "مكتملة",
+        "pending": "قيد التنفيذ",
+        "in progress": "قيد التنفيذ",
+        "not set": "غير محدد",
+        "no reminder": "بدون تذكير",
+        "other": "أخرى",
+        "custom": "أخرى",
+    }
+    return lower_map.get(text.lower(), text)
 
 
 GOALS_AR_LABELS = {
