@@ -1534,6 +1534,9 @@ def resource_match_score(resource, text):
 
 
 DASHBOARD_AR_LABELS = {
+    "الجامعة": "المرحلة الجامعية",
+    "الجامعي": "المرحلة الجامعية",
+    "المرحلة الجامعية": "المرحلة الجامعية",
     "Programming": "البرمجة",
     "Programming & Technology": "البرمجة والتكنولوجيا",
     "Mathematics": "الرياضيات",
@@ -1544,7 +1547,7 @@ DASHBOARD_AR_LABELS = {
     "Artificial Intelligence": "الذكاء الاصطناعي",
     "Quran Memorization": "حفظ القرآن الكريم",
     "Secondary School": "المرحلة الثانوية",
-    "University": "الجامعة",
+    "University": "المرحلة الجامعية",
     "Daily Life": "الحياة اليومية",
     "Projects": "المشاريع",
     "General": "عام",
@@ -1780,6 +1783,9 @@ def dashboard_ar(value):
 
 
 GOALS_AR_LABELS = {
+    "الجامعة": "المرحلة الجامعية",
+    "الجامعي": "المرحلة الجامعية",
+    "المرحلة الجامعية": "المرحلة الجامعية",
     "Education": "التعليم",
     "Language": "اللغات",
     "Exam / Certificate": "الاختبارات الدولية",
@@ -1797,7 +1803,7 @@ GOALS_AR_LABELS = {
     "تعلم تخطيط مشروع برمجي صغير": "تعلم تخطيط مشروع برمجي صغير",
     "Artificial Intelligence": "الذكاء الاصطناعي",
     "Scholarship": "المنح الدراسية",
-    "University": "الجامعة",
+    "University": "المرحلة الجامعية",
     "Mathematics": "الرياضيات",
     "Project": "المشاريع",
     "Daily Life": "الحياة اليومية",
