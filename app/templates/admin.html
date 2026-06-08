@@ -31,17 +31,17 @@
 
 <section class="card admin-message-card">
     <h2>إرسال رسالة تحفيزية من EduPath AI</h2>
-    <p class="muted">أرسل إشعاراً داخل التطبيق إلى مستخدم محدد. ستظهر الرسالة للمستخدم كتنبيه قصير داخل التطبيق.</p>
+    <p class="muted">أرسل إشعاراً داخل التطبيق إلى جميع المستخدمين أو إلى مستخدم محدد. ستظهر الرسالة للمستخدم كتنبيه قصير داخل التطبيق.</p>
 
     <form method="POST" action="{{ url_for('admin_send_message') }}" class="form admin-message-form">
         <label>اختر المستخدم</label>
-        <select name="user_id" required class="admin-user-select-v5589">
+        <select name="user_id" required class="admin-user-select-v5590">
+            <option value="all">جميع المستخدمين</option>
             {% for user in users %}
-                <option value="{{ user.id }}">
-                    {{ (user.name or "مستخدم بدون اسم") }} — {{ user.email }}
-                </option>
+                <option value="{{ user.id }}">{{ (user.name or "مستخدم بدون اسم") }} — {{ user.email }}</option>
             {% endfor %}
         </select>
+        <small class="admin-select-help-v5590">اختر جميع المستخدمين، أو اختر مستخدماً محدداً من القائمة حسب الاسم والبريد الإلكتروني.</small>
 
         <label>نوع الرسالة</label>
         <select name="message_type" id="adminMessageType" class="admin-message-type-select-v5589">

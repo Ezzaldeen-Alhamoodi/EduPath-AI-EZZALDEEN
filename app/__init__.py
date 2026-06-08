@@ -3264,9 +3264,33 @@ def create_app():
     @login_required
     @admin_required
     def admin_send_message():
-        user_id = int(request.form.get("user_id", 0) or 0)
+        target_user = request.form.get("user_id", "").strip()
         message_type = normalize_admin_message_type(request.form.get("message_type", "تشجيع عام").strip())
         custom_message = request.form.get("custom_message", "").strip()
+
+        if target_user == "all":
+            target_users = User.query.order_by(User.id.asc()).all()
+            sent_count = 0
+            email_count = 0
+
+            for user in target_users:
+                create_admin_message(user, current_user, message_type, custom_message)
+                sent_count += 1
+                if os.environ.get("SEND_ADMIN_EMAILS", "false").lower() == "true":
+                    if send_admin_motivation_email(user, message_type, custom_message):
+                        email_count += 1
+
+            if os.environ.get("SEND_ADMIN_EMAILS", "false").lower() == "true":
+                flash(f"تم إرسال الرسالة إلى جميع المستخدمين داخل التطبيق وعددهم {sent_count}. وتم إرسال البريد الإلكتروني إلى {email_count} مستخدم.", "success")
+            else:
+                flash(f"تم إرسال الرسالة إلى جميع المستخدمين داخل التطبيق وعددهم {sent_count}. إرسال البريد الإلكتروني غير مفعّل حالياً.", "success")
+            return redirect(url_for("admin_dashboard"))
+
+        try:
+            user_id = int(target_user or 0)
+        except ValueError:
+            flash("يرجى اختيار مستخدم صحيح.", "error")
+            return redirect(url_for("admin_dashboard"))
 
         user = User.query.get_or_404(user_id)
         create_admin_message(user, current_user, message_type, custom_message)

@@ -8171,3 +8171,28 @@ small.hint {
     direction: rtl;
     text-align: right;
 }
+
+
+
+/* EduPath AI v5.5.90 Admin message all users */
+.admin-user-select-v5590 {
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.admin-user-select-v5590 option {
+    font-size: 13px;
+    direction: rtl;
+    text-align: right;
+}
+
+.admin-select-help-v5590 {
+    display: block;
+    margin-top: -6px;
+    margin-bottom: 8px;
+    color: var(--muted, #64748b);
+    font-size: 12px;
+    line-height: 1.6;
+}
