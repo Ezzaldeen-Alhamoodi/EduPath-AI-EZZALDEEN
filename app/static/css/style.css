@@ -8153,3 +8153,21 @@ small.hint {
         grid-template-columns: 1fr;
     }
 }
+
+
+
+/* EduPath AI v5.5.89 Admin message selectors */
+.admin-user-select-v5589,
+.admin-message-type-select-v5589 {
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.admin-user-select-v5589 option,
+.admin-message-type-select-v5589 option {
+    font-size: 13px;
+    direction: rtl;
+    text-align: right;
+}

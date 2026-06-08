@@ -359,7 +359,25 @@ EduPath AI EZZALDEEN
 
 
 
+
+def normalize_admin_message_type(message_type):
+    text = (message_type or "تشجيع عام").strip()
+    mapping = {
+        "completed": "completed",
+        "partial": "partial",
+        "not_completed": "not_completed",
+        "encouragement": "encouragement",
+        "custom": "custom",
+        "تهنئة على إنجاز المهام": "completed",
+        "تشجيع بعد إنجاز جزء من المهام": "partial",
+        "تذكير لطيف عند عدم إكمال المهام": "not_completed",
+        "تشجيع عام": "encouragement",
+        "رسالة مخصصة": "custom",
+    }
+    return mapping.get(text, "encouragement")
+
 def create_admin_message(user, admin, message_type, custom_message=""):
+    message_type = normalize_admin_message_type(message_type)
     presets = {
         "completed": "أحسنت! أنت تحقق تقدماً حقيقياً. إنجاز المهام يعني أنك تبني الانضباط خطوة بعد خطوة.",
         "not_completed": "لا تقلق إذا لم تُكمل كل شيء اليوم. ابدأ من جديد بمهمة صغيرة واحدة؛ التقدم يُبنى بالعودة والاستمرار، وليس بالكمال.",
@@ -387,6 +405,7 @@ def create_admin_message(user, admin, message_type, custom_message=""):
 
 
 def send_admin_motivation_email(user, message_type, custom_message=""):
+    message_type = normalize_admin_message_type(message_type)
     presets = {
         "completed": "أحسنت! أنت تحقق تقدماً حقيقياً. إنجاز المهام يعني أنك تبني الانضباط خطوة بعد خطوة.",
         "not_completed": "لا تقلق إذا لم تُكمل كل شيء اليوم. ابدأ من جديد بمهمة صغيرة واحدة؛ التقدم يُبنى بالعودة والاستمرار، وليس بالكمال.",
@@ -3246,7 +3265,7 @@ def create_app():
     @admin_required
     def admin_send_message():
         user_id = int(request.form.get("user_id", 0) or 0)
-        message_type = request.form.get("message_type", "encouragement").strip()
+        message_type = normalize_admin_message_type(request.form.get("message_type", "تشجيع عام").strip())
         custom_message = request.form.get("custom_message", "").strip()
 
         user = User.query.get_or_404(user_id)

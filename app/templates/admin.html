@@ -35,19 +35,21 @@
 
     <form method="POST" action="{{ url_for('admin_send_message') }}" class="form admin-message-form">
         <label>اختر المستخدم</label>
-        <select name="user_id" required>
+        <select name="user_id" required class="admin-user-select-v5589">
             {% for user in users %}
-                <option value="{{ user.id }}">{{ user.name }} — {{ user.email }}</option>
+                <option value="{{ user.id }}">
+                    {{ (user.name or "مستخدم بدون اسم") }} — {{ user.email }}
+                </option>
             {% endfor %}
         </select>
 
         <label>نوع الرسالة</label>
-        <select name="message_type" id="adminMessageType">
-            <option value="completed">تهنئة على إنجاز المهام</option>
-            <option value="partial">تشجيع بعد إنجاز جزء من المهام</option>
-            <option value="not_completed">تذكير لطيف عند عدم إكمال المهام</option>
-            <option value="encouragement">تشجيع عام</option>
-            <option value="custom">رسالة مخصصة</option>
+        <select name="message_type" id="adminMessageType" class="admin-message-type-select-v5589">
+            <option value="تهنئة على إنجاز المهام">تهنئة على إنجاز المهام</option>
+            <option value="تشجيع بعد إنجاز جزء من المهام">تشجيع بعد إنجاز جزء من المهام</option>
+            <option value="تذكير لطيف عند عدم إكمال المهام">تذكير لطيف عند عدم إكمال المهام</option>
+            <option value="تشجيع عام">تشجيع عام</option>
+            <option value="رسالة مخصصة">رسالة مخصصة</option>
         </select>
 
         <label>نص الرسالة المخصصة</label>
