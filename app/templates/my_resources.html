@@ -33,7 +33,7 @@
             <select name="category">
                 <option value="">جميع الفئات</option>
                 {% for cat in categories %}
-                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat|resource_ar }}</option>
+                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -43,7 +43,7 @@
             <select name="status">
                 <option value="">جميع الحالات</option>
                 {% for status in statuses %}
-                    <option value="{{ status }}" {% if selected.status == status %}selected{% endif %}>{{ status|resource_status_ar }}</option>
+                    <option value="{{ status }}" {% if selected.status == status %}selected{% endif %}>{{ status }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -62,22 +62,22 @@
             <div class="resource-card-head">
                 <div>
                     <h3>{{ resource.name }}</h3>
-                    <p>{{ resource.category|resource_ar }}{% if resource.subcategory %} · {{ resource.subcategory|resource_ar }}{% endif %}</p>
+                    <p>{{ resource.category }}{% if resource.subcategory %} · {{ resource.subcategory }}{% endif %}</p>
                 </div>
                 <div class="resource-badges">
-                    <span class="badge saved-status">{{ item.status|resource_status_ar }}</span>
+                    <span class="badge saved-status">{{ item.status }}</span>
                     {% if resource.is_official %}<span class="badge official">رسمي</span>{% endif %}
                     {% if resource.is_free %}<span class="badge free">مجاني</span>{% endif %}
-                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type|resource_ar }}</span>{% endif %}
+                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
                 </div>
             </div>
 
-            <p class="resource-desc">{{ resource|resource_description_ar }}</p>
+            <p class="resource-desc">{{ resource.description }}</p>
 
             <div class="resource-meta">
                 {% if resource.exam %}<span>الاختبار: {{ resource.exam }}</span>{% endif %}
-                {% if resource.skill %}<span>المهارة: {{ resource.skill|resource_phrase_ar }}</span>{% endif %}
-                {% if resource.level %}<span>المستوى: {{ resource.level|resource_ar }}</span>{% endif %}
+                {% if resource.skill %}<span>المهارة: {{ resource.skill }}</span>{% endif %}
+                {% if resource.level %}<span>المستوى: {{ resource.level }}</span>{% endif %}
                 {% if item.last_opened %}<span>آخر فتح: {{ item.last_opened.strftime("%Y-%m-%d") }}</span>{% endif %}
             </div>
 
@@ -85,7 +85,7 @@
                 <label>الحالة</label>
                 <select name="status">
                     {% for status in statuses %}
-                        <option value="{{ status }}" {% if item.status == status %}selected{% endif %}>{{ status|resource_status_ar }}</option>
+                        <option value="{{ status }}" {% if item.status == status %}selected{% endif %}>{{ status }}</option>
                     {% endfor %}
                 </select>
 

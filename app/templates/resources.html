@@ -13,7 +13,7 @@
 
 <section class="resource-category-strip">
     {% for cat in categories %}
-        <a href="{{ url_for('resources', category=cat) }}" class="{% if selected.category == cat %}active{% endif %}">{{ cat|resource_ar }}</a>
+        <a href="{{ url_for('resources', category=cat) }}" class="{% if selected.category == cat %}active{% endif %}">{{ cat }}</a>
     {% endfor %}
 </section>
 
@@ -21,7 +21,7 @@
     <form method="GET" class="resources-filter-grid">
         <div class="filter-wide">
             <label>ابحث في المصادر</label>
-            <input name="q" value="{{ selected.q }}" placeholder="مثال: IELTS Reading، Python Flask، CSCA Physics، حفظ القرآن، رياضيات...">
+            <input name="q" value="{{ selected.q }}" placeholder="مثال: IELTS، Python، CSCA، حفظ القرآن، الرياضيات، التفاضل...">
         </div>
 
         <div>
@@ -29,7 +29,7 @@
             <select name="category">
                 <option value="">جميع الفئات</option>
                 {% for cat in categories %}
-                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat|resource_ar }}</option>
+                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -46,7 +46,7 @@
 
         <div>
             <label>المهارة أو الموضوع</label>
-            <input name="skill" value="{{ selected.skill }}" placeholder="مثال: Reading، Writing، Python، القرآن، الجبر، التفاضل...">
+            <input name="skill" value="{{ selected.skill }}" placeholder="مثال: القراءة، الكتابة، Python، القرآن، الجبر، التفاضل...">
         </div>
 
         <div>
@@ -64,7 +64,7 @@
             <select name="type">
                 <option value="">جميع الأنواع</option>
                 {% for type in types %}
-                    <option value="{{ type }}" {% if selected.type == type %}selected{% endif %}>{{ type|resource_ar }}</option>
+                    <option value="{{ type }}" {% if selected.type == type %}selected{% endif %}>{{ type }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -102,13 +102,13 @@
                 <span class="step-number">{{ loop.index }}</span>
                 <div>
                     <strong>{{ resource.name }}</strong>
-                    <p>{{ resource|resource_description_ar }}</p>
+                    <p>{{ resource.description }}</p>
                     <div class="resource-badges">
                         {% if resource.is_official %}<span class="badge official">رسمي</span>{% endif %}
                         {% if resource.is_free %}<span class="badge free">مجاني</span>{% endif %}
-                        {% if resource.resource_type %}<span class="badge">{{ resource.resource_type|resource_ar }}</span>{% endif %}
-                        {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">مناسب للمبتدئين</span>{% endif %}
-                        {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">متقدم</span>{% endif %}
+                        {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
+                        {% if "مبتدئ" in (resource.level or "") %}<span class="badge beginner">مناسب للمبتدئين</span>{% endif %}
+                        {% if "متقدم" in (resource.level or "") %}<span class="badge advanced">متقدم</span>{% endif %}
                     </div>
                     <div class="resource-actions-v472 compact">
                         {% if resource.id in saved_resource_ids %}
@@ -150,29 +150,29 @@
             <div class="resource-card-head">
                 <div>
                     <h3>{{ resource.name }}</h3>
-                    <p>{{ resource.category|resource_ar }}{% if resource.subcategory %} · {{ resource.subcategory|resource_ar }}{% endif %}</p>
+                    <p>{{ resource.category }}{% if resource.subcategory %} · {{ resource.subcategory }}{% endif %}</p>
                 </div>
                 <div class="resource-badges">
                     {% if resource.is_official %}<span class="badge official">رسمي</span>{% endif %}
                     {% if resource.is_free %}<span class="badge free">مجاني</span>{% endif %}
-                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type|resource_ar }}</span>{% endif %}
-                    {% if "Beginner" in (resource.level or "") %}<span class="badge beginner">مناسب للمبتدئين</span>{% endif %}
-                    {% if "Advanced" in (resource.level or "") %}<span class="badge advanced">متقدم</span>{% endif %}
+                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
+                    {% if "مبتدئ" in (resource.level or "") %}<span class="badge beginner">مناسب للمبتدئين</span>{% endif %}
+                    {% if "متقدم" in (resource.level or "") %}<span class="badge advanced">متقدم</span>{% endif %}
                 </div>
             </div>
 
-            <p class="resource-desc">{{ resource|resource_description_ar }}</p>
+            <p class="resource-desc">{{ resource.description }}</p>
 
             <div class="resource-meta">
                 {% if resource.exam %}<span>الاختبار: {{ resource.exam }}</span>{% endif %}
-                {% if resource.skill %}<span>المهارة: {{ resource.skill|resource_phrase_ar }}</span>{% endif %}
-                {% if resource.level %}<span>المستوى: {{ resource.level|resource_ar }}</span>{% endif %}
-                {% if resource.language %}<span>لغة المصدر: {{ resource.language|resource_ar }}</span>{% endif %}
+                {% if resource.skill %}<span>المهارة: {{ resource.skill }}</span>{% endif %}
+                {% if resource.level %}<span>المستوى: {{ resource.level }}</span>{% endif %}
+                {% if resource.language %}<span>لغة المصدر: {{ resource.language }}</span>{% endif %}
             </div>
 
             {% if resource.tags %}
                 <div class="resource-tags">
-                    {% for tag in (resource.tags|resource_tags_ar)[:8] %}
+                    {% for tag in resource.tags[:8] %}
                         <span>{{ tag }}</span>
                     {% endfor %}
                 </div>

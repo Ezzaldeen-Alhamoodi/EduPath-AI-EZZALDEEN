@@ -920,6 +920,186 @@ def resource_tags_ar(tags):
     return result
 
 
+
+# EduPath AI v5.5.88 — Native Arabic resource database normalization
+RESOURCE_STATUS_AR_VALUES_V5588 = {
+    "Not Started": "لم يبدأ",
+    "In Progress": "قيد الاستخدام",
+    "Completed": "مكتمل",
+    "لم يبدأ": "لم يبدأ",
+    "قيد الاستخدام": "قيد الاستخدام",
+    "مكتمل": "مكتمل",
+}
+
+RESOURCE_SEARCH_ALIAS_V5588 = {
+    "math": "الرياضيات",
+    "mathematics": "الرياضيات",
+    "algebra": "الجبر",
+    "geometry": "الهندسة",
+    "calculus": "التفاضل والتكامل",
+    "statistics": "الإحصاء",
+    "physics": "الفيزياء",
+    "chemistry": "الكيمياء",
+    "programming": "البرمجة",
+    "technology": "التكنولوجيا",
+    "scholarship": "منحة",
+    "scholarships": "منح",
+    "quran": "القرآن",
+    "islamic": "إسلامي",
+    "english": "الإنجليزية",
+    "chinese": "الصينية",
+    "typing": "الكتابة",
+}
+
+def resource_native_ar_value(value):
+    if value is None:
+        return ""
+    text = str(value).strip()
+    if not text:
+        return ""
+    return resource_ar(text)
+
+def resource_native_ar_phrase(value):
+    if value is None:
+        return ""
+    text = str(value).strip()
+    if not text:
+        return ""
+    if "," in text:
+        return "، ".join(resource_native_ar_value(part.strip()) for part in text.split(",") if part.strip())
+    return resource_native_ar_value(text)
+
+def resource_native_ar_tags(tags):
+    result = []
+    for tag in tags or []:
+        text = str(tag).strip()
+        if not text:
+            continue
+        if "," in text:
+            result.extend(resource_native_ar_tags([p.strip() for p in text.split(",") if p.strip()]))
+        else:
+            result.append(resource_native_ar_value(text))
+    # Keep order and remove duplicates
+    seen = set()
+    final = []
+    for tag in result:
+        if tag and tag not in seen:
+            seen.add(tag)
+            final.append(tag)
+    return final
+
+def normalize_resource_item_to_arabic(item):
+    """Return a native-Arabic resource dict while preserving the official source name and URL."""
+    converted = dict(item)
+    converted["category"] = resource_native_ar_value(item.get("category", ""))
+    converted["subcategory"] = resource_native_ar_value(item.get("subcategory", ""))
+    converted["skill"] = resource_native_ar_phrase(item.get("skill", ""))
+    converted["level"] = resource_native_ar_value(item.get("level", ""))
+    converted["resource_type"] = resource_native_ar_value(item.get("resource_type", ""))
+    converted["language"] = resource_native_ar_value(item.get("language", ""))
+    converted["description"] = RESOURCE_DESCRIPTION_OVERRIDES_V5584.get(
+        item.get("name", ""),
+        RESOURCE_DESCRIPTION_OVERRIDES_V5584.get(item.get("description", ""), resource_description_from_item_ar(converted))
+    )
+    converted["tags"] = resource_native_ar_tags(item.get("tags", []))
+    return converted
+
+def resource_description_from_item_ar(item):
+    category = item.get("category", "")
+    subcategory = item.get("subcategory", "")
+    skill = item.get("skill", "")
+    exam = item.get("exam", "")
+    level = item.get("level", "")
+    parts = []
+    if category:
+        parts.append(f"مصدر تعليمي في {category}")
+    else:
+        parts.append("مصدر تعليمي يساعدك على التعلم والمراجعة")
+    focus = []
+    if subcategory:
+        focus.append(subcategory)
+    if skill:
+        focus.append(skill)
+    if exam:
+        focus.append(exam)
+    if focus:
+        parts.append("يركز على " + "، ".join(focus[:3]))
+    if level:
+        parts.append(f"مناسب لمستوى {level}")
+    return "، ".join(parts) + "."
+
+def normalize_learning_resource_row_to_arabic(resource):
+    changed = False
+
+    def set_if_changed(attr, value):
+        nonlocal changed
+        value = value or ""
+        if getattr(resource, attr) != value:
+            setattr(resource, attr, value)
+            changed = True
+
+    set_if_changed("category", resource_native_ar_value(resource.category))
+    set_if_changed("subcategory", resource_native_ar_value(resource.subcategory))
+    set_if_changed("skill", resource_native_ar_phrase(resource.skill))
+    set_if_changed("level", resource_native_ar_value(resource.level))
+    set_if_changed("resource_type", resource_native_ar_value(resource.resource_type))
+    set_if_changed("language", resource_native_ar_value(resource.language))
+
+    new_description = RESOURCE_DESCRIPTION_OVERRIDES_V5584.get(
+        resource.name,
+        RESOURCE_DESCRIPTION_OVERRIDES_V5584.get(resource.description or "", "")
+    )
+    if not new_description:
+        new_description = resource_description_from_item_ar({
+            "category": resource.category,
+            "subcategory": resource.subcategory,
+            "skill": resource.skill,
+            "exam": resource.exam,
+            "level": resource.level,
+            "resource_type": resource.resource_type,
+        })
+    set_if_changed("description", new_description)
+
+    try:
+        tags = json.loads(resource.tags_json or "[]")
+    except Exception:
+        tags = []
+    new_tags = resource_native_ar_tags(tags)
+    new_tags_json = json.dumps(new_tags, ensure_ascii=False)
+    if resource.tags_json != new_tags_json:
+        resource.tags_json = new_tags_json
+        changed = True
+
+    return changed
+
+def normalize_all_learning_resources_to_native_arabic():
+    """Convert existing seeded/admin resources into Arabic data in the database itself."""
+    try:
+        changed = 0
+        for resource in LearningResource.query.all():
+            if normalize_learning_resource_row_to_arabic(resource):
+                changed += 1
+
+        for saved in SavedResource.query.all():
+            new_status = RESOURCE_STATUS_AR_VALUES_V5588.get(saved.status, saved.status)
+            if saved.status != new_status:
+                saved.status = new_status
+                changed += 1
+
+        if changed:
+            db.session.commit()
+            logger.info("Learning resources normalized to native Arabic: %s changes", changed)
+    except Exception:
+        db.session.rollback()
+        logger.exception("تعذر تحويل بيانات المصادر إلى العربية الأصلية")
+
+def normalize_resource_search_text(text):
+    text = (text or "").strip()
+    lowered = text.lower()
+    return RESOURCE_SEARCH_ALIAS_V5588.get(lowered, text)
+
+
+
 RESOURCE_CATEGORY_OPTIONS = [
     "مهارات اللغة الإنجليزية",
     "اختبارات اللغة الإنجليزية",
@@ -974,7 +1154,7 @@ RESOURCE_TYPE_OPTIONS = [
 ]
 
 def default_learning_resources():
-    return [
+    resources = [
         {"name":"Khan Academy Arithmetic","category":"Mathematics","subcategory":"Arithmetic","skill":"Arithmetic, Numbers, Fractions","exam":"","level":"Beginner","resource_type":"Course","url":"https://www.khanacademy.org/math/arithmetic","description":"Foundational arithmetic lessons and practice.","tags":["math", "arithmetic", "beginner", "recommended"],"is_official":False,"is_free":True,"language":"English"},
         {"name":"Khan Academy Pre-Algebra","category":"Mathematics","subcategory":"Pre-Algebra","skill":"Pre-Algebra, Equations","exam":"","level":"Beginner","resource_type":"Course","url":"https://www.khanacademy.org/math/pre-algebra","description":"Pre-algebra foundations for school, SAT, and CSCA preparation.","tags":["math", "pre algebra", "beginner", "recommended"],"is_official":False,"is_free":True,"language":"English"},
         {"name":"Khan Academy Algebra 1","category":"Mathematics","subcategory":"Algebra","skill":"Algebra, Equations, Functions","exam":"","level":"Beginner → Intermediate","resource_type":"Course","url":"https://www.khanacademy.org/math/algebra","description":"Strong free algebra course with practice exercises.","tags":["math", "algebra", "functions", "recommended"],"is_official":False,"is_free":True,"language":"English"},
@@ -1209,15 +1389,38 @@ def default_learning_resources():
         {"name":"IslamHouse","category":"Islamic Learning","subcategory":"Islamic Studies","skill":"Aqeedah, Fiqh, Seerah","exam":"","level":"All Levels","resource_type":"Library","url":"https://islamhouse.com/","description":"Large Islamic content library in many languages.","tags":["islamic","aqeedah","fiqh","seerah","Arabic"],"is_official":False,"is_free":True,"language":"Arabic/English"},
 
     ]
+    return [normalize_resource_item_to_arabic(item) for item in resources]
 
 
 def seed_learning_resources():
     try:
-        existing_names = {name for (name,) in db.session.query(LearningResource.name).all()}
+        existing_by_name = {resource.name: resource for resource in LearningResource.query.all()}
         added = 0
+        updated = 0
+
         for item in default_learning_resources():
-            if item["name"] in existing_names:
+            existing = existing_by_name.get(item["name"])
+            if existing:
+                fields = {
+                    "category": item.get("category", ""),
+                    "subcategory": item.get("subcategory", ""),
+                    "skill": item.get("skill", ""),
+                    "exam": item.get("exam", ""),
+                    "level": item.get("level", ""),
+                    "resource_type": item.get("resource_type", ""),
+                    "url": item["url"],
+                    "description": item.get("description", ""),
+                    "tags_json": json.dumps(item.get("tags", []), ensure_ascii=False),
+                    "is_official": bool(item.get("is_official", False)),
+                    "is_free": bool(item.get("is_free", True)),
+                    "language": item.get("language", ""),
+                }
+                for attr, value in fields.items():
+                    if getattr(existing, attr) != value:
+                        setattr(existing, attr, value)
+                        updated += 1
                 continue
+
             db.session.add(LearningResource(
                 name=item["name"],
                 category=item["category"],
@@ -1234,12 +1437,15 @@ def seed_learning_resources():
                 language=item.get("language", ""),
             ))
             added += 1
-        if added:
-            db.session.commit()
-            logger.info("Learning resources seeded/updated: %s new resources", added)
-    except Exception:
-        logger.exception("Failed to seed learning resources")
 
+        if added or updated:
+            db.session.commit()
+            logger.info("Learning resources seeded/native-Arabic updated: %s new, %s updated fields", added, updated)
+
+        normalize_all_learning_resources_to_native_arabic()
+    except Exception:
+        db.session.rollback()
+        logger.exception("تعذر تجهيز المصادر التعليمية العربية")
 
 
 
@@ -2649,9 +2855,9 @@ def create_app():
         # Keep resources available even after database resets or first deployment.
         seed_learning_resources()
 
-        query = request.args.get("q", "").strip()
+        query = normalize_resource_search_text(request.args.get("q", "").strip())
         category = request.args.get("category", "").strip()
-        skill = request.args.get("skill", "").strip()
+        skill = normalize_resource_search_text(request.args.get("skill", "").strip())
         exam = request.args.get("exam", "").strip()
         level = request.args.get("level", "").strip()
         resource_type = request.args.get("type", "").strip()
@@ -2728,18 +2934,18 @@ def create_app():
         resource = LearningResource.query.get_or_404(resource_id)
         existing = SavedResource.query.filter_by(user_id=current_user.id, resource_id=resource.id).first()
         if existing:
-            flash("This resource is already in My Resources.", "success")
+            flash("هذا المصدر محفوظ لديك بالفعل.", "success")
             return redirect(request.referrer or url_for("resources"))
 
         saved = SavedResource(
             user_id=current_user.id,
             resource_id=resource.id,
-            status="Not Started",
+            status="لم يبدأ",
             notes="",
         )
         db.session.add(saved)
         db.session.commit()
-        flash("Resource saved to My Resources.", "success")
+        flash("تم حفظ المصدر في مصادرك.", "success")
         return redirect(request.referrer or url_for("resources"))
 
     @app.route("/resources/<int:resource_id>/unsave", methods=["POST"])
@@ -2748,7 +2954,7 @@ def create_app():
         saved = SavedResource.query.filter_by(user_id=current_user.id, resource_id=resource_id).first_or_404()
         db.session.delete(saved)
         db.session.commit()
-        flash("Resource removed from My Resources.", "success")
+        flash("تمت إزالة المصدر من مصادرك.", "success")
         return redirect(request.referrer or url_for("resources"))
 
     @app.route("/my-resources")
@@ -2767,7 +2973,7 @@ def create_app():
 
         saved_items = saved_query.order_by(SavedResource.id.desc()).all()
         categories = sorted({item.resource.category for item in saved_items if item.resource and item.resource.category})
-        statuses = ["Not Started", "In Progress", "Completed"]
+        statuses = ["لم يبدأ", "قيد الاستخدام", "مكتمل"]
 
         return render_template(
             "my_resources.html",
@@ -2781,7 +2987,7 @@ def create_app():
     @login_required
     def update_saved_resource(saved_id):
         item = SavedResource.query.filter_by(id=saved_id, user_id=current_user.id).first_or_404()
-        item.status = request.form.get("status", item.status).strip() or "Not Started"
+        item.status = request.form.get("status", item.status).strip() or "لم يبدأ"
         item.notes = request.form.get("notes", "").strip()
         db.session.commit()
         flash("تم تحديث ملاحظات المصدر.", "success")
@@ -2919,6 +3125,7 @@ def create_app():
     @admin_required
     def admin_resources():
         seed_learning_resources()
+        normalize_all_learning_resources_to_native_arabic()
 
         if request.method == "POST":
             name = request.form.get("name", "").strip()
@@ -2929,22 +3136,22 @@ def create_app():
                 return redirect(url_for("admin_resources"))
 
             tags_text = request.form.get("tags", "").strip()
-            tags = [tag.strip() for tag in re.split(r"[,،\n]+", tags_text) if tag.strip()]
+            tags = resource_native_ar_tags([tag.strip() for tag in re.split(r"[,،\n]+", tags_text) if tag.strip()])
 
             resource = LearningResource(
                 name=name,
-                category=request.form.get("category", "").strip() or "General Learning",
-                subcategory=request.form.get("subcategory", "").strip(),
-                skill=request.form.get("skill", "").strip(),
+                category=resource_native_ar_value(request.form.get("category", "").strip()) or "التعلم العام",
+                subcategory=resource_native_ar_value(request.form.get("subcategory", "").strip()),
+                skill=resource_native_ar_phrase(request.form.get("skill", "").strip()),
                 exam=request.form.get("exam", "").strip(),
-                level=request.form.get("level", "").strip(),
-                resource_type=request.form.get("resource_type", "").strip() or "Website",
+                level=resource_native_ar_value(request.form.get("level", "").strip()),
+                resource_type=resource_native_ar_value(request.form.get("resource_type", "").strip()) or "موقع",
                 url=url,
                 description=request.form.get("description", "").strip(),
                 tags_json=json.dumps(tags, ensure_ascii=False),
                 is_official=request.form.get("is_official") == "on",
                 is_free=request.form.get("is_free") == "on",
-                language=request.form.get("language", "").strip(),
+                language=resource_native_ar_value(request.form.get("language", "").strip()),
             )
             db.session.add(resource)
             db.session.commit()
@@ -3002,21 +3209,21 @@ def create_app():
             return redirect(url_for("admin_resources"))
 
         tags_text = request.form.get("tags", "").strip()
-        tags = [tag.strip() for tag in re.split(r"[,،\n]+", tags_text) if tag.strip()]
+        tags = resource_native_ar_tags([tag.strip() for tag in re.split(r"[,،\n]+", tags_text) if tag.strip()])
 
         resource.name = name
-        resource.category = request.form.get("category", "").strip() or "General Learning"
-        resource.subcategory = request.form.get("subcategory", "").strip()
-        resource.skill = request.form.get("skill", "").strip()
+        resource.category = resource_native_ar_value(request.form.get("category", "").strip()) or "التعلم العام"
+        resource.subcategory = resource_native_ar_value(request.form.get("subcategory", "").strip())
+        resource.skill = resource_native_ar_phrase(request.form.get("skill", "").strip())
         resource.exam = request.form.get("exam", "").strip()
-        resource.level = request.form.get("level", "").strip()
-        resource.resource_type = request.form.get("resource_type", "").strip() or "Website"
+        resource.level = resource_native_ar_value(request.form.get("level", "").strip())
+        resource.resource_type = resource_native_ar_value(request.form.get("resource_type", "").strip()) or "موقع"
         resource.url = url
         resource.description = request.form.get("description", "").strip()
         resource.tags_json = json.dumps(tags, ensure_ascii=False)
         resource.is_official = request.form.get("is_official") == "on"
         resource.is_free = request.form.get("is_free") == "on"
-        resource.language = request.form.get("language", "").strip()
+        resource.language = resource_native_ar_value(request.form.get("language", "").strip())
 
         db.session.commit()
         flash("تم تحديث المصدر بنجاح.", "success")

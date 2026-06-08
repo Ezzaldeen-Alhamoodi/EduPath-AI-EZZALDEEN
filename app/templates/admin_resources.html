@@ -28,17 +28,17 @@
 
         <div>
             <label>الفئة</label>
-            <input name="category" list="resourceCategoryList" placeholder="مثال: الرياضيات / البرمجة والتكنولوجيا / Islamic Learning">
+            <input name="category" list="resourceCategoryList" placeholder="مثال: الرياضيات / البرمجة والتكنولوجيا / التعلم الإسلامي">
         </div>
 
         <div>
             <label>الفئة الفرعية</label>
-            <input name="subcategory" placeholder="مثال: التفاضل / Python / IELTS Practice">
+            <input name="subcategory" placeholder="مثال: التفاضل / Python / تدريب IELTS">
         </div>
 
         <div>
             <label>المهارة أو الموضوع</label>
-            <input name="skill" placeholder="مثال: Reading، Writing، Algebra، Python">
+            <input name="skill" placeholder="مثال: القراءة، الكتابة، الجبر، Python">
         </div>
 
         <div>
@@ -63,7 +63,7 @@
 
         <div>
             <label>الوسوم</label>
-            <input name="tags" placeholder="افصل الوسوم بفاصلة، مثال: IELTS، Reading، مجاني">
+            <input name="tags" placeholder="افصل الوسوم بفاصلة، مثال: IELTS، القراءة، مجاني">
         </div>
 
         <div class="field-wide">
@@ -88,7 +88,7 @@
 
     <datalist id="resourceCategoryList">
         {% for cat in categories %}
-            <option value="{{ cat }}">{{ cat|resource_ar }}</option>
+            <option value="{{ cat }}">{{ cat }}</option>
         {% endfor %}
     </datalist>
     <datalist id="resourceExamList">
@@ -98,17 +98,17 @@
     </datalist>
     <datalist id="resourceTypeList">
         {% for type in types %}
-            <option value="{{ type }}">{{ type|resource_ar }}</option>
+            <option value="{{ type }}">{{ type }}</option>
         {% endfor %}
     </datalist>
     <datalist id="resourceLevelList">
         {% for level in levels %}
-            <option value="{{ level }}">{{ level|resource_ar }}</option>
+            <option value="{{ level }}">{{ level }}</option>
         {% endfor %}
     </datalist>
     <datalist id="resourceLanguageList">
         {% for language in languages %}
-            <option value="{{ language }}">{{ language|resource_ar }}</option>
+            <option value="{{ language }}">{{ language }}</option>
         {% endfor %}
     </datalist>
 </section>
@@ -126,7 +126,7 @@
             <select name="category">
                 <option value="">جميع الفئات</option>
                 {% for cat in categories %}
-                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat|resource_ar }}</option>
+                    <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -169,22 +169,22 @@
             <div class="resource-card-head">
                 <div>
                     <h3>{{ resource.name }}</h3>
-                    <p>{{ resource.category|resource_ar }}{% if resource.subcategory %} · {{ resource.subcategory|resource_ar }}{% endif %}</p>
+                    <p>{{ resource.category }}{% if resource.subcategory %} · {{ resource.subcategory }}{% endif %}</p>
                 </div>
                 <div class="resource-badges">
                     {% if resource.is_official %}<span class="badge official">رسمي</span>{% endif %}
                     {% if resource.is_free %}<span class="badge free">مجاني</span>{% endif %}
-                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type|resource_ar }}</span>{% endif %}
-                    {% if resource.level %}<span class="badge">{{ resource.level|resource_ar }}</span>{% endif %}
+                    {% if resource.resource_type %}<span class="badge">{{ resource.resource_type }}</span>{% endif %}
+                    {% if resource.level %}<span class="badge">{{ resource.level }}</span>{% endif %}
                 </div>
             </div>
 
-            <p class="resource-desc">{{ resource|resource_description_ar }}</p>
+            <p class="resource-desc">{{ resource.description }}</p>
 
             <div class="resource-meta">
                 {% if resource.exam %}<span>الاختبار: {{ resource.exam }}</span>{% endif %}
-                {% if resource.skill %}<span>المهارة: {{ resource.skill|resource_phrase_ar }}</span>{% endif %}
-                {% if resource.language %}<span>لغة المصدر: {{ resource.language|resource_ar }}</span>{% endif %}
+                {% if resource.skill %}<span>المهارة: {{ resource.skill }}</span>{% endif %}
+                {% if resource.language %}<span>لغة المصدر: {{ resource.language }}</span>{% endif %}
             </div>
 
             <form method="POST" action="{{ url_for('admin_update_resource', resource_id=resource.id) }}" class="admin-resource-edit-form-v5587">
