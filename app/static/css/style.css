@@ -8426,3 +8426,36 @@ small.hint {
         box-shadow: none !important;
     }
 }
+
+
+/* EduPath AI v5.5.134 Official app icon only */
+.logo,
+.logo-link,
+.mobile-app-logo,
+.mobile-app-logo img,
+.brand-block {
+    background: transparent !important;
+}
+
+.logo,
+.mobile-app-logo img {
+    object-fit: contain !important;
+}
+
+.logo-link,
+.mobile-app-logo {
+    padding: 0 !important;
+}
+
+@media (max-width: 900px) {
+    .mobile-app-header {
+        justify-items: center !important;
+    }
+
+    .mobile-app-logo {
+        justify-self: center !important;
+        margin-inline: auto !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+}
