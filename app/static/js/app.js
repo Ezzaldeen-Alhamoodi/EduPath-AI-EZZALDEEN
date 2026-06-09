@@ -1034,6 +1034,15 @@ document.addEventListener("DOMContentLoaded", () => {
             moreMenu?.classList.remove("open");
         });
     }
+
+    const notificationButton = document.getElementById("mobileMenuNotifications");
+    const desktopNotificationButton = document.getElementById("enableNotifications");
+    if (notificationButton && desktopNotificationButton) {
+        notificationButton.addEventListener("click", () => {
+            desktopNotificationButton.click();
+            moreMenu?.classList.remove("open");
+        });
+    }
 });
 
 

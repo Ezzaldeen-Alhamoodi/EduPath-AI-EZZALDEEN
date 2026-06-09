@@ -11,7 +11,7 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}?v=5.5.140">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}?v=5.5.140">
     <link rel="preload" as="image" href="{{ url_for('static', filename='app-logo.png') }}?v=5.5.140">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=5.5.143">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=5.5.144">
 </head>
 <body>
 
@@ -51,7 +51,7 @@
             {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}<a class="nav-admin" href="{{ url_for('admin_dashboard') }}"><i>⚙</i>الإدارة</a>{% endif %}
         </nav>
 
-        <button class="notify-btn" id="enableNotifications">تفعيل التذكيرات</button>
+        <button class="notify-btn" id="enableNotifications">تفعيل الإشعارات</button>
     </aside>
 
     <main class="main">
@@ -83,7 +83,7 @@
 </div>
 {% endif %}
 
-    <script src="{{ url_for('static', filename='js/app.js') }}?v=5.5.140"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}?v=5.5.144"></script>
     {% block extra_scripts %}{% endblock %}
 
     <nav class="mobile-bottom-nav compact-icon-nav-v474" aria-label="Mobile navigation">
@@ -92,12 +92,13 @@
         <a class="nav-tasks" href="{{ url_for('tasks') }}"><span>▣</span><small>المهام</small></a>
         <a class="nav-resources" href="{{ url_for('resources') }}"><span>▤</span><small>المصادر</small></a>
         <a class="nav-coach" href="{{ url_for('coach') }}"><span>✦</span><small>المدرب</small></a>
-        <button class="mobile-more-btn nav-more" id="mobileMoreToggle" type="button"><span>⋯</span><small>المزيد</small></button>
+        <button class="mobile-more-btn nav-more" id="mobileMoreToggle" type="button"><span>⋯</span><small>أكثر</small></button>
     </nav>
 
 
 <div class="mobile-more-menu" id="mobileMoreMenu">
-    <button type="button" id="mobileMenuTheme">الوضع</button>
+    <button type="button" id="mobileMenuTheme">تبديل الوضع</button>
+    <button type="button" id="mobileMenuNotifications">تفعيل الإشعارات</button>
 <a href="{{ url_for('profile') }}">الملف الشخصي</a>
     {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}
         <a href="{{ url_for('admin_dashboard') }}">الإدارة</a>
