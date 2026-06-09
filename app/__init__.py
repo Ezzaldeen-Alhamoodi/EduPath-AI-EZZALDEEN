@@ -63,7 +63,10 @@ class User(UserMixin, db.Model):
 
 class SubscriptionCode(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    code = db.Column(db.String(48), nullable=False, unique=True, index=True)
+    # user_id remains nullable only for compatibility with very old databases.
+    # New global subscription codes are not assigned to a user until activation.
+    user_id = db.Column(db.Integer, nullable=True, index=True)
+    code = db.Column(db.String(64), nullable=False, unique=True, index=True)
     duration_days = db.Column(db.Integer, nullable=False, default=30)
     is_used = db.Column(db.Boolean, nullable=False, default=False)
     used_by_user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
@@ -83,6 +86,7 @@ class SubscriptionActivationAttempt(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, index=True)
     attempted_code = db.Column(db.String(80), nullable=True)
     was_successful = db.Column(db.Boolean, nullable=False, default=False)
+    ip_address = db.Column(db.String(64), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
 
     user = db.relationship("User", backref="subscription_activation_attempts")
@@ -567,20 +571,38 @@ def admin_required(view_func):
     return wrapper
 
 
+
+def normalize_subscription_code(raw_code):
+    """Normalize a subscription code before saving/searching.
+
+    Handles copied spaces, invisible characters, non-breaking spaces, and different dash types.
+    """
+    value = unicodedata.normalize("NFKC", raw_code or "")
+    for hidden in ("\u200b", "\u200c", "\u200d", "\ufeff"):
+        value = value.replace(hidden, "")
+    value = value.replace("\xa0", " ")
+    value = value.strip().upper()
+    value = value.replace("–", "-").replace("—", "-").replace("−", "-").replace("‐", "-")
+    value = re.sub(r"\s+", "", value)
+    value = re.sub(r"[^A-Z0-9-]", "", value)
+    value = re.sub(r"-{2,}", "-", value)
+    return value.strip("-")
+
+
 def generate_subscription_code():
     alphabet = string.ascii_uppercase + string.digits
-    # Long, random, human-readable code. Generated using secrets, not random.
-    return "EPAI-" + "-".join(
-        "".join(secrets.choice(alphabet) for _ in range(5))
-        for _ in range(4)
-    )
+    parts = []
+    for _ in range(4):
+        parts.append("".join(secrets.choice(alphabet) for _ in range(5)))
+    return "EDU-" + "-".join(parts)
 
 
-def generate_unique_subscription_code():
-    code = generate_subscription_code()
-    while SubscriptionCode.query.filter_by(code=code).first():
-        code = generate_subscription_code()
-    return code
+def generate_unique_subscription_code(max_attempts=20):
+    for _ in range(max_attempts):
+        code = normalize_subscription_code(generate_subscription_code())
+        if not SubscriptionCode.query.filter_by(code=code).first():
+            return code
+    raise RuntimeError("تعذر إنشاء رمز اشتراك فريد بعد عدة محاولات.")
 
 
 def ensure_user_subscription_code(user):
@@ -609,7 +631,7 @@ def paid_days_left(user):
     return max(0, delta.days + (1 if delta.seconds > 0 else 0))
 
 
-def too_many_subscription_attempts(user, max_attempts=5, within_minutes=60):
+def too_many_subscription_attempts(user, max_attempts=5, within_minutes=15):
     since = datetime.utcnow() - timedelta(minutes=within_minutes)
     failed_count = SubscriptionActivationAttempt.query.filter(
         SubscriptionActivationAttempt.user_id == user.id,
@@ -620,17 +642,28 @@ def too_many_subscription_attempts(user, max_attempts=5, within_minutes=60):
 
 
 def record_subscription_attempt(user, code, success):
+    ip_address = ""
+    try:
+        ip_address = (request.headers.get("X-Forwarded-For", request.remote_addr or "") or "").split(",")[0].strip()[:64]
+    except RuntimeError:
+        ip_address = ""
     db.session.add(SubscriptionActivationAttempt(
         user_id=user.id,
-        attempted_code=(code or "")[:80],
+        attempted_code=normalize_subscription_code(code)[:80],
         was_successful=bool(success),
+        ip_address=ip_address,
     ))
 
 
 def activate_subscription_code_for_user(user, raw_code):
-    code_value = (raw_code or "").strip().upper()
+    code_value = normalize_subscription_code(raw_code)
+    if not code_value:
+        return False, "يرجى إدخال رمز الاشتراك."
+
     if too_many_subscription_attempts(user):
         return False, "تمت محاولات تفعيل كثيرة غير ناجحة. يرجى المحاولة لاحقاً."
+
+    deactivate_expired_subscription(user)
 
     if getattr(user, "paid_active", False) and user.subscription_expires_at and datetime.utcnow() < user.subscription_expires_at:
         return False, "لديك اشتراك مدفوع نشط بالفعل."
@@ -652,19 +685,40 @@ def activate_subscription_code_for_user(user, raw_code):
         return False, "تم استخدام رمز الاشتراك هذا من قبل."
 
     now = datetime.utcnow()
-    subscription_code.is_used = True
-    subscription_code.used_by_user_id = user.id
-    subscription_code.used_at = now
-    subscription_code.expires_at = now + timedelta(days=subscription_code.duration_days)
+    duration_days = subscription_code.duration_days or 30
+    expires_at = now + timedelta(days=duration_days)
 
-    user.paid_active = True
-    user.paid_activated_at = now
-    user.subscription_expires_at = subscription_code.expires_at
+    try:
+        updated = SubscriptionCode.query.filter(
+            SubscriptionCode.id == subscription_code.id,
+            SubscriptionCode.is_used.is_(False),
+            SubscriptionCode.is_cancelled.is_(False),
+        ).update({
+            SubscriptionCode.is_used: True,
+            SubscriptionCode.used_by_user_id: user.id,
+            SubscriptionCode.used_at: now,
+            SubscriptionCode.expires_at: expires_at,
+            SubscriptionCode.user_id: None,
+        }, synchronize_session=False)
 
-    record_subscription_attempt(user, code_value, True)
-    db.session.commit()
-    return True, f"تم تفعيل النسخة المدفوعة بنجاح لمدة {subscription_code.duration_days} يوم."
+        if updated != 1:
+            db.session.rollback()
+            record_subscription_attempt(user, code_value, False)
+            db.session.commit()
+            return False, "تم استخدام هذا الرمز بالفعل أو لم يعد متاحاً."
 
+        user.paid_active = True
+        user.paid_activated_at = now
+        user.subscription_expires_at = expires_at
+
+        record_subscription_attempt(user, code_value, True)
+        db.session.commit()
+        return True, f"تم تفعيل النسخة المدفوعة بنجاح لمدة {duration_days} يوم."
+
+    except Exception:
+        db.session.rollback()
+        logger.exception("تعذر تفعيل رمز الاشتراك")
+        return False, "حدث خطأ أثناء تفعيل رمز الاشتراك. يرجى المحاولة لاحقاً."
 
 def user_has_unlimited_access(user):
     return user_is_admin(user)
@@ -2794,11 +2848,12 @@ def create_app():
 
     mail.init_app(app)
     login_manager.login_view = "login"
-    login_manager.login_message = "Please log in to access EduPath AI."
+    login_manager.login_message = "يرجى تسجيل الدخول للوصول إلى EduPath AI."
 
     with app.app_context():
         db.create_all()
         ensure_database_columns()
+        ensure_subscription_code_schema()
 
     ai_client = build_ai_client()
 
@@ -2818,7 +2873,7 @@ def create_app():
             languages = request.form.get("languages", "").strip()
 
             if not name or not email or not password:
-                flash("Name, email, and password are required.", "error")
+                flash("يرجى إدخال الاسم والبريد الإلكتروني وكلمة المرور.", "error")
                 return redirect(url_for("register"))
 
             if not is_valid_email(email):
@@ -2835,7 +2890,7 @@ def create_app():
 
             existing_user = User.query.filter_by(email=email).first()
             if existing_user:
-                flash("This email already has an account. Please log in.", "error")
+                flash("هذا البريد الإلكتروني لديه حساب بالفعل. يرجى تسجيل الدخول.", "error")
                 return redirect(url_for("login"))
 
             user = User(
@@ -2855,10 +2910,16 @@ def create_app():
             db.session.commit()
 
             if app.config.get("REQUIRE_EMAIL_VERIFICATION", False):
-                if os.environ.get("SEND_AUTH_EMAILS", "false").lower() == "true" and send_verification_email(user):
-                    flash("Account created. Please check your email to verify your account before logging in.", "success")
+                sent = False
+                if os.environ.get("SEND_AUTH_EMAILS", "false").lower() == "true":
+                    try:
+                        sent = bool(send_verification_email(user))
+                    except Exception:
+                        logger.exception("تعذر إرسال رسالة التحقق من البريد")
+                if sent:
+                    flash("تم إنشاء الحساب. يرجى فحص بريدك الإلكتروني لتأكيد الحساب قبل تسجيل الدخول.", "success")
                 else:
-                    flash("Account created. Email verification is enabled, but sending email is currently disabled or unavailable. Please contact the admin.", "error")
+                    flash("تم إنشاء الحساب، لكن التحقق من البريد مفعّل وتعذر إرسال رسالة التحقق حالياً. يرجى التواصل مع المشرف.", "error")
                 return redirect(url_for("login"))
 
             send_welcome_email(user) if os.environ.get("SEND_WELCOME_EMAIL", "false").lower() == "true" else False
@@ -2885,7 +2946,13 @@ def create_app():
                 return redirect(url_for("login"))
 
             if app.config.get("REQUIRE_EMAIL_VERIFICATION", False) and not user.email_verified:
-                if os.environ.get("SEND_AUTH_EMAILS", "false").lower() == "true" and send_verification_email(user):
+                sent = False
+                if os.environ.get("SEND_AUTH_EMAILS", "false").lower() == "true":
+                    try:
+                        sent = bool(send_verification_email(user))
+                    except Exception:
+                        logger.exception("تعذر إعادة إرسال رابط التحقق أثناء تسجيل الدخول")
+                if sent:
                     flash("يرجى تأكيد بريدك الإلكتروني قبل تسجيل الدخول. تم إرسال رابط التحقق.", "error")
                 else:
                     flash("لم يتم تأكيد بريدك الإلكتروني، وتعذر إرسال رسالة التحقق حالياً. يرجى التواصل مع المشرف.", "error")
@@ -2908,7 +2975,7 @@ def create_app():
         try:
             email = verify_token(token, "verify-email", max_age=86400)
         except SignatureExpired:
-            flash("Verification link expired. Please request a new one.", "error")
+            flash("انتهت صلاحية رابط التحقق. يرجى طلب رابط جديد.", "error")
             return redirect(url_for("resend_verification"))
         except BadSignature:
             flash("رابط التحقق غير صالح.", "error")
@@ -2932,10 +2999,18 @@ def create_app():
             return redirect(url_for("profile"))
 
         if request.method == "POST":
-            send_verification_email(current_user)
+            sent = False
+            if os.environ.get("SEND_AUTH_EMAILS", "false").lower() == "true":
+                try:
+                    sent = bool(send_verification_email(current_user))
+                except Exception:
+                    logger.exception("تعذر إرسال رسالة التحقق")
             current_user.verification_sent_at = datetime.utcnow()
             db.session.commit()
-            flash("تم إرسال رسالة التحقق. يرجى فحص صندوق البريد.", "success")
+            if sent:
+                flash("تم إرسال رسالة التحقق. يرجى فحص صندوق البريد.", "success")
+            else:
+                flash("تعذر إرسال رسالة التحقق حالياً. يرجى المحاولة لاحقاً أو التواصل مع المشرف.", "error")
             return redirect(url_for("profile"))
 
         return render_template("resend_verification.html")
@@ -2950,10 +3025,13 @@ def create_app():
             email = sanitize_email(request.form.get("email", ""))
             user = User.query.filter_by(email=email).first()
 
-            if user and not user.email_verified:
-                send_verification_email(user)
+            if user and not user.email_verified and os.environ.get("SEND_AUTH_EMAILS", "false").lower() == "true":
+                try:
+                    send_verification_email(user)
+                except Exception:
+                    logger.exception("تعذر إرسال رسالة التحقق العامة")
 
-            flash("إذا كان هذا البريد مرتبطاً بحساب غير مؤكد، فسيتم إرسال رابط التحقق إليه.", "success")
+            flash("إذا كان هذا البريد مرتبطاً بحساب غير مؤكد وكان إرسال البريد مفعلاً، فسيتم إرسال رابط التحقق إليه.", "success")
             return redirect(url_for("login"))
 
         return render_template("resend_verification_public.html")
@@ -2968,7 +3046,10 @@ def create_app():
             email = sanitize_email(request.form.get("email", ""))
             user = User.query.filter_by(email=email).first()
             if user and os.environ.get("SEND_AUTH_EMAILS", "false").lower() == "true":
-                send_password_reset_email(user)
+                try:
+                    send_password_reset_email(user)
+                except Exception:
+                    logger.exception("تعذر إرسال رابط إعادة تعيين كلمة المرور")
             flash("إذا كان هذا البريد موجوداً وكان إرسال البريد مفعلاً، فسيتم إرسال رابط إعادة تعيين كلمة المرور إليه.", "success")
             return redirect(url_for("login"))
 
@@ -3561,18 +3642,24 @@ def create_app():
         quantity = max(1, min(quantity, 200))
         duration_days = max(1, min(duration_days, 3650))
 
-        for _ in range(quantity):
-            db.session.add(SubscriptionCode(
-                code=generate_unique_subscription_code(),
-                duration_days=duration_days,
-                is_used=False,
-                is_cancelled=False,
-                created_by_admin_id=current_user.id,
-                note=note[:255],
-            ))
+        try:
+            for _ in range(quantity):
+                db.session.add(SubscriptionCode(
+                    code=generate_unique_subscription_code(),
+                    user_id=None,
+                    duration_days=duration_days,
+                    is_used=False,
+                    is_cancelled=False,
+                    created_by_admin_id=current_user.id,
+                    note=note[:255],
+                ))
 
-        db.session.commit()
-        flash(f"تم إنشاء {quantity} رمز اشتراك بنجاح.", "success")
+            db.session.commit()
+            flash(f"تم إنشاء {quantity} رمز اشتراك بنجاح.", "success")
+        except Exception:
+            db.session.rollback()
+            logger.exception("تعذر إنشاء رموز الاشتراك")
+            flash("حدث خطأ أثناء إنشاء رموز الاشتراك. يرجى المحاولة لاحقاً.", "error")
         return redirect(url_for("admin_dashboard"))
 
     @app.route("/admin/subscription-codes/<int:code_id>/cancel", methods=["POST"])
@@ -5267,8 +5354,8 @@ def ensure_database_columns():
                     """ALTER TABLE "user" ADD COLUMN IF NOT EXISTS paid_activated_at TIMESTAMP""",
                     """CREATE TABLE IF NOT EXISTS subscription_code (
                         id SERIAL PRIMARY KEY,
-                        user_id INTEGER NOT NULL,
-                        code VARCHAR(32) NOT NULL UNIQUE,
+                        user_id INTEGER,
+                        code VARCHAR(64) NOT NULL UNIQUE,
                         duration_days INTEGER NOT NULL DEFAULT 30,
                         is_used BOOLEAN NOT NULL DEFAULT FALSE,
                         used_at TIMESTAMP,
@@ -5286,6 +5373,7 @@ def ensure_database_columns():
                         user_id INTEGER NOT NULL,
                         attempted_code VARCHAR(80),
                         was_successful BOOLEAN NOT NULL DEFAULT FALSE,
+                        ip_address VARCHAR(64),
                         created_at TIMESTAMP
                     )""",
 
@@ -5430,8 +5518,8 @@ def ensure_database_columns():
             connection.exec_driver_sql("""
                 CREATE TABLE IF NOT EXISTS subscription_code (
                     id INTEGER PRIMARY KEY,
-                    user_id INTEGER NOT NULL,
-                    code VARCHAR(32) NOT NULL UNIQUE,
+                    user_id INTEGER,
+                    code VARCHAR(64) NOT NULL UNIQUE,
                     duration_days INTEGER NOT NULL DEFAULT 30,
                     is_used BOOLEAN NOT NULL DEFAULT 0,
                     used_at DATETIME,
@@ -5449,6 +5537,7 @@ def ensure_database_columns():
                     user_id INTEGER NOT NULL,
                     attempted_code VARCHAR(80),
                     was_successful BOOLEAN NOT NULL DEFAULT 0,
+                    ip_address VARCHAR(64),
                     created_at DATETIME
                 )
             """)
@@ -5484,6 +5573,187 @@ def ensure_database_columns():
             logger.info("SQLite lightweight migration completed")
     except Exception:
         logger.exception("Database column migration failed")
+
+
+def ensure_subscription_code_schema():
+    """Secure compatibility migration for old and new subscription code tables.
+
+    Keeps existing data, supports SQLite/PostgreSQL, and removes the old user_id NOT NULL
+    problem that prevented global subscription codes from being created.
+    """
+    try:
+        dialect = db.engine.dialect.name
+
+        if dialect == "postgresql":
+            with db.engine.connect() as connection:
+                postgres_sql = [
+                    """CREATE TABLE IF NOT EXISTS subscription_code (
+                        id SERIAL PRIMARY KEY,
+                        user_id INTEGER,
+                        code VARCHAR(64) NOT NULL UNIQUE,
+                        duration_days INTEGER NOT NULL DEFAULT 30,
+                        is_used BOOLEAN NOT NULL DEFAULT FALSE,
+                        is_cancelled BOOLEAN NOT NULL DEFAULT FALSE,
+                        created_by_admin_id INTEGER,
+                        used_by_user_id INTEGER,
+                        used_at TIMESTAMP,
+                        expires_at TIMESTAMP,
+                        note VARCHAR(255),
+                        created_at TIMESTAMP
+                    )""",
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS user_id INTEGER""",
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS duration_days INTEGER DEFAULT 30""",
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS is_used BOOLEAN DEFAULT FALSE""",
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS is_cancelled BOOLEAN DEFAULT FALSE""",
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS created_by_admin_id INTEGER""",
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS used_by_user_id INTEGER""",
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS used_at TIMESTAMP""",
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS expires_at TIMESTAMP""",
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS note VARCHAR(255)""",
+                    """ALTER TABLE subscription_code ADD COLUMN IF NOT EXISTS created_at TIMESTAMP""",
+                    """UPDATE subscription_code SET duration_days = 30 WHERE duration_days IS NULL""",
+                    """UPDATE subscription_code SET is_used = FALSE WHERE is_used IS NULL""",
+                    """UPDATE subscription_code SET is_cancelled = FALSE WHERE is_cancelled IS NULL""",
+                    """UPDATE subscription_code SET used_by_user_id = user_id WHERE used_by_user_id IS NULL AND user_id IS NOT NULL""",
+                    """UPDATE subscription_code SET is_used = TRUE WHERE user_id IS NOT NULL AND COALESCE(is_used, FALSE) = FALSE""",
+                    """CREATE TABLE IF NOT EXISTS subscription_activation_attempt (
+                        id SERIAL PRIMARY KEY,
+                        user_id INTEGER NOT NULL,
+                        attempted_code VARCHAR(80),
+                        was_successful BOOLEAN NOT NULL DEFAULT FALSE,
+                        ip_address VARCHAR(64),
+                        created_at TIMESTAMP
+                    )""",
+                    """ALTER TABLE subscription_activation_attempt ADD COLUMN IF NOT EXISTS ip_address VARCHAR(64)""",
+                ]
+                for sql in postgres_sql:
+                    connection.exec_driver_sql(sql)
+                try:
+                    connection.exec_driver_sql("ALTER TABLE subscription_code ALTER COLUMN user_id DROP NOT NULL")
+                    logger.warning("Subscription legacy migration applied: dropped user_id NOT NULL")
+                except Exception:
+                    logger.info("Subscription legacy user_id migration skipped or already applied")
+                try:
+                    connection.exec_driver_sql("ALTER TABLE subscription_code ALTER COLUMN code TYPE VARCHAR(64)")
+                except Exception:
+                    logger.info("Subscription code length migration skipped or already compatible")
+                connection.commit()
+            logger.info("Subscription code schema check completed successfully")
+            return
+
+        if dialect != "sqlite":
+            logger.info("Subscription code schema check skipped for unsupported dialect: %s", dialect)
+            return
+
+        with db.engine.connect() as connection:
+            connection.exec_driver_sql("""
+                CREATE TABLE IF NOT EXISTS subscription_code (
+                    id INTEGER PRIMARY KEY,
+                    user_id INTEGER,
+                    code VARCHAR(64) NOT NULL UNIQUE,
+                    duration_days INTEGER NOT NULL DEFAULT 30,
+                    is_used BOOLEAN NOT NULL DEFAULT 0,
+                    is_cancelled BOOLEAN NOT NULL DEFAULT 0,
+                    created_by_admin_id INTEGER,
+                    used_by_user_id INTEGER,
+                    used_at DATETIME,
+                    expires_at DATETIME,
+                    note VARCHAR(255),
+                    created_at DATETIME
+                )
+            """)
+
+            table_info = connection.exec_driver_sql("PRAGMA table_info(subscription_code)").fetchall()
+            columns = {row[1]: row for row in table_info}
+            user_id_not_null = "user_id" in columns and int(columns["user_id"][3] or 0) == 1
+
+            if user_id_not_null:
+                connection.exec_driver_sql("DROP TABLE IF EXISTS subscription_code_new")
+                connection.exec_driver_sql("""
+                    CREATE TABLE subscription_code_new (
+                        id INTEGER PRIMARY KEY,
+                        user_id INTEGER,
+                        code VARCHAR(64) NOT NULL UNIQUE,
+                        duration_days INTEGER NOT NULL DEFAULT 30,
+                        is_used BOOLEAN NOT NULL DEFAULT 0,
+                        is_cancelled BOOLEAN NOT NULL DEFAULT 0,
+                        created_by_admin_id INTEGER,
+                        used_by_user_id INTEGER,
+                        used_at DATETIME,
+                        expires_at DATETIME,
+                        note VARCHAR(255),
+                        created_at DATETIME
+                    )
+                """)
+
+                old_cols = set(columns.keys())
+                select_exprs = [
+                    "id" if "id" in old_cols else "NULL",
+                    "NULL",
+                    "code" if "code" in old_cols else "''",
+                    "COALESCE(duration_days, 30)" if "duration_days" in old_cols else "30",
+                    "CASE WHEN user_id IS NOT NULL THEN 1 ELSE COALESCE(is_used, 0) END" if "is_used" in old_cols and "user_id" in old_cols else ("CASE WHEN user_id IS NOT NULL THEN 1 ELSE 0 END" if "user_id" in old_cols else ("COALESCE(is_used, 0)" if "is_used" in old_cols else "0")),
+                    "COALESCE(is_cancelled, 0)" if "is_cancelled" in old_cols else "0",
+                    "created_by_admin_id" if "created_by_admin_id" in old_cols else "NULL",
+                    "COALESCE(used_by_user_id, user_id)" if "used_by_user_id" in old_cols and "user_id" in old_cols else ("user_id" if "user_id" in old_cols else ("used_by_user_id" if "used_by_user_id" in old_cols else "NULL")),
+                    "used_at" if "used_at" in old_cols else "NULL",
+                    "expires_at" if "expires_at" in old_cols else "NULL",
+                    "note" if "note" in old_cols else "NULL",
+                    "created_at" if "created_at" in old_cols else "NULL",
+                ]
+                connection.exec_driver_sql(f"""
+                    INSERT OR IGNORE INTO subscription_code_new (
+                        id, user_id, code, duration_days, is_used, is_cancelled,
+                        created_by_admin_id, used_by_user_id, used_at, expires_at, note, created_at
+                    )
+                    SELECT {", ".join(select_exprs)} FROM subscription_code
+                """)
+                connection.exec_driver_sql("DROP TABLE subscription_code")
+                connection.exec_driver_sql("ALTER TABLE subscription_code_new RENAME TO subscription_code")
+                logger.warning("Subscription legacy migration applied: rebuilt SQLite subscription_code table")
+
+            table_info = connection.exec_driver_sql("PRAGMA table_info(subscription_code)").fetchall()
+            existing = {row[1] for row in table_info}
+            additions = {
+                "user_id": "INTEGER",
+                "duration_days": "INTEGER NOT NULL DEFAULT 30",
+                "is_used": "BOOLEAN NOT NULL DEFAULT 0",
+                "is_cancelled": "BOOLEAN NOT NULL DEFAULT 0",
+                "created_by_admin_id": "INTEGER",
+                "used_by_user_id": "INTEGER",
+                "used_at": "DATETIME",
+                "expires_at": "DATETIME",
+                "note": "VARCHAR(255)",
+                "created_at": "DATETIME",
+            }
+            for column, column_type in additions.items():
+                if column not in existing:
+                    connection.exec_driver_sql(f"ALTER TABLE subscription_code ADD COLUMN {column} {column_type}")
+
+            connection.exec_driver_sql("""
+                CREATE TABLE IF NOT EXISTS subscription_activation_attempt (
+                    id INTEGER PRIMARY KEY,
+                    user_id INTEGER NOT NULL,
+                    attempted_code VARCHAR(80),
+                    was_successful BOOLEAN NOT NULL DEFAULT 0,
+                    ip_address VARCHAR(64),
+                    created_at DATETIME
+                )
+            """)
+            attempt_cols = {row[1] for row in connection.exec_driver_sql("PRAGMA table_info(subscription_activation_attempt)").fetchall()}
+            if "ip_address" not in attempt_cols:
+                connection.exec_driver_sql("ALTER TABLE subscription_activation_attempt ADD COLUMN ip_address VARCHAR(64)")
+
+            connection.exec_driver_sql("UPDATE subscription_code SET duration_days = 30 WHERE duration_days IS NULL")
+            connection.exec_driver_sql("UPDATE subscription_code SET is_used = 0 WHERE is_used IS NULL")
+            connection.exec_driver_sql("UPDATE subscription_code SET is_cancelled = 0 WHERE is_cancelled IS NULL")
+            connection.exec_driver_sql("UPDATE subscription_code SET used_by_user_id = user_id WHERE used_by_user_id IS NULL AND user_id IS NOT NULL")
+            connection.exec_driver_sql("UPDATE subscription_code SET is_used = 1 WHERE user_id IS NOT NULL AND COALESCE(is_used, 0) = 0")
+            connection.commit()
+
+        logger.info("Subscription code schema check completed successfully")
+    except Exception:
+        logger.exception("Subscription code schema migration failed")
 
 def build_ai_client():
     key = os.environ.get("OPENROUTER_API_KEY")
