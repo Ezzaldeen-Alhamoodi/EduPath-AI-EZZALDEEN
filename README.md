@@ -2284,3 +2284,43 @@ Dashboard-only layout fix.
   - 📖 🎓 🏫 🌍 💻 🤖 📐 🎯 📝 🏠 🚀 📚 ⚙️ ✨
 - Task-type cards now use a blue visual identity derived from the hero section.
 - Improved spacing, alignment, and desktop use of horizontal space.
+
+## EduPath AI PWA Task Reminder Notifications
+
+This version supports Web Push task notifications for installed PWA and supported browsers.
+
+Required Render environment variables:
+
+```text
+VAPID_PUBLIC_KEY=
+VAPID_PRIVATE_KEY=
+VAPID_CLAIM_EMAIL=mailto:your-email@example.com
+CRON_SECRET=put_a_long_secret_value_here
+```
+
+Do not commit VAPID private keys to GitHub.
+
+Cron endpoint:
+
+```text
+GET /cron/send-task-push-notifications
+Header:
+X-Cron-Secret: your-secret
+```
+
+Recommended cron frequency: every minute.
+
+The system sends:
+- one notification about 10 minutes before a scheduled task starts;
+- one notification at the task start time.
+
+Duplicate reminders are prevented by the task notification log.
+
+
+## v5.5.144.1 PWA Notifications Verification Fix
+
+### Reliability checks and fixes
+- Added explicit PWA manifest scope `/`.
+- Added configurable `APP_TIMEZONE` for server-side push notification scheduling.
+- Default notification timezone is `Asia/Aden`; set `APP_TIMEZONE` in Render if a different default timezone is needed.
+- Added model-level unique constraint for task notification logs to match the migration index and prevent duplicates more strongly.

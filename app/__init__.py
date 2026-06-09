@@ -1,3 +1,7 @@
+try:
+    from zoneinfo import ZoneInfo
+except Exception:
+    ZoneInfo = None
 \
 import os
 import json
@@ -115,6 +119,10 @@ class PushSubscription(db.Model):
 
 
 class TaskNotificationLog(db.Model):
+    __table_args__ = (
+        db.UniqueConstraint("user_id", "task_id", "notification_type", "scheduled_for", name="uq_task_notification_once"),
+    )
+
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, index=True)
     task_id = db.Column(db.Integer, db.ForeignKey("study_task.id"), nullable=False, index=True)
@@ -2955,6 +2963,28 @@ def task_notification_text(task, notification_type):
     return title, body
 
 
+
+def get_app_notification_timezone():
+    timezone_name = (os.environ.get("APP_TIMEZONE", "Asia/Aden") or "Asia/Aden").strip()
+    if ZoneInfo is None:
+        return None
+    try:
+        return ZoneInfo(timezone_name)
+    except Exception:
+        logger.warning("Invalid APP_TIMEZONE=%s; falling back to Asia/Aden", timezone_name)
+        try:
+            return ZoneInfo("Asia/Aden")
+        except Exception:
+            return None
+
+
+def current_app_notification_datetime():
+    tz = get_app_notification_timezone()
+    if tz is None:
+        return datetime.utcnow()
+    return datetime.now(tz).replace(tzinfo=None)
+
+
 def parse_task_date_value(value):
     try:
         return datetime.strptime((value or "").strip()[:10], "%Y-%m-%d").date()
@@ -3038,7 +3068,7 @@ def mark_task_notification_sent(user_id, task_id, notification_type, scheduled_f
 
 
 def send_due_task_push_notifications(now_dt=None):
-    now_dt = now_dt or datetime.utcnow()
+    now_dt = now_dt or current_app_notification_datetime()
     today = now_dt.date()
     weekday = now_dt.weekday()
     sent_count = 0
