@@ -433,7 +433,9 @@ function fillSmartSelect(select, values, selectedValue) {
 
 function getSmartConfig(type) {
     const oldToArabic = {
-        "أخرى": "أخرى"
+        "أخرى": "أخرى",
+        "Secondary School": "المرحلة الثانوية",
+        "Daily Life": "الحياة اليومية"
     };
     const stableType = oldToArabic[type] || type || "عام";
     return SMART_TASK_DATA[stableType] || SMART_TASK_DATA["عام"];
@@ -39163,3 +39165,474 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 })();
+
+
+/* EduPath AI v5.5.138 Corrective Core Secondary School Task Bank
+   هذا التحديث يعرّف بنك المرحلة الثانوية داخل دالة النظام الأساسية نفسها حتى لا يبقى مجرد إضافة سطحية. */
+const SECONDARY_SCHOOL_GRADES_V55138 = [
+    "الصف الأول الثانوي",
+    "الصف الثاني الثانوي",
+    "الصف الثالث الثانوي",
+    "مراجعة عامة للمرحلة الثانوية",
+    "أخرى"
+];
+
+const SECONDARY_SCHOOL_SUBJECTS_V55138 = [
+    "القرآن الكريم",
+    "التربية الإسلامية",
+    "اللغة العربية",
+    "اللغة الإنجليزية",
+    "الرياضيات",
+    "الفيزياء",
+    "الكيمياء",
+    "الأحياء",
+    "التاريخ",
+    "الجغرافيا",
+    "الدراسات الاجتماعية والمواطنة",
+    "علوم الأرض والبيئة",
+    "الحاسوب وتقنية المعلومات",
+    "المهارات الدراسية وتنظيم المذاكرة",
+    "البحث والقراءة الإثرائية",
+    "الاختبارات والمراجعة النهائية",
+    "أخرى"
+];
+
+const SECONDARY_SCHOOL_DETAILS_V55138 = {
+    "القرآن الكريم": [
+        "سور المقرر","آيات الحفظ المقررة","مقطع الحفظ","صفحة من المقرر","مراجعة محفوظ سابق",
+        "مراجعة مقرر الصف","تلاوة مقرر الصف","تفسير آيات المقرر","معاني المفردات","أسباب النزول إن وجدت",
+        "الفوائد والهدايات","أحكام التجويد المقررة","المتشابهات","الوقف والابتداء","اختبار حفظ","اختبار تلاوة","أخرى"
+    ],
+    "التربية الإسلامية": [
+        "الإيمان","الحديث","الفقه","السيرة","الأخلاق والآداب","القرآن وعلومه","العقيدة","العبادات",
+        "المعاملات","القيم الإسلامية","الدروس المستفادة","مراجعة وحدة","مراجعة اختبار","أخرى"
+    ],
+    "اللغة العربية": [
+        "النحو","الجملة الاسمية","الجملة الفعلية","المبتدأ والخبر","الفعل والفاعل","المفعول به","النواسخ",
+        "كان وأخواتها","إن وأخواتها","الحال","التمييز","النعت","العطف","البدل","التوكيد","علامات الإعراب",
+        "المبني والمعرب","الصرف","الميزان الصرفي","الفعل الصحيح والمعتل","المجرد والمزيد","المشتقات",
+        "اسم الفاعل","اسم المفعول","اسم التفضيل","صيغ المبالغة","المصدر","الإعلال والإبدال","البلاغة",
+        "التشبيه","الاستعارة","الكناية","المجاز","الطباق","المقابلة","الجناس","السجع","الأسلوب الخبري",
+        "الأسلوب الإنشائي","تحليل صورة بلاغية","الأدب","القراءة","الفكرة العامة","الأفكار الجزئية",
+        "معاني المفردات","تحليل الأسلوب","التعبير","كتابة فقرة","كتابة موضوع","المقدمة والخاتمة",
+        "ترتيب الأفكار","علامات الترقيم","الإملاء","النصوص","المحفوظات","القواعد اللغوية","تحليل نص",
+        "مراجعة وحدة","مراجعة اختبار","أخرى"
+    ],
+    "اللغة الإنجليزية": [
+        "Reading","Main Idea","Supporting Details","Vocabulary in Context","Inference","Reference Words","Skimming",
+        "Scanning","True or False Questions","Reading Comprehension Passage","Writing","Writing Sentences",
+        "Writing Paragraphs","Topic Sentence","Supporting Sentences","Conclusion Sentence","Essay Basics","Email Writing",
+        "Describing Pictures","Correcting Writing Mistakes","Grammar","Tenses","Present Simple","Present Continuous",
+        "Past Simple","Past Continuous","Future Forms","Modal Verbs","Conditionals","Passive Voice","Reported Speech",
+        "Relative Clauses","Articles","Prepositions","Comparatives and Superlatives","Vocabulary","School Vocabulary",
+        "Daily Life Vocabulary","Academic Vocabulary","Synonyms and Antonyms","Word Families","Phrasal Verbs","Collocations",
+        "Spelling","Listening","Speaking","Translation","Pronunciation","Exam Practice","Reading Passage","Writing Task",
+        "Grammar Unit","Vocabulary Unit","Listening Practice","Speaking Practice","أخرى"
+    ],
+    "الرياضيات": [
+        "الجبر","العمليات الجبرية","التحليل","المقادير الجبرية","الكسور الجبرية","المعادلات الخطية",
+        "المعادلات التربيعية","المعادلات الأسية","المعادلات اللوغاريتمية","المتطابقات","الهندسة",
+        "النقاط والمستقيمات","الزوايا","المثلثات","التطابق والتشابه","الدائرة","المضلعات","المساحة","الحجم",
+        "البراهين الهندسية","الهندسة التحليلية","الدوال","مفهوم الدالة","مجال ومدى الدالة","الدوال الخطية",
+        "الدوال التربيعية","الدوال الأسية","الدوال اللوغاريتمية","تحويلات الدوال","رسم الدوال",
+        "المعادلات والمتباينات","التفاضل","النهايات","الاتصال","المشتقة","قواعد الاشتقاق","تطبيقات المشتقة",
+        "التكامل","التكامل غير المحدد","التكامل المحدد","المساحة تحت المنحنى","الإحصاء والاحتمالات",
+        "المتوسط","الوسيط","المنوال","المدى","الانحراف المعياري","التمثيل البياني","الاحتمال",
+        "الاحتمال الشرطي","التباديل والتوافيق","المتتاليات والمتسلسلات","مراجعة قوانين","مراجعة وحدة","مراجعة اختبار","أخرى"
+    ],
+    "الفيزياء": [
+        "الوحدة الأولى","الوحدة الثانية","الوحدة الثالثة","الوحدة الرابعة","الوحدة الخامسة","الوحدة السادسة",
+        "الوحدة السابعة","الوحدة الثامنة","الوحدة التاسعة","مختبر وتجارب","قوانين الفيزياء","مسائل الفيزياء",
+        "القياس والوحدات","الكميات القياسية والمتجهة","الحركة في خط مستقيم","الحركة بعجلة","القوى وقوانين نيوتن",
+        "الشغل والطاقة","القدرة","الزخم والدفع","الحركة الدائرية","الجاذبية","الحرارة ودرجة الحرارة",
+        "التمدد الحراري","الكهرباء الساكنة","التيار الكهربائي","الدوائر الكهربائية","المغناطيسية",
+        "الحث الكهرومغناطيسي","الموجات","الصوت","الضوء","العدسات والمرايا","الفيزياء الحديثة","الذرة والنواة",
+        "مراجعة اختبار","أخرى"
+    ],
+    "الكيمياء": [
+        "الوحدة الأولى","الوحدة الثانية","الوحدة الثالثة","الوحدة الرابعة","الوحدة الخامسة","الوحدة السادسة",
+        "الوحدة السابعة","الوحدة الثامنة","الوحدة التاسعة","مختبر وتجارب","المعادلات والتفاعلات","الحسابات الكيميائية",
+        "المادة وخواصها","الذرة والجزيء","الجدول الدوري","الروابط الكيميائية","المعادلات الكيميائية",
+        "المول والحسابات الكيميائية","المحاليل","الأحماض والقواعد","الأكسدة والاختزال","الاتزان الكيميائي",
+        "سرعة التفاعل","الطاقة في التفاعلات","الكيمياء العضوية","الهيدروكربونات","المجموعات الوظيفية",
+        "الكيمياء الحيوية","السلامة في المختبر","مراجعة اختبار","أخرى"
+    ],
+    "الأحياء": [
+        "الوحدة الأولى","الوحدة الثانية","الوحدة الثالثة","الوحدة الرابعة","الوحدة الخامسة","الوحدة السادسة",
+        "الوحدة السابعة","الوحدة الثامنة","الوحدة التاسعة","مختبر ورسومات","مصطلحات أحيائية","عمليات حيوية",
+        "الخلية","الأنسجة","الأجهزة الحيوية","التغذية والهضم","التنفس","الدوران","الإخراج","الجهاز العصبي",
+        "الغدد والهرمونات","التكاثر","الوراثة","DNA والجينات","التطور والتنوع الحيوي","النبات","البيئة",
+        "الميكروبات","المناعة","مراجعة اختبار","أخرى"
+    ],
+    "التاريخ": [
+        "الوحدة الأولى","الوحدة الثانية","الوحدة الثالثة","الوحدة الرابعة","الوحدة الخامسة","الوحدة السادسة",
+        "الوحدة السابعة","الوحدة الثامنة","الوحدة التاسعة","شخصيات تاريخية","خرائط زمنية","أسباب ونتائج",
+        "الحضارات القديمة","التاريخ الإسلامي","الدولة الأموية","الدولة العباسية","الأندلس","العصر الحديث",
+        "الثورات والحركات الوطنية","الحروب العالمية","تاريخ الوطن العربي","تاريخ محلي","شخصيات وأحداث",
+        "تسلسل زمني","مراجعة اختبار","أخرى"
+    ],
+    "الجغرافيا": [
+        "الوحدة الأولى","الوحدة الثانية","الوحدة الثالثة","الوحدة الرابعة","الوحدة الخامسة","الوحدة السادسة",
+        "الوحدة السابعة","الوحدة الثامنة","الوحدة التاسعة","خرائط","إحصاءات ورسوم","مصطلحات جغرافية",
+        "الجغرافيا الطبيعية","المناخ","التضاريس","المياه","السكان","العمران","الزراعة","الصناعة","التجارة",
+        "النقل","الموارد الطبيعية","البيئة","الخرائط","الموقع الجغرافي","مراجعة اختبار","أخرى"
+    ],
+    "الدراسات الاجتماعية والمواطنة": [
+        "المواطنة","المجتمع","الدستور والقانون","الحقوق والواجبات","المؤسسات","القيم والسلوك",
+        "القضايا المعاصرة","البحث المجتمعي","مراجعة اختبار","أخرى"
+    ],
+    "علوم الأرض والبيئة": [
+        "الوحدة الأولى","الوحدة الثانية","الوحدة الثالثة","الوحدة الرابعة","الوحدة الخامسة","الوحدة السادسة",
+        "الوحدة السابعة","الوحدة الثامنة","الوحدة التاسعة","تجارب وملاحظات","الصخور والمعادن","القشرة الأرضية",
+        "البراكين","الزلازل","الصفائح التكتونية","الطقس والمناخ","المياه الجوفية","الموارد الطبيعية",
+        "التلوث","التغير المناخي","النظم البيئية","حماية البيئة","مراجعة اختبار","أخرى"
+    ],
+    "الحاسوب وتقنية المعلومات": [
+        "أساسيات الحاسوب","نظم التشغيل","معالجة النصوص","العروض التقديمية","الجداول الإلكترونية","الإنترنت",
+        "السلامة الرقمية","مبادئ البرمجة","مشروع حاسوبي","مراجعة اختبار","أخرى"
+    ],
+    "المهارات الدراسية وتنظيم المذاكرة": [
+        "تنظيم جدول","مراجعة يومية","مراجعة أسبوعية","تلخيص","خرائط ذهنية","بطاقات مراجعة","اختبار ذاتي",
+        "إدارة وقت","مراجعة أخطاء","خطة اختبار","أخرى"
+    ],
+    "البحث والقراءة الإثرائية": [
+        "بحث قصير","قراءة خارجية","مصادر متعددة","تلخيص مصدر","مقارنة مصادر","عرض معلومات","مقال علمي مبسط",
+        "مشروع إثرائي","موضوع من اختيار الطالب","موضوع علمي","موضوع ديني","موضوع لغوي","موضوع تاريخي",
+        "موضوع جغرافي","موضوع بيئي","موضوع صحي","موضوع تقني","موضوع اجتماعي","أخرى"
+    ],
+    "الاختبارات والمراجعة النهائية": [
+        "مراجعة درس","مراجعة وحدة","مراجعة مادة","اختبار ذاتي","حل نماذج","مراجعة أخطاء","خطة اختبار",
+        "حفظ قوانين","مراجعة ليلة الاختبار","أسئلة السنوات السابقة","أخرى"
+    ],
+    "أخرى": ["موضوع يحدده الطالب","وحدة من المقرر","درس من الكتاب","مراجعة خاصة","أخرى"]
+};
+
+const SECONDARY_SCHOOL_ACTIVITIES_V55138 = {
+    "القرآن الكريم": [
+        "حفظ مقطع جديد","تكرار الآيات للحفظ","تسميع ذاتي","تسميع لشخص آخر","مراجعة محفوظ سابق","تثبيت الحفظ",
+        "ربط الآيات بالمعنى","كتابة الأخطاء بعد التسميع","مراجعة المتشابهات","تلاوة بتأنٍ","الاستماع لقارئ ثم التلاوة",
+        "قراءة تفسير مبسط","تلخيص معاني الآيات","استخراج الفوائد والهدايات","تطبيق حكم تجويدي على الآيات",
+        "تسجيل التلاوة ومراجعتها","اختبار حفظ قصير","مراجعة قبل اختبار القرآن","أخرى"
+    ],
+    "التربية الإسلامية": [
+        "دراسة درس","تلخيص الدرس","حفظ حديث أو دليل","شرح حديث","استخراج فوائد","حل أسئلة الكتاب",
+        "كتابة جدول أحكام","مقارنة بين أحكام","تلخيص قصة من السيرة","ترتيب أحداث السيرة","استخراج الدروس والعبر",
+        "ربط الدرس بالحياة اليومية","اختبار ذاتي","مراجعة أخطاء","مراجعة قبل اختبار","أخرى"
+    ],
+    "اللغة العربية": [
+        "دراسة قاعدة","إعراب جمل","تحليل أمثلة","حل تدريبات","تصحيح أخطاء نحوية","تلخيص قاعدة في جدول",
+        "تحليل كلمة صرفياً","استخراج مشتقات","استخراج صورة بلاغية","تحليل أثر بلاغي","قراءة نص",
+        "استخراج الفكرة العامة","تلخيص نص","كتابة فقرة","كتابة موضوع تعبير","مراجعة إملاء","حفظ أبيات",
+        "تحليل أبيات","اختبار ذاتي","مراجعة قبل اختبار","أخرى"
+    ],
+    "اللغة الإنجليزية": [
+        "قراءة نص","استخراج الفكرة العامة","حل أسئلة فهم","تحديد كلمات جديدة","تلخيص النص بالإنجليزية",
+        "دراسة قاعدة Grammar","حل تمارين Grammar","تصحيح جمل","كتابة جمل","كتابة فقرة","تحسين فقرة",
+        "كتابة موضوع قصير","حفظ كلمات","استخدام الكلمات في جمل","اختبار إملاء كلمات","استماع لمقطع",
+        "تدوين ملاحظات","تكرار الجمل","تدريب نطق","إجابة أسئلة شفهية","ترجمة جمل","ترجمة فقرة قصيرة",
+        "مراجعة أخطاء","اختبار ذاتي","أخرى"
+    ],
+    "الرياضيات": [
+        "دراسة قاعدة","فهم مثال محلول","حل تمارين تدريجية","حل واجب","حل مسائل صعبة","تلخيص خطوات الحل",
+        "مراجعة قوانين","إعادة حل أخطاء","تصنيف أنواع المسائل","رسم شكل هندسي","كتابة برهان","رسم دالة",
+        "تحليل مجال ومدى","حل اختبار تدريبي","مراجعة قبل اختبار","أخرى"
+    ],
+    "الفيزياء": [
+        "دراسة وحدة","تلخيص قانون","حل مسائل","تحليل تجربة","رسم مخطط فيزيائي","تحويل وحدات",
+        "استخراج المعطيات والمطلوب","تطبيق قانون","مراجعة أخطاء الحل","كتابة تقرير تجربة",
+        "ربط المفهوم بتطبيق حياتي","حل اختبار ذاتي","مراجعة قبل اختبار","أخرى"
+    ],
+    "الكيمياء": [
+        "دراسة وحدة","تلخيص مفاهيم","حفظ قوانين أو تعاريف","حل مسائل كيميائية","موازنة معادلات",
+        "تحليل تفاعل","مقارنة خصائص","رسم جدول مقارنة","تحضير تجربة","كتابة تقرير مختبر",
+        "مراجعة أخطاء","اختبار ذاتي","مراجعة قبل اختبار","أخرى"
+    ],
+    "الأحياء": [
+        "دراسة وحدة","تلخيص درس","رسم مخطط حيوي","تسمية أجزاء رسم","حفظ مصطلحات","مقارنة عمليات حيوية",
+        "شرح دورة حيوية","حل أسئلة","إعداد خريطة ذهنية","كتابة تقرير مختبر","اختبار ذاتي",
+        "مراجعة قبل اختبار","أخرى"
+    ],
+    "التاريخ": [
+        "دراسة درس","تلخيص حدث","ترتيب أحداث زمنياً","عمل خط زمني","مقارنة بين عصرين","استخراج أسباب ونتائج",
+        "حفظ تواريخ مهمة","تحليل شخصية تاريخية","حل أسئلة","مراجعة قبل اختبار","أخرى"
+    ],
+    "الجغرافيا": [
+        "دراسة درس","تلخيص مفاهيم","رسم خريطة","تحليل خريطة","قراءة جدول أو رسم بياني","مقارنة مناطق",
+        "حفظ مصطلحات","حل أسئلة","بحث قصير","مراجعة قبل اختبار","أخرى"
+    ],
+    "الدراسات الاجتماعية والمواطنة": [
+        "دراسة درس","تلخيص مفهوم","تحليل موقف","ربط الدرس بالواقع","كتابة رأي","إعداد بحث قصير",
+        "مناقشة قضية","حل أسئلة","مراجعة قبل اختبار","أخرى"
+    ],
+    "علوم الأرض والبيئة": [
+        "دراسة وحدة","تلخيص مفاهيم","رسم دورة أو طبقات","تحليل ظاهرة طبيعية","قراءة خريطة أو رسم",
+        "بحث قصير","حل أسئلة","مراجعة قبل اختبار","أخرى"
+    ],
+    "الحاسوب وتقنية المعلومات": [
+        "دراسة درس","تطبيق عملي","إنشاء ملف","تنظيم مجلدات","إعداد عرض","إنشاء جدول","حل تمرين حاسوبي",
+        "مراجعة خطوات","مشروع صغير","اختبار ذاتي","مراجعة قبل اختبار","أخرى"
+    ],
+    "المهارات الدراسية وتنظيم المذاكرة": [
+        "ترتيب جدول مذاكرة","مراجعة درس سابق","تلخيص درس","إنشاء خريطة ذهنية","إنشاء بطاقات","حل اختبار ذاتي",
+        "تحديد نقاط الضعف","مراجعة أخطاء","إعداد خطة اختبار","تقييم التقدم الأسبوعي","أخرى"
+    ],
+    "البحث والقراءة الإثرائية": [
+        "البحث عن مصادر","قراءة مصدر","تلخيص مصدر","مقارنة مصدرين","كتابة تقرير قصير","إعداد عرض",
+        "استخراج أفكار جديدة","ربط الموضوع بالمقرر","توثيق المصادر","أخرى"
+    ],
+    "الاختبارات والمراجعة النهائية": [
+        "مراجعة مركزة","حل نموذج","تصحيح نموذج","تحليل أخطاء","إعادة حل أسئلة خاطئة","حفظ قوانين",
+        "مراجعة ملخص","اختبار زمني","تجهيز خطة آخر أسبوع","تحديد نقاط الضعف","أخرى"
+    ],
+    "أخرى": ["دراسة درس","حل تمارين","تلخيص","مراجعة","اختبار ذاتي","أخرى"]
+};
+
+function secondarySchoolActivitiesForV55138(subject, detail) {
+    const text = `${subject || ""} ${detail || ""}`;
+    if (/اختبار|مراجعة اختبار|مراجعة نهائية|حل نماذج|أسئلة السنوات السابقة/.test(text)) {
+        return ["مراجعة مركزة","حل نموذج","تصحيح نموذج","تحليل أخطاء","إعادة حل أسئلة خاطئة","اختبار زمني","مراجعة قبل اختبار","أخرى"];
+    }
+    if (/مختبر|تجارب|تجربة|رسومات|تجارب وملاحظات/.test(text)) {
+        return ["تحليل تجربة","كتابة تقرير تجربة","كتابة تقرير مختبر","رسم مخطط","تسمية أجزاء رسم","مراجعة خطوات","أخرى"];
+    }
+    if (/Reading|Grammar|Writing|Vocabulary|Listening|Speaking|Pronunciation|Translation/.test(text)) {
+        return SECONDARY_SCHOOL_ACTIVITIES_V55138["اللغة الإنجليزية"];
+    }
+    return SECONDARY_SCHOOL_ACTIVITIES_V55138[subject] || SECONDARY_SCHOOL_ACTIVITIES_V55138["أخرى"];
+}
+
+function secondarySchoolSuggestionV55138(subject, detail, activity) {
+    const text = `${subject || ""} ${detail || ""} ${activity || ""}`;
+    if (/اختبار|نموذج|مراجعة نهائية|مراجعة قبل اختبار|حل اختبار|اختبار زمني/.test(text)) {
+        return { difficulty: 5, priority: 5, minutes: 120, repeat: "يوميًا", notes: "خطة مقترحة: مراجعة مركزة، حل أسئلة، تحليل الأخطاء، ثم إعادة حل النقاط الضعيفة." };
+    }
+    if (/حل مسائل صعبة|مسائل صعبة|تقرير|بحث|مشروع|عرض|تجربة|مختبر|تحليل تجربة/.test(text)) {
+        return { difficulty: 4, priority: 5, minutes: 90, repeat: "أسبوعيًا", notes: "خطة مقترحة: حدّد المطلوب، نفّذ المهمة خطوة خطوة، ثم راجع الأخطاء أو الملاحظات قبل الحفظ النهائي." };
+    }
+    if (/حفظ مقطع|حفظ كلمات|حفظ قوانين|حفظ مصطلحات|تكرار الآيات|مراجعة محفوظ|تسميع|مفردات|إملاء/.test(text)) {
+        return { difficulty: 3, priority: 5, minutes: 35, repeat: "يوميًا", notes: "خطة مقترحة: استخدم التكرار القصير والمراجعة المتباعدة، وسجّل الأخطاء التي تحتاج إلى تثبيت." };
+    }
+    if (/حل تمارين|حل واجب|حل أسئلة|تطبيق قانون|إعراب|Grammar|تدريبات/.test(text)) {
+        return { difficulty: 3, priority: 4, minutes: 60, repeat: "أيام محددة", notes: "خطة مقترحة: ابدأ بمثال محلول، ثم تمارين سهلة، ثم متوسطة، ثم راجع الأخطاء." };
+    }
+    if (/قراءة|تلخيص|دراسة درس|دراسة وحدة|دراسة قاعدة|فهم مثال|تلخيص درس|تلخيص مفاهيم/.test(text)) {
+        return { difficulty: 3, priority: 4, minutes: 50, repeat: "أسبوعيًا", notes: "خطة مقترحة: اكتب ملخصاً قصيراً في نهاية المهمة وحدد ثلاث نقاط تحتاج إلى مراجعة لاحقة." };
+    }
+    if (/ترتيب جدول|تنظيم|بطاقات|خريطة ذهنية|مراجعة يومية|مراجعة درس سابق/.test(text)) {
+        return { difficulty: 2, priority: 4, minutes: 30, repeat: "يوميًا", notes: "خطة مقترحة: اجعل المهمة قصيرة ومنتظمة، وراجع الإنجاز في نهاية اليوم." };
+    }
+    return { difficulty: 3, priority: 4, minutes: 45, repeat: "أسبوعيًا", notes: "خطة مقترحة: نفّذ مهمة واحدة واضحة، ثم اكتب ملاحظة قصيرة عن مستوى الفهم أو الأخطاء." };
+}
+
+if (typeof SMART_TASK_DATA !== "undefined") {
+    SMART_TASK_DATA["المرحلة الثانوية"] = {
+        icon: "ث",
+        main: SECONDARY_SCHOOL_GRADES_V55138,
+        sub: {
+            "الصف الأول الثانوي": SECONDARY_SCHOOL_SUBJECTS_V55138,
+            "الصف الثاني الثانوي": SECONDARY_SCHOOL_SUBJECTS_V55138,
+            "الصف الثالث الثانوي": SECONDARY_SCHOOL_SUBJECTS_V55138,
+            "مراجعة عامة للمرحلة الثانوية": SECONDARY_SCHOOL_SUBJECTS_V55138,
+            "أخرى": SECONDARY_SCHOOL_SUBJECTS_V55138
+        },
+        detail: SECONDARY_SCHOOL_DETAILS_V55138,
+        training: ["دراسة درس","حل تمارين","مراجعة","اختبار ذاتي","أخرى"]
+    };
+}
+
+function updateSmartTaskFields() {
+    const categoryInput = document.getElementById("categorySelect");
+    const topicSelect = document.getElementById("topicSelect");
+    const skillSelect = document.getElementById("skillSelect");
+    const detailSelect = document.getElementById("detailedTopicSelect");
+    const trainingSelect = document.getElementById("trainingTypeSelect");
+
+    if (!categoryInput || !topicSelect || !skillSelect || !detailSelect || !trainingSelect) return;
+
+    const type = ({"Daily Life":"الحياة اليومية", "Secondary School": "المرحلة الثانوية"}[categoryInput.value] || categoryInput.value || "عام");
+    if (categoryInput.value === "Secondary School") categoryInput.value = "المرحلة الثانوية";
+    const isSecondarySchool = type === "المرحلة الثانوية";
+    const config = getSmartConfig(type);
+
+    function setLabelV55138(id, text) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+    }
+
+    function fillV55138(select, values, selected) {
+        const items = [...new Set((values && values.length ? values : ["أخرى"]).filter(Boolean))];
+        if (!items.includes("أخرى")) items.push("أخرى");
+        fillSmartSelect(select, items, selectedOrFirst(items, selected));
+    }
+
+    function toggleOtherBoxes() {
+        const customCategoryBox = document.getElementById("customCategoryBox");
+        const customTopicBox = document.getElementById("customTopicBox");
+        const customSkillBox = document.getElementById("customSkillBox");
+        const customDetailedTopicBox = document.getElementById("customDetailedTopicBox");
+        const customTrainingTypeBox = document.getElementById("customTrainingTypeBox");
+
+        if (customCategoryBox) customCategoryBox.style.display = type === "أخرى" ? "block" : "none";
+        if (customTopicBox) customTopicBox.style.display = topicSelect.value === "أخرى" ? "block" : "none";
+        if (customSkillBox) customSkillBox.style.display = skillSelect.value === "أخرى" ? "block" : "none";
+        if (customDetailedTopicBox) customDetailedTopicBox.style.display = detailSelect.value === "أخرى" ? "block" : "none";
+        if (customTrainingTypeBox) customTrainingTypeBox.style.display = trainingSelect.value === "أخرى" ? "block" : "none";
+    }
+
+    function applySecondarySuggestions() {
+        const suggestion = secondarySchoolSuggestionV55138(skillSelect.value, detailSelect.value, trainingSelect.value);
+        const difficulty = document.querySelector('input[name="difficulty"]');
+        const priority = document.querySelector('input[name="priority"]');
+        const minutes = document.querySelector('input[name="estimated_minutes"]');
+        const repeat = document.getElementById("repeatTypeSelect");
+        const notes = document.getElementById("notesInput");
+        const source = document.getElementById("sourceInput");
+
+        if (difficulty) difficulty.value = suggestion.difficulty;
+        if (priority) priority.value = suggestion.priority;
+        if (minutes) minutes.value = suggestion.minutes;
+        if (repeat) {
+            const available = [...repeat.options].map(option => option.value);
+            if (available.includes(suggestion.repeat)) repeat.value = suggestion.repeat;
+            if (typeof updateRepeatDaysVisibility === "function") updateRepeatDaysVisibility();
+        }
+        if (notes && (!notes.value || notes.value.startsWith("خطة مقترحة:"))) notes.value = suggestion.notes;
+        if (source) source.placeholder = "الكتاب المدرسي، دفتر الطالب، ملخص المعلم، شرائح الدرس، فيديو تعليمي، موقع تعليمي، ملف PDF، مصدر إثرائي، أطلس أو خريطة، نموذج اختبار، أسئلة سابقة، مصحف، كتاب تفسير، تسجيل صوتي، أو أخرى";
+    }
+
+    if (isSecondarySchool) {
+        setLabelV55138("topicLabel", "الصف الدراسي أو السنة الدراسية");
+        setLabelV55138("skillLabel", "المادة الدراسية");
+        setLabelV55138("detailLabel", "الوحدة أو الدرس أو المقرر حسب المادة");
+        setLabelV55138("trainingLabel", "ماذا سيفعل الطالب فعلياً؟");
+
+        fillV55138(topicSelect, SECONDARY_SCHOOL_GRADES_V55138, topicSelect.dataset.current || topicSelect.value);
+        fillV55138(skillSelect, SECONDARY_SCHOOL_SUBJECTS_V55138, skillSelect.dataset.current || skillSelect.value);
+
+        function refreshSecondaryDetails() {
+            const details = SECONDARY_SCHOOL_DETAILS_V55138[skillSelect.value] || SECONDARY_SCHOOL_DETAILS_V55138["أخرى"];
+            fillV55138(detailSelect, details, detailSelect.dataset.current || detailSelect.value);
+            refreshSecondaryActivities();
+        }
+
+        function refreshSecondaryActivities() {
+            const activities = secondarySchoolActivitiesForV55138(skillSelect.value, detailSelect.value);
+            fillV55138(trainingSelect, activities, trainingSelect.dataset.current || trainingSelect.value);
+            applySecondarySuggestions();
+            toggleOtherBoxes();
+        }
+
+        topicSelect.onchange = () => {
+            topicSelect.dataset.current = "";
+            skillSelect.dataset.current = "";
+            detailSelect.dataset.current = "";
+            trainingSelect.dataset.current = "";
+            fillV55138(skillSelect, SECONDARY_SCHOOL_SUBJECTS_V55138, "");
+            refreshSecondaryDetails();
+        };
+
+        skillSelect.onchange = () => {
+            skillSelect.dataset.current = "";
+            detailSelect.dataset.current = "";
+            trainingSelect.dataset.current = "";
+            refreshSecondaryDetails();
+        };
+
+        detailSelect.onchange = () => {
+            detailSelect.dataset.current = "";
+            trainingSelect.dataset.current = "";
+            refreshSecondaryActivities();
+        };
+
+        trainingSelect.onchange = () => {
+            trainingSelect.dataset.current = "";
+            applySecondarySuggestions();
+            toggleOtherBoxes();
+        };
+
+        refreshSecondaryDetails();
+        toggleOtherBoxes();
+        return;
+    }
+
+    setLabelV55138("topicLabel", "الفئة الرئيسية");
+    setLabelV55138("skillLabel", "الفئة الفرعية");
+    setLabelV55138("detailLabel", "الموضوع التفصيلي");
+    setLabelV55138("trainingLabel", "نوع النشاط");
+
+    const currentTopic = topicSelect.dataset.current || "";
+    const topicValues = config.main || ["أخرى"];
+    fillSmartSelect(topicSelect, topicValues, selectedOrFirst(topicValues, currentTopic));
+
+    function refreshSubFields() {
+        const selectedTopic = topicSelect.value;
+        const subValues = (config.sub && (config.sub[selectedTopic] || config.sub["أخرى"])) || ["أخرى"];
+        const currentSkill = skillSelect.dataset.current || "";
+        fillSmartSelect(skillSelect, subValues, selectedOrFirst(subValues, currentSkill));
+        refreshDetails();
+        toggleOtherBoxes();
+    }
+
+    function refreshDetails() {
+        const selectedType = categoryInput.value || "عام";
+        const selectedTopic = topicSelect.value;
+        const selectedSkill = skillSelect.value;
+
+        let detailValues = null;
+        let trainingValues = null;
+
+        if (["IELTS","TOEFL","Duolingo English Test","HSK","CSCA"].includes(selectedTopic)) {
+            detailValues = getOfficialExamDetails(selectedTopic, selectedSkill);
+            trainingValues = getOfficialExamTraining(selectedTopic, selectedSkill);
+        }
+
+        if (!detailValues && selectedType === "Exams & Certificates" && ["IELTS","TOEFL","Duolingo English Test","HSK","CSCA"].includes(selectedTopic)) {
+            detailValues = getOfficialExamDetails(selectedTopic, selectedSkill);
+            trainingValues = getOfficialExamTraining(selectedTopic, selectedSkill);
+        }
+
+        if (!detailValues) {
+            detailValues = (config.detail && (config.detail[selectedSkill] || config.detail[selectedTopic] || config.detail["أخرى"])) || ["موضوع عام", "أخرى"];
+        }
+
+        if (!trainingValues) {
+            trainingValues = config.training || ["Study", "Practice", "Review", "أخرى"];
+        }
+
+        const currentDetail = detailSelect.dataset.current || "";
+        fillSmartSelect(detailSelect, detailValues, selectedOrFirst(detailValues, currentDetail));
+
+        const currentTraining = trainingSelect.dataset.current || "";
+        fillSmartSelect(trainingSelect, trainingValues, selectedOrFirst(trainingValues, currentTraining));
+
+        updateCSCAExtraFields();
+        toggleOtherBoxes();
+    }
+
+    topicSelect.onchange = () => {
+        topicSelect.dataset.current = "";
+        skillSelect.dataset.current = "";
+        detailSelect.dataset.current = "";
+        trainingSelect.dataset.current = "";
+        refreshSubFields();
+        updateCSCAExtraFields();
+    };
+
+    skillSelect.onchange = () => {
+        skillSelect.dataset.current = "";
+        detailSelect.dataset.current = "";
+        refreshDetails();
+    };
+
+    detailSelect.onchange = () => {
+        updateCSCAExtraFields();
+        toggleOtherBoxes();
+    };
+
+    trainingSelect.onchange = () => {
+        updateCSCAExtraFields();
+        toggleOtherBoxes();
+    };
+
+    refreshSubFields();
+}
