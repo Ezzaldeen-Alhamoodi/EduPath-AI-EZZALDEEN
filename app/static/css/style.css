@@ -8459,3 +8459,101 @@ small.hint {
         background: transparent !important;
     }
 }
+
+
+/* EduPath AI v5.5.135 Corrective: match all requested page Heroes to Dashboard Hero exactly */
+:root {
+    --edupath-main-hero-bg-v55135: linear-gradient(135deg, #1d4ed8 0%, #2563eb 45%, #38bdf8 100%);
+    --edupath-main-hero-border-v55135: 1px solid rgba(255, 255, 255, .18);
+    --edupath-main-hero-shadow-v55135: 0 24px 55px rgba(37, 99, 235, .25);
+}
+
+.goals-hero-v41,
+.tasks-hero,
+.resources-hero-v4616,
+.coach-hero {
+    background: var(--edupath-main-hero-bg-v55135) !important;
+    color: #fff !important;
+    border: var(--edupath-main-hero-border-v55135) !important;
+    box-shadow: var(--edupath-main-hero-shadow-v55135) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.goals-hero-v41::before,
+.tasks-hero::before,
+.resources-hero-v4616::before,
+.coach-hero::before {
+    content: "";
+    position: absolute;
+    inset: -80px auto auto -80px;
+    width: 240px;
+    height: 240px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.16);
+    filter: blur(2px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.goals-hero-v41::after,
+.tasks-hero::after,
+.resources-hero-v4616::after,
+.coach-hero::after {
+    content: "";
+    position: absolute;
+    right: 35%;
+    bottom: -120px;
+    width: 280px;
+    height: 280px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.10);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.goals-hero-v41 > *,
+.tasks-hero > *,
+.resources-hero-v4616 > *,
+.coach-hero > * {
+    position: relative;
+    z-index: 1;
+}
+
+.goals-hero-v41 h1,
+.goals-hero-v41 h2,
+.goals-hero-v41 h3,
+.goals-hero-v41 p,
+.goals-hero-v41 .tag,
+.tasks-hero h1,
+.tasks-hero h2,
+.tasks-hero h3,
+.tasks-hero p,
+.tasks-hero .tag,
+.resources-hero-v4616 h1,
+.resources-hero-v4616 h2,
+.resources-hero-v4616 h3,
+.resources-hero-v4616 p,
+.resources-hero-v4616 .tag,
+.coach-hero h1,
+.coach-hero h2,
+.coach-hero h3,
+.coach-hero p,
+.coach-hero .tag {
+    color: #fff !important;
+}
+
+.goals-hero-v41 .tag,
+.tasks-hero .tag,
+.resources-hero-v4616 .tag,
+.coach-hero .tag {
+    background: rgba(255,255,255,.16) !important;
+    border: 1px solid rgba(255,255,255,.22) !important;
+}
+
+body.dark-mode .goals-hero-v41,
+body.dark-mode .tasks-hero,
+body.dark-mode .resources-hero-v4616,
+body.dark-mode .coach-hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #0ea5e9 100%) !important;
+}
