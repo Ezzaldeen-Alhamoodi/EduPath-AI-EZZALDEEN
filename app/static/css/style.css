@@ -8557,3 +8557,61 @@ body.dark-mode .resources-hero-v4616,
 body.dark-mode .coach-hero {
     background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #0ea5e9 100%) !important;
 }
+
+
+/* EduPath AI v5.5.143 Desktop-only layout fix for AI Coach pages and Profile
+   Scope: large screens only. No mobile/tablet, colors, fonts, text, fields, or logic changes. */
+@media (min-width: 1024px) {
+    body:has(.english-hero-v412) .grid-2,
+    body:has(.coach-hero) .grid-2,
+    body:has(.profile-hero-ar-v5593) .profile-grid-ar-v5593 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+    }
+
+    body:has(.english-hero-v412) .grid-2 > .card,
+    body:has(.coach-hero) .grid-2 > .card,
+    body:has(.profile-hero-ar-v5593) .profile-grid-ar-v5593 > .card {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+    }
+
+    /* Pages under AI Coach that do not have a hero but contain the requested trainer sections. */
+    body:has(.card h2) .grid-2:has(textarea[name="problem"]),
+    body:has(.card h2) .grid-2:has(input[name="scholarship"]),
+    body:has(.card h2) .grid-2:has(textarea[name="text"]) {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+    }
+
+    body:has(.card h2) .grid-2:has(textarea[name="problem"]) > .card,
+    body:has(.card h2) .grid-2:has(input[name="scholarship"]) > .card,
+    body:has(.card h2) .grid-2:has(textarea[name="text"]) > .card {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+    }
+
+    body:has(.english-hero-v412),
+    body:has(.coach-hero),
+    body:has(.profile-hero-ar-v5593),
+    body:has(textarea[name="problem"]),
+    body:has(input[name="scholarship"]) {
+        overflow-x: hidden !important;
+    }
+}
