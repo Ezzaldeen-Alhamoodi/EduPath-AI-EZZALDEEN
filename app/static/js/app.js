@@ -38221,3 +38221,71 @@ applyDeepLanguageTaskConfigV531();
     }
 })();
 // === End EduPath AI v5.5.130: Goals - University Stage Comprehensive Adaptive Bank ===
+
+
+
+/* EduPath AI v5.5.136 Secondary school task labels only */
+function edupathApplySecondarySchoolTaskLabelsV55136() {
+    const categoryInput = document.getElementById("categorySelect");
+    const topicSelect = document.getElementById("topicSelect");
+
+    const type = (categoryInput && categoryInput.value ? categoryInput.value : "").trim();
+    const isSecondarySchool = type === "المرحلة الثانوية" || type === "Secondary School";
+
+    const setLabel = (id, text) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+    };
+
+    if (isSecondarySchool) {
+        setLabel("topicLabel", "الصف الدراسي أو السنة الدراسية");
+        setLabel("skillLabel", "المادة الدراسية");
+        setLabel("detailLabel", "الوحدة أو الدرس أو المقرر حسب المادة");
+        setLabel("trainingLabel", "ماذا سيفعل الطالب فعلياً؟");
+        return;
+    }
+
+    /*
+      لا نغيّر أي نوع آخر. عند الخروج من المرحلة الثانوية تعود أسماء الحقول
+      العامة، مع الحفاظ على منطق CSCA الخاص الموجود سابقاً إذا كان نشطاً.
+    */
+    const isCSCA = topicSelect && topicSelect.value === "CSCA";
+    if (isCSCA) {
+        setLabel("topicLabel", "Exam");
+        setLabel("skillLabel", "Exam Language");
+        setLabel("detailLabel", "CSCA Subject");
+        setLabel("trainingLabel", "CSCA Main Topic");
+        return;
+    }
+
+    setLabel("topicLabel", "الفئة الرئيسية");
+    setLabel("skillLabel", "الفئة الفرعية");
+    setLabel("detailLabel", "الموضوع التفصيلي");
+    setLabel("trainingLabel", "نوع النشاط");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const applySecondaryLabels = () => setTimeout(edupathApplySecondarySchoolTaskLabelsV55136, 0);
+
+    applySecondaryLabels();
+    setTimeout(edupathApplySecondarySchoolTaskLabelsV55136, 120);
+    setTimeout(edupathApplySecondarySchoolTaskLabelsV55136, 380);
+
+    document.addEventListener("click", (event) => {
+        if (event.target.closest(".task-type-card")) {
+            setTimeout(edupathApplySecondarySchoolTaskLabelsV55136, 30);
+            setTimeout(edupathApplySecondarySchoolTaskLabelsV55136, 120);
+            setTimeout(edupathApplySecondarySchoolTaskLabelsV55136, 260);
+        }
+    });
+
+    ["categorySelect", "topicSelect", "skillSelect", "detailedTopicSelect", "trainingTypeSelect"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener("change", () => {
+                setTimeout(edupathApplySecondarySchoolTaskLabelsV55136, 20);
+                setTimeout(edupathApplySecondarySchoolTaskLabelsV55136, 140);
+            });
+        }
+    });
+});
