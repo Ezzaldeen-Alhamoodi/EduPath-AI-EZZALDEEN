@@ -3670,22 +3670,50 @@ def create_app():
     @app.route("/")
     @login_required
     def index():
-        today_value = str(date.today())
+        # EduPath AI v5.5.133
+        # حساب نسبة Hero يعتمد على اليوم الحالي بتوقيت اليمن/مكة فقط.
+        # Yemen and Makkah use UTC+03:00, so the dashboard day is recalculated after midnight there.
+        makkah_now = datetime.utcnow() + timedelta(hours=3)
+        today_date = makkah_now.date()
+        today_value = today_date.isoformat()
+        today_weekday = str(today_date.weekday())
+        today_day_of_month = today_date.day
+
+        def _parse_task_date(value):
+            text = (value or "").strip()
+            if not text:
+                return None
+            try:
+                return datetime.strptime(text[:10], "%Y-%m-%d").date()
+            except ValueError:
+                return None
+
+        def _is_completed_task(task):
+            status = (task.status or "").strip().lower()
+            return status in {
+                "done",
+                "completed",
+                "complete",
+                "مكتملة",
+                "منجزة",
+                "تم الإنجاز",
+                "تم إنجازها",
+            }
 
         def task_scheduled_for_today(task):
-            """Return True when the task belongs to today's plan without changing stored task data."""
+            """Return True when the task belongs to today's plan in Yemen/Makkah time without changing stored data."""
             try:
-                start = (task.start_date or "").strip()
-                due = (task.due_date or "").strip()
+                start_date_value = _parse_task_date(task.start_date)
+                due_date_value = _parse_task_date(task.due_date)
                 repeat = (task.repeat_type or "").strip()
+                repeat_lower = repeat.lower()
                 repeat_days = (task.repeat_days or "").strip()
 
-                if start and start > today_value:
+                if start_date_value and start_date_value > today_date:
                     return False
-                if due and due < today_value:
+                if due_date_value and due_date_value < today_date:
                     return False
 
-                repeat_lower = repeat.lower()
                 one_time_values = {
                     "مرة واحدة / بدون تكرار",
                     "مرة واحدة",
@@ -3693,41 +3721,41 @@ def create_app():
                     "once",
                     "one_time",
                     "none",
+                    "no repeat / once",
+                    "no repeat",
                 }
 
                 if repeat in one_time_values or repeat_lower in one_time_values:
-                    return (start == today_value) or (due == today_value) or (not start and not due)
+                    return (start_date_value == today_date) or (due_date_value == today_date)
 
                 if repeat in {"يوميًا", "يومي", "daily"} or repeat_lower == "daily":
-                    return True
+                    return (not start_date_value or start_date_value <= today_date) and (not due_date_value or due_date_value >= today_date)
 
                 if repeat in {"أيام محددة", "selected_days"} or repeat_lower == "selected_days":
-                    today_weekday = str(date.today().weekday())
                     selected_days = {day.strip() for day in repeat_days.split(",") if day.strip()}
                     return today_weekday in selected_days
 
                 if repeat in {"أسبوعيًا", "أسبوعي", "weekly"} or repeat_lower == "weekly":
-                    if start:
-                        try:
-                            return datetime.strptime(start, "%Y-%m-%d").date().weekday() == date.today().weekday()
-                        except ValueError:
-                            return True
-                    return True
+                    if start_date_value:
+                        return start_date_value.weekday() == today_date.weekday()
+                    if due_date_value:
+                        return due_date_value.weekday() == today_date.weekday()
+                    return False
 
                 if repeat in {"شهريًا", "شهري", "monthly"} or repeat_lower == "monthly":
-                    if start:
-                        try:
-                            return datetime.strptime(start, "%Y-%m-%d").date().day == date.today().day
-                        except ValueError:
-                            return True
-                    return True
+                    if start_date_value:
+                        return start_date_value.day == today_day_of_month
+                    if due_date_value:
+                        return due_date_value.day == today_day_of_month
+                    return False
 
                 if repeat in {"أخرى", "custom"} or repeat_lower == "custom":
-                    return (not start or start <= today_value) and (not due or due >= today_value)
+                    return (not start_date_value or start_date_value <= today_date) and (not due_date_value or due_date_value >= today_date)
 
-                return (not start or start <= today_value) and (not due or due >= today_value)
+                # المهام غير المرتبطة بتاريخ اليوم لا تدخل في نسبة Hero اليومية.
+                return (start_date_value == today_date) or (due_date_value == today_date)
             except Exception:
-                logger.exception("Today task progress calculation failed for task %s", getattr(task, "id", None))
+                logger.exception("تعذر حساب انتماء المهمة إلى مهام اليوم في الصفحة الرئيسية: %s", getattr(task, "id", None))
                 return False
 
         all_goals = Goal.query.filter_by(user_id=current_user.id).order_by(Goal.id.desc()).all()
@@ -3755,13 +3783,17 @@ def create_app():
         total_goals = Goal.query.filter_by(user_id=current_user.id).count()
 
         today_tasks = [task for task in StudyTask.query.filter_by(user_id=current_user.id).all() if task_scheduled_for_today(task)]
-        today_completed_tasks = [task for task in today_tasks if task.status == "done"]
-        if today_tasks and len(today_completed_tasks) == len(today_tasks):
-            progress = 100
-        elif today_tasks:
-            progress = round((len(today_completed_tasks) / len(today_tasks)) * 100)
-        else:
+        total_today_tasks = len(today_tasks)
+        completed_today_tasks = len([task for task in today_tasks if _is_completed_task(task)])
+
+        if total_today_tasks == 0:
             progress = 0
+        elif completed_today_tasks == total_today_tasks:
+            progress = 100
+        else:
+            progress = round((completed_today_tasks / total_today_tasks) * 100)
+
+        progress = max(0, min(100, progress))
 
         weak_skills = detect_weaknesses()
         admin_messages = []
