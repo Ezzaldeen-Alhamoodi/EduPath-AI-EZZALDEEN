@@ -17,6 +17,12 @@ from openai import OpenAI
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 from flask_mail import Mail, Message
 from markupsafe import Markup, escape
+try:
+    from pywebpush import webpush, WebPushException
+except Exception:
+    webpush = None
+    class WebPushException(Exception):
+        pass
 from .smart_goal_task_linking import precise_context_score, calculate_progress_added_precise
 
 load_dotenv(override=True)
@@ -91,6 +97,32 @@ class SubscriptionActivationAttempt(db.Model):
 
     user = db.relationship("User", backref="subscription_activation_attempts")
 
+
+
+
+class PushSubscription(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, index=True)
+    endpoint = db.Column(db.Text, nullable=False, unique=True)
+    p256dh = db.Column(db.Text, nullable=False)
+    auth = db.Column(db.Text, nullable=False)
+    user_agent = db.Column(db.Text, nullable=True)
+    is_active = db.Column(db.Boolean, default=True, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    user = db.relationship("User", backref="push_subscriptions")
+
+
+class TaskNotificationLog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, index=True)
+    task_id = db.Column(db.Integer, db.ForeignKey("study_task.id"), nullable=False, index=True)
+    notification_type = db.Column(db.String(40), nullable=False, index=True)
+    scheduled_for = db.Column(db.String(40), nullable=False, index=True)
+    sent_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+
+    task = db.relationship("StudyTask", backref="notification_logs")
 
 class AIUsage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -2798,6 +2830,271 @@ def ensure_all_users_subscription_codes():
 
 
 
+
+def get_vapid_public_key():
+    return (os.environ.get("VAPID_PUBLIC_KEY", "") or "").strip()
+
+
+def get_vapid_private_key():
+    return (os.environ.get("VAPID_PRIVATE_KEY", "") or "").strip()
+
+
+def get_vapid_claim_email():
+    value = (os.environ.get("VAPID_CLAIM_EMAIL", "") or "").strip()
+    if value:
+        return value
+    return "mailto:admin@example.com"
+
+
+def urlsafe_base64_to_uint8array_script_key(public_key):
+    return public_key
+
+
+def push_subscription_to_info(subscription):
+    return {
+        "endpoint": subscription.endpoint,
+        "keys": {
+            "p256dh": subscription.p256dh,
+            "auth": subscription.auth,
+        },
+    }
+
+
+def send_push_notification(subscription, title, body, url="/tasks", tag="edupath-task-reminder"):
+    if webpush is None:
+        logger.warning("pywebpush is not installed; push notification skipped")
+        return False
+
+    public_key = get_vapid_public_key()
+    private_key = get_vapid_private_key()
+    claim_email = get_vapid_claim_email()
+    if not public_key or not private_key:
+        logger.warning("VAPID keys are not configured; push notification skipped")
+        return False
+
+    payload = json.dumps({
+        "title": title or "تذكير من EduPath AI",
+        "body": body or "لديك مهمة تعليمية تنتظرك.",
+        "url": url or "/tasks",
+        "tag": tag or "edupath-task-reminder",
+        "icon": "/static/icons/icon-192.png",
+        "badge": "/static/icons/icon-192.png",
+    }, ensure_ascii=False)
+
+    try:
+        webpush(
+            subscription_info=push_subscription_to_info(subscription),
+            data=payload,
+            vapid_private_key=private_key,
+            vapid_claims={"sub": claim_email},
+        )
+        return True
+    except WebPushException as exc:
+        status_code = getattr(getattr(exc, "response", None), "status_code", None)
+        if status_code in {404, 410}:
+            subscription.is_active = False
+            try:
+                db.session.commit()
+            except Exception:
+                db.session.rollback()
+        logger.warning("Push notification failed", exc_info=True)
+        return False
+    except Exception:
+        logger.exception("Unexpected push notification failure")
+        return False
+
+
+BEFORE_TASK_TITLES = [
+    "⏳ بعد 10 دقائق تبدأ مهمتك",
+    "استعد لمهمتك القادمة",
+    "اقترب وقت الإنجاز",
+    "بقي القليل وتبدأ المهمة",
+    "تجهيز بسيط قبل البداية",
+]
+
+BEFORE_TASK_BODIES = [
+    "بعد عشر دقائق تبدأ مهمة: {task_title}. جهّز مكانك وابدأ بهدوء.",
+    "اقترب وقت مهمة: {task_title}. خطوة صغيرة الآن تصنع تقدماً واضحاً.",
+    "استعد، لديك مهمة بعد عشر دقائق: {task_title}. اجعل البداية بسيطة ومنظمة.",
+    "بعد قليل تبدأ مهمتك: {task_title}. خذ دقيقة لترتيب أدواتك.",
+    "اقترب وقت العمل على: {task_title}. لا تحتاج إلى الكمال، فقط ابدأ.",
+    "تبقّت عشر دقائق على: {task_title}. جهّز نفسك لإنجاز مركز.",
+    "مهمتك القادمة بعد عشر دقائق: {task_title}. ابدأ بخطوة واضحة.",
+    "استعد لمهمة: {task_title}. التركيز القصير أفضل من التأجيل الطويل.",
+]
+
+START_TASK_TITLES = [
+    "🚀 حان وقت المهمة",
+    "ابدأ الآن",
+    "وقت الإنجاز بدأ",
+    "مهمتك تبدأ الآن",
+    "خطوة جديدة نحو هدفك",
+]
+
+START_TASK_BODIES = [
+    "حان وقت تنفيذ مهمة: {task_title}. ابدأ الآن بخطوة صغيرة.",
+    "مهمتك بدأت الآن: {task_title}. ركّز على البداية ولا تنتظر الحماس.",
+    "الآن وقت العمل على: {task_title}. عشر دقائق من التركيز تكفي للانطلاق.",
+    "ابدأ مهمة: {task_title}. التقدم الحقيقي يبدأ من تنفيذ بسيط.",
+    "حان وقت الإنجاز: {task_title}. افتح المهمة وابدأ مباشرة.",
+    "مهمتك الآن: {task_title}. لا تؤجل، ابدأ بأول خطوة.",
+    "وقت البداية وصل: {task_title}. اجعل هذه الجلسة خطوة نحو هدفك.",
+    "ابدأ الآن في: {task_title}. الاستمرارية أهم من المثالية.",
+]
+
+
+def task_notification_text(task, notification_type):
+    title_value = (task.title or "").strip() or "مهمة تعليمية"
+    seed = int(getattr(task, "id", 0) or 0)
+    if notification_type == "before_10_minutes":
+        title = BEFORE_TASK_TITLES[seed % len(BEFORE_TASK_TITLES)]
+        body = BEFORE_TASK_BODIES[seed % len(BEFORE_TASK_BODIES)].format(task_title=title_value)
+    else:
+        title = START_TASK_TITLES[seed % len(START_TASK_TITLES)]
+        body = START_TASK_BODIES[seed % len(START_TASK_BODIES)].format(task_title=title_value)
+    return title, body
+
+
+def parse_task_date_value(value):
+    try:
+        return datetime.strptime((value or "").strip()[:10], "%Y-%m-%d").date()
+    except Exception:
+        return None
+
+
+def parse_task_time_value(value):
+    try:
+        return datetime.strptime((value or "").strip()[:5], "%H:%M").time()
+    except Exception:
+        return None
+
+
+def task_should_have_push_today(task, today_date, weekday):
+    status = (task.status or "").strip().lower()
+    if status in {"done", "completed", "complete", "مكتملة", "منجزة", "تم الإنجاز", "تم إنجازها"}:
+        return False
+
+    if not task.reminder_time:
+        return False
+
+    start_date_value = parse_task_date_value(task.start_date)
+    due_date_value = parse_task_date_value(task.due_date)
+
+    if start_date_value and start_date_value > today_date:
+        return False
+    if due_date_value and due_date_value < today_date:
+        return False
+
+    repeat_type = normalize_repeat_type_ar_v546(task.repeat_type)
+
+    if repeat_type_matches_v546(repeat_type, "مرة واحدة / بدون تكرار", "مرة واحدة"):
+        target_date = due_date_value or start_date_value
+        return True if target_date is None else target_date == today_date
+
+    if repeat_type_matches_v546(repeat_type, "أيام محددة"):
+        days = [d for d in (task.repeat_days or "").split(",") if d != ""]
+        return str(weekday) in days
+
+    if repeat_type_matches_v546(repeat_type, "أسبوعيًا"):
+        if due_date_value:
+            return due_date_value.weekday() == weekday
+        if start_date_value:
+            return start_date_value.weekday() == weekday
+        return True
+
+    if repeat_type_matches_v546(repeat_type, "شهريًا"):
+        target_date = due_date_value or start_date_value
+        return True if target_date is None else target_date.day == today_date.day
+
+    return True
+
+
+def task_start_datetime_for_today(task, now_dt):
+    reminder_time = parse_task_time_value(task.reminder_time)
+    if not reminder_time:
+        return None
+    return datetime.combine(now_dt.date(), reminder_time)
+
+
+def notification_log_exists(user_id, task_id, notification_type, scheduled_for):
+    return TaskNotificationLog.query.filter_by(
+        user_id=user_id,
+        task_id=task_id,
+        notification_type=notification_type,
+        scheduled_for=scheduled_for,
+    ).first() is not None
+
+
+def mark_task_notification_sent(user_id, task_id, notification_type, scheduled_for):
+    if notification_log_exists(user_id, task_id, notification_type, scheduled_for):
+        return
+    db.session.add(TaskNotificationLog(
+        user_id=user_id,
+        task_id=task_id,
+        notification_type=notification_type,
+        scheduled_for=scheduled_for,
+        sent_at=datetime.utcnow(),
+    ))
+
+
+def send_due_task_push_notifications(now_dt=None):
+    now_dt = now_dt or datetime.utcnow()
+    today = now_dt.date()
+    weekday = now_dt.weekday()
+    sent_count = 0
+    checked_count = 0
+
+    tasks = StudyTask.query.filter(
+        StudyTask.reminder_time.isnot(None),
+        StudyTask.status != "done",
+    ).all()
+
+    for task in tasks:
+        checked_count += 1
+        if not task.user_id:
+            continue
+        if not task_should_have_push_today(task, today, weekday):
+            continue
+
+        start_dt = task_start_datetime_for_today(task, now_dt)
+        if not start_dt:
+            continue
+
+        delta = start_dt - now_dt
+        scheduled_for = start_dt.strftime("%Y-%m-%d %H:%M")
+
+        candidates = []
+        if timedelta(minutes=9) <= delta <= timedelta(minutes=11):
+            candidates.append("before_10_minutes")
+        if timedelta(minutes=-1) <= delta <= timedelta(minutes=1):
+            candidates.append("at_start_time")
+
+        if not candidates:
+            continue
+
+        subscriptions = PushSubscription.query.filter_by(user_id=task.user_id, is_active=True).all()
+        if not subscriptions:
+            continue
+
+        for notification_type in candidates:
+            if notification_log_exists(task.user_id, task.id, notification_type, scheduled_for):
+                continue
+
+            title, body = task_notification_text(task, notification_type)
+            tag = f"edupath-task-{task.id}-{notification_type}-{scheduled_for}"
+            success = False
+            for subscription in subscriptions:
+                if send_push_notification(subscription, title, body, url="/tasks", tag=tag):
+                    success = True
+
+            if success:
+                mark_task_notification_sent(task.user_id, task.id, notification_type, scheduled_for)
+                db.session.commit()
+                sent_count += 1
+
+    return {"checked": checked_count, "sent": sent_count}
+
+
 def create_app():
     app = Flask(__name__)
     app.jinja_env.filters["clickable_sources"] = render_clickable_sources
@@ -3094,6 +3391,85 @@ def create_app():
         logout_user()
         flash("تم تسجيل الخروج بنجاح.", "success")
         return redirect(url_for("login"))
+
+    @app.route("/api/push/public-key")
+    @login_required
+    def push_public_key():
+        public_key = get_vapid_public_key()
+        if not public_key:
+            return jsonify({
+                "publicKey": "",
+                "message": "الإشعارات غير مفعّلة حالياً من إعدادات الخادم."
+            }), 200
+        return jsonify({"publicKey": public_key})
+
+    @app.route("/api/push/subscribe", methods=["POST"])
+    @login_required
+    def push_subscribe():
+        data = request.get_json(silent=True) or {}
+        endpoint = (data.get("endpoint") or "").strip()
+        keys = data.get("keys") or {}
+        p256dh = (keys.get("p256dh") or "").strip()
+        auth_value = (keys.get("auth") or "").strip()
+
+        if not endpoint or not p256dh or not auth_value:
+            return jsonify({"ok": False, "message": "تعذر حفظ اشتراك الإشعارات. بيانات الاشتراك غير مكتملة."}), 400
+
+        try:
+            existing = PushSubscription.query.filter_by(endpoint=endpoint).first()
+            if existing:
+                existing.user_id = current_user.id
+                existing.p256dh = p256dh
+                existing.auth = auth_value
+                existing.user_agent = (request.headers.get("User-Agent", "") or "")[:500]
+                existing.is_active = True
+                existing.updated_at = datetime.utcnow()
+            else:
+                db.session.add(PushSubscription(
+                    user_id=current_user.id,
+                    endpoint=endpoint,
+                    p256dh=p256dh,
+                    auth=auth_value,
+                    user_agent=(request.headers.get("User-Agent", "") or "")[:500],
+                    is_active=True,
+                    created_at=datetime.utcnow(),
+                    updated_at=datetime.utcnow(),
+                ))
+            db.session.commit()
+            return jsonify({"ok": True, "message": "تم تفعيل الإشعارات بنجاح."})
+        except Exception:
+            db.session.rollback()
+            logger.exception("تعذر حفظ اشتراك الإشعارات")
+            return jsonify({"ok": False, "message": "تعذر تفعيل الإشعارات حالياً. يرجى المحاولة لاحقاً."}), 500
+
+    @app.route("/api/push/unsubscribe", methods=["POST"])
+    @login_required
+    def push_unsubscribe():
+        data = request.get_json(silent=True) or {}
+        endpoint = (data.get("endpoint") or "").strip()
+        try:
+            query = PushSubscription.query.filter_by(user_id=current_user.id)
+            if endpoint:
+                query = query.filter_by(endpoint=endpoint)
+            for subscription in query.all():
+                subscription.is_active = False
+                subscription.updated_at = datetime.utcnow()
+            db.session.commit()
+            return jsonify({"ok": True, "message": "تم إلغاء تفعيل الإشعارات."})
+        except Exception:
+            db.session.rollback()
+            logger.exception("تعذر إلغاء اشتراك الإشعارات")
+            return jsonify({"ok": False, "message": "تعذر إلغاء تفعيل الإشعارات حالياً."}), 500
+
+    @app.route("/cron/send-task-push-notifications")
+    def cron_send_task_push_notifications():
+        cron_secret = os.environ.get("CRON_SECRET", "")
+        provided = request.headers.get("X-Cron-Secret", "") or request.args.get("secret", "")
+        if not cron_secret or provided != cron_secret:
+            return "Forbidden", 403
+        result = send_due_task_push_notifications()
+        return jsonify({"ok": True, **result})
+
 
     @app.route("/profile", methods=["GET", "POST"])
     @login_required
@@ -5305,6 +5681,28 @@ def ensure_database_columns():
                         linked_at TIMESTAMP
                     )""",
 
+                    """CREATE TABLE IF NOT EXISTS push_subscription (
+                        id SERIAL PRIMARY KEY,
+                        user_id INTEGER NOT NULL,
+                        endpoint TEXT NOT NULL UNIQUE,
+                        p256dh TEXT NOT NULL,
+                        auth TEXT NOT NULL,
+                        user_agent TEXT,
+                        is_active BOOLEAN NOT NULL DEFAULT TRUE,
+                        created_at TIMESTAMP,
+                        updated_at TIMESTAMP
+                    )""",
+                    """CREATE TABLE IF NOT EXISTS task_notification_log (
+                        id SERIAL PRIMARY KEY,
+                        user_id INTEGER NOT NULL,
+                        task_id INTEGER NOT NULL,
+                        notification_type VARCHAR(40) NOT NULL,
+                        scheduled_for VARCHAR(40) NOT NULL,
+                        sent_at TIMESTAMP
+                    )""",
+                    """CREATE UNIQUE INDEX IF NOT EXISTS idx_task_notification_unique
+                       ON task_notification_log (user_id, task_id, notification_type, scheduled_for)""",
+
                     """CREATE TABLE IF NOT EXISTS english_coach_saved_answer (
                         id SERIAL PRIMARY KEY,
                         user_id INTEGER NOT NULL,
@@ -5467,6 +5865,34 @@ def ensure_database_columns():
                     is_confirmed_by_user BOOLEAN NOT NULL DEFAULT 0,
                     linked_at DATETIME
                 )
+            """)
+
+            connection.exec_driver_sql("""
+                CREATE TABLE IF NOT EXISTS push_subscription (
+                    id INTEGER PRIMARY KEY,
+                    user_id INTEGER NOT NULL,
+                    endpoint TEXT NOT NULL UNIQUE,
+                    p256dh TEXT NOT NULL,
+                    auth TEXT NOT NULL,
+                    user_agent TEXT,
+                    is_active BOOLEAN NOT NULL DEFAULT 1,
+                    created_at DATETIME,
+                    updated_at DATETIME
+                )
+            """)
+            connection.exec_driver_sql("""
+                CREATE TABLE IF NOT EXISTS task_notification_log (
+                    id INTEGER PRIMARY KEY,
+                    user_id INTEGER NOT NULL,
+                    task_id INTEGER NOT NULL,
+                    notification_type VARCHAR(40) NOT NULL,
+                    scheduled_for VARCHAR(40) NOT NULL,
+                    sent_at DATETIME
+                )
+            """)
+            connection.exec_driver_sql("""
+                CREATE UNIQUE INDEX IF NOT EXISTS idx_task_notification_unique
+                ON task_notification_log (user_id, task_id, notification_type, scheduled_for)
             """)
 
             connection.exec_driver_sql("""

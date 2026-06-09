@@ -6,18 +6,18 @@ if ("serviceWorker" in navigator) {
 
 async function askNotificationPermission() {
     if (!("Notification" in window)) {
-        alert("Notifications are not supported in this browser.");
+        alert("هذا المتصفح لا يدعم إشعارات الويب على هذا الجهاز.");
         return;
     }
 
     const permission = await Notification.requestPermission();
 
     if (permission === "granted") {
-        new Notification("EduPath AI reminders enabled ✅", {
-            body: "You will receive browser reminders while the app is active or installed.",
+        new Notification("تم تفعيل الإشعارات بنجاح.", {
+            body: "ستصلك إشعارات المهام عند توفر إعدادات الإشعارات.",
         });
     } else {
-        alert("Notification permission was not granted.");
+        alert("لم يتم تفعيل الإشعارات لأن الإذن مرفوض من المتصفح.");
     }
 }
 
@@ -85,11 +85,8 @@ async function checkTaskReminders() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("enableNotifications");
-    if (btn) btn.addEventListener("click", askNotificationPermission);
-
-    setInterval(checkTaskReminders, 30000);
-    checkTaskReminders();
+    // v5.5.144: task reminders are handled by Web Push + Service Worker + cron.
+    // The old in-page reminder loop is intentionally disabled to prevent duplicate notifications.
 });
 
 /* Dark mode v2.1 */
@@ -39672,3 +39669,94 @@ function updateSmartTaskFields() {
 
     refreshSubFields();
 }
+
+
+/* EduPath AI v5.5.144 PWA Push Task Notifications */
+function urlBase64ToUint8Array(base64String) {
+    const padding = "=".repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}
+
+async function registerEduPathServiceWorker() {
+    if (!("serviceWorker" in navigator)) {
+        throw new Error("SERVICE_WORKER_UNSUPPORTED");
+    }
+    return await navigator.serviceWorker.register("/static/js/service-worker.js");
+}
+
+async function enableEduPathPushNotifications() {
+    if (!("Notification" in window) || !("serviceWorker" in navigator) || !("PushManager" in window)) {
+        alert("هذا المتصفح لا يدعم إشعارات الويب على هذا الجهاز.");
+        return;
+    }
+
+    const permission = await Notification.requestPermission();
+    if (permission !== "granted") {
+        alert("لم يتم تفعيل الإشعارات لأن الإذن مرفوض من المتصفح.");
+        return;
+    }
+
+    try {
+        const registration = await registerEduPathServiceWorker();
+        const response = await fetch("/api/push/public-key", { credentials: "same-origin" });
+        const data = await response.json();
+        if (!data.publicKey) {
+            alert(data.message || "الإشعارات غير مفعّلة حالياً من إعدادات الخادم.");
+            return;
+        }
+
+        let subscription = await registration.pushManager.getSubscription();
+        if (!subscription) {
+            subscription = await registration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(data.publicKey)
+            });
+        }
+
+        const saveResponse = await fetch("/api/push/subscribe", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "same-origin",
+            body: JSON.stringify(subscription)
+        });
+
+        const saveData = await saveResponse.json();
+        if (!saveResponse.ok || !saveData.ok) {
+            alert(saveData.message || "تعذر تفعيل الإشعارات حالياً. يرجى المحاولة لاحقاً.");
+            return;
+        }
+
+        alert(saveData.message || "تم تفعيل الإشعارات بنجاح.");
+    } catch (error) {
+        console.error("Push notification activation failed", error);
+        alert("تعذر تفعيل الإشعارات حالياً. يرجى المحاولة لاحقاً.");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    if ("serviceWorker" in navigator) {
+        registerEduPathServiceWorker().catch(error => {
+            console.warn("Service worker registration skipped", error);
+        });
+    }
+
+    const notificationButtons = [
+        document.getElementById("enableNotifications"),
+        document.getElementById("mobileMenuNotifications")
+    ].filter(Boolean);
+
+    notificationButtons.forEach(button => {
+        button.addEventListener("click", (event) => {
+            event.preventDefault();
+            enableEduPathPushNotifications();
+        });
+    });
+});
