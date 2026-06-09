@@ -17,6 +17,7 @@ from openai import OpenAI
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 from flask_mail import Mail, Message
 from markupsafe import Markup, escape
+from .smart_goal_task_linking import precise_context_score, calculate_progress_added_precise
 
 load_dotenv(override=True)
 
@@ -3880,6 +3881,10 @@ def create_app():
             goal.reminder_time = ""
             goal.notes = build_goal_notes_from_form(request.form)
             db.session.commit()
+            # Recalculate links for this edited goal only; keeps old data safe and avoids full-user recalculation.
+            GoalTaskLink.query.filter_by(goal_id=goal.id, user_id=current_user.id).delete(synchronize_session=False)
+            db.session.commit()
+            calculate_goal_progress(goal)
             flash("تم حفظ تعديلات الهدف.", "success")
             return redirect(url_for("goals"))
 
@@ -4008,6 +4013,11 @@ def create_app():
             )
             task.notes = request.form.get("notes", "").strip()
             db.session.commit()
+            if task.status == "done":
+                # Recalculate only this completed task's links after editing it. Backend-only performance-safe update.
+                GoalTaskLink.query.filter_by(task_id=task.id, user_id=current_user.id).delete(synchronize_session=False)
+                db.session.commit()
+                link_completed_task_to_goals(task)
             flash("تم تعديل المهمة بنجاح.", "success")
             return redirect(url_for("tasks"))
 
@@ -4851,7 +4861,7 @@ def goal_keywords(goal):
     return {k for k in keywords if len(k.strip()) >= 2}
 
 
-def calculate_match_score(goal, task):
+def calculate_match_score_legacy(goal, task):
     plan = parse_goal_plan(goal)
     task_text = task_match_text(task).lower()
     goal_text = " ".join([
@@ -4909,18 +4919,32 @@ def calculate_match_score(goal, task):
     return score, reason
 
 
-def calculate_progress_added(task, match_score):
-    minutes = task.estimated_minutes or 30
-    time_weight = min(1.5, max(0.15, minutes / 60))
-    if match_score >= 80:
-        multiplier = 1.0
-    elif match_score >= 60:
-        multiplier = 0.6
-    elif match_score >= 40:
-        multiplier = 0.3
-    else:
-        multiplier = 0
-    return round(time_weight * multiplier, 2)
+def calculate_match_score(goal, task):
+    """Precise backend-only matcher.
+
+    The legacy keyword system remains as a helper, but the precise context layer is decisive:
+    broad English does not inflate IELTS, same broad subject is not enough, and less than
+    60 never increases goal progress.
+    """
+    try:
+        legacy_score, legacy_reason = calculate_match_score_legacy(goal, task)
+    except Exception:
+        logger.exception("Legacy goal-task matcher failed")
+        legacy_score, legacy_reason = 0, "Legacy matcher failed"
+
+    try:
+        precise_score, precise_reason = precise_context_score(goal, task, legacy_score, legacy_reason)
+        reason = f"{precise_reason}; legacy_score={legacy_score}"
+        return int(max(0, min(100, precise_score))), reason
+    except Exception:
+        logger.exception("Precise goal-task matcher failed")
+        # Conservative fallback: never allow broad legacy-only matches to raise progress.
+        fallback = min(59, int(legacy_score or 0))
+        return fallback, f"Precise matcher failed; conservative legacy fallback={fallback}"
+
+
+def calculate_progress_added(task, match_score, goal=None):
+    return calculate_progress_added_precise(task, match_score, goal)
 
 
 def link_completed_task_to_goals(task):
@@ -4930,9 +4954,9 @@ def link_completed_task_to_goals(task):
     goals = Goal.query.filter_by(user_id=task.user_id).all()
     for goal in goals:
         score, reason = calculate_match_score(goal, task)
-        if score < 40:
+        if score < 60:
             continue
-        progress_added = calculate_progress_added(task, score)
+        progress_added = calculate_progress_added(task, score, goal)
         existing = GoalTaskLink.query.filter_by(goal_id=goal.id, task_id=task.id).first()
         if existing:
             existing.match_score = max(existing.match_score, score)
@@ -4978,14 +5002,14 @@ def calculate_goal_progress(goal):
         if not links:
             for task in StudyTask.query.filter_by(user_id=goal.user_id, status="done").all():
                 score, reason = calculate_match_score(goal, task)
-                if score >= 40:
+                if score >= 60:
                     db.session.add(GoalTaskLink(
                         goal_id=goal.id,
                         task_id=task.id,
                         user_id=goal.user_id,
                         match_score=score,
                         match_reason=reason,
-                        progress_added=calculate_progress_added(task, score),
+                        progress_added=calculate_progress_added(task, score, goal),
                         is_confirmed_by_user=False,
                     ))
             db.session.commit()
@@ -4994,7 +5018,7 @@ def calculate_goal_progress(goal):
         if not links:
             return 0
 
-        progress_points = sum(link.progress_added for link in links if link.task and link.task.status == "done")
+        progress_points = sum(link.progress_added for link in links if link.task and link.task.status == "done" and link.match_score >= 60)
         return min(100, int(progress_points * 10))
     except Exception:
         logger.exception("Smart goal progress calculation failed")
