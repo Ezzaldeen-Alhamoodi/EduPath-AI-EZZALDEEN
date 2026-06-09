@@ -3851,6 +3851,7 @@ def create_app():
 
             db.session.add(goal)
             db.session.commit()
+            rebuild_goal_links_for_completed_tasks(goal)
             flash("تم حفظ الهدف الذكي. أنشئ مهامك بنفسك، وسيقوم EduPath AI بربط المهام المكتملة بالأهداف المناسبة تلقائياً.", "success")
             return redirect(url_for("goals"))
 
@@ -3882,9 +3883,7 @@ def create_app():
             goal.notes = build_goal_notes_from_form(request.form)
             db.session.commit()
             # Recalculate links for this edited goal only; keeps old data safe and avoids full-user recalculation.
-            GoalTaskLink.query.filter_by(goal_id=goal.id, user_id=current_user.id).delete(synchronize_session=False)
-            db.session.commit()
-            calculate_goal_progress(goal)
+            rebuild_goal_links_for_completed_tasks(goal)
             flash("تم حفظ تعديلات الهدف.", "success")
             return redirect(url_for("goals"))
 
@@ -4960,7 +4959,7 @@ def link_completed_task_to_goals(task):
         existing = GoalTaskLink.query.filter_by(goal_id=goal.id, task_id=task.id).first()
         if existing:
             existing.match_score = max(existing.match_score, score)
-            existing.match_reason = reason
+            existing.match_reason = f"v5.5.142: {reason}"
             existing.progress_added = max(existing.progress_added, progress_added)
         else:
             db.session.add(GoalTaskLink(
@@ -4968,7 +4967,7 @@ def link_completed_task_to_goals(task):
                 task_id=task.id,
                 user_id=task.user_id,
                 match_score=score,
-                match_reason=reason,
+                match_reason=f"v5.5.142: {reason}",
                 progress_added=progress_added,
                 is_confirmed_by_user=False,
             ))
@@ -4976,6 +4975,73 @@ def link_completed_task_to_goals(task):
     db.session.commit()
     return linked
 
+
+
+def rebuild_goal_links_for_completed_tasks(goal):
+    """Build links for one goal only using completed tasks.
+
+    Used after creating/editing a goal. It does not scan all goals and does not run on every
+    dashboard page load, preserving navigation speed.
+    """
+    try:
+        GoalTaskLink.query.filter_by(goal_id=goal.id, user_id=goal.user_id).delete(synchronize_session=False)
+        completed_tasks = StudyTask.query.filter_by(user_id=goal.user_id, status="done").all()
+        for task in completed_tasks:
+            score, reason = calculate_match_score(goal, task)
+            progress_added = calculate_progress_added(task, score, goal) if score >= 60 else 0.0
+            if score >= 60:
+                db.session.add(GoalTaskLink(
+                    goal_id=goal.id,
+                    task_id=task.id,
+                    user_id=goal.user_id,
+                    match_score=score,
+                    match_reason=f"v5.5.142: {reason}",
+                    progress_added=progress_added,
+                    is_confirmed_by_user=False,
+                ))
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
+        logger.exception("Precise rebuild for one goal failed")
+
+
+def revalidate_existing_goal_links(goal, links):
+    """Re-check stored links with the precise engine before calculating progress.
+
+    This prevents old broad links from increasing the progress bar after the new precise
+    system is installed. It only touches already-stored links for this goal, not all user data.
+    """
+    changed = False
+    valid_links = []
+
+    for link in links:
+        task = link.task
+        if not task or task.status != "done":
+            continue
+
+        try:
+            score, reason = calculate_match_score(goal, task)
+            progress_added = calculate_progress_added(task, score, goal) if score >= 60 else 0.0
+
+            if link.match_score != score or abs((link.progress_added or 0.0) - progress_added) > 0.0001 or not (link.match_reason or "").startswith("v5.5.142:"):
+                link.match_score = score
+                link.match_reason = f"v5.5.142: {reason}"
+                link.progress_added = progress_added
+                changed = True
+
+            if score >= 60 and progress_added > 0:
+                valid_links.append(link)
+        except Exception:
+            logger.exception("Precise revalidation failed for goal=%s task=%s", getattr(goal, "id", None), getattr(task, "id", None))
+
+    if changed:
+        try:
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
+            logger.exception("Could not persist precise link revalidation")
+
+    return valid_links
 
 def extract_goal_milestones(goal):
     plan = parse_goal_plan(goal)
@@ -4995,35 +5061,26 @@ def extract_goal_milestones(goal):
 
 
 def calculate_goal_progress(goal):
-    """Progress is based only on related user-created completed tasks."""
+    """Progress is based on precisely-linked completed tasks only.
+
+    It revalidates stored links so old broad links cannot inflate the progress bar, but it
+    does not scan all completed tasks when opening the dashboard. New links are built when
+    a task is completed or when a goal/task is edited.
+    """
     try:
         links = GoalTaskLink.query.filter_by(goal_id=goal.id).all()
-
-        if not links:
-            for task in StudyTask.query.filter_by(user_id=goal.user_id, status="done").all():
-                score, reason = calculate_match_score(goal, task)
-                if score >= 60:
-                    db.session.add(GoalTaskLink(
-                        goal_id=goal.id,
-                        task_id=task.id,
-                        user_id=goal.user_id,
-                        match_score=score,
-                        match_reason=reason,
-                        progress_added=calculate_progress_added(task, score, goal),
-                        is_confirmed_by_user=False,
-                    ))
-            db.session.commit()
-            links = GoalTaskLink.query.filter_by(goal_id=goal.id).all()
-
         if not links:
             return 0
 
-        progress_points = sum(link.progress_added for link in links if link.task and link.task.status == "done" and link.match_score >= 60)
+        valid_links = revalidate_existing_goal_links(goal, links)
+        if not valid_links:
+            return 0
+
+        progress_points = sum(link.progress_added for link in valid_links if link.task and link.task.status == "done" and link.match_score >= 60)
         return min(100, int(progress_points * 10))
     except Exception:
         logger.exception("Smart goal progress calculation failed")
         return 0
-
 
 def goal_confidence(goal):
     try:
