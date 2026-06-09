@@ -3777,12 +3777,14 @@ def create_app():
         completed_task_items = [task for task in recent_task_candidates if task.status == "done"][:10]
         mistakes = MistakeLog.query.filter_by(user_id=current_user.id).order_by(MistakeLog.id.desc()).limit(6).all()
 
-        total_tasks = StudyTask.query.filter_by(user_id=current_user.id).count()
-        completed_tasks = StudyTask.query.filter_by(user_id=current_user.id, status="done").count()
-        pending_tasks = StudyTask.query.filter_by(user_id=current_user.id, status="pending").count()
-        total_goals = Goal.query.filter_by(user_id=current_user.id).count()
+        # EduPath AI v5.5.140: reuse already-loaded dashboard data to reduce repeated DB queries.
+        # This does not change task/goal logic, progress rules, adaptive banks, or saved data.
+        total_tasks = len(recent_task_candidates)
+        completed_tasks = len([task for task in recent_task_candidates if task.status == "done"])
+        pending_tasks = len([task for task in recent_task_candidates if task.status == "pending"])
+        total_goals = len(all_goals)
 
-        today_tasks = [task for task in StudyTask.query.filter_by(user_id=current_user.id).all() if task_scheduled_for_today(task)]
+        today_tasks = [task for task in recent_task_candidates if task_scheduled_for_today(task)]
         total_today_tasks = len(today_tasks)
         completed_today_tasks = len([task for task in today_tasks if _is_completed_task(task)])
 
