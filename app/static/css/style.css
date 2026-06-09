@@ -8459,3 +8459,20 @@ small.hint {
         background: transparent !important;
     }
 }
+
+
+/* EduPath AI v5.5.135 Unified page Hero color with Dashboard Hero */
+:root {
+    --edupath-dashboard-hero-gradient-v55135: linear-gradient(135deg, #eaf2ff 0%, #eefdf8 48%, #fff7e6 100%);
+    --edupath-dashboard-hero-border-v55135: 1px solid rgba(37, 99, 235, .18);
+    --edupath-dashboard-hero-shadow-v55135: 0 14px 36px rgba(37, 99, 235, .08);
+}
+
+.goals-hero-v41,
+.tasks-hero,
+.resources-hero-v4616,
+.coach-hero {
+    background: var(--edupath-dashboard-hero-gradient-v55135) !important;
+    border: var(--edupath-dashboard-hero-border-v55135) !important;
+    box-shadow: var(--edupath-dashboard-hero-shadow-v55135) !important;
+}
