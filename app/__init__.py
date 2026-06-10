@@ -4587,7 +4587,7 @@ def create_app():
                 return redirect(url_for("interview"))
 
             prompt = f"""
-You are EduPath AI Scholarship Interview Coach. Generate questions that sound like real scholarship, university, embassy, and admissions interviews — not abstract essay prompts.
+You are EduPath AI Scholarship Interview Coach. Generate REAL spoken interview questions for scholarships, university admissions, embassy interviews, and fully funded programs.
 
 Student profile:
 {profile}
@@ -4595,34 +4595,166 @@ Student profile:
 Scholarship: {scholarship}
 Major: {major}
 
-Use this common interview-question bank as inspiration, then customize to the scholarship, major, and student profile:
-- Tell us about yourself and your academic background.
+Your job is NOT to write abstract essay prompts. Your job is to act like an interviewer who tests the student's motivation, clarity, maturity, adaptability, commitment, honesty, and future impact.
+
+Use the following interview-question bank as your main source of inspiration. Do NOT copy the same wording every time. Choose the most relevant questions, rewrite them naturally, and customize them to the scholarship, country/university if mentioned, major, and student profile.
+
+CORE QUESTION BANK AND VARIATIONS:
+1) About yourself:
+- Tell me about yourself.
+- Can you introduce yourself?
+- Please give me a brief introduction about yourself.
+- Walk me through your background.
+- How would you describe yourself?
+- Tell us a little about your journey.
+- Can you summarize your profile?
+- Give me an overview of your academic and personal background.
+- What should we know about you?
+Follow-ups: What motivated you to study this field? What makes you different from other students? What are you most proud of? How did your environment shape you? Why should we remember you?
+
+2) Major choice:
 - Why did you choose this major?
-- Why Computer Science / technology / this field?
-- Why this scholarship?
-- Why this university or country, if the scholarship name suggests one?
-- Why should we choose you instead of another applicant?
-- What are your strongest academic achievements?
-- Tell us about a project, certificate, competition, or activity you are proud of.
-- What challenge have you overcome, especially with limited resources?
-- What are your strengths and weaknesses?
-- How do you handle pressure, failure, and difficult study situations?
-- What are your future plans after graduation?
-- How will you contribute to your community/country after studying?
-- How will you adapt to a new culture, language, and academic environment?
-- What will you do if you are not accepted?
-- Describe teamwork, leadership, volunteering, or helping others.
+- Why this field specifically?
+- What attracted you to this field?
+- Why not another major like IT, Computer Science, Engineering, or a related field?
+- What interests you most about this major?
+- Why is this field suitable for you?
+- When did you realize this is your passion?
+Follow-ups: What subjects do you expect to study? What skills are required? What area will you specialize in? How will this major help your country?
 
-Generate exactly 7 realistic interview questions. They must be direct, spoken-interview style, and highly relevant to the student's scholarship and major. Avoid vague questions like broad philosophical essays.
+3) Country / university choice when relevant:
+- Why did you choose this country for your studies?
+- Why not study in your home country?
+- Why this country instead of another country?
+- What do you know about the country, culture, and education system?
+- What are your expectations from studying there?
+Follow-ups: How will you adapt? Do you know the language? What challenges do you expect?
 
-For each question, provide:
-- question
-- why_they_ask
-- answer_strategy: a practical strategy for a strong scholarship answer, including what evidence the student should mention.
+4) Scholarship motivation:
+- Why are you applying for this scholarship?
+- What does this scholarship mean to you?
+- Why do you deserve this scholarship?
+- Why should we invest in you?
+- How will this scholarship help you?
+- What will you do if you do not get it?
+- Why is financial support important for you?
+Follow-ups: How will you handle financial challenges? Do you have a backup plan? How will you give back?
 
-Return valid JSON array only.
+5) Selection / uniqueness:
+- Why should we select you?
+- What makes you a strong candidate?
+- Why are you better than other applicants?
+- What value will you bring to our university?
+- Convince me to choose you.
+- What makes you unique?
+- Sell yourself in one minute.
+Follow-ups: Can you prove your skills? What will you contribute? How will you represent us?
+
+6) Strengths:
+- What are your main strengths?
+- What are your strongest qualities?
+- What skills are you most confident in?
+- What are you good at?
+- What advantages do you have as a student?
+Follow-ups: Give an example. How did you develop this strength? How will it help you in university?
+
+7) Weaknesses:
+- What are your weaknesses?
+- What is your biggest weakness?
+- What do you need to improve?
+- What is something you struggle with?
+- What is your area of improvement?
+Follow-ups: How are you improving it? Did it cause a problem before? What did you learn?
+
+8) Future plans:
+- What are your future goals?
+- What do you plan to do after graduation?
+- What are your career plans?
+- Where do you see your future?
+- What are your long-term goals?
+Follow-ups: Why this path? What if your plan does not work? Do you have a backup plan?
+
+9) Five-year plan:
+- Where do you see yourself in five years?
+- What will you be doing in five years?
+- What is your five-year plan?
+- What position or level do you expect to reach?
+Follow-ups: What steps will you take? What challenges might you face? How realistic is your plan?
+
+10) Projects and practical experience:
+- Tell me about your projects.
+- What projects have you worked on?
+- Describe a project you are proud of.
+- What practical experience do you have?
+- What have you built so far?
+Follow-ups: What technologies did you use? What was your role? What problem did you solve? What challenges did you face? What would you improve?
+
+11) Studying abroad and adaptation:
+- What challenges do you expect studying abroad?
+- How will you adapt to a new country?
+- How will you handle living away from family?
+- How will you deal with culture shock?
+- How will you manage language barriers?
+Follow-ups: What is your plan to overcome them? What if you feel homesick?
+
+12) Life challenge:
+- Tell me about a difficult situation.
+- What obstacles did you overcome?
+- What was a tough moment in your life?
+- Tell me about a problem you solved.
+Follow-ups: What did you learn? How did it change you? Would you do anything differently?
+
+13) Time management:
+- How do you manage your time?
+- How do you stay organized?
+- How do you handle multiple tasks?
+- What is your study routine?
+- How do you avoid procrastination?
+Follow-ups: What tools do you use? What happens when your plan fails?
+
+14) Failure:
+- Describe a failure.
+- Tell me about a mistake you made.
+- What is something that did not go well?
+- Have you ever failed at something important?
+Follow-ups: What did you learn? How did you recover? Did it change your behavior?
+
+15) Pressure:
+- How do you deal with pressure?
+- How do you handle stress?
+- How do you stay calm in difficult situations?
+- What if you have too much work?
+Follow-ups: Give an example. What if pressure increases? Do you ever feel overwhelmed?
+
+TRICKY QUESTIONS TO INCLUDE SOMETIMES:
+- Why not another country?
+- Why not a better-ranked university?
+- What if you fail?
+- What if you struggle academically?
+- Are you sure about your major?
+- What if you change your mind?
+- How will you survive financially?
+- Why should we trust you?
+- What proves your commitment?
+
+Generate exactly 8 realistic questions. Requirements:
+- At least 5 must be classic scholarship/interview questions from the bank, rewritten naturally.
+- At least 1 must test resilience, pressure, failure, or adaptability.
+- At least 1 must test projects/practical experience if the profile mentions projects or technology.
+- At least 1 may be a tricky follow-up if appropriate.
+- Questions must be spoken, direct, and realistic.
+- Customize to the student, scholarship, major, and country/university if inferable.
+
+For each question, return:
+- question: one interview question only.
+- category: one of Motivation, Major Fit, Scholarship Fit, Self-Awareness, Practical Experience, Adaptability, Future Impact, Tricky Follow-up.
+- why_they_ask: why an interviewer asks this.
+- answer_strategy: practical strategy for a strong scholarship answer, including what evidence to mention.
+- strong_answer_hint: one short hint showing what a strong answer should include, without writing the full answer for the student.
+
+Return valid JSON array only. No markdown. No explanation outside JSON.
 """
-            ai_text = call_ai(ai_client, prompt, max_tokens=900, temperature=0.5)
+            ai_text = call_ai(ai_client, prompt, max_tokens=1500, temperature=0.55)
             generated = parse_json_array(ai_text)
 
             if generated:
@@ -4656,28 +4788,41 @@ Return valid JSON array only.
 
             if action == "evaluate":
                 prompt = f"""
-You are a strict but supportive scholarship interview evaluator. Evaluate the answer as if the student is preparing for a real scholarship/university interview.
+You are a strict but supportive scholarship interview evaluator. Evaluate this as a SPOKEN scholarship/university interview answer, not as a written essay.
 
 Question:
 {item.question}
 
-Student answer:
+Student answer transcript:
 {answer}
 
-Evaluate using these criteria:
-- Directly answers the question
-- Shows motivation and maturity
-- Gives specific evidence from the student's background
-- Connects the answer to the scholarship, major, and future impact
-- Sounds natural for a spoken interview, not memorized or robotic
+Evaluate using scholarship interview standards:
+1. Directness: does the answer address the question clearly from the first sentences?
+2. Motivation: is the reason convincing, personal, and aligned with the scholarship/major?
+3. Evidence: does the student support claims with achievements, projects, volunteering, challenges, or examples?
+4. Clarity and structure: is the answer easy to follow in a spoken interview?
+5. Maturity: does it show self-awareness, responsibility, resilience, and realism?
+6. Scholarship fit: does it connect to future impact, contribution, and why the opportunity matters?
+7. Natural delivery: does it sound human and confident, not memorized, exaggerated, or robotic?
 
-Return valid JSON only:
+Important evaluation rules:
+- Be practical and honest. Do not overpraise weak answers.
+- If the answer is too general, say exactly what specific evidence is missing.
+- If the answer is too long, repetitive, or unclear, say how to shorten it.
+- If the answer is written-style rather than spoken-style, convert it to natural interview speech.
+- Never mention internal AI/provider errors.
+
+Return valid JSON only with this exact structure:
 {{
   "score": integer from 0 to 10,
+  "level": "Weak / Acceptable / Good / Strong / Excellent",
+  "main_issue": "the biggest issue limiting the answer",
   "strengths": ["..."],
   "weaknesses": ["..."],
   "suggestions": ["..."],
-  "improved_answer": "A natural, strong spoken answer that keeps the student's meaning but improves structure, evidence, and scholarship fit."
+  "missing_evidence": ["specific evidence the student should add, if any"],
+  "follow_up_questions": ["one or two likely follow-up questions an interviewer may ask"],
+  "improved_answer": "A natural, strong spoken answer. Keep the student's meaning, make it concise, specific, scholarship-focused, and suitable to say aloud in an interview."
 }}
 """
                 status = ai_usage_status(current_user, "scholarship")
@@ -4686,7 +4831,7 @@ Return valid JSON only:
                     db.session.commit()
                     return redirect(url_for("answer_question", answer_id=answer_id))
 
-                ai_text = call_ai(ai_client, prompt, max_tokens=800, temperature=0.3)
+                ai_text = call_ai(ai_client, prompt, max_tokens=1200, temperature=0.3)
                 record_ai_usage(current_user, "scholarship")
                 result = parse_json_object(ai_text)
                 item.score = result.get("score", 0)
@@ -4942,7 +5087,7 @@ Return valid JSON:
  "what_to_learn": ["..."]
 }}
 """
-            ai_text = call_ai(ai_client, prompt, max_tokens=800, temperature=0.3)
+            ai_text = call_ai(ai_client, prompt, max_tokens=1200, temperature=0.3)
             result = parse_json_object(ai_text)
 
         mistakes = MistakeLog.query.filter_by(user_id=current_user.id).order_by(MistakeLog.id.desc()).limit(12).all()
@@ -6703,61 +6848,92 @@ def fallback_ai_response(prompt, error=None):
             "useful_vocabulary": ["clear", "organized", "confident", "practical"]
         }, ensure_ascii=False)
 
-    if "Generate 5 realistic interview questions" in prompt or "Generate exactly 7 realistic interview questions" in prompt or "common interview-question bank" in prompt:
+    if "Generate 5 realistic interview questions" in prompt or "Generate exactly 7 realistic interview questions" in prompt or "Generate exactly 8 realistic questions" in prompt or "CORE QUESTION BANK" in prompt or "common interview-question bank" in prompt:
         return json.dumps([
             {
-                "question": "Tell us about yourself and your academic background.",
-                "why_they_ask": "They want a clear first impression of your profile, motivation, and readiness.",
-                "answer_strategy": "Give a short story: academic excellence, major interest, projects/certificates, volunteering, and future goal. Do not list everything randomly.",
+                "question": "Can you introduce yourself and briefly explain the journey that led you to this scholarship application?",
+                "category": "Motivation",
+                "why_they_ask": "They want a clear first impression of the student's background, motivation, and readiness.",
+                "answer_strategy": "Use a short story: academic achievement, interest in the major, one project or activity, and future goal. Avoid listing everything randomly.",
+                "strong_answer_hint": "Start with identity and academic strength, then connect your journey to the major and future impact."
             },
             {
-                "question": "Why did you choose this major, and how is it connected to your future plans?",
-                "why_they_ask": "They want to know whether your major choice is serious, informed, and realistic.",
-                "answer_strategy": "Connect your strengths in mathematics/problem-solving with the major, then mention one practical field where you want to create impact.",
+                "question": "Why did you choose this major, and how do you know it is the right field for you?",
+                "category": "Major Fit",
+                "why_they_ask": "They test whether the major choice is serious, informed, and connected to the student's abilities.",
+                "answer_strategy": "Connect strengths such as mathematics, logic, programming, projects, or problem-solving with what the major requires.",
+                "strong_answer_hint": "Mention a personal reason, evidence from learning/projects, and one future specialization."
             },
             {
-                "question": "Why are you applying for this scholarship?",
-                "why_they_ask": "They want to see motivation, financial/academic need, and alignment with the scholarship mission.",
-                "answer_strategy": "Explain how the scholarship gives access to quality education and how you will use it responsibly to build skills and contribute later.",
+                "question": "Why are you applying for this scholarship, and what will you do with this opportunity if selected?",
+                "category": "Scholarship Fit",
+                "why_they_ask": "They want to know motivation, need, responsibility, and alignment with the scholarship mission.",
+                "answer_strategy": "Explain how the scholarship removes barriers, supports serious study, and will be used to build skills and contribute later.",
+                "strong_answer_hint": "Avoid saying only 'because I need money'; show purpose, responsibility, and future contribution."
             },
             {
-                "question": "Why should we choose you over other strong applicants?",
-                "why_they_ask": "They want evidence of distinction, not general claims.",
-                "answer_strategy": "Use 2–3 concrete proofs: GPA/rank, competition/project, self-learning, volunteering, discipline, or leadership.",
+                "question": "Why should the committee choose you over other strong applicants?",
+                "category": "Scholarship Fit",
+                "why_they_ask": "They want proof of distinction, not general claims.",
+                "answer_strategy": "Use two or three concrete proofs: rank, GPA, competition, project, self-learning, volunteering, discipline, or leadership.",
+                "strong_answer_hint": "Say what makes you different, then prove it with evidence."
             },
             {
-                "question": "Tell us about a challenge you faced and how you overcame it.",
-                "why_they_ask": "They want resilience and problem-solving ability.",
-                "answer_strategy": "Use the STAR method: situation, task, action, result. End with what you learned.",
+                "question": "Tell me about a project or practical experience you are proud of. What problem did it solve?",
+                "category": "Practical Experience",
+                "why_they_ask": "They test whether the student can apply knowledge, not just talk about interest.",
+                "answer_strategy": "Explain the problem, your role, tools/technologies, challenge, result, and what you would improve.",
+                "strong_answer_hint": "Use simple technical explanation and focus on impact, not only tools."
             },
             {
-                "question": "What are your strengths and weaknesses as a student?",
-                "why_they_ask": "They want self-awareness and maturity.",
-                "answer_strategy": "Mention a real strength with evidence, then one manageable weakness and the method you use to improve it.",
+                "question": "What is one weakness you are actively improving, and what steps are you taking to improve it?",
+                "category": "Self-Awareness",
+                "why_they_ask": "They test maturity, honesty, and ability to improve.",
+                "answer_strategy": "Choose a manageable weakness, explain its effect, then show a clear improvement method.",
+                "strong_answer_hint": "Do not choose a fake weakness; show real progress and responsibility."
             },
             {
-                "question": "How will you contribute to your community or country after graduation?",
-                "why_they_ask": "Scholarships often look for future impact, not only personal benefit.",
-                "answer_strategy": "Give a realistic plan connected to your major: build skills, gain experience, then contribute through education, technology, healthcare, or local development.",
+                "question": "What challenges do you expect while studying abroad, and how will you handle them?",
+                "category": "Adaptability",
+                "why_they_ask": "They want to know whether the student is realistic and ready for culture, language, and academic challenges.",
+                "answer_strategy": "Mention language/culture/pressure/homesickness, then give practical solutions such as daily routine, asking for help, and joining student activities.",
+                "strong_answer_hint": "Show optimism with realism: you expect challenges and already have a plan."
             },
+            {
+                "question": "What if your plan does not work or you struggle academically? How will you respond?",
+                "category": "Tricky Follow-up",
+                "why_they_ask": "They test resilience, flexibility, and commitment under pressure.",
+                "answer_strategy": "Avoid panic or overconfidence. Explain how you analyze problems, seek support, adjust methods, and continue working.",
+                "strong_answer_hint": "Show that failure would be feedback, not the end of your goal."
+            }
         ], ensure_ascii=False)
 
-    if "Evaluate the answer" in prompt:
+    if "Evaluate the answer" in prompt or "Evaluate this as a SPOKEN scholarship" in prompt:
         return json.dumps({
             "score": 7,
+            "level": "Good",
+            "main_issue": "The answer is understandable, but it needs more specific evidence and a stronger connection to the scholarship.",
             "strengths": [
-                "The answer is understandable.",
-                "It has a clear personal direction.",
+                "The answer has a clear general direction.",
+                "The student shows motivation and seriousness."
             ],
             "weaknesses": [
-                "It needs a more specific example.",
-                "The ending can be stronger.",
+                "The answer needs at least one concrete example, project, achievement, or challenge.",
+                "The ending should connect more clearly to future impact and the scholarship's purpose."
             ],
             "suggestions": [
-                "Add one real achievement or project.",
-                "Connect your answer more clearly to the scholarship.",
+                "Add one real achievement or project as evidence.",
+                "Use a spoken structure: direct answer, evidence, connection to future goal.",
+                "Keep the answer concise and natural, as if speaking to an interviewer."
             ],
-            "improved_answer": "This is a good start. Make it more specific by adding one personal example and linking it to your future goals.",
+            "missing_evidence": [
+                "A specific achievement, project, competition, course, volunteering experience, or challenge."
+            ],
+            "follow_up_questions": [
+                "Can you give a specific example?",
+                "How will this scholarship help you achieve that goal?"
+            ],
+            "improved_answer": "This is a good start. I would make it stronger by giving a direct answer first, then adding one specific example from my academic background or projects, and finally connecting it to how I will use the scholarship responsibly to build skills and create impact."
         }, ensure_ascii=False)
 
     if "programming tutor" in prompt or "Explain the likely error" in prompt:

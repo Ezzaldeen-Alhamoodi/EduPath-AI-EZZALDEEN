@@ -1,4 +1,3 @@
-\
 {% extends "base.html" %}
 {% block page_title %}Scholarship Interview Coach{% endblock %}
 {% block content %}
@@ -40,8 +39,10 @@
     {% for item in generated %}
         <div class="item">
             <strong>{{ item.question }}</strong>
+            {% if item.category %}<span><b>Category:</b> {{ item.category }}</span>{% endif %}
             <span><b>Why:</b> {{ item.why_they_ask }}</span>
             <span><b>Strategy:</b> {{ item.answer_strategy }}</span>
+            {% if item.strong_answer_hint %}<span><b>Strong answer hint:</b> {{ item.strong_answer_hint }}</span>{% endif %}
         </div>
     {% endfor %}
 </section>

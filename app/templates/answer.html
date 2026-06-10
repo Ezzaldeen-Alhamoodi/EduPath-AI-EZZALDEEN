@@ -1,4 +1,3 @@
-\
 {% extends "base.html" %}
 {% block page_title %}Answer Practice{% endblock %}
 {% block content %}
@@ -7,9 +6,20 @@
     <h2>Question</h2>
     <p class="question">{{ item.question }}</p>
 
-    <form method="POST" class="form">
+    <form method="POST" class="form" id="interviewAnswerForm">
         <label>Your answer</label>
-        <textarea name="answer" rows="8">{{ item.answer or "" }}</textarea>
+        <textarea name="answer" id="answerText" rows="8" placeholder="Write your answer here, or use the Record button to speak and convert your voice to text.">{{ item.answer or "" }}</textarea>
+
+        <div class="voice-practice-box" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:8px;">
+            <button type="button" id="recordBtn" class="small-button">🎙️ Record Answer</button>
+            <button type="button" id="stopRecordBtn" class="small-button" disabled>⏹ Stop</button>
+            <select id="speechLang" aria-label="Speech recognition language">
+                <option value="en-US">English - US</option>
+                <option value="en-GB">English - UK</option>
+            </select>
+            <span id="recordStatus" class="muted">Use Chrome/Edge for best speech recognition.</span>
+        </div>
+        <p class="muted" style="margin-top:6px;">Tip: answer aloud like a real interview. The transcript will appear in the box, then you can evaluate it with AI.</p>
 
         <div class="form-row">
             <button name="action" value="save" type="submit">💾 Save Only</button>
@@ -26,6 +36,14 @@
         <div class="score">Score: {{ feedback.score }}/10</div>
     {% endif %}
 
+    {% if feedback.level %}
+        <p><strong>Level:</strong> {{ feedback.level }}</p>
+    {% endif %}
+
+    {% if feedback.main_issue %}
+        <p><strong>Main issue:</strong> {{ feedback.main_issue }}</p>
+    {% endif %}
+
     {% if feedback.strengths %}
         <h3>Strengths</h3>
         <ul>{% for s in feedback.strengths %}<li>{{ s }}</li>{% endfor %}</ul>
@@ -36,13 +54,23 @@
         <ul>{% for w in feedback.weaknesses %}<li>{{ w }}</li>{% endfor %}</ul>
     {% endif %}
 
+    {% if feedback.missing_evidence %}
+        <h3>Missing Evidence</h3>
+        <ul>{% for item in feedback.missing_evidence %}<li>{{ item }}</li>{% endfor %}</ul>
+    {% endif %}
+
     {% if feedback.suggestions %}
         <h3>Suggestions</h3>
         <ul>{% for s in feedback.suggestions %}<li>{{ s }}</li>{% endfor %}</ul>
     {% endif %}
 
+    {% if feedback.follow_up_questions %}
+        <h3>Likely Follow-up Questions</h3>
+        <ul>{% for q in feedback.follow_up_questions %}<li>{{ q }}</li>{% endfor %}</ul>
+    {% endif %}
+
     {% if feedback.improved_answer %}
-        <h3>Improved Answer</h3>
+        <h3>Improved Spoken Answer</h3>
         <p class="improved">{{ feedback.improved_answer }}</p>
     {% endif %}
 
@@ -51,5 +79,71 @@
     {% endif %}
 </section>
 {% endif %}
+
+<script>
+(function () {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recordBtn = document.getElementById('recordBtn');
+    const stopBtn = document.getElementById('stopRecordBtn');
+    const status = document.getElementById('recordStatus');
+    const textarea = document.getElementById('answerText');
+    const langSelect = document.getElementById('speechLang');
+
+    if (!recordBtn || !stopBtn || !status || !textarea) return;
+
+    if (!SpeechRecognition) {
+        recordBtn.disabled = true;
+        stopBtn.disabled = true;
+        status.textContent = 'Speech recognition is not supported in this browser. Please use Chrome or Edge.';
+        return;
+    }
+
+    let recognition = null;
+    let finalTranscript = '';
+
+    function setRecordingState(isRecording) {
+        recordBtn.disabled = isRecording;
+        stopBtn.disabled = !isRecording;
+        status.textContent = isRecording ? 'Listening... speak clearly and naturally.' : 'Recording stopped. You can edit the transcript before evaluation.';
+    }
+
+    recordBtn.addEventListener('click', function () {
+        recognition = new SpeechRecognition();
+        recognition.lang = langSelect.value || 'en-US';
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        finalTranscript = textarea.value.trim();
+
+        recognition.onstart = function () { setRecordingState(true); };
+        recognition.onerror = function (event) {
+            status.textContent = 'Recording error: ' + (event.error || 'unknown') + '. Try again in a quiet place.';
+            setRecordingState(false);
+        };
+        recognition.onend = function () { setRecordingState(false); };
+        recognition.onresult = function (event) {
+            let interimTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                const transcript = event.results[i][0].transcript;
+                if (event.results[i].isFinal) {
+                    finalTranscript += (finalTranscript ? ' ' : '') + transcript.trim();
+                } else {
+                    interimTranscript += transcript;
+                }
+            }
+            textarea.value = (finalTranscript + (interimTranscript ? ' ' + interimTranscript : '')).trim();
+        };
+
+        try {
+            recognition.start();
+        } catch (e) {
+            status.textContent = 'Could not start recording. Please allow microphone permission and try again.';
+        }
+    });
+
+    stopBtn.addEventListener('click', function () {
+        if (recognition) recognition.stop();
+    });
+})();
+</script>
 
 {% endblock %}
