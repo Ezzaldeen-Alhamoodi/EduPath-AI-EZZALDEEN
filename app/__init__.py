@@ -2,7 +2,6 @@ try:
     from zoneinfo import ZoneInfo
 except Exception:
     ZoneInfo = None
-\
 import os
 import json
 import logging
@@ -10,6 +9,7 @@ import unicodedata
 import secrets
 import string
 import re
+import time
 from datetime import datetime, date, timedelta
 
 from flask import Flask, render_template, request, redirect, url_for, jsonify, flash, session, abort
@@ -4747,7 +4747,7 @@ Rules:
 """
                 ai_text = call_ai(ai_client, prompt, max_tokens=1400, temperature=0.35)
                 record_ai_usage(current_user, "english")
-                essay_result = parse_json_object(ai_text)
+                essay_result = normalize_essay_result(parse_json_object(ai_text), essay=essay, topic=topic)
 
             else:
                 text = request.form.get("text", "").strip()
@@ -4794,7 +4794,7 @@ Return valid JSON only:
 """
                 ai_text = call_ai(ai_client, prompt, max_tokens=700, temperature=0.4)
                 record_ai_usage(current_user, "english")
-                result = parse_json_object(ai_text)
+                result = normalize_quick_english_result(parse_json_object(ai_text), text=text)
 
         return render_template(
             "english.html",
@@ -6222,8 +6222,8 @@ def build_ai_client():
 
     Supported modes through AI_PROVIDER:
     - auto: use Gemini first, then OpenRouter fallback
-    - gemini: use Gemini only, then local fallback
-    - openrouter: use OpenRouter only, then local fallback
+    - gemini: use Gemini only, then local safe fallback
+    - openrouter: use OpenRouter only, then local safe fallback
     """
     provider = os.environ.get("AI_PROVIDER", "auto").strip().lower() or "auto"
     gemini_key = os.environ.get("GEMINI_API_KEY", "").strip()
@@ -6263,13 +6263,27 @@ def build_ai_client():
             logger.exception("Failed to initialize OpenRouter client. OpenRouter will be skipped.")
 
     if ai_config["provider"] == "gemini" and not ai_config["gemini_client"]:
-        logger.warning("AI_PROVIDER=gemini but Gemini is not available. App will use fallback responses.")
+        logger.warning("AI_PROVIDER=gemini but Gemini is not available. App will use local safe fallback responses.")
     elif ai_config["provider"] == "openrouter" and not ai_config["openrouter_client"]:
-        logger.warning("AI_PROVIDER=openrouter but OPENROUTER_API_KEY is missing or invalid. App will use fallback responses.")
+        logger.warning("AI_PROVIDER=openrouter but OPENROUTER_API_KEY is missing or invalid. App will use local safe fallback responses.")
     elif ai_config["provider"] == "auto" and not ai_config["gemini_client"] and not ai_config["openrouter_client"]:
         logger.warning("No AI provider is configured. Add GEMINI_API_KEY and/or OPENROUTER_API_KEY to enable full AI features.")
 
     return ai_config
+
+
+def _env_int(name, default):
+    try:
+        return int(os.environ.get(name, str(default)))
+    except Exception:
+        return default
+
+
+def _env_float(name, default):
+    try:
+        return float(os.environ.get(name, str(default)))
+    except Exception:
+        return default
 
 
 def _extract_gemini_text(response):
@@ -6290,12 +6304,54 @@ def _extract_gemini_text(response):
     return ""
 
 
-def _call_gemini(gemini_client, prompt, max_tokens=500, temperature=0.4):
-    model = os.environ.get("GEMINI_MODEL", "gemini-2.0-flash").strip() or "gemini-2.0-flash"
+def _ai_error_summary(error):
+    """Return a short log-only error summary without exposing secrets."""
+    try:
+        message = str(error)
+    except Exception:
+        message = error.__class__.__name__
+    message = re.sub(r"AIza[0-9A-Za-z_\-]{20,}", "[REDACTED_API_KEY]", message)
+    return message[:900]
+
+
+def _is_transient_ai_error(error):
+    message = _ai_error_summary(error).lower()
+    transient_markers = [
+        "503", "429", "500", "502", "504",
+        "unavailable", "high demand", "temporarily", "try again later",
+        "rate limit", "resource_exhausted", "deadline", "timeout", "overloaded",
+    ]
+    return any(marker in message for marker in transient_markers)
+
+
+def _gemini_models_to_try():
+    primary = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash").strip() or "gemini-2.5-flash"
+    fallback = os.environ.get("GEMINI_FALLBACK_MODEL", "gemini-2.5-flash-lite").strip()
+    extra = os.environ.get("GEMINI_EXTRA_MODELS", "").strip()
+    models = []
+    for model in [primary, fallback, *[m.strip() for m in extra.split(",") if m.strip()]]:
+        if model and model not in models:
+            models.append(model)
+    return models
+
+
+def _openrouter_models_to_try():
+    primary = os.environ.get("OPENROUTER_MODEL", "deepseek/deepseek-chat-v3-0324:free").strip() or "deepseek/deepseek-chat-v3-0324:free"
+    fallback = os.environ.get("OPENROUTER_FALLBACK_MODEL", "google/gemini-2.0-flash-exp:free").strip()
+    extra = os.environ.get("OPENROUTER_EXTRA_MODELS", "").strip()
+    models = []
+    for model in [primary, fallback, *[m.strip() for m in extra.split(",") if m.strip()]]:
+        if model and model not in models:
+            models.append(model)
+    return models
+
+
+def _call_gemini_model(gemini_client, model, prompt, max_tokens=500, temperature=0.4):
     system_instruction = (
         "You are EduPath AI EZZALDEEN, a natural, practical, honest learning coach. "
         "Use simple clear language. Do not invent facts. "
-        "When the user asks for JSON, return valid JSON only without markdown fences."
+        "When the user asks for JSON, return valid JSON only without markdown fences. "
+        "Never include API errors or internal system messages in the final answer."
     )
 
     if genai_types is not None:
@@ -6319,11 +6375,32 @@ def _call_gemini(gemini_client, prompt, max_tokens=500, temperature=0.4):
     text = _extract_gemini_text(response)
     if not text:
         raise RuntimeError("Gemini returned an empty response.")
+    logger.info("AI provider used: Gemini | model: %s", model)
     return text
 
 
-def _call_openrouter(openrouter_client, prompt, max_tokens=500, temperature=0.4):
-    model = os.environ.get("OPENROUTER_MODEL", "deepseek/deepseek-chat-v3-0324:free").strip() or "deepseek/deepseek-chat-v3-0324:free"
+def _call_gemini(gemini_client, prompt, max_tokens=500, temperature=0.4):
+    retries = max(1, _env_int("GEMINI_RETRIES", 2))
+    retry_seconds = max(0.0, _env_float("GEMINI_RETRY_SECONDS", 1.0))
+    errors = []
+
+    for model in _gemini_models_to_try():
+        for attempt in range(1, retries + 1):
+            try:
+                return _call_gemini_model(gemini_client, model, prompt, max_tokens=max_tokens, temperature=temperature)
+            except Exception as exc:
+                summary = _ai_error_summary(exc)
+                errors.append(f"Gemini {model} attempt {attempt}: {summary}")
+                logger.warning("Gemini AI call failed | model=%s | attempt=%s/%s | transient=%s | error=%s", model, attempt, retries, _is_transient_ai_error(exc), summary)
+                if attempt < retries and _is_transient_ai_error(exc) and retry_seconds > 0:
+                    time.sleep(retry_seconds)
+                    continue
+                break
+
+    raise RuntimeError("Gemini failed after all configured models. " + " || ".join(errors[-4:]))
+
+
+def _call_openrouter_model(openrouter_client, model, prompt, max_tokens=500, temperature=0.4):
     response = openrouter_client.chat.completions.create(
         model=model,
         messages=[
@@ -6332,7 +6409,8 @@ def _call_openrouter(openrouter_client, prompt, max_tokens=500, temperature=0.4)
                 "content": (
                     "You are EduPath AI EZZALDEEN, a natural, practical, honest learning coach. "
                     "Use simple clear language. Do not invent facts. "
-                    "When the user asks for JSON, return valid JSON only without markdown fences."
+                    "When the user asks for JSON, return valid JSON only without markdown fences. "
+                    "Never include API errors or internal system messages in the final answer."
                 ),
             },
             {"role": "user", "content": prompt},
@@ -6343,22 +6421,36 @@ def _call_openrouter(openrouter_client, prompt, max_tokens=500, temperature=0.4)
     text = response.choices[0].message.content
     if not text:
         raise RuntimeError("OpenRouter returned an empty response.")
+    logger.info("AI provider used: OpenRouter | model: %s", model)
     return text.strip()
+
+
+def _call_openrouter(openrouter_client, prompt, max_tokens=500, temperature=0.4):
+    errors = []
+    for model in _openrouter_models_to_try():
+        try:
+            return _call_openrouter_model(openrouter_client, model, prompt, max_tokens=max_tokens, temperature=temperature)
+        except Exception as exc:
+            summary = _ai_error_summary(exc)
+            errors.append(f"OpenRouter {model}: {summary}")
+            logger.warning("OpenRouter AI call failed | model=%s | error=%s", model, summary)
+    raise RuntimeError("OpenRouter failed after all configured models. " + " || ".join(errors[-4:]))
 
 
 def call_ai(client, prompt, max_tokens=500, temperature=0.4):
     """Call Gemini and/or OpenRouter through one safe entry point.
 
-    Existing routes keep calling this function without knowing which provider is active.
+    This function must never expose provider errors to the user-facing page.
+    Errors are logged in Render logs, then the next provider is tried automatically.
     """
     if not client:
+        logger.warning("AI client is not configured. Returning local safe fallback response.")
         return fallback_ai_response(prompt)
 
     provider = client.get("provider", "auto") if isinstance(client, dict) else "openrouter"
     gemini_client = client.get("gemini_client") if isinstance(client, dict) else None
     openrouter_client = client.get("openrouter_client") if isinstance(client, dict) else client
 
-    provider_order = []
     if provider == "gemini":
         provider_order = ["gemini"]
     elif provider == "openrouter":
@@ -6373,14 +6465,120 @@ def call_ai(client, prompt, max_tokens=500, temperature=0.4):
                 return _call_gemini(gemini_client, prompt, max_tokens=max_tokens, temperature=temperature)
             if selected_provider == "openrouter" and openrouter_client is not None:
                 return _call_openrouter(openrouter_client, prompt, max_tokens=max_tokens, temperature=temperature)
-        except Exception as e:
-            logger.exception("%s AI call failed", selected_provider)
-            errors.append(f"{selected_provider}: {e}")
+        except Exception as exc:
+            summary = _ai_error_summary(exc)
+            logger.warning("%s provider failed. Trying next provider if available. error=%s", selected_provider, summary)
+            errors.append(f"{selected_provider}: {summary}")
 
-    return fallback_ai_response(prompt, error=" | ".join(errors) if errors else None)
+    logger.error("All AI providers failed. Returning local safe fallback. Last errors: %s", " || ".join(errors[-4:]))
+    return fallback_ai_response(prompt)
+
+
+def _extract_between(text, start_marker, end_markers=None, max_chars=4000):
+    if not text or start_marker not in text:
+        return ""
+    value = text.split(start_marker, 1)[1]
+    if end_markers:
+        cut_positions = [value.find(marker) for marker in end_markers if marker in value]
+        if cut_positions:
+            value = value[:min(pos for pos in cut_positions if pos >= 0)]
+    return value.strip()[:max_chars]
+
+
+def _simple_sentence_cleanup(text):
+    cleaned = (text or "").strip()
+    replacements = {
+        " i ": " I ",
+        " i\n": " I\n",
+        " i.": " I.",
+        " i,": " I,",
+        " i want ": " I want ",
+        " i like ": " I like ",
+        " i am ": " I am ",
+        " dont ": " don't ",
+        " cant ": " can't ",
+        " doesnt ": " doesn't ",
+        " isnt ": " isn't ",
+        " wasnt ": " wasn't ",
+        " didnt ": " didn't ",
+    }
+    cleaned = " " + cleaned + " "
+    for wrong, right in replacements.items():
+        cleaned = cleaned.replace(wrong, right)
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    if cleaned and cleaned[0].islower():
+        cleaned = cleaned[0].upper() + cleaned[1:]
+    return cleaned
 
 
 def fallback_ai_response(prompt, error=None):
+    """Return structured local fallback JSON that keeps pages usable.
+
+    Provider errors stay in logs only. The website should never show raw Gemini/OpenRouter errors.
+    """
+    if "Analyze the essay carefully" in prompt or "Essay topic or question:" in prompt:
+        topic = _extract_between(prompt, "Essay topic or question:", ["Student essay:"])
+        essay = _extract_between(prompt, "Student essay:", ["Analyze the essay carefully."])
+        corrected = _simple_sentence_cleanup(essay)
+        if not corrected:
+            corrected = "Write your essay here, then review grammar, spelling, clarity, and topic relevance."
+        return json.dumps({
+            "corrected_text": corrected,
+            "corrections": [
+                {
+                    "original": "General grammar and sentence clarity",
+                    "correction": "Use complete sentences with clear subject, verb, and object.",
+                    "why": "Clear sentence structure makes your essay easier to understand.",
+                    "how_to_improve": "After writing each sentence, check: Who did the action? What is the action? Is the idea connected to the topic?"
+                },
+                {
+                    "original": "Essay organization",
+                    "correction": "Use an introduction, two or three body points, and a short conclusion.",
+                    "why": "A clear structure helps examiners follow your ideas quickly.",
+                    "how_to_improve": "Plan 2 minutes before writing: main idea, supporting reason, example, conclusion."
+                }
+            ],
+            "writing_tips": [
+                "Keep each paragraph focused on one main idea.",
+                "Use simple accurate grammar before trying complex sentences.",
+                "Support your opinion with one specific example.",
+                "Leave one minute at the end to check spelling, verbs, articles, and punctuation."
+            ],
+            "topic_vocabulary": [
+                {
+                    "word_or_phrase": "well-organized",
+                    "meaning": "arranged clearly and logically",
+                    "example": "A well-organized study plan helps students make steady progress."
+                },
+                {
+                    "word_or_phrase": "long-term goal",
+                    "meaning": "an important aim for the future",
+                    "example": "My long-term goal is to study computer science and build useful technology."
+                },
+                {
+                    "word_or_phrase": "practical skills",
+                    "meaning": "skills that can be used in real situations",
+                    "example": "Programming gives students practical skills for solving real problems."
+                }
+            ]
+        }, ensure_ascii=False)
+
+    if "Return valid JSON only:" in prompt and "corrected_text" in prompt and "natural_version" in prompt:
+        student_text = _extract_between(prompt, "Student text:", ["Return valid JSON only:"])
+        corrected = _simple_sentence_cleanup(student_text)
+        if not corrected:
+            corrected = "Please write your text first so it can be improved."
+        return json.dumps({
+            "corrected_text": corrected,
+            "natural_version": corrected,
+            "simple_explanation": [
+                "Use clear sentences and correct capitalization.",
+                "Check subject-verb agreement and punctuation.",
+                "Keep your meaning direct and easy to understand."
+            ],
+            "useful_vocabulary": ["clear", "organized", "confident", "practical"]
+        }, ensure_ascii=False)
+
     if "Generate 5 realistic interview questions" in prompt:
         return json.dumps([
             {
@@ -6428,30 +6626,51 @@ def fallback_ai_response(prompt, error=None):
             "improved_answer": "This is a good start. Make it more specific by adding one personal example and linking it to your future goals.",
         }, ensure_ascii=False)
 
-    if "English coach" in prompt:
+    if "programming tutor" in prompt or "Explain the likely error" in prompt:
         return json.dumps({
-            "corrected_text": "Your text was received. Add your Gemini or OpenRouter API key to get full AI correction.",
-            "natural_version": "Add your Gemini or OpenRouter API key to generate a natural English version.",
-            "simple_explanation": [
-                "Fallback mode is working.",
-                "AI correction needs GEMINI_API_KEY or OPENROUTER_API_KEY.",
-            ],
-            "useful_vocabulary": ["clear", "natural", "confident"],
-        }, ensure_ascii=False)
-
-    if "programming tutor" in prompt:
-        return json.dumps({
-            "likely_problem": "AI mode is not enabled yet, but the debugging coach page is working.",
-            "hints": ["Add your GEMINI_API_KEY or OPENROUTER_API_KEY in .env.", "Then paste your code and error message."],
-            "debugging_steps": ["Read the error line.", "Print variables.", "Test one small part at a time."],
-            "what_to_learn": ["Debugging habits", "Reading error messages"],
+            "likely_problem": "The code needs step-by-step debugging.",
+            "hints": ["Read the exact error line.", "Check variable names and indentation.", "Test one small part at a time."],
+            "debugging_steps": ["Reproduce the error.", "Locate the line mentioned in the traceback.", "Print important variables.", "Fix one issue and run again."],
+            "what_to_learn": ["Debugging habits", "Reading error messages", "Breaking problems into smaller parts"],
         }, ensure_ascii=False)
 
     return json.dumps({
-        "message": "Fallback mode is active. Add GEMINI_API_KEY or OPENROUTER_API_KEY to enable full AI features.",
-        "error": error or "",
+        "message": "EduPath AI is ready. Please try again with a clearer question or a shorter input.",
     }, ensure_ascii=False)
 
+
+def normalize_essay_result(data, essay="", topic=""):
+    """Guarantee the English essay template always receives complete fields."""
+    if not isinstance(data, dict):
+        data = {}
+    fallback = json.loads(fallback_ai_response(f"Essay topic or question:\n{topic}\n\nStudent essay:\n{essay}\n\nAnalyze the essay carefully."))
+    corrected = data.get("corrected_text") or data.get("corrected_essay") or data.get("improved_essay") or fallback["corrected_text"]
+    corrections = data.get("corrections") if isinstance(data.get("corrections"), list) else fallback["corrections"]
+    writing_tips = data.get("writing_tips") if isinstance(data.get("writing_tips"), list) else fallback["writing_tips"]
+    vocabulary = data.get("topic_vocabulary") if isinstance(data.get("topic_vocabulary"), list) else fallback["topic_vocabulary"]
+    return {
+        "corrected_text": corrected,
+        "corrections": corrections,
+        "writing_tips": writing_tips,
+        "topic_vocabulary": vocabulary,
+    }
+
+
+def normalize_quick_english_result(data, text=""):
+    """Guarantee the English quick-coach template always receives complete fields."""
+    if not isinstance(data, dict):
+        data = {}
+    fallback = json.loads(fallback_ai_response(f"Student text:\n{text}\n\nReturn valid JSON only:\n{{\"corrected_text\":\"...\",\"natural_version\":\"...\"}}"))
+    corrected = data.get("corrected_text") or data.get("correction") or fallback["corrected_text"]
+    natural = data.get("natural_version") or data.get("improved_text") or corrected or fallback["natural_version"]
+    explanation = data.get("simple_explanation") if isinstance(data.get("simple_explanation"), list) else fallback["simple_explanation"]
+    vocabulary = data.get("useful_vocabulary") if isinstance(data.get("useful_vocabulary"), list) else fallback["useful_vocabulary"]
+    return {
+        "corrected_text": corrected,
+        "natural_version": natural,
+        "simple_explanation": explanation,
+        "useful_vocabulary": vocabulary,
+    }
 
 def create_initial_tasks(goal):
     plan = generate_algorithmic_plan(goal.title, goal.current_level, goal.daily_minutes, days=14, category=goal.category)
@@ -6585,7 +6804,18 @@ def detect_weaknesses():
     return sorted_items[:5]
 
 
+
+def strip_json_fences(text):
+    if text is None:
+        return ""
+    text = str(text).strip()
+    if text.startswith("```"):
+        text = re.sub(r"^```(?:json)?\s*", "", text, flags=re.IGNORECASE)
+        text = re.sub(r"\s*```$", "", text).strip()
+    return text
+
 def parse_json_array(text):
+    text = strip_json_fences(text)
     try:
         data = json.loads(text)
         if isinstance(data, list):
@@ -6608,6 +6838,7 @@ def parse_json_array(text):
 
 
 def parse_json_object(text):
+    text = strip_json_fences(text)
     try:
         data = json.loads(text)
         if isinstance(data, dict):
