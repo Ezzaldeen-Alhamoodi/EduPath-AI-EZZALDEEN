@@ -4587,7 +4587,7 @@ def create_app():
                 return redirect(url_for("interview"))
 
             prompt = f"""
-You are a scholarship interview coach.
+You are EduPath AI Scholarship Interview Coach. Generate questions that sound like real scholarship, university, embassy, and admissions interviews — not abstract essay prompts.
 
 Student profile:
 {profile}
@@ -4595,10 +4595,30 @@ Student profile:
 Scholarship: {scholarship}
 Major: {major}
 
-Generate 5 realistic interview questions. For each question, provide:
+Use this common interview-question bank as inspiration, then customize to the scholarship, major, and student profile:
+- Tell us about yourself and your academic background.
+- Why did you choose this major?
+- Why Computer Science / technology / this field?
+- Why this scholarship?
+- Why this university or country, if the scholarship name suggests one?
+- Why should we choose you instead of another applicant?
+- What are your strongest academic achievements?
+- Tell us about a project, certificate, competition, or activity you are proud of.
+- What challenge have you overcome, especially with limited resources?
+- What are your strengths and weaknesses?
+- How do you handle pressure, failure, and difficult study situations?
+- What are your future plans after graduation?
+- How will you contribute to your community/country after studying?
+- How will you adapt to a new culture, language, and academic environment?
+- What will you do if you are not accepted?
+- Describe teamwork, leadership, volunteering, or helping others.
+
+Generate exactly 7 realistic interview questions. They must be direct, spoken-interview style, and highly relevant to the student's scholarship and major. Avoid vague questions like broad philosophical essays.
+
+For each question, provide:
 - question
 - why_they_ask
-- answer_strategy
+- answer_strategy: a practical strategy for a strong scholarship answer, including what evidence the student should mention.
 
 Return valid JSON array only.
 """
@@ -4636,7 +4656,7 @@ Return valid JSON array only.
 
             if action == "evaluate":
                 prompt = f"""
-You are a strict but helpful scholarship interview evaluator.
+You are a strict but supportive scholarship interview evaluator. Evaluate the answer as if the student is preparing for a real scholarship/university interview.
 
 Question:
 {item.question}
@@ -4644,13 +4664,20 @@ Question:
 Student answer:
 {answer}
 
-Evaluate the answer. Return valid JSON only:
+Evaluate using these criteria:
+- Directly answers the question
+- Shows motivation and maturity
+- Gives specific evidence from the student's background
+- Connects the answer to the scholarship, major, and future impact
+- Sounds natural for a spoken interview, not memorized or robotic
+
+Return valid JSON only:
 {{
   "score": integer from 0 to 10,
   "strengths": ["..."],
   "weaknesses": ["..."],
   "suggestions": ["..."],
-  "improved_answer": "..."
+  "improved_answer": "A natural, strong spoken answer that keeps the student's meaning but improves structure, evidence, and scholarship fit."
 }}
 """
                 status = ai_usage_status(current_user, "scholarship")
@@ -4687,6 +4714,7 @@ Evaluate the answer. Return valid JSON only:
         submitted_text = ""
         submitted_topic = ""
         selected_mode = "natural"
+        selected_purpose = "general"
 
         if request.method == "POST":
             coach_type = request.form.get("coach_type", "quick").strip()
@@ -4700,6 +4728,8 @@ Evaluate the answer. Return valid JSON only:
             if coach_type == "essay":
                 topic = request.form.get("essay_topic", "").strip()
                 essay = request.form.get("essay_text", "").strip()
+                essay_purpose = request.form.get("essay_purpose", "general").strip().lower()
+                selected_purpose = essay_purpose
                 submitted_topic = topic
                 submitted_text = essay
 
@@ -4707,8 +4737,21 @@ Evaluate the answer. Return valid JSON only:
                     flash("Please write both the essay topic/question and your essay.", "error")
                     return redirect(url_for("english"))
 
+                purpose_descriptions = {
+                    "general": "General English writing practice: prioritize clarity, grammar, natural expression, and organization.",
+                    "ielts": "IELTS Academic Writing style: focus on Task Response/Task Achievement, Coherence and Cohesion, Lexical Resource, Grammar Range and Accuracy, paragraphing, and academic tone.",
+                    "toefl": "TOEFL iBT Writing style: focus on clear organization, development of ideas, grammar accuracy, academic clarity, and relevant examples.",
+                    "duolingo": "Duolingo English Test writing style: focus on clear direct response, grammatical accuracy, vocabulary range, coherence, and natural time-efficient expression.",
+                    "academic": "General academic writing: focus on thesis clarity, logical structure, evidence, formal vocabulary, and sentence control.",
+                    "scholarship": "Scholarship/application writing: focus on motivation, personal evidence, impact, authenticity, and concise persuasive expression."
+                }
+                purpose_instruction = purpose_descriptions.get(essay_purpose, purpose_descriptions["general"])
+
                 prompt = f"""
 You are EduPath AI Essay Coach for English learners and scholarship/test preparation students.
+
+Writing purpose/exam: {essay_purpose}
+Purpose instruction: {purpose_instruction}
 
 Essay topic or question:
 {topic}
@@ -4716,19 +4759,25 @@ Essay topic or question:
 Student essay:
 {essay}
 
-Analyze the essay carefully. Return valid JSON only with this exact structure:
+Analyze the essay according to the selected purpose/exam. Return valid JSON only with this exact structure:
 {{
-  "corrected_text": "A corrected version of the student's essay. Keep the student's meaning, but fix spelling, grammar, word choice, unclear expressions, illogical usage, and sentences that do not fit the topic.",
+  "corrected_text": "A corrected version of the student's essay. Keep the student's meaning, but fix spelling, grammar, word choice, unclear expressions, weak logic, and sentences that do not fit the topic or selected exam purpose.",
+  "assessment": {{
+    "purpose": "{essay_purpose}",
+    "estimated_level_or_score": "A careful approximate level/score if relevant; otherwise write General practice",
+    "main_problem": "the biggest issue limiting the writing",
+    "main_priority": "the most important next improvement"
+  }},
   "corrections": [
     {{
-      "original": "the wrong word, phrase, sentence, or idea",
-      "correction": "the corrected version",
-      "why": "explain clearly why it is wrong or weak",
-      "how_to_improve": "explain how the student can avoid this mistake"
+      "original": "the wrong or weak word, phrase, sentence, grammar, idea, or organization issue",
+      "correction": "the corrected or stronger version",
+      "why": "explain clearly why it is wrong or weak, using the selected purpose/exam when relevant",
+      "how_to_improve": "explain how the student can avoid this mistake and write better next time"
     }}
   ],
   "writing_tips": [
-    "practical advice to write better and faster under time pressure"
+    "practical advice to write better and faster for the selected purpose/exam"
   ],
   "topic_vocabulary": [
     {{
@@ -4741,8 +4790,10 @@ Analyze the essay carefully. Return valid JSON only with this exact structure:
 
 Rules:
 - Be practical, clear, and encouraging.
+- Do not invent official scores; give approximate guidance only.
 - If the essay includes ideas unrelated to the topic, mention that clearly in corrections.
 - Vocabulary must be related to the topic and should mostly be different from words already used by the student.
+- Give detailed corrections, not empty generic feedback.
 - Do not add markdown outside JSON.
 """
                 ai_text = call_ai(ai_client, prompt, max_tokens=1400, temperature=0.35)
@@ -4771,12 +4822,14 @@ Rules:
                     "vocabulary": "Improve vocabulary and expressions without making it too complex.",
                     "email": "Professional email style.",
                     "ielts": "IELTS-style answer with clear organization and appropriate vocabulary.",
-                    "toefl": "TOEFL-style answer with direct academic clarity."
+                    "toefl": "TOEFL-style answer with direct academic clarity.",
+                    "duolingo": "Duolingo English Test style: clear, direct, grammatical, and time-efficient.",
+                    "scholarship": "Scholarship application/interview style: authentic, specific, concise, and persuasive."
                 }
                 mode_instruction = mode_descriptions.get(mode, mode_descriptions["natural"])
 
                 prompt = f"""
-You are an English coach for a scholarship student.
+You are EduPath AI English Coach for a scholarship student.
 
 Mode: {mode}
 Mode instruction: {mode_instruction}
@@ -4784,12 +4837,14 @@ Mode instruction: {mode_instruction}
 Student text:
 {text}
 
+Improve the text according to the selected mode. Keep the student's meaning and voice, but make the English stronger, clearer, and more natural.
+
 Return valid JSON only:
 {{
-  "corrected_text": "...",
-  "natural_version": "...",
-  "simple_explanation": ["..."],
-  "useful_vocabulary": ["..."]
+  "corrected_text": "Correct grammar, spelling, punctuation, and basic clarity.",
+  "natural_version": "A stronger natural version suitable for the selected mode.",
+  "simple_explanation": ["Mention the most important errors or weaknesses and how to improve them."],
+  "useful_vocabulary": ["Give useful words or phrases the student could use in similar answers."]
 }}
 """
                 ai_text = call_ai(ai_client, prompt, max_tokens=700, temperature=0.4)
@@ -4803,7 +4858,8 @@ Return valid JSON only:
             active_tab=active_tab,
             submitted_text=submitted_text,
             submitted_topic=submitted_topic,
-            selected_mode=selected_mode
+            selected_mode=selected_mode,
+            selected_purpose=selected_purpose
         )
 
     @app.route("/english/save", methods=["POST"])
@@ -6221,7 +6277,7 @@ def build_ai_client():
     """Build an AI provider configuration.
 
     Supported modes through AI_PROVIDER:
-    - auto: use Gemini first, then OpenRouter fallback
+    - auto: use Gemini primary first, then OpenRouter, then Gemini fallback model
     - gemini: use Gemini only, then local safe fallback
     - openrouter: use OpenRouter only, then local safe fallback
     """
@@ -6324,15 +6380,31 @@ def _is_transient_ai_error(error):
     return any(marker in message for marker in transient_markers)
 
 
-def _gemini_models_to_try():
-    primary = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash").strip() or "gemini-2.5-flash"
-    fallback = os.environ.get("GEMINI_FALLBACK_MODEL", "gemini-2.5-flash-lite").strip()
-    extra = os.environ.get("GEMINI_EXTRA_MODELS", "").strip()
+def _unique_models(items):
     models = []
-    for model in [primary, fallback, *[m.strip() for m in extra.split(",") if m.strip()]]:
+    for model in items:
+        model = (model or "").strip()
         if model and model not in models:
             models.append(model)
     return models
+
+
+def _gemini_primary_models_to_try():
+    primary = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash").strip() or "gemini-2.5-flash"
+    extra = os.environ.get("GEMINI_PRIMARY_EXTRA_MODELS", "").strip()
+    return _unique_models([primary, *[m.strip() for m in extra.split(",") if m.strip()]])
+
+
+def _gemini_fallback_models_to_try():
+    primary_models = set(_gemini_primary_models_to_try())
+    fallback = os.environ.get("GEMINI_FALLBACK_MODEL", "gemini-2.5-flash-lite").strip()
+    extra = os.environ.get("GEMINI_EXTRA_MODELS", "").strip()
+    models = _unique_models([fallback, *[m.strip() for m in extra.split(",") if m.strip()]])
+    return [model for model in models if model not in primary_models]
+
+
+def _gemini_models_to_try():
+    return _unique_models([*_gemini_primary_models_to_try(), *_gemini_fallback_models_to_try()])
 
 
 def _openrouter_models_to_try():
@@ -6379,25 +6451,26 @@ def _call_gemini_model(gemini_client, model, prompt, max_tokens=500, temperature
     return text
 
 
-def _call_gemini(gemini_client, prompt, max_tokens=500, temperature=0.4):
+def _call_gemini(gemini_client, prompt, max_tokens=500, temperature=0.4, models=None, phase="Gemini"):
     retries = max(1, _env_int("GEMINI_RETRIES", 2))
     retry_seconds = max(0.0, _env_float("GEMINI_RETRY_SECONDS", 1.0))
     errors = []
+    models_to_try = models or _gemini_models_to_try()
 
-    for model in _gemini_models_to_try():
+    for model in models_to_try:
         for attempt in range(1, retries + 1):
             try:
                 return _call_gemini_model(gemini_client, model, prompt, max_tokens=max_tokens, temperature=temperature)
             except Exception as exc:
                 summary = _ai_error_summary(exc)
-                errors.append(f"Gemini {model} attempt {attempt}: {summary}")
-                logger.warning("Gemini AI call failed | model=%s | attempt=%s/%s | transient=%s | error=%s", model, attempt, retries, _is_transient_ai_error(exc), summary)
+                errors.append(f"{phase} {model} attempt {attempt}: {summary}")
+                logger.warning("%s AI call failed | model=%s | attempt=%s/%s | transient=%s | error=%s", phase, model, attempt, retries, _is_transient_ai_error(exc), summary)
                 if attempt < retries and _is_transient_ai_error(exc) and retry_seconds > 0:
                     time.sleep(retry_seconds)
                     continue
                 break
 
-    raise RuntimeError("Gemini failed after all configured models. " + " || ".join(errors[-4:]))
+    raise RuntimeError(f"{phase} failed after configured models. " + " || ".join(errors[-4:]))
 
 
 def _call_openrouter_model(openrouter_client, model, prompt, max_tokens=500, temperature=0.4):
@@ -6440,8 +6513,13 @@ def _call_openrouter(openrouter_client, prompt, max_tokens=500, temperature=0.4)
 def call_ai(client, prompt, max_tokens=500, temperature=0.4):
     """Call Gemini and/or OpenRouter through one safe entry point.
 
-    This function must never expose provider errors to the user-facing page.
-    Errors are logged in Render logs, then the next provider is tried automatically.
+    Auto mode quality order:
+    1) Gemini primary model (usually gemini-2.5-flash)
+    2) OpenRouter selected model
+    3) Gemini fallback model (usually gemini-2.5-flash-lite)
+    4) Local safe fallback
+
+    Provider errors must stay in Render logs only. The website should never show raw Gemini/OpenRouter errors.
     """
     if not client:
         logger.warning("AI client is not configured. Returning local safe fallback response.")
@@ -6451,28 +6529,68 @@ def call_ai(client, prompt, max_tokens=500, temperature=0.4):
     gemini_client = client.get("gemini_client") if isinstance(client, dict) else None
     openrouter_client = client.get("openrouter_client") if isinstance(client, dict) else client
 
-    if provider == "gemini":
-        provider_order = ["gemini"]
-    elif provider == "openrouter":
-        provider_order = ["openrouter"]
-    else:
-        provider_order = ["gemini", "openrouter"]
-
     errors = []
-    for selected_provider in provider_order:
+
+    def _try_step(label, fn):
         try:
-            if selected_provider == "gemini" and gemini_client is not None:
-                return _call_gemini(gemini_client, prompt, max_tokens=max_tokens, temperature=temperature)
-            if selected_provider == "openrouter" and openrouter_client is not None:
-                return _call_openrouter(openrouter_client, prompt, max_tokens=max_tokens, temperature=temperature)
+            return fn()
         except Exception as exc:
             summary = _ai_error_summary(exc)
-            logger.warning("%s provider failed. Trying next provider if available. error=%s", selected_provider, summary)
-            errors.append(f"{selected_provider}: {summary}")
+            logger.warning("%s failed. Trying next AI option if available. error=%s", label, summary)
+            errors.append(f"{label}: {summary}")
+            return None
+
+    if provider == "gemini":
+        if gemini_client is not None:
+            result = _try_step("Gemini provider", lambda: _call_gemini(gemini_client, prompt, max_tokens=max_tokens, temperature=temperature))
+            if result:
+                return result
+    elif provider == "openrouter":
+        if openrouter_client is not None:
+            result = _try_step("OpenRouter provider", lambda: _call_openrouter(openrouter_client, prompt, max_tokens=max_tokens, temperature=temperature))
+            if result:
+                return result
+    else:
+        # Quality-first auto order: strong Gemini -> strong OpenRouter -> lighter Gemini fallback.
+        if gemini_client is not None:
+            result = _try_step(
+                "Gemini primary provider",
+                lambda: _call_gemini(
+                    gemini_client,
+                    prompt,
+                    max_tokens=max_tokens,
+                    temperature=temperature,
+                    models=_gemini_primary_models_to_try(),
+                    phase="Gemini primary",
+                ),
+            )
+            if result:
+                return result
+
+        if openrouter_client is not None:
+            result = _try_step("OpenRouter provider", lambda: _call_openrouter(openrouter_client, prompt, max_tokens=max_tokens, temperature=temperature))
+            if result:
+                return result
+
+        if gemini_client is not None:
+            fallback_models = _gemini_fallback_models_to_try()
+            if fallback_models:
+                result = _try_step(
+                    "Gemini fallback provider",
+                    lambda: _call_gemini(
+                        gemini_client,
+                        prompt,
+                        max_tokens=max_tokens,
+                        temperature=temperature,
+                        models=fallback_models,
+                        phase="Gemini fallback",
+                    ),
+                )
+                if result:
+                    return result
 
     logger.error("All AI providers failed. Returning local safe fallback. Last errors: %s", " || ".join(errors[-4:]))
     return fallback_ai_response(prompt)
-
 
 def _extract_between(text, start_marker, end_markers=None, max_chars=4000):
     if not text or start_marker not in text:
@@ -6524,6 +6642,12 @@ def fallback_ai_response(prompt, error=None):
             corrected = "Write your essay here, then review grammar, spelling, clarity, and topic relevance."
         return json.dumps({
             "corrected_text": corrected,
+            "assessment": {
+                "purpose": "general",
+                "estimated_level_or_score": "General practice",
+                "main_problem": "The writing needs clearer grammar, organization, and topic focus.",
+                "main_priority": "Write clear complete sentences and support each main idea with a simple example."
+            },
             "corrections": [
                 {
                     "original": "General grammar and sentence clarity",
@@ -6579,32 +6703,42 @@ def fallback_ai_response(prompt, error=None):
             "useful_vocabulary": ["clear", "organized", "confident", "practical"]
         }, ensure_ascii=False)
 
-    if "Generate 5 realistic interview questions" in prompt:
+    if "Generate 5 realistic interview questions" in prompt or "Generate exactly 7 realistic interview questions" in prompt or "common interview-question bank" in prompt:
         return json.dumps([
             {
                 "question": "Tell us about yourself and your academic background.",
-                "why_they_ask": "They want to understand your profile and motivation.",
-                "answer_strategy": "Mention your academic strength, computer science interest, projects, volunteering, and future goals.",
+                "why_they_ask": "They want a clear first impression of your profile, motivation, and readiness.",
+                "answer_strategy": "Give a short story: academic excellence, major interest, projects/certificates, volunteering, and future goal. Do not list everything randomly.",
             },
             {
-                "question": "Why did you choose Computer Science?",
-                "why_they_ask": "They want to know if your choice is serious and connected to your future.",
-                "answer_strategy": "Connect mathematics, problem-solving, programming, AI, and practical impact.",
+                "question": "Why did you choose this major, and how is it connected to your future plans?",
+                "why_they_ask": "They want to know whether your major choice is serious, informed, and realistic.",
+                "answer_strategy": "Connect your strengths in mathematics/problem-solving with the major, then mention one practical field where you want to create impact.",
             },
             {
-                "question": "Why do you deserve this scholarship?",
-                "why_they_ask": "They want evidence of excellence, discipline, and potential.",
-                "answer_strategy": "Mention your GPA, self-learning, projects, volunteering, and clear goals.",
+                "question": "Why are you applying for this scholarship?",
+                "why_they_ask": "They want to see motivation, financial/academic need, and alignment with the scholarship mission.",
+                "answer_strategy": "Explain how the scholarship gives access to quality education and how you will use it responsibly to build skills and contribute later.",
             },
             {
-                "question": "What are your future plans after graduation?",
-                "why_they_ask": "They want to see if you have a realistic long-term vision.",
-                "answer_strategy": "Explain your plan to gain strong CS skills and use technology to help education and healthcare.",
+                "question": "Why should we choose you over other strong applicants?",
+                "why_they_ask": "They want evidence of distinction, not general claims.",
+                "answer_strategy": "Use 2–3 concrete proofs: GPA/rank, competition/project, self-learning, volunteering, discipline, or leadership.",
             },
             {
-                "question": "What challenge have you overcome?",
-                "why_they_ask": "They want to assess resilience.",
-                "answer_strategy": "Use a real challenge such as limited resources and explain how you continued learning.",
+                "question": "Tell us about a challenge you faced and how you overcame it.",
+                "why_they_ask": "They want resilience and problem-solving ability.",
+                "answer_strategy": "Use the STAR method: situation, task, action, result. End with what you learned.",
+            },
+            {
+                "question": "What are your strengths and weaknesses as a student?",
+                "why_they_ask": "They want self-awareness and maturity.",
+                "answer_strategy": "Mention a real strength with evidence, then one manageable weakness and the method you use to improve it.",
+            },
+            {
+                "question": "How will you contribute to your community or country after graduation?",
+                "why_they_ask": "Scholarships often look for future impact, not only personal benefit.",
+                "answer_strategy": "Give a realistic plan connected to your major: build skills, gain experience, then contribute through education, technology, healthcare, or local development.",
             },
         ], ensure_ascii=False)
 
@@ -6645,11 +6779,13 @@ def normalize_essay_result(data, essay="", topic=""):
         data = {}
     fallback = json.loads(fallback_ai_response(f"Essay topic or question:\n{topic}\n\nStudent essay:\n{essay}\n\nAnalyze the essay carefully."))
     corrected = data.get("corrected_text") or data.get("corrected_essay") or data.get("improved_essay") or fallback["corrected_text"]
+    assessment = data.get("assessment") if isinstance(data.get("assessment"), dict) else fallback.get("assessment", {})
     corrections = data.get("corrections") if isinstance(data.get("corrections"), list) else fallback["corrections"]
     writing_tips = data.get("writing_tips") if isinstance(data.get("writing_tips"), list) else fallback["writing_tips"]
     vocabulary = data.get("topic_vocabulary") if isinstance(data.get("topic_vocabulary"), list) else fallback["topic_vocabulary"]
     return {
         "corrected_text": corrected,
+        "assessment": assessment,
         "corrections": corrections,
         "writing_tips": writing_tips,
         "topic_vocabulary": vocabulary,

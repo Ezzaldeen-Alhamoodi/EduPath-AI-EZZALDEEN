@@ -23,13 +23,14 @@
             <label>Your text</label>
             <textarea name="text" rows="8" placeholder="Write your English answer here..."></textarea>
 
-            <label>Mode</label>
+            <label>Mode / Purpose</label>
             <select name="mode">
-                <option value="natural">Natural</option>
+                <option value="natural">General natural English</option>
                 <option value="simple">Simple and clear</option>
                 <option value="formal">Formal</option>
                 <option value="interview">Interview answer</option>
                 <option value="academic">Academic</option>
+                <option value="scholarship">Scholarship application / interview</option>
                 <option value="friendly">Friendly</option>
                 <option value="concise">Concise and direct</option>
                 <option value="grammar">Grammar correction</option>
@@ -37,6 +38,7 @@
                 <option value="email">Professional email</option>
                 <option value="ielts">IELTS style</option>
                 <option value="toefl">TOEFL style</option>
+                <option value="duolingo">Duolingo English Test style</option>
             </select>
 
             <button type="submit">✨ Improve Text</button>
@@ -49,6 +51,16 @@
 
         <form method="POST" class="form">
             <input type="hidden" name="coach_type" value="essay">
+
+            <label>Writing purpose / exam</label>
+            <select name="essay_purpose">
+                <option value="general">General writing practice</option>
+                <option value="ielts">IELTS Academic Writing</option>
+                <option value="toefl">TOEFL iBT Writing</option>
+                <option value="duolingo">Duolingo English Test Writing</option>
+                <option value="academic">Academic writing</option>
+                <option value="scholarship">Scholarship / application writing</option>
+            </select>
 
             <label>Essay Question / Topic</label>
             <input name="essay_topic" placeholder="Example: Some people think technology improves education. Discuss both views and give your opinion.">
@@ -95,7 +107,17 @@
     <h3>1. Corrected Essay</h3>
     <p class="improved">{{ essay_result.corrected_text }}</p>
 
-    <h3>2. Corrections and Explanations</h3>
+    {% if essay_result.assessment %}
+    <h3>2. Purpose-Based Assessment</h3>
+    <div class="correction-card">
+        <p><strong>Purpose:</strong> {{ essay_result.assessment.purpose }}</p>
+        <p><strong>Approximate level/score:</strong> {{ essay_result.assessment.estimated_level_or_score }}</p>
+        <p><strong>Main problem:</strong> {{ essay_result.assessment.main_problem }}</p>
+        <p><strong>Main priority:</strong> {{ essay_result.assessment.main_priority }}</p>
+    </div>
+    {% endif %}
+
+    <h3>3. Corrections and Explanations</h3>
     {% if essay_result.corrections %}
         <div class="correction-list">
             {% for item in essay_result.corrections %}
@@ -115,14 +137,14 @@
         <p class="muted">No detailed corrections were returned.</p>
     {% endif %}
 
-    <h3>3. Writing Tips: Better Writing in Less Time</h3>
+    <h3>4. Writing Tips: Better Writing in Less Time</h3>
     <ul>
         {% for tip in essay_result.writing_tips %}
             <li>{{ tip }}</li>
         {% endfor %}
     </ul>
 
-    <h3>4. Topic Vocabulary and Phrases</h3>
+    <h3>5. Topic Vocabulary and Phrases</h3>
     {% if essay_result.topic_vocabulary %}
         <div class="vocab-grid">
             {% for vocab in essay_result.topic_vocabulary %}
@@ -140,6 +162,7 @@
     <form method="POST" action="{{ url_for('save_english_answer') }}" class="save-result-form">
         <input type="hidden" name="coach_type" value="essay">
         <input type="hidden" name="topic" value="{{ submitted_topic|e }}">
+        <input type="hidden" name="mode" value="{{ selected_purpose }}">
         <input type="hidden" name="original_text" value="{{ submitted_text|e }}">
         <input type="hidden" name="result_json" value='{{ essay_result|tojson }}'>
         <button type="submit" class="small-button">💾 Save Essay Analysis</button>
