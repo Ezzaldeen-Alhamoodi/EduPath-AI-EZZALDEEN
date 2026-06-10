@@ -18,6 +18,12 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
 from openai import OpenAI
+try:
+    from google import genai
+    from google.genai import types as genai_types
+except Exception:
+    genai = None
+    genai_types = None
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 from flask_mail import Mail, Message
 from markupsafe import Markup, escape
@@ -6212,47 +6218,166 @@ def ensure_subscription_code_schema():
         logger.exception("Subscription code schema migration failed")
 
 def build_ai_client():
-    key = os.environ.get("OPENROUTER_API_KEY")
-    if not key:
-        logger.warning("OPENROUTER_API_KEY is missing. App will use fallback responses.")
-        return None
+    """Build an AI provider configuration.
 
-    return OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=key,
-        default_headers={
-            "HTTP-Referer": "http://localhost:5000",
-            "X-Title": "EduPath AI EZZALDEEN",
-        },
+    Supported modes through AI_PROVIDER:
+    - auto: use Gemini first, then OpenRouter fallback
+    - gemini: use Gemini only, then local fallback
+    - openrouter: use OpenRouter only, then local fallback
+    """
+    provider = os.environ.get("AI_PROVIDER", "auto").strip().lower() or "auto"
+    gemini_key = os.environ.get("GEMINI_API_KEY", "").strip()
+    openrouter_key = os.environ.get("OPENROUTER_API_KEY", "").strip()
+
+    ai_config = {
+        "provider": provider,
+        "gemini_client": None,
+        "openrouter_client": None,
+    }
+
+    if provider not in {"auto", "gemini", "openrouter"}:
+        logger.warning("Unsupported AI_PROVIDER=%s. Falling back to auto mode.", provider)
+        ai_config["provider"] = "auto"
+
+    if gemini_key and genai is not None:
+        try:
+            ai_config["gemini_client"] = genai.Client(api_key=gemini_key)
+            logger.info("Gemini AI provider is configured.")
+        except Exception:
+            logger.exception("Failed to initialize Gemini client. Gemini will be skipped.")
+    elif gemini_key and genai is None:
+        logger.warning("GEMINI_API_KEY is set, but google-genai is not installed. Add google-genai to requirements.txt.")
+
+    if openrouter_key:
+        try:
+            ai_config["openrouter_client"] = OpenAI(
+                base_url="https://openrouter.ai/api/v1",
+                api_key=openrouter_key,
+                default_headers={
+                    "HTTP-Referer": os.environ.get("APP_PUBLIC_URL", "http://localhost:5000"),
+                    "X-Title": "EduPath AI EZZALDEEN",
+                },
+            )
+            logger.info("OpenRouter AI provider is configured.")
+        except Exception:
+            logger.exception("Failed to initialize OpenRouter client. OpenRouter will be skipped.")
+
+    if ai_config["provider"] == "gemini" and not ai_config["gemini_client"]:
+        logger.warning("AI_PROVIDER=gemini but Gemini is not available. App will use fallback responses.")
+    elif ai_config["provider"] == "openrouter" and not ai_config["openrouter_client"]:
+        logger.warning("AI_PROVIDER=openrouter but OPENROUTER_API_KEY is missing or invalid. App will use fallback responses.")
+    elif ai_config["provider"] == "auto" and not ai_config["gemini_client"] and not ai_config["openrouter_client"]:
+        logger.warning("No AI provider is configured. Add GEMINI_API_KEY and/or OPENROUTER_API_KEY to enable full AI features.")
+
+    return ai_config
+
+
+def _extract_gemini_text(response):
+    """Safely extract text from different google-genai response shapes."""
+    text = getattr(response, "text", None)
+    if text:
+        return text.strip()
+
+    try:
+        candidates = getattr(response, "candidates", None) or []
+        parts = candidates[0].content.parts if candidates else []
+        joined = "".join(getattr(part, "text", "") for part in parts)
+        if joined.strip():
+            return joined.strip()
+    except Exception:
+        pass
+
+    return ""
+
+
+def _call_gemini(gemini_client, prompt, max_tokens=500, temperature=0.4):
+    model = os.environ.get("GEMINI_MODEL", "gemini-2.0-flash").strip() or "gemini-2.0-flash"
+    system_instruction = (
+        "You are EduPath AI EZZALDEEN, a natural, practical, honest learning coach. "
+        "Use simple clear language. Do not invent facts. "
+        "When the user asks for JSON, return valid JSON only without markdown fences."
     )
+
+    if genai_types is not None:
+        config = genai_types.GenerateContentConfig(
+            system_instruction=system_instruction,
+            temperature=temperature,
+            max_output_tokens=max_tokens,
+        )
+    else:
+        config = {
+            "system_instruction": system_instruction,
+            "temperature": temperature,
+            "max_output_tokens": max_tokens,
+        }
+
+    response = gemini_client.models.generate_content(
+        model=model,
+        contents=prompt,
+        config=config,
+    )
+    text = _extract_gemini_text(response)
+    if not text:
+        raise RuntimeError("Gemini returned an empty response.")
+    return text
+
+
+def _call_openrouter(openrouter_client, prompt, max_tokens=500, temperature=0.4):
+    model = os.environ.get("OPENROUTER_MODEL", "deepseek/deepseek-chat-v3-0324:free").strip() or "deepseek/deepseek-chat-v3-0324:free"
+    response = openrouter_client.chat.completions.create(
+        model=model,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are EduPath AI EZZALDEEN, a natural, practical, honest learning coach. "
+                    "Use simple clear language. Do not invent facts. "
+                    "When the user asks for JSON, return valid JSON only without markdown fences."
+                ),
+            },
+            {"role": "user", "content": prompt},
+        ],
+        max_tokens=max_tokens,
+        temperature=temperature,
+    )
+    text = response.choices[0].message.content
+    if not text:
+        raise RuntimeError("OpenRouter returned an empty response.")
+    return text.strip()
 
 
 def call_ai(client, prompt, max_tokens=500, temperature=0.4):
-    if client is None:
+    """Call Gemini and/or OpenRouter through one safe entry point.
+
+    Existing routes keep calling this function without knowing which provider is active.
+    """
+    if not client:
         return fallback_ai_response(prompt)
 
-    model = os.environ.get("OPENROUTER_MODEL", "deepseek/deepseek-chat-v3-0324:free")
+    provider = client.get("provider", "auto") if isinstance(client, dict) else "openrouter"
+    gemini_client = client.get("gemini_client") if isinstance(client, dict) else None
+    openrouter_client = client.get("openrouter_client") if isinstance(client, dict) else client
 
-    try:
-        response = client.chat.completions.create(
-            model=model,
-            messages=[
-                {
-                    "role": "system",
-                    "content": (
-                        "You are EduPath AI EZZALDEEN, a natural, practical, honest learning coach. "
-                        "Use simple clear language. Do not invent facts."
-                    ),
-                },
-                {"role": "user", "content": prompt},
-            ],
-            max_tokens=max_tokens,
-            temperature=temperature,
-        )
-        return response.choices[0].message.content.strip()
-    except Exception as e:
-        logger.exception("AI call failed")
-        return fallback_ai_response(prompt, error=str(e))
+    provider_order = []
+    if provider == "gemini":
+        provider_order = ["gemini"]
+    elif provider == "openrouter":
+        provider_order = ["openrouter"]
+    else:
+        provider_order = ["gemini", "openrouter"]
+
+    errors = []
+    for selected_provider in provider_order:
+        try:
+            if selected_provider == "gemini" and gemini_client is not None:
+                return _call_gemini(gemini_client, prompt, max_tokens=max_tokens, temperature=temperature)
+            if selected_provider == "openrouter" and openrouter_client is not None:
+                return _call_openrouter(openrouter_client, prompt, max_tokens=max_tokens, temperature=temperature)
+        except Exception as e:
+            logger.exception("%s AI call failed", selected_provider)
+            errors.append(f"{selected_provider}: {e}")
+
+    return fallback_ai_response(prompt, error=" | ".join(errors) if errors else None)
 
 
 def fallback_ai_response(prompt, error=None):
@@ -6305,11 +6430,11 @@ def fallback_ai_response(prompt, error=None):
 
     if "English coach" in prompt:
         return json.dumps({
-            "corrected_text": "Your text was received. Add your OpenRouter API key to get full AI correction.",
-            "natural_version": "Add your OpenRouter API key to generate a natural English version.",
+            "corrected_text": "Your text was received. Add your Gemini or OpenRouter API key to get full AI correction.",
+            "natural_version": "Add your Gemini or OpenRouter API key to generate a natural English version.",
             "simple_explanation": [
                 "Fallback mode is working.",
-                "AI correction needs OPENROUTER_API_KEY.",
+                "AI correction needs GEMINI_API_KEY or OPENROUTER_API_KEY.",
             ],
             "useful_vocabulary": ["clear", "natural", "confident"],
         }, ensure_ascii=False)
@@ -6317,13 +6442,13 @@ def fallback_ai_response(prompt, error=None):
     if "programming tutor" in prompt:
         return json.dumps({
             "likely_problem": "AI mode is not enabled yet, but the debugging coach page is working.",
-            "hints": ["Add your OpenRouter API key in .env.", "Then paste your code and error message."],
+            "hints": ["Add your GEMINI_API_KEY or OPENROUTER_API_KEY in .env.", "Then paste your code and error message."],
             "debugging_steps": ["Read the error line.", "Print variables.", "Test one small part at a time."],
             "what_to_learn": ["Debugging habits", "Reading error messages"],
         }, ensure_ascii=False)
 
     return json.dumps({
-        "message": "Fallback mode is active. Add OPENROUTER_API_KEY to enable full AI features.",
+        "message": "Fallback mode is active. Add GEMINI_API_KEY or OPENROUTER_API_KEY to enable full AI features.",
         "error": error or "",
     }, ensure_ascii=False)
 
