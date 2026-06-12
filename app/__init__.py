@@ -541,28 +541,8 @@ def task_due_for_email_reminder(task, now_dt):
     if task.email_reminder_sent_at == today_value:
         return False
 
-    if task.start_date and task.start_date > today_value:
+    if not task_scheduled_for_date_v55146(task, now_dt.date()):
         return False
-
-    if task.due_date and task.due_date < today_value:
-        return False
-
-    if repeat_type_matches_v546(task.repeat_type, "مرة واحدة / بدون تكرار") and task.due_date and task.due_date != today_value:
-        return False
-
-    if repeat_type_matches_v546(task.repeat_type, "أيام محددة"):
-        # Python Monday=0 ... Sunday=6, same as the frontend values.
-        days = [d for d in (task.repeat_days or "").split(",") if d != ""]
-        if str(now_dt.weekday()) not in days:
-            return False
-
-    if repeat_type_matches_v546(task.repeat_type, "أسبوعيًا") and task.due_date:
-        try:
-            due_weekday = datetime.strptime(task.due_date, "%Y-%m-%d").weekday()
-            if now_dt.weekday() != due_weekday:
-                return False
-        except Exception:
-            pass
 
     # Allow a small window so Render Cron does not need to run exactly at the minute.
     try:
@@ -3006,44 +2986,9 @@ def parse_task_time_value(value):
 
 
 def task_should_have_push_today(task, today_date, weekday):
-    status = (task.status or "").strip().lower()
-    if status in {"done", "completed", "complete", "مكتملة", "منجزة", "تم الإنجاز", "تم إنجازها"}:
-        return False
-
     if not task.reminder_time:
         return False
-
-    start_date_value = parse_task_date_value(task.start_date)
-    due_date_value = parse_task_date_value(task.due_date)
-
-    if start_date_value and start_date_value > today_date:
-        return False
-    if due_date_value and due_date_value < today_date:
-        return False
-
-    repeat_type = normalize_repeat_type_ar_v546(task.repeat_type)
-
-    if repeat_type_matches_v546(repeat_type, "مرة واحدة / بدون تكرار", "مرة واحدة"):
-        target_date = due_date_value or start_date_value
-        return True if target_date is None else target_date == today_date
-
-    if repeat_type_matches_v546(repeat_type, "أيام محددة"):
-        days = [d for d in (task.repeat_days or "").split(",") if d != ""]
-        return str(weekday) in days
-
-    if repeat_type_matches_v546(repeat_type, "أسبوعيًا"):
-        if due_date_value:
-            return due_date_value.weekday() == weekday
-        if start_date_value:
-            return start_date_value.weekday() == weekday
-        return True
-
-    if repeat_type_matches_v546(repeat_type, "شهريًا"):
-        target_date = due_date_value or start_date_value
-        return True if target_date is None else target_date.day == today_date.day
-
-    return True
-
+    return task_scheduled_for_date_v55146(task, today_date)
 
 def task_start_datetime_for_today(task, now_dt):
     reminder_time = parse_task_time_value(task.reminder_time)
@@ -3075,6 +3020,7 @@ def mark_task_notification_sent(user_id, task_id, notification_type, scheduled_f
 
 def send_due_task_push_notifications(now_dt=None):
     now_dt = now_dt or current_app_notification_datetime()
+    reset_count = reset_recurring_tasks_for_date(now_dt.date())
     today = now_dt.date()
     weekday = now_dt.weekday()
     sent_count = 0
@@ -3128,8 +3074,128 @@ def send_due_task_push_notifications(now_dt=None):
                 db.session.commit()
                 sent_count += 1
 
-    return {"checked": checked_count, "sent": sent_count}
+    return {"checked": checked_count, "sent": sent_count, "recurring_reset": reset_count}
 
+
+
+# EduPath AI v5.5.146 Recurring Task Daily Reset
+# Backend-only logic: no UI, design, bank, or field changes.
+def current_app_local_datetime():
+    try:
+        return current_app_notification_datetime()
+    except Exception:
+        return datetime.utcnow() + timedelta(hours=int(os.environ.get("APP_TIMEZONE_OFFSET_HOURS", "3")))
+
+
+def current_app_local_date():
+    return current_app_local_datetime().date()
+
+
+def is_task_done_status(task):
+    return (task.status or "").strip().lower() in {
+        "done", "completed", "complete", "مكتملة", "منجزة", "تم الإنجاز", "تم إنجازها"
+    }
+
+
+def parse_edupath_date(value):
+    try:
+        return datetime.strptime((value or "").strip()[:10], "%Y-%m-%d").date()
+    except Exception:
+        return None
+
+
+def normalize_repeat_for_schedule(value):
+    return normalize_repeat_type_ar_v546(value)
+
+
+def is_repeating_task(task):
+    repeat = normalize_repeat_for_schedule(task.repeat_type)
+    repeat_lower = (repeat or "").strip().lower()
+    return repeat not in {"مرة واحدة / بدون تكرار", "مرة واحدة", "بدون تكرار", ""} and repeat_lower not in {
+        "once", "one_time", "none", "no repeat", "no repeat / once"
+    }
+
+
+def task_scheduled_for_date_v55146(task, target_date):
+    start_date_value = parse_edupath_date(task.start_date)
+    due_date_value = parse_edupath_date(task.due_date)
+    repeat = normalize_repeat_for_schedule(task.repeat_type)
+    repeat_lower = (repeat or "").strip().lower()
+
+    if start_date_value and start_date_value > target_date:
+        return False
+
+    one_time_values = {
+        "مرة واحدة / بدون تكرار", "مرة واحدة", "بدون تكرار",
+        "once", "one_time", "none", "no repeat / once", "no repeat",
+    }
+
+    if repeat in one_time_values or repeat_lower in one_time_values:
+        if due_date_value and due_date_value < target_date:
+            return False
+        if start_date_value or due_date_value:
+            return (start_date_value == target_date) or (due_date_value == target_date)
+        return True
+
+    # For repeating tasks, due_date is treated as a final end date only when it is clearly
+    # after the start date. This prevents a daily/weekly task created for today from stopping
+    # forever just because its first due date was today.
+    if due_date_value and start_date_value and due_date_value > start_date_value and due_date_value < target_date:
+        return False
+
+    if repeat in {"يوميًا", "يومي", "daily"} or repeat_lower == "daily":
+        return True
+
+    if repeat in {"أسبوعيًا", "أسبوعي", "weekly"} or repeat_lower == "weekly":
+        base_date = start_date_value or due_date_value
+        return bool(base_date and base_date.weekday() == target_date.weekday())
+
+    if repeat in {"أيام محددة", "selected_days"} or repeat_lower == "selected_days":
+        selected_days = {day.strip() for day in (task.repeat_days or "").split(",") if day.strip() != ""}
+        return str(target_date.weekday()) in selected_days
+
+    if repeat in {"شهريًا", "شهري", "monthly"} or repeat_lower == "monthly":
+        base_date = start_date_value or due_date_value
+        return bool(base_date and base_date.day == target_date.day)
+
+    # Custom repeat patterns cannot be safely interpreted, so keep them available after start date
+    # and before due date without changing any visible field.
+    if repeat in {"أخرى", "custom", "Custom"} or repeat_lower in {"custom", "other"}:
+        return True
+
+    return True
+
+
+def reset_recurring_tasks_for_date(target_date=None, user_id=None):
+    """Reset recurring tasks to pending on their next scheduled day.
+
+    A recurring task completed yesterday stays completed until it becomes scheduled again.
+    When the new scheduled day arrives in Yemen/Aden time, it returns to pending so the user
+    can complete the new occurrence and daily progress is calculated correctly.
+    """
+    target_date = target_date or current_app_local_date()
+    today_value = target_date.isoformat()
+    query = StudyTask.query.filter(StudyTask.status == "done")
+    if user_id is not None:
+        query = query.filter(StudyTask.user_id == user_id)
+
+    reset_count = 0
+    for task in query.all():
+        if not is_repeating_task(task):
+            continue
+        if task.last_reviewed == today_value:
+            continue
+        if not task_scheduled_for_date_v55146(task, target_date):
+            continue
+
+        task.status = "pending"
+        task.email_reminder_sent_at = None
+        task.completion_email_sent_at = None
+        reset_count += 1
+
+    if reset_count:
+        db.session.commit()
+    return reset_count
 
 def create_app():
     app = Flask(__name__)
@@ -3563,7 +3629,8 @@ def create_app():
         if cron_secret and not secrets.compare_digest(provided, cron_secret):
             return jsonify({"ok": False, "error": "unauthorized"}), 401
 
-        now_dt = datetime.utcnow() + timedelta(hours=int(os.environ.get("APP_TIMEZONE_OFFSET_HOURS", "3")))
+        now_dt = current_app_local_datetime()
+        reset_count = reset_recurring_tasks_for_date(now_dt.date())
         sent = 0
         checked = 0
 
@@ -3579,7 +3646,22 @@ def create_app():
                     sent += 1
 
         db.session.commit()
-        return jsonify({"ok": True, "checked": checked, "sent": sent, "now": now_dt.isoformat()})
+        return jsonify({"ok": True, "checked": checked, "sent": sent, "recurring_reset": reset_count, "now": now_dt.isoformat()})
+
+
+
+
+    @app.route("/cron/reset-recurring-tasks")
+    def cron_reset_recurring_tasks():
+        cron_secret = os.environ.get("CRON_SECRET", "")
+        provided = request.headers.get("X-Cron-Secret") or request.args.get("secret", "")
+
+        if cron_secret and not secrets.compare_digest(provided, cron_secret):
+            return jsonify({"ok": False, "error": "unauthorized"}), 401
+
+        now_dt = current_app_local_datetime()
+        reset_count = reset_recurring_tasks_for_date(now_dt.date())
+        return jsonify({"ok": True, "recurring_reset": reset_count, "date": now_dt.date().isoformat()})
 
 
 
@@ -4170,6 +4252,7 @@ def create_app():
     @app.route("/")
     @login_required
     def index():
+        reset_recurring_tasks_for_date(user_id=current_user.id)
         # EduPath AI v5.5.133
         # حساب نسبة Hero يعتمد على اليوم الحالي بتوقيت اليمن/مكة فقط.
         # Yemen and Makkah use UTC+03:00, so the dashboard day is recalculated after midnight there.
@@ -4202,61 +4285,8 @@ def create_app():
 
         def task_scheduled_for_today(task):
             """Return True when the task belongs to today's plan in Yemen/Makkah time without changing stored data."""
-            try:
-                start_date_value = _parse_task_date(task.start_date)
-                due_date_value = _parse_task_date(task.due_date)
-                repeat = (task.repeat_type or "").strip()
-                repeat_lower = repeat.lower()
-                repeat_days = (task.repeat_days or "").strip()
+            return task_scheduled_for_date_v55146(task, today_date)
 
-                if start_date_value and start_date_value > today_date:
-                    return False
-                if due_date_value and due_date_value < today_date:
-                    return False
-
-                one_time_values = {
-                    "مرة واحدة / بدون تكرار",
-                    "مرة واحدة",
-                    "بدون تكرار",
-                    "once",
-                    "one_time",
-                    "none",
-                    "no repeat / once",
-                    "no repeat",
-                }
-
-                if repeat in one_time_values or repeat_lower in one_time_values:
-                    return (start_date_value == today_date) or (due_date_value == today_date)
-
-                if repeat in {"يوميًا", "يومي", "daily"} or repeat_lower == "daily":
-                    return (not start_date_value or start_date_value <= today_date) and (not due_date_value or due_date_value >= today_date)
-
-                if repeat in {"أيام محددة", "selected_days"} or repeat_lower == "selected_days":
-                    selected_days = {day.strip() for day in repeat_days.split(",") if day.strip()}
-                    return today_weekday in selected_days
-
-                if repeat in {"أسبوعيًا", "أسبوعي", "weekly"} or repeat_lower == "weekly":
-                    if start_date_value:
-                        return start_date_value.weekday() == today_date.weekday()
-                    if due_date_value:
-                        return due_date_value.weekday() == today_date.weekday()
-                    return False
-
-                if repeat in {"شهريًا", "شهري", "monthly"} or repeat_lower == "monthly":
-                    if start_date_value:
-                        return start_date_value.day == today_day_of_month
-                    if due_date_value:
-                        return due_date_value.day == today_day_of_month
-                    return False
-
-                if repeat in {"أخرى", "custom"} or repeat_lower == "custom":
-                    return (not start_date_value or start_date_value <= today_date) and (not due_date_value or due_date_value >= today_date)
-
-                # المهام غير المرتبطة بتاريخ اليوم لا تدخل في نسبة Hero اليومية.
-                return (start_date_value == today_date) or (due_date_value == today_date)
-            except Exception:
-                logger.exception("تعذر حساب انتماء المهمة إلى مهام اليوم في الصفحة الرئيسية: %s", getattr(task, "id", None))
-                return False
 
         all_goals = Goal.query.filter_by(user_id=current_user.id).order_by(Goal.id.desc()).all()
         active_goals = []
@@ -4465,6 +4495,8 @@ def create_app():
             flash("تم حفظ المهمة بنجاح.", "success")
             return redirect(url_for("tasks"))
 
+        reset_recurring_tasks_for_date(user_id=current_user.id)
+
         all_tasks = StudyTask.query.filter_by(user_id=current_user.id).order_by(
             StudyTask.status.asc(),
             StudyTask.priority.desc(),
@@ -4527,14 +4559,14 @@ def create_app():
         task = StudyTask.query.filter_by(id=task_id, user_id=current_user.id).first_or_404()
         task.status = "done"
         task.review_count += 1
-        task.last_reviewed = str(date.today())
+        task.last_reviewed = current_app_local_date().isoformat()
         db.session.commit()
 
         linked_goals = link_completed_task_to_goals(task)
 
-        if os.environ.get("SEND_TASK_COMPLETION_EMAILS", "false").lower() == "true" and task.completion_email_sent_at != str(date.today()):
+        if os.environ.get("SEND_TASK_COMPLETION_EMAILS", "false").lower() == "true" and task.completion_email_sent_at != current_app_local_date().isoformat():
             if send_task_completion_email(current_user, task):
-                task.completion_email_sent_at = str(date.today())
+                task.completion_email_sent_at = current_app_local_date().isoformat()
                 db.session.commit()
 
         related_msg = ""
@@ -5110,6 +5142,7 @@ Return valid JSON:
     @app.route("/api/tasks")
     @login_required
     def api_tasks():
+        reset_recurring_tasks_for_date(user_id=current_user.id)
         tasks = StudyTask.query.filter_by(user_id=current_user.id, status="pending").all()
         return jsonify([
             {
