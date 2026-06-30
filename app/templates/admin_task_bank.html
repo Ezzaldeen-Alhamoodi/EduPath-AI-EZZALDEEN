@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block page_title %}تعديل المهام{% endblock %}
+{% block content %}
+
+<section class="hero compact tasks-hero admin-task-bank-hero-v5600">
+    <div>
+        <span class="tag">لوحة المشرف · النظام التكيفي</span>
+        <h2>تعديل صفحة المهام</h2>
+        <p>عدّل خيارات المهام كما تظهر للمستخدمين تمامًا، مع الحفاظ على الأسماء الحالية كما هي حتى تقوم أنت بتغييرها من هنا.</p>
+    </div>
+    <a class="button light" href="{{ url_for('admin_dashboard') }}">↩ العودة إلى Admin</a>
+</section>
+
+<section class="card admin-task-bank-shell-v5600">
+    <div class="admin-bank-topbar-v5600">
+        <div>
+            <h2>اختيار نوع المهمة</h2>
+            <p class="muted">اختر نوعًا واحدًا فقط ليتم تحميل قاعدة هذا النوع، وهذا يحافظ على خفة الصفحة وسرعتها.</p>
+        </div>
+        <div class="admin-bank-actions-v5600">
+            <button type="button" id="saveTaskBankBtn">💾 حفظ التعديلات</button>
+            <button type="button" class="small-button warning" id="previewTaskBankBtn">👁 معاينة كما يظهر للمستخدم</button>
+            <button type="button" class="small-button cancel" id="rollbackTaskBankBtn">↩ استعادة آخر تعديل</button>
+            <button type="button" class="small-button danger" id="restoreDefaultTaskBankBtn">⟲ استعادة الافتراضي لهذا النوع</button>
+        </div>
+    </div>
+
+    <div class="task-type-grid admin-task-type-grid-v5600" id="adminTaskTypeCards">
+        {% for name in type_names %}
+            {% set cfg = override_map.get(name).config if override_map.get(name) else None %}
+            <button type="button" class="task-type-card admin-task-type-card-v5600" data-type="{{ name }}">
+                <span class="task-type-emoji">{{ cfg.icon if cfg and cfg.icon else "✨" }}</span>
+                <strong>{{ name }}</strong>
+                {% if override_map.get(name) %}<small>معدل</small>{% endif %}
+            </button>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="admin-bank-layout-v5600">
+    <aside class="card admin-bank-sidebar-v5600">
+        <h2>المسار التكيفي</h2>
+        <p class="muted">اختر عنصرًا في كل مستوى لتعديل الخيارات التي تظهر بعده.</p>
+        <div class="admin-bank-path-v5600">
+            <label>الفئة الرئيسية<select id="bankMainSelect"></select></label>
+            <label>الفئة الفرعية<select id="bankSubSelect"></select></label>
+            <label>الموضوع التفصيلي<select id="bankDetailSelect"></select></label>
+        </div>
+        <div class="admin-current-type-v5600" id="bankStatusBox">لم يتم اختيار نوع مهمة بعد.</div>
+    </aside>
+
+    <div class="admin-bank-editor-stack-v5600">
+        <section class="card admin-bank-level-card-v5600" data-level="main">
+            <div class="level-card-head-v5600">
+                <div><span class="tag">المستوى 1</span><h2>الفئة الرئيسية</h2></div>
+                <button type="button" class="small-button success" data-add-level="main">＋ إضافة خيار</button>
+            </div>
+            <div class="bank-option-list-v5600" id="mainOptionsList"></div>
+        </section>
+
+        <section class="card admin-bank-level-card-v5600" data-level="sub">
+            <div class="level-card-head-v5600">
+                <div><span class="tag">المستوى 2</span><h2>الفئة الفرعية المرتبطة بالفئة الرئيسية المختارة</h2></div>
+                <button type="button" class="small-button success" data-add-level="sub">＋ إضافة خيار</button>
+            </div>
+            <div class="bank-option-list-v5600" id="subOptionsList"></div>
+        </section>
+
+        <section class="card admin-bank-level-card-v5600" data-level="detail">
+            <div class="level-card-head-v5600">
+                <div><span class="tag">المستوى 3</span><h2>الموضوع التفصيلي المرتبط بالفئة الفرعية المختارة</h2></div>
+                <button type="button" class="small-button success" data-add-level="detail">＋ إضافة خيار</button>
+            </div>
+            <div class="bank-option-list-v5600" id="detailOptionsList"></div>
+        </section>
+
+        <section class="card admin-bank-level-card-v5600" data-level="training">
+            <div class="level-card-head-v5600">
+                <div><span class="tag">المستوى 4</span><h2>نوع النشاط</h2></div>
+                <button type="button" class="small-button success" data-add-level="training">＋ إضافة خيار</button>
+            </div>
+            <p class="muted">هذا المستوى عام لهذا النوع من المهام. إذا كان النوع يحتوي على علاقات خاصة حسب التفاصيل فستظل محفوظة في البيانات.</p>
+            <div class="bank-option-list-v5600" id="trainingOptionsList"></div>
+        </section>
+    </div>
+
+    <aside class="card admin-bank-history-v5600">
+        <h2>سجل التعديلات</h2>
+        <p class="muted">يمكنك استعادة آخر تعديل أو نسخة محددة من السجل.</p>
+        <div id="bankRevisionsList" class="bank-revisions-list-v5600"></div>
+    </aside>
+</section>
+
+<div class="admin-bank-modal-v5600" id="bankManualOrderModal" hidden>
+    <div class="admin-bank-modal-card-v5600">
+        <h2>ترتيب يدوي</h2>
+        <p class="muted">اكتب كل خيار في سطر مستقل بالترتيب الذي تريده.</p>
+        <textarea id="manualOrderTextarea" rows="12"></textarea>
+        <div class="actions">
+            <button type="button" id="applyManualOrderBtn">تطبيق الترتيب</button>
+            <button type="button" class="small-button cancel" id="closeManualOrderBtn">إلغاء</button>
+        </div>
+    </div>
+</div>
+
+<div class="admin-bank-preview-v5600 card" id="bankPreviewBox" hidden>
+    <h2>معاينة كما يظهر للمستخدم</h2>
+    <div class="smart-task-form preview-only-v5600">
+        <div class="task-field"><label>نوع المهمة</label><input id="previewType" disabled></div>
+        <div class="task-field"><label>الفئة الرئيسية</label><select id="previewMain"></select></div>
+        <div class="task-field"><label>الفئة الفرعية</label><select id="previewSub"></select></div>
+        <div class="task-field"><label>الموضوع التفصيلي</label><select id="previewDetail"></select></div>
+        <div class="task-field"><label>نوع النشاط</label><select id="previewTraining"></select></div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/admin_task_bank.js') }}?v=5.6.0"></script>
+{% endblock %}

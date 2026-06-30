@@ -8615,3 +8615,187 @@ body.dark-mode .coach-hero {
         overflow-x: hidden !important;
     }
 }
+
+/* EduPath AI v5.6.0 - Admin adaptive task bank editor */
+.admin-task-bank-entry-v5600,
+.admin-task-bank-shell-v5600 {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    align-items: center;
+}
+.admin-bank-topbar-v5600 {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.admin-bank-actions-v5600 {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+.admin-task-type-grid-v5600 {
+    width: 100%;
+    margin-top: 16px;
+}
+.admin-task-type-card-v5600 small {
+    display: block;
+    margin-top: 4px;
+    opacity: .75;
+    font-size: .78rem;
+}
+.admin-bank-layout-v5600 {
+    display: grid;
+    grid-template-columns: minmax(230px, 280px) minmax(0, 1fr) minmax(230px, 300px);
+    gap: 16px;
+    align-items: start;
+}
+.admin-bank-sidebar-v5600,
+.admin-bank-history-v5600 {
+    position: sticky;
+    top: 86px;
+}
+.admin-bank-path-v5600 {
+    display: grid;
+    gap: 12px;
+}
+.admin-bank-path-v5600 label {
+    display: grid;
+    gap: 6px;
+    font-weight: 700;
+}
+.admin-current-type-v5600 {
+    margin-top: 14px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(37, 99, 235, .08);
+    color: #1d4ed8;
+    font-weight: 700;
+}
+.admin-bank-editor-stack-v5600 {
+    display: grid;
+    gap: 16px;
+}
+.level-card-head-v5600 {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.bank-option-list-v5600 {
+    display: grid;
+    gap: 10px;
+}
+.bank-option-row-v5600 {
+    display: grid;
+    grid-template-columns: 42px minmax(170px, 1fr) auto auto auto auto;
+    gap: 8px;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid rgba(148, 163, 184, .28);
+    border-radius: 16px;
+    background: rgba(248, 250, 252, .86);
+}
+.option-order-v5600 {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, .10);
+    color: #1d4ed8;
+    font-weight: 800;
+}
+.bank-revisions-list-v5600 {
+    display: grid;
+    gap: 10px;
+}
+.bank-revision-item-v5600 {
+    display: grid;
+    gap: 6px;
+    padding: 10px;
+    border-radius: 14px;
+    background: rgba(248, 250, 252, .9);
+    border: 1px solid rgba(148, 163, 184, .25);
+}
+.bank-revision-item-v5600 span {
+    color: #64748b;
+    font-size: .85rem;
+}
+.admin-bank-modal-v5600 {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(15, 23, 42, .45);
+}
+.admin-bank-modal-v5600[hidden],
+.admin-bank-preview-v5600[hidden] {
+    display: none !important;
+}
+.admin-bank-modal-card-v5600 {
+    width: min(720px, 96vw);
+    background: #fff;
+    border-radius: 24px;
+    padding: 22px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, .28);
+}
+.admin-bank-modal-card-v5600 textarea {
+    width: 100%;
+    margin: 10px 0 14px;
+}
+.admin-bank-preview-v5600 {
+    margin-top: 16px;
+}
+.preview-only-v5600 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+.admin-bank-toast-v5600 {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 10000;
+    padding: 12px 16px;
+    border-radius: 16px;
+    color: #fff;
+    background: #1d4ed8;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, .22);
+    font-weight: 800;
+}
+@media (max-width: 1100px) {
+    .admin-bank-layout-v5600 {
+        grid-template-columns: 1fr;
+    }
+    .admin-bank-sidebar-v5600,
+    .admin-bank-history-v5600 {
+        position: static;
+    }
+}
+@media (max-width: 760px) {
+    .admin-task-bank-entry-v5600,
+    .admin-task-bank-shell-v5600,
+    .level-card-head-v5600 {
+        align-items: stretch;
+        flex-direction: column;
+    }
+    .bank-option-row-v5600 {
+        grid-template-columns: 36px 1fr;
+    }
+    .bank-option-row-v5600 button {
+        grid-column: span 2;
+    }
+    .preview-only-v5600 {
+        grid-template-columns: 1fr;
+    }
+}

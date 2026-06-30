@@ -1,0 +1,30 @@
+# EduPath AI EZZALDEEN - AlwaysData Environment Variables Template
+# Put these values in AlwaysData environment variables. Do NOT put real secrets in GitHub.
+
+SECRET_KEY=change-this-to-a-long-random-secret
+
+# Database on AlwaysData PostgreSQL:
+# Use SQLAlchemy psycopg format:
+# DATABASE_URL=postgresql+psycopg://USER:PASSWORD@HOST:PORT/DBNAME
+DATABASE_URL=
+
+AI_PROVIDER=auto
+GEMINI_API_KEY=
+GEMINI_MODEL=gemini-2.5-flash
+GEMINI_FALLBACK_MODEL=gemini-2.5-flash-lite
+GEMINI_RETRIES=2
+GEMINI_RETRY_SECONDS=1
+
+OPENROUTER_API_KEY=
+OPENROUTER_MODEL=deepseek/deepseek-chat-v3-0324:free
+OPENROUTER_FALLBACK_MODEL=google/gemini-2.0-flash-exp:free
+
+DEFAULT_AI_DAILY_LIMIT=20
+REMEMBER_LOGIN_DAYS=365
+ADMIN_EMAILS=geni49607@gmail.com
+REQUIRE_EMAIL_VERIFICATION=false
+MAIL_ENABLED=false
+SEND_AUTH_EMAILS=false
+SEND_WELCOME_EMAIL=false
+SEND_ADMIN_EMAILS=false
+APP_TIMEZONE_OFFSET_HOURS=3

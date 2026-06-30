@@ -212,6 +212,35 @@ class StudyTask(db.Model):
 
 
 
+class TaskBankConfig(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type_name = db.Column(db.String(160), nullable=False, unique=True, index=True)
+    config_json = db.Column(db.Text, nullable=False)
+    updated_by_admin_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, index=True)
+
+    updated_by_admin = db.relationship("User", foreign_keys=[updated_by_admin_id])
+
+    @property
+    def config(self):
+        try:
+            return json.loads(self.config_json or "{}")
+        except Exception:
+            return {}
+
+
+class TaskBankRevision(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type_name = db.Column(db.String(160), nullable=False, index=True)
+    action = db.Column(db.String(80), nullable=False, default="update")
+    before_json = db.Column(db.Text, nullable=True)
+    after_json = db.Column(db.Text, nullable=True)
+    admin_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+
+    admin = db.relationship("User", foreign_keys=[admin_id])
+
+
 class LearningResource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(180), nullable=False, index=True)
@@ -3197,6 +3226,58 @@ def reset_recurring_tasks_for_date(target_date=None, user_id=None):
         db.session.commit()
     return reset_count
 
+
+def task_bank_defaults_path():
+    return os.path.join(os.path.dirname(__file__), "static", "data", "task_bank_defaults.json")
+
+
+def load_task_bank_defaults():
+    try:
+        with open(task_bank_defaults_path(), "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {}
+    except Exception as exc:
+        logger.warning("Could not load task bank defaults: %s", exc)
+        return {}
+
+
+def get_task_bank_type_config(type_name):
+    defaults = load_task_bank_defaults()
+    row = TaskBankConfig.query.filter_by(type_name=type_name).first()
+    if row:
+        return row.config, True
+    return defaults.get(type_name, {}), False
+
+
+def get_task_bank_overrides_map():
+    rows = TaskBankConfig.query.order_by(TaskBankConfig.type_name.asc()).all()
+    overrides = {}
+    for row in rows:
+        cfg = row.config
+        if cfg:
+            overrides[row.type_name] = cfg
+    return overrides
+
+
+def validate_task_bank_config(config):
+    if not isinstance(config, dict):
+        return False, "البيانات غير صحيحة."
+    config.setdefault("icon", "✨")
+    config.setdefault("main", ["أخرى"])
+    config.setdefault("sub", {})
+    config.setdefault("detail", {})
+    config.setdefault("training", ["أخرى"])
+    if not isinstance(config.get("main"), list):
+        return False, "الفئة الرئيسية يجب أن تكون قائمة."
+    if not isinstance(config.get("sub"), dict):
+        return False, "الفئات الفرعية يجب أن تكون علاقات منظمة."
+    if not isinstance(config.get("detail"), dict):
+        return False, "الموضوعات التفصيلية يجب أن تكون علاقات منظمة."
+    if not isinstance(config.get("training"), list):
+        return False, "نوع النشاط يجب أن يكون قائمة."
+    return True, "تم التحقق."
+
+
 def create_app():
     app = Flask(__name__)
     app.jinja_env.filters["clickable_sources"] = render_clickable_sources
@@ -3953,6 +4034,149 @@ def create_app():
 
 
 
+
+
+    @app.route("/admin/task-bank")
+    @login_required
+    @admin_required
+    def admin_task_bank():
+        defaults = load_task_bank_defaults()
+        override_rows = TaskBankConfig.query.all()
+        override_map = {row.type_name: row for row in override_rows}
+        type_names = list(defaults.keys())
+        for row in override_rows:
+            if row.type_name not in type_names:
+                type_names.append(row.type_name)
+        return render_template("admin_task_bank.html", type_names=type_names, override_map=override_map)
+
+
+    @app.route("/api/admin/task-bank/types")
+    @login_required
+    @admin_required
+    def api_admin_task_bank_types():
+        defaults = load_task_bank_defaults()
+        override_rows = TaskBankConfig.query.all()
+        override_map = {row.type_name: row for row in override_rows}
+        names = list(defaults.keys())
+        for row in override_rows:
+            if row.type_name not in names:
+                names.append(row.type_name)
+        return jsonify({
+            "types": [
+                {
+                    "name": name,
+                    "icon": (override_map.get(name).config if override_map.get(name) else defaults.get(name, {})).get("icon", "✨"),
+                    "customized": name in override_map,
+                    "updated_at": override_map[name].updated_at.isoformat() if name in override_map and override_map[name].updated_at else None,
+                }
+                for name in names
+            ]
+        })
+
+
+    @app.route("/api/admin/task-bank/<path:type_name>")
+    @login_required
+    @admin_required
+    def api_admin_task_bank_get(type_name):
+        defaults = load_task_bank_defaults()
+        config, customized = get_task_bank_type_config(type_name)
+        row = TaskBankConfig.query.filter_by(type_name=type_name).first()
+        revisions = TaskBankRevision.query.filter_by(type_name=type_name).order_by(TaskBankRevision.id.desc()).limit(12).all()
+        return jsonify({
+            "type_name": type_name,
+            "exists_in_defaults": type_name in defaults,
+            "customized": customized,
+            "updated_at": row.updated_at.isoformat() if row and row.updated_at else None,
+            "config": config,
+            "revisions": [
+                {
+                    "id": rev.id,
+                    "action": rev.action,
+                    "created_at": rev.created_at.isoformat() if rev.created_at else None,
+                    "admin": rev.admin.email if rev.admin else "مشرف",
+                }
+                for rev in revisions
+            ],
+        })
+
+
+    @app.route("/api/admin/task-bank/<path:type_name>", methods=["POST"])
+    @login_required
+    @admin_required
+    def api_admin_task_bank_save(type_name):
+        payload = request.get_json(silent=True) or {}
+        config = payload.get("config") or {}
+        action = payload.get("action") or "update"
+        ok, message = validate_task_bank_config(config)
+        if not ok:
+            return jsonify({"ok": False, "message": message}), 400
+
+        row = TaskBankConfig.query.filter_by(type_name=type_name).first()
+        before_json = row.config_json if row else None
+        after_json = json.dumps(config, ensure_ascii=False, indent=2)
+        if row:
+            row.config_json = after_json
+            row.updated_by_admin_id = current_user.id
+        else:
+            row = TaskBankConfig(type_name=type_name, config_json=after_json, updated_by_admin_id=current_user.id)
+            db.session.add(row)
+        db.session.add(TaskBankRevision(type_name=type_name, action=action, before_json=before_json, after_json=after_json, admin_id=current_user.id))
+        db.session.commit()
+        return jsonify({"ok": True, "message": "تم حفظ تعديل بنك المهام.", "updated_at": row.updated_at.isoformat() if row.updated_at else None})
+
+
+    @app.route("/api/admin/task-bank/<path:type_name>/restore-default", methods=["POST"])
+    @login_required
+    @admin_required
+    def api_admin_task_bank_restore_default(type_name):
+        defaults = load_task_bank_defaults()
+        if type_name not in defaults:
+            return jsonify({"ok": False, "message": "لا توجد نسخة افتراضية لهذا النوع."}), 404
+        row = TaskBankConfig.query.filter_by(type_name=type_name).first()
+        before_json = row.config_json if row else None
+        after_json = json.dumps(defaults[type_name], ensure_ascii=False, indent=2)
+        if row:
+            db.session.delete(row)
+        db.session.add(TaskBankRevision(type_name=type_name, action="restore_default", before_json=before_json, after_json=after_json, admin_id=current_user.id))
+        db.session.commit()
+        return jsonify({"ok": True, "message": "تمت استعادة النسخة الافتراضية لهذا النوع."})
+
+
+    @app.route("/api/admin/task-bank/<path:type_name>/rollback", methods=["POST"])
+    @login_required
+    @admin_required
+    def api_admin_task_bank_rollback(type_name):
+        revision_id = (request.get_json(silent=True) or {}).get("revision_id")
+        if revision_id:
+            revision = TaskBankRevision.query.filter_by(id=revision_id, type_name=type_name).first()
+        else:
+            revision = TaskBankRevision.query.filter_by(type_name=type_name).order_by(TaskBankRevision.id.desc()).first()
+        if not revision or not revision.before_json:
+            return jsonify({"ok": False, "message": "لا توجد نسخة سابقة صالحة للاستعادة."}), 404
+        config = json.loads(revision.before_json)
+        ok, message = validate_task_bank_config(config)
+        if not ok:
+            return jsonify({"ok": False, "message": message}), 400
+        row = TaskBankConfig.query.filter_by(type_name=type_name).first()
+        current_json = row.config_json if row else None
+        restored_json = json.dumps(config, ensure_ascii=False, indent=2)
+        if row:
+            row.config_json = restored_json
+            row.updated_by_admin_id = current_user.id
+        else:
+            row = TaskBankConfig(type_name=type_name, config_json=restored_json, updated_by_admin_id=current_user.id)
+            db.session.add(row)
+        db.session.add(TaskBankRevision(type_name=type_name, action="rollback", before_json=current_json, after_json=restored_json, admin_id=current_user.id))
+        db.session.commit()
+        return jsonify({"ok": True, "message": "تمت استعادة النسخة السابقة."})
+
+
+    @app.route("/api/task-bank-overrides")
+    @login_required
+    def api_task_bank_overrides():
+        return jsonify(get_task_bank_overrides_map())
+
+
     @app.route("/admin/resources", methods=["GET", "POST"])
     @login_required
     @admin_required
@@ -4503,7 +4727,7 @@ def create_app():
             StudyTask.difficulty.asc(),
             StudyTask.id.desc(),
         ).all()
-        return render_template("tasks.html", tasks=all_tasks)
+        return render_template("tasks.html", tasks=all_tasks, task_bank_overrides_json=json.dumps(get_task_bank_overrides_map(), ensure_ascii=False))
 
     @app.route("/task/<int:task_id>/edit", methods=["GET", "POST"])
     @login_required
@@ -4551,7 +4775,7 @@ def create_app():
             flash("تم تعديل المهمة بنجاح.", "success")
             return redirect(url_for("tasks"))
 
-        return render_template("edit_task.html", task=task)
+        return render_template("edit_task.html", task=task, task_bank_overrides_json=json.dumps(get_task_bank_overrides_map(), ensure_ascii=False))
 
     @app.route("/task/<int:task_id>/done")
     @login_required
@@ -4603,6 +4827,162 @@ def create_app():
     def languages():
         tasks = StudyTask.query.filter_by(user_id=current_user.id, category="Language").order_by(StudyTask.id.desc()).all()
         return render_template("languages.html", tasks=tasks)
+
+
+    def build_scholarship_interview_fallback_questions(scholarship, major, profile=""):
+        """Create reliable interview questions locally if an AI response is empty or malformed."""
+        scholarship = (scholarship or "the scholarship").strip()
+        major = (major or "your major").strip()
+        profile_lower = (profile or "").lower()
+        has_projects = any(word in profile_lower for word in [
+            "project", "projects", "cs50", "python", "machine learning", "ml", "ai",
+            "code", "programming", "flask", "website", "app", "application"
+        ])
+
+        core = [
+            {
+                "question": f"Can you introduce yourself and briefly explain the journey that led you to apply for {scholarship}?",
+                "category": "Motivation",
+                "why_they_ask": "Interviewers use this as a first-impression question to test clarity, confidence, background, and motivation.",
+                "answer_strategy": "Give a spoken 60–90 second overview: academic background, one or two strong achievements, interest in the major, and future goal.",
+                "strong_answer_hint": "Start with who you are, prove your seriousness with evidence, then connect your journey to the scholarship."
+            },
+            {
+                "question": f"Why did you choose {major}, and how do you know this field is suitable for you?",
+                "category": "Major Fit",
+                "why_they_ask": "They want to know whether your major choice is informed, serious, and connected to your abilities.",
+                "answer_strategy": "Connect the major to your strengths, self-learning, projects, academic interests, and the problems you want to solve.",
+                "strong_answer_hint": "Mention a personal reason, evidence from learning or projects, and a clear future direction."
+            },
+            {
+                "question": f"Why are you applying for {scholarship}, and what does this opportunity mean to you?",
+                "category": "Scholarship Fit",
+                "why_they_ask": "They test whether you understand the value of the scholarship beyond financial support.",
+                "answer_strategy": "Explain how the scholarship removes barriers, gives academic opportunity, and helps you build skills for future contribution.",
+                "strong_answer_hint": "Do not answer only with financial need; show purpose, responsibility, and impact."
+            },
+            {
+                "question": "Why should the selection committee choose you over other strong applicants?",
+                "category": "Scholarship Fit",
+                "why_they_ask": "They want proof of distinction, not general self-praise.",
+                "answer_strategy": "Use two or three concrete proofs such as GPA, rank, competition, project, volunteering, discipline, or leadership.",
+                "strong_answer_hint": "Make a confident claim, then immediately prove it with evidence."
+            },
+            {
+                "question": "What are your main strengths as a student, and can you give an example?",
+                "category": "Self-Awareness",
+                "why_they_ask": "They test whether you know your strengths and can prove them through real situations.",
+                "answer_strategy": "Choose strengths relevant to study abroad and university success, then support each with a short example.",
+                "strong_answer_hint": "Use strengths like discipline, analytical thinking, persistence, teamwork, or self-learning, but prove them."
+            },
+            {
+                "question": "What is one weakness you are actively improving, and what steps are you taking to improve it?",
+                "category": "Self-Awareness",
+                "why_they_ask": "They test honesty, maturity, and your ability to improve yourself.",
+                "answer_strategy": "Choose a real but manageable weakness, explain how it affected you, and show a clear improvement plan.",
+                "strong_answer_hint": "Avoid fake weaknesses; show responsibility and progress."
+            },
+            {
+                "question": "What challenges do you expect while studying abroad, and how will you handle them?",
+                "category": "Adaptability",
+                "why_they_ask": "They want to know whether you are realistic about language, culture, pressure, homesickness, and academic adaptation.",
+                "answer_strategy": "Mention expected challenges calmly, then give practical solutions: routine, asking for help, language practice, and joining student activities.",
+                "strong_answer_hint": "Show optimism with realism: challenges exist, but you already have a plan."
+            },
+            {
+                "question": "What are your future plans after graduation, and how will this scholarship help you reach them?",
+                "category": "Future Impact",
+                "why_they_ask": "They test whether you have a clear long-term goal and whether the scholarship has future impact.",
+                "answer_strategy": "Connect your degree to career goals, postgraduate development, and contribution to your community or country.",
+                "strong_answer_hint": "Make your plan realistic: degree → skills/projects → career/research → impact."
+            }
+        ]
+
+        project_question = {
+            "question": "Tell me about a project or practical experience you are proud of. What problem did it solve, and what did you learn?",
+            "category": "Practical Experience",
+            "why_they_ask": "They test whether you can apply knowledge in real work, not just talk about your interest.",
+            "answer_strategy": "Explain the problem, your role, tools or technologies, challenge, result, and what you would improve.",
+            "strong_answer_hint": "Use a simple technical explanation and focus on impact, challenge, and learning."
+        }
+        if has_projects:
+            core[4] = project_question
+        else:
+            core.append(project_question)
+
+        tricky = {
+            "question": "What if your plan does not work, or you struggle academically during your studies?",
+            "category": "Tricky Follow-up",
+            "why_they_ask": "They test resilience, flexibility, honesty, and whether you can respond maturely under pressure.",
+            "answer_strategy": "Avoid panic or overconfidence. Explain how you analyze problems, seek support, adjust methods, and keep working.",
+            "strong_answer_hint": "Show that failure would be feedback and a reason to improve, not a reason to give up."
+        }
+        if len(core) >= 8:
+            core[-1] = tricky
+        else:
+            core.append(tricky)
+
+        return core[:8]
+
+    def normalize_interview_questions(ai_text, scholarship, major, profile=""):
+        """Parse AI interview output safely and always return displayable question dictionaries."""
+        generated = parse_json_array(ai_text)
+
+        if not generated:
+            obj = parse_json_object(ai_text)
+            if isinstance(obj, dict):
+                for key in ("questions", "interview_questions", "items", "data", "results"):
+                    value = obj.get(key)
+                    if isinstance(value, list):
+                        generated = value
+                        break
+
+        normalized = []
+        allowed_categories = {
+            "Motivation", "Major Fit", "Scholarship Fit", "Self-Awareness",
+            "Practical Experience", "Adaptability", "Future Impact", "Tricky Follow-up"
+        }
+
+        for item in generated or []:
+            if isinstance(item, str):
+                q_text = item.strip()
+                item = {}
+            elif isinstance(item, dict):
+                q_text = str(item.get("question") or item.get("q") or item.get("title") or "").strip()
+            else:
+                continue
+
+            if not q_text or len(q_text) < 8:
+                continue
+
+            category = str(item.get("category") or "Motivation").strip()
+            if category not in allowed_categories:
+                category = "Motivation"
+
+            normalized.append({
+                "question": q_text,
+                "category": category,
+                "why_they_ask": str(item.get("why_they_ask") or item.get("why") or "Interviewers ask this to test your motivation, clarity, maturity, and fit for the scholarship.").strip(),
+                "answer_strategy": str(item.get("answer_strategy") or item.get("strategy") or "Answer directly, then support your answer with one specific academic, project, volunteering, or life example.").strip(),
+                "strong_answer_hint": str(item.get("strong_answer_hint") or item.get("hint") or "Use a concise spoken answer: direct answer, evidence, and future connection.").strip(),
+            })
+
+        if not normalized:
+            logger.warning("Interview question generation returned empty/malformed output. Using local scholarship interview fallback.")
+            return build_scholarship_interview_fallback_questions(scholarship, major, profile)
+
+        # Ensure enough useful questions even if AI returns too few.
+        if len(normalized) < 5:
+            seen = {q["question"].lower() for q in normalized}
+            for item in build_scholarship_interview_fallback_questions(scholarship, major, profile):
+                if item["question"].lower() not in seen:
+                    normalized.append(item)
+                    seen.add(item["question"].lower())
+                if len(normalized) >= 8:
+                    break
+
+        return normalized[:8]
+
 
     @app.route("/interview", methods=["GET", "POST"])
     @login_required
@@ -4786,19 +5166,39 @@ For each question, return:
 
 Return valid JSON array only. No markdown. No explanation outside JSON.
 """
-            ai_text = call_ai(ai_client, prompt, max_tokens=1500, temperature=0.55)
-            generated = parse_json_array(ai_text)
+            ai_text = call_ai(ai_client, prompt, max_tokens=1800, temperature=0.45)
+            generated = normalize_interview_questions(ai_text, scholarship, major, profile)
 
             if generated:
+                saved_count = 0
+                existing_questions = {
+                    row.question.strip().lower()
+                    for row in InterviewAnswer.query.filter_by(user_id=current_user.id).all()
+                    if row.question
+                }
                 for item in generated:
+                    question_text = str(item.get("question") or "").strip()
+                    if not question_text:
+                        continue
+                    question_key = question_text.lower()
+                    if question_key in existing_questions:
+                        continue
                     q = InterviewAnswer(
                         user_id=current_user.id,
                         scholarship=scholarship,
                         major=major,
-                        question=item.get("question", str(item)),
+                        question=question_text,
                     )
                     db.session.add(q)
+                    existing_questions.add(question_key)
+                    saved_count += 1
                 db.session.commit()
+                if saved_count:
+                    flash(f"Generated {saved_count} scholarship interview questions successfully.", "success")
+                else:
+                    flash("Questions were generated, but they already exist in your saved questions.", "info")
+            else:
+                flash("Could not generate questions now. Please try again with a shorter profile summary.", "error")
 
         saved_questions = InterviewAnswer.query.filter_by(user_id=current_user.id).order_by(InterviewAnswer.id.desc()).limit(20).all()
         return render_template("interview.html", generated=generated, saved_questions=saved_questions)
