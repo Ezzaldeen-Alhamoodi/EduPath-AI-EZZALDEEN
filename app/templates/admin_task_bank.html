@@ -4,97 +4,76 @@
 
 <section class="hero compact tasks-hero admin-task-bank-hero-v5600">
     <div>
-        <span class="tag">لوحة المشرف · النظام التكيفي</span>
-        <h2>تعديل صفحة المهام</h2>
-        <p>عدّل خيارات المهام كما تظهر للمستخدمين تمامًا، مع الحفاظ على الأسماء الحالية كما هي حتى تقوم أنت بتغييرها من هنا.</p>
+        <span class="tag">Admin · نسخة إدارة صفحة المهام</span>
+        <h2>تعديل المهام</h2>
+        <p>هذه الصفحة تستخدم نفس نموذج صفحة المهام ونفس النظام التكيفي الحالي، ثم تضيف أدوات إدارة فقط بدون تغيير الأسماء أو الأيقونات أو الترتيب من تلقاء نفسها.</p>
     </div>
     <a class="button light" href="{{ url_for('admin_dashboard') }}">↩ العودة إلى Admin</a>
 </section>
 
-<section class="card admin-task-bank-shell-v5600">
-    <div class="admin-bank-topbar-v5600">
-        <div>
-            <h2>اختيار نوع المهمة</h2>
-            <p class="muted">اختر نوعًا واحدًا فقط ليتم تحميل قاعدة هذا النوع، وهذا يحافظ على خفة الصفحة وسرعتها.</p>
-        </div>
-        <div class="admin-bank-actions-v5600">
-            <button type="button" id="saveTaskBankBtn">💾 حفظ التعديلات</button>
-            <button type="button" class="small-button warning" id="previewTaskBankBtn">👁 معاينة كما يظهر للمستخدم</button>
-            <button type="button" class="small-button cancel" id="rollbackTaskBankBtn">↩ استعادة آخر تعديل</button>
-            <button type="button" class="small-button danger" id="restoreDefaultTaskBankBtn">⟲ استعادة الافتراضي لهذا النوع</button>
-        </div>
+<section class="card admin-task-editor-command-v5610">
+    <div>
+        <h2>أدوات التحديث</h2>
+        <p class="muted" id="adminTaskBankStatus">اختر نوع مهمة من البطاقات كما في صفحة المهام.</p>
     </div>
-
-    <div class="task-type-grid admin-task-type-grid-v5600" id="adminTaskTypeCards">
-        {% for name in type_names %}
-            {% set cfg = override_map.get(name).config if override_map.get(name) else None %}
-            <button type="button" class="task-type-card admin-task-type-card-v5600" data-type="{{ name }}">
-                <span class="task-type-emoji">{{ cfg.icon if cfg and cfg.icon else "✨" }}</span>
-                <strong>{{ name }}</strong>
-                {% if override_map.get(name) %}<small>معدل</small>{% endif %}
-            </button>
-        {% endfor %}
+    <div class="admin-bank-actions-v5600">
+        <button type="button" id="saveDraftTaskBankBtn">💾 حفظ كمسودة</button>
+        <button type="button" class="small-button success" id="publishTaskBankBtn">🚀 نشر التعديلات</button>
+        <button type="button" class="small-button warning" id="previewTaskBankBtn">👁 معاينة كطالب</button>
+        <button type="button" class="small-button cancel" id="rollbackTaskBankBtn">↩ استعادة آخر تعديل</button>
+        <button type="button" class="small-button danger" id="restoreDefaultTaskBankBtn">⟲ استعادة الافتراضي لهذا النوع</button>
     </div>
 </section>
 
-<section class="admin-bank-layout-v5600">
-    <aside class="card admin-bank-sidebar-v5600">
-        <h2>المسار التكيفي</h2>
-        <p class="muted">اختر عنصرًا في كل مستوى لتعديل الخيارات التي تظهر بعده.</p>
-        <div class="admin-bank-path-v5600">
-            <label>الفئة الرئيسية<select id="bankMainSelect"></select></label>
-            <label>الفئة الفرعية<select id="bankSubSelect"></select></label>
-            <label>الموضوع التفصيلي<select id="bankDetailSelect"></select></label>
+<section class="admin-real-task-editor-layout-v5610">
+    <div class="card admin-real-task-form-card-v5610" id="adminRealTaskFormCard">
+        <h2>نفس صفحة المهام الحالية</h2>
+        <p class="muted">اختر نوع المهمة والمسار التكيفي كما يفعل الطالب. أدوات التحرير في الجهة الأخرى تعدل نفس الخيارات الظاهرة هنا.</p>
+        <div class="form admin-task-bank-native-form-v5610">
+            {% set task = None %}
+            {% include "_task_form.html" %}
         </div>
-        <div class="admin-current-type-v5600" id="bankStatusBox">لم يتم اختيار نوع مهمة بعد.</div>
-    </aside>
-
-    <div class="admin-bank-editor-stack-v5600">
-        <section class="card admin-bank-level-card-v5600" data-level="main">
-            <div class="level-card-head-v5600">
-                <div><span class="tag">المستوى 1</span><h2>الفئة الرئيسية</h2></div>
-                <button type="button" class="small-button success" data-add-level="main">＋ إضافة خيار</button>
-            </div>
-            <div class="bank-option-list-v5600" id="mainOptionsList"></div>
-        </section>
-
-        <section class="card admin-bank-level-card-v5600" data-level="sub">
-            <div class="level-card-head-v5600">
-                <div><span class="tag">المستوى 2</span><h2>الفئة الفرعية المرتبطة بالفئة الرئيسية المختارة</h2></div>
-                <button type="button" class="small-button success" data-add-level="sub">＋ إضافة خيار</button>
-            </div>
-            <div class="bank-option-list-v5600" id="subOptionsList"></div>
-        </section>
-
-        <section class="card admin-bank-level-card-v5600" data-level="detail">
-            <div class="level-card-head-v5600">
-                <div><span class="tag">المستوى 3</span><h2>الموضوع التفصيلي المرتبط بالفئة الفرعية المختارة</h2></div>
-                <button type="button" class="small-button success" data-add-level="detail">＋ إضافة خيار</button>
-            </div>
-            <div class="bank-option-list-v5600" id="detailOptionsList"></div>
-        </section>
-
-        <section class="card admin-bank-level-card-v5600" data-level="training">
-            <div class="level-card-head-v5600">
-                <div><span class="tag">المستوى 4</span><h2>نوع النشاط</h2></div>
-                <button type="button" class="small-button success" data-add-level="training">＋ إضافة خيار</button>
-            </div>
-            <p class="muted">هذا المستوى عام لهذا النوع من المهام. إذا كان النوع يحتوي على علاقات خاصة حسب التفاصيل فستظل محفوظة في البيانات.</p>
-            <div class="bank-option-list-v5600" id="trainingOptionsList"></div>
-        </section>
     </div>
 
-    <aside class="card admin-bank-history-v5600">
-        <h2>سجل التعديلات</h2>
-        <p class="muted">يمكنك استعادة آخر تعديل أو نسخة محددة من السجل.</p>
-        <div id="bankRevisionsList" class="bank-revisions-list-v5600"></div>
+    <aside class="card admin-real-controls-v5610">
+        <h2>أدوات إدارة الخانة التكيفية</h2>
+        <p class="muted" id="adminAdaptivePathSummary">المسار الحالي: —</p>
+
+        <div class="admin-adaptive-tabs-v5610" id="adminAdaptiveLevelTabs"></div>
+
+        <div class="admin-current-field-head-v5610">
+            <h3 id="adminCurrentFieldTitle">الخانة الحالية</h3>
+            <div class="actions">
+                <button type="button" class="small-button" id="editFieldLabelBtn">تعديل اسم الخانة</button>
+                <button type="button" class="small-button success" id="addOptionBtn">＋ إضافة خيار</button>
+                <button type="button" class="small-button warning" id="manualOrderBtn">ترتيب يدوي</button>
+            </div>
+        </div>
+
+        <div class="bank-option-list-v5600" id="adminCurrentOptionsList"></div>
+
+        <hr>
+        <h3>الخيارات المخفية</h3>
+        <p class="muted">الإخفاء آمن: يخفي الخيار من المستخدم مع بقاء تفرعاته قابلة للاستعادة.</p>
+        <div id="adminHiddenOptionsList" class="bank-revisions-list-v5600"></div>
     </aside>
+</section>
+
+<section class="card admin-student-preview-v5610" id="studentPreviewFrame" hidden>
+    <h2>معاينة كطالب</h2>
+    <p class="muted">المعاينة أعلاه هي نفسها النموذج الحالي. عند حفظ المسودة لا تظهر للمستخدمين، وعند النشر تظهر في صفحة المهام العادية.</p>
+</section>
+
+<section class="card admin-bank-history-v5600">
+    <h2>سجل تعديلات هذا النوع فقط</h2>
+    <p class="muted">الاستعادة هنا تخص نوع المهمة الحالي فقط ولا تؤثر على بقية الأنواع.</p>
+    <div id="bankRevisionsList" class="bank-revisions-list-v5600"></div>
 </section>
 
 <div class="admin-bank-modal-v5600" id="bankManualOrderModal" hidden>
     <div class="admin-bank-modal-card-v5600">
         <h2>ترتيب يدوي</h2>
-        <p class="muted">اكتب كل خيار في سطر مستقل بالترتيب الذي تريده.</p>
+        <p class="muted">اكتب كل خيار في سطر مستقل بالترتيب الذي تريده. الترتيب لا يقطع التفرعات التكيفية.</p>
         <textarea id="manualOrderTextarea" rows="12"></textarea>
         <div class="actions">
             <button type="button" id="applyManualOrderBtn">تطبيق الترتيب</button>
@@ -103,19 +82,18 @@
     </div>
 </div>
 
-<div class="admin-bank-preview-v5600 card" id="bankPreviewBox" hidden>
-    <h2>معاينة كما يظهر للمستخدم</h2>
-    <div class="smart-task-form preview-only-v5600">
-        <div class="task-field"><label>نوع المهمة</label><input id="previewType" disabled></div>
-        <div class="task-field"><label>الفئة الرئيسية</label><select id="previewMain"></select></div>
-        <div class="task-field"><label>الفئة الفرعية</label><select id="previewSub"></select></div>
-        <div class="task-field"><label>الموضوع التفصيلي</label><select id="previewDetail"></select></div>
-        <div class="task-field"><label>نوع النشاط</label><select id="previewTraining"></select></div>
-    </div>
-</div>
-
 {% endblock %}
 
 {% block extra_scripts %}
-<script src="{{ url_for('static', filename='js/admin_task_bank.js') }}?v=5.6.0"></script>
+<script>
+window.EDUPATH_TASK_BANK_OVERRIDES = {{ task_bank_overrides_json|default('{}')|safe }};
+window.EDUPATH_TASK_BANK_BASE_DATA = null;
+</script>
+<script src="{{ url_for('static', filename='js/tasks_native_ar.js') }}?v=5.6.1-admin-editor"></script>
+<script src="{{ url_for('static', filename='js/secondary-school-bank-v55139.js') }}?v=5.6.1-admin-editor"></script>
+<script>
+window.EDUPATH_TASK_BANK_BASE_DATA = JSON.parse(JSON.stringify(window.EDUPATH_TASKS_AR_DATA || {}));
+</script>
+<script src="{{ url_for('static', filename='js/task_bank_runtime.js') }}?v=5.6.1-admin-editor"></script>
+<script src="{{ url_for('static', filename='js/admin_task_bank.js') }}?v=5.6.1-admin-editor"></script>
 {% endblock %}

@@ -241,6 +241,23 @@ class TaskBankRevision(db.Model):
     admin = db.relationship("User", foreign_keys=[admin_id])
 
 
+class TaskBankDraft(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type_name = db.Column(db.String(160), nullable=False, unique=True, index=True)
+    config_json = db.Column(db.Text, nullable=False)
+    updated_by_admin_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, index=True)
+
+    updated_by_admin = db.relationship("User", foreign_keys=[updated_by_admin_id])
+
+    @property
+    def config(self):
+        try:
+            return json.loads(self.config_json or "{}")
+        except Exception:
+            return {}
+
+
 class LearningResource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(180), nullable=False, index=True)
@@ -4047,7 +4064,12 @@ def create_app():
         for row in override_rows:
             if row.type_name not in type_names:
                 type_names.append(row.type_name)
-        return render_template("admin_task_bank.html", type_names=type_names, override_map=override_map)
+        return render_template(
+            "admin_task_bank.html",
+            type_names=type_names,
+            override_map=override_map,
+            task_bank_overrides_json=json.dumps(get_task_bank_overrides_map(), ensure_ascii=False),
+        )
 
 
     @app.route("/api/admin/task-bank/types")
@@ -4081,6 +4103,7 @@ def create_app():
         defaults = load_task_bank_defaults()
         config, customized = get_task_bank_type_config(type_name)
         row = TaskBankConfig.query.filter_by(type_name=type_name).first()
+        draft = TaskBankDraft.query.filter_by(type_name=type_name).first()
         revisions = TaskBankRevision.query.filter_by(type_name=type_name).order_by(TaskBankRevision.id.desc()).limit(12).all()
         return jsonify({
             "type_name": type_name,
@@ -4088,6 +4111,9 @@ def create_app():
             "customized": customized,
             "updated_at": row.updated_at.isoformat() if row and row.updated_at else None,
             "config": config,
+            "has_draft": bool(draft),
+            "draft_updated_at": draft.updated_at.isoformat() if draft and draft.updated_at else None,
+            "draft_config": draft.config if draft else None,
             "revisions": [
                 {
                     "id": rev.id,
@@ -4098,6 +4124,28 @@ def create_app():
                 for rev in revisions
             ],
         })
+
+
+    @app.route("/api/admin/task-bank/<path:type_name>/draft", methods=["POST"])
+    @login_required
+    @admin_required
+    def api_admin_task_bank_save_draft(type_name):
+        payload = request.get_json(silent=True) or {}
+        config = payload.get("config") or {}
+        ok, message = validate_task_bank_config(config)
+        if not ok:
+            return jsonify({"ok": False, "message": message}), 400
+
+        after_json = json.dumps(config, ensure_ascii=False, indent=2)
+        draft = TaskBankDraft.query.filter_by(type_name=type_name).first()
+        if draft:
+            draft.config_json = after_json
+            draft.updated_by_admin_id = current_user.id
+        else:
+            draft = TaskBankDraft(type_name=type_name, config_json=after_json, updated_by_admin_id=current_user.id)
+            db.session.add(draft)
+        db.session.commit()
+        return jsonify({"ok": True, "message": "تم حفظ مسودة تعديل المهام لهذا النوع فقط.", "updated_at": draft.updated_at.isoformat() if draft.updated_at else None})
 
 
     @app.route("/api/admin/task-bank/<path:type_name>", methods=["POST"])
@@ -4121,8 +4169,12 @@ def create_app():
             row = TaskBankConfig(type_name=type_name, config_json=after_json, updated_by_admin_id=current_user.id)
             db.session.add(row)
         db.session.add(TaskBankRevision(type_name=type_name, action=action, before_json=before_json, after_json=after_json, admin_id=current_user.id))
+        if payload.get("clear_draft"):
+            draft = TaskBankDraft.query.filter_by(type_name=type_name).first()
+            if draft:
+                db.session.delete(draft)
         db.session.commit()
-        return jsonify({"ok": True, "message": "تم حفظ تعديل بنك المهام.", "updated_at": row.updated_at.isoformat() if row.updated_at else None})
+        return jsonify({"ok": True, "message": "تم نشر تعديل بنك المهام لهذا النوع فقط.", "updated_at": row.updated_at.isoformat() if row.updated_at else None})
 
 
     @app.route("/api/admin/task-bank/<path:type_name>/restore-default", methods=["POST"])
@@ -4137,6 +4189,9 @@ def create_app():
         after_json = json.dumps(defaults[type_name], ensure_ascii=False, indent=2)
         if row:
             db.session.delete(row)
+        draft = TaskBankDraft.query.filter_by(type_name=type_name).first()
+        if draft:
+            db.session.delete(draft)
         db.session.add(TaskBankRevision(type_name=type_name, action="restore_default", before_json=before_json, after_json=after_json, admin_id=current_user.id))
         db.session.commit()
         return jsonify({"ok": True, "message": "تمت استعادة النسخة الافتراضية لهذا النوع."})
