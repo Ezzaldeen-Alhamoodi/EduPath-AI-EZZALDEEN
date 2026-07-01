@@ -39781,10 +39781,32 @@ document.addEventListener("DOMContentLoaded", () => {
         "أخرى": {topic: "التصنيف المخصص", skill: "النوع المخصص", detail: "التفاصيل المخصصة", training: "النشاط المخصص"}
     };
     const DEFAULT_LABELS = {topic: "الفئة الرئيسية", skill: "الفئة الفرعية", detail: "الموضوع التفصيلي", training: "نوع النشاط"};
+    const FIELD_LABEL_TYPE_ALIASES = {
+        "Quran Memorization": "حفظ القرآن الكريم",
+        "Secondary School": "المرحلة الثانوية",
+        "University": "المرحلة الجامعية",
+        "Languages": "اللغات",
+        "Programming & Technology": "البرمجة والتكنولوجيا",
+        "البرمجة والتقنية": "البرمجة والتكنولوجيا",
+        "Artificial Intelligence": "الذكاء الاصطناعي",
+        "AI": "الذكاء الاصطناعي",
+        "Mathematics": "الرياضيات",
+        "Math": "الرياضيات",
+        "Scholarships": "المنح الدراسية",
+        "Exam / Certificate": "الاختبارات الدولية",
+        "Exams & Certificates": "الاختبارات الدولية",
+        "الاختبارات والشهادات": "الاختبارات الدولية",
+        "Daily Life": "الحياة اليومية",
+        "Projects": "المشاريع",
+        "Reading & Research": "القراءة والبحث",
+        "General": "عام",
+        "Other": "أخرى"
+    };
     const normalizeLabelType = (value) => String(value == null ? "" : value).trim();
     function fieldLabelsForCurrentTaskType() {
         const typeInput = document.getElementById("categorySelect");
-        const type = normalizeLabelType(typeInput && typeInput.value) || "عام";
+        const rawType = normalizeLabelType(typeInput && typeInput.value) || "عام";
+        const type = FIELD_LABEL_TYPE_ALIASES[rawType] || rawType;
         return Object.assign({}, DEFAULT_LABELS, LABELS_BY_TYPE[type] || {});
     }
     function setFieldLabelText(id, value) {
