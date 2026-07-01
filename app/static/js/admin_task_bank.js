@@ -100,8 +100,8 @@
 
     function buildMergedAdminConfig(baseConfig, publishedConfig, draftConfig) {
         const base = ensureConfig(baseConfig || {});
-        if (draftConfig) return ensureConfig(deepMerge(base, draftConfig, !draftConfig.__edupathAdminFullConfig));
-        if (publishedConfig) return ensureConfig(deepMerge(base, publishedConfig, !publishedConfig.__edupathAdminFullConfig));
+        if (draftConfig) return ensureConfig(deepMerge(base, draftConfig, true));
+        if (publishedConfig) return ensureConfig(deepMerge(base, publishedConfig, true));
         return base;
     }
 
@@ -623,7 +623,7 @@
         modal.className = "admin-bank-modal-v5600";
         modal.hidden = true;
         modal.innerHTML = `
-        <div class="admin-bank-modal-card-v5600 admin-add-option-card-v5681" style="max-width:780px">
+        <div class="admin-bank-modal-card-v5600 admin-add-option-card-v5681 admin-add-option-card-v5612">
             <h2>إضافة خيار تكيفي جديد</h2>
             <p class="muted" id="addOptionPathHint">—</p>
             <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;padding:12px;margin:10px 0">
@@ -643,16 +643,16 @@
                     <select id="addOptionBranchMode"><option value="manual">إضافة تفرعات الآن</option><option value="copy">نسخ تفرعات من خيار موجود</option><option value="empty">إنشاء تفرع افتراضي مؤقت</option></select>
                     <select id="addOptionCopySource" style="margin-top:8px"></select>
                     <label id="addOptionChildrenLabel">التفرعات التابعة، كل خيار في سطر</label>
-                    <textarea id="addOptionChildrenTextarea" rows="8" placeholder="اكتب كل تفرع في سطر مستقل"></textarea>
+                    <textarea id="addOptionChildrenTextarea" rows="4" placeholder="اكتب كل تفرع في سطر مستقل"></textarea>
                     <p class="muted" id="addOptionChildrenHelp">هذه التفرعات ستُحفظ لهذا الخيار فقط، ولن تغيّر بقية المسارات.</p>
                     <label id="addOptionChildrenCountLabel">عدد التفرعات المؤقتة</label>
                     <input id="addOptionChildrenCountInput" type="number" min="0" value="1">
                     <div id="addOptionDeepBranchPanel" style="border-top:1px dashed #d1d5db;margin-top:12px;padding-top:12px">
                         <p class="muted">اختياري: يمكنك تجهيز تفرعات أعمق الآن لتصبح الخانة الجديدة جاهزة فوراً.</p>
                         <label id="addOptionGrandChildrenLabel">تفرعات المستوى التالي لكل تفرع تضيفه</label>
-                        <textarea id="addOptionGrandChildrenTextarea" rows="5" placeholder="اختياري — كل خيار في سطر"></textarea>
+                        <textarea id="addOptionGrandChildrenTextarea" rows="3" placeholder="اختياري — كل خيار في سطر"></textarea>
                         <label id="addOptionGreatGrandChildrenLabel">أنشطة/تفرعات المستوى الأخير</label>
-                        <textarea id="addOptionGreatGrandChildrenTextarea" rows="5" placeholder="اختياري — كل خيار في سطر"></textarea>
+                        <textarea id="addOptionGreatGrandChildrenTextarea" rows="3" placeholder="اختياري — كل خيار في سطر"></textarea>
                     </div>
                 </div>
             </div>
@@ -859,7 +859,7 @@
         if (!confirm("سيتم نشر التعديلات لتظهر في صفحة المهام العادية. هل تريد المتابعة؟")) return;
         try {
             const res = await fetchJson(`/api/admin/task-bank/${encodeURIComponent(state.currentType)}`, {
-                method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({config: configForSave(), action: "v5.6.10_save_new_options_with_branches", clear_draft: true})
+                method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({config: configForSave(), action: "v5.6.12_final_admin_editor_no_option_loss", clear_draft: true})
             });
             state.dirty = false;
             toast(res.message || "تم النشر مع الخيارات والتفرعات الجديدة.");

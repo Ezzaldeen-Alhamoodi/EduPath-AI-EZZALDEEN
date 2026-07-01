@@ -124,7 +124,7 @@
             const override = overrides[typeName];
             if (!override || typeof override !== "object") return;
             const base = (window.EDUPATH_TASK_BANK_BASE_DATA && window.EDUPATH_TASK_BANK_BASE_DATA[typeName]) || data[typeName] || {};
-            const repairMode = !override.__edupathAdminFullConfig;
+            const repairMode = true; // v5.6.12: always protect the original full bank; Admin overrides are merged over the base, never allowed to erase existing adaptive options by omission.
             data[typeName] = ensureShape(deepMerge(base, override, repairMode));
         });
         Object.keys(data || {}).forEach((typeName) => {
