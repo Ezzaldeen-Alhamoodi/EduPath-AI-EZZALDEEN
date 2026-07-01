@@ -8878,3 +8878,36 @@ body.dark-mode .coach-hero {
     width: 100%;
     margin-top: 0.35rem;
 }
+
+/* EduPath AI v5.6.10 - clearer adaptive option builder inside Admin Task Editor */
+.admin-add-option-card-v5681 label,
+.admin-add-option-card-v5610 label,
+.admin-add-option-card-v5620 label {
+    display: block;
+    margin-top: 0.75rem;
+    font-weight: 800;
+}
+.admin-add-option-card-v5681 input,
+.admin-add-option-card-v5681 select,
+.admin-add-option-card-v5681 textarea,
+.admin-add-option-card-v5610 input,
+.admin-add-option-card-v5610 select,
+.admin-add-option-card-v5610 textarea,
+.admin-add-option-card-v5620 input,
+.admin-add-option-card-v5620 select,
+.admin-add-option-card-v5620 textarea {
+    width: 100%;
+    margin-top: 0.35rem;
+}
+.admin-add-guide-v5610,
+.admin-add-deep-panel-v5610 {
+    margin: 12px 0;
+    padding: 12px;
+    border-radius: 16px;
+    background: rgba(37, 99, 235, 0.06);
+    border: 1px solid rgba(37, 99, 235, 0.16);
+}
+.admin-add-deep-panel-v5610 {
+    background: rgba(15, 23, 42, 0.035);
+    border-color: rgba(15, 23, 42, 0.12);
+}

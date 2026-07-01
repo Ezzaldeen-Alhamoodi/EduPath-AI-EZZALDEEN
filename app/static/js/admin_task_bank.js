@@ -249,7 +249,7 @@
         return list.length ? list : ["أخرى"];
     }
 
-    function writeList(level, list) {
+    function writeList(level, list, preferredValue) {
         const safe = unique(list);
         const cfg = state.config;
         if (!cfg) return;
@@ -258,7 +258,7 @@
         if (level === "detail") cfg.detailByPath[pathKey(selectedMain(), selectedSub())] = safe;
         if (level === "training") cfg.trainingByPath[pathKey(selectedMain(), selectedSub(), selectedDetail())] = safe;
         markDirty();
-        refreshNativeForm();
+        refreshNativeForm(preferredValue ? valuesWithPreferred(level, preferredValue) : null);
     }
 
     function childLevel(level) {
@@ -279,6 +279,59 @@
         if (child === "sub") state.config.subByPath[childPathFor(level, option)] = safe;
         if (child === "detail") state.config.detailByPath[childPathFor(level, option)] = safe;
         if (child === "training") state.config.trainingByPath[childPathFor(level, option)] = safe;
+    }
+
+    function linesFrom(id) {
+        const el = $(id);
+        return unique(((el && el.value) || "").split(/\n+/));
+    }
+
+    function parseManualBranches() {
+        const mode = ($("addOptionBranchMode") && $("addOptionBranchMode").value) || "empty";
+        if (mode === "copy") return getChildList(state.selectedLevel, $("addOptionCopySource").value);
+        if (mode === "manual") return linesFrom("addOptionChildrenTextarea");
+        const count = Math.max(0, parseInt(($("addOptionChildrenCountInput") && $("addOptionChildrenCountInput").value) || "1", 10));
+        return count ? Array.from({length: count}, (_, i) => i === 0 ? "أخرى" : `تفرع ${i + 1}`) : ["أخرى"];
+    }
+
+    function applyGuidedBranches(level, value) {
+        const next = childLevel(level);
+        if (!next) return;
+        const children = parseManualBranches();
+        setChildList(level, value, children);
+
+        const second = linesFrom("addOptionGrandChildrenTextarea");
+        const third = linesFrom("addOptionGreatGrandChildrenTextarea");
+        if (level === "main") {
+            children.forEach((subValue) => {
+                if (second.length) state.config.detailByPath[pathKey(value, subValue)] = second;
+                if (third.length) second.forEach((detailValue) => {
+                    state.config.trainingByPath[pathKey(value, subValue, detailValue)] = third;
+                });
+            });
+        }
+        if (level === "sub") {
+            const main = selectedMain();
+            children.forEach((detailValue) => {
+                if (second.length) state.config.trainingByPath[pathKey(main, value, detailValue)] = second;
+            });
+        }
+    }
+
+    function pickAddedOptionInNativeForm(level, value) {
+        const meta = levelMeta(level);
+        const el = $(meta.selectId);
+        if (el) {
+            el.dataset.current = value;
+            setTimeout(() => {
+                const fresh = $(meta.selectId);
+                if (fresh) {
+                    fresh.value = value;
+                    fresh.dataset.current = value;
+                    fresh.dispatchEvent(new Event("change", {bubbles: true}));
+                }
+            }, 90);
+        }
     }
     function getChildList(level, option) {
         const child = childLevel(level);
@@ -327,13 +380,32 @@
         });
     }
 
-    function refreshNativeForm() {
+    function levelSelectId(level) { return levelMeta(level).selectId; }
+    function forceSelectValue(level, value) {
+        const el = $(levelSelectId(level));
+        if (!el || !value) return;
+        const exists = Array.from(el.options || []).some((o) => normalize(o.value || o.textContent) === value);
+        if (!exists) el.add(new Option(value, value));
+        el.dataset.current = value;
+        el.value = value;
+    }
+    function valuesWithPreferred(level, value) {
         const vals = preserveSelectValues();
+        if (level === "main") { vals.main = value; vals.sub = ""; vals.detail = ""; vals.training = ""; }
+        if (level === "sub") { vals.sub = value; vals.detail = ""; vals.training = ""; }
+        if (level === "detail") { vals.detail = value; vals.training = ""; }
+        if (level === "training") vals.training = value;
+        return vals;
+    }
+
+    function refreshNativeForm(preferred) {
+        const vals = preferred || preserveSelectValues();
         applyConfigToRuntime();
         restoreSelectDatasets(vals);
         if (typeof window.EDUPATH_NATIVE_TASKS_INIT === "function") window.EDUPATH_NATIVE_TASKS_INIT();
-        setTimeout(() => { restoreSelectDatasets(vals); renderEditor(); }, 60);
-        setTimeout(renderEditor, 180);
+        if (preferred) Object.keys({main:1,sub:1,detail:1,training:1}).forEach((level) => forceSelectValue(level, preferred[level]));
+        setTimeout(() => { restoreSelectDatasets(vals); if (preferred) Object.keys({main:1,sub:1,detail:1,training:1}).forEach((level) => forceSelectValue(level, preferred[level])); renderEditor(); }, 60);
+        setTimeout(() => { if (preferred) Object.keys({main:1,sub:1,detail:1,training:1}).forEach((level) => forceSelectValue(level, preferred[level])); renderEditor(); }, 180);
     }
 
     async function syncSelectedType(force) {
@@ -551,35 +623,62 @@
         modal.className = "admin-bank-modal-v5600";
         modal.hidden = true;
         modal.innerHTML = `
-        <div class="admin-bank-modal-card-v5600 admin-add-option-card-v5681">
+        <div class="admin-bank-modal-card-v5600 admin-add-option-card-v5681" style="max-width:780px">
             <h2>إضافة خيار تكيفي جديد</h2>
             <p class="muted" id="addOptionPathHint">—</p>
-            <label>اسم الخيار الجديد</label>
-            <input id="addOptionNameInput" placeholder="اكتب الاسم كما سيظهر للمستخدم">
-            <label>مكان الإضافة</label>
+            <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;padding:12px;margin:10px 0">
+                <strong id="addOptionLevelHint">الخانة الحالية: —</strong>
+                <p class="muted" id="addOptionChildHint" style="margin:.35rem 0 0">—</p>
+            </div>
+            <label>اسم الخيار الجديد الذي سيظهر للمستخدم</label>
+            <input id="addOptionNameInput" placeholder="مثال: مشروع برمجي / القراءة / التفاضل">
+            <label>مكان الإضافة داخل القائمة الحالية</label>
             <select id="addOptionPositionSelect"><option value="end">في النهاية</option><option value="start">في البداية</option><option value="after">بعد خيار محدد</option></select>
-            <select id="addOptionAfterSelect"></select>
-            <label>طريقة إنشاء التفرعات التابعة</label>
-            <select id="addOptionBranchMode"><option value="empty">تفرعات فارغة</option><option value="copy">نسخ تفرعات من خيار موجود</option><option value="manual">إضافة تفرعات الآن</option></select>
-            <select id="addOptionCopySource"></select>
-            <label>عدد التفرعات التابعة</label>
-            <input id="addOptionChildrenCountInput" type="number" min="0" value="1">
-            <label>التفرعات التابعة، كل خيار في سطر</label>
-            <textarea id="addOptionChildrenTextarea" rows="8" placeholder="أخرى"></textarea>
-            <div class="actions"><button type="button" id="confirmAddOptionBtn">حفظ الخيار</button><button type="button" class="small-button cancel" id="cancelAddOptionBtn">إلغاء</button></div>
+            <select id="addOptionAfterSelect" style="margin-top:8px"></select>
+            <div id="addOptionAdaptiveBox" style="border:1px solid #e5e7eb;border-radius:14px;padding:12px;margin-top:14px">
+                <label style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><input id="addOptionHasBranchesCheckbox" type="checkbox" checked> هذا الخيار له تفرعات تكيفية في الخانة التالية</label>
+                <p class="muted" id="addOptionBranchMeaning">—</p>
+                <label>طريقة إنشاء التفرعات التابعة</label>
+                <select id="addOptionBranchMode"><option value="manual">إضافة تفرعات الآن</option><option value="copy">نسخ تفرعات من خيار موجود</option><option value="empty">إنشاء تفرع افتراضي مؤقت</option></select>
+                <select id="addOptionCopySource" style="margin-top:8px"></select>
+                <label id="addOptionChildrenLabel">التفرعات التابعة، كل خيار في سطر</label>
+                <textarea id="addOptionChildrenTextarea" rows="9" placeholder="اكتب كل تفرع في سطر مستقل"></textarea>
+                <p class="muted" id="addOptionChildrenHelp">هذه التفرعات ستُحفظ لهذا الخيار فقط، ولن تغيّر بقية المسارات.</p>
+                <label id="addOptionChildrenCountLabel">عدد التفرعات المؤقتة</label>
+                <input id="addOptionChildrenCountInput" type="number" min="0" value="1">
+            </div>
+            <div class="actions"><button type="button" id="confirmAddOptionBtn">حفظ الخيار والتفرعات</button><button type="button" class="small-button cancel" id="cancelAddOptionBtn">إلغاء</button></div>
         </div>`;
         document.body.appendChild(modal);
         $("cancelAddOptionBtn").addEventListener("click", () => modal.hidden = true);
         $("confirmAddOptionBtn").addEventListener("click", confirmAddOption);
         $("addOptionBranchMode").addEventListener("change", refreshAddModalMode);
+        $("addOptionHasBranchesCheckbox").addEventListener("change", refreshAddModalMode);
         return modal;
     }
 
     function refreshAddModalMode() {
-        const mode = $("addOptionBranchMode").value;
-        $("addOptionCopySource").style.display = mode === "copy" ? "block" : "none";
-        $("addOptionChildrenTextarea").style.display = mode === "manual" ? "block" : "none";
-        $("addOptionChildrenCountInput").style.display = mode === "empty" ? "block" : "none";
+        const adaptive = ($("addOptionAdaptiveSelect") && $("addOptionAdaptiveSelect").value) !== "no";
+        const mode = ($("addOptionBranchMode") && $("addOptionBranchMode").value) || "manual";
+        const pos = ($("addOptionPositionSelect") && $("addOptionPositionSelect").value) || "end";
+        const child = childLevel(state.selectedLevel);
+        if ($("addOptionAfterSelect")) $("addOptionAfterSelect").style.display = pos === "after" ? "block" : "none";
+        if ($("addOptionBranchPanel")) $("addOptionBranchPanel").style.display = adaptive && child ? "block" : "none";
+        if ($("addOptionCopySource")) $("addOptionCopySource").style.display = mode === "copy" ? "block" : "none";
+        if ($("addOptionChildrenTextarea")) $("addOptionChildrenTextarea").style.display = mode === "manual" ? "block" : "none";
+        if ($("addOptionChildrenCountInput")) $("addOptionChildrenCountInput").style.display = mode === "empty" ? "block" : "none";
+        const deep = $("addOptionDeepBranchPanel");
+        if (deep) deep.style.display = adaptive && child && state.selectedLevel !== "detail" ? "block" : "none";
+        if ($("addOptionNextLabel")) $("addOptionNextLabel").textContent = child ? `ماذا تريد أن يظهر في خانة: ${currentLabel(child)}؟` : "هذا المستوى الأخير ولا يحتاج تفرعات";
+        if ($("addOptionGrandChildrenLabel")) {
+            const grand = childLevel(child);
+            $("addOptionGrandChildrenLabel").textContent = grand ? `اختياري: عناصر خانة ${currentLabel(grand)} لكل تفرع تضيفه` : "";
+        }
+        if ($("addOptionGreatGrandChildrenLabel")) {
+            const grand = childLevel(child);
+            const great = childLevel(grand);
+            $("addOptionGreatGrandChildrenLabel").textContent = great ? `اختياري: عناصر خانة ${currentLabel(great)} لكل عنصر من الخانة السابقة` : "";
+        }
     }
 
     function openAddOption() {
@@ -587,13 +686,18 @@
         const modal = ensureAddModal();
         modal.dataset.level = state.selectedLevel;
         const list = getList(state.selectedLevel);
-        $("addOptionPathHint").textContent = `الخانة: ${currentLabel(state.selectedLevel)} · المسار: ${state.currentType || "—"} → ${selectedMain() || "—"} → ${selectedSub() || "—"} → ${selectedDetail() || "—"}`;
+        const parts = [state.currentType, selectedMain(), selectedSub(), selectedDetail()].filter(Boolean);
+        $("addOptionPathHint").textContent = `الخانة الحالية: ${currentLabel(state.selectedLevel)} · المسار الحالي: ${parts.join(" → ") || "—"}`;
         $("addOptionNameInput").value = "";
         $("addOptionAfterSelect").innerHTML = list.map((v) => `<option value="${esc(v)}">${esc(v)}</option>`).join("");
-        $("addOptionCopySource").innerHTML = list.map((v) => `<option value="${esc(v)}">نسخ من: ${esc(v)}</option>`).join("");
+        $("addOptionCopySource").innerHTML = list.map((v) => `<option value="${esc(v)}">نسخ تفرعات: ${esc(v)}</option>`).join("");
         $("addOptionChildrenTextarea").value = "أخرى";
+        $("addOptionGrandChildrenTextarea").value = "";
+        $("addOptionGreatGrandChildrenTextarea").value = "";
         $("addOptionChildrenCountInput").value = childLevel(state.selectedLevel) ? "1" : "0";
-        $("addOptionBranchMode").value = "empty";
+        $("addOptionBranchMode").value = childLevel(state.selectedLevel) ? "manual" : "empty";
+        $("addOptionAdaptiveSelect").value = childLevel(state.selectedLevel) ? "yes" : "no";
+        $("addOptionPositionSelect").value = "end";
         refreshAddModalMode();
         modal.hidden = false;
         setTimeout(() => $("addOptionNameInput") && $("addOptionNameInput").focus(), 20);
@@ -613,19 +717,15 @@
             const i = raw.indexOf(after);
             raw.splice(i >= 0 ? i + 1 : raw.length, 0, value);
         } else raw.push(value);
-        if (childLevel(level)) {
-            const mode = $("addOptionBranchMode").value;
-            let children = ["أخرى"];
-            if (mode === "copy") children = getChildList(level, $("addOptionCopySource").value);
-            if (mode === "manual") children = unique(($("addOptionChildrenTextarea").value || "").split(/\n+/));
-            if (mode === "empty") {
-                const count = Math.max(0, parseInt($("addOptionChildrenCountInput").value || "1", 10));
-                children = count ? Array.from({length: count}, (_, i) => i === 0 ? "أخرى" : `تفرع ${i + 1}`) : ["أخرى"];
-            }
-            setChildList(level, value, children);
-        }
+
+        const adaptive = ($("addOptionAdaptiveSelect") && $("addOptionAdaptiveSelect").value) !== "no";
+        if (adaptive && childLevel(level)) applyGuidedBranches(level, value);
+        else if (childLevel(level)) setChildList(level, value, ["أخرى"]);
+
         modal.hidden = true;
         writeList(level, raw);
+        pickAddedOptionInNativeForm(level, value);
+        toast("تمت إضافة الخيار والتفرعات داخل المسار الحالي. اضغط حفظ كمسودة أو نشر التعديلات للاحتفاظ بها نهائياً.");
     }
 
     function ensureBranchesModal() {
@@ -719,24 +819,38 @@
         box.querySelectorAll("[data-id]").forEach((b) => b.addEventListener("click", () => rollback(b.dataset.id)));
     }
 
+    function configForSave() {
+        state.config = ensureConfig(state.config || {});
+        applyConfigToRuntime();
+        return Object.assign({}, clone(state.config), {__edupathAdminFullConfig: true});
+    }
+
     async function saveDraft() {
         if (!state.currentType || !state.config) return toast("اختر نوع مهمة أولاً.");
-        const res = await fetchJson(`/api/admin/task-bank/${encodeURIComponent(state.currentType)}/draft`, {
-            method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({config: Object.assign({}, ensureConfig(state.config), {__edupathAdminFullConfig: true})})
-        });
-        state.dirty = false;
-        toast(res.message || "تم حفظ المسودة.");
-        await syncSelectedType(true);
+        try {
+            const res = await fetchJson(`/api/admin/task-bank/${encodeURIComponent(state.currentType)}/draft`, {
+                method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({config: configForSave()})
+            });
+            state.dirty = false;
+            toast(res.message || "تم حفظ المسودة مع الخيارات والتفرعات الجديدة.");
+            await syncSelectedType(true);
+        } catch (e) {
+            toast(e.message || "فشل حفظ المسودة. راجع الاتصال أو صلاحيات المشرف.");
+        }
     }
     async function publish() {
         if (!state.currentType || !state.config) return toast("اختر نوع مهمة أولاً.");
         if (!confirm("سيتم نشر التعديلات لتظهر في صفحة المهام العادية. هل تريد المتابعة؟")) return;
-        const res = await fetchJson(`/api/admin/task-bank/${encodeURIComponent(state.currentType)}`, {
-            method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({config: Object.assign({}, ensureConfig(state.config), {__edupathAdminFullConfig: true}), action: "v5.6.9_fix_real_adaptive_admin_editor", clear_draft: true})
-        });
-        state.dirty = false;
-        toast(res.message || "تم النشر.");
-        await syncSelectedType(true);
+        try {
+            const res = await fetchJson(`/api/admin/task-bank/${encodeURIComponent(state.currentType)}`, {
+                method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({config: configForSave(), action: "v5.6.10_save_new_options_with_branches", clear_draft: true})
+            });
+            state.dirty = false;
+            toast(res.message || "تم النشر مع الخيارات والتفرعات الجديدة.");
+            await syncSelectedType(true);
+        } catch (e) {
+            toast(e.message || "فشل نشر التعديلات. راجع الاتصال أو صلاحيات المشرف.");
+        }
     }
     async function rollback(id) {
         if (!state.currentType) return;
