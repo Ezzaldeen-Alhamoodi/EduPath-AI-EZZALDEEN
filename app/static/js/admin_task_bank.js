@@ -120,8 +120,8 @@
 
     function buildMergedAdminConfig(baseConfig, publishedConfig, draftConfig) {
         const base = ensureConfig(baseConfig || {});
-        if (draftConfig) return ensureConfig(deepMerge(base, draftConfig));
-        if (publishedConfig) return ensureConfig(deepMerge(base, publishedConfig));
+        if (draftConfig) return ensureConfig(deepMergeWithMode(base, draftConfig, !draftConfig.__edupathAdminFullConfig));
+        if (publishedConfig) return ensureConfig(deepMergeWithMode(base, publishedConfig, !publishedConfig.__edupathAdminFullConfig));
         return base;
     }
 
@@ -193,6 +193,50 @@
     function isExamType() { return normalize(state.currentType || getTypeFromForm()) === "الاختبارات الدولية"; }
     function listOrNull(value) { return Array.isArray(value) ? value : null; }
 
+    function getSelectValuesForLevel(level) {
+        const meta = levelMeta(level);
+        const select = meta && $(meta.selectId);
+        if (!select) return null;
+        const values = Array.from(select.options || []).map((option) => normalize(option.value || option.textContent)).filter(Boolean);
+        const clean = uniqueList(values);
+        if (clean.length === 1 && clean[0] === "أخرى") return null;
+        return clean;
+    }
+
+    function resolveTypeKey(typeName) {
+        const data = getTaskData();
+        const raw = normalize(typeName);
+        const alias = TASK_TYPE_LABEL_ALIASES[raw] || raw;
+        if (data[raw]) return raw;
+        if (data[alias]) return alias;
+        const base = window.EDUPATH_TASK_BANK_BASE_DATA || {};
+        if (base[raw]) return raw;
+        if (base[alias]) return alias;
+        const keys = Object.keys(data).concat(Object.keys(base));
+        return keys.find((key) => normalize((data[key] || base[key] || {}).displayName) === raw) || alias || raw;
+    }
+
+    function mergeLists(baseList, overrideList, repairMode) {
+        const next = uniqueList(overrideList || []);
+        if (!repairMode) return next;
+        const base = uniqueList(baseList || []);
+        return uniqueList([...base, ...next]);
+    }
+
+    function deepMergeWithMode(base, override, repairMode) {
+        if (Array.isArray(override)) return mergeLists(Array.isArray(base) ? base : [], override, repairMode);
+        if (!override || typeof override !== "object") return clone(base || {});
+        const output = (base && typeof base === "object" && !Array.isArray(base)) ? clone(base) : {};
+        Object.keys(override).forEach((key) => {
+            if (key === "__edupathAdminFullConfig") return;
+            const next = override[key];
+            if (Array.isArray(next)) output[key] = mergeLists(Array.isArray(output[key]) ? output[key] : [], next, repairMode);
+            else if (next && typeof next === "object") output[key] = deepMergeWithMode(output[key], next, repairMode);
+            else output[key] = next;
+        });
+        return output;
+    }
+
     function examFallbackList(level) {
         if (!isExamType()) return null;
         const exams = getExamData();
@@ -213,9 +257,12 @@
     function adminListSourceForLevel(level) {
         if (!state.config) return {list: [], source: "empty", path: "", pathSpecific: false};
         if (level === "main") {
-            return {list: uniqueList(listOrNull(state.config.main) || examFallbackList("main") || ["أخرى"]), source: "main", path: "", pathSpecific: true};
+            const formValues = getSelectValuesForLevel("main");
+            return {list: uniqueList(formValues || listOrNull(state.config.main) || examFallbackList("main") || ["أخرى"]), source: formValues ? "native-select" : "main", path: "", pathSpecific: true};
         }
         if (level === "sub") {
+            const formValues = getSelectValuesForLevel("sub");
+            if (formValues) return {list: formValues, source: "native-select", path: pathKey(selectedMain()), pathSpecific: true};
             const main = selectedMain();
             const key = pathKey(main);
             if (listOrNull(state.config.subByPath[key])) return {list: uniqueList(state.config.subByPath[key]), source: "subByPath", path: key, pathSpecific: true};
@@ -226,6 +273,8 @@
             return {list: ["أخرى"], source: "fallback", path: key, pathSpecific: false};
         }
         if (level === "detail") {
+            const formValues = getSelectValuesForLevel("detail");
+            if (formValues) return {list: formValues, source: "native-select", path: pathKey(selectedMain(), selectedSub()), pathSpecific: true};
             const main = selectedMain();
             const sub = selectedSub();
             const key = pathKey(main, sub);
@@ -238,6 +287,8 @@
             return {list: ["أخرى"], source: "fallback", path: key, pathSpecific: false};
         }
         if (level === "training") {
+            const formValues = getSelectValuesForLevel("training");
+            if (formValues) return {list: formValues, source: "native-select", path: pathKey(selectedMain(), selectedSub(), selectedDetail()), pathSpecific: true};
             const main = selectedMain();
             const sub = selectedSub();
             const detail = selectedDetail();
@@ -485,6 +536,7 @@
         $("addOptionAfterSelect").innerHTML = list.map((v) => `<option value="${esc(v)}">${esc(v)}</option>`).join("");
         $("addOptionCopySource").innerHTML = list.map((v) => `<option value="${esc(v)}">نسخ من: ${esc(v)}</option>`).join("");
         $("addOptionChildrenTextarea").value = "أخرى";
+        const child = getChildrenLevel(level);
         $("addOptionChildrenCountInput").value = child ? "1" : "0";
         $("addOptionBranchMode").value = "empty";
         refreshAddModalMode();
@@ -604,14 +656,32 @@
 
     function refreshNativeForm() {
         if (!state.currentType || !state.config) return;
+        const selected = {
+            type: state.currentType,
+            main: selectedMain(),
+            sub: selectedSub(),
+            detail: selectedDetail(),
+            training: normalize($("trainingTypeSelect") && $("trainingTypeSelect").value)
+        };
         getTaskData()[state.currentType] = ensureConfig(state.config);
+        ["topicSelect", "skillSelect", "detailedTopicSelect", "trainingTypeSelect"].forEach((id, idx) => {
+            const el = $(id);
+            const val = [selected.main, selected.sub, selected.detail, selected.training][idx];
+            if (el) el.dataset.current = val || "";
+        });
+        const categoryInput = $("categorySelect");
+        if (categoryInput) categoryInput.value = selected.type;
         if (window.EDUPATH_NATIVE_TASKS_INIT) window.EDUPATH_NATIVE_TASKS_INIT();
-        renderEditor();
+        requestAnimationFrame(renderEditor);
+        setTimeout(renderEditor, 80);
     }
 
     async function syncSelectedType() {
-        const typeName = getTypeFromForm();
+        const requestedTypeName = getTypeFromForm();
+        const typeName = resolveTypeKey(requestedTypeName);
         if (!typeName) return;
+        const categoryInput = $("categorySelect");
+        if (categoryInput && categoryInput.value !== typeName) categoryInput.value = typeName;
         if (state.dirty && state.currentType && state.currentType !== typeName) {
             if (!confirm("لديك تعديلات غير محفوظة. هل تريد الانتقال دون حفظ؟")) {
                 const input = $("categorySelect");
@@ -833,7 +903,7 @@
     async function saveDraft() {
         if (!state.currentType || !state.config) return toast("اختر نوع مهمة أولًا.");
         const data = await fetchJson(`/api/admin/task-bank/${encodeURIComponent(state.currentType)}/draft`, {
-            method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({config: state.config})
+            method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({config: Object.assign({}, state.config, {__edupathAdminFullConfig: true})})
         });
         state.dirty = false; state.draftMode = true; toast(data.message || "تم حفظ المسودة."); await syncSelectedType();
     }
@@ -842,7 +912,7 @@
         if (!state.currentType || !state.config) return toast("اختر نوع مهمة أولًا.");
         if (!confirm("سيتم نشر التعديلات لتظهر في صفحة المهام العادية. هل أنت متأكد؟")) return;
         const data = await fetchJson(`/api/admin/task-bank/${encodeURIComponent(state.currentType)}`, {
-            method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({config: state.config, action: "publish_path_aware_admin_editor", clear_draft: true})
+            method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({config: Object.assign({}, state.config, {__edupathAdminFullConfig: true}), action: "publish_path_aware_admin_editor", clear_draft: true})
         });
         state.dirty = false; state.draftMode = false; toast(data.message || "تم النشر."); await syncSelectedType();
     }
@@ -876,11 +946,13 @@
         window.__EDUPATH_ADMIN_TASK_BANK_BOUND__ = true;
         document.addEventListener("click", (event) => {
             const typeCard = event.target.closest("#taskTypeCards .task-type-card");
-            if (typeCard) requestAnimationFrame(syncSelectedType);
+            if (typeCard) { requestAnimationFrame(syncSelectedType); setTimeout(syncSelectedType, 120); }
         });
         document.addEventListener("change", (event) => {
             if (["categorySelect", "topicSelect", "skillSelect", "detailedTopicSelect", "trainingTypeSelect"].includes(event.target && event.target.id)) {
                 requestAnimationFrame(renderEditor);
+                setTimeout(renderEditor, 80);
+                setTimeout(renderEditor, 220);
             }
         });
         ["topicSelect", "skillSelect", "detailedTopicSelect", "trainingTypeSelect"].forEach((id) => {

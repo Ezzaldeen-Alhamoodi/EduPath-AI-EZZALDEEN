@@ -77,14 +77,21 @@
         return ensureShape(cfg);
     }
 
-    function deepMerge(base, override) {
-        if (Array.isArray(override)) return unique(override);
+    function mergeLists(baseList, overrideList, repairMode) {
+        const next = unique(overrideList || []);
+        if (!repairMode) return next;
+        return unique([...(Array.isArray(baseList) ? baseList : []), ...next]);
+    }
+
+    function deepMerge(base, override, repairMode) {
+        if (Array.isArray(override)) return mergeLists(Array.isArray(base) ? base : [], override, repairMode);
         if (!override || typeof override !== "object") return override;
         const output = (base && typeof base === "object" && !Array.isArray(base)) ? clone(base) : {};
         Object.keys(override).forEach((key) => {
+            if (key === "__edupathAdminFullConfig") return;
             const next = override[key];
-            if (Array.isArray(next)) output[key] = unique(next);
-            else if (next && typeof next === "object") output[key] = deepMerge(output[key], next);
+            if (Array.isArray(next)) output[key] = mergeLists(output[key], next, repairMode);
+            else if (next && typeof next === "object") output[key] = deepMerge(output[key], next, repairMode);
             else output[key] = next;
         });
         return output;
@@ -116,7 +123,9 @@
         Object.keys(overrides || {}).forEach((typeName) => {
             const override = overrides[typeName];
             if (!override || typeof override !== "object") return;
-            data[typeName] = ensureShape(deepMerge(data[typeName] || {}, override));
+            const base = (window.EDUPATH_TASK_BANK_BASE_DATA && window.EDUPATH_TASK_BANK_BASE_DATA[typeName]) || data[typeName] || {};
+            const repairMode = !override.__edupathAdminFullConfig;
+            data[typeName] = ensureShape(deepMerge(base, override, repairMode));
         });
         Object.keys(data || {}).forEach((typeName) => {
             data[typeName] = ensureShape(data[typeName]);
