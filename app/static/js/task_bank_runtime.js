@@ -34,10 +34,9 @@
         return Object.assign({}, DEFAULT_FIELD_LABELS, TASK_TYPE_FIELD_LABELS[normalize(typeName)] || {});
     }
 
-    function mergeFixedLabels(typeName, config) {
-        const cfg = config || {};
-        cfg.labels = Object.assign({}, fixedLabelsForType(typeName), cfg.labels || {});
-        return cfg;
+    // Labels are display-only. Never write fixed labels into the task-bank config.
+    function labelsForDisplay(typeName, config) {
+        return Object.assign({}, DEFAULT_FIELD_LABELS, (config && config.labels) || {}, fixedLabelsForType(typeName));
     }
 
     function getData() {
@@ -49,7 +48,7 @@
         const data = getData();
         const type = normalize(typeName || (document.getElementById("categorySelect") || {}).value || "عام");
         const cfg = data[type] || data["عام"] || {};
-        return mergeFixedLabels(type, ensureShape(cfg));
+        return ensureShape(cfg);
     }
 
     function deepMerge(base, override) {
@@ -94,7 +93,7 @@
             data[typeName] = ensureShape(deepMerge(data[typeName] || {}, override));
         });
         Object.keys(data || {}).forEach((typeName) => {
-            data[typeName] = mergeFixedLabels(typeName, ensureShape(data[typeName]));
+            data[typeName] = ensureShape(data[typeName]);
         });
         return data;
     }
@@ -112,7 +111,7 @@
     function applyTaskBankLabels() {
         const type = activeType();
         const cfg = getConfig(type);
-        const labels = Object.assign({}, fixedLabelsForType(type), cfg.labels || {});
+        const labels = labelsForDisplay(type, cfg);
         setText("taskNameLabel", labels.taskName || labels.title);
         setText("topicLabel", labels.topic);
         setText("skillLabel", labels.skill);

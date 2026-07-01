@@ -93,7 +93,7 @@
         c.recommendations = ensureObject(c.recommendations);
         c.recommendationsByPath = ensureObject(c.recommendationsByPath);
         c.sourceSuggestionsByPath = ensureObject(c.sourceSuggestionsByPath);
-        c.labels = Object.assign({}, fixedLabelsForType(state.currentType || getTypeFromForm()), ensureObject(c.labels));
+        c.labels = ensureObject(c.labels);
         c.hidden = ensureObject(c.hidden);
         c.hiddenByPath = ensureObject(c.hiddenByPath);
         ["main", "sub", "detail", "training"].forEach((level) => {
@@ -119,10 +119,12 @@
 
     function currentLabel(level) {
         const meta = levelMeta(level);
+        const fixed = fixedLabelsForType(state.currentType || getTypeFromForm());
         const labels = (state.config && state.config.labels) || {};
-        const mapped = level === "main" ? labels.topic : level === "sub" ? labels.skill : labels[level];
+        const custom = level === "main" ? labels.topic : level === "sub" ? labels.skill : labels[level];
+        const mapped = level === "main" ? fixed.topic : level === "sub" ? fixed.skill : fixed[level];
         const el = meta && $(meta.labelId);
-        return normalize(mapped || (el && el.textContent)) || meta.defaultLabel || level;
+        return normalize(mapped || custom || (el && el.textContent)) || meta.defaultLabel || level;
     }
 
     function getHidden(level) {
