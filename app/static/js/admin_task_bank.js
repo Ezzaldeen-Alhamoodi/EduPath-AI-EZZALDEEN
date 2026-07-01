@@ -191,6 +191,8 @@
 
     function getExamData() { return window.SMART_EXAM_DATA || {}; }
     function isExamType() { return normalize(state.currentType || getTypeFromForm()) === "الاختبارات الدولية"; }
+    function listOrNull(value) { return Array.isArray(value) ? value : null; }
+
     function examFallbackList(level) {
         if (!isExamType()) return null;
         const exams = getExamData();
@@ -208,38 +210,59 @@
         return null;
     }
 
-    function getRawList(level) {
-        if (!state.config) return [];
-        if (level === "main") return uniqueList(state.config.main || examFallbackList("main") || ["أخرى"]);
+    function adminListSourceForLevel(level) {
+        if (!state.config) return {list: [], source: "empty", path: "", pathSpecific: false};
+        if (level === "main") {
+            return {list: uniqueList(listOrNull(state.config.main) || examFallbackList("main") || ["أخرى"]), source: "main", path: "", pathSpecific: true};
+        }
         if (level === "sub") {
             const main = selectedMain();
             const key = pathKey(main);
-            return uniqueList(state.config.subByPath[key] || state.config.sub[main] || examFallbackList("sub") || state.config.sub["أخرى"] || ["أخرى"]);
+            if (listOrNull(state.config.subByPath[key])) return {list: uniqueList(state.config.subByPath[key]), source: "subByPath", path: key, pathSpecific: true};
+            if (listOrNull(state.config.sub[main])) return {list: uniqueList(state.config.sub[main]), source: "sub", path: key, pathSpecific: false};
+            const exam = examFallbackList("sub");
+            if (exam) return {list: uniqueList(exam), source: "SMART_EXAM_DATA", path: key, pathSpecific: false};
+            if (listOrNull(state.config.sub["أخرى"])) return {list: uniqueList(state.config.sub["أخرى"]), source: "sub.default", path: key, pathSpecific: false};
+            return {list: ["أخرى"], source: "fallback", path: key, pathSpecific: false};
         }
         if (level === "detail") {
             const main = selectedMain();
             const sub = selectedSub();
             const key = pathKey(main, sub);
-            return uniqueList(state.config.detailByPath[key] || examFallbackList("detail") || state.config.detail[sub] || state.config.detail[main] || state.config.detail["أخرى"] || ["أخرى"]);
+            if (listOrNull(state.config.detailByPath[key])) return {list: uniqueList(state.config.detailByPath[key]), source: "detailByPath", path: key, pathSpecific: true};
+            const exam = examFallbackList("detail");
+            if (exam) return {list: uniqueList(exam), source: "SMART_EXAM_DATA", path: key, pathSpecific: false};
+            if (listOrNull(state.config.detail[sub])) return {list: uniqueList(state.config.detail[sub]), source: "detail.sub", path: key, pathSpecific: false};
+            if (listOrNull(state.config.detail[main])) return {list: uniqueList(state.config.detail[main]), source: "detail.main", path: key, pathSpecific: false};
+            if (listOrNull(state.config.detail["أخرى"])) return {list: uniqueList(state.config.detail["أخرى"]), source: "detail.default", path: key, pathSpecific: false};
+            return {list: ["أخرى"], source: "fallback", path: key, pathSpecific: false};
         }
         if (level === "training") {
             const main = selectedMain();
             const sub = selectedSub();
             const detail = selectedDetail();
             const key = pathKey(main, sub, detail);
-            return uniqueList(
-                state.config.trainingByPath[key] ||
-                examFallbackList("training") ||
-                state.config.trainingByDetail[detail] ||
-                state.config.trainingByDetail[sub] ||
-                state.config.trainingByDetail[main] ||
-                state.config.trainingByDetail["أخرى"] ||
-                state.config.training ||
-                ["أخرى"]
-            );
+            if (listOrNull(state.config.trainingByPath[key])) return {list: uniqueList(state.config.trainingByPath[key]), source: "trainingByPath", path: key, pathSpecific: true};
+            const exam = examFallbackList("training");
+            if (exam) return {list: uniqueList(exam), source: "SMART_EXAM_DATA", path: key, pathSpecific: false};
+            const byDetail = state.config.trainingByDetail || {};
+            if (listOrNull(byDetail[detail])) return {list: uniqueList(byDetail[detail]), source: "trainingByDetail.detail", path: key, pathSpecific: false};
+            if (listOrNull(byDetail[sub])) return {list: uniqueList(byDetail[sub]), source: "trainingByDetail.sub", path: key, pathSpecific: false};
+            if (listOrNull(byDetail[main])) return {list: uniqueList(byDetail[main]), source: "trainingByDetail.main", path: key, pathSpecific: false};
+            if (listOrNull(byDetail["أخرى"])) return {list: uniqueList(byDetail["أخرى"]), source: "trainingByDetail.default", path: key, pathSpecific: false};
+            if (listOrNull(state.config.training)) return {list: uniqueList(state.config.training), source: "training.default", path: key, pathSpecific: false};
+            return {list: ["أخرى"], source: "fallback", path: key, pathSpecific: false};
         }
-        return ["أخرى"];
+        return {list: ["أخرى"], source: "fallback", path: "", pathSpecific: false};
     }
+
+    function getRawList(level) {
+        return adminListSourceForLevel(level).list;
+    }
+
+    function getAdminListForLevel(level) { return getList(level); }
+
+    function setAdminListForLevel(level, list) { setList(level, list); }
 
     function getList(level) { return showList(getRawList(level), level); }
 
@@ -371,10 +394,46 @@
     function getChildListFromSource(level, source) {
         const child = getChildrenLevel(level);
         if (!child || !source) return ["أخرى"];
-        const oldCurrent = {main: selectedMain(), sub: selectedSub(), detail: selectedDetail()};
-        if (level === "main") return uniqueList(state.config.subByPath[pathKey(source)] || state.config.sub[source] || ["أخرى"]);
-        if (level === "sub") return uniqueList(state.config.detailByPath[pathKey(oldCurrent.main, source)] || state.config.detail[source] || ["أخرى"]);
-        if (level === "detail") return uniqueList(state.config.trainingByPath[pathKey(oldCurrent.main, oldCurrent.sub, source)] || state.config.trainingByDetail[source] || state.config.training || ["أخرى"]);
+        const main = selectedMain();
+        const sub = selectedSub();
+        if (level === "main") {
+            const key = pathKey(source);
+            const examData = getExamData()[source];
+            return uniqueList(
+                listOrNull(state.config.subByPath[key]) ||
+                listOrNull(state.config.sub[source]) ||
+                (isExamType() && examData && examData.sections) ||
+                listOrNull(state.config.sub["أخرى"]) ||
+                ["أخرى"]
+            );
+        }
+        if (level === "sub") {
+            const key = pathKey(main, source);
+            const examData = getExamData()[main];
+            return uniqueList(
+                listOrNull(state.config.detailByPath[key]) ||
+                (isExamType() && examData && examData.details && examData.details[source]) ||
+                listOrNull(state.config.detail[source]) ||
+                listOrNull(state.config.detail[main]) ||
+                listOrNull(state.config.detail["أخرى"]) ||
+                ["أخرى"]
+            );
+        }
+        if (level === "detail") {
+            const key = pathKey(main, sub, source);
+            const examData = getExamData()[main];
+            const examActivities = isExamType() && examData && examData.activities && (examData.activities[source] || examData.activities[sub]);
+            return uniqueList(
+                listOrNull(state.config.trainingByPath[key]) ||
+                examActivities ||
+                listOrNull(state.config.trainingByDetail[source]) ||
+                listOrNull(state.config.trainingByDetail[sub]) ||
+                listOrNull(state.config.trainingByDetail[main]) ||
+                listOrNull(state.config.trainingByDetail["أخرى"]) ||
+                listOrNull(state.config.training) ||
+                ["أخرى"]
+            );
+        }
         return ["أخرى"];
     }
 
@@ -397,6 +456,8 @@
                 <label>طريقة إنشاء التفرعات التابعة</label>
                 <select id="addOptionBranchMode"><option value="empty">تفرعات فارغة</option><option value="copy">نسخ تفرعات من خيار موجود</option><option value="manual">إضافة تفرعات الآن</option></select>
                 <select id="addOptionCopySource"></select>
+                <label>عدد التفرعات التابعة</label>
+                <input id="addOptionChildrenCountInput" type="number" min="0" value="1">
                 <label>التفرعات التابعة، كل خيار في سطر</label>
                 <textarea id="addOptionChildrenTextarea" rows="8" placeholder="أخرى"></textarea>
                 <div class="actions"><button type="button" id="confirmAddOptionBtn">حفظ الخيار</button><button type="button" class="small-button cancel" id="cancelAddOptionBtn">إلغاء</button></div>
@@ -424,6 +485,7 @@
         $("addOptionAfterSelect").innerHTML = list.map((v) => `<option value="${esc(v)}">${esc(v)}</option>`).join("");
         $("addOptionCopySource").innerHTML = list.map((v) => `<option value="${esc(v)}">نسخ من: ${esc(v)}</option>`).join("");
         $("addOptionChildrenTextarea").value = "أخرى";
+        $("addOptionChildrenCountInput").value = child ? "1" : "0";
         $("addOptionBranchMode").value = "empty";
         refreshAddModalMode();
         modal.hidden = false;
@@ -449,6 +511,10 @@
             let children = ["أخرى"];
             if (mode === "copy") children = getChildListFromSource(level, $("addOptionCopySource").value);
             if (mode === "manual") children = uniqueList($("addOptionChildrenTextarea").value.split(/\n+/));
+            if (mode === "empty") {
+                const count = Math.max(0, parseInt($("addOptionChildrenCountInput").value || "1", 10));
+                children = count ? Array.from({length: count}, (_, i) => i === 0 ? "أخرى" : `تفرع ${i + 1}`) : ["أخرى"];
+            }
             setChildListFor(level, value, children);
         }
         modal.hidden = true;
@@ -603,9 +669,31 @@
         if (labelTitle) labelTitle.textContent = currentLabel(state.selectedLevel);
         const pathBox = $("adminAdaptivePathSummary");
         if (pathBox) pathBox.textContent = `المسار الحالي: ${state.currentType || "—"} → ${selectedMain() || "—"} → ${selectedSub() || "—"} → ${selectedDetail() || "—"}`;
+        renderSourceHint();
         renderOptions();
         renderHidden();
         updateStatus();
+    }
+
+
+    function renderSourceHint() {
+        const host = $("adminCurrentOptionsList");
+        if (!host || !state.config) return;
+        let hint = $("adminAdaptiveSourceHint");
+        if (!hint) {
+            hint = document.createElement("p");
+            hint.id = "adminAdaptiveSourceHint";
+            hint.className = "muted admin-adaptive-source-hint-v567";
+            host.parentNode.insertBefore(hint, host);
+        }
+        const info = adminListSourceForLevel(state.selectedLevel);
+        if (state.selectedLevel !== "main" && !info.pathSpecific) {
+            hint.textContent = "هذه القائمة قادمة من الافتراضي العام أو من بيانات الاختبار الأصلية. أي تعديل هنا سيُنشئ نسخة مخصصة لهذا المسار فقط ولن يغيّر القائمة العامة.";
+            hint.hidden = false;
+        } else {
+            hint.textContent = "هذه القائمة مخصصة لهذا المسار الحالي.";
+            hint.hidden = false;
+        }
     }
 
     function renderOptions() {
@@ -622,16 +710,33 @@
                 <button type="button" class="small-button" data-act="up">↑ للأعلى</button>
                 <button type="button" class="small-button" data-act="down">↓ للأسفل</button>
                 <button type="button" class="small-button" data-act="branches">إدارة التفرعات</button>
+                <button type="button" class="small-button" data-act="copybranches">نسخ التفرعات</button>
                 <button type="button" class="small-button warning" data-act="hide">إخفاء آمن</button>
                 <button type="button" class="small-button danger" data-act="delete">حذف نهائي</button>`;
             row.querySelector("input").addEventListener("change", (e) => renameOption(state.selectedLevel, index, e.target.value));
             row.querySelector('[data-act="up"]').addEventListener("click", () => moveOption(state.selectedLevel, index, -1));
             row.querySelector('[data-act="down"]').addEventListener("click", () => moveOption(state.selectedLevel, index, 1));
             row.querySelector('[data-act="branches"]').addEventListener("click", () => manageBranches(state.selectedLevel, value));
+            row.querySelector('[data-act="copybranches"]').addEventListener("click", () => copyBranchesToOption(state.selectedLevel, value));
             row.querySelector('[data-act="hide"]').addEventListener("click", () => hideOption(state.selectedLevel, index));
             row.querySelector('[data-act="delete"]').addEventListener("click", () => deleteOption(state.selectedLevel, index));
             listBox.appendChild(row);
         });
+    }
+
+
+    function copyBranchesToOption(level, value) {
+        const child = getChildrenLevel(level);
+        if (!child) return toast("هذا المستوى لا يحتوي على تفرعات تابعة.");
+        const siblings = getList(level).filter((item) => item !== value);
+        if (!siblings.length) return toast("لا يوجد خيار آخر لنسخ التفرعات منه.");
+        const source = prompt("اكتب اسم الخيار الذي تريد نسخ تفرعاته:", siblings[0]);
+        const src = normalize(source);
+        if (!src || !siblings.includes(src)) return toast("لم يتم اختيار مصدر صحيح.");
+        setChildListFor(level, value, getChildListFromSource(level, src));
+        markDirty();
+        refreshNativeForm();
+        toast("تم نسخ التفرعات إلى الخيار المحدد في هذا المسار فقط.");
     }
 
     function ensureBranchesModal() {
@@ -648,6 +753,12 @@
                 <label id="branchesChildLabel">التفرعات التابعة</label>
                 <textarea id="branchesTextarea" rows="10" placeholder="كل خيار في سطر"></textarea>
                 <div class="actions">
+                    <button type="button" class="small-button success" id="addBranchLineBtn">إضافة تفرع</button>
+                    <button type="button" class="small-button warning" id="sortBranchesBtn">ترتيب يدوي أبجدي</button>
+                    <select id="branchesCopySourceSelect"></select>
+                    <button type="button" class="small-button" id="copyBranchesBtn">نسخ تفرعات من خيار آخر</button>
+                </div>
+                <div class="actions">
                     <button type="button" id="saveBranchesBtn">حفظ التفرعات</button>
                     <button type="button" class="small-button cancel" id="cancelBranchesBtn">إلغاء</button>
                 </div>
@@ -655,6 +766,9 @@
         document.body.appendChild(modal);
         $("cancelBranchesBtn").addEventListener("click", () => modal.hidden = true);
         $("saveBranchesBtn").addEventListener("click", saveBranchesFromModal);
+        $("addBranchLineBtn").addEventListener("click", () => { const ta = $("branchesTextarea"); ta.value = (ta.value ? ta.value + "\n" : "") + "أخرى"; ta.focus(); });
+        $("sortBranchesBtn").addEventListener("click", () => { const ta = $("branchesTextarea"); ta.value = uniqueList((ta.value || "").split(/\n+/)).sort((a,b)=>a.localeCompare(b, "ar")).join("\n"); });
+        $("copyBranchesBtn").addEventListener("click", () => { const modal = $("adminBranchesModal"); const src = $("branchesCopySourceSelect").value; const ta = $("branchesTextarea"); if (src) ta.value = getChildListFromSource(modal.dataset.level, src).join("\n"); });
         return modal;
     }
 
@@ -669,6 +783,9 @@
         $("branchesPathHint").textContent = `الخيار: ${value} · المسار: ${state.currentType || "—"} → ${selectedMain() || "—"} → ${selectedSub() || "—"} → ${selectedDetail() || "—"}`;
         $("branchesChildLabel").textContent = `قائمة: ${childLabel}`;
         $("branchesTextarea").value = existing.join("\n");
+        const siblings = getList(level).filter((item) => item !== value);
+        const copySelect = $("branchesCopySourceSelect");
+        if (copySelect) copySelect.innerHTML = siblings.map((v) => `<option value="${esc(v)}">نسخ من: ${esc(v)}</option>`).join("");
         modal.hidden = false;
     }
 
