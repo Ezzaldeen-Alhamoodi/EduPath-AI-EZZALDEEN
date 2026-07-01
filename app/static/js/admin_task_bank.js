@@ -288,7 +288,7 @@
 
     function parseManualBranches() {
         const mode = ($("addOptionBranchMode") && $("addOptionBranchMode").value) || "empty";
-        if (mode === "copy") return getChildList(state.selectedLevel, $("addOptionCopySource").value);
+        if (mode === "copy") return getChildList(state.selectedLevel, ($("addOptionCopySource") && $("addOptionCopySource").value) || "");
         if (mode === "manual") return linesFrom("addOptionChildrenTextarea");
         const count = Math.max(0, parseInt(($("addOptionChildrenCountInput") && $("addOptionChildrenCountInput").value) || "1", 10));
         return count ? Array.from({length: count}, (_, i) => i === 0 ? "أخرى" : `تفرع ${i + 1}`) : ["أخرى"];
@@ -636,16 +636,25 @@
             <select id="addOptionPositionSelect"><option value="end">في النهاية</option><option value="start">في البداية</option><option value="after">بعد خيار محدد</option></select>
             <select id="addOptionAfterSelect" style="margin-top:8px"></select>
             <div id="addOptionAdaptiveBox" style="border:1px solid #e5e7eb;border-radius:14px;padding:12px;margin-top:14px">
-                <label style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><input id="addOptionHasBranchesCheckbox" type="checkbox" checked> هذا الخيار له تفرعات تكيفية في الخانة التالية</label>
+                <label style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><input id="addOptionHasBranchesCheckbox" type="checkbox" checked> هذا الخيار تكيفي وله تفرعات في الخانة التالية</label>
                 <p class="muted" id="addOptionBranchMeaning">—</p>
-                <label>طريقة إنشاء التفرعات التابعة</label>
-                <select id="addOptionBranchMode"><option value="manual">إضافة تفرعات الآن</option><option value="copy">نسخ تفرعات من خيار موجود</option><option value="empty">إنشاء تفرع افتراضي مؤقت</option></select>
-                <select id="addOptionCopySource" style="margin-top:8px"></select>
-                <label id="addOptionChildrenLabel">التفرعات التابعة، كل خيار في سطر</label>
-                <textarea id="addOptionChildrenTextarea" rows="9" placeholder="اكتب كل تفرع في سطر مستقل"></textarea>
-                <p class="muted" id="addOptionChildrenHelp">هذه التفرعات ستُحفظ لهذا الخيار فقط، ولن تغيّر بقية المسارات.</p>
-                <label id="addOptionChildrenCountLabel">عدد التفرعات المؤقتة</label>
-                <input id="addOptionChildrenCountInput" type="number" min="0" value="1">
+                <div id="addOptionBranchPanel">
+                    <label>طريقة إنشاء التفرعات التابعة</label>
+                    <select id="addOptionBranchMode"><option value="manual">إضافة تفرعات الآن</option><option value="copy">نسخ تفرعات من خيار موجود</option><option value="empty">إنشاء تفرع افتراضي مؤقت</option></select>
+                    <select id="addOptionCopySource" style="margin-top:8px"></select>
+                    <label id="addOptionChildrenLabel">التفرعات التابعة، كل خيار في سطر</label>
+                    <textarea id="addOptionChildrenTextarea" rows="8" placeholder="اكتب كل تفرع في سطر مستقل"></textarea>
+                    <p class="muted" id="addOptionChildrenHelp">هذه التفرعات ستُحفظ لهذا الخيار فقط، ولن تغيّر بقية المسارات.</p>
+                    <label id="addOptionChildrenCountLabel">عدد التفرعات المؤقتة</label>
+                    <input id="addOptionChildrenCountInput" type="number" min="0" value="1">
+                    <div id="addOptionDeepBranchPanel" style="border-top:1px dashed #d1d5db;margin-top:12px;padding-top:12px">
+                        <p class="muted">اختياري: يمكنك تجهيز تفرعات أعمق الآن لتصبح الخانة الجديدة جاهزة فوراً.</p>
+                        <label id="addOptionGrandChildrenLabel">تفرعات المستوى التالي لكل تفرع تضيفه</label>
+                        <textarea id="addOptionGrandChildrenTextarea" rows="5" placeholder="اختياري — كل خيار في سطر"></textarea>
+                        <label id="addOptionGreatGrandChildrenLabel">أنشطة/تفرعات المستوى الأخير</label>
+                        <textarea id="addOptionGreatGrandChildrenTextarea" rows="5" placeholder="اختياري — كل خيار في سطر"></textarea>
+                    </div>
+                </div>
             </div>
             <div class="actions"><button type="button" id="confirmAddOptionBtn">حفظ الخيار والتفرعات</button><button type="button" class="small-button cancel" id="cancelAddOptionBtn">إلغاء</button></div>
         </div>`;
@@ -654,14 +663,15 @@
         $("confirmAddOptionBtn").addEventListener("click", confirmAddOption);
         $("addOptionBranchMode").addEventListener("change", refreshAddModalMode);
         $("addOptionHasBranchesCheckbox").addEventListener("change", refreshAddModalMode);
+        $("addOptionPositionSelect").addEventListener("change", refreshAddModalMode);
         return modal;
     }
 
     function refreshAddModalMode() {
-        const adaptive = ($("addOptionAdaptiveSelect") && $("addOptionAdaptiveSelect").value) !== "no";
+        const child = childLevel(state.selectedLevel);
+        const adaptive = !!child && (! $("addOptionHasBranchesCheckbox") || $("addOptionHasBranchesCheckbox").checked);
         const mode = ($("addOptionBranchMode") && $("addOptionBranchMode").value) || "manual";
         const pos = ($("addOptionPositionSelect") && $("addOptionPositionSelect").value) || "end";
-        const child = childLevel(state.selectedLevel);
         if ($("addOptionAfterSelect")) $("addOptionAfterSelect").style.display = pos === "after" ? "block" : "none";
         if ($("addOptionBranchPanel")) $("addOptionBranchPanel").style.display = adaptive && child ? "block" : "none";
         if ($("addOptionCopySource")) $("addOptionCopySource").style.display = mode === "copy" ? "block" : "none";
@@ -692,12 +702,18 @@
         $("addOptionAfterSelect").innerHTML = list.map((v) => `<option value="${esc(v)}">${esc(v)}</option>`).join("");
         $("addOptionCopySource").innerHTML = list.map((v) => `<option value="${esc(v)}">نسخ تفرعات: ${esc(v)}</option>`).join("");
         $("addOptionChildrenTextarea").value = "أخرى";
-        $("addOptionGrandChildrenTextarea").value = "";
-        $("addOptionGreatGrandChildrenTextarea").value = "";
+        if ($("addOptionGrandChildrenTextarea")) $("addOptionGrandChildrenTextarea").value = "";
+        if ($("addOptionGreatGrandChildrenTextarea")) $("addOptionGreatGrandChildrenTextarea").value = "";
         $("addOptionChildrenCountInput").value = childLevel(state.selectedLevel) ? "1" : "0";
         $("addOptionBranchMode").value = childLevel(state.selectedLevel) ? "manual" : "empty";
-        $("addOptionAdaptiveSelect").value = childLevel(state.selectedLevel) ? "yes" : "no";
+        if ($("addOptionHasBranchesCheckbox")) {
+            $("addOptionHasBranchesCheckbox").checked = !!childLevel(state.selectedLevel);
+            $("addOptionHasBranchesCheckbox").disabled = !childLevel(state.selectedLevel);
+        }
         $("addOptionPositionSelect").value = "end";
+        if ($("addOptionLevelHint")) $("addOptionLevelHint").textContent = `الخانة الحالية: ${currentLabel(state.selectedLevel)}`;
+        if ($("addOptionChildHint")) $("addOptionChildHint").textContent = childLevel(state.selectedLevel) ? `الخانة التالية التي ستبني تفرعاتها: ${currentLabel(childLevel(state.selectedLevel))}` : "هذا المستوى الأخير؛ سيُحفظ الخيار في المسار الحالي فقط.";
+        if ($("addOptionBranchMeaning")) $("addOptionBranchMeaning").textContent = childLevel(state.selectedLevel) ? `عند اختيار "${currentLabel(state.selectedLevel)}" الجديد، ستظهر هذه التفرعات في خانة "${currentLabel(childLevel(state.selectedLevel))}".` : "لا توجد تفرعات بعد هذا المستوى.";
         refreshAddModalMode();
         modal.hidden = false;
         setTimeout(() => $("addOptionNameInput") && $("addOptionNameInput").focus(), 20);
@@ -718,7 +734,7 @@
             raw.splice(i >= 0 ? i + 1 : raw.length, 0, value);
         } else raw.push(value);
 
-        const adaptive = ($("addOptionAdaptiveSelect") && $("addOptionAdaptiveSelect").value) !== "no";
+        const adaptive = !!childLevel(level) && (! $("addOptionHasBranchesCheckbox") || $("addOptionHasBranchesCheckbox").checked);
         if (adaptive && childLevel(level)) applyGuidedBranches(level, value);
         else if (childLevel(level)) setChildList(level, value, ["أخرى"]);
 
