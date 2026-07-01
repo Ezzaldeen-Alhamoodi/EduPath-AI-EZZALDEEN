@@ -3895,13 +3895,36 @@ window.SMART_EXAM_DATA = {
 
     function updateExamFields(topic, skill, detail, training) {
         const examData = getExamData();
-        const exams = Object.keys(examData);
+        const examConfig = getConfig("الاختبارات الدولية");
+        applyConfigLabels(examConfig);
+        const configuredExams = visibleValues(examConfig, "main", "", examConfig.main || []);
+        const exams = configuredExams && configuredExams.length ? configuredExams : Object.keys(examData);
         fillSelect(topic, exams, topic.dataset.current || topic.value);
+
+        function hasPathList(obj, key) { return obj && Array.isArray(obj[key]); }
+        function examSections(exam) {
+            const key = pathKey(exam);
+            if (hasPathList(examConfig.subByPath, key) || hasPathList(examConfig.sub, exam)) return getSubValues(examConfig, exam);
+            const data = examData[exam];
+            return visibleValues(examConfig, "sub", key, (data && data.sections) || examConfig.sub["أخرى"] || ["Full Official Test","Mock Test"]);
+        }
+        function examDetails(exam, section) {
+            const key = pathKey(exam, section);
+            if (hasPathList(examConfig.detailByPath, key) || hasPathList(examConfig.detail, section) || hasPathList(examConfig.detail, exam)) return getDetailValues(examConfig, exam, section);
+            const data = examData[exam];
+            const values = (data && data.details && data.details[section]) || examConfig.detail["أخرى"] || ["Other"];
+            return visibleValues(examConfig, "detail", key, values);
+        }
+        function examTraining(exam, section, detailValue) {
+            const key = pathKey(exam, section, detailValue);
+            const byDetail = examConfig.trainingByDetail || {};
+            if (hasPathList(examConfig.trainingByPath, key) || hasPathList(byDetail, detailValue) || hasPathList(byDetail, section) || hasPathList(byDetail, exam)) return getTrainingValues(examConfig, exam, section, detailValue);
+            return visibleValues(examConfig, "training", key, getExamActivities(exam, section, detailValue));
+        }
 
         function refreshSections() {
             const exam = normalize(topic.value);
-            const data = examData[exam];
-            const sections = (data && data.sections) || ["Full Official Test","Mock Test"];
+            const sections = examSections(exam);
             fillSelect(skill, sections, skill.dataset.current || skill.value);
             refreshDetails();
         }
@@ -3909,8 +3932,7 @@ window.SMART_EXAM_DATA = {
         function refreshDetails() {
             const exam = normalize(topic.value);
             const section = normalize(skill.value);
-            const data = examData[exam];
-            const values = (data && data.details && data.details[section]) || ["Other"];
+            const values = examDetails(exam, section);
             fillSelect(detail, values, detail.dataset.current || detail.value);
             refreshActivities();
         }
@@ -3919,7 +3941,7 @@ window.SMART_EXAM_DATA = {
             const exam = normalize(topic.value);
             const section = normalize(skill.value);
             const detailValue = normalize(detail.value);
-            const values = getExamActivities(exam, section, detailValue);
+            const values = examTraining(exam, section, detailValue);
             fillSelect(training, values, training.dataset.current || training.value);
             toggleBoxes();
         }

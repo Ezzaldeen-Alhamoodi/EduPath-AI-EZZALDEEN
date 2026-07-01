@@ -14,9 +14,9 @@
 window.EDUPATH_DEFER_NATIVE_TASKS_INIT = true;
 window.EDUPATH_TASK_BANK_OVERRIDES = {{ task_bank_overrides_json|default('{}')|safe }};
 </script>
-<script src="{{ url_for('static', filename='js/tasks_native_ar.js') }}?v=5.6.6-field-labels-only"></script>
-<script src="{{ url_for('static', filename='js/secondary-school-bank-v55139.js') }}?v=5.6.6-field-labels-only"></script>
-<script src="{{ url_for('static', filename='js/task_bank_runtime.js') }}?v=5.6.6-field-labels-only"></script>
+<script src="{{ url_for('static', filename='js/tasks_native_ar.js') }}?v=5.6.7-fix-adaptive-admin-task-editor"></script>
+<script src="{{ url_for('static', filename='js/secondary-school-bank-v55139.js') }}?v=5.6.7-fix-adaptive-admin-task-editor"></script>
+<script src="{{ url_for('static', filename='js/task_bank_runtime.js') }}?v=5.6.7-fix-adaptive-admin-task-editor"></script>
 <script>window.EDUPATH_TASK_BANK_BOOT && window.EDUPATH_TASK_BANK_BOOT();</script>
-<script src="{{ url_for('static', filename='js/field_labels_only_v566.js') }}?v=5.6.6-field-labels-only"></script>
+<script src="{{ url_for('static', filename='js/field_labels_only_v566.js') }}?v=5.6.7-fix-adaptive-admin-task-editor"></script>
 {% endblock %}

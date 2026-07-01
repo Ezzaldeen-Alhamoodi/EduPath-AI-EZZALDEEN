@@ -105,6 +105,26 @@
 
     function ensureObject(value) { return value && typeof value === "object" && !Array.isArray(value) ? value : {}; }
 
+    function deepMerge(base, override) {
+        if (Array.isArray(override)) return uniqueList(override);
+        if (!override || typeof override !== "object") return clone(base || {});
+        const output = (base && typeof base === "object" && !Array.isArray(base)) ? clone(base) : {};
+        Object.keys(override).forEach((key) => {
+            const next = override[key];
+            if (Array.isArray(next)) output[key] = uniqueList(next);
+            else if (next && typeof next === "object") output[key] = deepMerge(output[key], next);
+            else output[key] = next;
+        });
+        return output;
+    }
+
+    function buildMergedAdminConfig(baseConfig, publishedConfig, draftConfig) {
+        const base = ensureConfig(baseConfig || {});
+        if (draftConfig) return ensureConfig(deepMerge(base, draftConfig));
+        if (publishedConfig) return ensureConfig(deepMerge(base, publishedConfig));
+        return base;
+    }
+
     function ensureConfig(config) {
         const c = clone(config);
         c.icon = c.icon || c.typeIcon || "✨";
@@ -150,7 +170,7 @@
         const custom = level === "main" ? labels.topic : level === "sub" ? labels.skill : labels[level];
         const mapped = level === "main" ? fixed.topic : level === "sub" ? fixed.skill : fixed[level];
         const el = meta && $(meta.labelId);
-        return normalize(mapped || custom || (el && el.textContent)) || meta.defaultLabel || level;
+        return normalize(custom || mapped || (el && el.textContent)) || meta.defaultLabel || level;
     }
 
     function getHidden(level) {
@@ -169,19 +189,38 @@
         return out.length ? out : ["أخرى"];
     }
 
+    function getExamData() { return window.SMART_EXAM_DATA || {}; }
+    function isExamType() { return normalize(state.currentType || getTypeFromForm()) === "الاختبارات الدولية"; }
+    function examFallbackList(level) {
+        if (!isExamType()) return null;
+        const exams = getExamData();
+        const main = selectedMain();
+        const sub = selectedSub();
+        const detail = selectedDetail();
+        if (level === "main") return Object.keys(exams || {});
+        const exam = exams[main];
+        if (level === "sub" && exam) return exam.sections || null;
+        if (level === "detail" && exam) return (exam.details && exam.details[sub]) || null;
+        if (level === "training" && exam) {
+            const activities = exam.activities || {};
+            return activities[detail] || activities[sub] || null;
+        }
+        return null;
+    }
+
     function getRawList(level) {
         if (!state.config) return [];
-        if (level === "main") return uniqueList(state.config.main || ["أخرى"]);
+        if (level === "main") return uniqueList(state.config.main || examFallbackList("main") || ["أخرى"]);
         if (level === "sub") {
             const main = selectedMain();
             const key = pathKey(main);
-            return uniqueList(state.config.subByPath[key] || state.config.sub[main] || state.config.sub["أخرى"] || ["أخرى"]);
+            return uniqueList(state.config.subByPath[key] || state.config.sub[main] || examFallbackList("sub") || state.config.sub["أخرى"] || ["أخرى"]);
         }
         if (level === "detail") {
             const main = selectedMain();
             const sub = selectedSub();
             const key = pathKey(main, sub);
-            return uniqueList(state.config.detailByPath[key] || state.config.detail[sub] || state.config.detail[main] || state.config.detail["أخرى"] || ["أخرى"]);
+            return uniqueList(state.config.detailByPath[key] || examFallbackList("detail") || state.config.detail[sub] || state.config.detail[main] || state.config.detail["أخرى"] || ["أخرى"]);
         }
         if (level === "training") {
             const main = selectedMain();
@@ -190,6 +229,7 @@
             const key = pathKey(main, sub, detail);
             return uniqueList(
                 state.config.trainingByPath[key] ||
+                examFallbackList("training") ||
                 state.config.trainingByDetail[detail] ||
                 state.config.trainingByDetail[sub] ||
                 state.config.trainingByDetail[main] ||
@@ -499,7 +539,6 @@
     function refreshNativeForm() {
         if (!state.currentType || !state.config) return;
         getTaskData()[state.currentType] = ensureConfig(state.config);
-        if (window.EDUPATH_APPLY_TASK_BANK_OVERRIDES) window.EDUPATH_APPLY_TASK_BANK_OVERRIDES();
         if (window.EDUPATH_NATIVE_TASKS_INIT) window.EDUPATH_NATIVE_TASKS_INIT();
         renderEditor();
     }
@@ -517,26 +556,21 @@
         }
         state.currentType = typeName;
         const runtimeConfig = ensureConfig(getTaskData()[typeName] || {});
-        state.baseConfig = ensureConfig((window.EDUPATH_TASK_BANK_BASE_DATA || {})[typeName] || runtimeConfig);
-        state.config = clone(runtimeConfig);
+        const baseSource = (window.EDUPATH_TASK_BANK_BASE_DATA || {})[typeName] || runtimeConfig;
+        state.baseConfig = ensureConfig(baseSource);
+        state.publishedConfig = null;
+        state.draftConfig = null;
+        state.revisions = [];
         try {
             const api = await fetchJson(`/api/admin/task-bank/${encodeURIComponent(typeName)}`);
             state.publishedConfig = api.customized && api.config ? ensureConfig(api.config) : null;
             state.draftConfig = api.draft_config ? ensureConfig(api.draft_config) : null;
             state.revisions = api.revisions || [];
-            if (state.draftConfig) {
-                state.config = clone(state.draftConfig);
-                state.draftMode = true;
-            } else if (state.publishedConfig) {
-                state.config = clone(state.publishedConfig);
-                state.draftMode = false;
-            } else {
-                state.config = clone(state.baseConfig);
-                state.draftMode = false;
-            }
+            state.draftMode = !!state.draftConfig;
         } catch (error) {
             toast(error.message || "تعذر تحميل بيانات الإدارة لهذا النوع.");
         }
+        state.config = buildMergedAdminConfig(state.baseConfig, state.publishedConfig, state.draftConfig);
         state.dirty = false;
         getTaskData()[typeName] = ensureConfig(state.config);
         if (window.EDUPATH_NATIVE_TASKS_INIT) window.EDUPATH_NATIVE_TASKS_INIT();
@@ -600,13 +634,51 @@
         });
     }
 
+    function ensureBranchesModal() {
+        let modal = $("adminBranchesModal");
+        if (modal) return modal;
+        modal = document.createElement("div");
+        modal.id = "adminBranchesModal";
+        modal.className = "admin-bank-modal-v5600";
+        modal.hidden = true;
+        modal.innerHTML = `
+            <div class="admin-bank-modal-card-v5600 admin-branches-card-v5620">
+                <h2>إدارة التفرعات التكيفية</h2>
+                <p class="muted" id="branchesPathHint">—</p>
+                <label id="branchesChildLabel">التفرعات التابعة</label>
+                <textarea id="branchesTextarea" rows="10" placeholder="كل خيار في سطر"></textarea>
+                <div class="actions">
+                    <button type="button" id="saveBranchesBtn">حفظ التفرعات</button>
+                    <button type="button" class="small-button cancel" id="cancelBranchesBtn">إلغاء</button>
+                </div>
+            </div>`;
+        document.body.appendChild(modal);
+        $("cancelBranchesBtn").addEventListener("click", () => modal.hidden = true);
+        $("saveBranchesBtn").addEventListener("click", saveBranchesFromModal);
+        return modal;
+    }
+
     function manageBranches(level, value) {
         const child = getChildrenLevel(level);
         if (!child) return toast("هذا هو المستوى الأخير، لا توجد تفرعات بعده.");
+        const modal = ensureBranchesModal();
+        modal.dataset.level = level;
+        modal.dataset.value = value;
         const existing = getChildListFromSource(level, value);
-        const next = prompt(`اكتب التفرعات التابعة للخيار (${value})، كل خيار في سطر:`, existing.join("\n"));
-        if (next == null) return;
-        setChildListFor(level, value, uniqueList(next.split(/\n+/)));
+        const childLabel = currentLabel(child);
+        $("branchesPathHint").textContent = `الخيار: ${value} · المسار: ${state.currentType || "—"} → ${selectedMain() || "—"} → ${selectedSub() || "—"} → ${selectedDetail() || "—"}`;
+        $("branchesChildLabel").textContent = `قائمة: ${childLabel}`;
+        $("branchesTextarea").value = existing.join("\n");
+        modal.hidden = false;
+    }
+
+    function saveBranchesFromModal() {
+        const modal = $("adminBranchesModal");
+        if (!modal) return;
+        const level = modal.dataset.level;
+        const value = modal.dataset.value;
+        setChildListFor(level, value, uniqueList(($("branchesTextarea").value || "").split(/\n+/)));
+        modal.hidden = true;
         markDirty();
         refreshNativeForm();
     }
@@ -683,9 +755,16 @@
     }
 
     function bind() {
+        if (window.__EDUPATH_ADMIN_TASK_BANK_BOUND__) return;
+        window.__EDUPATH_ADMIN_TASK_BANK_BOUND__ = true;
         document.addEventListener("click", (event) => {
             const typeCard = event.target.closest("#taskTypeCards .task-type-card");
             if (typeCard) requestAnimationFrame(syncSelectedType);
+        });
+        document.addEventListener("change", (event) => {
+            if (["categorySelect", "topicSelect", "skillSelect", "detailedTopicSelect", "trainingTypeSelect"].includes(event.target && event.target.id)) {
+                requestAnimationFrame(renderEditor);
+            }
         });
         ["topicSelect", "skillSelect", "detailedTopicSelect", "trainingTypeSelect"].forEach((id) => {
             const el = $(id);
