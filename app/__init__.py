@@ -2770,6 +2770,36 @@ def native_task_label_v541(value):
 
 
 
+
+TASK_TYPE_FIELD_LABELS_V563 = {
+    "حفظ القرآن الكريم": {"topic": "نوع المتابعة القرآنية", "skill": "السورة أو مجال المتابعة", "detail": "المقطع أو الآيات المحددة", "training": "ماذا ستفعل فعلياً؟"},
+    "المرحلة الثانوية": {"topic": "الصف الدراسي أو السنة الدراسية", "skill": "المادة الدراسية", "detail": "الوحدة أو الدرس أو المقرر حسب المادة", "training": "ماذا سيفعل الطالب فعلياً؟"},
+    "المرحلة الجامعية": {"topic": "التخصص أو المجال الجامعي", "skill": "نوع المهمة الجامعية", "detail": "المادة أو الموضوع الجامعي", "training": "ماذا ستفعل فعلياً؟"},
+    "اللغات": {"topic": "اللغة", "skill": "المهارة اللغوية", "detail": "الموضوع أو الجانب اللغوي", "training": "نوع التدريب"},
+    "البرمجة والتكنولوجيا": {"topic": "المجال التقني", "skill": "المسار أو التقنية", "detail": "الموضوع البرمجي أو المهارة التقنية", "training": "نوع التطبيق أو التدريب"},
+    "الذكاء الاصطناعي": {"topic": "مجال الذكاء الاصطناعي", "skill": "المسار أو التقنية", "detail": "الموضوع أو النموذج أو المفهوم", "training": "نوع التطبيق أو التدريب"},
+    "الرياضيات": {"topic": "فرع الرياضيات", "skill": "الموضوع الرياضي", "detail": "الدرس أو المهارة الرياضية", "training": "نوع التمرين أو المراجعة"},
+    "المنح الدراسية": {"topic": "نوع المنحة أو المرحلة", "skill": "جزء التقديم أو المتطلب", "detail": "المستند أو الخطوة التفصيلية", "training": "نوع العمل المطلوب"},
+    "الاختبارات الدولية": {"topic": "اسم الاختبار", "skill": "قسم الاختبار", "detail": "نوع السؤال أو المهارة", "training": "نوع التدريب أو المحاكاة"},
+    "الحياة اليومية": {"topic": "مجال الحياة اليومية", "skill": "نوع الروتين أو المسؤولية", "detail": "المهمة أو العادة المحددة", "training": "طريقة التنفيذ"},
+    "المشاريع": {"topic": "نوع المشروع", "skill": "مرحلة المشروع", "detail": "الجزء أو المهمة داخل المشروع", "training": "نوع التنفيذ"},
+    "القراءة والبحث": {"topic": "مجال القراءة أو البحث", "skill": "نوع المصدر أو البحث", "detail": "الموضوع أو السؤال البحثي", "training": "نوع القراءة أو المعالجة"},
+    "عام": {"topic": "المجال العام", "skill": "نوع المهمة", "detail": "تفاصيل المهمة", "training": "نوع النشاط"},
+    "أخرى": {"topic": "التصنيف المخصص", "skill": "النوع المخصص", "detail": "التفاصيل المخصصة", "training": "النشاط المخصص"},
+}
+
+TASK_FIELD_LABEL_FALLBACKS_V563 = {
+    "topic": "الفئة الرئيسية",
+    "skill": "الفئة الفرعية",
+    "detail": "الموضوع التفصيلي",
+    "training": "نوع النشاط",
+}
+
+def task_field_label_v563(category, field):
+    cat = native_task_label_v541(category) if category else "عام"
+    labels = TASK_TYPE_FIELD_LABELS_V563.get(cat) or TASK_TYPE_FIELD_LABELS_V563.get(str(category or "").strip()) or {}
+    return labels.get(field) or TASK_FIELD_LABEL_FALLBACKS_V563.get(field) or field
+
 TASK_CATEGORY_TO_AR_V543 = {
     "Quran Memorization": "حفظ القرآن الكريم",
     "Secondary School": "المرحلة الثانوية",
@@ -3279,11 +3309,31 @@ def get_task_bank_overrides_map():
 def validate_task_bank_config(config):
     if not isinstance(config, dict):
         return False, "البيانات غير صحيحة."
-    config.setdefault("icon", "✨")
+
+    # Keep the validator permissive: the Admin Task Editor must preserve all
+    # adaptive-bank fields, including future fields, and only validate the
+    # core shapes that can break rendering.
+    config.setdefault("icon", config.get("typeIcon") or "✨")
     config.setdefault("main", ["أخرى"])
     config.setdefault("sub", {})
     config.setdefault("detail", {})
     config.setdefault("training", ["أخرى"])
+
+    list_fields = ["main", "training", "sourceSuggestions"]
+    object_fields = [
+        "sub", "detail", "trainingByDetail", "labels", "hidden", "hiddenByPath",
+        "subByPath", "detailByPath", "trainingByPath", "recommendations",
+        "recommendationsByPath", "sourceSuggestionsByPath",
+    ]
+
+    for field in list_fields:
+        if field in config and config[field] is not None and not isinstance(config[field], list):
+            return False, f"الحقل {field} يجب أن يكون قائمة."
+
+    for field in object_fields:
+        if field in config and config[field] is not None and not isinstance(config[field], dict):
+            return False, f"الحقل {field} يجب أن يكون كائناً منظماً."
+
     if not isinstance(config.get("main"), list):
         return False, "الفئة الرئيسية يجب أن تكون قائمة."
     if not isinstance(config.get("sub"), dict):
@@ -3292,6 +3342,7 @@ def validate_task_bank_config(config):
         return False, "الموضوعات التفصيلية يجب أن تكون علاقات منظمة."
     if not isinstance(config.get("training"), list):
         return False, "نوع النشاط يجب أن يكون قائمة."
+
     return True, "تم التحقق."
 
 
@@ -3304,6 +3355,7 @@ def create_app():
     app.jinja_env.filters["task_exam_safe"] = task_ar_exam_safe
     app.jinja_env.filters["task_exam_raw_or_ar"] = task_exam_raw_or_ar
     app.jinja_env.filters["native_task_label"] = native_task_label_v541
+    app.jinja_env.filters["task_field_label"] = task_field_label_v563
     app.jinja_env.filters["goals_ar"] = goals_ar
     app.jinja_env.filters["goal_time_ar"] = format_goal_time_left
     app.jinja_env.filters["goal_time_compact_ar"] = format_goal_time_left_compact
@@ -4087,7 +4139,8 @@ def create_app():
             "types": [
                 {
                     "name": name,
-                    "icon": (override_map.get(name).config if override_map.get(name) else defaults.get(name, {})).get("icon", "✨"),
+                    "displayName": (override_map.get(name).config if override_map.get(name) else defaults.get(name, {})).get("displayName", name),
+                    "icon": (override_map.get(name).config if override_map.get(name) else defaults.get(name, {})).get("typeIcon") or (override_map.get(name).config if override_map.get(name) else defaults.get(name, {})).get("icon", "✨"),
                     "customized": name in override_map,
                     "updated_at": override_map[name].updated_at.isoformat() if name in override_map and override_map[name].updated_at else None,
                 }

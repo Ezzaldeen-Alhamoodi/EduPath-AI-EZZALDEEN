@@ -8865,3 +8865,16 @@ body.dark-mode .coach-hero {
         position: static;
     }
 }
+
+/* EduPath AI v5.6.2 - Admin Task Editor path-aware modal refinements */
+.admin-add-option-card-v5620 label {
+    display: block;
+    margin-top: 0.75rem;
+    font-weight: 800;
+}
+.admin-add-option-card-v5620 input,
+.admin-add-option-card-v5620 select,
+.admin-add-option-card-v5620 textarea {
+    width: 100%;
+    margin-top: 0.35rem;
+}

@@ -3548,11 +3548,54 @@ window.SMART_EXAM_DATA = {
         return data[normalizedType] || data["عام"];
     }
 
+    function pathKey() {
+        return Array.from(arguments).map(normalize).filter(Boolean).join("::");
+    }
+
+    function listOrNull(value) {
+        return Array.isArray(value) ? value : null;
+    }
+
+    function hiddenValuesFor(config, level, path) {
+        const out = [];
+        const hidden = (config && config.hidden) || {};
+        const hiddenByPath = (config && config.hiddenByPath) || {};
+        if (Array.isArray(hidden[level])) out.push(...hidden[level]);
+        const pathId = level + (path ? "::" + path : "");
+        if (Array.isArray(hiddenByPath[pathId])) out.push(...hiddenByPath[pathId]);
+        return out.map(normalize);
+    }
+
+    function visibleValues(config, level, path, values) {
+        const list = unique(values || ["أخرى"]);
+        const hidden = hiddenValuesFor(config, level, path);
+        const shown = list.filter((item) => !hidden.includes(normalize(item)));
+        return shown.length ? shown : ["أخرى"];
+    }
+
+    function getSubValues(config, topic) {
+        const t = normalize(topic);
+        if (!config) return ["أخرى"];
+        const byPath = config.subByPath || {};
+        const legacy = config.sub || {};
+        const raw = listOrNull(byPath[pathKey(t)]) || listOrNull(legacy[t]) || listOrNull(legacy["أخرى"]) || ["أخرى"];
+        return visibleValues(config, "sub", pathKey(t), raw);
+    }
+
     function getDetailValues(config, topic, skill) {
         const t = normalize(topic);
         const s = normalize(skill);
-        if (!config || !config.detail) return ["موضوع عام", "أخرى"];
-        return config.detail[s] || config.detail[t] || config.detail["أخرى"] || ["موضوع عام", "أخرى"];
+        if (!config) return ["موضوع عام", "أخرى"];
+        const byPath = config.detailByPath || {};
+        const legacy = config.detail || {};
+        const raw = (
+            listOrNull(byPath[pathKey(t, s)]) ||
+            listOrNull(legacy[s]) ||
+            listOrNull(legacy[t]) ||
+            listOrNull(legacy["أخرى"]) ||
+            ["موضوع عام", "أخرى"]
+        );
+        return visibleValues(config, "detail", pathKey(t, s), raw);
     }
 
     function getTrainingValues(config, topic, skill, detail) {
@@ -3560,16 +3603,37 @@ window.SMART_EXAM_DATA = {
         const selectedDetail = normalize(detail);
         const selectedSkill = normalize(skill);
         const selectedTopic = normalize(topic);
-        if (config.trainingByDetail) {
-            return (
-                config.trainingByDetail[selectedDetail] ||
-                config.trainingByDetail[selectedSkill] ||
-                config.trainingByDetail[selectedTopic] ||
-                config.trainingByDetail["أخرى"] ||
-                ["أخرى"]
-            );
-        }
-        return config.training || ["أخرى"];
+        const byPath = config.trainingByPath || {};
+        const byDetail = config.trainingByDetail || {};
+        const raw = (
+            listOrNull(byPath[pathKey(selectedTopic, selectedSkill, selectedDetail)]) ||
+            listOrNull(byDetail[selectedDetail]) ||
+            listOrNull(byDetail[selectedSkill]) ||
+            listOrNull(byDetail[selectedTopic]) ||
+            listOrNull(byDetail["أخرى"]) ||
+            listOrNull(config.training) ||
+            ["أخرى"]
+        );
+        return visibleValues(config, "training", pathKey(selectedTopic, selectedSkill, selectedDetail), raw);
+    }
+
+    function applyConfigLabels(config) {
+        const labels = (config && config.labels) || {};
+        if (labels.taskName || labels.title) setLabel("taskNameLabel", labels.taskName || labels.title);
+        if (labels.topic) setLabel("topicLabel", labels.topic);
+        if (labels.skill) setLabel("skillLabel", labels.skill);
+        if (labels.detail) setLabel("detailLabel", labels.detail);
+        if (labels.training) setLabel("trainingLabel", labels.training);
+        if (labels.source) setLabel("sourceLabel", labels.source);
+        if (labels.difficulty) setLabel("difficultyLabel", labels.difficulty);
+        if (labels.priority) setLabel("priorityLabel", labels.priority);
+        if (labels.expectedTime) setLabel("expectedTimeLabel", labels.expectedTime);
+        if (labels.startDate) setLabel("startDateLabel", labels.startDate);
+        if (labels.endDate) setLabel("endDateLabel", labels.endDate);
+        if (labels.reminder) setLabel("reminderLabel", labels.reminder);
+        if (labels.repeat) setLabel("repeatLabel", labels.repeat);
+        if (labels.repeatDays) setLabel("repeatDaysLabel", labels.repeatDays);
+        if (labels.notes) setLabel("notesLabel", labels.notes);
     }
 
 
@@ -3742,7 +3806,7 @@ window.SMART_EXAM_DATA = {
             button.type = "button";
             button.className = "task-type-card" + (type === current ? " active" : "");
             button.dataset.type = type;
-            button.innerHTML = `<span class="task-type-emoji">${TASK_TYPE_ICON_MAP_V554[type] || config.icon || "✨"}</span><strong>${type}</strong>`;
+            button.innerHTML = `<span class="task-type-emoji">${config.typeIcon || config.icon || TASK_TYPE_ICON_MAP_V554[type] || "✨"}</span><strong>${config.displayName || type}</strong>`;
             button.addEventListener("click", () => {
                 categoryInput.value = type;
                 ["topicSelect", "skillSelect", "detailedTopicSelect", "trainingTypeSelect"].forEach(id => {
@@ -3852,12 +3916,13 @@ window.SMART_EXAM_DATA = {
         }
 
         const config = getConfig(type);
+        applyConfigLabels(config);
         const oldTopic = normalize(topic.dataset.current || topic.value || "");
-        fillSelect(topic, config.main || ["أخرى"], oldTopic);
+        fillSelect(topic, visibleValues(config, "main", "", config.main || ["أخرى"]), oldTopic);
 
         function refreshSub() {
             const selectedTopic = normalize(topic.value);
-            const subValues = (config.sub && (config.sub[selectedTopic] || config.sub["أخرى"])) || ["أخرى"];
+            const subValues = getSubValues(config, selectedTopic);
             fillSelect(skill, subValues, skill.dataset.current || skill.value);
             refreshDetail();
         }
@@ -3912,7 +3977,9 @@ window.SMART_EXAM_DATA = {
         });
     }
 
-    document.addEventListener("DOMContentLoaded", initNativeTasks);
+    if (!window.EDUPATH_DEFER_NATIVE_TASKS_INIT) {
+        document.addEventListener("DOMContentLoaded", initNativeTasks);
+    }
     window.EDUPATH_NATIVE_TASKS_INIT = initNativeTasks;
 })();
 

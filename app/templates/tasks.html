@@ -31,10 +31,10 @@
                 <div>
                     <strong>{{ task.title }}</strong>
                     <span><b>نوع المهمة:</b> {% if task.category == "Other" and task.custom_category %}{{ task.custom_category }}{% else %}{{ task.category|native_task_label }}{% endif %}</span>
-                    <span><b>الفئة الرئيسية:</b> {% if task.topic == "Other" and task.custom_topic %}{{ task.custom_topic }}{% else %}{{ task.topic or "غير محدد"|native_task_label }}{% endif %}</span>
-                    <span><b>الفئة الفرعية:</b> {% if task.skill == "Other" and task.custom_skill %}{{ task.custom_skill }}{% else %}{{ task.skill or "غير محدد"|native_task_label }}{% endif %}</span>
-                    <span><b>الموضوع التفصيلي:</b> {{ task.language or "غير محدد"|native_task_label }}</span>
-                    <span><b>نوع النشاط:</b> {{ task.practice_type or "عام"|native_task_label }}</span>
+                    <span><b>{{ task.category|task_field_label("topic") }}:</b> {% if task.topic == "Other" and task.custom_topic %}{{ task.custom_topic }}{% else %}{{ task.topic or "غير محدد"|native_task_label }}{% endif %}</span>
+                    <span><b>{{ task.category|task_field_label("skill") }}:</b> {% if task.skill == "Other" and task.custom_skill %}{{ task.custom_skill }}{% else %}{{ task.skill or "غير محدد"|native_task_label }}{% endif %}</span>
+                    <span><b>{{ task.category|task_field_label("detail") }}:</b> {{ task.language or "غير محدد"|native_task_label }}</span>
+                    <span><b>{{ task.category|task_field_label("training") }}:</b> {{ task.practice_type or "عام"|native_task_label }}</span>
                     <span><b>المصدر:</b> {{ task.source|clickable_sources }}</span>
                     <span>{{ task.estimated_minutes }} دقيقة · الأولوية {{ task.priority }} · الصعوبة {{ task.difficulty }}</span>
                     <span>من {{ task.start_date or "غير محدد" }} إلى {{ task.due_date or "غير محدد" }} · {{ task.repeat_type|native_task_label }} · {% if task.repeat_type == "custom" %}نمط التكرار: {{ task.repeat_days or "غير محدد" }}{% elif task.repeat_type == "selected_days" %}الأيام: {{ task.repeat_type|repeat_days_display_ar(task.repeat_days) }}{% else %}{{ task.repeat_type|native_task_label }}{% endif %}</span>
@@ -63,11 +63,13 @@
 
 {% block extra_scripts %}
 <script>
+window.EDUPATH_DEFER_NATIVE_TASKS_INIT = true;
 window.EDUPATH_TASK_BANK_OVERRIDES = {{ task_bank_overrides_json|default('{}')|safe }};
 </script>
-<script src="{{ url_for('static', filename='js/tasks_native_ar.js') }}?v=5.6.1"></script>
-<script src="{{ url_for('static', filename='js/secondary-school-bank-v55139.js') }}?v=5.6.1"></script>
-<script src="{{ url_for('static', filename='js/task_bank_runtime.js') }}?v=5.6.1"></script>
+<script src="{{ url_for('static', filename='js/tasks_native_ar.js') }}?v=5.6.3-labels"></script>
+<script src="{{ url_for('static', filename='js/secondary-school-bank-v55139.js') }}?v=5.6.3-labels"></script>
+<script src="{{ url_for('static', filename='js/task_bank_runtime.js') }}?v=5.6.3-labels"></script>
+<script>window.EDUPATH_TASK_BANK_BOOT && window.EDUPATH_TASK_BANK_BOOT();</script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {

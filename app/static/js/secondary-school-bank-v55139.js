@@ -858,6 +858,74 @@
         select.dataset.current = select.value;
     }
 
+
+    function normalizeSecondary(value) { return String(value == null ? "" : value).trim(); }
+
+    function pathKey() {
+        return Array.from(arguments).map(normalizeSecondary).filter(Boolean).join("::");
+    }
+
+    function runtimeSecondaryConfig() {
+        const data = window.EDUPATH_TASKS_AR_DATA || (typeof SMART_TASK_DATA !== "undefined" ? SMART_TASK_DATA : {});
+        return (data && data["المرحلة الثانوية"]) || null;
+    }
+
+    function listOrNull(value) { return Array.isArray(value) ? value : null; }
+
+    function hiddenFor(config, level, path) {
+        const out = [];
+        const hidden = (config && config.hidden) || {};
+        const hiddenByPath = (config && config.hiddenByPath) || {};
+        if (Array.isArray(hidden[level])) out.push(...hidden[level]);
+        const key = level + (path ? "::" + path : "");
+        if (Array.isArray(hiddenByPath[key])) out.push(...hiddenByPath[key]);
+        return out.map(normalizeSecondary);
+    }
+
+    function visible(config, level, path, values) {
+        const hidden = hiddenFor(config, level, path);
+        const list = uniqueWithOther(values || []);
+        const shown = list.filter((item) => !hidden.includes(normalizeSecondary(item)));
+        return shown.length ? shown : [OTHER];
+    }
+
+    function secondaryGrades(config) {
+        return visible(config, "main", "", (config && config.main) || GRADES);
+    }
+
+    function secondarySubjects(config, grade) {
+        const g = normalizeSecondary(grade);
+        const raw = (config && (listOrNull((config.subByPath || {})[pathKey(g)]) || listOrNull((config.sub || {})[g]) || listOrNull((config.sub || {})[OTHER]))) || SUBJECTS;
+        return visible(config, "sub", pathKey(g), raw);
+    }
+
+    function secondaryDetails(config, grade, subject) {
+        const g = normalizeSecondary(grade);
+        const s = normalizeSecondary(subject);
+        const raw = (config && (listOrNull((config.detailByPath || {})[pathKey(g, s)]) || listOrNull((config.detail || {})[s]) || listOrNull((config.detail || {})[g]) || listOrNull((config.detail || {})[OTHER]))) || DETAILS[s] || DETAILS[OTHER];
+        return visible(config, "detail", pathKey(g, s), raw);
+    }
+
+    function secondaryActivities(config, grade, subject, detail) {
+        const g = normalizeSecondary(grade);
+        const s = normalizeSecondary(subject);
+        const d = normalizeSecondary(detail);
+        const raw = (config && (listOrNull((config.trainingByPath || {})[pathKey(g, s, d)]) || listOrNull((config.trainingByDetail || {})[d]) || listOrNull((config.trainingByDetail || {})[s]) || listOrNull((config.trainingByDetail || {})[g]) || listOrNull(config.training))) || activityList(s, d);
+        return visible(config, "training", pathKey(g, s, d), raw);
+    }
+
+    function applySecondaryLabelsFromConfig(config) {
+        const labels = (config && config.labels) || {};
+        setText("topicLabel", labels.topic || "الصف الدراسي أو السنة الدراسية");
+        setText("skillLabel", labels.skill || "المادة الدراسية");
+        setText("detailLabel", labels.detail || "الوحدة أو الدرس أو المقرر حسب المادة");
+        setText("trainingLabel", labels.training || "ماذا سيفعل الطالب فعلياً؟");
+        setText("sourceLabel", labels.source || "المصدر أو الرابط");
+        setText("difficultyLabel", labels.difficulty || "مستوى الصعوبة من ١ إلى ٥");
+        setText("priorityLabel", labels.priority || "الأولوية من ١ إلى ٥");
+        setText("expectedTimeLabel", labels.expectedTime || "الوقت المتوقع بالدقائق");
+    }
+
     function ensureSecondaryBank() {
         const categoryInput = byId("categorySelect");
         if (categoryInput && categoryInput.value === "Secondary School") {
@@ -994,30 +1062,26 @@
 
         if (!gradeSelect || !subjectSelect || !detailSelect || !activitySelect) return false;
 
-        setText("topicLabel", "الصف الدراسي أو السنة الدراسية");
-        setText("skillLabel", "المادة الدراسية");
-        setText("detailLabel", "الوحدة أو الدرس أو المقرر حسب المادة");
-        setText("trainingLabel", "ماذا سيفعل الطالب فعلياً؟");
-        setText("sourceLabel", "المصدر أو الرابط");
-        setText("difficultyLabel", "مستوى الصعوبة من ١ إلى ٥");
-        setText("priorityLabel", "الأولوية من ١ إلى ٥");
-        setText("expectedTimeLabel", "الوقت المتوقع بالدقائق");
+        const runtimeConfig = runtimeSecondaryConfig();
+        applySecondaryLabelsFromConfig(runtimeConfig);
 
-        if (!GRADES.includes(gradeSelect.value) || optionValues(gradeSelect).join("|") !== GRADES.join("|")) {
-            fillSelect(gradeSelect, GRADES, gradeSelect.value);
+        const grades = secondaryGrades(runtimeConfig);
+        if (!grades.includes(gradeSelect.value) || optionValues(gradeSelect).join("|") !== grades.join("|")) {
+            fillSelect(gradeSelect, grades, gradeSelect.value);
         }
 
-        if (!SUBJECTS.includes(subjectSelect.value) || optionValues(subjectSelect).join("|") !== SUBJECTS.join("|")) {
-            fillSelect(subjectSelect, SUBJECTS, subjectSelect.value);
+        const subjects = secondarySubjects(runtimeConfig, gradeSelect.value);
+        if (!subjects.includes(subjectSelect.value) || optionValues(subjectSelect).join("|") !== subjects.join("|")) {
+            fillSelect(subjectSelect, subjects, subjectSelect.value);
         }
 
         const subject = subjectSelect.value || OTHER;
-        const details = DETAILS[subject] || DETAILS[OTHER];
+        const details = secondaryDetails(runtimeConfig, gradeSelect.value, subject);
         if (!details.includes(detailSelect.value) || optionValues(detailSelect).join("|") !== details.join("|")) {
             fillSelect(detailSelect, details, detailSelect.value);
         }
 
-        const activities = activityList(subjectSelect.value, detailSelect.value);
+        const activities = secondaryActivities(runtimeConfig, gradeSelect.value, subjectSelect.value, detailSelect.value);
         if (!activities.includes(activitySelect.value) || optionValues(activitySelect).join("|") !== activities.join("|")) {
             fillSelect(activitySelect, activities, activitySelect.value);
         }
@@ -1055,9 +1119,8 @@
         ensureSecondaryBank();
 
         const run = () => {
-            setTimeout(applySecondaryBank, 0);
-            setTimeout(applySecondaryBank, 60);
-            setTimeout(applySecondaryBank, 180);
+            applySecondaryBank();
+            document.dispatchEvent(new CustomEvent("edupath:secondary-bank-applied"));
         };
 
         document.addEventListener("click", (event) => {
