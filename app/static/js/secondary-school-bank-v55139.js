@@ -915,9 +915,12 @@
     }
 
     function applySecondaryLabelsFromConfig(config) {
-        const labels = (config && config.labels) || {};
-        setText("topicLabel", labels.topic || "الصف الدراسي أو السنة الدراسية");
-        setText("skillLabel", labels.skill || "المادة الدراسية");
+        const configLabels = (config && config.labels) || {};
+        const getLabels = window.EDUPATH_GET_TASK_TYPE_FIELD_LABELS;
+        const fixedLabels = (typeof getLabels === "function") ? getLabels("المرحلة الثانوية") : {};
+        const labels = Object.assign({}, configLabels, fixedLabels);
+        setText("topicLabel", labels.topic || labels.main || "الصف الدراسي أو السنة الدراسية");
+        setText("skillLabel", labels.skill || labels.sub || "المادة الدراسية");
         setText("detailLabel", labels.detail || "الوحدة أو الدرس أو المقرر حسب المادة");
         setText("trainingLabel", labels.training || "ماذا سيفعل الطالب فعلياً؟");
         setText("sourceLabel", labels.source || "المصدر أو الرابط");
@@ -1041,10 +1044,14 @@
 
     function restoreDefaultLabelsWhenNotSecondary() {
         if (isSecondary()) return;
-        setText("topicLabel", "الفئة الرئيسية");
-        setText("skillLabel", "الفئة الفرعية");
-        setText("detailLabel", "الموضوع التفصيلي");
-        setText("trainingLabel", "نوع النشاط");
+        const categoryInput = byId("categorySelect");
+        const type = normalizeSecondary(categoryInput && categoryInput.value) || "عام";
+        const getLabels = window.EDUPATH_GET_TASK_TYPE_FIELD_LABELS;
+        const labels = (typeof getLabels === "function") ? getLabels(type) : {};
+        setText("topicLabel", labels.topic || labels.main || "الفئة الرئيسية");
+        setText("skillLabel", labels.skill || labels.sub || "الفئة الفرعية");
+        setText("detailLabel", labels.detail || "الموضوع التفصيلي");
+        setText("trainingLabel", labels.training || "نوع النشاط");
     }
 
     function applySecondaryBank() {

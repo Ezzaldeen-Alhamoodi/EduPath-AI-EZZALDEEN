@@ -113,8 +113,8 @@
         const cfg = getConfig(type);
         const labels = labelsForDisplay(type, cfg);
         setText("taskNameLabel", labels.taskName || labels.title);
-        setText("topicLabel", labels.topic);
-        setText("skillLabel", labels.skill);
+        setText("topicLabel", labels.topic || labels.main);
+        setText("skillLabel", labels.skill || labels.sub);
         setText("detailLabel", labels.detail);
         setText("trainingLabel", labels.training);
         setText("sourceLabel", labels.source);
@@ -138,6 +138,7 @@
         applyTaskBankOverrides();
         if (window.EDUPATH_NATIVE_TASKS_INIT) window.EDUPATH_NATIVE_TASKS_INIT();
         applyTaskBankLabels();
+        if (window.EDUPATH_APPLY_FIELD_LABELS_ONLY_V565) window.EDUPATH_APPLY_FIELD_LABELS_ONLY_V565();
         document.dispatchEvent(new CustomEvent("edupath:task-bank-ready"));
     }
 
@@ -154,7 +155,7 @@
 
     window.EDUPATH_MERGE_TASK_BANK_OVERRIDES = mergeTaskBankOverrides;
     window.EDUPATH_APPLY_TASK_BANK_OVERRIDES = applyTaskBankOverrides;
-    window.EDUPATH_APPLY_TASK_BANK_RUNTIME = function () { applyTaskBankOverrides(); applyTaskBankLabels(); };
+    window.EDUPATH_APPLY_TASK_BANK_RUNTIME = function () { applyTaskBankOverrides(); applyTaskBankLabels(); if (window.EDUPATH_APPLY_FIELD_LABELS_ONLY_V565) window.EDUPATH_APPLY_FIELD_LABELS_ONLY_V565(); };
     window.EDUPATH_TASK_BANK_BOOT = function () { bootTaskBank(); installBindings(); };
     window.EDUPATH_TASK_TYPE_FIELD_LABELS = TASK_TYPE_FIELD_LABELS;
     window.EDUPATH_GET_TASK_TYPE_FIELD_LABELS = fixedLabelsForType;

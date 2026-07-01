@@ -3505,6 +3505,31 @@ window.SMART_EXAM_DATA = {
 
     function qs(id) { return document.getElementById(id); }
 
+    const NATIVE_TASK_TYPE_FIELD_LABELS = {
+        "حفظ القرآن الكريم": {topic: "نوع المتابعة القرآنية", main: "نوع المتابعة القرآنية", skill: "السورة أو مجال المتابعة", sub: "السورة أو مجال المتابعة", detail: "المقطع أو الآيات المحددة", training: "ماذا ستفعل فعلياً؟"},
+        "المرحلة الثانوية": {topic: "الصف الدراسي أو السنة الدراسية", main: "الصف الدراسي أو السنة الدراسية", skill: "المادة الدراسية", sub: "المادة الدراسية", detail: "الوحدة أو الدرس أو المقرر حسب المادة", training: "ماذا سيفعل الطالب فعلياً؟"},
+        "المرحلة الجامعية": {topic: "التخصص أو المجال الجامعي", main: "التخصص أو المجال الجامعي", skill: "نوع المهمة الجامعية", sub: "نوع المهمة الجامعية", detail: "المادة أو الموضوع الجامعي", training: "ماذا ستفعل فعلياً؟"},
+        "اللغات": {topic: "اللغة", main: "اللغة", skill: "المهارة اللغوية", sub: "المهارة اللغوية", detail: "الموضوع أو الجانب اللغوي", training: "نوع التدريب"},
+        "البرمجة والتكنولوجيا": {topic: "المجال التقني", main: "المجال التقني", skill: "المسار أو التقنية", sub: "المسار أو التقنية", detail: "الموضوع البرمجي أو المهارة التقنية", training: "نوع التطبيق أو التدريب"},
+        "الذكاء الاصطناعي": {topic: "مجال الذكاء الاصطناعي", main: "مجال الذكاء الاصطناعي", skill: "المسار أو التقنية", sub: "المسار أو التقنية", detail: "الموضوع أو النموذج أو المفهوم", training: "نوع التطبيق أو التدريب"},
+        "الرياضيات": {topic: "فرع الرياضيات", main: "فرع الرياضيات", skill: "الموضوع الرياضي", sub: "الموضوع الرياضي", detail: "الدرس أو المهارة الرياضية", training: "نوع التمرين أو المراجعة"},
+        "المنح الدراسية": {topic: "نوع المنحة أو المرحلة", main: "نوع المنحة أو المرحلة", skill: "جزء التقديم أو المتطلب", sub: "جزء التقديم أو المتطلب", detail: "المستند أو الخطوة التفصيلية", training: "نوع العمل المطلوب"},
+        "الاختبارات الدولية": {topic: "اسم الاختبار", main: "اسم الاختبار", skill: "قسم الاختبار", sub: "قسم الاختبار", detail: "نوع السؤال أو المهارة", training: "نوع التدريب أو المحاكاة"},
+        "الحياة اليومية": {topic: "مجال الحياة اليومية", main: "مجال الحياة اليومية", skill: "نوع الروتين أو المسؤولية", sub: "نوع الروتين أو المسؤولية", detail: "المهمة أو العادة المحددة", training: "طريقة التنفيذ"},
+        "المشاريع": {topic: "نوع المشروع", main: "نوع المشروع", skill: "مرحلة المشروع", sub: "مرحلة المشروع", detail: "الجزء أو المهمة داخل المشروع", training: "نوع التنفيذ"},
+        "القراءة والبحث": {topic: "مجال القراءة أو البحث", main: "مجال القراءة أو البحث", skill: "نوع المصدر أو البحث", sub: "نوع المصدر أو البحث", detail: "الموضوع أو السؤال البحثي", training: "نوع القراءة أو المعالجة"},
+        "عام": {topic: "المجال العام", main: "المجال العام", skill: "نوع المهمة", sub: "نوع المهمة", detail: "تفاصيل المهمة", training: "نوع النشاط"},
+        "أخرى": {topic: "التصنيف المخصص", main: "التصنيف المخصص", skill: "النوع المخصص", sub: "النوع المخصص", detail: "التفاصيل المخصصة", training: "النشاط المخصص"}
+    };
+    const NATIVE_DEFAULT_FIELD_LABELS = {topic: "الفئة الرئيسية", main: "الفئة الرئيسية", skill: "الفئة الفرعية", sub: "الفئة الفرعية", detail: "الموضوع التفصيلي", training: "نوع النشاط"};
+
+    function nativeLabelsForType(typeName, config) {
+        const type = normalize(typeName || (qs("categorySelect") || {}).value || "عام");
+        const fromRuntime = window.EDUPATH_GET_TASK_TYPE_FIELD_LABELS;
+        const fixed = (typeof fromRuntime === "function") ? fromRuntime(type) : (NATIVE_TASK_TYPE_FIELD_LABELS[type] || {});
+        return Object.assign({}, NATIVE_DEFAULT_FIELD_LABELS, (config && config.labels) || {}, fixed);
+    }
+
     function isOther(value) {
         return normalize(value) === "أخرى" || normalize(value) === "Other";
     }
@@ -3618,12 +3643,13 @@ window.SMART_EXAM_DATA = {
     }
 
     function applyConfigLabels(config) {
-        const labels = (config && config.labels) || {};
+        const type = normalize((qs("categorySelect") || {}).value || "عام");
+        const labels = nativeLabelsForType(type, config);
         if (labels.taskName || labels.title) setLabel("taskNameLabel", labels.taskName || labels.title);
-        if (labels.topic) setLabel("topicLabel", labels.topic);
-        if (labels.skill) setLabel("skillLabel", labels.skill);
-        if (labels.detail) setLabel("detailLabel", labels.detail);
-        if (labels.training) setLabel("trainingLabel", labels.training);
+        setLabel("topicLabel", labels.topic || labels.main);
+        setLabel("skillLabel", labels.skill || labels.sub);
+        setLabel("detailLabel", labels.detail);
+        setLabel("trainingLabel", labels.training);
         if (labels.source) setLabel("sourceLabel", labels.source);
         if (labels.difficulty) setLabel("difficultyLabel", labels.difficulty);
         if (labels.priority) setLabel("priorityLabel", labels.priority);
@@ -3704,11 +3730,10 @@ window.SMART_EXAM_DATA = {
     }
 
     function applyNativeLabels() {
+        const type = normalize((qs("categorySelect") || {}).value || "عام");
+        const config = getConfig(type);
         setLabel("taskNameLabel", "اسم المهمة");
-        setLabel("topicLabel", "الفئة الرئيسية");
-        setLabel("skillLabel", "الفئة الفرعية");
-        setLabel("detailLabel", "الموضوع التفصيلي");
-        setLabel("trainingLabel", "نوع النشاط");
+        applyConfigLabels(config);
         setLabel("sourceLabel", "المصدر أو الرابط");
         setLabel("difficultyLabel", "مستوى الصعوبة من 1 إلى 5");
         setLabel("priorityLabel", "الأولوية من 1 إلى 5");

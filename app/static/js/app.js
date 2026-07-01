@@ -39760,3 +39760,62 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// v5.6.5 field labels only: display labels for adaptive task fields by task type.
+// This block changes visible label text only. It does not change data, banks, options, relations, saving, or database keys.
+(function () {
+    const LABELS_BY_TYPE = {
+        "حفظ القرآن الكريم": {topic: "نوع المتابعة القرآنية", skill: "السورة أو مجال المتابعة", detail: "المقطع أو الآيات المحددة", training: "ماذا ستفعل فعلياً؟"},
+        "المرحلة الثانوية": {topic: "الصف الدراسي أو السنة الدراسية", skill: "المادة الدراسية", detail: "الوحدة أو الدرس أو المقرر حسب المادة", training: "ماذا سيفعل الطالب فعلياً؟"},
+        "المرحلة الجامعية": {topic: "التخصص أو المجال الجامعي", skill: "نوع المهمة الجامعية", detail: "المادة أو الموضوع الجامعي", training: "ماذا ستفعل فعلياً؟"},
+        "اللغات": {topic: "اللغة", skill: "المهارة اللغوية", detail: "الموضوع أو الجانب اللغوي", training: "نوع التدريب"},
+        "البرمجة والتكنولوجيا": {topic: "المجال التقني", skill: "المسار أو التقنية", detail: "الموضوع البرمجي أو المهارة التقنية", training: "نوع التطبيق أو التدريب"},
+        "الذكاء الاصطناعي": {topic: "مجال الذكاء الاصطناعي", skill: "المسار أو التقنية", detail: "الموضوع أو النموذج أو المفهوم", training: "نوع التطبيق أو التدريب"},
+        "الرياضيات": {topic: "فرع الرياضيات", skill: "الموضوع الرياضي", detail: "الدرس أو المهارة الرياضية", training: "نوع التمرين أو المراجعة"},
+        "المنح الدراسية": {topic: "نوع المنحة أو المرحلة", skill: "جزء التقديم أو المتطلب", detail: "المستند أو الخطوة التفصيلية", training: "نوع العمل المطلوب"},
+        "الاختبارات الدولية": {topic: "اسم الاختبار", skill: "قسم الاختبار", detail: "نوع السؤال أو المهارة", training: "نوع التدريب أو المحاكاة"},
+        "الحياة اليومية": {topic: "مجال الحياة اليومية", skill: "نوع الروتين أو المسؤولية", detail: "المهمة أو العادة المحددة", training: "طريقة التنفيذ"},
+        "المشاريع": {topic: "نوع المشروع", skill: "مرحلة المشروع", detail: "الجزء أو المهمة داخل المشروع", training: "نوع التنفيذ"},
+        "القراءة والبحث": {topic: "مجال القراءة أو البحث", skill: "نوع المصدر أو البحث", detail: "الموضوع أو السؤال البحثي", training: "نوع القراءة أو المعالجة"},
+        "عام": {topic: "المجال العام", skill: "نوع المهمة", detail: "تفاصيل المهمة", training: "نوع النشاط"},
+        "أخرى": {topic: "التصنيف المخصص", skill: "النوع المخصص", detail: "التفاصيل المخصصة", training: "النشاط المخصص"}
+    };
+    const DEFAULT_LABELS = {topic: "الفئة الرئيسية", skill: "الفئة الفرعية", detail: "الموضوع التفصيلي", training: "نوع النشاط"};
+    const normalizeLabelType = (value) => String(value == null ? "" : value).trim();
+    function fieldLabelsForCurrentTaskType() {
+        const typeInput = document.getElementById("categorySelect");
+        const type = normalizeLabelType(typeInput && typeInput.value) || "عام";
+        return Object.assign({}, DEFAULT_LABELS, LABELS_BY_TYPE[type] || {});
+    }
+    function setFieldLabelText(id, value) {
+        const el = document.getElementById(id);
+        if (el && value) el.textContent = value;
+    }
+    function applyFieldLabelsOnlyV565() {
+        const labels = fieldLabelsForCurrentTaskType();
+        setFieldLabelText("topicLabel", labels.topic);
+        setFieldLabelText("skillLabel", labels.skill);
+        setFieldLabelText("detailLabel", labels.detail);
+        setFieldLabelText("trainingLabel", labels.training);
+    }
+    window.EDUPATH_APPLY_FIELD_LABELS_ONLY_V565 = applyFieldLabelsOnlyV565;
+    document.addEventListener("DOMContentLoaded", function () {
+        applyFieldLabelsOnlyV565();
+        [0, 80, 250, 700, 1200, 1800].forEach((delay) => setTimeout(applyFieldLabelsOnlyV565, delay));
+        ["categorySelect", "topicSelect", "skillSelect", "detailedTopicSelect", "trainingTypeSelect"].forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener("change", () => setTimeout(applyFieldLabelsOnlyV565, 0));
+                el.addEventListener("input", () => setTimeout(applyFieldLabelsOnlyV565, 0));
+            }
+        });
+        document.addEventListener("click", function (event) {
+            if (event.target && event.target.closest && event.target.closest(".task-type-card")) {
+                setTimeout(applyFieldLabelsOnlyV565, 0);
+                setTimeout(applyFieldLabelsOnlyV565, 80);
+            }
+        }, true);
+    });
+    document.addEventListener("edupath:task-bank-ready", applyFieldLabelsOnlyV565);
+    document.addEventListener("edupath:secondary-bank-applied", applyFieldLabelsOnlyV565);
+})();
