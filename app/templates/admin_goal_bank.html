@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block page_title %}تعديل الأهداف{% endblock %}
+{% block content %}
+
+<section class="hero compact goals-hero-v41" id="adminGoalBankPage">
+    <div>
+        <span class="tag">Admin · النظام التكيفي للأهداف</span>
+        <h2>تعديل بنك الأهداف التكيفي</h2>
+        <p>عدّل خيارات صفحة الأهداف كما تظهر للمستخدمين، مع الحفاظ على النظام التكيفي والعلاقات بين الاختيارات دون تغيير البنك الأصلي يدوياً.</p>
+    </div>
+    <a class="button light" href="{{ url_for('admin_dashboard') }}">↩ العودة إلى Admin</a>
+</section>
+
+<section class="card admin-task-editor-command-v5610">
+    <div>
+        <h2>أدوات التحديث</h2>
+        <p class="muted" id="adminGoalBankStatus">اختر نوع هدف من النموذج العلوي.</p>
+    </div>
+    <div class="admin-bank-actions-v5600">
+        <button type="button" id="saveDraftGoalBankBtn">💾 حفظ كمسودة</button>
+        <button type="button" class="small-button success" id="publishGoalBankBtn">🚀 نشر التعديلات</button>
+        <button type="button" class="small-button warning" id="previewGoalBankBtn">👁 معاينة كطالب</button>
+        <button type="button" class="small-button cancel" id="rollbackGoalBankBtn">↩ استعادة آخر تعديل</button>
+        <button type="button" class="small-button danger" id="restoreDefaultGoalBankBtn">⟲ استعادة الافتراضي لهذا النوع</button>
+    </div>
+</section>
+
+<section class="admin-real-task-editor-layout-v5610">
+    <div class="card admin-real-task-form-card-v5610">
+        <h2>نفس صفحة الأهداف الحالية</h2>
+        <p class="muted">هذا نموذج معاينة حي لا ينشئ هدفاً حقيقياً. اختر نوع الهدف والمسار كما يفعل الطالب، ثم حرّر نفس الخيارات من أدوات الإدارة.</p>
+        <form class="form smart-goal-form-v4613" id="smartGoalForm" onsubmit="return false;">
+            <div class="goal-field goal-field-wide">
+                <label>عنوان الهدف</label>
+                <input name="title" id="goalTitleInput" placeholder="معاينة فقط — لا يتم إنشاء هدف حقيقي">
+            </div>
+            <div class="goal-field goal-field-wide">
+                <label>نوع الهدف</label>
+                <select name="category" id="goalTypeSelect"></select>
+            </div>
+            <div class="adaptive-goal-panel-v4614" id="adaptiveGoalBox">
+                <div class="goal-field">
+                    <label id="goalCategoryLabel">تصنيف الهدف</label>
+                    <select name="goal_category" id="goalCategorySelect"></select>
+                    <div class="inline-custom-field" id="customCategoryBox"><label id="customCategoryLabel">اكتب ما تريد</label><input name="custom_goal_category" id="customGoalCategoryInput" placeholder="يرجى كتابة ما تريد"></div>
+                </div>
+                <div class="goal-field">
+                    <label id="goalPathLabel">مسار الهدف</label>
+                    <select name="goal_path" id="goalPathSelect"></select>
+                    <div class="inline-custom-field" id="customPathBox"><label id="customPathLabel">اكتب ما تريد</label><input name="custom_goal_path" id="customGoalPathInput" placeholder="يرجى كتابة ما تريد"></div>
+                </div>
+                <div class="goal-field">
+                    <label id="currentStateLabel">الحالة الحالية</label>
+                    <select name="current_state" id="currentStateSelect"></select>
+                    <div class="inline-custom-field" id="customCurrentBox"><label id="customCurrentLabel">اكتب ما تريد</label><input name="custom_current_state" id="customCurrentInput" placeholder="يرجى كتابة ما تريد"></div>
+                </div>
+                <div class="goal-field">
+                    <label id="targetStateLabel">الحالة المستهدفة</label>
+                    <select name="target_state" id="targetStateSelect"></select>
+                    <div class="inline-custom-field" id="customTargetBox"><label id="customTargetLabel">اكتب ما تريد</label><input name="custom_target_state" id="customTargetInput" placeholder="اكتب ما تريد"></div>
+                </div>
+                <div class="goal-field goal-field-wide">
+                    <label id="goalOutcomeLabel">النتيجة المستهدفة</label>
+                    <input name="goal_outcome" id="goalOutcomeInput" placeholder="ماذا تريد أن يتحقق عند إنجاز هذا الهدف؟">
+                </div>
+                <input type="hidden" name="milestones" id="milestonesInput">
+                <div class="goal-field">
+                    <label id="commitmentLabel">الالتزام اليومي أو الأسبوعي</label>
+                    <select name="commitment" id="commitmentSelect"></select>
+                    <div class="inline-custom-field" id="customCommitmentBox"><label id="customCommitmentLabel">اكتب ما تريد</label><input name="custom_commitment" id="customCommitmentInput" placeholder="اكتب ما تريد"></div>
+                </div>
+                <input type="hidden" name="keywords" id="goalKeywordsInput">
+            </div>
+        </form>
+    </div>
+
+    <aside class="card admin-real-controls-v5610">
+        <h2>أدوات إدارة الخانة التكيفية</h2>
+        <p class="muted" id="adminGoalPathSummary">المسار الحالي: —</p>
+        <div class="admin-adaptive-tabs-v5610" id="adminGoalLevelTabs"></div>
+        <div class="admin-current-field-head-v5610">
+            <h3 id="adminGoalCurrentFieldTitle">الخانة الحالية</h3>
+            <div class="actions">
+                <button type="button" class="small-button" id="editGoalFieldLabelBtn">تعديل اسم الخانة</button>
+                <button type="button" class="small-button success" id="addGoalOptionBtn">＋ إضافة خيار</button>
+                <button type="button" class="small-button warning" id="manualOrderGoalBtn">ترتيب يدوي</button>
+            </div>
+        </div>
+        <div class="bank-option-list-v5600" id="adminGoalOptionsList"></div>
+        <hr>
+        <h3>الخيارات المخفية</h3>
+        <p class="muted">الإخفاء آمن ويخص المسار الحالي فقط.</p>
+        <div id="adminGoalHiddenList" class="bank-revisions-list-v5600"></div>
+    </aside>
+</section>
+
+<section class="card admin-bank-history-v5600">
+    <h2>سجل تعديلات هذا النوع فقط</h2>
+    <p class="muted">الاستعادة هنا تخص نوع الهدف الحالي فقط ولا تؤثر على بقية الأنواع.</p>
+    <div id="goalBankRevisionsList" class="bank-revisions-list-v5600"></div>
+</section>
+
+<div class="admin-bank-modal-v5600 admin-goal-add-modal-v5613" id="goalAddOptionModal" hidden>
+    <div class="admin-bank-modal-card-v5600 admin-goal-add-card-v5613">
+        <h2 id="goalAddOptionTitle">إضافة خيار</h2>
+        <p class="muted">أضف الخيار في الخانة الحالية، ويمكنك كتابة التفرعات التابعة له مباشرة. كل تفرع في سطر مستقل.</p>
+        <label>اسم الخيار الجديد</label>
+        <input id="goalNewOptionName" placeholder="اكتب اسم الخيار الجديد">
+        <label>مكان الإضافة</label>
+        <select id="goalNewOptionPosition">
+            <option value="end">في النهاية</option>
+            <option value="start">في البداية</option>
+            <option value="after">بعد خيار محدد</option>
+        </select>
+        <label>بعد خيار محدد — اختياري</label>
+        <input id="goalNewOptionAfter" placeholder="اكتب اسم الخيار الذي تريد الإضافة بعده">
+        <label id="goalNewOptionBranchesLabel">التفرعات التابعة الاختيارية</label>
+        <textarea id="goalNewOptionBranches" rows="6" placeholder="مثال:\nمسار تابع 1\nمسار تابع 2\nمسار تابع 3"></textarea>
+        <div class="actions">
+            <button type="button" id="applyGoalAddOptionBtn">حفظ الخيار والتفرعات</button>
+            <button type="button" class="small-button cancel" id="closeGoalAddOptionBtn">إلغاء</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+window.EDUPATH_GOAL_BANK_OVERRIDES = {{ goal_bank_overrides_json|default('{}')|safe }};
+</script>
+<script src="{{ url_for('static', filename='js/goal_bank_runtime.js') }}?v=5.6.13-admin-adaptive-goal-editor"></script>
+<script src="{{ url_for('static', filename='js/admin_goal_bank.js') }}?v=5.6.13-admin-adaptive-goal-editor"></script>
+{% endblock %}

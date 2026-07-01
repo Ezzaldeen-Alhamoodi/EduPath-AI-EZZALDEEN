@@ -258,6 +258,53 @@ class TaskBankDraft(db.Model):
             return {}
 
 
+
+class GoalBankConfig(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type_name = db.Column(db.String(160), nullable=False, unique=True, index=True)
+    config_json = db.Column(db.Text, nullable=False)
+    updated_by_admin_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, index=True)
+
+    updated_by_admin = db.relationship("User", foreign_keys=[updated_by_admin_id])
+
+    @property
+    def config(self):
+        try:
+            return json.loads(self.config_json or "{}")
+        except Exception:
+            return {}
+
+
+class GoalBankDraft(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type_name = db.Column(db.String(160), nullable=False, unique=True, index=True)
+    config_json = db.Column(db.Text, nullable=False)
+    updated_by_admin_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, index=True)
+
+    updated_by_admin = db.relationship("User", foreign_keys=[updated_by_admin_id])
+
+    @property
+    def config(self):
+        try:
+            return json.loads(self.config_json or "{}")
+        except Exception:
+            return {}
+
+
+class GoalBankRevision(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type_name = db.Column(db.String(160), nullable=False, index=True)
+    action = db.Column(db.String(80), nullable=False, default="update")
+    before_json = db.Column(db.Text, nullable=True)
+    after_json = db.Column(db.Text, nullable=True)
+    admin_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True, index=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+
+    admin = db.relationship("User", foreign_keys=[admin_id])
+
+
 class LearningResource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(180), nullable=False, index=True)
@@ -4073,6 +4120,179 @@ def create_app():
 
 
 
+
+
+
+    def validate_goal_bank_config(config):
+        if not isinstance(config, dict):
+            return False, "صيغة بنك الأهداف غير صحيحة."
+        return True, "ok"
+
+    def get_goal_bank_overrides_map():
+        rows = GoalBankConfig.query.all()
+        data = {}
+        for row in rows:
+            data[row.type_name] = row.config
+        return data
+
+
+    @app.route("/admin/goal-bank")
+    @login_required
+    @admin_required
+    def admin_goal_bank():
+        return render_template(
+            "admin_goal_bank.html",
+            goal_bank_overrides_json=json.dumps(get_goal_bank_overrides_map(), ensure_ascii=False),
+        )
+
+
+    @app.route("/api/admin/goal-bank/types")
+    @login_required
+    @admin_required
+    def api_admin_goal_bank_types():
+        fallback_names = [
+            "التعليم", "اللغات", "الاختبارات الدولية", "البرمجة والتقنية", "الذكاء الاصطناعي",
+            "المنح الدراسية", "المرحلة الجامعية", "الرياضيات", "المشاريع", "الحياة اليومية",
+            "الأهداف الإسلامية", "عام", "أخرى"
+        ]
+        rows = GoalBankConfig.query.all()
+        names = list(fallback_names)
+        for row in rows:
+            if row.type_name not in names:
+                names.append(row.type_name)
+        return jsonify({"types": [{"name": name, "displayName": name, "customized": any(r.type_name == name for r in rows)} for name in names]})
+
+
+    @app.route("/api/admin/goal-bank/<path:type_name>")
+    @login_required
+    @admin_required
+    def api_admin_goal_bank_get(type_name):
+        row = GoalBankConfig.query.filter_by(type_name=type_name).first()
+        draft = GoalBankDraft.query.filter_by(type_name=type_name).first()
+        revisions = GoalBankRevision.query.filter_by(type_name=type_name).order_by(GoalBankRevision.id.desc()).limit(20).all()
+        return jsonify({
+            "type_name": type_name,
+            "customized": bool(row),
+            "config": row.config if row else None,
+            "updated_at": row.updated_at.isoformat() if row and row.updated_at else None,
+            "has_draft": bool(draft),
+            "draft_config": draft.config if draft else None,
+            "draft_updated_at": draft.updated_at.isoformat() if draft and draft.updated_at else None,
+            "revisions": [
+                {
+                    "id": rev.id,
+                    "action": rev.action,
+                    "created_at": rev.created_at.isoformat() if rev.created_at else None,
+                    "admin": rev.admin.email if rev.admin else "مشرف",
+                }
+                for rev in revisions
+            ],
+        })
+
+
+    @app.route("/api/admin/goal-bank/<path:type_name>/draft", methods=["POST"])
+    @login_required
+    @admin_required
+    def api_admin_goal_bank_save_draft(type_name):
+        payload = request.get_json(silent=True) or {}
+        config = payload.get("config") or {}
+        ok, message = validate_goal_bank_config(config)
+        if not ok:
+            return jsonify({"ok": False, "message": message}), 400
+        after_json = json.dumps(config, ensure_ascii=False, indent=2)
+        draft = GoalBankDraft.query.filter_by(type_name=type_name).first()
+        if draft:
+            draft.config_json = after_json
+            draft.updated_by_admin_id = current_user.id
+        else:
+            draft = GoalBankDraft(type_name=type_name, config_json=after_json, updated_by_admin_id=current_user.id)
+            db.session.add(draft)
+        db.session.commit()
+        return jsonify({"ok": True, "message": "تم حفظ مسودة تعديل الأهداف لهذا النوع فقط.", "updated_at": draft.updated_at.isoformat() if draft.updated_at else None})
+
+
+    @app.route("/api/admin/goal-bank/<path:type_name>", methods=["POST"])
+    @login_required
+    @admin_required
+    def api_admin_goal_bank_save(type_name):
+        payload = request.get_json(silent=True) or {}
+        config = payload.get("config") or {}
+        action = payload.get("action") or "update"
+        ok, message = validate_goal_bank_config(config)
+        if not ok:
+            return jsonify({"ok": False, "message": message}), 400
+        row = GoalBankConfig.query.filter_by(type_name=type_name).first()
+        before_json = row.config_json if row else None
+        after_json = json.dumps(config, ensure_ascii=False, indent=2)
+        if row:
+            row.config_json = after_json
+            row.updated_by_admin_id = current_user.id
+        else:
+            row = GoalBankConfig(type_name=type_name, config_json=after_json, updated_by_admin_id=current_user.id)
+            db.session.add(row)
+        db.session.add(GoalBankRevision(type_name=type_name, action=action, before_json=before_json, after_json=after_json, admin_id=current_user.id))
+        if payload.get("clear_draft"):
+            draft = GoalBankDraft.query.filter_by(type_name=type_name).first()
+            if draft:
+                db.session.delete(draft)
+        db.session.commit()
+        return jsonify({"ok": True, "message": "تم نشر تعديل بنك الأهداف لهذا النوع فقط.", "updated_at": row.updated_at.isoformat() if row.updated_at else None})
+
+
+    @app.route("/api/admin/goal-bank/<path:type_name>/restore-default", methods=["POST"])
+    @login_required
+    @admin_required
+    def api_admin_goal_bank_restore_default(type_name):
+        row = GoalBankConfig.query.filter_by(type_name=type_name).first()
+        before_json = row.config_json if row else None
+        if row:
+            db.session.delete(row)
+        draft = GoalBankDraft.query.filter_by(type_name=type_name).first()
+        if draft:
+            db.session.delete(draft)
+        db.session.add(GoalBankRevision(type_name=type_name, action="restore_default", before_json=before_json, after_json=None, admin_id=current_user.id))
+        db.session.commit()
+        return jsonify({"ok": True, "message": "تمت استعادة الافتراضي لهذا النوع فقط."})
+
+
+    @app.route("/api/admin/goal-bank/<path:type_name>/rollback", methods=["POST"])
+    @login_required
+    @admin_required
+    def api_admin_goal_bank_rollback(type_name):
+        revision_id = (request.get_json(silent=True) or {}).get("revision_id")
+        if revision_id:
+            revision = GoalBankRevision.query.filter_by(id=revision_id, type_name=type_name).first()
+        else:
+            revision = GoalBankRevision.query.filter_by(type_name=type_name).order_by(GoalBankRevision.id.desc()).first()
+        if not revision:
+            return jsonify({"ok": False, "message": "لا توجد نسخة سابقة صالحة للاستعادة."}), 404
+        row = GoalBankConfig.query.filter_by(type_name=type_name).first()
+        current_json = row.config_json if row else None
+        if revision.before_json:
+            try:
+                restored = json.loads(revision.before_json)
+            except Exception:
+                return jsonify({"ok": False, "message": "النسخة السابقة غير صالحة."}), 400
+            restored_json = json.dumps(restored, ensure_ascii=False, indent=2)
+            if row:
+                row.config_json = restored_json
+                row.updated_by_admin_id = current_user.id
+            else:
+                row = GoalBankConfig(type_name=type_name, config_json=restored_json, updated_by_admin_id=current_user.id)
+                db.session.add(row)
+        else:
+            if row:
+                db.session.delete(row)
+            restored_json = None
+        db.session.add(GoalBankRevision(type_name=type_name, action="rollback", before_json=current_json, after_json=restored_json, admin_id=current_user.id))
+        db.session.commit()
+        return jsonify({"ok": True, "message": "تمت استعادة النسخة السابقة لهذا النوع."})
+
+
+    @app.route("/api/goal-bank-overrides")
+    @login_required
+    def api_goal_bank_overrides():
+        return jsonify(get_goal_bank_overrides_map())
 
 
     @app.route("/admin/task-bank")

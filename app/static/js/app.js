@@ -39819,3 +39819,52 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("edupath:task-bank-ready", applyFieldLabelsOnlyV565);
     document.addEventListener("edupath:secondary-bank-applied", applyFieldLabelsOnlyV565);
 })();
+
+/* EduPath AI v5.6.13 Goal Bank Runtime Bridge - admin-safe overrides only */
+(function () {
+    function clone(obj) {
+        try { return JSON.parse(JSON.stringify(obj || {})); } catch (e) { return {}; }
+    }
+    function mergeArray(base, override) {
+        if (!Array.isArray(override)) return Array.isArray(base) ? base.slice() : [];
+        var out = [];
+        (Array.isArray(base) ? base : []).forEach(function (item) {
+            if (!out.includes(item)) out.push(item);
+        });
+        override.forEach(function (item) {
+            if (!out.includes(item)) out.push(item);
+        });
+        return out;
+    }
+    function deepMergeGoal(base, override) {
+        if (!override || typeof override !== "object") return clone(base);
+        if (Array.isArray(base) || Array.isArray(override)) return mergeArray(base, override);
+        var out = clone(base);
+        Object.keys(override).forEach(function (key) {
+            var value = override[key];
+            if (Array.isArray(value)) out[key] = mergeArray(out[key], value);
+            else if (value && typeof value === "object") out[key] = deepMergeGoal(out[key] || {}, value);
+            else out[key] = value;
+        });
+        return out;
+    }
+    window.EDUPATH_GOAL_BANK_DEEP_MERGE = deepMergeGoal;
+    window.EDUPATH_GOAL_BANK_BASE_DATA = (typeof GOAL_CONFIG_V524 !== "undefined") ? clone(GOAL_CONFIG_V524) : {};
+    window.EDUPATH_GET_GOAL_BANK_CONFIG = function () {
+        return (typeof GOAL_CONFIG_V524 !== "undefined") ? GOAL_CONFIG_V524 : {};
+    };
+    window.EDUPATH_APPLY_GOAL_BANK_OVERRIDES = function (overrides) {
+        if (typeof GOAL_CONFIG_V524 === "undefined") return;
+        var all = overrides || window.EDUPATH_GOAL_BANK_OVERRIDES || {};
+        Object.keys(all || {}).forEach(function (typeName) {
+            GOAL_CONFIG_V524[typeName] = deepMergeGoal((window.EDUPATH_GOAL_BANK_BASE_DATA || {})[typeName] || GOAL_CONFIG_V524[typeName] || {}, all[typeName] || {});
+        });
+        try { if (typeof refreshGoalsArabicV524 === "function") refreshGoalsArabicV524("goalTypeSelect"); } catch (e) {}
+    };
+    window.EDUPATH_REFRESH_GOALS_ADAPTIVE = function (changedId) {
+        try { if (typeof refreshGoalsArabicV524 === "function") refreshGoalsArabicV524(changedId || "goalTypeSelect"); } catch (e) {}
+    };
+    window.EDUPATH_GOAL_LABEL = function (value) {
+        try { return typeof goalV524Label === "function" ? goalV524Label(value) : value; } catch (e) { return value; }
+    };
+})();

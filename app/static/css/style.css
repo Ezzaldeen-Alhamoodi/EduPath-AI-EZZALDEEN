@@ -8957,3 +8957,35 @@ body.dark-mode .coach-hero {
         min-height: 72px;
     }
 }
+
+/* EduPath AI v5.6.13 Admin Goal Bank modal: compact and responsive */
+.admin-goal-add-modal-v5613,
+.admin-bank-modal-v5600 {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(15, 23, 42, 0.45);
+    overflow: auto;
+}
+.admin-goal-add-modal-v5613[hidden],
+.admin-bank-modal-v5600[hidden] { display: none !important; }
+.admin-goal-add-card-v5613 {
+    width: min(720px, 96vw);
+    max-height: 88vh;
+    overflow: auto;
+    border-radius: 22px;
+}
+.admin-goal-add-card-v5613 input,
+.admin-goal-add-card-v5613 select,
+.admin-goal-add-card-v5613 textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+@media (max-width: 700px) {
+    .admin-goal-add-modal-v5613 { align-items: flex-start; padding: 10px; }
+    .admin-goal-add-card-v5613 { width: 100%; max-height: calc(100vh - 20px); border-radius: 16px; }
+}
