@@ -3522,37 +3522,37 @@ window.SMART_EXAM_DATA = {
         "أخرى": {topic: "التصنيف المخصص", main: "التصنيف المخصص", skill: "النوع المخصص", sub: "النوع المخصص", detail: "التفاصيل المخصصة", training: "النشاط المخصص"}
     };
     const NATIVE_DEFAULT_FIELD_LABELS = {topic: "الفئة الرئيسية", main: "الفئة الرئيسية", skill: "الفئة الفرعية", sub: "الفئة الفرعية", detail: "الموضوع التفصيلي", training: "نوع النشاط"};
-    const NATIVE_FIELD_LABEL_TYPE_ALIASES = {
+
+    const NATIVE_TASK_TYPE_LABEL_ALIASES = {
         "Quran Memorization": "حفظ القرآن الكريم",
         "Secondary School": "المرحلة الثانوية",
         "University": "المرحلة الجامعية",
+        "University Study": "المرحلة الجامعية",
         "Languages": "اللغات",
         "Programming & Technology": "البرمجة والتكنولوجيا",
+        "Programming and Technology": "البرمجة والتكنولوجيا",
         "البرمجة والتقنية": "البرمجة والتكنولوجيا",
         "Artificial Intelligence": "الذكاء الاصطناعي",
         "AI": "الذكاء الاصطناعي",
         "Mathematics": "الرياضيات",
         "Math": "الرياضيات",
         "Scholarships": "المنح الدراسية",
-        "Exam / Certificate": "الاختبارات الدولية",
         "Exams & Certificates": "الاختبارات الدولية",
-        "الاختبارات والشهادات": "الاختبارات الدولية",
+        "Exams and Certificates": "الاختبارات الدولية",
+        "International Exams": "الاختبارات الدولية",
+        "Exam / Certificate": "الاختبارات الدولية",
         "Daily Life": "الحياة اليومية",
         "Projects": "المشاريع",
         "Reading & Research": "القراءة والبحث",
+        "Reading and Research": "القراءة والبحث",
         "General": "عام",
         "Other": "أخرى"
     };
 
-    function nativeLabelTypeKey(typeName) {
-        const type = normalize(typeName);
-        return NATIVE_FIELD_LABEL_TYPE_ALIASES[type] || type;
-    }
-
     function nativeLabelsForType(typeName, config) {
         const type = normalize(typeName || (qs("categorySelect") || {}).value || "عام");
         const fromRuntime = window.EDUPATH_GET_TASK_TYPE_FIELD_LABELS;
-        const fixed = (typeof fromRuntime === "function") ? fromRuntime(type) : (NATIVE_TASK_TYPE_FIELD_LABELS[nativeLabelTypeKey(type)] || {});
+        const fixed = (typeof fromRuntime === "function") ? fromRuntime(type) : (NATIVE_TASK_TYPE_FIELD_LABELS[NATIVE_TASK_TYPE_LABEL_ALIASES[type] || type] || {});
         return Object.assign({}, NATIVE_DEFAULT_FIELD_LABELS, (config && config.labels) || {}, fixed);
     }
 
