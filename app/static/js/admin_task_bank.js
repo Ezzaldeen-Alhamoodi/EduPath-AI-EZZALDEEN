@@ -365,9 +365,11 @@
     }
 
     function fetchJson(url, options) {
-        return fetch(url, options || {}).then(async (res) => {
+        const opts = Object.assign({ credentials: "same-origin" }, options || {});
+        opts.headers = Object.assign({ "X-Requested-With": "XMLHttpRequest" }, opts.headers || {});
+        return fetch(url, opts).then(async (res) => {
             const body = await res.json().catch(() => ({}));
-            if (!res.ok || body.ok === false) throw new Error(body.message || "فشل الاتصال بالخادم.");
+            if (!res.ok || body.ok === false) throw new Error(body.message || `فشل الاتصال بالخادم (${res.status}).`);
             return body;
         });
     }
@@ -861,6 +863,8 @@
 
     async function saveDraft() {
         if (!state.currentType || !state.config) return toast("اختر نوع مهمة أولاً.");
+        const btn = $("saveDraftTaskBankBtn");
+        if (btn) { btn.disabled = true; btn.dataset.oldText = btn.textContent; btn.textContent = "جارٍ حفظ المسودة..."; }
         try {
             const res = await fetchJson(`/api/admin/task-bank/${encodeURIComponent(state.currentType)}/draft`, {
                 method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({config: configForSave()})
@@ -870,11 +874,15 @@
             await syncSelectedType(true);
         } catch (e) {
             toast(e.message || "فشل حفظ المسودة. راجع الاتصال أو صلاحيات المشرف.");
+        } finally {
+            if (btn) { btn.disabled = false; btn.textContent = btn.dataset.oldText || "💾 حفظ كمسودة"; }
         }
     }
     async function publish() {
         if (!state.currentType || !state.config) return toast("اختر نوع مهمة أولاً.");
         if (!confirm("سيتم نشر التعديلات لتظهر في صفحة المهام العادية. هل تريد المتابعة؟")) return;
+        const btn = $("publishTaskBankBtn");
+        if (btn) { btn.disabled = true; btn.dataset.oldText = btn.textContent; btn.textContent = "جارٍ النشر..."; }
         try {
             const res = await fetchJson(`/api/admin/task-bank/${encodeURIComponent(state.currentType)}`, {
                 method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({config: configForSave(), action: "v5.6.12_final_admin_editor_no_option_loss", clear_draft: true})
@@ -884,6 +892,8 @@
             await syncSelectedType(true);
         } catch (e) {
             toast(e.message || "فشل نشر التعديلات. راجع الاتصال أو صلاحيات المشرف.");
+        } finally {
+            if (btn) { btn.disabled = false; btn.textContent = btn.dataset.oldText || "🚀 نشر التعديلات"; }
         }
     }
     async function rollback(id) {

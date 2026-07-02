@@ -282,6 +282,13 @@
                 ${protectedOther ? '<small class="muted">خيار ثابت يفتح خانة مخصصة ولا يمكن حذفه أو إخفاؤه.</small>' : ''}
                 ${state.level === "type" ? '<small class="muted">يمكن ترتيب/إخفاء نوع الهدف من هنا، ولا يتم حذف أو إعادة تسمية البنك الأصلي.</small>' : ''}`;
             row.querySelector("input").addEventListener("change", e => renameOption(value, e.target.value));
+            row.querySelectorAll("button[data-act]").forEach(function (btn) {
+                btn.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    runOptionAction(btn.dataset.act, value, index);
+                });
+            });
             box.appendChild(row);
         });
     }
@@ -337,20 +344,22 @@
         markDirty(); refreshNative(state.level); renderEditor();
     }
 
-    function handleOptionAction(evt) {
-        const btn = evt.target.closest("button[data-act]");
-        if (!btn || btn.disabled) return;
-        const row = btn.closest(".admin-goal-option-row-v5615");
-        if (!row) return;
-        const value = row.dataset.value || "";
-        const index = parseInt(row.dataset.index || "0", 10);
-        const act = btn.dataset.act;
+    function runOptionAction(act, value, index) {
+        if (!act) return;
         if (act === "up") return moveOption(index, -1);
         if (act === "down") return moveOption(index, 1);
         if (act === "branches") return openBranchesModal(value);
         if (act === "copy") return copyBranches(value);
         if (act === "hide") return hideOption(value);
         if (act === "delete") return deleteOption(value);
+    }
+    function handleOptionAction(evt) {
+        const btn = evt.target.closest && evt.target.closest("button[data-act]");
+        if (!btn || btn.disabled) return;
+        evt.preventDefault();
+        const row = btn.closest(".admin-goal-option-row-v5615");
+        if (!row) return;
+        runOptionAction(btn.dataset.act, row.dataset.value || "", parseInt(row.dataset.index || "0", 10));
     }
     function renderHidden() {
         const box = $("adminGoalHiddenList"); if (!box) return;
@@ -552,21 +561,56 @@
         $("goalBranchesCopySourceSelect").innerHTML = getListForLevel(state.level).filter(v => v !== item && !isProtectedOther(v)).map(v => `<option value="${esc(v)}">${esc(label(v))}</option>`).join("");
         modal.hidden = false;
     }
+    function ensureSimpleModal(id, title) {
+        let modal = $(id);
+        if (modal) return modal;
+        modal = document.createElement("div");
+        modal.id = id;
+        modal.className = "admin-bank-modal-v5600 admin-goal-action-modal-v5617";
+        modal.hidden = true;
+        modal.innerHTML = `<div class="admin-bank-modal-card-v5600 admin-goal-action-card-v5617">
+            <h2>${esc(title)}</h2>
+            <p class="muted" data-role="hint"></p>
+            <div data-role="body"></div>
+            <div class="actions">
+                <button type="button" class="success" data-role="apply">حفظ</button>
+                <button type="button" class="small-button cancel" data-role="cancel">إلغاء</button>
+            </div>
+        </div>`;
+        document.body.appendChild(modal);
+        modal.querySelector('[data-role="cancel"]').addEventListener("click", () => modal.hidden = true);
+        return modal;
+    }
     function manualOrder() {
-        if (!EDITABLE_LEVELS.includes(state.level)) return toast("لا يتم ترتيب أنواع الأهداف من هنا حفاظاً على البنك الأصلي.");
-        const text = prompt("اكتب كل خيار في سطر مستقل بالترتيب المطلوب:", getListForLevel(state.level).join("\n"));
-        if (text === null) return;
-        setListForLevel(state.level, text.split(/\n+/).map(x => x.trim()).filter(Boolean));
+        if (!EDITABLE_LEVELS.includes(state.level)) return toast("هذا المستوى غير قابل للترتيب.");
+        const modal = ensureSimpleModal("goalManualOrderModal", "ترتيب يدوي");
+        modal.querySelector('[data-role="hint"]').textContent = `اكتب كل خيار في سطر مستقل لخانة: ${currentLabel(state.level)}. سيبقى خيار أخرى في النهاية تلقائياً.`;
+        modal.querySelector('[data-role="body"]').innerHTML = `<textarea id="goalManualOrderTextarea" rows="12"></textarea>`;
+        $("goalManualOrderTextarea").value = getListForLevel(state.level).join("\n");
+        modal.querySelector('[data-role="apply"]').onclick = function () {
+            setListForLevel(state.level, ($("goalManualOrderTextarea").value || "").split(/\n+/).map(x => x.trim()).filter(Boolean));
+            modal.hidden = true;
+        };
+        modal.hidden = false;
+        setTimeout(() => $("goalManualOrderTextarea")?.focus(), 20);
     }
     function editFieldLabel() {
         if (state.level === "type") return alert("اسم خانة نوع الهدف ثابت في النموذج حتى لا يختلط مع أنواع الأهداف الأصلية.");
         const current = currentLabel(state.level);
-        const next = normalize(prompt("اكتب اسم الخانة الجديد لهذا النوع فقط:", current));
-        if (!next || next === current) return;
-        if (!state.config.labels) state.config.labels = {};
-        state.config.labels[state.level] = next;
-        markDirty();
-        renderEditor();
+        const modal = ensureSimpleModal("goalFieldLabelModal", "تعديل اسم الخانة");
+        modal.querySelector('[data-role="hint"]').textContent = `هذا التغيير يخص نوع الهدف الحالي فقط: ${label(state.type)}.`;
+        modal.querySelector('[data-role="body"]').innerHTML = `<label>اسم الخانة الجديد</label><input id="goalFieldLabelInput" value="${esc(current)}">`;
+        modal.querySelector('[data-role="apply"]').onclick = function () {
+            const next = normalize($("goalFieldLabelInput")?.value);
+            if (!next || next === current) { modal.hidden = true; return; }
+            if (!state.config.labels) state.config.labels = {};
+            state.config.labels[state.level] = next;
+            modal.hidden = true;
+            markDirty();
+            renderEditor();
+        };
+        modal.hidden = false;
+        setTimeout(() => $("goalFieldLabelInput")?.focus(), 20);
     }
     function configForSave() { state.config = normalizeConfigOther(state.config || {}); return Object.assign({}, clone(state.config), { __edupathAdminFullConfig: true }); }
     function save(mode) {

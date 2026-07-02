@@ -9086,3 +9086,97 @@ body.dark-mode .coach-hero {
 .admin-goal-branch-row-v5616{display:grid;gap:8px;margin:10px 0;padding:10px;border:1px solid #dbe3ef;border-radius:12px;background:#fff}
 .admin-goal-branch-row-v5616 strong{color:#0f172a}
 @media (max-width: 720px){.admin-goal-row-actions-v5616{display:grid;grid-template-columns:1fr 1fr;width:100%}.admin-goal-row-actions-v5616 .small-button{width:100%}.admin-goal-per-branch-v5616{max-height:260px}}
+
+/* v5.6.17 — final professional adaptive admin controls for goals */
+.admin-real-controls-v5610 {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.07);
+}
+.admin-real-controls-v5610 .admin-current-field-head-v5610 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 12px;
+    border-radius: 18px;
+    background: #f1f5f9;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    margin: 12px 0;
+}
+.admin-real-controls-v5610 .admin-current-field-head-v5610 .actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.admin-goal-option-row-v5615 {
+    display: grid !important;
+    grid-template-columns: 42px minmax(180px, 1fr);
+    gap: 10px;
+    padding: 12px !important;
+    margin-bottom: 10px;
+    border-radius: 18px !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(148, 163, 184, 0.28) !important;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06) !important;
+}
+.admin-goal-option-row-v5615 .option-order-v5600 {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: #e0f2fe;
+    color: #0369a1;
+    font-weight: 900;
+}
+.admin-goal-option-row-v5615 input {
+    min-height: 38px;
+}
+.admin-goal-row-actions-v5616 {
+    grid-column: 1 / -1;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(120px, 1fr));
+    gap: 8px !important;
+    width: 100%;
+}
+.admin-goal-row-actions-v5616 .small-button {
+    width: 100%;
+    min-height: 36px;
+    border-radius: 12px;
+    white-space: normal;
+    line-height: 1.25;
+}
+.admin-goal-option-row-v5615 small {
+    grid-column: 1 / -1;
+    padding: 8px 10px;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+.admin-goal-action-modal-v5617,
+.admin-goal-add-modal-v5613,
+.admin-bank-modal-v5600 {
+    z-index: 9999;
+}
+.admin-goal-action-card-v5617 {
+    width: min(620px, calc(100vw - 24px));
+    max-height: calc(100vh - 24px);
+    overflow: auto;
+    border-radius: 20px;
+}
+.admin-goal-action-card-v5617 input,
+.admin-goal-action-card-v5617 textarea,
+.admin-goal-action-card-v5617 select {
+    width: 100%;
+    box-sizing: border-box;
+}
+@media (max-width: 900px) {
+    .admin-goal-row-actions-v5616 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+    .admin-goal-row-actions-v5616 { grid-template-columns: 1fr; }
+    .admin-real-controls-v5610 .admin-current-field-head-v5610 .actions,
+    .admin-real-controls-v5610 .admin-current-field-head-v5610 .actions button { width: 100%; }
+}
