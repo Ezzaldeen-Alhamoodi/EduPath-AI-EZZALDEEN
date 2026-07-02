@@ -60,10 +60,13 @@
         <div class="card home-card-ar-v513">
             <h2>رؤى التعلم</h2>
             {% if weak_skills %}
-                {% for skill, score in weak_skills %}
-                    <div class="weakness compact-weakness-ar-v513">
-                        <span>{{ skill|dashboard_ar }}</span>
-                        <div class="bar"><div style="width: {{ [score * 10, 100] | min }}%"></div></div>
+                {% for insight in weak_skills %}
+                    <div class="weakness compact-weakness-ar-v513 learning-insight-v5620">
+                        <div class="learning-insight-icon-v5620">{{ insight.emoji }}</div>
+                        <div class="learning-insight-body-v5620">
+                            <strong>{{ insight.skill|dashboard_ar }}</strong>
+                            <small>{{ insight.status }}{% if insight.completed %} · {{ insight.completed }} منجزة{% endif %}{% if insight.pending %} · {{ insight.pending }} قيد التنفيذ{% endif %}</small>
+                        </div>
                     </div>
                 {% endfor %}
             {% else %}

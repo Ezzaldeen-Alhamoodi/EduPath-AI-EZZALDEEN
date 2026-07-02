@@ -253,7 +253,7 @@ def detect_type(obj: Any, text: str, is_goal: bool) -> str:
     combined = normalize_text(text)
     domains = detect_domains(combined)
 
-    if contains_phrase(combined, "المرحلة الثانوية") or contains_phrase(category, "الثانوية") or "secondary" in category or "secondary_general" in domains:
+    if contains_phrase(combined, "المرحلة الثانوية") or contains_phrase(category, "الثانوية") or "secondary" in category or any(d.startswith("secondary_") for d in domains):
         return "secondary"
     if contains_phrase(combined, "المرحلة الجامعية") or contains_phrase(category, "جامعي") or "university" in category or any(d.startswith("university_") for d in domains):
         return "university"
@@ -313,6 +313,15 @@ def type_compatible(goal_sig: Dict[str, Any], task_sig: Dict[str, Any]) -> Tuple
     gt, tt = goal_sig["type"], task_sig["type"]
     if gt == tt:
         return True, 25, f"Type matched: {gt}"
+
+    # Allow a saved "عام" goal/task to match a specific adaptive area when both texts
+    # share a precise domain. This fixes real Arabic entries such as "إتقان الإحصاء"
+    # linked with "مقدمة في الإحصاء" without turning broad English into IELTS progress.
+    shared_domains = goal_sig["domains"] & task_sig["domains"]
+    if shared_domains and (gt == "general" or tt == "general"):
+        if goal_sig["domains"] & EXAM_DOMAINS and not (task_sig["domains"] & EXAM_DOMAINS):
+            return False, 0, "Rejected broad general task for exam goal"
+        return True, 18, "Allowed general/specific match because precise domain is shared"
 
     # Explicit safe relations.
     if gt == "exam" and tt == "language":
@@ -500,7 +509,7 @@ def calculate_progress_added_precise(task: Any, match_score: int, goal: Any = No
     real completed task whose match_score is at least 60. The caps keep long-term
     goals from reaching 100 too quickly while ensuring real linked work is visible.
     """
-    if match_score < 60:
+    if match_score < 55:
         return 0.0
 
     try:
@@ -525,8 +534,10 @@ def calculate_progress_added_precise(task: Any, match_score: int, goal: Any = No
         match_multiplier = 1.0
     elif match_score >= 70:
         match_multiplier = 0.75
-    else:
+    elif match_score >= 60:
         match_multiplier = 0.55
+    else:
+        match_multiplier = 0.45
 
     activity_text = normalize_text(" ".join([
         get_attr(task, "practice_type"),

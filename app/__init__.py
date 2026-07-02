@@ -6425,7 +6425,7 @@ def link_completed_task_to_goals(task):
     goals = Goal.query.filter_by(user_id=task.user_id).all()
     for goal in goals:
         score, reason = calculate_match_score(goal, task)
-        if score < 60:
+        if score < 55:
             continue
         progress_added = calculate_progress_added(task, score, goal)
         if progress_added <= 0:
@@ -6434,7 +6434,7 @@ def link_completed_task_to_goals(task):
         existing = GoalTaskLink.query.filter_by(goal_id=goal.id, task_id=task.id, user_id=task.user_id).first()
         if existing:
             existing.match_score = score
-            existing.match_reason = f"v5.6.19: {reason}"
+            existing.match_reason = f"v5.6.20: {reason}"
             existing.progress_added = progress_added
         else:
             db.session.add(GoalTaskLink(
@@ -6442,7 +6442,7 @@ def link_completed_task_to_goals(task):
                 task_id=task.id,
                 user_id=task.user_id,
                 match_score=score,
-                match_reason=f"v5.6.19: {reason}",
+                match_reason=f"v5.6.20: {reason}",
                 progress_added=progress_added,
                 is_confirmed_by_user=False,
             ))
@@ -6466,14 +6466,14 @@ def rebuild_goal_links_for_completed_tasks(goal):
         completed_tasks = StudyTask.query.filter_by(user_id=goal.user_id, status="done").all()
         for task in completed_tasks:
             score, reason = calculate_match_score(goal, task)
-            progress_added = calculate_progress_added(task, score, goal) if score >= 60 else 0.0
-            if score >= 60:
+            progress_added = calculate_progress_added(task, score, goal) if score >= 55 else 0.0
+            if score >= 55:
                 db.session.add(GoalTaskLink(
                     goal_id=goal.id,
                     task_id=task.id,
                     user_id=goal.user_id,
                     match_score=score,
-                    match_reason=f"v5.6.19: {reason}",
+                    match_reason=f"v5.6.20: {reason}",
                     progress_added=progress_added,
                     is_confirmed_by_user=False,
                 ))
@@ -6499,15 +6499,15 @@ def revalidate_existing_goal_links(goal, links):
 
         try:
             score, reason = calculate_match_score(goal, task)
-            progress_added = calculate_progress_added(task, score, goal) if score >= 60 else 0.0
+            progress_added = calculate_progress_added(task, score, goal) if score >= 55 else 0.0
 
-            if link.match_score != score or abs((link.progress_added or 0.0) - progress_added) > 0.0001 or not (link.match_reason or "").startswith("v5.6.19:"):
+            if link.match_score != score or abs((link.progress_added or 0.0) - progress_added) > 0.0001 or not (link.match_reason or "").startswith("v5.6.20:"):
                 link.match_score = score
-                link.match_reason = f"v5.6.19: {reason}"
+                link.match_reason = f"v5.6.20: {reason}"
                 link.progress_added = progress_added
                 changed = True
 
-            if score >= 60 and progress_added > 0:
+            if score >= 55 and progress_added > 0:
                 valid_links.append(link)
         except Exception:
             logger.exception("Precise revalidation failed for goal=%s task=%s", getattr(goal, "id", None), getattr(task, "id", None))
@@ -6559,12 +6559,21 @@ def calculate_goal_progress(goal):
 
         valid_links = revalidate_existing_goal_links(goal, links)
         if not valid_links:
+            # If old stored links were invalid or too broad, rebuild this one goal from
+            # the user's completed tasks once before giving up. This keeps legacy data
+            # from leaving active goals stuck at 0%.
+            completed_count = StudyTask.query.filter_by(user_id=goal.user_id, status="done").count()
+            if completed_count > 0:
+                rebuild_goal_links_for_completed_tasks(goal)
+                links = GoalTaskLink.query.filter_by(goal_id=goal.id, user_id=goal.user_id).all()
+                valid_links = revalidate_existing_goal_links(goal, links) if links else []
+        if not valid_links:
             return 0
 
         progress_points = sum(
             float(link.progress_added or 0)
             for link in valid_links
-            if link.task and link.task.status == "done" and link.match_score >= 60
+            if link.task and link.task.status == "done" and link.match_score >= 55
         )
         return max(0, min(100, int(round(progress_points))))
     except Exception:
@@ -7894,19 +7903,40 @@ def infer_skills(title, category="General"):
     return ["Planning", "Learning", "Practice", "Review", "Application"]
 
 def detect_weaknesses(user_id):
-    """Return learning insights for the current user's active work only.
+    """Return motivating learning insights for the current user.
 
-    Completed/deleted tasks are excluded because insights should show what still
-    needs focus now. Completed goals are also excluded by progress < 100.
+    Insights are not removed when a task becomes completed. Completion now increases
+    the insight signal; only deleted tasks disappear because they no longer exist.
+    The function stays user-scoped and excludes completed goals from goal-side hints.
     """
-    counts = {}
+    insights = {}
 
-    pending_tasks = StudyTask.query.filter_by(user_id=user_id, status="pending").all()
-    for task in pending_tasks:
-        key = (task.skill or task.topic or task.category or "عام").strip()
-        if not key:
-            continue
-        counts[key] = counts.get(key, 0) + max(1, int(task.priority or 1))
+    def _clean(value):
+        return (str(value or "").strip() or "عام")
+
+    def _entry(key):
+        key = _clean(key)
+        if key not in insights:
+            insights[key] = {
+                "skill": key,
+                "pending": 0,
+                "completed": 0,
+                "priority": 0,
+                "goal_boost": 0,
+            }
+        return insights[key]
+
+    tasks = StudyTask.query.filter(StudyTask.user_id == user_id).all()
+    for task in tasks:
+        key = _clean(task.skill or task.topic or task.category or task.title or "عام")
+        item = _entry(key)
+        weight = max(1, int(task.priority or 1))
+        if (task.status or "").strip().lower() == "done":
+            item["completed"] += 1
+            item["priority"] += max(1, weight // 2)
+        else:
+            item["pending"] += 1
+            item["priority"] += weight
 
     active_goals = Goal.query.filter_by(user_id=user_id).all()
     for goal in active_goals:
@@ -7914,12 +7944,45 @@ def detect_weaknesses(user_id):
         if progress >= 100:
             continue
         plan = parse_goal_plan(goal)
-        key = (plan.get("Goal Path") or plan.get("Goal Category") or goal.category or "").strip()
-        if key:
-            counts[key] = counts.get(key, 0) + 1
+        key = _clean(plan.get("Goal Path") or plan.get("Goal Category") or goal.category or goal.title)
+        item = _entry(key)
+        item["goal_boost"] += 1
+        item["priority"] += 1
 
-    sorted_items = sorted(counts.items(), key=lambda x: x[1], reverse=True)
-    return sorted_items[:5]
+    result = []
+    for item in insights.values():
+        total = item["pending"] + item["completed"]
+        if total <= 0 and item["goal_boost"] <= 0:
+            continue
+        if total > 0:
+            completion_ratio = item["completed"] / total
+        else:
+            completion_ratio = 0.0
+
+        # Emoji states replace the old progress bar: cold = no completed work yet,
+        # sprouting = early progress, fire = strong momentum.
+        if item["completed"] <= 0:
+            emoji = "🥶"
+            status = "بارد الآن — يحتاج بداية عملية"
+        elif completion_ratio < 0.5:
+            emoji = "🌱"
+            status = "بداية نمو — استمر"
+        else:
+            emoji = "🔥"
+            status = "نشاط قوي — تقدم ممتاز"
+
+        result.append({
+            "skill": item["skill"],
+            "score": item["priority"] + item["completed"] * 2 + item["goal_boost"],
+            "completed": item["completed"],
+            "pending": item["pending"],
+            "emoji": emoji,
+            "status": status,
+            "completion_ratio": int(round(completion_ratio * 100)),
+        })
+
+    result.sort(key=lambda x: (x["score"], x["completed"], x["pending"]), reverse=True)
+    return result[:5]
 
 
 def strip_json_fences(text):
