@@ -9079,3 +9079,10 @@ body.dark-mode .coach-hero {
         padding: 14px;
     }
 }
+
+/* v5.6.16 — stronger adaptive goal editor controls */
+.admin-goal-row-actions-v5616{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-start}
+.admin-goal-per-branch-v5616{margin-top:14px;padding:12px;border:1px solid #e5e7eb;border-radius:14px;background:#f8fafc;max-height:320px;overflow:auto}
+.admin-goal-branch-row-v5616{display:grid;gap:8px;margin:10px 0;padding:10px;border:1px solid #dbe3ef;border-radius:12px;background:#fff}
+.admin-goal-branch-row-v5616 strong{color:#0f172a}
+@media (max-width: 720px){.admin-goal-row-actions-v5616{display:grid;grid-template-columns:1fr 1fr;width:100%}.admin-goal-row-actions-v5616 .small-button{width:100%}.admin-goal-per-branch-v5616{max-height:260px}}

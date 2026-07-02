@@ -20,7 +20,7 @@
         { key: "target", label: "الحالة المستهدفة" },
         { key: "commitment", label: "الالتزام اليومي أو الأسبوعي" }
     ];
-    const EDITABLE_LEVELS = ["category", "path", "current", "target", "commitment"];
+    const EDITABLE_LEVELS = ["type", "category", "path", "current", "target", "commitment"];
 
     function $(id) { return document.getElementById(id); }
     function clone(obj) { try { return JSON.parse(JSON.stringify(obj || {})); } catch (e) { return {}; } }
@@ -91,7 +91,7 @@
         return { current: ["أخرى"], target: ["أخرى"], commitment: ["أخرى"] };
     }
     function getListForLevel(level) {
-        if (level === "type") return otherGuard(allTypeNames());
+        if (level === "type") return otherGuard((state.config && state.config.typeOrder && state.config.typeOrder.length ? state.config.typeOrder : allTypeNames()));
         if (level === "category") return otherGuard(selectValues("goalCategorySelect").length ? selectValues("goalCategorySelect") : (state.config.categories || ["أخرى"]));
         if (level === "path") {
             const p = selectedPath();
@@ -104,7 +104,7 @@
         return ["أخرى"];
     }
     function getRawList(level) {
-        if (level === "type") return otherGuard(allTypeNames());
+        if (level === "type") return otherGuard((state.config && state.config.typeOrder && state.config.typeOrder.length ? state.config.typeOrder : allTypeNames()));
         if (level === "category") return otherGuard(state.config.categories || selectValues("goalCategorySelect"));
         if (level === "path") {
             const cat = selectedPath().category || "أخرى";
@@ -121,7 +121,8 @@
     }
     function setListForLevel(level, list) {
         if (level === "type") {
-            toast("ترتيب/إخفاء أنواع الأهداف يظهر في أدوات الإدارة فقط حالياً، ولا يغيّر البنك الأصلي أو صفحة الأهداف.");
+            state.config.typeOrder = otherGuard(list).filter(v => !isProtectedOther(v));
+            markDirty();
             return renderEditor();
         }
         list = otherGuard(list);
@@ -144,7 +145,10 @@
         if (level === "path") return "current";
         return null;
     }
-    function currentLabel(level) { return (LEVELS.find(x => x.key === level) || {}).label || level; }
+    function currentLabel(level) {
+        const custom = state.config && state.config.labels && state.config.labels[level];
+        return custom || (LEVELS.find(x => x.key === level) || {}).label || level;
+    }
     function parseLines(text) { return otherGuard(String(text || "").split(/\n|،|,/).map(x => x.trim()).filter(Boolean)); }
     function setStateTriplet(cat, path, currentList, targetList, commitmentList) {
         if (!state.config.states) state.config.states = {};
@@ -158,6 +162,11 @@
     function setChildBranches(parentLevel, parentName, branches, extra) {
         branches = otherGuard(branches || []);
         const p = selectedPath();
+        if (parentLevel === "type") {
+            if (parentName !== state.type) { toast("يمكن إدارة تفرعات نوع الهدف الحالي فقط من هذه الصفحة."); return; }
+            state.config.categories = branches;
+            return;
+        }
         if (parentLevel === "category") {
             if (!state.config.paths) state.config.paths = {};
             state.config.paths[parentName] = branches;
@@ -169,7 +178,7 @@
         }
     }
     function childList(level, value) {
-        if (level === "type") return baseAll()[value]?.categories || ["أخرى"];
+        if (level === "type") return otherGuard((value === state.type ? state.config.categories : baseAll()[value]?.categories) || ["أخرى"]);
         if (level === "category") return otherGuard((state.config.paths || {})[value] || ["أخرى"]);
         if (level === "path") {
             const cat = selectedPath().category || "أخرى";
@@ -254,24 +263,25 @@
             const row = document.createElement("div");
             const protectedOther = isProtectedOther(value);
             row.className = "bank-option-row-v5600 admin-real-option-row-v5610 admin-goal-option-row-v5615";
+            row.dataset.value = value;
+            row.dataset.index = String(index);
             const canEdit = EDITABLE_LEVELS.includes(state.level) && !protectedOther;
+            const canRenameDelete = canEdit && state.level !== "type";
+            const canBranch = canEdit && !["commitment", "current", "target"].includes(state.level);
             row.innerHTML = `
                 <span class="option-order-v5600">${index + 1}</span>
-                <input value="${esc(value)}" aria-label="اسم الخيار" ${canEdit ? "" : "disabled"}>
-                <button type="button" class="small-button" data-act="up" ${canEdit ? "" : "disabled"}>↑ للأعلى</button>
-                <button type="button" class="small-button" data-act="down" ${canEdit ? "" : "disabled"}>↓ للأسفل</button>
-                <button type="button" class="small-button" data-act="branches" ${state.level === "commitment" || state.level === "current" || state.level === "target" ? "disabled" : ""}>إدارة التفرعات</button>
-                <button type="button" class="small-button" data-act="copy" ${state.level === "commitment" || state.level === "current" || state.level === "target" || protectedOther ? "disabled" : ""}>نسخ التفرعات</button>
-                <button type="button" class="small-button warning" data-act="hide" ${canEdit ? "" : "disabled"}>إخفاء آمن</button>
-                <button type="button" class="small-button danger" data-act="delete" ${canEdit ? "" : "disabled"}>حذف نهائي</button>
-                ${protectedOther ? '<small class="muted">خيار ثابت يفتح خانة مخصصة ولا يمكن حذفه أو إخفاؤه.</small>' : ''}`;
+                <input value="${esc(value)}" aria-label="اسم الخيار" ${canRenameDelete ? "" : "disabled"}>
+                <div class="admin-goal-row-actions-v5616">
+                    <button type="button" class="small-button" data-act="up" ${canEdit ? "" : "disabled"}>↑ للأعلى</button>
+                    <button type="button" class="small-button" data-act="down" ${canEdit ? "" : "disabled"}>↓ للأسفل</button>
+                    <button type="button" class="small-button" data-act="branches" ${canBranch ? "" : "disabled"}>إدارة التفرعات</button>
+                    <button type="button" class="small-button" data-act="copy" ${canBranch ? "" : "disabled"}>نسخ التفرعات</button>
+                    <button type="button" class="small-button warning" data-act="hide" ${canEdit ? "" : "disabled"}>إخفاء آمن</button>
+                    <button type="button" class="small-button danger" data-act="delete" ${canRenameDelete ? "" : "disabled"}>حذف نهائي</button>
+                </div>
+                ${protectedOther ? '<small class="muted">خيار ثابت يفتح خانة مخصصة ولا يمكن حذفه أو إخفاؤه.</small>' : ''}
+                ${state.level === "type" ? '<small class="muted">يمكن ترتيب/إخفاء نوع الهدف من هنا، ولا يتم حذف أو إعادة تسمية البنك الأصلي.</small>' : ''}`;
             row.querySelector("input").addEventListener("change", e => renameOption(value, e.target.value));
-            row.querySelector('[data-act="up"]').addEventListener("click", () => moveOption(index, -1));
-            row.querySelector('[data-act="down"]').addEventListener("click", () => moveOption(index, 1));
-            row.querySelector('[data-act="branches"]').addEventListener("click", () => openBranchesModal(value));
-            row.querySelector('[data-act="copy"]').addEventListener("click", () => copyBranches(value));
-            row.querySelector('[data-act="hide"]').addEventListener("click", () => hideOption(value));
-            row.querySelector('[data-act="delete"]').addEventListener("click", () => deleteOption(value));
             box.appendChild(row);
         });
     }
@@ -293,7 +303,7 @@
         setListForLevel(state.level, list);
     }
     function hideOption(item) {
-        if (!EDITABLE_LEVELS.includes(state.level)) return toast("نوع الهدف لا يُخفى من هنا حتى لا يتغير البنك الأصلي.");
+        if (!EDITABLE_LEVELS.includes(state.level)) return toast("هذا المستوى غير قابل للإخفاء.");
         if (isProtectedOther(item)) { alert('لا يمكن إخفاء خيار "أخرى" لأنه يجب أن يبقى متاحاً دائماً في آخر القائمة.'); return; }
         if (!confirm(`إخفاء آمن للخيار: ${item}؟`)) return;
         if (!state.config.hiddenByPath) state.config.hiddenByPath = {};
@@ -310,7 +320,7 @@
         setListForLevel(state.level, getRawList(state.level).filter(x => x !== item));
     }
     function moveOption(index, dir) {
-        if (!EDITABLE_LEVELS.includes(state.level)) return toast("ترتيب أنواع الأهداف من هنا للمعاينة فقط حتى لا يتغير البنك الأصلي.");
+        if (!EDITABLE_LEVELS.includes(state.level)) return toast("هذا المستوى غير قابل للترتيب.");
         const list = getRawList(state.level);
         if (isProtectedOther(list[index])) { alert('خيار "أخرى" ثابت في آخر القائمة ولا يمكن تحريكه.'); return; }
         const target = index + dir;
@@ -325,6 +335,22 @@
         if (!src || !siblings.includes(src)) return toast("لم يتم اختيار مصدر صحيح.");
         setChildBranches(state.level, item, childList(state.level, src), { current: stateBox(state.config, false, selectedPath().category, src).current, target: stateBox(state.config, false, selectedPath().category, src).target, commitment: stateBox(state.config, false, selectedPath().category, src).commitment });
         markDirty(); refreshNative(state.level); renderEditor();
+    }
+
+    function handleOptionAction(evt) {
+        const btn = evt.target.closest("button[data-act]");
+        if (!btn || btn.disabled) return;
+        const row = btn.closest(".admin-goal-option-row-v5615");
+        if (!row) return;
+        const value = row.dataset.value || "";
+        const index = parseInt(row.dataset.index || "0", 10);
+        const act = btn.dataset.act;
+        if (act === "up") return moveOption(index, -1);
+        if (act === "down") return moveOption(index, 1);
+        if (act === "branches") return openBranchesModal(value);
+        if (act === "copy") return copyBranches(value);
+        if (act === "hide") return hideOption(value);
+        if (act === "delete") return deleteOption(value);
     }
     function renderHidden() {
         const box = $("adminGoalHiddenList"); if (!box) return;
@@ -343,6 +369,75 @@
         if ($("goalNewOptionEmptyCount")) $("goalNewOptionEmptyCount").style.display = mode === "empty" ? "block" : "none";
         const trip = $("goalAddStateTripletPanel");
         if (trip) trip.style.display = (state.level === "category" || state.level === "path") && child ? "grid" : "none";
+        refreshGoalPerBranchDesigner();
+    }
+
+    function ensureGoalPerBranchDesigner() {
+        let box = $("goalPerBranchDesigner");
+        const panel = $("goalAddStateTripletPanel");
+        if (!panel) return null;
+        if (!box) {
+            box = document.createElement("div");
+            box.id = "goalPerBranchDesigner";
+            box.className = "admin-goal-per-branch-v5616";
+            box.innerHTML = `<h3>تفصيل تكيفي لكل تفرع</h3><p class="muted">اختياري: اكتب الحالات الحالية والمستهدفة والالتزامات لكل تفرع بشكل مستقل. إذا تركت حقلاً فارغاً سيستخدم القيم العامة أعلاه.</p><div id="goalPerBranchRows"></div>`;
+            panel.parentNode.insertBefore(box, panel.nextSibling);
+        }
+        return box;
+    }
+    function manualBranchNamesForDesigner() {
+        const mode = $("goalNewOptionBranchMode")?.value || "manual";
+        if (mode === "manual") return parseLines($("goalNewOptionBranches")?.value || "").filter(v => !isProtectedOther(v));
+        if (mode === "empty") {
+            const count = Math.max(0, parseInt($("goalNewOptionEmptyCount")?.value || "0", 10));
+            return Array.from({ length: count }, (_, i) => `تفرع جديد ${i + 1}`);
+        }
+        if (mode === "copy") return childList(state.level, $("goalNewOptionCopySource")?.value || "").filter(v => !isProtectedOther(v));
+        return [];
+    }
+    function buildGoalPerBranchDesigner(names) {
+        const box = ensureGoalPerBranchDesigner();
+        if (!box) return;
+        const rows = $("goalPerBranchRows");
+        if (!rows) return;
+        if (!(state.level === "category" || state.level === "path") || !childLevel(state.level)) { box.style.display = "none"; return; }
+        box.style.display = "block";
+        const existing = {};
+        rows.querySelectorAll("[data-branch]").forEach(row => {
+            existing[row.dataset.branch] = {
+                current: row.querySelector('[data-kind="current"]')?.value || "",
+                target: row.querySelector('[data-kind="target"]')?.value || "",
+                commitment: row.querySelector('[data-kind="commitment"]')?.value || ""
+            };
+        });
+        rows.innerHTML = "";
+        (names || []).forEach(name => {
+            const old = existing[name] || {};
+            const row = document.createElement("div");
+            row.className = "admin-goal-branch-row-v5616";
+            row.dataset.branch = name;
+            row.innerHTML = `<strong>${esc(name)}</strong>
+                <label>الحالة الحالية لهذا التفرع</label><textarea data-kind="current" rows="2" placeholder="كل خيار في سطر">${esc(old.current || "")}</textarea>
+                <label>الحالة المستهدفة لهذا التفرع</label><textarea data-kind="target" rows="2" placeholder="كل خيار في سطر">${esc(old.target || "")}</textarea>
+                <label>الالتزام لهذا التفرع</label><textarea data-kind="commitment" rows="2" placeholder="كل خيار في سطر">${esc(old.commitment || "")}</textarea>`;
+            rows.appendChild(row);
+        });
+        if (!names.length) rows.innerHTML = '<p class="muted">اكتب التفرعات أولاً ليظهر لكل تفرع إعداداته الخاصة.</p>';
+    }
+    function refreshGoalPerBranchDesigner() { buildGoalPerBranchDesigner(manualBranchNamesForDesigner()); }
+    function perBranchTriplets() {
+        const out = {};
+        const rows = $("goalPerBranchRows");
+        if (!rows) return out;
+        rows.querySelectorAll("[data-branch]").forEach(row => {
+            const name = row.dataset.branch;
+            out[name] = {
+                current: parseLines(row.querySelector('[data-kind="current"]')?.value || ""),
+                target: parseLines(row.querySelector('[data-kind="target"]')?.value || ""),
+                commitment: parseLines(row.querySelector('[data-kind="commitment"]')?.value || "")
+            };
+        });
+        return out;
     }
     function openAddModal() {
         if (!EDITABLE_LEVELS.includes(state.level)) { toast("إضافة نوع هدف جديد تحتاج تحديثاً عاماً للبنك، لذلك أضف الخيارات داخل نوع هدف محدد من التبويبات الأخرى."); return; }
@@ -359,6 +454,7 @@
         $("goalNewOptionCurrentBranches").value = "أخرى";
         $("goalNewOptionTargetBranches").value = "أخرى";
         $("goalNewOptionCommitmentBranches").value = "أخرى";
+        buildGoalPerBranchDesigner([]);
         $("goalNewOptionPosition").value = "end";
         $("goalNewOptionBranchMode").value = child ? "manual" : "empty";
         $("goalNewOptionEmptyCount").value = child ? "1" : "0";
@@ -387,11 +483,22 @@
                 const count = Math.max(0, parseInt($("goalNewOptionEmptyCount")?.value || "0", 10));
                 branches = Array.from({ length: count }, (_, i) => `تفرع جديد ${i + 1}`);
             } else branches = parseLines($("goalNewOptionBranches")?.value || "");
-            setChildBranches(level, name, branches, {
+            const common = {
                 current: parseLines($("goalNewOptionCurrentBranches")?.value || ""),
                 target: parseLines($("goalNewOptionTargetBranches")?.value || ""),
                 commitment: parseLines($("goalNewOptionCommitmentBranches")?.value || "")
-            });
+            };
+            setChildBranches(level, name, branches, common);
+            const detailed = perBranchTriplets();
+            if (level === "category") {
+                branches.filter(x => !isProtectedOther(x)).forEach(branch => {
+                    const d = detailed[branch] || {};
+                    setStateTriplet(name, branch, d.current && d.current.length ? d.current : common.current, d.target && d.target.length ? d.target : common.target, d.commitment && d.commitment.length ? d.commitment : common.commitment);
+                });
+            } else if (level === "path") {
+                const d = detailed[name] || {};
+                setStateTriplet(selectedPath().category || "أخرى", name, d.current && d.current.length ? d.current : common.current, d.target && d.target.length ? d.target : common.target, d.commitment && d.commitment.length ? d.commitment : common.commitment);
+            }
         }
         setListForLevel(level, list);
         closeAddModal();
@@ -451,7 +558,16 @@
         if (text === null) return;
         setListForLevel(state.level, text.split(/\n+/).map(x => x.trim()).filter(Boolean));
     }
-    function editFieldLabel() { alert("أسماء خانات الأهداف الافتراضية بقيت كما هي. يمكن إضافة تخصيص labels لاحقاً دون تغيير البنك الأصلي."); }
+    function editFieldLabel() {
+        if (state.level === "type") return alert("اسم خانة نوع الهدف ثابت في النموذج حتى لا يختلط مع أنواع الأهداف الأصلية.");
+        const current = currentLabel(state.level);
+        const next = normalize(prompt("اكتب اسم الخانة الجديد لهذا النوع فقط:", current));
+        if (!next || next === current) return;
+        if (!state.config.labels) state.config.labels = {};
+        state.config.labels[state.level] = next;
+        markDirty();
+        renderEditor();
+    }
     function configForSave() { state.config = normalizeConfigOther(state.config || {}); return Object.assign({}, clone(state.config), { __edupathAdminFullConfig: true }); }
     function save(mode) {
         if (!state.type) return toast("اختر نوع هدف أولاً.");
@@ -476,11 +592,15 @@
     }
     function attach() {
         ["goalTypeSelect", "goalCategorySelect", "goalPathSelect", "currentStateSelect", "targetStateSelect", "commitmentSelect"].forEach(id => { const el = $(id); if (el) el.addEventListener("change", () => setTimeout(syncTypeFromForm, 50)); });
+        $("adminGoalOptionsList")?.addEventListener("click", handleOptionAction);
         $("addGoalOptionBtn")?.addEventListener("click", openAddModal);
         $("closeGoalAddOptionBtn")?.addEventListener("click", closeAddModal);
         $("applyGoalAddOptionBtn")?.addEventListener("click", applyAddOption);
         $("goalNewOptionBranchMode")?.addEventListener("change", refreshAddModalMode);
         $("goalNewOptionPosition")?.addEventListener("change", refreshAddModalMode);
+        $("goalNewOptionBranches")?.addEventListener("input", refreshGoalPerBranchDesigner);
+        $("goalNewOptionEmptyCount")?.addEventListener("input", refreshGoalPerBranchDesigner);
+        $("goalNewOptionCopySource")?.addEventListener("change", refreshGoalPerBranchDesigner);
         $("manualOrderGoalBtn")?.addEventListener("click", manualOrder);
         $("editGoalFieldLabelBtn")?.addEventListener("click", editFieldLabel);
         $("saveDraftGoalBankBtn")?.addEventListener("click", () => save("draft"));
