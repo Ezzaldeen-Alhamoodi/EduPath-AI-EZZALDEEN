@@ -4879,7 +4879,7 @@ def create_app():
 
         progress = max(0, min(100, progress))
 
-        weak_skills = detect_weaknesses()
+        weak_skills = detect_weaknesses(current_user.id)
         admin_messages = []
         unread_admin_messages = 0
 
@@ -5109,6 +5109,8 @@ def create_app():
     @login_required
     def mark_task_done(task_id):
         task = StudyTask.query.filter_by(id=task_id, user_id=current_user.id).first_or_404()
+        # Remove old smart links first so a changed task is re-linked cleanly.
+        GoalTaskLink.query.filter_by(task_id=task.id, user_id=current_user.id).delete(synchronize_session=False)
         task.status = "done"
         task.review_count += 1
         task.last_reviewed = current_app_local_date().isoformat()
@@ -5137,6 +5139,7 @@ def create_app():
     def mark_task_pending(task_id):
         task = StudyTask.query.filter_by(id=task_id, user_id=current_user.id).first_or_404()
         task.status = "pending"
+        GoalTaskLink.query.filter_by(task_id=task.id, user_id=current_user.id).delete(synchronize_session=False)
         db.session.commit()
         flash("تمت إعادة المهمة إلى قيد التنفيذ.", "success")
         return redirect(url_for("tasks"))
@@ -5145,6 +5148,7 @@ def create_app():
     @login_required
     def delete_task(task_id):
         task = StudyTask.query.filter_by(id=task_id, user_id=current_user.id).first_or_404()
+        GoalTaskLink.query.filter_by(task_id=task.id, user_id=current_user.id).delete(synchronize_session=False)
         db.session.delete(task)
         db.session.commit()
         flash("تم حذف المهمة.", "success")
@@ -6408,8 +6412,15 @@ def calculate_progress_added(task, match_score, goal=None):
 
 
 def link_completed_task_to_goals(task):
-    if task.status != "done":
+    """Link one completed task to the current user's active goals.
+
+    Only completed tasks can create progress. Existing links for the same task are
+    refreshed by callers before this function runs, and this function also avoids
+    duplicate links defensively.
+    """
+    if not task or task.status != "done":
         return []
+
     linked = []
     goals = Goal.query.filter_by(user_id=task.user_id).all()
     for goal in goals:
@@ -6417,25 +6428,31 @@ def link_completed_task_to_goals(task):
         if score < 60:
             continue
         progress_added = calculate_progress_added(task, score, goal)
-        existing = GoalTaskLink.query.filter_by(goal_id=goal.id, task_id=task.id).first()
+        if progress_added <= 0:
+            continue
+
+        existing = GoalTaskLink.query.filter_by(goal_id=goal.id, task_id=task.id, user_id=task.user_id).first()
         if existing:
-            existing.match_score = max(existing.match_score, score)
-            existing.match_reason = f"v5.5.142: {reason}"
-            existing.progress_added = max(existing.progress_added, progress_added)
+            existing.match_score = score
+            existing.match_reason = f"v5.6.19: {reason}"
+            existing.progress_added = progress_added
         else:
             db.session.add(GoalTaskLink(
                 goal_id=goal.id,
                 task_id=task.id,
                 user_id=task.user_id,
                 match_score=score,
-                match_reason=f"v5.5.142: {reason}",
+                match_reason=f"v5.6.19: {reason}",
                 progress_added=progress_added,
                 is_confirmed_by_user=False,
             ))
+        logger.info(
+            "Goal link: goal=%s task=%s score=%s progress=%s reason=%s",
+            goal.id, task.id, score, progress_added, reason[:180]
+        )
         linked.append((goal, score, reason))
     db.session.commit()
     return linked
-
 
 
 def rebuild_goal_links_for_completed_tasks(goal):
@@ -6456,7 +6473,7 @@ def rebuild_goal_links_for_completed_tasks(goal):
                     task_id=task.id,
                     user_id=goal.user_id,
                     match_score=score,
-                    match_reason=f"v5.5.142: {reason}",
+                    match_reason=f"v5.6.19: {reason}",
                     progress_added=progress_added,
                     is_confirmed_by_user=False,
                 ))
@@ -6484,9 +6501,9 @@ def revalidate_existing_goal_links(goal, links):
             score, reason = calculate_match_score(goal, task)
             progress_added = calculate_progress_added(task, score, goal) if score >= 60 else 0.0
 
-            if link.match_score != score or abs((link.progress_added or 0.0) - progress_added) > 0.0001 or not (link.match_reason or "").startswith("v5.5.142:"):
+            if link.match_score != score or abs((link.progress_added or 0.0) - progress_added) > 0.0001 or not (link.match_reason or "").startswith("v5.6.19:"):
                 link.match_score = score
-                link.match_reason = f"v5.5.142: {reason}"
+                link.match_reason = f"v5.6.19: {reason}"
                 link.progress_added = progress_added
                 changed = True
 
@@ -6522,14 +6539,21 @@ def extract_goal_milestones(goal):
 
 
 def calculate_goal_progress(goal):
-    """Progress is based on precisely-linked completed tasks only.
+    """Calculate progress from completed tasks linked to this goal.
 
-    It revalidates stored links so old broad links cannot inflate the progress bar, but it
-    does not scan all completed tasks when opening the dashboard. New links are built when
-    a task is completed or when a goal/task is edited.
+    If an old goal has no stored links, a lightweight one-goal backfill is run only
+    when that user already has completed tasks. Time remaining only changes the
+    weight of real linked work; no linked completed tasks still means 0%.
     """
     try:
-        links = GoalTaskLink.query.filter_by(goal_id=goal.id).all()
+        links = GoalTaskLink.query.filter_by(goal_id=goal.id, user_id=goal.user_id).all()
+
+        if not links:
+            completed_count = StudyTask.query.filter_by(user_id=goal.user_id, status="done").count()
+            if completed_count > 0:
+                rebuild_goal_links_for_completed_tasks(goal)
+                links = GoalTaskLink.query.filter_by(goal_id=goal.id, user_id=goal.user_id).all()
+
         if not links:
             return 0
 
@@ -6537,8 +6561,12 @@ def calculate_goal_progress(goal):
         if not valid_links:
             return 0
 
-        progress_points = sum(link.progress_added for link in valid_links if link.task and link.task.status == "done" and link.match_score >= 60)
-        return min(100, int(progress_points * 10))
+        progress_points = sum(
+            float(link.progress_added or 0)
+            for link in valid_links
+            if link.task and link.task.status == "done" and link.match_score >= 60
+        )
+        return max(0, min(100, int(round(progress_points))))
     except Exception:
         logger.exception("Smart goal progress calculation failed")
         return 0
@@ -7865,17 +7893,33 @@ def infer_skills(title, category="General"):
 
     return ["Planning", "Learning", "Practice", "Review", "Application"]
 
-def detect_weaknesses():
-    pending = StudyTask.query.filter_by(status="pending").all()
+def detect_weaknesses(user_id):
+    """Return learning insights for the current user's active work only.
+
+    Completed/deleted tasks are excluded because insights should show what still
+    needs focus now. Completed goals are also excluded by progress < 100.
+    """
     counts = {}
 
-    for task in pending:
-        key = task.skill or task.category or "General"
-        counts[key] = counts.get(key, 0) + (task.priority or 1)
+    pending_tasks = StudyTask.query.filter_by(user_id=user_id, status="pending").all()
+    for task in pending_tasks:
+        key = (task.skill or task.topic or task.category or "عام").strip()
+        if not key:
+            continue
+        counts[key] = counts.get(key, 0) + max(1, int(task.priority or 1))
+
+    active_goals = Goal.query.filter_by(user_id=user_id).all()
+    for goal in active_goals:
+        progress = calculate_goal_progress(goal)
+        if progress >= 100:
+            continue
+        plan = parse_goal_plan(goal)
+        key = (plan.get("Goal Path") or plan.get("Goal Category") or goal.category or "").strip()
+        if key:
+            counts[key] = counts.get(key, 0) + 1
 
     sorted_items = sorted(counts.items(), key=lambda x: x[1], reverse=True)
     return sorted_items[:5]
-
 
 
 def strip_json_fences(text):

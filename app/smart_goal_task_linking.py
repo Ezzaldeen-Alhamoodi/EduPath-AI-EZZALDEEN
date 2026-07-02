@@ -45,7 +45,7 @@ AI_DOMAINS = {
 
 DOMAIN_ALIASES: Dict[str, List[str]] = {
     # Exams
-    "ielts": ["ielts", "ايلتس", "آيلتس", "academic ielts", "reading ielts", "listening ielts", "writing task 1", "writing task 2", "speaking part 1", "speaking part 2", "speaking part 3", "band score", "band descriptors", "نموذج ايلتس", "اختبار ايلتس"],
+    "ielts": ["ielts", "ايلتس", "آيلتس", "academic ielts", "ielts reading", "reading ielts", "ielts listening", "listening ielts", "ielts writing", "ielts speaking", "writing task 1", "writing task 2", "speaking part 1", "speaking part 2", "speaking part 3", "band score", "band descriptors", "mock test", "نموذج ايلتس", "اختبار ايلتس", "قراءة ايلتس", "استماع ايلتس", "كتابة ايلتس", "محادثة ايلتس"],
     "toefl": ["toefl", "توفل", "reading toefl", "listening toefl", "speaking toefl", "writing toefl", "academic discussion", "integrated writing", "toefl mock"],
     "duolingo": ["duolingo english test", "duolingo", "det", "دولينجو", "interactive reading", "interactive listening", "interactive writing", "interactive speaking", "read and select", "listen and type", "writing sample", "speaking sample"],
     "csca": ["csca", "cs ca", "اختبار csca", "csca physics", "csca chemistry", "csca mathematics", "csca math"],
@@ -55,18 +55,18 @@ DOMAIN_ALIASES: Dict[str, List[str]] = {
     "hsk": ["hsk"],
 
     # Languages
-    "english_general": ["english", "الانجليزيه", "اللغة الانجليزية", "انجليزي", "grammar", "vocabulary", "reading", "writing", "listening", "speaking", "pronunciation", "translation", "القواعد", "المفردات", "القراءه", "الكتابه", "الاستماع", "المحادثه", "النطق", "الترجمه"],
+    "english_general": ["english", "الانجليزيه", "اللغة الانجليزية", "اللغة الإنجليزية", "انجليزي", "grammar", "vocabulary", "reading", "writing", "listening", "speaking", "pronunciation", "translation", "القواعد", "المفردات", "القراءه", "القراءة", "الكتابه", "الكتابة", "الاستماع", "المحادثه", "المحادثة", "النطق", "الترجمه", "الترجمة", "المهارة اللغوية"],
     "arabic_language": ["العربيه", "اللغة العربية", "نحو", "صرف", "بلاغه", "ادب", "قراءه", "تعبير", "املاء"],
 
     # Quran / Islamic
-    "quran_memorization": ["قران", "القران", "حفظ", "تسميع", "تجويد", "تلاوه", "سوره", "ايات", "ايه", "جزء", "مصحف", "تفسير", "المتشابهات", "الوقف والابتداء", "مراجعة محفوظ", "اختبار حفظ"],
+    "quran_memorization": ["قران", "قرآن", "القران", "القرآن", "نوع المتابعة القرآنية", "السورة أو مجال المتابعة", "المقطع أو الآيات المحددة", "حفظ", "حفظ جديد", "مراجعة", "تسميع", "تجويد", "تلاوه", "تلاوة", "سوره", "سورة", "السورة كاملة", "ايات", "آيات", "آيات محددة", "ايه", "آية", "جزء", "مصحف", "تفسير", "تفسير مبسط", "المتشابهات", "الوقف والابتداء", "مراجعة محفوظ", "اختبار حفظ"],
     "islamic_studies": ["التربيه الاسلاميه", "اسلاميه", "ايمان", "حديث", "فقه", "سيره"],
 
     # Secondary school subjects and topics
     "secondary_general": ["المرحله الثانويه", "الصف الاول الثانوي", "الصف الثاني الثانوي", "الصف الثالث الثانوي", "ثانوي"],
-    "secondary_math": ["رياضيات", "الرياضيات", "جبر", "هندسه", "دوال", "معادلات", "احتمالات", "احصاء"],
-    "secondary_calculus": ["تفاضل", "تكامل", "مشتقه", "المشتقه", "نهايات", "اتصال", "قواعد الاشتقاق", "تطبيقات المشتقه", "المساحه تحت المنحني"],
-    "secondary_statistics": ["احصاء", "احتمالات", "المتوسط", "الوسيط", "المنوال", "انحراف معياري", "تباديل", "توافيق"],
+    "secondary_math": ["رياضيات", "الرياضيات", "المادة الدراسية", "فرع الرياضيات", "جبر", "هندسه", "هندسة", "دوال", "معادلات", "حل مسائل", "حل تمارين", "احتمالات", "احصاء", "إحصاء"],
+    "secondary_calculus": ["تفاضل", "تكامل", "مشتقه", "مشتقة", "المشتقه", "المشتقة", "نهايات", "اتصال", "قواعد الاشتقاق", "تطبيقات المشتقه", "تطبيقات المشتقة", "المساحه تحت المنحني", "المساحة تحت المنحنى"],
+    "secondary_statistics": ["احصاء", "إحصاء", "الاحصاء", "الإحصاء", "احتمالات", "المتوسط", "الوسيط", "المنوال", "انحراف معياري", "تباين", "تباديل", "توافيق"],
     "secondary_physics": ["فيزياء", "الفيزياء", "قوانين نيوتن", "حركه", "قوي", "شغل", "طاقه", "زخم", "كهرباء", "دوائر كهربائيه", "مغناطيسيه", "موجات", "صوت", "ضوء", "عدسات", "مرايا"],
     "secondary_chemistry": ["كيمياء", "الكيمياء", "المعادلات الكيميائيه", "المول", "المحاليل", "احماض", "قواعد", "اكسده", "اختزال", "اتزان كيميائي", "الكيمياء العضويه"],
     "secondary_biology": ["احياء", "الاحياء", "الخليه", "الانسجه", "التغذيه", "التنفس", "الدوران", "الاخراج", "الجهاز العصبي", "الوراثه", "dna", "الجينات", "المناعه"],
@@ -83,7 +83,7 @@ DOMAIN_ALIASES: Dict[str, List[str]] = {
     "university_medicine": ["طب", "الطب", "طب بشري", "medicine", "medical"],
 
     # Programming
-    "python_basics": ["python", "بايثون", "syntax", "variables", "functions", "loops", "oop", "اساسيات بايثون"],
+    "python_basics": ["python", "بايثون", "syntax", "variables", "functions", "loops", "oop", "اساسيات بايثون", "أساسيات بايثون", "المجال التقني", "المسار أو التقنية"],
     "flask": ["flask", "فلاسك", "routes", "templates", "jinja", "sqlalchemy", "web backend"],
     "django": ["django"],
     "nodejs": ["node.js", "nodejs", "express"],
@@ -105,8 +105,8 @@ DOMAIN_ALIASES: Dict[str, List[str]] = {
     "secure_coding": ["secure coding", "security", "owasp"],
 
     # AI
-    "ai_general": ["artificial intelligence", "الذكاء الاصطناعي", "ai fundamentals"],
-    "machine_learning": ["machine learning", "تعلم الاله", "ml", "scikit-learn", "model training"],
+    "ai_general": ["artificial intelligence", "الذكاء الاصطناعي", "مجال الذكاء الاصطناعي", "ai fundamentals", "prompt engineering", "هندسة الأوامر"],
+    "machine_learning": ["machine learning", "تعلم الاله", "تعلم الآلة", "ml", "scikit-learn", "model training", "تدريب النموذج"],
     "regression": ["regression", "linear regression", "logistic regression", "الانحدار"],
     "classification": ["classification", "classification metrics", "تصنيف", "confusion matrix", "precision", "recall", "f1"],
     "clustering": ["clustering", "k-means"],
@@ -120,9 +120,9 @@ DOMAIN_ALIASES: Dict[str, List[str]] = {
     "llms": ["llm", "llms", "large language model", "language models"],
     "prompt_engineering": ["prompt engineering", "prompts"],
     "generative_ai": ["generative ai", "text generation", "image generation"],
-    "embeddings": ["embeddings", "embedding", "vectors"],
-    "vector_search": ["vector search", "semantic search", "vector database"],
-    "rag": ["rag", "retrieval augmented generation", "retrieval", "retrieved context", "مصادر", "استرجاع", "vector search", "embeddings"],
+    "embeddings": ["embeddings", "embedding", "vectors", "تضمينات"],
+    "vector_search": ["vector search", "semantic search", "vector database", "بحث متجهي"],
+    "rag": ["rag", "retrieval augmented generation", "retrieval", "retrieved context", "مصادر", "استرجاع", "vector search", "embeddings", "توليد معزز بالاسترجاع"],
     "fine_tuning": ["fine-tuning", "finetuning", "fine tuning"],
     "ai_agents": ["ai agents", "agents", "tools"],
     "multimodal_ai": ["multimodal", "vision language"],
@@ -494,50 +494,87 @@ def precise_context_score(goal: Any, task: Any, legacy_score: int = 0, legacy_re
 
 
 def calculate_progress_added_precise(task: Any, match_score: int, goal: Any = None) -> float:
-    """Conservative, fast progress calculation.
+    """Return direct percentage-like progress points for one completed linked task.
 
-    Less than 60 adds no progress. 60-79 adds a little. 80+ adds clear progress.
-    Longer goals progress more conservatively.
+    Time remaining never creates progress by itself; it only adjusts the weight of a
+    real completed task whose match_score is at least 60. The caps keep long-term
+    goals from reaching 100 too quickly while ensuring real linked work is visible.
     """
+    if match_score < 60:
+        return 0.0
+
     try:
         minutes = int(get_attr(task, "estimated_minutes") or 30)
     except Exception:
         minutes = 30
 
-    time_weight = min(1.5, max(0.15, minutes / 60.0))
+    if minutes < 20:
+        time_weight = 0.5
+    elif minutes < 45:
+        time_weight = 0.8
+    elif minutes < 90:
+        time_weight = 1.1
+    elif minutes < 150:
+        time_weight = 1.4
+    else:
+        time_weight = 1.7
 
-    if match_score >= 80:
+    if match_score >= 90:
+        match_multiplier = 1.25
+    elif match_score >= 80:
         match_multiplier = 1.0
-    elif match_score >= 60:
-        match_multiplier = 0.5
+    elif match_score >= 70:
+        match_multiplier = 0.75
     else:
-        return 0.0
+        match_multiplier = 0.55
 
-    # Activity intensity.
-    activity_text = normalize_text(get_attr(task, "practice_type") + " " + get_attr(task, "title"))
+    activity_text = normalize_text(" ".join([
+        get_attr(task, "practice_type"),
+        get_attr(task, "title"),
+        get_attr(task, "skill"),
+        get_attr(task, "topic"),
+        get_attr(task, "notes"),
+    ]))
     if any(contains_phrase(activity_text, term) for term in STRONG_ACTIVITY_TERMS):
-        activity_multiplier = 1.15
-    elif any(contains_phrase(activity_text, term) for term in LIGHT_ACTIVITY_TERMS):
-        activity_multiplier = 0.75
-    else:
+        activity_multiplier = 1.45
+        max_add = 10.0
+        base_points = 4.0
+    elif any(contains_phrase(activity_text, term) for term in MEDIUM_ACTIVITY_TERMS):
         activity_multiplier = 1.0
+        max_add = 6.0
+        base_points = 3.0
+    elif any(contains_phrase(activity_text, term) for term in LIGHT_ACTIVITY_TERMS):
+        activity_multiplier = 0.65
+        max_add = 3.0
+        base_points = 2.0
+    else:
+        activity_multiplier = 0.9
+        max_add = 6.0
+        base_points = 2.8
 
-    # Conservative deadline factor to prevent inflated long-term goals.
-    deadline_factor = 0.75
+    deadline_factor = 0.85
     if goal is not None:
         deadline = get_attr(goal, "deadline")
         if deadline:
             try:
                 days_left = (datetime.strptime(deadline[:10], "%Y-%m-%d").date() - date.today()).days
-                if days_left <= 14:
-                    deadline_factor = 1.05
-                elif days_left <= 45:
-                    deadline_factor = 0.90
+                if days_left < 0:
+                    deadline_factor = 1.40
+                elif days_left <= 7:
+                    deadline_factor = 1.35
+                elif days_left <= 14:
+                    deadline_factor = 1.25
+                elif days_left <= 30:
+                    deadline_factor = 1.10
+                elif days_left <= 60:
+                    deadline_factor = 1.00
                 elif days_left <= 120:
-                    deadline_factor = 0.65
+                    deadline_factor = 0.85
                 else:
-                    deadline_factor = 0.45
+                    deadline_factor = 0.70
             except Exception:
-                deadline_factor = 0.75
+                deadline_factor = 0.85
 
-    return round(time_weight * match_multiplier * activity_multiplier * deadline_factor, 2)
+    points = base_points * time_weight * match_multiplier * activity_multiplier * deadline_factor
+    points = max(1.0, min(max_add, points))
+    return round(points, 2)
