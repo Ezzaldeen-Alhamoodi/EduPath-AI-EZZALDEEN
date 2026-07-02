@@ -44,12 +44,23 @@
     }
 
     function unique(items) {
+        const guard = window.EDUPATH_ENSURE_OTHER_OPTION;
+        if (typeof guard === "function") return guard(items || []);
         const out = [];
         (items || []).forEach((item) => {
-            const v = normalize(item);
-            if (v && !out.includes(v)) out.push(v);
+            let v = normalize(item);
+            if (["Other", "other", "اخرى", "أُخرى"].includes(v)) v = "أخرى";
+            if (v && v !== "أخرى" && !out.includes(v)) out.push(v);
         });
-        return out.length ? out : ["أخرى"];
+        out.push("أخرى");
+        return out;
+    }
+    function isProtectedOther(value) {
+        return (window.EDUPATH_IS_OTHER_OPTION && window.EDUPATH_IS_OTHER_OPTION(value)) || normalize(value) === "أخرى";
+    }
+    function normalizeConfigOther(cfg) {
+        if (window.EDUPATH_NORMALIZE_ADAPTIVE_CONFIG) window.EDUPATH_NORMALIZE_ADAPTIVE_CONFIG(cfg);
+        return cfg;
     }
 
     function ensureObj(v) { return v && typeof v === "object" && !Array.isArray(v) ? v : {}; }
@@ -75,7 +86,7 @@
         ["main", "sub", "detail", "training"].forEach((level) => {
             if (!Array.isArray(c.hidden[level])) c.hidden[level] = [];
         });
-        return c;
+        return normalizeConfigOther(c);
     }
 
     function mergeLists(baseList, overrideList, repair) {
@@ -499,16 +510,18 @@
         box.innerHTML = "";
         list.forEach((value, index) => {
             const row = document.createElement("div");
+            const protectedOther = isProtectedOther(value);
             row.className = "bank-option-row-v5600 admin-real-option-row-v5610";
             row.innerHTML = `
                 <span class="option-order-v5600">${index + 1}</span>
-                <input value="${esc(value)}" aria-label="اسم الخيار">
-                <button type="button" class="small-button" data-act="up">↑ للأعلى</button>
-                <button type="button" class="small-button" data-act="down">↓ للأسفل</button>
+                <input value="${esc(value)}" aria-label="اسم الخيار" ${protectedOther ? "disabled" : ""}>
+                <button type="button" class="small-button" data-act="up" ${protectedOther ? "disabled" : ""}>↑ للأعلى</button>
+                <button type="button" class="small-button" data-act="down" ${protectedOther ? "disabled" : ""}>↓ للأسفل</button>
                 <button type="button" class="small-button" data-act="branches">إدارة التفرعات</button>
                 <button type="button" class="small-button" data-act="copy">نسخ التفرعات</button>
-                <button type="button" class="small-button warning" data-act="hide">إخفاء آمن</button>
-                <button type="button" class="small-button danger" data-act="delete">حذف نهائي</button>`;
+                <button type="button" class="small-button warning" data-act="hide" ${protectedOther ? "disabled" : ""}>إخفاء آمن</button>
+                <button type="button" class="small-button danger" data-act="delete" ${protectedOther ? "disabled" : ""}>حذف نهائي</button>
+                ${protectedOther ? '<small class="muted">خيار ثابت يفتح خانة مخصصة ولا يمكن حذفه أو إخفاؤه.</small>' : ''}`;
             row.querySelector("input").addEventListener("change", (e) => renameOption(state.selectedLevel, value, e.target.value));
             row.querySelector('[data-act="up"]').addEventListener("click", () => moveOption(state.selectedLevel, value, -1));
             row.querySelector('[data-act="down"]').addEventListener("click", () => moveOption(state.selectedLevel, value, 1));
@@ -536,7 +549,9 @@
     }
 
     function renameOption(level, oldValue, nextValue) {
+        if (isProtectedOther(oldValue)) { toast('لا يمكن تغيير اسم خيار "أخرى" لأنه خيار ثابت في النظام.'); return renderEditor(); }
         const next = normalize(nextValue);
+        if (isProtectedOther(next)) { toast('لا يمكن استخدام اسم "أخرى" إلا للخيار الثابت في آخر القائمة.'); return renderEditor(); }
         if (!next || next === oldValue) return renderEditor();
         const raw = getRawList(level).slice();
         const idx = raw.indexOf(oldValue);
@@ -566,6 +581,7 @@
     }
 
     function moveOption(level, value, dir) {
+        if (isProtectedOther(value)) { toast('خيار "أخرى" ثابت في آخر القائمة ولا يمكن تحريكه.'); return; }
         const raw = getRawList(level).slice();
         const i = raw.indexOf(value);
         const j = i + dir;
@@ -575,6 +591,7 @@
     }
 
     function hideOption(level, value) {
+        if (isProtectedOther(value)) { toast('لا يمكن إخفاء خيار "أخرى" لأنه يجب أن يبقى متاحاً دائماً في آخر القائمة.'); return; }
         const key = hiddenKey(level);
         state.config.hiddenByPath[key] = unique([...(state.config.hiddenByPath[key] || []), value]);
         markDirty();
@@ -837,6 +854,7 @@
 
     function configForSave() {
         state.config = ensureConfig(state.config || {});
+        normalizeConfigOther(state.config);
         applyConfigToRuntime();
         return Object.assign({}, clone(state.config), {__edupathAdminFullConfig: true});
     }

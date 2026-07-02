@@ -32,7 +32,19 @@
         return out;
     }
     function label(v) { return (window.EDUPATH_GOAL_LABEL && window.EDUPATH_GOAL_LABEL(v)) || v; }
-    function unique(list) { return Array.from(new Set((list || []).filter(Boolean))); }
+    function unique(list) {
+        if (window.EDUPATH_ENSURE_OTHER_OPTION) return window.EDUPATH_ENSURE_OTHER_OPTION(list || []);
+        const out = [];
+        (list || []).forEach(function (item) {
+            let v = String(item == null ? "" : item).trim();
+            if (["Other", "other", "اخرى", "أُخرى"].includes(v)) v = "أخرى";
+            if (v && v !== "أخرى" && !out.includes(v)) out.push(v);
+        });
+        out.push("أخرى");
+        return out;
+    }
+    function isProtectedOther(value) { return (window.EDUPATH_IS_OTHER_OPTION && window.EDUPATH_IS_OTHER_OPTION(value)) || String(value || "").trim() === "أخرى"; }
+    function normalizeConfigOther(cfg) { if (window.EDUPATH_NORMALIZE_ADAPTIVE_CONFIG) window.EDUPATH_NORMALIZE_ADAPTIVE_CONFIG(cfg); return cfg; }
     function baseAll() { return clone(window.EDUPATH_GOAL_BANK_BASE_DATA || window.EDUPATH_GET_GOAL_BANK_CONFIG?.() || {}); }
     function currentSelectValues(id) { const el = $(id); return el ? Array.from(el.options).map(o => o.value).filter(Boolean) : []; }
     function selectedPath() {
@@ -73,6 +85,7 @@
     }
     function setListForLevel(level, list) {
         list = unique(list);
+        normalizeConfigOther(state.config);
         if (level === "category") state.config.categories = list;
         else if (level === "path") {
             if (!state.config.paths) state.config.paths = {};
@@ -115,8 +128,8 @@
         renderEditor();
     }
     function buildConfig() {
-        state.baseConfig = clone(baseAll()[state.type] || {});
-        state.config = merge(state.baseConfig, state.draftConfig || state.publishedConfig || {});
+        state.baseConfig = normalizeConfigOther(clone(baseAll()[state.type] || {}));
+        state.config = normalizeConfigOther(merge(state.baseConfig, state.draftConfig || state.publishedConfig || {}));
     }
     function fillTypeSelect() {
         const typeEl = $("goalTypeSelect");
@@ -134,7 +147,7 @@
     function refreshNative(changed) {
         try {
             const all = window.EDUPATH_GET_GOAL_BANK_CONFIG?.();
-            if (all) all[state.type] = merge(state.baseConfig, state.config);
+            if (all) all[state.type] = normalizeConfigOther(merge(state.baseConfig, state.config));
             window.EDUPATH_REFRESH_GOALS_ADAPTIVE?.(changed === "category" ? "goalTypeSelect" : changed === "path" ? "goalCategorySelect" : "goalPathSelect");
         } catch (e) {}
     }
@@ -187,20 +200,23 @@
         }
         list.forEach((item, index) => {
             const row = document.createElement("div"); row.className = "bank-option-row-v5600";
-            row.innerHTML = `<strong>${label(item)}</strong><span class="muted">${item}</span>`;
+            const protectedOther = isProtectedOther(item);
+            row.innerHTML = `<strong>${label(item)}</strong><span class="muted">${item}</span>${protectedOther ? '<small class="muted">خيار ثابت يفتح خانة مخصصة ولا يمكن حذفه أو إخفاؤه.</small>' : ''}`;
             const actions = document.createElement("div"); actions.className = "actions";
-            const mk = (txt, cls, fn) => { const b = document.createElement("button"); b.type="button"; b.className=cls||"small-button"; b.textContent=txt; b.addEventListener("click", fn); return b; };
-            actions.appendChild(mk("تعديل الاسم", "small-button", () => renameOption(item)));
-            actions.appendChild(mk("إخفاء آمن", "small-button warning", () => hideOption(item)));
-            actions.appendChild(mk("حذف نهائي", "small-button danger", () => deleteOption(item)));
-            actions.appendChild(mk("↑", "small-button", () => moveOption(index, -1)));
-            actions.appendChild(mk("↓", "small-button", () => moveOption(index, 1)));
-            actions.appendChild(mk("إدارة التفرعات", "small-button", () => openBranchesModal(item)));
+            const mk = (txt, cls, fn, disabled) => { const b = document.createElement("button"); b.type="button"; b.className=cls||"small-button"; b.textContent=txt; if (disabled) b.disabled = true; b.addEventListener("click", fn); return b; };
+            actions.appendChild(mk("تعديل الاسم", "small-button", () => renameOption(item), protectedOther));
+            actions.appendChild(mk("إخفاء آمن", "small-button warning", () => hideOption(item), protectedOther));
+            actions.appendChild(mk("حذف نهائي", "small-button danger", () => deleteOption(item), protectedOther));
+            actions.appendChild(mk("↑", "small-button", () => moveOption(index, -1), protectedOther));
+            actions.appendChild(mk("↓", "small-button", () => moveOption(index, 1), protectedOther));
+            actions.appendChild(mk("إدارة التفرعات", "small-button", () => openBranchesModal(item), false));
             row.appendChild(actions); box.appendChild(row);
         });
     }
     function renameOption(oldName) {
+        if (isProtectedOther(oldName)) { alert('لا يمكن تغيير اسم خيار "أخرى" لأنه خيار ثابت في النظام.'); return; }
         const next = prompt("اكتب الاسم الجديد مع الحفاظ على التفرعات التابعة:", oldName);
+        if (isProtectedOther(next)) { alert('لا يمكن استخدام اسم "أخرى" إلا للخيار الثابت في آخر القائمة.'); return; }
         if (!next || next === oldName) return;
         const list = getListForLevel(state.level).map(x => x === oldName ? next : x);
         if (state.level === "category" && state.config.paths) {
@@ -217,6 +233,7 @@
         setListForLevel(state.level, list);
     }
     function hideOption(item) {
+        if (isProtectedOther(item)) { alert('لا يمكن إخفاء خيار "أخرى" لأنه يجب أن يبقى متاحاً دائماً في آخر القائمة.'); return; }
         if (!confirm(`إخفاء آمن للخيار: ${item}؟`)) return;
         const list = getListForLevel(state.level).filter(x => x !== item);
         if (!state.config.hiddenByPath) state.config.hiddenByPath = {};
@@ -232,6 +249,7 @@
     }
     function moveOption(index, dir) {
         const list = getListForLevel(state.level);
+        if (isProtectedOther(list[index])) { alert('خيار "أخرى" ثابت في آخر القائمة ولا يمكن تحريكه.'); return; }
         const target = index + dir;
         if (target < 0 || target >= list.length) return;
         [list[index], list[target]] = [list[target], list[index]];
@@ -287,6 +305,7 @@
     function publish() { save("publish"); }
     function save(mode) {
         const url = `/api/admin/goal-bank/${encodeURIComponent(state.type)}${mode === "draft" ? "/draft" : ""}`;
+        normalizeConfigOther(state.config);
         fetch(url, { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ config: state.config, action: mode === "draft" ? "draft" : "publish", clear_draft: mode === "publish" }) })
             .then(r => r.json().then(data => ({ ok: r.ok, data })))
             .then(({ok, data}) => { if (!ok || !data.ok) throw new Error(data.message || "تعذر الحفظ"); setStatus(data.message || "تم الحفظ"); if (mode === "publish") window.EDUPATH_GOAL_BANK_OVERRIDES = Object.assign(window.EDUPATH_GOAL_BANK_OVERRIDES || {}, { [state.type]: state.config }); loadType(state.type); })

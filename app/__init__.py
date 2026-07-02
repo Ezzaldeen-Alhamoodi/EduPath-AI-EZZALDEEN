@@ -3292,6 +3292,29 @@ def reset_recurring_tasks_for_date(target_date=None, user_id=None):
     return reset_count
 
 
+
+def normalize_other_option_in_bank_global(value, key_name=""):
+    other_aliases = {"أخرى", "أُخرى", "اخرى", "Other", "other", "OTHER"}
+    if isinstance(value, list):
+        cleaned = []
+        seen = set()
+        for item in value:
+            text = str(item).strip() if item is not None else ""
+            if text in other_aliases:
+                text = "أخرى"
+            if not text or text == "أخرى":
+                continue
+            if text not in seen:
+                seen.add(text)
+                cleaned.append(text)
+        if "hidden" in str(key_name).lower():
+            return cleaned
+        cleaned.append("أخرى")
+        return cleaned
+    if isinstance(value, dict):
+        return {k: normalize_other_option_in_bank_global(v, k) for k, v in value.items()}
+    return value
+
 def task_bank_defaults_path():
     return os.path.join(os.path.dirname(__file__), "static", "data", "task_bank_defaults.json")
 
@@ -3318,7 +3341,7 @@ def get_task_bank_overrides_map():
     rows = TaskBankConfig.query.order_by(TaskBankConfig.type_name.asc()).all()
     overrides = {}
     for row in rows:
-        cfg = row.config
+        cfg = normalize_other_option_in_bank_global(row.config)
         if cfg:
             overrides[row.type_name] = cfg
     return overrides
@@ -4123,6 +4146,11 @@ def create_app():
 
 
 
+
+
+    def normalize_other_option_in_bank(value, key_name=""):
+        return normalize_other_option_in_bank_global(value, key_name)
+
     def validate_goal_bank_config(config):
         if not isinstance(config, dict):
             return False, "صيغة بنك الأهداف غير صحيحة."
@@ -4132,7 +4160,7 @@ def create_app():
         rows = GoalBankConfig.query.all()
         data = {}
         for row in rows:
-            data[row.type_name] = row.config
+            data[row.type_name] = normalize_other_option_in_bank(row.config)
         return data
 
 
@@ -4195,7 +4223,7 @@ def create_app():
     @admin_required
     def api_admin_goal_bank_save_draft(type_name):
         payload = request.get_json(silent=True) or {}
-        config = payload.get("config") or {}
+        config = normalize_other_option_in_bank(payload.get("config") or {})
         ok, message = validate_goal_bank_config(config)
         if not ok:
             return jsonify({"ok": False, "message": message}), 400
@@ -4216,7 +4244,7 @@ def create_app():
     @admin_required
     def api_admin_goal_bank_save(type_name):
         payload = request.get_json(silent=True) or {}
-        config = payload.get("config") or {}
+        config = normalize_other_option_in_bank(payload.get("config") or {})
         action = payload.get("action") or "update"
         ok, message = validate_goal_bank_config(config)
         if not ok:
@@ -4273,6 +4301,7 @@ def create_app():
                 restored = json.loads(revision.before_json)
             except Exception:
                 return jsonify({"ok": False, "message": "النسخة السابقة غير صالحة."}), 400
+            restored = normalize_other_option_in_bank(restored)
             restored_json = json.dumps(restored, ensure_ascii=False, indent=2)
             if row:
                 row.config_json = restored_json
@@ -4374,7 +4403,7 @@ def create_app():
     @admin_required
     def api_admin_task_bank_save_draft(type_name):
         payload = request.get_json(silent=True) or {}
-        config = payload.get("config") or {}
+        config = normalize_other_option_in_bank(payload.get("config") or {})
         ok, message = validate_task_bank_config(config)
         if not ok:
             return jsonify({"ok": False, "message": message}), 400
@@ -4396,7 +4425,7 @@ def create_app():
     @admin_required
     def api_admin_task_bank_save(type_name):
         payload = request.get_json(silent=True) or {}
-        config = payload.get("config") or {}
+        config = normalize_other_option_in_bank(payload.get("config") or {})
         action = payload.get("action") or "update"
         ok, message = validate_task_bank_config(config)
         if not ok:
@@ -4457,6 +4486,7 @@ def create_app():
             return jsonify({"ok": False, "message": message}), 400
         row = TaskBankConfig.query.filter_by(type_name=type_name).first()
         current_json = row.config_json if row else None
+        config = normalize_other_option_in_bank(config)
         restored_json = json.dumps(config, ensure_ascii=False, indent=2)
         if row:
             row.config_json = restored_json

@@ -5175,6 +5175,7 @@ const JUZ_AMMA_MILESTONES_V4610 = ["النبأ","النازعات","عبس","ا�
 
 function fillGoalSelectV4610(select, values) {
     if (!select) return;
+    values = (window.EDUPATH_ENSURE_OTHER_OPTION ? window.EDUPATH_ENSURE_OTHER_OPTION(values || []) : (Array.isArray(values) ? values : ["أخرى"]));
     const previous = select.value;
     select.innerHTML = "";
     values.forEach(value => {
@@ -39826,15 +39827,14 @@ document.addEventListener("DOMContentLoaded", () => {
         try { return JSON.parse(JSON.stringify(obj || {})); } catch (e) { return {}; }
     }
     function mergeArray(base, override) {
-        if (!Array.isArray(override)) return Array.isArray(base) ? base.slice() : [];
         var out = [];
         (Array.isArray(base) ? base : []).forEach(function (item) {
             if (!out.includes(item)) out.push(item);
         });
-        override.forEach(function (item) {
+        (Array.isArray(override) ? override : []).forEach(function (item) {
             if (!out.includes(item)) out.push(item);
         });
-        return out;
+        return window.EDUPATH_ENSURE_OTHER_OPTION ? window.EDUPATH_ENSURE_OTHER_OPTION(out) : out;
     }
     function deepMergeGoal(base, override) {
         if (!override || typeof override !== "object") return clone(base);
@@ -39858,6 +39858,7 @@ document.addEventListener("DOMContentLoaded", () => {
         var all = overrides || window.EDUPATH_GOAL_BANK_OVERRIDES || {};
         Object.keys(all || {}).forEach(function (typeName) {
             GOAL_CONFIG_V524[typeName] = deepMergeGoal((window.EDUPATH_GOAL_BANK_BASE_DATA || {})[typeName] || GOAL_CONFIG_V524[typeName] || {}, all[typeName] || {});
+            if (window.EDUPATH_NORMALIZE_ADAPTIVE_CONFIG) window.EDUPATH_NORMALIZE_ADAPTIVE_CONFIG(GOAL_CONFIG_V524[typeName]);
         });
         try { if (typeof refreshGoalsArabicV524 === "function") refreshGoalsArabicV524("goalTypeSelect"); } catch (e) {}
     };

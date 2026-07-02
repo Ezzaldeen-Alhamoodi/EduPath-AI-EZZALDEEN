@@ -2,12 +2,15 @@
     const clone = (obj) => JSON.parse(JSON.stringify(obj || {}));
     const normalize = (value) => String(value == null ? "" : value).trim();
     const unique = (items) => {
+        if (window.EDUPATH_ENSURE_OTHER_OPTION) return window.EDUPATH_ENSURE_OTHER_OPTION(items || []);
         const out = [];
         (items || []).forEach((item) => {
-            const text = normalize(item);
-            if (text && !out.includes(text)) out.push(text);
+            let text = normalize(item);
+            if (["Other", "other", "اخرى", "أُخرى"].includes(text)) text = "أخرى";
+            if (text && text !== "أخرى" && !out.includes(text)) out.push(text);
         });
-        return out.length ? out : ["أخرى"];
+        out.push("أخرى");
+        return out;
     };
 
 
@@ -115,6 +118,8 @@
         ["main", "sub", "detail", "training"].forEach((level) => {
             if (!Array.isArray(cfg.hidden[level])) cfg.hidden[level] = [];
         });
+        if (window.EDUPATH_NORMALIZE_ADAPTIVE_CONFIG) window.EDUPATH_NORMALIZE_ADAPTIVE_CONFIG(cfg);
+        if (window.EDUPATH_NORMALIZE_ADAPTIVE_CONFIG) window.EDUPATH_NORMALIZE_ADAPTIVE_CONFIG(cfg);
         return cfg;
     }
 

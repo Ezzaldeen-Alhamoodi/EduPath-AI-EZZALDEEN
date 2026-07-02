@@ -3561,7 +3561,15 @@ window.SMART_EXAM_DATA = {
     }
 
     function unique(values) {
-        return [...new Set((values && values.length ? values : ["أخرى"]).map(normalize))];
+        if (window.EDUPATH_ENSURE_OTHER_OPTION) return window.EDUPATH_ENSURE_OTHER_OPTION(values || []);
+        const out = [];
+        (values && values.length ? values : ["أخرى"]).forEach((item) => {
+            let v = normalize(item);
+            if (["Other", "other", "اخرى", "أُخرى"].includes(v)) v = "أخرى";
+            if (v && v !== "أخرى" && !out.includes(v)) out.push(v);
+        });
+        out.push("أخرى");
+        return out;
     }
 
     function setLabel(id, text) {
@@ -3620,8 +3628,8 @@ window.SMART_EXAM_DATA = {
     function visibleValues(config, level, path, values) {
         const list = unique(values || ["أخرى"]);
         const hidden = hiddenValuesFor(config, level, path);
-        const shown = list.filter((item) => !hidden.includes(normalize(item)));
-        return shown.length ? shown : ["أخرى"];
+        const shown = list.filter((item) => normalize(item) === "أخرى" || !hidden.includes(normalize(item)));
+        return unique(shown.length ? shown : ["أخرى"]);
     }
 
     function getSubValues(config, topic) {

@@ -9,6 +9,7 @@
             .then(function (res) { return res.ok ? res.json() : {}; })
             .then(function (data) {
                 window.EDUPATH_GOAL_BANK_OVERRIDES = data || {};
+                if (window.EDUPATH_NORMALIZE_ADAPTIVE_CONFIG) window.EDUPATH_NORMALIZE_ADAPTIVE_CONFIG(window.EDUPATH_GOAL_BANK_OVERRIDES);
                 if (window.EDUPATH_APPLY_GOAL_BANK_OVERRIDES) window.EDUPATH_APPLY_GOAL_BANK_OVERRIDES(data || {});
                 return data || {};
             })
