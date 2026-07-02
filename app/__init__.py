@@ -6383,12 +6383,112 @@ def calculate_match_score_legacy(goal, task):
     return score, reason
 
 
-def calculate_match_score(goal, task):
-    """Precise backend-only matcher.
+def _safe_link_tokens_v5621(text):
+    """Small deterministic tokenizer for the progress fallback layer."""
+    text = (text or "").lower()
+    text = re.sub(r"[\u064B-\u065F\u0670]", "", text)
+    replacements = {
+        "أ": "ا", "إ": "ا", "آ": "ا", "ى": "ي", "ة": "ه",
+    }
+    for src, dst in replacements.items():
+        text = text.replace(src, dst)
+    raw = re.findall(r"[\u0600-\u06FFa-zA-Z0-9+#.]{2,}", text)
+    weak = {
+        "عام", "اخرى", "other", "نوع", "خيار", "مهمة", "هدف", "دراسة", "تعلم",
+        "مراجعة", "تدريب", "جديد", "المستوى", "الحالة", "المجال", "المسار",
+        "التصنيف", "الدرس", "الموضوع", "الصف", "المرحلة", "قسم", "اختبار",
+    }
+    return {w for w in raw if w not in weak and len(w) >= 2}
 
-    The legacy keyword system remains as a helper, but the precise context layer is decisive:
-    broad English does not inflate IELTS, same broad subject is not enough, and less than
-    60 never increases goal progress.
+
+def _contextual_goal_task_score_v5621(goal, task, legacy_score=0):
+    """Reliable fallback for clearly related user-created tasks.
+
+    It fixes progress staying at 0 when the strict matcher rejects a real relation
+    because a task/goal was created through Arabic adaptive fields, custom "أخرى"
+    fields, or an explicit goal-generated task. It still blocks broad English tasks
+    from inflating specific exam goals such as IELTS Reading.
+    """
+    plan = parse_goal_plan(goal)
+    goal_text = " ".join([
+        goal.title or "", goal.category or "", goal.current_level or "", goal.notes or "",
+        plan.get("Goal Type", ""), plan.get("Goal Category", ""), plan.get("Goal Path", ""),
+        plan.get("Current State", ""), plan.get("Target State", ""), plan.get("Goal Outcome", ""),
+        plan.get("Milestones", ""), plan.get("Commitment", ""), plan.get("Keywords", ""),
+    ])
+    task_text = task_match_text(task)
+
+    goal_tokens = _safe_link_tokens_v5621(goal_text)
+    task_tokens = _safe_link_tokens_v5621(task_text)
+    overlap = goal_tokens & task_tokens
+
+    goal_lower = goal_text.lower()
+    task_lower = task_text.lower()
+
+    # Strongest and safest case: a generated or manually linked task already stores goal_id.
+    if getattr(task, "goal_id", None) and getattr(task, "goal_id", None) == getattr(goal, "id", None):
+        return 92, "Direct task.goal_id matched this goal"
+
+    exam_terms = ["ielts", "toefl", "duolingo", "hsk", "csca", "sat", "act", "gre", "gmat", "ايلتس", "آيلتس", "توفل", "دولينجو"]
+    goal_exam_terms = [term for term in exam_terms if term in goal_lower]
+    if goal_exam_terms and not any(term in task_lower for term in goal_exam_terms):
+        # Do not allow broad English/vocabulary tasks to move a specific exam goal.
+        return min(45, int(legacy_score or 0)), "Specific exam goal requires the same exam name in the task"
+
+    score = 0
+    reasons = []
+
+    if overlap:
+        score += min(34, 7 * len(overlap))
+        reasons.append("shared tokens: " + ", ".join(sorted(overlap)[:8]))
+
+    # Important Arabic/custom adaptive fields: category/path/current/target may be enough
+    # when title wording differs but the same domain is clearly present.
+    important_goal_fields = [
+        plan.get("Goal Category", ""), plan.get("Goal Path", ""), plan.get("Current State", ""),
+        plan.get("Target State", ""), goal.category or "", goal.title or "",
+    ]
+    for field in important_goal_fields:
+        field_text = (field or "").strip()
+        if len(field_text) >= 3 and field_text.lower() in task_lower:
+            score += 18
+            reasons.append(f"goal field appears in task: {field_text[:40]}")
+            break
+
+    # Same explicit task category as the goal category is a useful support signal,
+    # but never enough alone without overlap/field evidence.
+    if (goal.category or "").strip() and (task.category or "").strip():
+        if normalize_task_category_ar_v543(goal.category) == normalize_task_category_ar_v543(task.category):
+            score += 10
+            reasons.append("same adaptive type/category")
+
+    activity_text = " ".join([task.title or "", task.practice_type or "", task.skill or "", task.topic or ""])
+    strong_terms = ["حل نموذج", "محاكاة", "اختبار", "حل مسائل", "حل تمارين", "مشروع", "تطبيق عملي", "تسميع", "مراجعة أخطاء", "تقييم"]
+    medium_terms = ["دراسة", "تلخيص", "مراجعة", "قراءة", "تدريب", "شرح"]
+    if any(term in activity_text for term in strong_terms):
+        score += 12
+        reasons.append("strong task activity")
+    elif any(term in activity_text for term in medium_terms):
+        score += 7
+        reasons.append("medium task activity")
+
+    # Legacy can help only when this fallback already found real context.
+    if score >= 35 and legacy_score >= 60:
+        score += 8
+        reasons.append("legacy supported contextual match")
+
+    if score < 55:
+        return max(score, min(54, int(legacy_score or 0))), "; ".join(reasons) or "No enough contextual overlap"
+
+    return max(60, min(95, score)), "; ".join(reasons)
+
+
+def calculate_match_score(goal, task):
+    """Precise backend-only matcher with a safe contextual fallback.
+
+    The precise context layer remains the primary guard against broad false matches.
+    The fallback is used only to prevent genuine Arabic/custom-field relations from
+    leaving progress bars stuck at 0.
     """
     try:
         legacy_score, legacy_reason = calculate_match_score_legacy(goal, task)
@@ -6398,13 +6498,14 @@ def calculate_match_score(goal, task):
 
     try:
         precise_score, precise_reason = precise_context_score(goal, task, legacy_score, legacy_reason)
-        reason = f"{precise_reason}; legacy_score={legacy_score}"
-        return int(max(0, min(100, precise_score))), reason
     except Exception:
         logger.exception("Precise goal-task matcher failed")
-        # Conservative fallback: never allow broad legacy-only matches to raise progress.
-        fallback = min(59, int(legacy_score or 0))
-        return fallback, f"Precise matcher failed; conservative legacy fallback={fallback}"
+        precise_score, precise_reason = 0, "Precise matcher failed"
+
+    fallback_score, fallback_reason = _contextual_goal_task_score_v5621(goal, task, legacy_score)
+    final_score = int(max(0, min(100, max(precise_score, fallback_score))))
+    reason = f"precise={precise_score}: {precise_reason}; fallback={fallback_score}: {fallback_reason}; legacy_score={legacy_score}"
+    return final_score, reason
 
 
 def calculate_progress_added(task, match_score, goal=None):
