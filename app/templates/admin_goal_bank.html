@@ -101,21 +101,51 @@
 </section>
 
 <div class="admin-bank-modal-v5600 admin-goal-add-modal-v5613" id="goalAddOptionModal" hidden>
-    <div class="admin-bank-modal-card-v5600 admin-goal-add-card-v5613">
-        <h2 id="goalAddOptionTitle">إضافة خيار</h2>
-        <p class="muted">أضف الخيار في الخانة الحالية، ويمكنك كتابة التفرعات التابعة له مباشرة. كل تفرع في سطر مستقل.</p>
-        <label>اسم الخيار الجديد</label>
-        <input id="goalNewOptionName" placeholder="اكتب اسم الخيار الجديد">
-        <label>مكان الإضافة</label>
+    <div class="admin-bank-modal-card-v5600 admin-goal-add-card-v5613 admin-add-option-card-v5612 admin-goal-add-card-v5615">
+        <h2 id="goalAddOptionTitle">إضافة خيار تكيفي جديد</h2>
+        <p class="muted" id="goalAddOptionPathHint">—</p>
+
+        <div class="admin-add-guide-v5610">
+            <strong>إضافة واضحة بدون حذف أي خيار أصلي</strong>
+            <p class="muted">أضف الخيار داخل الخانة الحالية، ثم جهّز التفرعات التابعة له مباشرة. سيتم تثبيت خيار "أخرى" تلقائياً في آخر كل قائمة.</p>
+        </div>
+
+        <label>اسم الخيار الجديد الذي سيظهر للمستخدم</label>
+        <input id="goalNewOptionName" placeholder="مثال: IELTS Academic / مسار جديد / حالة جديدة">
+
+        <label>مكان الإضافة داخل القائمة الحالية</label>
         <select id="goalNewOptionPosition">
-            <option value="end">في النهاية</option>
+            <option value="end">في النهاية قبل خيار أخرى</option>
             <option value="start">في البداية</option>
             <option value="after">بعد خيار محدد</option>
         </select>
-        <label>بعد خيار محدد — اختياري</label>
-        <input id="goalNewOptionAfter" placeholder="اكتب اسم الخيار الذي تريد الإضافة بعده">
-        <label id="goalNewOptionBranchesLabel">التفرعات التابعة الاختيارية</label>
-        <textarea id="goalNewOptionBranches" rows="6" placeholder="مثال:\nمسار تابع 1\nمسار تابع 2\nمسار تابع 3"></textarea>
+        <select id="goalNewOptionAfterSelect" style="margin-top:8px"></select>
+
+        <div id="goalAddBranchPanel" class="admin-add-deep-panel-v5610">
+            <label>طريقة إنشاء التفرعات التابعة</label>
+            <select id="goalNewOptionBranchMode">
+                <option value="manual">إضافة تفرعات الآن</option>
+                <option value="copy">نسخ تفرعات من خيار موجود</option>
+                <option value="empty">إنشاء تفرعات مؤقتة فارغة</option>
+            </select>
+            <select id="goalNewOptionCopySource" style="margin-top:8px"></select>
+
+            <label id="goalNewOptionBranchesLabel">التفرعات التابعة</label>
+            <textarea id="goalNewOptionBranches" rows="4" placeholder="اكتب كل تفرع في سطر مستقل"></textarea>
+
+            <label>عدد التفرعات المؤقتة</label>
+            <input id="goalNewOptionEmptyCount" type="number" min="0" value="1">
+
+            <div id="goalAddStateTripletPanel" class="admin-goal-triplet-v5615">
+                <label>الحالات الحالية التي ستظهر للمسارات الجديدة</label>
+                <textarea id="goalNewOptionCurrentBranches" rows="3" placeholder="كل حالة في سطر"></textarea>
+                <label>الحالات المستهدفة التي ستظهر للمسارات الجديدة</label>
+                <textarea id="goalNewOptionTargetBranches" rows="3" placeholder="كل حالة في سطر"></textarea>
+                <label>الالتزام اليومي أو الأسبوعي للمسارات الجديدة</label>
+                <textarea id="goalNewOptionCommitmentBranches" rows="3" placeholder="كل التزام في سطر"></textarea>
+            </div>
+        </div>
+
         <div class="actions">
             <button type="button" id="applyGoalAddOptionBtn">حفظ الخيار والتفرعات</button>
             <button type="button" class="small-button cancel" id="closeGoalAddOptionBtn">إلغاء</button>
@@ -129,6 +159,6 @@
 <script>
 window.EDUPATH_GOAL_BANK_OVERRIDES = {{ goal_bank_overrides_json|default('{}')|safe }};
 </script>
-<script src="{{ url_for('static', filename='js/goal_bank_runtime.js') }}?v=5.6.14-enforce-other-option"></script>
-<script src="{{ url_for('static', filename='js/admin_goal_bank.js') }}?v=5.6.14-enforce-other-option"></script>
+<script src="{{ url_for('static', filename='js/goal_bank_runtime.js') }}?v=5.6.15-goal-editor-final-ui"></script>
+<script src="{{ url_for('static', filename='js/admin_goal_bank.js') }}?v=5.6.15-goal-editor-final-ui"></script>
 {% endblock %}

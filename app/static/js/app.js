@@ -11505,7 +11505,7 @@ function fillGoalV524(select, values) {
     if (!select) return;
     const old = select.value || select.dataset.saved || "";
     select.innerHTML = "";
-    const list = values || ["أخرى"];
+    const list = (window.EDUPATH_ENSURE_OTHER_OPTION ? window.EDUPATH_ENSURE_OTHER_OPTION(values || []) : (values || ["أخرى"]));
     list.forEach(value => {
         const opt = document.createElement("option");
         opt.value = value;
