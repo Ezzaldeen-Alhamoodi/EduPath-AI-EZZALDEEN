@@ -11585,7 +11585,8 @@ function refreshGoalsArabicV524(changedId) {
     if (!type || !category || !path || !current || !target || !commitment) return;
 
     if (!type.dataset.v524Ready) {
-        fillGoalV524(type, Object.keys(GOAL_CONFIG_V524));
+        const typeValues = (window.EDUPATH_GOAL_TYPE_ORDER && window.EDUPATH_GOAL_TYPE_ORDER.length) ? window.EDUPATH_GOAL_TYPE_ORDER : Object.keys(GOAL_CONFIG_V524);
+        fillGoalV524(type, typeValues);
         type.dataset.v524Ready = "1";
     }
 
@@ -39826,27 +39827,48 @@ document.addEventListener("DOMContentLoaded", () => {
     function clone(obj) {
         try { return JSON.parse(JSON.stringify(obj || {})); } catch (e) { return {}; }
     }
-    function mergeArray(base, override) {
+    function mergeArray(base, override, replaceMode) {
         var out = [];
-        (Array.isArray(base) ? base : []).forEach(function (item) {
-            if (!out.includes(item)) out.push(item);
-        });
-        (Array.isArray(override) ? override : []).forEach(function (item) {
+        var source = replaceMode ? (Array.isArray(override) ? override : []) : [];
+        if (!replaceMode) {
+            (Array.isArray(base) ? base : []).forEach(function (item) {
+                if (!out.includes(item)) out.push(item);
+            });
+            source = Array.isArray(override) ? override : [];
+        }
+        source.forEach(function (item) {
             if (!out.includes(item)) out.push(item);
         });
         return window.EDUPATH_ENSURE_OTHER_OPTION ? window.EDUPATH_ENSURE_OTHER_OPTION(out) : out;
     }
-    function deepMergeGoal(base, override) {
+    function deepMergeGoalInternal(base, override, replaceArrays) {
         if (!override || typeof override !== "object") return clone(base);
-        if (Array.isArray(base) || Array.isArray(override)) return mergeArray(base, override);
+        if (Array.isArray(base) || Array.isArray(override)) return mergeArray(base, override, replaceArrays);
         var out = clone(base);
         Object.keys(override).forEach(function (key) {
+            if (key === "__edupathAdminFullConfig") return;
             var value = override[key];
-            if (Array.isArray(value)) out[key] = mergeArray(out[key], value);
-            else if (value && typeof value === "object") out[key] = deepMergeGoal(out[key] || {}, value);
+            if (Array.isArray(value)) out[key] = mergeArray(out[key], value, replaceArrays);
+            else if (value && typeof value === "object") out[key] = deepMergeGoalInternal(out[key] || {}, value, replaceArrays);
             else out[key] = value;
         });
         return out;
+    }
+    function deepMergeGoal(base, override) {
+        var replaceArrays = !!(override && override.__edupathAdminFullConfig);
+        return deepMergeGoalInternal(base, override, replaceArrays);
+    }
+    function collectGoalTypeOrder(overrides) {
+        var order = [];
+        Object.keys(overrides || {}).forEach(function (typeName) {
+            var cfg = overrides[typeName] || {};
+            if (Array.isArray(cfg.typeOrder)) {
+                cfg.typeOrder.forEach(function (item) {
+                    if (item && !order.includes(item) && item !== "أخرى") order.push(item);
+                });
+            }
+        });
+        return order;
     }
     window.EDUPATH_GOAL_BANK_DEEP_MERGE = deepMergeGoal;
     window.EDUPATH_GOAL_BANK_BASE_DATA = (typeof GOAL_CONFIG_V524 !== "undefined") ? clone(GOAL_CONFIG_V524) : {};
@@ -39856,11 +39878,22 @@ document.addEventListener("DOMContentLoaded", () => {
     window.EDUPATH_APPLY_GOAL_BANK_OVERRIDES = function (overrides) {
         if (typeof GOAL_CONFIG_V524 === "undefined") return;
         var all = overrides || window.EDUPATH_GOAL_BANK_OVERRIDES || {};
+        var orderedTypes = collectGoalTypeOrder(all);
+        if (orderedTypes.length) {
+            Object.keys(GOAL_CONFIG_V524 || {}).forEach(function (name) {
+                if (!orderedTypes.includes(name) && name !== "أخرى") orderedTypes.push(name);
+            });
+            window.EDUPATH_GOAL_TYPE_ORDER = orderedTypes;
+        }
         Object.keys(all || {}).forEach(function (typeName) {
             GOAL_CONFIG_V524[typeName] = deepMergeGoal((window.EDUPATH_GOAL_BANK_BASE_DATA || {})[typeName] || GOAL_CONFIG_V524[typeName] || {}, all[typeName] || {});
             if (window.EDUPATH_NORMALIZE_ADAPTIVE_CONFIG) window.EDUPATH_NORMALIZE_ADAPTIVE_CONFIG(GOAL_CONFIG_V524[typeName]);
         });
-        try { if (typeof refreshGoalsArabicV524 === "function") refreshGoalsArabicV524("goalTypeSelect"); } catch (e) {}
+        try {
+            var typeSelect = document.getElementById("goalTypeSelect");
+            if (typeSelect) delete typeSelect.dataset.v524Ready;
+            if (typeof refreshGoalsArabicV524 === "function") refreshGoalsArabicV524("goalTypeSelect");
+        } catch (e) {}
     };
     window.EDUPATH_REFRESH_GOALS_ADAPTIVE = function (changedId) {
         try { if (typeof refreshGoalsArabicV524 === "function") refreshGoalsArabicV524(changedId || "goalTypeSelect"); } catch (e) {}

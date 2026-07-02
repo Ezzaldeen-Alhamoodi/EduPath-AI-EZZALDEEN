@@ -203,8 +203,15 @@
     function refreshNative(changed) {
         try {
             const all = window.EDUPATH_GET_GOAL_BANK_CONFIG?.();
-            if (all && state.type) all[state.type] = normalizeConfigOther(merge(state.baseConfig, state.config));
-            window.EDUPATH_REFRESH_GOALS_ADAPTIVE?.(changed === "category" ? "goalTypeSelect" : changed === "path" ? "goalCategorySelect" : "goalPathSelect");
+            if (all && state.type) {
+                // state.config is already the effective full config shown in Admin.
+                // Do not union it back with base here, because union-style merging keeps the old order
+                // and makes published/admin ordering look as if it did not apply.
+                all[state.type] = normalizeConfigOther(clone(state.config));
+            }
+            const typeSelect = $("goalTypeSelect");
+            if (typeSelect && changed === "type") delete typeSelect.dataset.v524Ready;
+            window.EDUPATH_REFRESH_GOALS_ADAPTIVE?.(changed === "category" ? "goalTypeSelect" : changed === "path" ? "goalCategorySelect" : changed === "type" ? "goalTypeSelect" : "goalPathSelect");
         } catch (e) {}
     }
     function loadType(type) {
