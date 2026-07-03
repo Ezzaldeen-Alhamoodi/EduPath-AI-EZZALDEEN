@@ -4881,79 +4881,110 @@ def create_app():
 
         weak_skills = detect_weaknesses(current_user.id)
         pending_task_items = [task for task in recent_task_candidates if not _is_completed_task(task)]
+        weak_skill_names = {
+            (insight.get("skill") or "").strip()
+            for insight in weak_skills[:3]
+            if insight.get("completed", 0) <= 2
+        }
+
+        def build_task_recommendation(task):
+            due_date_value = _parse_task_date(task.due_date)
+            is_today = task_scheduled_for_today(task)
+            is_overdue = bool(due_date_value and due_date_value < today_date)
+            is_weak_skill = (task.skill or "").strip() in weak_skill_names
+            days_left = (due_date_value - today_date).days if due_date_value else None
+            due_soon_score = 0
+            if days_left is not None:
+                if days_left <= 0:
+                    due_soon_score = 25
+                elif days_left <= 2:
+                    due_soon_score = 15
+                elif days_left <= 7:
+                    due_soon_score = 8
+
+            priority = int(task.priority or 0)
+            minutes = int(task.estimated_minutes or 0)
+            score = (
+                (100 if is_today else 0)
+                + (80 if is_overdue else 0)
+                + due_soon_score
+                + (20 if is_weak_skill else 0)
+                + priority * 3
+                + (8 if 0 < minutes <= 25 else 0)
+            )
+
+            if is_overdue:
+                reason = "متأخرة وتحتاج إغلاقًا سريعًا حتى لا تتراكم."
+                tone = "urgent"
+                badge = "الأولوية الآن"
+                impact = "إزالة ضغط"
+            elif is_today:
+                reason = "مجدولة لليوم، وإنجازها يحرك تقدمك مباشرة."
+                tone = "today"
+                badge = "مهمة اليوم"
+                impact = "تقدم اليوم"
+            elif is_weak_skill:
+                reason = "ترفع مهارة تحتاج بداية أقوى في تحليلات التعلم."
+                tone = "skill"
+                badge = "تقوية مهارة"
+                impact = "تحسين مهارة"
+            elif due_date_value:
+                reason = "قريبة من موعدها وتستحق أن تبدأ بها مبكرًا."
+                tone = "soon"
+                badge = "موعد قريب"
+                impact = "استباق الموعد"
+            elif priority >= 4:
+                reason = "أولوية عالية ويمكن أن تصنع فرقًا واضحًا في خطتك."
+                tone = "steady"
+                badge = "أولوية عالية"
+                impact = "تركيز قوي"
+            elif 0 < minutes <= 25:
+                reason = "قصيرة ومناسبة كبداية سريعة قبل المهام الأكبر."
+                tone = "quick"
+                badge = "إنجاز سريع"
+                impact = "زخم سريع"
+            else:
+                reason = "اختيار متوازن حسب الأولوية والوقت المتوقع."
+                tone = "steady"
+                badge = "اختيار ذكي"
+                impact = "خطوة متوازنة"
+
+            return {
+                "kind": "task",
+                "tone": tone,
+                "badge": badge,
+                "title": task.title,
+                "reason": reason,
+                "impact": impact,
+                "skill": task.skill,
+                "category": task.category,
+                "minutes": task.estimated_minutes,
+                "priority": task.priority,
+                "due_date": task.due_date,
+                "score": score,
+                "id": int(task.id or 0),
+            }
+
+        recommended_tasks = [
+            build_task_recommendation(task)
+            for task in pending_task_items
+        ]
+        recommended_tasks.sort(
+            key=lambda item: (
+                item["score"],
+                int(item.get("priority") or 0),
+                -int(item.get("minutes") or 0),
+                item["id"],
+            ),
+            reverse=True,
+        )
+        recommended_tasks = recommended_tasks[:3]
+        for index, item in enumerate(recommended_tasks, start=1):
+            item["rank"] = index
 
         def build_home_next_action():
-            if pending_task_items:
-                weak_skill_names = {
-                    (insight.get("skill") or "").strip()
-                    for insight in weak_skills[:3]
-                    if insight.get("completed", 0) <= 2
-                }
-
-                def task_priority(task):
-                    due_date_value = _parse_task_date(task.due_date)
-                    is_today = task_scheduled_for_today(task)
-                    is_overdue = bool(due_date_value and due_date_value < today_date)
-                    is_weak_skill = (task.skill or "").strip() in weak_skill_names
-                    due_soon_score = 0
-                    if due_date_value:
-                        days_left = (due_date_value - today_date).days
-                        if days_left <= 0:
-                            due_soon_score = 25
-                        elif days_left <= 2:
-                            due_soon_score = 15
-                        elif days_left <= 7:
-                            due_soon_score = 8
-                    return (
-                        100 if is_today else 0,
-                        80 if is_overdue else 0,
-                        due_soon_score,
-                        20 if is_weak_skill else 0,
-                        int(task.priority or 0),
-                        -int(task.estimated_minutes or 0),
-                        int(task.id or 0),
-                    )
-
-                task = max(pending_task_items, key=task_priority)
-                due_date_value = _parse_task_date(task.due_date)
-                is_today = task_scheduled_for_today(task)
-                is_overdue = bool(due_date_value and due_date_value < today_date)
-                is_weak_skill = (task.skill or "").strip() in weak_skill_names
-
-                if is_overdue:
-                    reason = "متأخرة وتحتاج إغلاقًا سريعًا حتى لا تتراكم."
-                    tone = "urgent"
-                    badge = "الأولوية الآن"
-                elif is_today:
-                    reason = "مجدولة لليوم، وإنجازها يحرك تقدمك مباشرة."
-                    tone = "today"
-                    badge = "مهمة اليوم"
-                elif is_weak_skill:
-                    reason = "مرتبطة بمهارة تحتاج بداية أقوى في تحليلات التعلم."
-                    tone = "skill"
-                    badge = "تقوية مهارة"
-                elif due_date_value:
-                    reason = "قريبة من موعدها وتستحق أن تبدأ بها مبكرًا."
-                    tone = "soon"
-                    badge = "موعد قريب"
-                else:
-                    reason = "أفضل مهمة حالية حسب الأولوية والوقت المتوقع."
-                    tone = "steady"
-                    badge = "اختيار ذكي"
-
-                return {
-                    "kind": "task",
-                    "tone": tone,
-                    "badge": badge,
-                    "title": task.title,
-                    "reason": reason,
-                    "skill": task.skill,
-                    "category": task.category,
-                    "minutes": task.estimated_minutes,
-                    "priority": task.priority,
-                    "due_date": task.due_date,
-                }
-
+            if recommended_tasks:
+                return recommended_tasks[0]
             if active_goals:
                 goal = active_goals[0]
                 return {
@@ -4999,6 +5030,7 @@ def create_app():
             total_goals=total_goals,
             progress=progress,
             next_action=next_action,
+            recommended_tasks=recommended_tasks,
             weak_skills=weak_skills,
             admin_messages=admin_messages,
             unread_admin_messages=unread_admin_messages,

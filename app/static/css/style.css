@@ -4967,6 +4967,11 @@ body.dark-mode .desktop-icon-nav-v483 a {
     color: #b45309;
 }
 
+.home-next-action-quick-v5700 .home-next-action-kicker-v5700 {
+    background: rgba(124, 58, 237, 0.1);
+    color: #6d28d9;
+}
+
 body.dark-mode .home-next-action-v5700 {
     border-color: rgba(148, 163, 184, 0.18);
     background: linear-gradient(135deg, rgba(15,23,42,0.92), rgba(30,41,59,0.88));
@@ -4976,6 +4981,152 @@ body.dark-mode .home-next-action-v5700 {
 body.dark-mode .home-next-action-meta-v5700 span {
     background: rgba(15, 23, 42, 0.72);
     border-color: rgba(148, 163, 184, 0.18);
+}
+
+.home-smart-plan-v5701 {
+    display: grid;
+    gap: 12px;
+}
+
+.home-smart-plan-v5701 .section-title-row {
+    margin-bottom: 0;
+}
+
+.home-smart-plan-v5701 h2 {
+    margin: 0 0 4px;
+    font-size: 19px;
+}
+
+.home-smart-task-grid-v5701 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.home-smart-task-v5701 {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 11px;
+    min-height: 168px;
+    padding: 14px;
+    border-radius: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+}
+
+.home-smart-task-v5701::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #2563eb;
+}
+
+.home-smart-task-rank-v5701 {
+    width: 34px;
+    height: 34px;
+    border-radius: 13px;
+    display: grid;
+    place-items: center;
+    background: rgba(37, 99, 235, 0.1);
+    color: #1d4ed8;
+    font-weight: 950;
+    font-size: 14px;
+}
+
+.home-smart-task-body-v5701 {
+    min-width: 0;
+    display: grid;
+    align-content: start;
+    gap: 7px;
+}
+
+.home-smart-task-badge-v5701 {
+    justify-self: start;
+    min-height: 24px;
+    padding: 4px 9px;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, 0.1);
+    color: #1d4ed8;
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.home-smart-task-v5701 strong {
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.home-smart-task-v5701 p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.home-smart-task-meta-v5701 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 2px;
+}
+
+.home-smart-task-meta-v5701 span {
+    min-height: 25px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(248, 250, 252, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    color: var(--text);
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.home-smart-task-urgent-v5701::before { background: #dc2626; }
+.home-smart-task-today-v5701::before { background: #2563eb; }
+.home-smart-task-skill-v5701::before { background: #0d9488; }
+.home-smart-task-soon-v5701::before { background: #d97706; }
+.home-smart-task-quick-v5701::before { background: #7c3aed; }
+
+.home-smart-task-urgent-v5701 .home-smart-task-rank-v5701,
+.home-smart-task-urgent-v5701 .home-smart-task-badge-v5701 {
+    background: rgba(220, 38, 38, 0.1);
+    color: #b91c1c;
+}
+
+.home-smart-task-skill-v5701 .home-smart-task-rank-v5701,
+.home-smart-task-skill-v5701 .home-smart-task-badge-v5701 {
+    background: rgba(13, 148, 136, 0.1);
+    color: #0f766e;
+}
+
+.home-smart-task-soon-v5701 .home-smart-task-rank-v5701,
+.home-smart-task-soon-v5701 .home-smart-task-badge-v5701 {
+    background: rgba(217, 119, 6, 0.12);
+    color: #b45309;
+}
+
+.home-smart-task-quick-v5701 .home-smart-task-rank-v5701,
+.home-smart-task-quick-v5701 .home-smart-task-badge-v5701 {
+    background: rgba(124, 58, 237, 0.1);
+    color: #6d28d9;
+}
+
+body.dark-mode .home-smart-task-v5701 {
+    background: rgba(15, 23, 42, 0.84);
+    border-color: rgba(148, 163, 184, 0.18);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+}
+
+body.dark-mode .home-smart-task-meta-v5701 span {
+    background: rgba(30, 41, 59, 0.78);
+    border-color: rgba(148, 163, 184, 0.16);
 }
 
 .home-shortcuts-ar-v513 {
@@ -5232,6 +5383,21 @@ body.dark-mode .home-next-action-meta-v5700 span {
     .home-next-action-v5700 .small-button {
         width: 100%;
         justify-content: center;
+    }
+
+    .home-smart-task-grid-v5701 {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+    .home-smart-task-v5701 {
+        min-height: auto;
+        padding: 12px;
+        border-radius: 16px;
+    }
+
+    .home-smart-plan-v5701 .section-title-row {
+        gap: 8px;
     }
 
     .home-shortcuts-ar-v513 {

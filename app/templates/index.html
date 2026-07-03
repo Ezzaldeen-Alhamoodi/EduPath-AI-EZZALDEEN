@@ -58,6 +58,37 @@
         </a>
     </section>
 
+    {% if recommended_tasks %}
+        <section class="home-smart-plan-v5701">
+            <div class="section-title-row compact-title-ar-v513">
+                <div>
+                    <h2>خطة المهام الذكية</h2>
+                    <p class="muted">أفضل ثلاث خطوات مقترحة الآن حسب اليوم، الموعد، الأولوية، وتحليلات التعلم.</p>
+                </div>
+                <a class="small-button" href="{{ url_for('tasks') }}">عرض المهام</a>
+            </div>
+
+            <div class="home-smart-task-grid-v5701">
+                {% for task in recommended_tasks %}
+                    <article class="home-smart-task-v5701 home-smart-task-{{ task.tone }}-v5701">
+                        <div class="home-smart-task-rank-v5701">{{ task.rank }}</div>
+                        <div class="home-smart-task-body-v5701">
+                            <span class="home-smart-task-badge-v5701">{{ task.badge }}</span>
+                            <strong>{{ task.title }}</strong>
+                            <p>{{ task.reason }}</p>
+                            <div class="home-smart-task-meta-v5701">
+                                {% if task.skill %}<span>{{ task.skill|dashboard_ar }}</span>{% endif %}
+                                {% if task.minutes %}<span>{{ task.minutes }} دقيقة</span>{% endif %}
+                                {% if task.priority %}<span>أولوية {{ task.priority }}</span>{% endif %}
+                                {% if task.impact %}<span>{{ task.impact }}</span>{% endif %}
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+
     <section class="home-main-grid-ar-v513">
         <div class="card home-card-ar-v513">
             <div class="section-title-row compact-title-ar-v513">
