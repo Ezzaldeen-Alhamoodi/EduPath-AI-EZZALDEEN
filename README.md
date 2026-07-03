@@ -436,7 +436,7 @@ No database migration was required. CSCA values are stored using the existing ta
   - Admin users are unlimited.
   - Admin motivational email messaging to selected users.
 - Recommended ADMIN_EMAILS:
-  `geni49607@gmail.com,edupath.ai.ezzaldeen.app@outlook.com`
+  `....`
 
 
 ## v4.6.1 Email Timeout Fix
