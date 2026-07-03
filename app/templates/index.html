@@ -31,6 +31,33 @@
         <div class="stat-card orange"><span>◷</span><h3>المهام المتبقية</h3><p>{{ pending_tasks }}</p></div>
         <div class="stat-card purple"><span>▣</span><h3>إجمالي المهام</h3><p>{{ total_tasks }}</p></div>
     </section>
+
+    <section class="home-next-action-v5700 home-next-action-{{ next_action.tone }}-v5700">
+        <div class="home-next-action-main-v5700">
+            <span class="home-next-action-kicker-v5700">{{ next_action.badge }}</span>
+            <h2>ماذا أفعل الآن؟</h2>
+            <strong>{{ next_action.title }}</strong>
+            <p>{{ next_action.reason }}</p>
+        </div>
+        <div class="home-next-action-meta-v5700">
+            {% if next_action.skill %}
+                <span>{{ next_action.skill|dashboard_ar }}</span>
+            {% endif %}
+            {% if next_action.minutes %}
+                <span>{{ next_action.minutes }} دقيقة</span>
+            {% endif %}
+            {% if next_action.priority %}
+                <span>أولوية {{ next_action.priority }}</span>
+            {% endif %}
+            {% if next_action.due_date %}
+                <span>{{ next_action.due_date }}</span>
+            {% endif %}
+        </div>
+        <a class="small-button" href="{{ url_for('tasks') }}">
+            {% if next_action.kind == 'empty' %}إنشاء مهمة{% else %}فتح المهام{% endif %}
+        </a>
+    </section>
+
     <section class="home-main-grid-ar-v513">
         <div class="card home-card-ar-v513">
             <div class="section-title-row compact-title-ar-v513">
