@@ -5,29 +5,29 @@
 
     <section class="home-hero-ar-v513 home-hero-blue-ar-v514">
         <div class="home-hero-text-ar-v513">
-            <span class="home-tag-ar-v513">مساحة ذكية للتعلم وتنظيم الأهداف</span>
-            <h1>EduPath AI — نظّم تعلمك، تابع مهامك، وحقق أهدافك بخطة واضحة</h1>
+            <span class="home-tag-ar-v513">منصة ذكية للتعلم وتحقيق الأهداف</span>
+            <h1>EduPath AI — خطط لتعلمك، نظّم مهامك، وتتبع تقدمك نحو أهدافك بثقة</h1>
             <p>
-                يجمع التطبيق بين الأهداف الذكية، المهام اليومية، المصادر التعليمية، ومتابعة التقدم؛
-                ليساعدك على تحويل الدراسة والحفظ والتعلم الذاتي إلى خطوات منظمة وقابلة للإنجاز.
+                ييجمع بين التخطيط الذكي، وإدارة المهام، والمصادر التعليمية، وتحليلات التقدم， 
+                ليحوّل التعلم إلى رحلة منظمة وأكثر فاعلية.
             </p>
             <div class="home-actions-ar-v513">
-                <a class="button light" href="{{ url_for('goals') }}">إنشاء هدف</a>
-                <a class="button ghost" href="{{ url_for('tasks') }}">إضافة مهمة</a>
-                <a class="button ghost" href="{{ url_for('resources') }}">فتح المصادر</a>
+                <a class="button light" href="{{ url_for('goals') }}">هدف جديد</a>
+                <a class="button ghost" href="{{ url_for('tasks') }}">مهمة جديدة</a>
+                <a class="button ghost" href="{{ url_for('resources') }}">المصادر التعليمية</a>
             </div>
         </div>
 
         <div class="home-progress-ar-v513">
             <div class="progress-circle">{{ progress }}%</div>
-            <strong>تقدم المهام</strong>
-            <small>نسبة إنجاز مهام اليوم من المهام المجدولة لهذا اليوم.</small>
+            <strong>تقدم مهام اليوم</strong>
+            <small>نسبة إنجاز المهام المجدولة لهذا اليوم.</small>
         </div>
     </section>
 
     <section class="home-compact-stats-ar-v513">
-        <div class="stat-card blue"><span>◎</span><h3>عدد الأهداف</h3><p>{{ total_goals }}</p></div>
-        <div class="stat-card green"><span>✓</span><h3>المهام المكتملة</h3><p>{{ completed_tasks }}</p></div>
+        <div class="stat-card blue"><span>◎</span><h3>الأهداف النشطة</h3><p>{{ total_goals }}</p></div>
+        <div class="stat-card green"><span>✓</span><h3>المهام المنجزة</h3><p>{{ completed_tasks }}</p></div>
         <div class="stat-card orange"><span>◷</span><h3>المهام المتبقية</h3><p>{{ pending_tasks }}</p></div>
         <div class="stat-card purple"><span>▣</span><h3>إجمالي المهام</h3><p>{{ total_tasks }}</p></div>
     </section>
@@ -36,7 +36,7 @@
             <div class="section-title-row compact-title-ar-v513">
                 <div>
                     <h2>التركيز الحالي</h2>
-                    <p class="muted">أهم أهدافك القريبة بناءً على التقدم والتخطيط الأخير.</p>
+                    <p class="muted">الأهداف الأكثر أولوية وفق تقدمك وخطتك الحالية.</p>
                 </div>
                 <a class="small-button" href="{{ url_for('goals') }}">إدارة الأهداف</a>
             </div>
@@ -179,10 +179,10 @@
     </section>
 
     <footer class="home-footer-clean-ar-v513">
-        <strong>EduPath AI EZZALDEEN · v5.5.140</strong>
-        <span>للتواصل: edupath.ai.ezzaldeen.app@outlook.com</span>
-        <span>لمعرفة كيفية استخدام التطبيق والاستفادة من جميع المميزات، يرجى الضغط على <a href="{{ url_for('user_guide') }}">دليل الاستخدام</a>.</span>
-        <small>جميع الحقوق محفوظة © عزالدين الحمودي. يمنع منعًا باتًا اقتباس أو تقليد فكرة التطبيق أو تصميمه أو محتواه أو مميزاته دون إذن صريح.</small>
+        <strong>EduPath AI EZZALDEEN · v5.6.20</strong>
+        <span>للتواصل والدعم:  edupath.ai.ezzaldeen.app@outlook.com</span>
+        <span>للتعرّف على جميع المزايا وطريقة الاستخدام، افتح <a href="{{ url_for('user_guide') }}">دليل الاستخدام</a>.</span>
+        <small>جميع الحقوق محفوظة © عزالدين نشوان الحمودي. يحظر نسخ أو إعادة استخدام فكرة التطبيق أو تصميمه أو محتواه أو مميزاته كلياً أو جزئياً دون إذن كتابي مسبق.</small>
     </footer>
 
 </div>

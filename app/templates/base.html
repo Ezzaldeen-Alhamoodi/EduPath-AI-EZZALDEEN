@@ -91,13 +91,13 @@
         <a class="nav-goals" href="{{ url_for('goals') }}"><span>◎</span><small>الأهداف</small></a>
         <a class="nav-tasks" href="{{ url_for('tasks') }}"><span>▣</span><small>المهام</small></a>
         <a class="nav-resources" href="{{ url_for('resources') }}"><span>▤</span><small>المصادر</small></a>
-        <a class="nav-coach" href="{{ url_for('coach') }}"><span>✦</span><small>المدرب</small></a>
-        <button class="mobile-more-btn nav-more" id="mobileMoreToggle" type="button"><span>⋯</span><small>أكثر</small></button>
+        <a class="nav-coach" href="{{ url_for('coach') }}"><span>✦</span><small>المدرب الذكي</small></a>
+        <button class="mobile-more-btn nav-more" id="mobileMoreToggle" type="button"><span>⋯</span><small>المزيد</small></button>
     </nav>
 
 
 <div class="mobile-more-menu" id="mobileMoreMenu">
-    <button type="button" id="mobileMenuTheme">تبديل الوضع</button>
+    <button type="button" id="mobileMenuTheme">تغيير المظهر</button>
     <button type="button" id="mobileMenuNotifications">تفعيل الإشعارات</button>
 <a href="{{ url_for('profile') }}">الملف الشخصي</a>
     {% if current_user.is_authenticated and (current_user.is_admin or current_user.email.lower() in config.ADMIN_EMAILS) %}
