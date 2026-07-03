@@ -8,7 +8,7 @@
             <span class="home-tag-ar-v513">منصة ذكية للتعلم وتحقيق الأهداف</span>
             <h1>EduPath AI — خطط لتعلمك، نظّم مهامك، وتتبع تقدمك نحو أهدافك بثقة</h1>
             <p>
-                ييجمع بين التخطيط الذكي، وإدارة المهام، والمصادر التعليمية، وتحليلات التقدم， 
+                يجمع بين التخطيط الذكي، وإدارة المهام، والمصادر التعليمية، وتحليلات التقدم， 
                 ليحوّل التعلم إلى رحلة منظمة وأكثر فاعلية.
             </p>
             <div class="home-actions-ar-v513">
@@ -65,7 +65,7 @@
                         <div class="learning-insight-icon-v5620">{{ insight.emoji }}</div>
                         <div class="learning-insight-body-v5620">
                             <strong>{{ insight.skill|dashboard_ar }}</strong>
-                            <small>{{ insight.status }}{% if insight.completed %} · {{ insight.completed }} منجزة{% endif %}{% if insight.pending %} · {{ insight.pending }} قيد التنفيذ{% endif %}</small>
+                            <small>{{ insight.status }}{% if insight.completed %} · <b>{{ insight.completed }} منجزة</b>{% endif %}</small>
                         </div>
                     </div>
                 {% endfor %}

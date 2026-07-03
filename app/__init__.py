@@ -8055,22 +8055,17 @@ def detect_weaknesses(user_id):
         total = item["pending"] + item["completed"]
         if total <= 0 and item["goal_boost"] <= 0:
             continue
-        if total > 0:
-            completion_ratio = item["completed"] / total
-        else:
-            completion_ratio = 0.0
-
-        # Emoji states replace the old progress bar: cold = no completed work yet,
-        # sprouting = early progress, fire = strong momentum.
+        # Learning analytics are lifetime-cumulative per skill: only completed
+        # tasks decide the motivational state, with no daily reset.
         if item["completed"] <= 0:
             emoji = "🥶"
             status = "بارد الآن — يحتاج بداية عملية"
-        elif completion_ratio < 0.5:
-            emoji = "🌱"
-            status = "بداية نمو — استمر"
-        else:
+        elif item["completed"] <= 2:
             emoji = "🔥"
-            status = "نشاط قوي — تقدم ممتاز"
+            status = "نشاط جيد — بداية موفقة"
+        else:
+            emoji = "🚀"
+            status = "نشاط استثنائي — تقدم رائع"
 
         result.append({
             "skill": item["skill"],
@@ -8079,7 +8074,6 @@ def detect_weaknesses(user_id):
             "pending": item["pending"],
             "emoji": emoji,
             "status": status,
-            "completion_ratio": int(round(completion_ratio * 100)),
         })
 
     result.sort(key=lambda x: (x["score"], x["completed"], x["pending"]), reverse=True)
@@ -8139,4 +8133,3 @@ def parse_json_object(text):
             pass
 
     return {"raw": text}
-

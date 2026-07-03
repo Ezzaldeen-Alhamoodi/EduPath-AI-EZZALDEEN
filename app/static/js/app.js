@@ -814,7 +814,7 @@ const EDUPATH_I18N = {
         "dashboard.focus_desc": "Your most important goals based on progress and recent planning.",
         "dashboard.active_goals": "Active Goals",
         "dashboard.active_desc": "Keep your long-term targets visible. Your tasks are the daily steps.",
-        "dashboard.insights": "Learning Insights",
+        "dashboard.insights": "Learning Analytics",
         "dashboard.recent_tasks": "المهام الحديثة",
         "goals.title": "Smart Goals & Progress Intelligence",
         "goals.desc": "Create goals that connect naturally with your tasks: exams, languages, programming, scholarships, university, and daily improvement.",
@@ -869,7 +869,7 @@ const EDUPATH_I18N = {
         "dashboard.focus_desc": "أهم أهدافك حسب التقدم والخطة الحالية.",
         "dashboard.active_goals": "الأهداف النشطة",
         "dashboard.active_desc": "اجعل أهدافك الطويلة أمامك دائمًا، والمهام هي خطواتك اليومية.",
-        "dashboard.insights": "تحليل التعلم",
+        "dashboard.insights": "تحليلات التعلم",
         "dashboard.recent_tasks": "آخر المهام",
         "goals.title": "أهداف ذكية وتحليل التقدم",
         "goals.desc": "أنشئ أهدافًا ترتبط تلقائيًا بمهامك في الاختبارات واللغات والبرمجة والمنح والجامعة وتطوير الذات.",
@@ -39902,3 +39902,4 @@ document.addEventListener("DOMContentLoaded", () => {
         try { return typeof goalV524Label === "function" ? goalV524Label(value) : value; } catch (e) { return value; }
     };
 })();
+
