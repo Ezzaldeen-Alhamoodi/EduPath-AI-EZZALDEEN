@@ -116,7 +116,47 @@
         </div>
 
         <div class="card home-card-ar-v513">
-            <h2>تحليلات التعلم</h2>
+            <div class="learning-analytics-head-v5702">
+                <div>
+                    <h2>تحليلات التعلم</h2>
+                    <p class="muted">{{ learning_analytics.headline }}</p>
+                </div>
+                <span class="learning-analytics-total-v5702">{{ learning_analytics.total_completed }} منجزة</span>
+            </div>
+            <div class="learning-analytics-summary-v5702 learning-analytics-summary-{{ learning_analytics.tone }}-v5702">
+                <div class="learning-analytics-message-v5702">
+                    <strong>{{ learning_analytics.message }}</strong>
+                </div>
+                <div class="learning-analytics-metrics-v5702">
+                    <div>
+                        <span>🚀</span>
+                        <small>الأكثر نشاطاً</small>
+                        <strong>
+                            {% if learning_analytics.active_skill and learning_analytics.active_skill.completed %}
+                                {{ learning_analytics.active_skill.skill|dashboard_ar }}
+                            {% else %}
+                                لم يبدأ بعد
+                            {% endif %}
+                        </strong>
+                    </div>
+                    <div>
+                        <span>🥶</span>
+                        <small>تحتاج بداية</small>
+                        <strong>
+                            {% if learning_analytics.starter_skill %}
+                                {{ learning_analytics.starter_skill.skill|dashboard_ar }}
+                            {% else %}
+                                لا توجد مهارة باردة
+                            {% endif %}
+                        </strong>
+                    </div>
+                    <div>
+                        <span>🔥</span>
+                        <small>Streak بسيط</small>
+                        <strong>{{ learning_analytics.streak_days }} يوم</strong>
+                    </div>
+                </div>
+            </div>
             {% if weak_skills %}
                 {% for insight in weak_skills %}
                     <div class="weakness compact-weakness-ar-v513 learning-insight-v5620">

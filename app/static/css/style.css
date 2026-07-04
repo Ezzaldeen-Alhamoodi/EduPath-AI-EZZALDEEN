@@ -9480,6 +9480,87 @@ body.dark-mode .coach-hero {
 }
 
 /* v5.6.20 — Learning insights use adaptive motivational icons instead of progress bars. */
+.learning-analytics-head-v5702 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.learning-analytics-head-v5702 h2 {
+    margin-bottom: 2px;
+}
+.learning-analytics-total-v5702 {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, 0.1);
+    color: #1d4ed8;
+    font-size: 12px;
+    font-weight: 950;
+    white-space: nowrap;
+}
+.learning-analytics-summary-v5702 {
+    display: grid;
+    gap: 12px;
+    padding: 13px;
+    margin-bottom: 12px;
+    border-radius: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    background:
+        linear-gradient(135deg, rgba(255,255,255,0.96), rgba(248,250,252,0.92)),
+        linear-gradient(90deg, rgba(37,99,235,0.07), rgba(13,148,136,0.07));
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.06);
+}
+.learning-analytics-message-v5702 strong {
+    display: block;
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.7;
+}
+.learning-analytics-metrics-v5702 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+.learning-analytics-metrics-v5702 div {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+    padding: 10px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+}
+.learning-analytics-metrics-v5702 span {
+    font-size: 18px;
+    line-height: 1;
+}
+.learning-analytics-metrics-v5702 small {
+    color: var(--muted);
+    font-size: 10.5px;
+    font-weight: 800;
+}
+.learning-analytics-metrics-v5702 strong {
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+.learning-analytics-summary-cold-v5702 .learning-analytics-message-v5702 strong {
+    color: #0369a1;
+}
+.learning-analytics-summary-warm-v5702 .learning-analytics-message-v5702 strong {
+    color: #b45309;
+}
+.learning-analytics-summary-active-v5702 .learning-analytics-message-v5702 strong {
+    color: #0f766e;
+}
+.learning-analytics-summary-strong-v5702 .learning-analytics-message-v5702 strong {
+    color: #1d4ed8;
+}
 .learning-insight-v5620 {
     display: flex;
     align-items: center;
@@ -9519,6 +9600,15 @@ body.dark-mode .coach-hero {
     line-height: 1.6;
 }
 @media (max-width: 640px) {
+    .learning-analytics-head-v5702 {
+        display: grid;
+    }
+    .learning-analytics-total-v5702 {
+        justify-self: start;
+    }
+    .learning-analytics-metrics-v5702 {
+        grid-template-columns: 1fr;
+    }
     .learning-insight-v5620 {
         padding: 10px 11px;
         gap: 10px;
@@ -9538,6 +9628,22 @@ body.dark-mode .learning-insight-v5620 {
     background: linear-gradient(135deg, rgba(30,41,59,0.96), rgba(15,23,42,0.94));
     border-color: rgba(148,163,184,0.28);
     box-shadow: 0 14px 30px rgba(0,0,0,0.24);
+}
+body.dark-mode .learning-analytics-total-v5702 {
+    background: rgba(59, 130, 246, 0.16);
+    color: #bfdbfe;
+}
+body.dark-mode .learning-analytics-summary-v5702 {
+    background: linear-gradient(135deg, rgba(30,41,59,0.94), rgba(15,23,42,0.9));
+    border-color: rgba(148,163,184,0.24);
+}
+body.dark-mode .learning-analytics-metrics-v5702 div {
+    background: rgba(15,23,42,0.68);
+    border-color: rgba(148,163,184,0.18);
+}
+body.dark-mode .learning-analytics-message-v5702 strong,
+body.dark-mode .learning-analytics-metrics-v5702 strong {
+    color: #f8fafc !important;
 }
 body.dark-mode .learning-insight-icon-v5620 {
     background: rgba(15,23,42,0.82);

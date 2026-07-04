@@ -4887,6 +4887,70 @@ def create_app():
             if insight.get("completed", 0) <= 2
         }
 
+        def build_learning_analytics_summary():
+            completed_items = [
+                task for task in recent_task_candidates
+                if _is_completed_task(task)
+            ]
+            total_completed = len(completed_items)
+            active_candidates = [
+                item for item in weak_skills
+                if item.get("completed", 0) > 0
+            ]
+            active_skill = max(
+                active_candidates,
+                key=lambda item: (item.get("completed", 0), item.get("score", 0)),
+                default=None,
+            )
+            starter_skill = next(
+                (item for item in weak_skills if item.get("completed", 0) <= 0),
+                None,
+            )
+
+            completed_dates = set()
+            for task in completed_items:
+                task_date = _parse_task_date(task.due_date) or _parse_task_date(task.start_date)
+                if task_date:
+                    completed_dates.add(task_date)
+
+            streak_days = 0
+            cursor = today_date
+            while cursor in completed_dates:
+                streak_days += 1
+                cursor -= timedelta(days=1)
+
+            if streak_days == 0 and total_completed > 0:
+                streak_days = 1
+
+            if total_completed <= 0:
+                message = "ابدأ بمهمة واحدة اليوم، وأول إنجاز سيشعل لوحة التحليلات."
+                tone = "cold"
+                headline = "جاهز لأول إنجاز"
+            elif total_completed <= 2:
+                message = "البداية موجودة. كرر الإنجاز مرتين وستبدأ ترى زخماً واضحاً."
+                tone = "warm"
+                headline = "بداية واعدة"
+            elif total_completed <= 7:
+                message = "أنت تبني عادة تعلم حقيقية. استمر على نفس الإيقاع."
+                tone = "active"
+                headline = "زخم ممتاز"
+            else:
+                message = "تقدمك صار واضحاً. ركز الآن على توزيع الإنجاز بين المهارات."
+                tone = "strong"
+                headline = "أداء قوي"
+
+            return {
+                "total_completed": total_completed,
+                "active_skill": active_skill,
+                "starter_skill": starter_skill,
+                "streak_days": streak_days,
+                "message": message,
+                "tone": tone,
+                "headline": headline,
+            }
+
+        learning_analytics = build_learning_analytics_summary()
+
         def build_task_recommendation(task):
             due_date_value = _parse_task_date(task.due_date)
             is_today = task_scheduled_for_today(task)
@@ -5032,6 +5096,7 @@ def create_app():
             next_action=next_action,
             recommended_tasks=recommended_tasks,
             weak_skills=weak_skills,
+            learning_analytics=learning_analytics,
             admin_messages=admin_messages,
             unread_admin_messages=unread_admin_messages,
         )
